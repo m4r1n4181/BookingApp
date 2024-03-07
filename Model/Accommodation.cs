@@ -22,9 +22,8 @@ namespace BookingApp.Model
         private List<string> Pictures { get; set; }
 
 
-        public Accommodation() 
-            {
-            }
+        public Accommodation() {}
+        
         public Accommodation(int idAccommodation, int idOwner, string name, AccommodationType type, Location location, int maxGuests, int minReservationDays, int cancellationDays)
             {
                 this.AccommodationId = idAccommodation;

@@ -8,7 +8,7 @@ namespace BookingApp.Repository
     {
         public List<Accommodation> Accommodations { get; set; } = new List<Accommodation>();
 
-        public void AddAccommodation(Accommodation accommodation)
+        public void RegisterAccommodation(Accommodation accommodation)
         {
             // Accommodations.RegisterAccommodation(accommodation);
 
