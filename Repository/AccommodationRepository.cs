@@ -1,5 +1,6 @@
 using System;
 using BookingApp.Model;
+using BookingApp.Model.Accommodation;
 
 namespace BookingApp.Repository
 {
@@ -9,7 +10,7 @@ namespace BookingApp.Repository
 
         public void AddAccommodation(Accommodation accommodation)
         {
-           // Accommodations.RegisterAccommodation(accommodation);
-        
+            // Accommodations.RegisterAccommodation(accommodation);
+        }
     }
 }

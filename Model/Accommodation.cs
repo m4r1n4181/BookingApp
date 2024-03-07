@@ -18,13 +18,13 @@ namespace BookingApp.Model
         private int MaxGuests { get; set; }
         private int MinReservationDays { get; set; }
         private int CancellationDays { get; set; }
-        private List<string> Pictures { get; set; }
+      //  private List<string> Pictures { get; set; }
 
 
         public Accommodation() 
             {
             }
-        public Accommodation(int, idAccommodation, int idOwner, string name, AccommodationType type, Location location int maxGuests, int minReservationDays, int cancellationDays)
+        public Accommodation(int idAccommodation, int idOwner, string name, AccommodationType type, Location location, int maxGuests, int minReservationDays, int cancellationDays)
             {
                 this.AccommodationId = idAccommodation;
                 this.OwnerId = idOwner;
@@ -33,7 +33,7 @@ namespace BookingApp.Model
                 this.Location = location;
                 this.MinReservationDays = minReservationDays;
                 this.CancellationDays = cancellationDays;
-                this.Pictures = new List<string>();
+                //this.Pictures = new List<string>();
             }
 
 
