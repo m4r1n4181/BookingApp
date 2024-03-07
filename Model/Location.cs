@@ -11,8 +11,8 @@ namespace BookingApp.Model
 
         public Location(string city, string country)
         {
-            this.City = city;   
-            this.Country = country; 
+            this.City = city;
+            this.Country = country;
         }
-
+    }
 }

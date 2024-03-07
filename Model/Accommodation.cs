@@ -1,8 +1,9 @@
 using System;
+using System.Collections.Generic;
 
 namespace BookingApp.Model
 {
-    private enum AccommodationType
+    public enum AccommodationType
     {
         apartment,
         house,
@@ -24,7 +25,7 @@ namespace BookingApp.Model
         public Accommodation() 
             {
             }
-        public Accommodation(int, idAccommodation, int idOwner, string name, AccommodationType type, Location location int maxGuests, int minReservationDays, int cancellationDays)
+        public Accommodation(int idAccommodation, int idOwner, string name, AccommodationType type, Location location, int maxGuests, int minReservationDays, int cancellationDays)
             {
                 this.AccommodationId = idAccommodation;
                 this.OwnerId = idOwner;
