@@ -6,10 +6,16 @@ namespace BookingApp.Service
 {
     public class GuestReviewService
     {
-       
-        public GuestReview RateGuest(Guest guest) 
+       private GuestReviewRepository _guestReviewRepository;
+
+        public GuestReviewService()
         {
-            return null; //bilo sta da vrati dok ga ne implementiramo
+            _guestReviewRepository = new GuestReviewRepository();   
+        }
+        public GuestReview RateGuest(GuestReview guestReview) 
+        {
+            guestReview = _guestReviewRepository.Save(guestReview);
+            return guestReview; 
         }
 
         public void NotifyToRate(Owner owner) 

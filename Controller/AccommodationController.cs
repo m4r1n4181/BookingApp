@@ -6,11 +6,17 @@ namespace BookingApp.Controller
 {
     public class AccommodationController
     {
-        private AccommodationService accommodationService;
+        private AccommodationService _accommodationService;
 
-        public bool RegisterAccommondation(Accommodation accommondation)
+        public AccommodationController()
         {
-            return false;
+            _accommodationService = new AccommodationService();
+        }
+        
+        public void RegisterAccommondation(Accommodation accommondation)
+        {
+            _accommodationService.RegisterAccommondation(accommondation);
+            
         }
         
     }

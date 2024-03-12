@@ -10,8 +10,8 @@ namespace BookingApp.Model
    
     public class Accommodation : ISerializable
     {
-        private int Id {  get; set; }
-        private Owner Owner { get; set; }
+        public int Id {  get; set; }
+        public Owner Owner { get; set; }
         private string Name { get; set; }
         private AccommodationType Type { get; set; }
         private Location Location { get; set; }
@@ -38,7 +38,6 @@ namespace BookingApp.Model
             CancellationDays = cancellationDays;
             Pictures = pictures;
         }
-
         public string[] ToCSV()
         {
             string picturesString = string.Join(",", Pictures);
