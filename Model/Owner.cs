@@ -5,13 +5,13 @@ namespace BookingApp.Model
 {
     public class Owner : User
     {
-        private int OwnerId { get; set; }
+        private int Id { get; set; }
 
         public Owner() { }
 
         public Owner(int id)
         {
-            this.OwnerId = id;
+            this.Id = id;
         }
      }
 

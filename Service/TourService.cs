@@ -12,36 +12,21 @@ namespace BookingApp.Service
 {
     public class TourService
     {
-        private TourRepository tourRepository;
+        private TourRepository _tourRepository;
 
-        public TourService(TourRepository tourRepository)
+        public TourService()
         {
-            this.tourRepository = tourRepository;
-        }
-        //metoda da se kreira pa doda tura u repository
-        public void Create(int id,
-            string name,
-            string description,
-            string language,
-            int maxTourists,
-            List<DateTime> startDates,
-            int duration,
-            List<string> images,
-            bool isStarted)
-        {
-            // Validacija ili dodatne provere pre kreiranja ture
-
-            // Kreiranje nove ture
-            Tour newTour = new Tour(id, name, description, language, maxTourists, startDates, duration, images, isStarted);
-
-            // Dodavanje ture u repository
-            tourRepository.Add(newTour);
+            _tourRepository = new TourRepository();
         }
 
-        public List<Tour> GetAllTours()
+    public Tour CreateTour(Tour tour)
         {
-            return tourRepository.GetAllTours();
+            tour = _tourRepository.Save(tour);
+
+            return tour;
+
         }
+
     }
 
 }
