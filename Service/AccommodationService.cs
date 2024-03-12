@@ -8,7 +8,7 @@ namespace BookingApp.Service
     {
         private AccommodationRepository accommodationRepository;
 
-        public bool RegisterAccommondation(Accommondation accommondation)
+        public bool RegisterAccommondation(Accommodation accommondation)
         {
             return false;
         }

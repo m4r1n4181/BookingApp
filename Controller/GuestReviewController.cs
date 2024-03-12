@@ -8,14 +8,14 @@ namespace BookingApp.Controller
 	{
 		private GuestReviewService guestReviewService;
 
-		/*public GuestReview RateGuest(Guest guest) 
+		public GuestReview RateGuest(Guest guest) 
 		{
 			return null;
 		}
 		public void NotifyToRate(Owner owner)
 		{
 
-		}*/
+		}
 
 	}
 }

@@ -8,7 +8,7 @@ namespace BookingApp.Controller
     {
         private AccommodationService accommodationService;
 
-        public bool RegisterAccommondation(Accommondation accommondation)
+        public bool RegisterAccommondation(Accommodation accommondation)
         {
             return false;
         }

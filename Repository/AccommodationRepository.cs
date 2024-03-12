@@ -1,6 +1,7 @@
 using System;
+using System.Collections.Generic;
 using BookingApp.Model;
-using BookingApp.Model.Accommodation;
+
 
 namespace BookingApp.Repository
 {
@@ -8,9 +9,9 @@ namespace BookingApp.Repository
     {
         public List<Accommodation> Accommodations { get; set; } = new List<Accommodation>();
 
-        public void AddAccommodation(Accommodation accommodation)
+        public void RegisterAccommodation(Accommodation accommodation)
         {
-            // Accommodations.RegisterAccommodation(accommodation);
+
         }
     }
 }
