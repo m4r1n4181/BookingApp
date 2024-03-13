@@ -109,13 +109,17 @@ namespace BookingApp.Repository
             return Accommodations.FindAll(a => a.Location.Country.Contains((char)type));
         }
 
-        public List<Accommodation> GetByMaxGuests(int maxGuests) 
+        public List<Accommodation> GetByMaxGuests(int guestNumbers) 
         {
-            
+            Accommodations = _serializer.FromCSV(FilePath);
+            return Accommodations.FindAll(a => a.MaxGuests >= guestNumbers);
         }
 
-        public List<Accommodation> GetByDays(int minReservationDays, int cancellationDays) { return null; }
-
+        public List<Accommodation> GetByMinReservationDays(int minReservationDays)
+        {
+            Accommodations = _serializer.FromCSV(FilePath);
+            return Accommodations.FindAll(a => a.MinReservationDays <= minReservationDays);
+        }
 
 
 

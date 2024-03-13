@@ -44,7 +44,15 @@ namespace BookingApp.Service
             return _accommodationRepository.GetByType(type);
         }
 
+        public List<Accommodation> GetAccommodationsByMaxGuests(int guestNumbers)
+        {
+            return _accommodationRepository.GetByMaxGuests(guestNumbers);
+        }
 
+        public List<Accommodation> GetAccommodationsByMinReservationDays(int minReservationDays)
+        {
+            return _accommodationRepository.GetByMinReservationDays(minReservationDays);
+        }
 
 
     }

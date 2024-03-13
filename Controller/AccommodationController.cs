@@ -43,7 +43,15 @@ namespace BookingApp.Controller
             return _accommodationService.GetAccommodationsByType(type);
         }
 
+        public List<Accommodation> GetAccommodationsByMaxGuests(int guestNumbers)
+        {
+            return _accommodationService.GetAccommodationsByMaxGuests(guestNumbers);
+        }
 
+        public List<Accommodation> GetAccommodationsByMinReservationDays(int minReservationDays)
+        {
+            return _accommodationService.GetAccommodationsByMinReservationDays(minReservationDays);
+        }
 
     }
 
