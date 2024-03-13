@@ -1,0 +1,16 @@
+﻿<Window x:Class="BookingApp.View.AccommodationReservation"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:BookingApp.View"
+        mc:Ignorable="d"
+        Title="AccommodationReservation" Height="450" Width="800">
+    <Grid>
+        <Label Content="Rezervacija smestaja : " HorizontalAlignment="Center" Margin="0,34,0,0" VerticalAlignment="Top"/>
+        <Label Content="Izaberi smestaj : " HorizontalAlignment="Left" Margin="58,95,0,0" VerticalAlignment="Top"/>
+        <Label Content="Unesi opseg datuma :" HorizontalAlignment="Left" Height="25" Margin="58,157,0,0" VerticalAlignment="Top" Width="126" RenderTransformOrigin="-0.151,0.228"/>
+        <Label Content="Unesi broj dana boravka : " HorizontalAlignment="Left" Margin="58,217,0,0" VerticalAlignment="Top"/>
+
+    </Grid>
+</Window>

@@ -15,11 +15,11 @@ using System.Windows.Shapes;
 namespace BookingApp.View
 {
     /// <summary>
-    /// Interaction logic for GuestForm.xaml
+    /// Interaction logic for AccommodationReservation.xaml
     /// </summary>
-    public partial class GuestForm : Window
+    public partial class AccommodationReservation : Window
     {
-        public GuestForm()
+        public AccommodationReservation()
         {
             InitializeComponent();
         }
