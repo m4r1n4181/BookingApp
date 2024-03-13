@@ -1,0 +1,17 @@
+﻿<Window x:Class="BookingApp.View.AccommodationRegistration"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:BookingApp.View"
+        mc:Ignorable="d"
+        Title="AccommodationRegistration" Height="450" Width="800">
+    <Grid>
+        <Label Content="Registracija smestaja" HorizontalAlignment="Left" Margin="52,31,0,0" VerticalAlignment="Top" FontSize="16"/>
+        <Label Content="name&#xD;&#xA;" HorizontalAlignment="Left" Margin="81,99,0,0" VerticalAlignment="Top" Width="49" FontSize="14" Height="33"/>
+        <Label Content="location city&#xD;&#xA;" HorizontalAlignment="Left" Margin="81,137,0,0" VerticalAlignment="Top" Width="86" FontSize="14" Height="33"/>
+        <Label Content="location country&#xD;&#xA;" HorizontalAlignment="Left" Margin="81,175,0,0" VerticalAlignment="Top" Width="109" FontSize="14" Height="33"/>
+        <Label Content="apartment/house/hut" HorizontalAlignment="Left" Margin="81,213,0,0" VerticalAlignment="Top" Width="145" FontSize="14" Height="33"/>
+
+    </Grid>
+</Window>
