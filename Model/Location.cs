@@ -5,10 +5,9 @@ namespace BookingApp.Model
 {
     public class Location : ISerializable
     {
-<<<<<<< HEAD
-=======
+
         public int Id { get; set; }
->>>>>>> e0df37cb42a87101dd7cbaad0780f9461965e4fb
+
         public string City { get; set; }
         public string Country { get; set; }
 

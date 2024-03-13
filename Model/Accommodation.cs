@@ -12,13 +12,13 @@ namespace BookingApp.Model
     {
         public int Id {  get; set; }
         public Owner Owner { get; set; }
-        private string Name { get; set; }
-        private AccommodationType Type { get; set; }
-        private Location Location { get; set; }
-        private int MaxGuests { get; set; }
-        private int MinReservationDays { get; set; }
-        private int CancellationDays { get; set; }
-        private List<string> Pictures { get; set; }
+        public string Name { get; set; }
+        public AccommodationType Type { get; set; }
+        public Location Location { get; set; }
+        public int MaxGuests { get; set; }
+        public int MinReservationDays { get; set; }
+        public int CancellationDays { get; set; }
+        public List<string> Pictures { get; set; }
 
 
 

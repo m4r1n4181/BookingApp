@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Xml.Linq;
 using BookingApp.Model;
+using BookingApp.Model.Enums;
 using BookingApp.Serializer;
 
 
@@ -31,11 +32,7 @@ namespace BookingApp.Repository
             return Accommodations.FirstOrDefault(acc => acc.Id == id);
         }
 
-        public List<Accommodation> GetAll()
-        {
-            return _serializer.FromCSV(FilePath);
-        }
-
+     
         public Accommodation Save(Accommodation accommodation)
         {
             accommodation.Id = NextId();
@@ -79,7 +76,51 @@ namespace BookingApp.Repository
             Accommodations = _serializer.FromCSV(FilePath);
             return Accommodations.FindAll(a => a.Owner.Id == owner.Id);
         }
+
+        public List<Accommodation> GetAll()
+        {
+            return _serializer.FromCSV(FilePath);
+        }
+
+
+        public List<Accommodation> GetByName(string name) 
+        {
+            Accommodations = _serializer.FromCSV(FilePath);
+            return Accommodations.FindAll(a=>a.Name.Contains(name, StringComparison.OrdinalIgnoreCase));
+
+        }
+
+        public List<Accommodation> GetByLocationCountry(string locationCountry) 
+        {
+            Accommodations = _serializer.FromCSV(FilePath);
+            return Accommodations.FindAll(a=>a.Location.City.Contains(locationCountry, StringComparison.OrdinalIgnoreCase));
+        }
+
+        public List<Accommodation> GetByLocationCity(string locationCity)
+        {
+            Accommodations = _serializer.FromCSV(FilePath);
+            return Accommodations.FindAll(a=>a.Location.Country.Contains(locationCity, StringComparison.OrdinalIgnoreCase));
+
+        }
+
+        public List<Accommodation> GetByType(AccommodationType type) 
+        {
+            Accommodations = _serializer.FromCSV(FilePath);
+            return Accommodations.FindAll(a => a.Location.Country.Contains((char)type));
+        }
+
+        public List<Accommodation> GetByMaxGuests(int maxGuests) 
+        {
+            
+        }
+
+        public List<Accommodation> GetByDays(int minReservationDays, int cancellationDays) { return null; }
+
+
+
+
+
     }
-       
-    
+
+
 }

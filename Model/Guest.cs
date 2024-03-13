@@ -10,17 +10,13 @@ namespace BookingApp.Model
 {
     public class Guest : User, BookingApp.Serializer.ISerializable
     {
-<<<<<<< HEAD
-=======
+
         public Guest() { }
 
         public int Id { get; set; }
->>>>>>> e0df37cb42a87101dd7cbaad0780f9461965e4fb
+
         public string Name { get; set; }
         public string Surname { get; set; }
-
-        public Guest() { }
-
         public Guest(string name, string surname, string username, string password) : base(username, password)
         {
             Name = name;
