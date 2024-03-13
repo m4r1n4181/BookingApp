@@ -1,26 +1,33 @@
 using System.Collections.Generic;
+using System.Runtime.Serialization;
 using BookingApp.Model;
+using BookingApp.Serializer;
 
 namespace BookingApp.Repository
 {
     public class GuestRepository
     {
-        public List<Guest> Guests = new List<Guest>();
+
+        private const string FilePath = "D:/LETNJI/simsProjekat/sims-in-2024-group-3-team-b/Resources/Data/accommodation.csv";
+
+        private readonly Serializer<Guest> _serializer;
+
+        public List<Guest> _guests = new List<Guest>();
 
 
-        public List<Accommodation> FindAll() { return null; }
+        public List<Accommodation> GetAll() { return null; }
 
-        public List<Accommodation> FindByName(string name) { return null; }
+        public List<Accommodation> GetByName(string name) { return null; }
 
-        public List<Accommodation> FindByLocationCountry(string locationCountry) { return null; }
+        public List<Accommodation> GetByLocationCountry(string locationCountry) { return null; }
 
-        public List<Accommodation> FindByLocationCity(string locationCity) { return null; }
+        public List<Accommodation> GetByLocationCity(string locationCity) { return null; }
 
-        public List<Accommodation> FindByType(AccommodationType type) { return null; }
+        public List<Accommodation> GetByType(AccommodationType type) { return null; }
 
-        public List<Accommodation> FindByMaxGuests(int maxGuests) { return null; }
+        public List<Accommodation> GetByMaxGuests(int maxGuests) { return null; }
 
-        public List<Accommodation> FindByDays(int minReservationDays, int cancellationDays) { return null; }
+        public List<Accommodation> GetByDays(int minReservationDays, int cancellationDays) { return null; }
 
 
 
