@@ -16,7 +16,12 @@ namespace BookingApp.Model
         private int associatedTour;
         public KeyPoint() { }
 
-
+        public KeyPoint(string name, bool isActive, int associatedTour)
+        {
+            this.name = name;
+            this.isActive = isActive;
+            this.associatedTour = associatedTour;
+        }
     }
 
 }

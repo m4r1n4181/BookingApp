@@ -1,7 +1,11 @@
 using System.Collections.Generic;
 using System.Runtime.Serialization;
 using BookingApp.Model;
+<<<<<<< HEAD
 using BookingApp.Serializer;
+=======
+using BookingApp.Model.Enums;
+>>>>>>> e0df37cb42a87101dd7cbaad0780f9461965e4fb
 
 namespace BookingApp.Repository
 {

@@ -6,11 +6,15 @@ namespace BookingApp.Controller
 {
 	public class GuestReviewController
 	{
-		private GuestReviewService guestReviewService;
+		private GuestReviewService _guestReviewService;
 
-		public GuestReview RateGuest(Guest guest) 
+		public GuestReviewController()
 		{
-			return null;
+			_guestReviewService = new GuestReviewService();
+		}
+		public void RateGuest(GuestReview guestReview) 
+		{
+			_guestReviewService.RateGuest(guestReview);
 		}
 		public void NotifyToRate(Owner owner)
 		{

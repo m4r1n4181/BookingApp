@@ -6,7 +6,7 @@ using System.Linq;
 
 namespace BookingApp.Model
 {
-    public class Tour
+    public class Tour : Location
     {
 
         //treba mi klasa loction i klasa keypoint kao parametri u ovoj klasi 
