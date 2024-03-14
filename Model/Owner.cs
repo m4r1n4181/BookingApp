@@ -7,7 +7,7 @@ namespace BookingApp.Model
     {
         private int Id { get; set; }
 
-        public Owner() { }
+        public Owner(User user) { }
 
         public Owner(int id)
         {

@@ -9,17 +9,22 @@ namespace BookingApp.Model
 	{
 		public int Id { get; set; }
 		public AccommodationReservation AccommodationReservation { get; set; }
-		private int Cleanliness { get; set; }
-		private int RuleAdherence { get; set; }
-		private string Comment { get; set; }
+		public int Cleanliness { get; set; }
+		public int RuleAdherence { get; set; }
+		public string Comment { get; set; }
 
 
 
 		public GuestReview()
 			{
 			}
-
-		public GuestReview(AccommodationReservation accommodationReservation, int cleanliness, int ruleAdherence, string comment)
+        public GuestReview(int cleanliness, int ruleAdherence, string comment)
+        {
+            this.Cleanliness = cleanliness;
+            this.RuleAdherence = ruleAdherence;
+            this.Comment = comment;
+        }
+        public GuestReview(AccommodationReservation accommodationReservation, int cleanliness, int ruleAdherence, string comment)
 			{
 				this.AccommodationReservation = accommodationReservation;
 				this.Cleanliness = cleanliness;

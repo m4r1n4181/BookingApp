@@ -12,21 +12,22 @@ namespace BookingApp.Model
     {
         public int Id {  get; set; }
         public Owner Owner { get; set; }
-        private string Name { get; set; }
-        private AccommodationType Type { get; set; }
-        private Location Location { get; set; }
-        private int MaxGuests { get; set; }
-        private int MinReservationDays { get; set; }
-        private int CancellationDays { get; set; }
-        private List<string> Pictures { get; set; }
+        public string Name { get; set; }
+        public AccommodationType Type { get; set; }
+        public Location Location { get; set; }
+        public int MaxGuests { get; set; }
+        public int MinReservationDays { get; set; }
+        public int CancellationDays { get; set; }
+        public List<string> Pictures { get; set; }
 
 
 
         public Accommodation() 
         {
         }
-        public Accommodation( string name, AccommodationType type, Location location, int maxGuests, int minReservationDays, int cancellationDays, List<string> pictures)
+        public Accommodation(User user, string name, AccommodationType type, Location location, int maxGuests, int minReservationDays, int cancellationDays, List<string> pictures)
         {
+            Owner = new Owner(user);
             Name = name;
             Type = type;
             Location = location;
@@ -35,6 +36,7 @@ namespace BookingApp.Model
             CancellationDays = cancellationDays;
             Pictures = pictures;
         }
+
         public Accommodation(int id, Owner owner, string name, AccommodationType type, Location location, int maxGuests, int minReservationDays, int cancellationDays, List<string> pictures)
         {
             Id = id;

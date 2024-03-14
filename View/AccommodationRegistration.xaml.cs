@@ -27,13 +27,17 @@ namespace BookingApp.View
     public partial class AccommodationRegistration : Window
     {
         private AccommodationController _accommodationController;
-        
-        public AccommodationRegistration()
+        //private Owner user;
+
+        public User LoggedOwner { get; set; }
+        public AccommodationRegistration(User user)
         {
             InitializeComponent();
+            LoggedOwner = user;
             _accommodationController = new AccommodationController();
 
         }
+
 
         // cancel button
         private void Button_Click(object sender, RoutedEventArgs e)
@@ -44,24 +48,22 @@ namespace BookingApp.View
         // save accommodation
         private void Button_Click_1(object sender, RoutedEventArgs e)
         {
-            
-                // Kreiranje nove instance Accommodation na osnovu unetih podataka iz TextBox-ova
-                Accommodation accommodation = new Accommodation(
-                    Name.Text,
-                    (AccommodationType)Enum.Parse(typeof(AccommodationType), Type.Text),
-                    new Location(City.Text, Country.Text),
-                    int.Parse(MaxGuests.Text),
-                    int.Parse(MinDays.Text),
-                    int.Parse(CancellationDays.Text),
-                    Pictures.Text.Split(',').ToList()
-                );
+
+            // Kreiranje nove instance Accommodation na osnovu unetih podataka iz TextBox-ova
+            Accommodation accommodation = new Accommodation(
+                LoggedOwner,
+                Name.Text,
+                (AccommodationType)Enum.Parse(typeof(AccommodationType), Type.Text),
+                new Location(City.Text, Country.Text),
+                int.Parse(MaxGuests.Text),
+                int.Parse(MinDays.Text),
+                int.Parse(CancellationDays.Text),
+                Pictures.Text.Split(',').ToList()
+            ); ;
 
             // Poziv funkcije iz kontrolera
             _accommodationController.RegisterAccommondation(accommodation);
-
-                // Nakon što je smeštaj registrovan, možete obavestiti korisnika ili izvršiti neku drugu logiku
-                MessageBox.Show("Accommodation successfully saved!");
-                // Ili zatvorite prozor ako je to potrebno
+                MessageBox.Show("Accommodation successfully saved!");     
                 this.Close();
             
         }
