@@ -32,4 +32,12 @@
     </Content>
   </ItemGroup>
 
+  
+
+	<ItemGroup>
+	  <None Update="Resources\Data\locations.csv">
+	    <Generator>MSBuild:Compile</Generator>
+	  </None>
+	</ItemGroup>
+
 </Project>

@@ -12,7 +12,7 @@ namespace BookingApp.Repository
 {
     public class AccommodationRepository
     {
-        private const string FilePath = "C:\\Users\\Asus\\Desktop\\sims-in-2024-group-3-team-b\\Resources\\Data\\accommodations.csv";
+        private const string FilePath = "..\\..\\..\\Resources\\Data\\accommodation.csv";
         private readonly Serializer<Accommodation> _serializer;
         public List<Accommodation> Accommodations; //{ get; set; } = new List<Accommodation>();
 
@@ -90,7 +90,7 @@ namespace BookingApp.Repository
             Accommodations = Accommodations.FindAll(a => a.Name.Contains(searchParams.Name, StringComparison.OrdinalIgnoreCase));
             Accommodations = Accommodations.FindAll(a => a.Location.City.Contains(searchParams.City, StringComparison.OrdinalIgnoreCase));
             Accommodations = Accommodations.FindAll(a => a.Location.Country.Contains(searchParams.Country, StringComparison.OrdinalIgnoreCase));
-            if(searchParams.Type == null)
+            if(searchParams.Type != null)
             {
                 Accommodations = Accommodations.FindAll(a => a.Type == searchParams.Type);
             }
