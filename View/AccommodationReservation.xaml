@@ -8,9 +8,17 @@
         Title="AccommodationReservation" Height="450" Width="800">
     <Grid>
         <Label Content="Rezervacija smestaja : " HorizontalAlignment="Center" Margin="0,34,0,0" VerticalAlignment="Top"/>
-        <Label Content="Izaberi smestaj : " HorizontalAlignment="Left" Margin="58,95,0,0" VerticalAlignment="Top"/>
-        <Label Content="Unesi opseg datuma :" HorizontalAlignment="Left" Height="25" Margin="58,157,0,0" VerticalAlignment="Top" Width="126" RenderTransformOrigin="-0.151,0.228"/>
-        <Label Content="Unesi broj dana boravka : " HorizontalAlignment="Left" Margin="58,217,0,0" VerticalAlignment="Top"/>
+        <Label Content="Izaberi smestaj : " HorizontalAlignment="Left" Margin="10,64,0,0" VerticalAlignment="Top"/>
+        <Label Content="Broj dana boravka : " HorizontalAlignment="Left" Margin="10,217,0,0" VerticalAlignment="Top" RenderTransformOrigin="3.309,0.842" Width="114" Height="40"/>
+        <Label Content="Pocetni datum :" HorizontalAlignment="Left" Margin="10,161,0,0" VerticalAlignment="Top" Width="109"/>
+        <Label Content="Krajnji datum :" HorizontalAlignment="Left" Margin="257,165,0,0" VerticalAlignment="Top" Width="109"/>
+        <Label Content="Pretraga slobodnih smestaja : " HorizontalAlignment="Left" Margin="132,118,0,0" VerticalAlignment="Top"/>
+        <TextBox HorizontalAlignment="Left" Margin="137,219,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="80"/>
+        <Button Content="Rezervisi" HorizontalAlignment="Center" Margin="0,364,0,0" VerticalAlignment="Top" Height="41" Width="127"/>
+        <Button Content="Odustani" HorizontalAlignment="Left" Margin="647,364,0,0" VerticalAlignment="Top" Height="41" Width="127"/>
+        <DatePicker HorizontalAlignment="Left" Margin="115,163,0,0" VerticalAlignment="Top"/>
+        <DatePicker HorizontalAlignment="Left" Margin="362,165,0,0" VerticalAlignment="Top"/>
+        <TextBox HorizontalAlignment="Left" Margin="132,68,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120"/>
 
     </Grid>
 </Window>
