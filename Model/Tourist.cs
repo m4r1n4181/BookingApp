@@ -1,43 +1,49 @@
-﻿using System;
+﻿using BookingApp.Serializer;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows;
+using System.Windows.Controls;
+using System.Xml.Linq;
 
 namespace BookingApp.Model
 {
-    public class Tourist
+    public class Tourist : ISerializable
     {
-        public string FirstName { get; set; }  
+        public int Id { get; set; }
+        public string FirstName { get; set; }
         public string LastName { get; set; }
 
         public int Age { get; set; }
 
-        // Metoda za prikaz svih tura
-        public List<Tour> GetAllTours(string filePath)
+        public Tourist(string firstName, string lastName, int age)
         {
-            // Pozivamo metodu GetAllTours iz klase Tour kako bismo dobili sve ture
-            return Tour.GetAllTours(filePath);
+            Id = Id;
+            FirstName = firstName;
+            LastName = lastName;
+            Age = age;
         }
 
-        public List<Tour> FindTour(Location location, int duration, string language, int numberOfPeople)
+        public Tourist() { }
+
+        public string[] ToCSV()
         {
-            // Učitaj sve ture iz CSV fajla
-            List<Tour> allTours = Tour.LoadToursFromCsv("");
 
-            // Filtriranje tura na osnovu zadatih parametara
-            var filteredTours = allTours.Where(tour =>
-                tour.Location.City.Equals(location.City, StringComparison.OrdinalIgnoreCase) &&
-                tour.Location.Country.Equals(location.Country, StringComparison.OrdinalIgnoreCase) &&
-                tour.Duration <= duration &&
-                tour.Language.Equals(language, StringComparison.OrdinalIgnoreCase) &&
-                tour.MaxTourists >= numberOfPeople
-            ).ToList();
-
-            return filteredTours;
+            string[] csvValues = { Id.ToString(), FirstName, LastName, Age.ToString() };
+            return csvValues;
         }
 
+
+        public void FromCSV(string[] values)
+        {
+            Id = Convert.ToInt32(values[0]);
+            FirstName = values[1];
+            LastName = values[2];
+            Age = Convert.ToInt32(values[3]);
+        }
     }
+
+
 }
-
-

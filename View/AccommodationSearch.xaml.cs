@@ -1,5 +1,6 @@
 ﻿using BookingApp.Controller;
 using BookingApp.DTO;
+using BookingApp.Model.Enums;
 using BookingApp.Model;
 using System;
 using System.Collections.Generic;
@@ -21,9 +22,9 @@ using System.Windows.Shapes;
 namespace BookingApp.View
 {
     /// <summary>
-    /// Interaction logic for GuestForm.xaml
+    /// Interaction logic for AccommodationSearch.xaml
     /// </summary>
-    public partial class GuestForm : Window
+    public partial class AccommodationSearch : Window
     {
         private AccommodationController _accommodationController;
         public static ObservableCollection<Accommodation> Accommodations { get; set; }
@@ -46,8 +47,76 @@ namespace BookingApp.View
             }
         }
 
+        private string _city;
+        public string City
+        {
+            get => _city;
+            set
+            {
+                if (value != _city)
+                {
+                    _city = value;
+                    OnPropertyChanged();
+                }
+            }
+        }
+        private string _country;
+        public string Country
+        {
+            get => _country;
+            set
+            {
+                if (value != _country)
+                {
+                    _country = value;
+                    OnPropertyChanged();
+                }
+            }
+        }
+
+        private AccommodationType _accommodationType;
+        public AccommodationType Type
+        {
+            get => _accommodationType;
+            set
+            {
+                if (value != _accommodationType)
+                {
+                    _accommodationType = value;
+                    OnPropertyChanged();
+                }
+            }
+        }
+
+        private int _maxGuests;
+        public int MaxGuests
+        {
+            get => _maxGuests;
+            set
+            {
+                if (value != _maxGuests)
+                {
+                    _maxGuests = value;
+                    OnPropertyChanged();
+                }
+            }
+        }
 
 
+
+        private int _minReservationDays;
+        public int MinReservationDays
+        {
+            get => _minReservationDays;
+            set
+            {
+                if (value != _minReservationDays)
+                {
+                    _minReservationDays = value;
+                    OnPropertyChanged();
+                }
+            }
+        }
 
         public event PropertyChangedEventHandler PropertyChanged;
 
@@ -57,7 +126,7 @@ namespace BookingApp.View
         }
 
 
-        public GuestForm()
+        public AccommodationSearch()
         {
             InitializeComponent();
             this.DataContext = this;
@@ -69,24 +138,24 @@ namespace BookingApp.View
         public void Update()
         {
             Accommodations.Clear();
-            foreach(Accommodation accommodation in _accommodationController.GetAll())
+            foreach (Accommodation accommodation in _accommodationController.GetAll())
             {
                 Accommodations.Add(accommodation);
             }
 
         }
 
-      
+
 
         private void Button_Click(object sender, RoutedEventArgs e)
         {
             AccommodationSearchParams searchParams = new AccommodationSearchParams();
             searchParams.Name = Name;
-            searchParams.City = "";
-            searchParams.Country = "";
-            searchParams.Type = null;
-            searchParams.MaxGests = -1; 
-            searchParams.MinReservationDays = -1;
+            searchParams.City = City;
+            searchParams.Country = Country;
+            searchParams.Type = Type;
+            searchParams.MaxGests = MaxGuests;
+            searchParams.MinReservationDays = MinReservationDays;
             Accommodations.Clear();
             foreach (Accommodation accommodation in _accommodationController.SearchAccommodations(searchParams))
             {

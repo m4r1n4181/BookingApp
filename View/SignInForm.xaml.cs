@@ -51,6 +51,9 @@ namespace BookingApp.View
                 {
                     CommentsOverview commentsOverview = new CommentsOverview(user);
                     commentsOverview.Show();
+
+                    AccommodationSearch accommodationSearch = new AccommodationSearch();
+                    accommodationSearch.Show();
                     Close();
                 } 
                 else
