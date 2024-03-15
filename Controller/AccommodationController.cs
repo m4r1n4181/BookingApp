@@ -1,9 +1,10 @@
 using System;
 using System.Collections.Generic;
+using BookingApp.DTO;
 using BookingApp.Model;
 using BookingApp.Model.Enums;
 using BookingApp.Service;
-
+ 
 namespace BookingApp.Controller
 {
     public class AccommodationController
@@ -14,6 +15,11 @@ namespace BookingApp.Controller
         {
             _accommodationService = new AccommodationService();
         }
+
+        public List<Accommodation> GetAll()
+        {
+            return _accommodationService.GetAll();
+        }
         
         public void RegisterAccommondation(Accommodation accommondation)
         {
@@ -21,37 +27,11 @@ namespace BookingApp.Controller
             
         }
 
-        public List<Accommodation> GetAccommodationsByName(string name)
+        public List<Accommodation> SearchAccommodations(AccommodationSearchParams searchParams)
         {
-            return _accommodationService.GetAccommodationsByName(name);
+            return _accommodationService.SearchAccommodations(searchParams);
         }
 
-        public List<Accommodation> GetAccommodationsByLocationCountry(string locationCountry)
-        {
-            return _accommodationService.GetAccommodationsByLocationCountry(locationCountry);
-        }
-
-
-        public List<Accommodation> GetAccommodationsByLocationCity(string locationCity)
-        {
-            return _accommodationService.GetAccommodationsByLocationCity(locationCity);
-        }
-
-
-        public List<Accommodation> GetAccommodationsByType(AccommodationType type)
-        {
-            return _accommodationService.GetAccommodationsByType(type);
-        }
-
-        public List<Accommodation> GetAccommodationsByMaxGuests(int guestNumbers)
-        {
-            return _accommodationService.GetAccommodationsByMaxGuests(guestNumbers);
-        }
-
-        public List<Accommodation> GetAccommodationsByMinReservationDays(int minReservationDays)
-        {
-            return _accommodationService.GetAccommodationsByMinReservationDays(minReservationDays);
-        }
 
     }
 

@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.Xml.Linq;
+using BookingApp.DTO;
 using BookingApp.Model;
 using BookingApp.Model.Enums;
 using BookingApp.Repository;
@@ -22,39 +23,17 @@ namespace BookingApp.Service
             return accommodation;
         }
 
+     
 
-        public List<Accommodation> GetAccommodationsByName(string name)
+        public List<Accommodation> SearchAccommodations(AccommodationSearchParams searchParams)
         {
-            return _accommodationRepository.GetByName(name);
+            return _accommodationRepository.SearchAccommodation(searchParams);
         }
 
-
-        public List<Accommodation> GetAccommodationsByLocationCountry(string locationCountry)
+        public List<Accommodation> GetAll()
         {
-            return _accommodationRepository.GetByLocationCountry(locationCountry);
+            return _accommodationRepository.GetAll();
         }
-
-        public List<Accommodation> GetAccommodationsByLocationCity(string locationCity)
-        {
-            return _accommodationRepository.GetByLocationCity(locationCity);
-        }
-
-        public List<Accommodation> GetAccommodationsByType(AccommodationType type)
-        {
-            return _accommodationRepository.GetByType(type);
-        }
-
-        public List<Accommodation> GetAccommodationsByMaxGuests(int guestNumbers)
-        {
-            return _accommodationRepository.GetByMaxGuests(guestNumbers);
-        }
-
-        public List<Accommodation> GetAccommodationsByMinReservationDays(int minReservationDays)
-        {
-            return _accommodationRepository.GetByMinReservationDays(minReservationDays);
-        }
-
-
     }
 
 }

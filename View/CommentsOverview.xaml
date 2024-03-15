@@ -28,6 +28,7 @@
                 <DataGrid.Columns>
                     <DataGridTextColumn Header="Creation time" Binding="{Binding CreationTime}" Width="200"/>
                     <DataGridTextColumn Header="Text" Binding="{Binding Text}" Width="*"/>
+                    <DataGridTextColumn Header="Text" Binding="{Binding Text}" Width="*"/>
                 </DataGrid.Columns>
             </DataGrid>
         </StackPanel>

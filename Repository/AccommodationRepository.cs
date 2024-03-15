@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Xml.Linq;
+using BookingApp.DTO;
 using BookingApp.Model;
 using BookingApp.Model.Enums;
 using BookingApp.Serializer;
@@ -83,45 +84,30 @@ namespace BookingApp.Repository
         }
 
 
-        public List<Accommodation> GetByName(string name) 
+        public List<Accommodation> SearchAccommodation(AccommodationSearchParams searchParams) 
         {
             Accommodations = _serializer.FromCSV(FilePath);
-            return Accommodations.FindAll(a=>a.Name.Contains(name, StringComparison.OrdinalIgnoreCase));
+            Accommodations = Accommodations.FindAll(a => a.Name.Contains(searchParams.Name, StringComparison.OrdinalIgnoreCase));
+            Accommodations = Accommodations.FindAll(a => a.Location.City.Contains(searchParams.City, StringComparison.OrdinalIgnoreCase));
+            Accommodations = Accommodations.FindAll(a => a.Location.Country.Contains(searchParams.Country, StringComparison.OrdinalIgnoreCase));
+            if(searchParams.Type == null)
+            {
+                Accommodations = Accommodations.FindAll(a => a.Type == searchParams.Type);
+            }
+            if(searchParams.MaxGests != -1)
+            {
+                Accommodations = Accommodations.FindAll(a => a.MaxGuests >= searchParams.MaxGests);
+            }
+            if(searchParams.MinReservationDays != -1)
+            {
+                Accommodations = Accommodations.FindAll(a => a.MinReservationDays <= searchParams.MinReservationDays);
+            }
 
+
+            return Accommodations;
         }
 
-        public List<Accommodation> GetByLocationCountry(string locationCountry) 
-        {
-            Accommodations = _serializer.FromCSV(FilePath);
-            return Accommodations.FindAll(a=>a.Location.City.Contains(locationCountry, StringComparison.OrdinalIgnoreCase));
-        }
-
-        public List<Accommodation> GetByLocationCity(string locationCity)
-        {
-            Accommodations = _serializer.FromCSV(FilePath);
-            return Accommodations.FindAll(a=>a.Location.Country.Contains(locationCity, StringComparison.OrdinalIgnoreCase));
-
-        }
-
-        public List<Accommodation> GetByType(AccommodationType type) 
-        {
-            Accommodations = _serializer.FromCSV(FilePath);
-            return Accommodations.FindAll(a => a.Location.Country.Contains((char)type));
-        }
-
-        public List<Accommodation> GetByMaxGuests(int guestNumbers) 
-        {
-            Accommodations = _serializer.FromCSV(FilePath);
-            return Accommodations.FindAll(a => a.MaxGuests >= guestNumbers);
-        }
-
-        public List<Accommodation> GetByMinReservationDays(int minReservationDays)
-        {
-            Accommodations = _serializer.FromCSV(FilePath);
-            return Accommodations.FindAll(a => a.MinReservationDays <= minReservationDays);
-        }
-
-
+   
 
 
     }
