@@ -25,6 +25,17 @@ namespace BookingApp.Model
         public Accommodation() 
         {
         }
+        public Accommodation(User user, string name, AccommodationType type, Location location, int maxGuests, int minReservationDays, int cancellationDays, List<string> pictures)
+        {
+            Owner = new Owner(user);
+            Name = name;
+            Type = type;
+            Location = location;
+            MaxGuests = maxGuests;
+            MinReservationDays = minReservationDays;
+            CancellationDays = cancellationDays;
+            Pictures = pictures;
+        }
 
         public Accommodation(int id, Owner owner, string name, AccommodationType type, Location location, int maxGuests, int minReservationDays, int cancellationDays, List<string> pictures)
         {
