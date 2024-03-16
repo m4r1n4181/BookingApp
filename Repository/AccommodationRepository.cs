@@ -33,6 +33,12 @@ namespace BookingApp.Repository
             return Accommodations.FirstOrDefault(acc => acc.Id == id);
         }
 
+        public void BindLocations()
+        {
+            LocationRepository locationRepository = new LocationRepository();
+            Accommodations.ForEach(locR => { locR.Location = locationRepository.GetById(locR.Location.Id); });
+        }
+
      
         public Accommodation Save(Accommodation accommodation)
         {
@@ -83,22 +89,41 @@ namespace BookingApp.Repository
             return _serializer.FromCSV(FilePath);
         }
 
+        public List<Accommodation> GetAllWithLocations()
+        {
+            Accommodations = _serializer.FromCSV(FilePath);
+            BindLocations();
+            return Accommodations;
+        }
+
 
         public List<Accommodation> SearchAccommodation(AccommodationSearchParams searchParams) 
         {
             Accommodations = _serializer.FromCSV(FilePath);
-            Accommodations = Accommodations.FindAll(a => a.Name.Contains(searchParams.Name, StringComparison.OrdinalIgnoreCase));
-            Accommodations = Accommodations.FindAll(a => a.Location.City.Contains(searchParams.City, StringComparison.OrdinalIgnoreCase));
-            Accommodations = Accommodations.FindAll(a => a.Location.Country.Contains(searchParams.Country, StringComparison.OrdinalIgnoreCase));
+            BindLocations();
+            if (searchParams.Name != null)
+            {
+                Accommodations = Accommodations.FindAll(a => a.Name.Contains(searchParams.Name, StringComparison.OrdinalIgnoreCase));
+            }
+
+            if (searchParams.City != null)
+            {
+                Accommodations = Accommodations.FindAll(a => a.Location.City.Contains(searchParams.City, StringComparison.OrdinalIgnoreCase));
+            }
+
+            if (searchParams.Country != null)
+            {
+                Accommodations = Accommodations.FindAll(a => a.Location.Country.Contains(searchParams.Country, StringComparison.OrdinalIgnoreCase));
+            }
             if(searchParams.Type != null)
             {
                 Accommodations = Accommodations.FindAll(a => a.Type == searchParams.Type);
             }
-            if(searchParams.MaxGests != -1)
+            if(searchParams.MaxGests != 0)
             {
                 Accommodations = Accommodations.FindAll(a => a.MaxGuests >= searchParams.MaxGests);
             }
-            if(searchParams.MinReservationDays != -1)
+            if(searchParams.MinReservationDays != 0)
             {
                 Accommodations = Accommodations.FindAll(a => a.MinReservationDays <= searchParams.MinReservationDays);
             }

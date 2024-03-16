@@ -27,14 +27,18 @@ namespace BookingApp.View
     public partial class AccommodationSearch : Window
     {
         private AccommodationController _accommodationController;
-        public static ObservableCollection<Accommodation> Accommodations { get; set; }
+        public ObservableCollection<Accommodation> Accommodations { get; set; }
+
+        public ObservableCollection<AccommodationType> Types { get; set; }
+
+        public AccommodationType? SelectedType { get; set; }
 
 
         public Accommodation SelectedAccommodation { get; set; }
 
 
         private string _name;
-        public string Name
+        public string AccommodationName
         {
             get => _name;
             set
@@ -132,7 +136,15 @@ namespace BookingApp.View
             this.DataContext = this;
             _accommodationController = new AccommodationController();
 
-            Accommodations = new ObservableCollection<Accommodation>(_accommodationController.GetAll());
+            Accommodations = new ObservableCollection<Accommodation>(_accommodationController.GetAllWithLocations());
+            City = "";
+            Country = "";
+            Types = new ObservableCollection<AccommodationType>();
+            Types.Add(AccommodationType.apartment);
+            Types.Add(AccommodationType.hut);
+            Types.Add(AccommodationType.house);
+            SelectedType = null;
+
         }
 
         public void Update()
@@ -150,10 +162,10 @@ namespace BookingApp.View
         private void Button_Click(object sender, RoutedEventArgs e)
         {
             AccommodationSearchParams searchParams = new AccommodationSearchParams();
-            searchParams.Name = Name;
+            searchParams.Name = AccommodationName;
             searchParams.City = City;
             searchParams.Country = Country;
-            searchParams.Type = Type;
+            searchParams.Type = SelectedType;
             searchParams.MaxGests = MaxGuests;
             searchParams.MinReservationDays = MinReservationDays;
             Accommodations.Clear();
