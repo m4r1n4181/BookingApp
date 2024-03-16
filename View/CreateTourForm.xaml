@@ -20,7 +20,7 @@
         <StackPanel Grid.Row="1" Margin="10">
             <StackPanel Orientation="Horizontal" Margin="0 0 0 10">
                 <TextBlock Width="100" Text="Name:" VerticalAlignment="Center"/>
-                <TextBox x:Name="txtTourName" Text="{Binding Path=Name, UpdateSourceTrigger=PropertyChanged}" Width="200"/>
+                <TextBox x:Name="txtTourName" Text="{Binding Path=TourName, UpdateSourceTrigger=PropertyChanged}" Width="200"/>
             </StackPanel>
             <StackPanel Orientation="Horizontal" Margin="0 0 0 10">
                 <TextBlock Width="100" Text="Location:" VerticalAlignment="Center"/>
@@ -33,7 +33,7 @@
             </StackPanel>
             <StackPanel Orientation="Horizontal" Margin="0 0 0 10">
                 <TextBlock Width="100" Text="Languages:" VerticalAlignment="Center"/>
-                <TextBox x:Name="txtLanguages" Text="{Binding Path=Language, UpdateSourceTrigger=PropertyChanged}" Width="200"/>
+                <TextBox x:Name="txtLanguages" Text="{Binding Path=TourLanguage, UpdateSourceTrigger=PropertyChanged}" Width="200"/>
             </StackPanel>
             <StackPanel Orientation="Horizontal" Margin="0 0 0 10">
                 <TextBlock Width="101" Text="Maximum number of tourists:" VerticalAlignment="Center" Height="22"/>
@@ -42,15 +42,16 @@
             <StackPanel Orientation="Horizontal" Margin="0 0 0 10">
                 <TextBlock Width="100" Text="Key Points:" VerticalAlignment="Center"/>
                 <TextBox x:Name="txtKeyPoints" Text="{Binding Path=KeyPoint, UpdateSourceTrigger=PropertyChanged}" Width="200"/>
+                <Button Width="40" Height="20" Margin="10, 0, 0, 0" Click="Add_Key_Point_Click">Add</Button>
+            </StackPanel>
+            <StackPanel Orientation="Horizontal" Margin="0 0 0 10">
+                <TextBlock Width="100" Text="Added Key Points:" VerticalAlignment="Center"/>
+                <TextBlock Width="300" Text="{Binding AddedKeyPoint, UpdateSourceTrigger=PropertyChanged}" VerticalAlignment="Center"/>
             </StackPanel>
             <StackPanel Orientation="Horizontal" Margin="0 0 0 10">
                 <TextBlock Width="100" Text="Date and time:" VerticalAlignment="Center"/>
-                <DatePicker x:Name="dpStartDate" Width="150"/>
-                <ComboBox x:Name="cbStartTime" Width="100" Margin="5 0 0 0">
-                    <ComboBoxItem Content="09:00"/>
-                    <ComboBoxItem Content="12:00"/>
-                    <ComboBoxItem Content="15:00"/>
-                    <ComboBoxItem Content="18:00"/>
+                <DatePicker x:Name="dpStartDate" SelectedDate="{Binding TourDate}" Width="150"/>
+                <ComboBox x:Name="cbStartTime" ItemsSource="{Binding PossibleTimes}" SelectedItem="{Binding SelectedTime}" Width="100" Margin="5 0 0 0">
                 </ComboBox>
             </StackPanel>
 

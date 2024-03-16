@@ -22,6 +22,8 @@ namespace BookingApp.Controller
             tourService.CreateTour(tour);
 
         }
+
+      
     }
 
    

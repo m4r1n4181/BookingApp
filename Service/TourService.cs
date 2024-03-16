@@ -27,6 +27,7 @@ namespace BookingApp.Service
 
         public Tour CreateTour(Tour tour)
         {
+            
             tour = _tourRepository.Save(tour);
 
             return tour;

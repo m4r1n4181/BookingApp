@@ -21,6 +21,15 @@ namespace BookingApp.Service
             _keyPointRepository = new KeyPointRepository();
         }
 
+        public void CreateKeyPoints(List<KeyPoint> keyPoints)
+        {
+            foreach(KeyPoint keyPoint in keyPoints)
+            {
+                _keyPointRepository.Save(keyPoint);
+            }
+        }
+
+
         public void ActivateKeyPoint(int keyPointId)
         {
             
@@ -45,7 +54,10 @@ namespace BookingApp.Service
             }
         }
 
-        
+        public void SaveAll()
+        {
+            throw new NotImplementedException(); //da sacuva sve keypointove 
+        }
     }
 }
 

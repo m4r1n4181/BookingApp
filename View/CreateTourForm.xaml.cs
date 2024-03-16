@@ -12,20 +12,39 @@ using System.Windows.Controls;
 
 namespace BookingApp.View
 {
-    public partial class CreateTourForm : Window
+    public partial class CreateTourForm : Window, INotifyPropertyChanged
     {
-        private readonly TourRepository _tourRepository;
+        private readonly TourController _tourController;
+
 
         public ObservableCollection<Location> Locations { get; set; }
+        public ObservableCollection<string> PossibleTimes { get; set; }
         private LocationController _locationController;
+        private KeyPointController _keyPointController;
         public Location SelectedLocation { get; set; }
 
         public List<string> Pictures { get; set; }
+        public List<KeyPoint> KeyPoints { get; set; }
+
+        public string SelectedTime { get; set; }
 
 
+        private string _addedKeyPoint;
+        public string AddedKeyPoint
+        {
+            get => _addedKeyPoint;
+            set
+            {
+                if (value != _addedKeyPoint)
+                {
+                    _addedKeyPoint = value;
+                    OnPropertyChanged("AddedKeyPoint");
+                }
+            }
+        }
 
         private string _name;
-        public string Name
+        public string TourName
         {
             get => _name;
             set
@@ -54,7 +73,7 @@ namespace BookingApp.View
         }
 
         private string _language;
-        public string Language
+        public string TourLanguage
         {
             get => _language;
             set
@@ -62,6 +81,19 @@ namespace BookingApp.View
                 if (value != _language)
                 {
                     _language = value;
+                    OnPropertyChanged();
+                }
+            }
+        }
+        private string _keyPoint;
+        public string KeyPoint
+        {
+            get => _keyPoint;
+            set
+            {
+                if (value != _keyPoint)
+                {
+                    _keyPoint = value;
                     OnPropertyChanged();
                 }
             }
@@ -95,6 +127,21 @@ namespace BookingApp.View
             }
         }
 
+        private DateTime _tourDate;
+        public DateTime TourDate
+        {
+            get => _tourDate;
+            set
+            {
+                if (value != _tourDate)
+                {
+                    _tourDate = value;
+                    OnPropertyChanged();
+                }
+            }
+        }
+
+
 
 
         public event PropertyChangedEventHandler PropertyChanged;
@@ -107,10 +154,17 @@ namespace BookingApp.View
         {
             InitializeComponent();
             this.DataContext = this;
-            _tourRepository = new TourRepository();
+            _tourController = new TourController();
             _locationController = new LocationController();
             Locations = new ObservableCollection<Location>(_locationController.GetAll());
             Pictures = new List<string>();
+            KeyPoints = new List<KeyPoint>();
+            AddedKeyPoint = "";
+            TourDate = DateTime.Now;
+
+
+
+            PossibleTimes = new ObservableCollection<string>() { "9:00", "12:00", "14:00" };
         }
 
         private void CreateTourFrom(object sender, RoutedEventArgs e)
@@ -119,17 +173,23 @@ namespace BookingApp.View
             {
                 Name = Name,
                 Description = Description,
-                Language = Language,
-                Location = new Location(),
+                Language = TourLanguage,
                 MaxTourists = MaxTourists,
-                KeyPoint = new KeyPoint(),
                 StartDates = new List<DateTime> { dpStartDate.SelectedDate ?? DateTime.Now },
                 Duration = Duration,
-                Pictures = new List<string>(),
             };
 
+            TourDate = TourDate.Date;
+            TimeSpan timeOfDay = TimeSpan.Parse(SelectedTime);
+            TourDate = TourDate.Add(timeOfDay);
 
-            _tourRepository.Save(newTour);
+
+            _tourController.CreateTour(newTour);
+
+            KeyPoints.ForEach(kp => kp.Tour = newTour);
+
+            _keyPointController.SaveAll(KeyPoints);
+
             Close();
         }
 
@@ -145,17 +205,14 @@ namespace BookingApp.View
             OpenFileDialog openFileDialog1 = new OpenFileDialog();
             openFileDialog1.FileName = "";
             openFileDialog1.Title = "Images";
-            openFileDialog1.Filter = "All Image Files|.png;.jpg;.jpeg;.bmp|PNG Image (.png)|.png|JPEG Image (.jpg;.jpeg)|.jpg;.jpeg";
+            openFileDialog1.Filter = "All Image Files|*.png;*.jpg;*.jpeg;*.bmp";
             openFileDialog1.ShowDialog();
 
             if (!string.IsNullOrEmpty(openFileDialog1.FileName))
             {
                 string imagePath = openFileDialog1.FileName;
-                string imageFileName = System.IO.Path.GetFileName(imagePath); // Get just the file name
+                string imageFileName = System.IO.Path.GetFileName(imagePath); 
                 string imageDestinationPath = "../Resources/Images/" + imageFileName;
-
-
-                //File.Copy(imagePath, imageDestinationPath, true);
 
                 Pictures.Add(imageDestinationPath);
 
@@ -164,7 +221,12 @@ namespace BookingApp.View
 
         }
 
-
+        private void Add_Key_Point_Click(object sender, RoutedEventArgs e)
+        {
+            KeyPoint keyPoint = new KeyPoint() { Name = KeyPoint, IsActive = false };
+            KeyPoints.Add(keyPoint);
+            AddedKeyPoint += KeyPoint + ", ";
+        }
     }
 }
 
