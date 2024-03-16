@@ -1,4 +1,5 @@
-﻿using BookingApp.Model;
+﻿using Booking.App;
+using BookingApp.Model;
 using BookingApp.Serializer;
 using System;
 using System.Collections.Generic;
@@ -22,10 +23,26 @@ namespace BookingApp.Repository
             _touristEntry = _serializer.FromCSV(FilePath);
         }
 
+
+        public void BindTours() //bindovala turu sa turistima koji su se pojavili na turi 
+        {
+           TourRepository tourRepository = new TourRepository();
+            _touristEntry.ForEach(touristEntry => { touristEntry.Tour = tourRepository.GetById(touristEntry.Tour.Id); });
+
+        }
+
         public List<TouristEntry> GetAll()
         {
             return _serializer.FromCSV(FilePath);
         }
+
+        public List<TouristEntry> GetAllWithTours()
+        {
+            _touristEntry = _serializer.FromCSV(FilePath);
+            BindTours();
+            return _touristEntry;
+        }
+
 
         public TouristEntry Save(TouristEntry touristEntry)
         {
@@ -64,5 +81,8 @@ namespace BookingApp.Repository
             _serializer.ToCSV(FilePath, _touristEntry);
             return touristEntry;
         }
+
+       
+
     }
 }

@@ -19,6 +19,8 @@ namespace BookingApp.Model
         public string Language { get; set; }
         public Location Location { get; set; }
         public int MaxTourists { get; set; }
+
+        public KeyPoint KeyPoint { get; set; }
         public int AvaibleSeats { get; set; }
         public List<DateTime> StartDates { get; set; }
         public int Duration { get; set; }
@@ -39,7 +41,7 @@ namespace BookingApp.Model
             this.Id = id;
         }
 
-        public Tour(int id, TourGuide tourGuide, string name, string description, string language, Location location, int maxTourists, int avaibleSeats, List<DateTime> startDates, int duration, List<string> pictures, bool isStarted)
+        public Tour(int id, TourGuide tourGuide, string name, string description, string language, Location location, int maxTourists, KeyPoint keyPoint, int avaibleSeats, List<DateTime> startDates, int duration, List<string> pictures, bool isStarted)
         {
             Id = id;
             TourGuide = tourGuide;
@@ -48,6 +50,7 @@ namespace BookingApp.Model
             Language = language;
             Location = location;
             MaxTourists = maxTourists;
+            KeyPoint = keyPoint;
             AvaibleSeats = avaibleSeats;
             StartDates = startDates;
             Duration = duration;
@@ -60,7 +63,7 @@ namespace BookingApp.Model
 
             string startDatesString = string.Join(";", StartDates);
             string picturesString = string.Join(",", Pictures);
-            string[] csvValues = { Id.ToString(), TourGuide.Id.ToString(), Name, Description, Language, Location.Id.ToString(), MaxTourists.ToString(), AvaibleSeats.ToString(), startDatesString, Duration.ToString(), picturesString, IsStarted.ToString() };
+            string[] csvValues = { Id.ToString(), TourGuide.Id.ToString(), Name, Description, Language, Location.Id.ToString(), MaxTourists.ToString(), KeyPoint.Id.ToString(), AvaibleSeats.ToString(), startDatesString, Duration.ToString(), picturesString, IsStarted.ToString() };
             return csvValues;
         }
 
@@ -73,14 +76,15 @@ namespace BookingApp.Model
             Language = values[4];
             Location = new Location() { Id = Convert.ToInt32(values[5]) };
             MaxTourists = Convert.ToInt32(values[6]);
-            AvaibleSeats = Convert.ToInt32(values[7]);
+            KeyPoint = new KeyPoint() { Id = Convert.ToInt32(values[7]) };
+            AvaibleSeats = Convert.ToInt32(values[8]);
 
-            List<string> datesString = values[8].Split(";").ToList();
+            List<string> datesString = values[9].Split(";").ToList();
             StartDates = datesString.Select(s => Convert.ToDateTime(s)).ToList();
 
-            Duration = Convert.ToInt32(values[9]);
-            Pictures = values[10].Split(",").ToList();
-            IsStarted = Convert.ToBoolean(values[11]);
+            Duration = Convert.ToInt32(values[10]);
+            Pictures = values[11].Split(",").ToList();
+            IsStarted = Convert.ToBoolean(values[12]);
 
         }
     }

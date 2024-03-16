@@ -15,12 +15,20 @@ namespace BookingApp.Repository
 
         private readonly Serializer<Tour> _serializer;
 
-        private List<Tour> _tours;
+        private List<Tour> _tours;//Tours
 
         public TourRepository()
         {
             _serializer = new Serializer<Tour>();
             _tours = _serializer.FromCSV(FilePath);
+        }
+
+     
+
+        public Tour GetById(int id)
+        {
+            _tours = _serializer.FromCSV(FilePath);
+            return _tours.FirstOrDefault(tour => tour.Id == id);
         }
 
         public List<Tour> GetAll()
@@ -64,6 +72,25 @@ namespace BookingApp.Repository
             _tours.Insert(index, tour);      
             _serializer.ToCSV(FilePath, _tours);
             return tour;
+        }
+
+        public List<Tour> GetByTourGuide(TourGuide tourGuide)
+        {
+            _tours = _serializer.FromCSV(FilePath);
+            return _tours.FindAll(tour => tour.TourGuide.Id == tourGuide.Id);
+
+        }
+
+        private bool TourStartesToday(Tour tour)
+        {
+            return tour.StartDates.Any(date => date.Date == DateTime.Now.Date);
+        }
+
+        public List<Tour> GetTodayTours()
+        {
+
+            _tours = _serializer.FromCSV(FilePath);
+            return _tours.FindAll(tour => TourStartesToday(tour) && !tour.IsStarted);
         }
 
 

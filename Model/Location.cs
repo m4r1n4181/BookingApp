@@ -23,5 +23,10 @@ namespace BookingApp.Model
             City = values[1];
             Country = values[2];
         }
+
+        public override string ToString()
+        {
+            return City + " " + Country;
+        }
     }
 }
