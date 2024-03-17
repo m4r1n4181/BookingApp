@@ -16,11 +16,12 @@ namespace BookingApp.Model
 
         public TourGuide()
         {
-
+           
         }
-        public TourGuide(int id)
+        public TourGuide(int id )
         {
-            this.Id = id;
+            this.Id = id; 
+
         }
         public TourGuide(int Id, string firstName, string lastName, string email, string phone)
         {

@@ -1,4 +1,4 @@
-﻿using BookingApp.Model.Enums;
+using BookingApp.Model.Enums;
 using BookingApp.Serializer;
 using Microsoft.VisualBasic;
 using System;
@@ -9,12 +9,12 @@ using System.Linq;
 namespace BookingApp.Model
 {
     public class Tour : ISerializable
-    {
+{
 
         //treba mi klasa loction i klasa keypoint kao parametri u ovoj klasi 
-        public int Id { get; set; }
+        public int Id { get; set; } 
         public TourGuide TourGuide { get; set; }
-        public string Name { get; set; }
+        public  string Name { get; set; }
         public string Description { get; set; }
         public string Language { get; set; }
         public Location Location { get; set; }
@@ -26,12 +26,13 @@ namespace BookingApp.Model
         public List<string> Pictures { get; set; }
 
         public bool IsStarted { get; set; } // da li je tura započela
-                                            // public List<TouristEntry> TouristEntries { get; set; } // koji od prijavljenih turista su došli na turu
+       // public List<TouristEntry> TouristEntries { get; set; } // koji od prijavljenih turista su došli na turu
 
-
+     
 
         public Tour()
-        {
+        { 
+         
 
         }
 

@@ -1,4 +1,4 @@
-﻿using BookingApp.Model;
+using BookingApp.Model;
 using BookingApp.Serializer;
 using System;
 using System.Collections.Generic;
@@ -23,7 +23,7 @@ namespace BookingApp.Repository
             _tours = _serializer.FromCSV(FilePath);
         }
 
-
+     
 
         public Tour GetById(int id)
         {
@@ -69,7 +69,7 @@ namespace BookingApp.Repository
             Tour current = _tours.Find(tour => tour.Id == tour.Id);
             int index = _tours.IndexOf(current);
             _tours.Remove(current);
-            _tours.Insert(index, tour);
+            _tours.Insert(index, tour);      
             _serializer.ToCSV(FilePath, _tours);
             return tour;
         }

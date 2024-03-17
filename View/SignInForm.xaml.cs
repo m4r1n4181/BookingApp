@@ -57,6 +57,9 @@ namespace BookingApp.View
                     CommentsOverview commentsOverview = new CommentsOverview(user);
                     commentsOverview.Show();
                     Close();
+                    CreateTourForm createTourForm  = new CreateTourForm();
+                    createTourForm.Show();
+                    Close();
                 } 
                 else
                 {
