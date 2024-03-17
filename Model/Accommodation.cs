@@ -61,7 +61,8 @@ namespace BookingApp.Model
             Id = Convert.ToInt32(values[0]);
             Owner = new Owner(Convert.ToInt32(values[1]));
             Name = values[2];
-            Enum.TryParse(values[3], out AccommodationType Type);
+            Enum.TryParse(values[3], out AccommodationType loadedType);
+            Type = loadedType;
             Location = new Location() { Id = Convert.ToInt32(values[4])};
             MaxGuests = Convert.ToInt32(values[5]);
             MinReservationDays = Convert.ToInt32(values[6]);

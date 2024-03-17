@@ -2,7 +2,9 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Xml.Linq;
+using BookingApp.DTO;
 using BookingApp.Model;
+using BookingApp.Model.Enums;
 using BookingApp.Serializer;
 
 
@@ -10,7 +12,7 @@ namespace BookingApp.Repository
 {
     public class AccommodationRepository
     {
-        private const string FilePath = "C:\\Users\\Asus\\Desktop\\sims-in-2024-group-3-team-b\\Resources\\Data\\accommodations.csv";
+        private const string FilePath = "..\\..\\..\\Resources\\Data\\accommodation.csv";
         private readonly Serializer<Accommodation> _serializer;
         public List<Accommodation> Accommodations; //{ get; set; } = new List<Accommodation>();
 
@@ -31,11 +33,13 @@ namespace BookingApp.Repository
             return Accommodations.FirstOrDefault(acc => acc.Id == id);
         }
 
-        public List<Accommodation> GetAll()
+        public void BindLocations()
         {
-            return _serializer.FromCSV(FilePath);
+            LocationRepository locationRepository = new LocationRepository();
+            Accommodations.ForEach(locR => { locR.Location = locationRepository.GetById(locR.Location.Id); });
         }
 
+     
         public Accommodation Save(Accommodation accommodation)
         {
             accommodation.Id = NextId();
@@ -79,7 +83,59 @@ namespace BookingApp.Repository
             Accommodations = _serializer.FromCSV(FilePath);
             return Accommodations.FindAll(a => a.Owner.Id == owner.Id);
         }
+
+        public List<Accommodation> GetAll()
+        {
+            return _serializer.FromCSV(FilePath);
+        }
+
+        public List<Accommodation> GetAllWithLocations()
+        {
+            Accommodations = _serializer.FromCSV(FilePath);
+            BindLocations();
+            return Accommodations;
+        }
+
+
+        public List<Accommodation> SearchAccommodation(AccommodationSearchParams searchParams) 
+        {
+            Accommodations = _serializer.FromCSV(FilePath);
+            BindLocations();
+            if (searchParams.Name != null)
+            {
+                Accommodations = Accommodations.FindAll(a => a.Name.Contains(searchParams.Name, StringComparison.OrdinalIgnoreCase));
+            }
+
+            if (searchParams.City != null)
+            {
+                Accommodations = Accommodations.FindAll(a => a.Location.City.Contains(searchParams.City, StringComparison.OrdinalIgnoreCase));
+            }
+
+            if (searchParams.Country != null)
+            {
+                Accommodations = Accommodations.FindAll(a => a.Location.Country.Contains(searchParams.Country, StringComparison.OrdinalIgnoreCase));
+            }
+            if(searchParams.Type != null)
+            {
+                Accommodations = Accommodations.FindAll(a => a.Type == searchParams.Type);
+            }
+            if(searchParams.MaxGests != 0)
+            {
+                Accommodations = Accommodations.FindAll(a => a.MaxGuests >= searchParams.MaxGests);
+            }
+            if(searchParams.MinReservationDays != 0)
+            {
+                Accommodations = Accommodations.FindAll(a => a.MinReservationDays <= searchParams.MinReservationDays);
+            }
+
+
+            return Accommodations;
+        }
+
+   
+
+
     }
-       
-    
+
+
 }

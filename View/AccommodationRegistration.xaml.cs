@@ -54,7 +54,7 @@ namespace BookingApp.View
                 LoggedOwner,
                 Name.Text,
                 (AccommodationType)Enum.Parse(typeof(AccommodationType), Type.Text),
-                new Location(City.Text, Country.Text),
+                new Location() { City = City.Text, Country = Country.Text },
                 int.Parse(MaxGuests.Text),
                 int.Parse(MinDays.Text),
                 int.Parse(CancellationDays.Text),

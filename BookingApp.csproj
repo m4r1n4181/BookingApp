@@ -8,13 +8,16 @@
   </PropertyGroup>
 
   <ItemGroup>
+    
     <None Remove="Resources\Images\add.png" />
     <None Remove="Resources\Images\delete.png" />
     <None Remove="Resources\Images\edit.png" />
     <None Remove="Resources\Images\view.png" />
   </ItemGroup>
 
-  <ItemGroup>
+  
+
+	<ItemGroup>
     <Content Include="Resources\Images\add.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
@@ -28,5 +31,13 @@
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
   </ItemGroup>
+
+  
+
+	<ItemGroup>
+	  <None Update="Resources\Data\locations.csv">
+	    <Generator>MSBuild:Compile</Generator>
+	  </None>
+	</ItemGroup>
 
 </Project>

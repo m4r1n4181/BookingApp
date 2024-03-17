@@ -23,6 +23,8 @@ namespace BookingApp.Service
             _tourRepository = new TourRepository();
             _keyPointRepository = new KeyPointRepository();
         }
+        //metoda da se kreira pa doda tura u repository
+
 
 
         public Tour CreateTour(Tour tour)
@@ -98,7 +100,6 @@ namespace BookingApp.Service
             tour.IsStarted = false;
             _tourRepository.Update(tour);
         }
-
 
     }
 
