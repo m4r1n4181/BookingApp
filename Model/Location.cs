@@ -10,11 +10,6 @@ namespace BookingApp.Model
         public string Country { get; set; }
 
         public Location() { }
-        public Location(string city, string country) 
-        {
-        this.City = city;
-        this.Country = country;
-        }
 
         public string[] ToCSV()
         {
@@ -27,6 +22,11 @@ namespace BookingApp.Model
             Id = Convert.ToInt32(values[0]);
             City = values[1];
             Country = values[2];
+        }
+
+        public override string ToString()
+        {
+            return City + " " + Country;
         }
     }
 }
