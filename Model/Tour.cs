@@ -1,4 +1,4 @@
-﻿using BookingApp.Model.Enums;
+using BookingApp.Model.Enums;
 using BookingApp.Serializer;
 using Microsoft.VisualBasic;
 using System;
@@ -84,5 +84,5 @@ namespace BookingApp.Model
 
         }
     }
-
 }
+
