@@ -164,7 +164,7 @@ namespace BookingApp.View
 
 
 
-            PossibleTimes = new ObservableCollection<string>() { "9:00", "12:00", "14:00" };
+            PossibleTimes = new ObservableCollection<string>() { "9:00", "12:00", "15:00", "18:00" };
         }
 
         private void CreateTourFrom(object sender, RoutedEventArgs e)

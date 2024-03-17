@@ -60,7 +60,9 @@ namespace BookingApp.Model
         {
 
             string startDatesString = string.Join(";", StartDates);
-            string picturesString = string.Join(",", Pictures);
+           // string? picturesString = Pictures != null ? string.Join(",", Pictures) : null;
+           //takodje nista se ne upisuje u tour.csv i proeriti saveAll keypoints
+            string picturesString = string.Join(",", Pictures); //greska buni se jer je null...
             string[] csvValues = { Id.ToString(), TourGuide.Id.ToString(), Name, Description, Language, Location.Id.ToString(), MaxTourists.ToString(), AvaibleSeats.ToString(), startDatesString, Duration.ToString(), picturesString, IsStarted.ToString() };
             return csvValues;
         }
