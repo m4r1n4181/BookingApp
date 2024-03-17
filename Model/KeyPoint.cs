@@ -12,6 +12,7 @@ using System.Xml.Linq;
 namespace BookingApp.Model
 {
     public class KeyPoint : ISerializable 
+
     {
         public int Id { get; set; }
         public string Name { get; set; }
@@ -35,7 +36,6 @@ namespace BookingApp.Model
             string[] csvValues = { Id.ToString(),  Name,  IsActive.ToString(), Tour.Id.ToString() };
             return csvValues;
         }
-
         public void FromCSV(string[] values)
         {
             Id = Convert.ToInt32(values[0]);
@@ -43,7 +43,6 @@ namespace BookingApp.Model
             IsActive = Convert.ToBoolean(values[2]);
             Tour = new Tour(Convert.ToInt32(values[3]));
         }
-
         
     }
 

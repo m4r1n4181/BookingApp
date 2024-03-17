@@ -1,4 +1,6 @@
 using System;
+using System.Collections.Generic;
+using System.Xml.Linq;
 using BookingApp.Model;
 using BookingApp.Repository;
 
@@ -6,13 +8,19 @@ namespace BookingApp.Service
 {
     public class AccommodationService
     {
-        private AccommodationRepository accommodationRepository;
+        private AccommodationRepository _accommodationRepository;
 
-        public bool RegisterAccommondation(Accommodation accommondation)
-        {
-            return false;
+        public AccommodationService() { 
+            _accommodationRepository = new AccommodationRepository();
         }
-       
+
+        public Accommodation RegisterAccommondation(Accommodation accommodation)
+        {
+            accommodation = _accommodationRepository.Save(accommodation);
+
+            return accommodation;
+        }
+
     }
 
 }

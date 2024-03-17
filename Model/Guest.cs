@@ -9,6 +9,7 @@ namespace BookingApp.Model
     {
         public Guest() { }
 
+        public int Id { get; set; }
         public string Name { get; set; }
         public string Surname { get; set; }
 
@@ -19,6 +20,11 @@ namespace BookingApp.Model
         {
             this.Name = name;
             this.Surname = surname;
+        }
+
+        public Guest(int id)
+        {
+            this.Id = id;
         }
     }
 }

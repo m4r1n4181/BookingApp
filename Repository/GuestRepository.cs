@@ -2,7 +2,6 @@ using System.Collections.Generic;
 using BookingApp.Model;
 using BookingApp.Model.Enums;
 
-
 namespace BookingApp.Repository
 {
     public class GuestRepository

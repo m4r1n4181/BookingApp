@@ -1,4 +1,4 @@
-﻿using BookingApp.Model;
+using BookingApp.Model;
 using BookingApp.Repository;
 using System;
 using System.Collections.Generic;
@@ -27,8 +27,8 @@ namespace BookingApp.Service
 
         public Tour CreateTour(Tour tour)
         {
-            
             tour = _tourRepository.Save(tour);
+
 
             return tour;
 
@@ -62,7 +62,6 @@ namespace BookingApp.Service
         }
 
 
-
         public void TouristArrival(int touristId, int keyPointId)
         {
             Tourist tourist = _touristRepository.GetById(touristId);
@@ -91,6 +90,7 @@ namespace BookingApp.Service
             List<KeyPoint> keyPoints = _keyPointRepository.GetKeyPointsForTour(id);
            
             foreach(KeyPoint keyPoint in keyPoints)
+
             {
                 keyPoint.IsActive = false;
                 _keyPointRepository.Update(keyPoint);
