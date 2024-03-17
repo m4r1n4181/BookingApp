@@ -32,6 +32,7 @@ namespace BookingApp.View
         private void Submit(object sender, RoutedEventArgs e)
         {
             //morala sam naglasiti da je iz modela jer i ovde imam GuestReview
+            // dodati uslov za manje od 1 i vece od 5 da baci error 
             Model.GuestReview guestReview = new Model.GuestReview(
                 int.Parse(Cleanliness.Text),
                 int.Parse(RuleAdherence.Text),

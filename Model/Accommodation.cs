@@ -25,9 +25,18 @@ namespace BookingApp.Model
         public Accommodation() 
         {
         }
-        public Accommodation(User user, string name, AccommodationType type, Location location, int maxGuests, int minReservationDays, int cancellationDays, List<string> pictures)
+        public Accommodation(string name, AccommodationType type, int maxGuests, int minReservationDays, int cancellationDays)
         {
-            Owner = new Owner(user);
+            Name = name;
+            Type = type;
+            MaxGuests = maxGuests;
+            MinReservationDays = minReservationDays;
+            CancellationDays = cancellationDays;
+        }
+
+        public Accommodation( string name, AccommodationType type, Location location, int maxGuests, int minReservationDays, int cancellationDays, List<string> pictures)
+        {
+           // Owner = new Owner(user);
             Name = name;
             Type = type;
             Location = location;
@@ -36,7 +45,6 @@ namespace BookingApp.Model
             CancellationDays = cancellationDays;
             Pictures = pictures;
         }
-
         public Accommodation(int id, Owner owner, string name, AccommodationType type, Location location, int maxGuests, int minReservationDays, int cancellationDays, List<string> pictures)
         {
             Id = id;
@@ -70,6 +78,7 @@ namespace BookingApp.Model
             Pictures = values[8].Split(",").ToList();
             
         }
+
     }
 
 
