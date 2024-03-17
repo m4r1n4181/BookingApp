@@ -1,4 +1,4 @@
-﻿using BookingApp.Model.Enums;
+using BookingApp.Model.Enums;
 using BookingApp.Serializer;
 using Microsoft.VisualBasic;
 using System;
@@ -33,6 +33,7 @@ namespace BookingApp.Model
         public Tour()
         { 
          
+
         }
 
         public Tour(int id)
@@ -87,5 +88,5 @@ namespace BookingApp.Model
 
         }
     }
- 
+
 }

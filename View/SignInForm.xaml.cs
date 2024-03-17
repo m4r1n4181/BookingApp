@@ -47,6 +47,11 @@ namespace BookingApp.View
             User user = _repository.GetByUsername(Username);
             if (user != null)
             {
+               /* if(user.Id == 3)
+                {
+                    AccommodationRegistration registration = new AccommodationRegistration(user); //pokusaj logovanja vlasnika ali cast ne radi dobro
+                    registration.Show();
+                }*/
                 if(user.Password == txtPassword.Password)
                 {
                     CommentsOverview commentsOverview = new CommentsOverview(user);

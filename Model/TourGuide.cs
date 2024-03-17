@@ -13,7 +13,7 @@ namespace BookingApp.Model
         public string Email { get; set; }
         public string Phone { get; set; }
 
-   
+
         public TourGuide()
         {
            
@@ -21,6 +21,7 @@ namespace BookingApp.Model
         public TourGuide(int id )
         {
             this.Id = id; 
+
         }
         public TourGuide(int Id, string firstName, string lastName, string email, string phone)
         {
