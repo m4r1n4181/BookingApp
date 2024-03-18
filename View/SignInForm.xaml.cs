@@ -1,4 +1,5 @@
 ﻿using BookingApp.Model;
+using BookingApp.Model.Enums;
 using BookingApp.Repository;
 using System.ComponentModel;
 using System.Runtime.CompilerServices;
@@ -13,6 +14,8 @@ namespace BookingApp.View
     {
 
         private readonly UserRepository _repository;
+
+        public static User LoggedUser { get; set; }
 
         private string _username;
         public string Username
@@ -47,11 +50,30 @@ namespace BookingApp.View
             User user = _repository.GetByUsername(Username);
             if (user != null)
             {
+                
                 if(user.Password == txtPassword.Password)
                 {
+                    LoggedUser = user;
+                    if (user.Type == UserType.TourGuide)
+                    {
+                        
+                        CreateTourForm createTourForm = new CreateTourForm();
+                        createTourForm.Show();
+                    }else if (user.Type == UserType.Owner)
+                    {
+                        
+                    }else if (user.Type == UserType.Tourist)
+                    {
+                        
+                    }
+                    else
+                    {
+
+                    }
                     CommentsOverview commentsOverview = new CommentsOverview(user);
                     commentsOverview.Show();
                     Close();
+                    
                 } 
                 else
                 {

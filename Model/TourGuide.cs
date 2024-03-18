@@ -4,34 +4,32 @@ using System.Collections.Generic;
 
 namespace BookingApp.Model
 {
-    public class TourGuide
+    public class TourGuide : User
     {
+
         public int Id { get; set; }
-        public string Username { get; set; }
-        public string Password { get; set; }
         public string FirstName { get; set; }
         public string LastName { get; set; }
         public string Email { get; set; }
         public string Phone { get; set; }
-        public List<Tour> Tours { get; set; }
 
-   
+
         public TourGuide()
         {
-            Tours = new List<Tour>();
+           
         }
-
-    
-        public TourGuide(int id, string username, string password, string firstName, string lastName, string email, string phone)
+        public TourGuide(int id )
         {
-            Id = id;
-            Username = username;
-            Password = password;
+            this.Id = id; 
+
+        }
+        public TourGuide(int Id, string firstName, string lastName, string email, string phone)
+        {
+            Id = Id;
             FirstName = firstName;
             LastName = lastName;
             Email = email;
             Phone = phone;
-            Tours = new List<Tour>();
         }
     }
 }

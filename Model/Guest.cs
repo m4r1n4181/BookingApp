@@ -1,3 +1,4 @@
+using BookingApp.Model.Enums;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -16,7 +17,7 @@ namespace BookingApp.Model
 
 
 
-        public Guest(string name, string surname, string username, string password) : base(username, password)
+        public Guest(string name, string surname, string username, string password) : base(username, password, UserType.Guest)
         {
             this.Name = name;
             this.Surname = surname;

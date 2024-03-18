@@ -13,6 +13,6 @@ namespace BookingApp.Model
         {
             this.Id = id;
         }
-     }
+    }
 
 }
