@@ -13,7 +13,7 @@ namespace BookingApp.Model
 
         //treba mi klasa loction i klasa keypoint kao parametri u ovoj klasi 
         public int Id { get; set; } 
-        public TourGuide TourGuide { get; set; }
+        public User TourGuide { get; set; }
         public  string Name { get; set; }
         public string Description { get; set; }
         public string Language { get; set; }
@@ -71,7 +71,7 @@ namespace BookingApp.Model
         public void FromCSV(string[] values)
         {
             Id = Convert.ToInt32(values[0]);
-            TourGuide = new TourGuide(Convert.ToInt32(values[1]));
+            TourGuide = new User(Convert.ToInt32(values[1]));
             Name = values[2];
             Description = values[3];
             Language = values[4];

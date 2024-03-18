@@ -1,4 +1,5 @@
-﻿using BookingApp.Serializer;
+﻿using BookingApp.Model.Enums;
+using BookingApp.Serializer;
 using System;
 
 namespace BookingApp.Model
@@ -9,17 +10,24 @@ namespace BookingApp.Model
         public string Username { get; set; }
         public string Password { get; set; }
 
-        public User() { }
+        public UserType Type { get; set; }
 
-        public User(string username, string password)
+        public User() { }
+        public User(int id) {
+            Id = id;
+
+        }
+
+        public User( string username, string password, UserType type)
         {
             Username = username;
             Password = password;
+            Type = type;
         }
 
         public string[] ToCSV()
         {
-            string[] csvValues = { Id.ToString(), Username, Password };
+            string[] csvValues = { Id.ToString(), Username, Password, Type.ToString() };
             return csvValues;
         }
 
@@ -28,6 +36,8 @@ namespace BookingApp.Model
             Id = Convert.ToInt32(values[0]);
             Username = values[1];
             Password = values[2];
+            Enum.TryParse(values[3], out UserType userType);
+            Type = userType;
         }
     }
 }

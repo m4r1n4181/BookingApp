@@ -156,6 +156,7 @@ namespace BookingApp.View
             this.DataContext = this;
             _tourController = new TourController();
             _locationController = new LocationController();
+            _keyPointController = new KeyPointController();
             Locations = new ObservableCollection<Location>(_locationController.GetAll());
             Pictures = new List<string>();
             KeyPoints = new List<KeyPoint>();
@@ -169,20 +170,25 @@ namespace BookingApp.View
 
         private void CreateTourFrom(object sender, RoutedEventArgs e)
         {
+            
             Tour newTour = new Tour
             {
-                Name = Name,
+                Name = TourName,
+                Location = SelectedLocation,
+                TourGuide = SignInForm.LoggedUser,
                 Description = Description,
                 Language = TourLanguage,
                 MaxTourists = MaxTourists,
-                StartDates = new List<DateTime> { dpStartDate.SelectedDate ?? DateTime.Now },
+                StartDates = new List<DateTime>(),
                 Duration = Duration,
+                Pictures = Pictures,
             };
 
             TourDate = TourDate.Date;
             TimeSpan timeOfDay = TimeSpan.Parse(SelectedTime);
             TourDate = TourDate.Add(timeOfDay);
 
+            newTour.StartDates.Add(TourDate);
 
             _tourController.CreateTour(newTour);
 

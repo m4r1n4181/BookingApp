@@ -54,9 +54,8 @@ namespace BookingApp.Service
             }
         }
 
-        public void SaveAll()
+        public void SaveAll(List<KeyPoint> keyPoints)
         {
-            List<KeyPoint> keyPoints = _keyPointRepository.GetAll(); //da mi sacuva sve keypointove ili ide ova metoda GetKeyPointsForTour
             foreach (KeyPoint keyPoint in keyPoints)
             {
                 _keyPointRepository.Save(keyPoint);
