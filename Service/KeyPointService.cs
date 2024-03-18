@@ -54,6 +54,10 @@ namespace BookingApp.Service
             }
         }
 
+        public List<KeyPoint> GetAllForTour(int tourId)
+        {
+            return _keyPointRepository.GetKeyPointsForTour(tourId);
+        }
         public void SaveAll(List<KeyPoint> keyPoints)
         {
             foreach (KeyPoint keyPoint in keyPoints)

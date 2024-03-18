@@ -1,4 +1,5 @@
 ﻿using BookingApp.Model;
+using BookingApp.Repository;
 using BookingApp.Service;
 using System;
 using System.Collections.Generic;
@@ -20,6 +21,15 @@ namespace BookingApp.Controller
         public void SaveAll(List<KeyPoint> keyPoints)
         {
             _keyPointService.SaveAll(keyPoints);
+        }
+        public List<KeyPoint> GetAllForTour(int tourId)
+        {
+            return _keyPointService.GetAllForTour(tourId);
+        }
+
+        public void ActivateKeyPoint(int keyPointId)
+        {
+            _keyPointService.ActivateKeyPoint(keyPointId);
         }
     }
 }

@@ -59,6 +59,9 @@ namespace BookingApp.View
                         
                         CreateTourForm createTourForm = new CreateTourForm();
                         createTourForm.Show();
+                        LiveTourView liveTourView = new LiveTourView();
+                        liveTourView.Show();
+
                     }else if (user.Type == UserType.Owner)
                     {
                         

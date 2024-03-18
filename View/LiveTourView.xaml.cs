@@ -1,42 +1,58 @@
-﻿using BookingApp.Model;
-using System;
+﻿using System;
 using System.Collections.ObjectModel;
 using System.Windows;
-using System.Windows.Input;
+using BookingApp.Model;
+using BookingApp.Repository;
+using BookingApp.Service;
+
 
 namespace BookingApp.View
 {
     public partial class LiveTourView : Window
     {
-        public ObservableCollection<Tour> Tours { get; set; } // Prikaz liste tura
+        public ObservableCollection<Tour> Tours { get; set; }
+        public Tour SelectedTour { get; set; }
 
-        public ICommand ActivateTourCommand { get; private set; } // ICommand za aktiviranje ture
+        private readonly TourRepository _tourRepository;
+        private readonly TourService _tourService;
 
         public LiveTourView()
         {
             InitializeComponent();
             DataContext = this;
-
-            Tours = new ObservableCollection<Tour>(); // Inicijalizacija liste tura
-
-           
-           // Tours.Add(new Tour { Name = "Tour 1", StartDate = DateTime.Now });
-           // Tours.Add(new Tour { Name = "Tour 2", StartDate = DateTime.Now });
-           // Tours.Add(new Tour { Name = "Tour 3", StartDate = DateTime.Now });
-
-            //ActivateTourCommand = new RelayCommand(ActivateTour); // Inicijalizacija ICommand-a
+            _tourRepository = new TourRepository();
+            _tourService = new TourService();
+            Tours = new ObservableCollection<Tour>(_tourRepository.GetTodayTours());
         }
 
-        private void ActivateTour(object tour)
+        private void ActivateTour(object sender, RoutedEventArgs e)
         {
-            // Otvori novi prozor za aktiviranu turu sa ključnim tačkama
-            Tour activatedTour = tour as Tour;
-            if (activatedTour != null)
+            if (SelectedTour != null)
             {
-                //TourKeyPointsView keyPointsView = new TourKeyPointsView(activatedTour);
-                //keyPointsView.ShowDialog();
+                MessageBoxResult result = MessageBox.Show("Are you sure you want to activate this tour?", "Activate Tour",
+                    MessageBoxButton.YesNo, MessageBoxImage.Question);
+                if (result == MessageBoxResult.Yes)
+                {
+                    _tourService.StartTour(SelectedTour.Id);
+
+
+                    TourDetails tourDetails = new TourDetails();
+                    tourDetails.Show();
+                }
             }
+        }
+
+        private void Activate_Click(object sender, RoutedEventArgs e)
+        {
+            if(SelectedTour == null)
+            {
+                //messageboc
+                return;
+            }
+            TourDetails tourDetails = new TourDetails(SelectedTour);
+            tourDetails.ShowDialog();
+
+
         }
     }
 }
-
