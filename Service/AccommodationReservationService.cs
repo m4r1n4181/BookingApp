@@ -1,4 +1,4 @@
-﻿using Booking.App;
+﻿using BookingApp.Model;
 using BookingApp.Repository;
 using System;
 using System.Collections.Generic;
@@ -32,5 +32,26 @@ namespace BookingApp.Service
 
             return ownersReservations;
         }
+
+        /*public List<AccommodationReservation> GetAccommodationReservationsToRate(int ownerId)
+        {
+            List<AccommodationReservation> allAccommodationReservations = _accommodationReservationRepository.GetAll();
+            List<AccommodationReservation> accommodationReservationsToRate = new List<AccommodationReservation>();
+            DateTime currentDate = DateTime.Now;
+            foreach (AccommodationReservation accommodationReservation in allAccommodationReservations)
+            {
+                if (accommodationReservation.Departure < currentDate)
+                {
+                    if ((currentDate - accommodationReservation.Departure).TotalDays <= 5)
+                    {
+                        accommodationReservationsToRate.Add(accommodationReservation);
+                    }
+
+                }
+            }
+            return accommodationReservationsToRate;
+
+        }
+        */
     }
 }

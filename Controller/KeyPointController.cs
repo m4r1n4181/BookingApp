@@ -19,7 +19,7 @@ namespace BookingApp.Controller
 
         public void SaveAll(List<KeyPoint> keyPoints)
         {
-            _keyPointService.SaveAll();
+            _keyPointService.SaveAll(keyPoints);
         }
     }
 }

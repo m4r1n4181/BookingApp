@@ -1,4 +1,3 @@
-using Booking.App;
 using BookingApp.Serializer;
 using System;
 
@@ -18,20 +17,21 @@ namespace BookingApp.Model
 		public GuestReview()
 			{
 			}
+        public GuestReview(AccommodationReservation accommodationReservation, int cleanliness, int ruleAdherence, string comment)
+        {
+            this.AccommodationReservation = accommodationReservation;
+            this.Cleanliness = cleanliness;
+            this.RuleAdherence = ruleAdherence;
+            this.Comment = comment;
+
+        }
         public GuestReview(int cleanliness, int ruleAdherence, string comment)
         {
             this.Cleanliness = cleanliness;
             this.RuleAdherence = ruleAdherence;
             this.Comment = comment;
         }
-        public GuestReview(AccommodationReservation accommodationReservation, int cleanliness, int ruleAdherence, string comment)
-			{
-				this.AccommodationReservation = accommodationReservation;
-				this.Cleanliness = cleanliness;
-				this.RuleAdherence = ruleAdherence;
-				this.Comment = comment;
 
-			}
 
         public string[] ToCSV()
         {

@@ -155,13 +155,26 @@ namespace BookingApp.View
 
         private void RegisterAccommodation_Click(object sender, RoutedEventArgs e)
         {
+            if(SelectedType == null)
+            {
+                MessageBoxResult result = MessageBox.Show("Must select type"); 
+                return;
+            }
+            if (SelectedLocation == null)
+            {
+                MessageBoxResult result = MessageBox.Show("Must select location");
+                return;
+            }
             Accommodation newAccommodation = new Accommodation
             {
+                Owner = SignInForm.LoggedUser,
                 Name = AccommodationName,
-                //Type = (AccommodationType)Enum.Parse(typeof(AccommodationType), SelectedAccommodationType),
+                Type = (AccommodationType)SelectedType,
+                Location = SelectedLocation,
                 MaxGuests = MaxGuests,
                 MinReservationDays = MinReservationDays,
                 CancellationDays = CancellationDays,
+                Pictures = Pictures,
             };
 
             _accommodationController.RegisterAccommondation(newAccommodation);
