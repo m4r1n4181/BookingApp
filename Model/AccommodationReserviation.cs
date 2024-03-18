@@ -16,6 +16,17 @@ namespace Booking.App
         public DateTime Departure { get; set; }
 
 
+       // AccommodationReservation() { }
+
+
+       /* AccommodationReservation(Accommodation accommodation, Guest guest, DateTime arrival, DateTime departure)
+        {
+            Accommodation = accommodation;
+            Guest = guest;
+            Arrival = arrival;
+            Departure = departure;
+
+        }*/
         public string[] ToCSV()
         {
             string[] csvValues = { Id.ToString(), Accommodation.Id.ToString(), Guest.Id.ToString(), Arrival.ToString(), Departure.ToString() };

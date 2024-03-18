@@ -6,6 +6,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Xml.Linq;
 namespace BookingApp.Repository
 {
     public class AccommodationReservationRepository
@@ -73,6 +74,11 @@ namespace BookingApp.Repository
             return accommodationReservation;
         }
 
-        
+        public List<AccommodationReservation> GetByAccommodation(int accommodationId)
+        {
+            AccommodationReservations = _serializer.FromCSV(FilePath);
+            return AccommodationReservations.FindAll(c => c.Accommodation.Id == accommodationId);
+        }
+
     }
 }

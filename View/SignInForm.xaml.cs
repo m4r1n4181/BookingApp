@@ -55,10 +55,13 @@ namespace BookingApp.View
                 if(user.Password == txtPassword.Password)
                 {
                     CommentsOverview commentsOverview = new CommentsOverview(user);
-                    commentsOverview.Show();
+                   // commentsOverview.Show();
 
                     AccommodationSearch accommodationSearch = new AccommodationSearch();
                     accommodationSearch.Show();
+
+
+                 
                     Close();
                 } 
                 else

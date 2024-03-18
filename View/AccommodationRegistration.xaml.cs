@@ -19,6 +19,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 
+
 namespace BookingApp.View
 {
     /// <summary>
@@ -50,7 +51,7 @@ namespace BookingApp.View
         {
 
             // Kreiranje nove instance Accommodation na osnovu unetih podataka iz TextBox-ova
-            Accommodation accommodation = new Accommodation(
+            Accommodation accommodation = null;/* new Accommodation(
                 LoggedOwner,
                 Name.Text,
                 (AccommodationType)Enum.Parse(typeof(AccommodationType), Type.Text),
@@ -59,8 +60,8 @@ namespace BookingApp.View
                 int.Parse(MinDays.Text),
                 int.Parse(CancellationDays.Text),
                 Pictures.Text.Split(',').ToList()
-            ); ;
-
+            );
+            */
             // Poziv funkcije iz kontrolera
             _accommodationController.RegisterAccommondation(accommodation);
                 MessageBox.Show("Accommodation successfully saved!");     

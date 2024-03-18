@@ -20,7 +20,7 @@
         <ComboBox HorizontalAlignment="Left" ItemsSource="{Binding Types}" SelectedItem="{Binding SelectedType}" Margin="100,200,0,0" VerticalAlignment="Top" Width="100"/>
         <TextBox HorizontalAlignment="Left" Text="{Binding Path=MaxGuests, UpdateSourceTrigger=PropertyChanged}" Margin="100,248,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="100"/>
         <TextBox HorizontalAlignment="Left" Text="{Binding Path=MinReservationDays, UpdateSourceTrigger=PropertyChanged}" Margin="100,318,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="100"/>
-        <Button Content="Prikazi" HorizontalAlignment="Left" Margin="467,19,0,0" VerticalAlignment="Top" Width="156" Height="59" Click="Button_Click"/>
+        <Button Content="Prikazi" HorizontalAlignment="Left" Margin="31,358,0,0" VerticalAlignment="Top" Width="156" Height="59" Click="Button_Click"/>
         <StackPanel Margin="250,90,20,20">
             <DataGrid ItemsSource="{Binding Accommodations}"
               SelectedItem="{Binding Path=SelectedAccommodation}"
@@ -36,5 +36,6 @@
                 </DataGrid.Columns>
             </DataGrid>
         </StackPanel>
+        <Button Content="Rezervisi" HorizontalAlignment="Left" Margin="592,18,0,0" VerticalAlignment="Top" Width="156" Height="59" Click="Button_Click_1"/>
     </Grid>
 </Window>
