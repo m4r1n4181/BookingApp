@@ -28,14 +28,47 @@ namespace BookingApp.View
             _guestReviewController = new GuestReviewController();
         }
 
+        /*   private int _cleanliness;
+           public int Clean
+           {
+               get => _cleanliness;
+               set
+               {
+                   if (value != _cleanliness)
+                   {
+                       _cleanliness = value;
+                       OnPropertyChanged();
+                   }
+               }
+           }
+           private int _rules;
+           public int Rule
+           {
+               get => _rules;
+               set
+               {
+                   if (value != _rules)
+                   {
+                       _rules = value;
+                       OnPropertyChanged();
+                   }
+               }
+           } 
 
+     public GuestReview()
+           {
+               InitializeComponent();
+               this.DataContext = this;
+               _guestReviewController = new GuestReviewController();
+           }
+         */
         private void Submit(object sender, RoutedEventArgs e)
         {
             //morala sam naglasiti da je iz modela jer i ovde imam GuestReview
             // dodati uslov za manje od 1 i vece od 5 da baci error 
             Model.GuestReview guestReview = new Model.GuestReview(
-                int.Parse(Cleanliness.Text),
-                int.Parse(RuleAdherence.Text),
+                int.Parse(Clean.Text),
+                int.Parse(Rule.Text),
                 Comment.Text
             );
 

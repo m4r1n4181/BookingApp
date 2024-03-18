@@ -139,10 +139,10 @@ namespace BookingApp.View
             {
                 string imagePath = openFileDialog1.FileName;
                 string imageFileName = System.IO.Path.GetFileName(imagePath);
-                string imageDestinationPath = "../Resources/Images/" + imageFileName;
+                string imageDestinationPath = System.IO.Path.Combine(Environment.CurrentDirectory, "Resources", "Images", imageFileName);
 
+                // Now you have the correct absolute path to your image
                 Pictures.Add(imageDestinationPath);
-
             }
 
 

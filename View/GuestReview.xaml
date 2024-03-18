@@ -11,8 +11,8 @@
         <Label Content="Cleanliness" HorizontalAlignment="Left" Margin="166,89,0,0" VerticalAlignment="Top"/>
         <Label Content="Rule Adherence" HorizontalAlignment="Left" Margin="166,130,0,0" VerticalAlignment="Top"/>
         <Label Content="Comment" HorizontalAlignment="Left" Margin="166,180,0,0" VerticalAlignment="Top"/>
-        <TextBox Name="Cleanliness" HorizontalAlignment="Left" Margin="280,93,0,0" TextWrapping="Wrap"  VerticalAlignment="Top" Width="120"/>
-        <TextBox Name ="RuleAdherence" HorizontalAlignment="Left" Margin="280,138,0,0" TextWrapping="Wrap"  VerticalAlignment="Top" Width="120"/>
+        <TextBox Name="Clean"  Text="{Binding Path=Cleanliness, UpdateSourceTrigger=PropertyChanged}" HorizontalAlignment="Left" Margin="280,93,0,0" TextWrapping="Wrap"  VerticalAlignment="Top" Width="120"/>
+        <TextBox Name ="Rule"  Text="{Binding Path=RuleAdherence, UpdateSourceTrigger=PropertyChanged}" HorizontalAlignment="Left" Margin="280,138,0,0" TextWrapping="Wrap"  VerticalAlignment="Top" Width="120"/>
         <TextBox Name="Comment" HorizontalAlignment="Left" Margin="280,188,0,0" TextWrapping="Wrap"  VerticalAlignment="Top" Width="120"/>
         <Button Content="Submit review" HorizontalAlignment="Left" Margin="557,383,0,0" VerticalAlignment="Top" Click="Submit" Width="102" Height="29" FontSize="14"/>
         <Button Content="Cancel" HorizontalAlignment="Left" Margin="674,383,0,0" VerticalAlignment="Top" Click="Cancel" Width="102" Height="29" FontSize="14"/>
