@@ -25,28 +25,12 @@ namespace BookingApp.View
             Tours = new ObservableCollection<Tour>(_tourRepository.GetTodayTours());
         }
 
-        private void ActivateTour(object sender, RoutedEventArgs e)
-        {
-            if (SelectedTour != null)
-            {
-                MessageBoxResult result = MessageBox.Show("Are you sure you want to activate this tour?", "Activate Tour",
-                    MessageBoxButton.YesNo, MessageBoxImage.Question);
-                if (result == MessageBoxResult.Yes)
-                {
-                    _tourService.StartTour(SelectedTour.Id);
-
-
-                    TourDetails tourDetails = new TourDetails();
-                    tourDetails.Show();
-                }
-            }
-        }
 
         private void Activate_Click(object sender, RoutedEventArgs e)
         {
             if(SelectedTour == null)
             {
-                //messageboc
+                MessageBox.Show("Please select a tour.", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
                 return;
             }
             TourDetails tourDetails = new TourDetails(SelectedTour);

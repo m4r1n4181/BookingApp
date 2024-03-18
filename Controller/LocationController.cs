@@ -21,5 +21,6 @@ namespace BookingApp.Controller
         {
             return _locationService.GetAll();
         }
+
     }
 }

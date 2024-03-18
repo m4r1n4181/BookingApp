@@ -24,8 +24,8 @@
 AutoGenerateColumns="False" Height="325" HeadersVisibility="Column" FontSize="13">
                 <DataGrid.Columns>
                     <DataGridTextColumn Header="Name" Binding="{Binding Name}" Width="200"/>
-                    <DataGridTextColumn Header="City" Binding="{Binding Location.City}" Width="*"/>
-                    <DataGridTextColumn Header="Country" Binding="{Binding Location.Country}" Width="*"/>
+                    <DataGridTextColumn Header="City" Width="*" Binding="{Binding Location.City}" />
+                    <DataGridTextColumn Header="Country" Width="*" Binding="{Binding Location.Country}" />
                 </DataGrid.Columns>
             </DataGrid>
         </StackPanel>

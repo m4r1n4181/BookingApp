@@ -5,8 +5,12 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:BookingApp.View"
         mc:Ignorable="d"
-        Title="TourDetails" Height="450" Width="800">
-    <Grid Margin="10">
+        Title="TourDetails" Height="600" Width="800">
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="Auto"/>
+            <ColumnDefinition Width="*"/>
+        </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto"/>
             <RowDefinition Height="Auto"/>
@@ -19,7 +23,7 @@
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
 
-        <TextBlock Text="TourName:" FontWeight="Bold" Margin="5"/>
+        <TextBlock Text="Name:" FontWeight="Bold" Margin="5"/>
         <TextBlock Text="{Binding TourName}" Grid.Row="0" Grid.Column="1" Margin="5"/>
 
         <TextBlock Text="Location:" FontWeight="Bold" Margin="5" Grid.Row="1"/>
@@ -29,13 +33,13 @@
         <TextBlock Text="{Binding Description}" Grid.Row="2" Grid.Column="1" Margin="5"/>
 
         <TextBlock Text="Language:" FontWeight="Bold" Margin="5" Grid.Row="3"/>
-        <TextBlock Text="{Binding Language}" Grid.Row="3" Grid.Column="1" Margin="5"/>
+        <TextBlock Text="{Binding Languages}" Grid.Row="3" Grid.Column="1" Margin="5"/>
 
         <TextBlock Text="Max number of tourists:" FontWeight="Bold" Margin="5" Grid.Row="4"/>
         <TextBlock Text="{Binding MaxTourists}" Grid.Row="4" Grid.Column="1" Margin="5"/>
 
-        <TextBlock Text="KeyPoints:" FontWeight="Bold" Margin="5" Grid.Row="5"/>
-        <ItemsControl ItemsSource="{Binding KeyPoints}" Grid.Row="5" Grid.Column="1" Margin="5">
+        <TextBlock Text="StartDate and time:" FontWeight="Bold" Margin="5" Grid.Row="5"/>
+        <ItemsControl ItemsSource="{Binding StartDates}" Grid.Row="5" Grid.Column="1" Margin="5">
             <ItemsControl.ItemTemplate>
                 <DataTemplate>
                     <TextBlock Text="{Binding}" Margin="2"/>
@@ -43,25 +47,27 @@
             </ItemsControl.ItemTemplate>
         </ItemsControl>
 
-        <TextBlock Text="StartDate and time:" FontWeight="Bold" Margin="5" Grid.Row="6"/>
-        <ItemsControl ItemsSource="{Binding StartDates}" Grid.Row="6" Grid.Column="1" Margin="5">
-            <ItemsControl.ItemTemplate>
-                <DataTemplate>
-                    <TextBlock Text="{Binding}" Margin="2"/>
-                </DataTemplate>
-            </ItemsControl.ItemTemplate>
-        </ItemsControl>
+        <TextBlock Text="Duration in hours:" FontWeight="Bold" Margin="5" Grid.Row="6"/>
+        <TextBlock Text="{Binding Duration}" Grid.Row="6" Grid.Column="1" Margin="5"/>
 
-        <TextBlock Text="Duration in hours:" FontWeight="Bold" Margin="5" Grid.Row="7"/>
-        <TextBlock Text="{Binding Duration}" Grid.Row="7" Grid.Column="1" Margin="5"/>
+        <StackPanel Grid.Row="7" Grid.Column="1">
+            <DataGrid ItemsSource="{Binding KeyPoints}"
+              SelectedItem="{Binding Path=SelectedKeyPoint}"
+              IsReadOnly="True" SelectionMode="Single" 
+              AutoGenerateColumns="False" Height="325" HeadersVisibility="Column" FontSize="13" Width="661"
+              HorizontalAlignment="Left">
+                <DataGrid.Columns>
+                    <DataGridTextColumn Header="KeyPoint" Binding="{Binding KeyPointName}" Width="*"/>
+                </DataGrid.Columns>
+            </DataGrid>
+            <ToolBar Grid.Row="0" Grid.ColumnSpan="3">
+                <Button Click="MarkKeyPoint_Click" FontSize="14" HorizontalAlignment="Center" Margin="5,0,0,0">
+                    Activate KeyPoint
+                </Button>
+            </ToolBar>
 
-        <TextBlock Text="Pictures:" FontWeight="Bold" Margin="5" Grid.Row="8"/>
-        <ItemsControl ItemsSource="{Binding Pictures}" Grid.Row="8" Grid.Column="1" Margin="5">
-            <ItemsControl.ItemTemplate>
-                <DataTemplate>
-                    <Image Source="{Binding}" Width="200" Height="150" Margin="2"/>
-                </DataTemplate>
-            </ItemsControl.ItemTemplate>
-        </ItemsControl>
+        </StackPanel>
+
+
     </Grid>
 </Window>

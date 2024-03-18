@@ -82,7 +82,9 @@ namespace BookingApp.Repository
             return touristEntry;
         }
 
-       
-
+        internal void Add(TouristEntry touristEntry)
+        {
+            throw new NotImplementedException();
+        }
     }
 }
