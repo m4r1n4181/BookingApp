@@ -25,7 +25,7 @@ namespace BookingApp.Controller
             }
 
             // Postavljanje Id svojstva za Guest
-            accommodationReservation.Guest.Id = 1;
+            accommodationReservation.Guest.Id = 4;
             return _accommodationReservationService.Create(accommodationReservation);
         }
 

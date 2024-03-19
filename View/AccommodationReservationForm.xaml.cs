@@ -106,8 +106,8 @@ namespace BookingApp.View
             {
                 Accommodation = SelectedAccommodation,
                 Guest = null,//SignInForm.LoggedUser,
-                Arrival = Arrival,
-                Departure = Departure,
+                Arrival = SelectedReservation.Arrival,
+                Departure = SelectedReservation.Departure,
             };
             _accommodationReservationController.Create(accommodationReservation);
 
@@ -118,12 +118,27 @@ namespace BookingApp.View
             AccommodationReservation accommodationReservation = new AccommodationReservation();
             accommodationReservation.Arrival = Arrival;
             accommodationReservation.Departure = Departure;
-
+            List<AccommodationReservation> reservations;
             AccommodationReservations.Clear();
-            foreach (AccommodationReservation reservation in _accommodationReservationController.GetFreeRangeDays(SelectedAccommodation.Id, Arrival, Departure, NumberOfDays))
+
+
+            DateTime startTime = Arrival;
+            DateTime endTime = Departure; //pocetna vremena 
+            do
+            {
+                reservations = _accommodationReservationController.GetFreeRangeDays(SelectedAccommodation.Id, startTime, endTime, NumberOfDays);
+                startTime = endTime;
+                endTime = endTime.AddDays((Departure - Arrival).Days);
+                
+            } while (reservations.Count==0);
+
+
+
+            foreach (AccommodationReservation reservation in  reservations)
             {
                 AccommodationReservations.Add(reservation);
             }
+
         }
     }
 }
