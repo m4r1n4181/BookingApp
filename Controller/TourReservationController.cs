@@ -1,4 +1,5 @@
-﻿using BookingApp.Service;
+﻿using BookingApp.Model;
+using BookingApp.Service;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -18,6 +19,15 @@ namespace BookingApp.Controller
         public void GetAllTours()
         {
             _tourReservationService.GetAllTours();
+        }
+
+        public List<TourReservation> GetAvaibleSeats(int id)
+        {
+            return _tourReservationService.GetAvailableSeats(id);
+        }
+        public TourReservation Update(TourReservation tourReservation)
+        {
+            return _tourReservationService.Update(tourReservation);
         }
     }
 }
