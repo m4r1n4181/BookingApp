@@ -54,7 +54,7 @@ namespace BookingApp.Service
             List<TourReservation> tourReservations = _tourReservationRepository.GetByTour(id);
 
             // Pronalazimo maksimalan broj sedišta za datu turu
-            Tour tour = _tourRepository.Get(id);
+            Tour tour = _tourRepository.GetById(id);
             int maxSeats = tour.MaxTourists;
 
             // Racunamo ukupan broj rezervisanih sedišta

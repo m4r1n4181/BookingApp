@@ -6,6 +6,7 @@ using System.Text;
 using System.Threading.Tasks;
 using BookingApp.Repository;
 using BookingApp.DTO;
+using System;
 namespace BookingApp.Controller
 {
     public class TourController
@@ -25,6 +26,7 @@ namespace BookingApp.Controller
         public void CreateTour(Tour tour)
         {
             _tourService.CreateTour(tour);
+        }
 
         public List<Tour> GetAllWithLocations()
         {
@@ -41,6 +43,10 @@ namespace BookingApp.Controller
             _tourService.StartTour(id);
         }
 
+        public List<Tour>SearchTours(TourSearchParams searchParams)
+        {
+            return _tourService.SearchTours(searchParams);
+        }
     }
 
 

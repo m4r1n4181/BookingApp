@@ -74,7 +74,8 @@ namespace BookingApp.View
 
                     else if (user.Type == UserType.Tourist)
                     {
-
+                        TourOverviewForm tourOverviewForm = new TourOverviewForm();
+                        tourOverviewForm.Show();
                     }
                     else
                     {
