@@ -9,7 +9,7 @@ using System.Linq;
 namespace BookingApp.Model
 {
     public class Tour : ISerializable
-{
+    {
 
         //treba mi klasa loction i klasa keypoint kao parametri u ovoj klasi 
         public int Id { get; set; } 
@@ -19,20 +19,18 @@ namespace BookingApp.Model
         public string Language { get; set; }
         public Location Location { get; set; }
         public int MaxTourists { get; set; }
-
         public int AvaibleSeats { get; set; }
         public List<DateTime> StartDates { get; set; }
         public int Duration { get; set; }
         public List<string> Pictures { get; set; }
 
         public bool IsStarted { get; set; } // da li je tura započela
-       // public List<TouristEntry> TouristEntries { get; set; } // koji od prijavljenih turista su došli na turu
+                                            // public List<TouristEntry> TouristEntries { get; set; } // koji od prijavljenih turista su došli na turu
 
-     
+
 
         public Tour()
-        { 
-         
+        {
 
         }
 
@@ -88,5 +86,5 @@ namespace BookingApp.Model
 
         }
     }
-
 }
+

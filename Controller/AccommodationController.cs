@@ -1,5 +1,9 @@
 using System;
+using System.Collections.Generic;
+using BookingApp.DTO;
 using BookingApp.Model;
+using BookingApp.Model.Enums;
+using BookingApp.Repository;
 using BookingApp.Service;
 
 namespace BookingApp.Controller
@@ -12,13 +16,29 @@ namespace BookingApp.Controller
         {
             _accommodationService = new AccommodationService();
         }
-        
+
+        public List<Accommodation> GetAll()
+        {
+            return _accommodationService.GetAll();
+        }
+
+        public List<Accommodation> GetAllWithLocations()
+        {
+            return _accommodationService.GetAllWithLocations();
+        }
+
         public void RegisterAccommondation(Accommodation accommondation)
         {
             _accommodationService.RegisterAccommondation(accommondation);
-            
+
         }
-        
+
+        public List<Accommodation> SearchAccommodations(AccommodationSearchParams searchParams)
+        {
+            return _accommodationService.SearchAccommodations(searchParams);
+        }
+
+
     }
 
 }

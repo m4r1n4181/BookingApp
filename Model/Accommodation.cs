@@ -3,31 +3,46 @@ using BookingApp.Serializer;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Windows;
 using static System.Net.Mime.MediaTypeNames;
 
 namespace BookingApp.Model
 {
-   
+
     public class Accommodation : ISerializable
     {
-        public int Id {  get; set; }
-        public Owner Owner { get; set; }
+        public int Id { get; set; }
+        public User Owner { get; set; }
         public string Name { get; set; }
         public AccommodationType Type { get; set; }
         public Location Location { get; set; }
         public int MaxGuests { get; set; }
         public int MinReservationDays { get; set; }
-        public int CancellationDays { get; set; }
+        private int _cancellationDays = 1; // Inicijalizujemo na 1
+        public int CancellationDays
+        {
+            get { return _cancellationDays; }
+            set { _cancellationDays = value; }
+        }
         public List<string> Pictures { get; set; }
 
 
 
-        public Accommodation() 
+        public Accommodation()
         {
         }
+        public Accommodation(string name, AccommodationType type, int maxGuests, int minReservationDays, int cancellationDays)
+        {
+            Name = name;
+            Type = type;
+            MaxGuests = maxGuests;
+            MinReservationDays = minReservationDays;
+            CancellationDays = cancellationDays;
+        }
+
         public Accommodation(User user, string name, AccommodationType type, Location location, int maxGuests, int minReservationDays, int cancellationDays, List<string> pictures)
         {
-            Owner = (Owner?)user;
+            Owner = user;
             Name = name;
             Type = type;
             Location = location;
@@ -36,7 +51,6 @@ namespace BookingApp.Model
             CancellationDays = cancellationDays;
             Pictures = pictures;
         }
-
         public Accommodation(int id, Owner owner, string name, AccommodationType type, Location location, int maxGuests, int minReservationDays, int cancellationDays, List<string> pictures)
         {
             Id = id;
@@ -59,17 +73,18 @@ namespace BookingApp.Model
         public void FromCSV(string[] values)
         {
             Id = Convert.ToInt32(values[0]);
-            Owner = new Owner(Convert.ToInt32(values[1]));
+            Owner = new User(Convert.ToInt32(values[1]));
             Name = values[2];
             Enum.TryParse(values[3], out AccommodationType accommodationType);
             Type = accommodationType;
-            Location = new Location() { Id = Convert.ToInt32(values[4])};
+            Location = new Location() { Id = Convert.ToInt32(values[4]) };
             MaxGuests = Convert.ToInt32(values[5]);
             MinReservationDays = Convert.ToInt32(values[6]);
             CancellationDays = Convert.ToInt32(values[7]);
             Pictures = values[8].Split(",").ToList();
-            
+
         }
+
     }
 
 
