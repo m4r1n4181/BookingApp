@@ -34,6 +34,13 @@ namespace BookingApp.Repository
             return _serializer.FromCSV(FilePath);
         }
 
+        public List<TourReservation> GetAllWithTours()
+        {
+            TourReservations = _serializer.FromCSV(FilePath);
+            BindReservations();
+            return TourReservations;
+        }
+
         public List<TourReservation> GetAllTours()
         {
             TourReservations = _serializer.FromCSV(FilePath);
@@ -78,6 +85,12 @@ namespace BookingApp.Repository
             TourReservations.Insert(index, tourReservation);
             _serializer.ToCSV(FilePath, TourReservations);
             return tourReservation;
+        }
+
+        public List<TourReservation> GetByTour(int tourId)
+        {
+            TourReservations = _serializer.FromCSV(FilePath);
+            return TourReservations.FindAll(c => c.Tour.Id == tourId);
         }
     }
 }
