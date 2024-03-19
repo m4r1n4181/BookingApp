@@ -19,7 +19,11 @@ namespace BookingApp.Model
 
         public int Age { get; set; }
 
-        public Tourist(string firstName, string lastName, int age)
+        
+
+        public Tourist() { }
+
+        public Tourist(int id, string firstName, string lastName, int age)
         {
             Id = Id;
             FirstName = firstName;
@@ -27,7 +31,6 @@ namespace BookingApp.Model
             Age = age;
         }
 
-        public Tourist() { }
 
         public string[] ToCSV()
         {

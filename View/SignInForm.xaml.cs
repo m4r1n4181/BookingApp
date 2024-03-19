@@ -56,9 +56,13 @@ namespace BookingApp.View
                     LoggedUser = user;
                     if (user.Type == UserType.TourGuide)
                     {
+                        TourGuideHomePage tourGuideHomePage= new TourGuideHomePage();
+                        tourGuideHomePage.Show();
+                        /* CreateTourForm createTourForm = new CreateTourForm();
+                         createTourForm.Show();
+                         LiveTourView liveTourView = new LiveTourView();
+                         liveTourView.Show();*/
 
-                        CreateTourForm createTourForm = new CreateTourForm();
-                        createTourForm.Show();
                     }
                     else if (user.Type == UserType.Owner)
                     {
