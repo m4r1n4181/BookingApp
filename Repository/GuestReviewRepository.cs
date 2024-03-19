@@ -20,7 +20,7 @@ namespace BookingApp.Repository
             _serializer = new Serializer<GuestReview>();
             GuestReviews = _serializer.FromCSV(FilePath);
         }
-       
+
 
         public List<GuestReview> GetAll()
         {
@@ -64,6 +64,6 @@ namespace BookingApp.Repository
             _serializer.ToCSV(FilePath, GuestReviews);
             return guestReview;
         }
-  
+
     }
 }

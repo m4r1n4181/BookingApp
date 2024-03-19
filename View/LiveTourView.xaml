@@ -1,0 +1,23 @@
+﻿<Window x:Class="BookingApp.View.LiveTourView"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="LiveTourView" Height="450" Width="800">
+    <Grid>
+        <ListView ItemsSource="{Binding Tours}">
+            <ListView.View>
+                <GridView>
+                    <GridViewColumn Header="Tour Name" DisplayMemberBinding="{Binding Name}" />
+                    <GridViewColumn Header="Start Date" DisplayMemberBinding="{Binding StartDate}" />
+                    <GridViewColumn Header="Active" Width="80">
+                        <GridViewColumn.CellTemplate>
+                            <DataTemplate>
+                                <Button Content="Active" Command="{Binding DataContext.ActivateTourCommand, RelativeSource={RelativeSource AncestorType={x:Type Window}}}" 
+                                        CommandParameter="{Binding}" />
+                            </DataTemplate>
+                        </GridViewColumn.CellTemplate>
+                    </GridViewColumn>
+                </GridView>
+            </ListView.View>
+        </ListView>
+    </Grid>
+</Window>

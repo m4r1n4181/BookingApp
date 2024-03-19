@@ -1,4 +1,5 @@
 ﻿using BookingApp.Model;
+using BookingApp.Model.Enums;
 using BookingApp.Repository;
 using System.ComponentModel;
 using System.Runtime.CompilerServices;
@@ -13,6 +14,8 @@ namespace BookingApp.View
     {
 
         private readonly UserRepository _repository;
+
+        public static User LoggedUser { get; set; }
 
         private string _username;
         public string Username
@@ -47,26 +50,38 @@ namespace BookingApp.View
             User user = _repository.GetByUsername(Username);
             if (user != null)
             {
-               /* if(user.Id == 3)
+
+                if (user.Password == txtPassword.Password)
                 {
-                    AccommodationRegistration registration = new AccommodationRegistration(user); //pokusaj logovanja vlasnika ali cast ne radi dobro
-                    registration.Show();
-                }*/
-                if(user.Password == txtPassword.Password)
-                {
-                    CommentsOverview commentsOverview = new CommentsOverview(user);
-                   // commentsOverview.Show();
+                    LoggedUser = user;
+                    if (user.Type == UserType.TourGuide)
+                    {
 
-                    AccommodationSearch accommodationSearch = new AccommodationSearch();
-                    accommodationSearch.Show();
+                        CreateTourForm createTourForm = new CreateTourForm();
+                        createTourForm.Show();
+                    }
+                    else if (user.Type == UserType.Owner)
+                    {
+                        RegisterAccommodationForm registerAccommodationForm = new RegisterAccommodationForm();
+                        registerAccommodationForm.Show();
+                        AccommodationReservationToRateForm accommodationReservationToRateForm = new AccommodationReservationToRateForm(user);
+                        accommodationReservationToRateForm.Show();
+                    }
 
+                    else if (user.Type == UserType.Tourist)
+                    {
 
-                 
-                    Close();
-                    CreateTourForm createTourForm  = new CreateTourForm();
-                    createTourForm.Show();
-                    Close();
-                } 
+                    }
+                    else
+                    {
+                        AccommodationSearch accommodationSearch = new AccommodationSearch();
+                        accommodationSearch.Show();
+                        Close();
+                        CreateTourForm createTourForm = new CreateTourForm();
+                        createTourForm.Show();
+                        Close();
+
+                    } 
                 else
                 {
                     MessageBox.Show("Wrong password!");
@@ -76,7 +91,7 @@ namespace BookingApp.View
             {
                 MessageBox.Show("Wrong username!");
             }
-            
+
         }
     }
 }

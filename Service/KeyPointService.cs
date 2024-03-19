@@ -54,9 +54,12 @@ namespace BookingApp.Service
             }
         }
 
-        public void SaveAll()
+        public void SaveAll(List<KeyPoint> keyPoints)
         {
-            throw new NotImplementedException(); //da sacuva sve keypointove 
+            foreach (KeyPoint keyPoint in keyPoints)
+            {
+                _keyPointRepository.Save(keyPoint);
+            }
         }
     }
 }

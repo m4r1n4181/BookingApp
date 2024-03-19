@@ -6,7 +6,7 @@ using BookingApp.Model;
 using BookingApp.Model.Enums;
 using BookingApp.Repository;
 using BookingApp.Service;
- 
+
 namespace BookingApp.Controller
 {
     public class AccommodationController
@@ -35,7 +35,7 @@ namespace BookingApp.Controller
         public void RegisterAccommondation(Accommodation accommondation)
         {
             _accommodationService.RegisterAccommondation(accommondation);
-            
+
         }
 
         public List<Accommodation> SearchAccommodations(AccommodationSearchParams searchParams)

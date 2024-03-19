@@ -37,7 +37,7 @@
             </StackPanel>
             <StackPanel Orientation="Horizontal" Margin="0 0 0 10">
                 <TextBlock Width="101" Text="Maximum number of tourists:" VerticalAlignment="Center" Height="22"/>
-                <TextBox x:Name="txtMaxTourists" Text="{Binding Path=MaxTourist, UpdateSourceTrigger=PropertyChanged}" Width="70"/>
+                <TextBox x:Name="txtMaxTourists" Text="{Binding Path=MaxTourists, UpdateSourceTrigger=PropertyChanged}" Width="70"/>
             </StackPanel>
             <StackPanel Orientation="Horizontal" Margin="0 0 0 10">
                 <TextBlock Width="100" Text="Key Points:" VerticalAlignment="Center"/>
