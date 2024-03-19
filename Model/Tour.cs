@@ -1,5 +1,6 @@
 ﻿using BookingApp.Model.Enums;
 using BookingApp.Serializer;
+using BookingApp.Service;
 using Microsoft.VisualBasic;
 using System;
 using System.Collections.Generic;
@@ -13,7 +14,7 @@ namespace BookingApp.Model
 
         //treba mi klasa loction i klasa keypoint kao parametri u ovoj klasi 
         public int Id { get; set; } 
-        public TourGuide TourGuide { get; set; }
+        public User TourGuide { get; set; }
         public  string Name { get; set; }
         public string Description { get; set; }
         public string Language { get; set; }
@@ -59,7 +60,9 @@ namespace BookingApp.Model
         {
 
             string startDatesString = string.Join(";", StartDates);
-            string picturesString = string.Join(",", Pictures);
+            // string? picturesString = Pictures != null ? string.Join(",", Pictures) : null;
+            //takodje nista se ne upisuje u tour.csv i proeriti saveAll keypoints
+            string picturesString = string.Join(",", Pictures); //greska buni se jer je null...
             string[] csvValues = { Id.ToString(), TourGuide.Id.ToString(), Name, Description, Language, Location.Id.ToString(), MaxTourists.ToString(), AvaibleSeats.ToString(), startDatesString, Duration.ToString(), picturesString, IsStarted.ToString() };
             return csvValues;
         }
@@ -67,7 +70,7 @@ namespace BookingApp.Model
         public void FromCSV(string[] values)
         {
             Id = Convert.ToInt32(values[0]);
-            TourGuide = new TourGuide(Convert.ToInt32(values[1]));
+            TourGuide = new User(Convert.ToInt32(values[1]));
             Name = values[2];
             Description = values[3];
             Language = values[4];
@@ -83,6 +86,13 @@ namespace BookingApp.Model
             IsStarted = Convert.ToBoolean(values[11]);
 
         }
+
+       
     }
+
+      /*  public List<Tour> GetAllTours()
+    {
+        
+    }*/
  
 }

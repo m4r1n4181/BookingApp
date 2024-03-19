@@ -10,23 +10,27 @@ namespace BookingApp.Model
 {
     public class TouristEntry : ISerializable
     {
+        public int Id { get; set; }
+        public KeyPoint KeyPoint { get; set; }
+        public Tourist Tourist { get; set; }
 
-        public TouristEntry() { }  
-        public TouristEntry(int id, KeyPoint keyPoint, User tourist)
+        public Tour Tour { get; set; }
+
+
+
+        public TouristEntry() { }
+        public TouristEntry(int id, KeyPoint keyPoint, Tourist tourist, Tour tour)
         {
             Id = id;
             KeyPoint = keyPoint;
             Tourist = tourist;
+            Tour = tour;
         }
-
-        public int Id { get; set; }
-        public KeyPoint KeyPoint { get; set; }
-        public User Tourist { get; set; }
 
 
         public string[] ToCSV()
         {
-            string[] csvValues = { Id.ToString(), KeyPoint.Id.ToString(), Tourist.Id.ToString() };
+            string[] csvValues = { Id.ToString(), KeyPoint.Id.ToString(), Tourist.Id.ToString(), Tour.Id.ToString() };
             return csvValues;
         }
 
@@ -34,8 +38,10 @@ namespace BookingApp.Model
         {
             Id = Convert.ToInt32(values[0]);
             KeyPoint = new KeyPoint() { Id = Convert.ToInt32(values[1]) };
-            Tourist = new User() { Id = Convert.ToInt32(values[2]) };
-            
+            Tourist = new Tourist() { Id = Convert.ToInt32(values[2]) };
+            Tour = new Tour() { Id = Convert.ToInt32(values[3]) };
+
+
         }
     }
 }
