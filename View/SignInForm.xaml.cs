@@ -63,6 +63,9 @@ namespace BookingApp.View
 
                  
                     Close();
+                    CreateTourForm createTourForm  = new CreateTourForm();
+                    createTourForm.Show();
+                    Close();
                 } 
                 else
                 {
