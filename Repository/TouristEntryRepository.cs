@@ -62,18 +62,12 @@ namespace BookingApp.Repository
             return _touristEntry.Max(touristEntry => touristEntry.Id) + 1;
         }
 
-        public void Delete(TourGuide tourGuide)
-        {
-            _touristEntry = _serializer.FromCSV(FilePath);
-            TouristEntry founded = _touristEntry.Find(touristEntry => touristEntry.Id == touristEntry.Id);
-            _touristEntry.Remove(founded);
-            _serializer.ToCSV(FilePath, _touristEntry);
-        }
+       
 
         public TouristEntry Update(TouristEntry touristEntry)
         {
             _touristEntry = _serializer.FromCSV(FilePath);
-            TouristEntry current = _touristEntry.Find(touristEntry => touristEntry.Id == touristEntry.Id);
+            TouristEntry current = _touristEntry.Find(te => te.Id == touristEntry.Id);
             int index = _touristEntry.IndexOf(current);
             _touristEntry.Remove(current);
             _touristEntry.Insert(index, touristEntry);
