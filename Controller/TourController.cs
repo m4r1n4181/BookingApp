@@ -1,8 +1,11 @@
 ﻿using BookingApp.Service;
 using BookingApp.Model;
 using System.Collections.Generic;
-using BookingApp.DTO; // Import the necessary namespace for TourSearchParams
-
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+using BookingApp.Repository;
+using BookingApp.DTO;
 namespace BookingApp.Controller
 {
     public class TourController
@@ -14,28 +17,30 @@ namespace BookingApp.Controller
             _tourService = new TourService();
         }
 
+        public void EndTour(int id)
+        {
+            _tourService.EndTour(id);
+        }
+
         public void CreateTour(Tour tour)
         {
             _tourService.CreateTour(tour);
-        }
-
-        // Add public access modifier
-        public List<Tour> SearchTours(TourSearchParams tourSearchParams)
-        {
-            return _tourService.SearchTours(tourSearchParams);
-        }
-
-        public List<Tour> GetAll()
-        {
-            return _tourService.GetAll();
-        }
 
         public List<Tour> GetAllWithLocations()
         {
             return _tourService.GetAllWithLocations();
         }
 
-      
+        public List<Tour> GetTodayTours()
+        {
+            return _tourService.GetTodayTours();
+        }
+
+        public void StartTour(int id)
+        {
+            _tourService.StartTour(id);
+        }
+
     }
 
 

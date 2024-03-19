@@ -59,6 +59,12 @@ namespace BookingApp.Service
             tour.IsStarted = true;
             _tourRepository.Update(tour);
 
+            foreach(KeyPoint keyPoint in keyPoints)
+            {
+                keyPoint.IsActive = false;
+                _keyPointRepository.Update(keyPoint);
+            }
+
             KeyPoint firstPoint = keyPoints.ElementAt(0);
             firstPoint.IsActive = true;
             _keyPointRepository.Update(firstPoint);

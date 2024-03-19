@@ -23,6 +23,14 @@ namespace BookingApp.Repository
             _tours = _serializer.FromCSV(FilePath);
         }
 
+
+
+        public void BindLocations()
+        {
+            LocationRepository locationRepository = new LocationRepository();
+            _tours.ForEach(t => t.Location = locationRepository.GetById(t.Location.Id));
+        }
+
      
 
         public Tour GetById(int id)
@@ -58,7 +66,7 @@ namespace BookingApp.Repository
         public void Delete(Tour tour)
         {
             _tours = _serializer.FromCSV(FilePath);
-            Tour founded = _tours.Find(tour => tour.Id == tour.Id);
+            Tour founded = _tours.Find(t => t.Id == tour.Id);
             _tours.Remove(founded);
             _serializer.ToCSV(FilePath, _tours);
         }
@@ -66,7 +74,7 @@ namespace BookingApp.Repository
         public Tour Update(Tour tour)
         {
             _tours = _serializer.FromCSV(FilePath);
-            Tour current = _tours.Find(tour => tour.Id == tour.Id);
+            Tour current = _tours.Find(t => t.Id == tour.Id);
             int index = _tours.IndexOf(current);
             _tours.Remove(current);
             _tours.Insert(index, tour);      
@@ -90,6 +98,7 @@ namespace BookingApp.Repository
         {
 
             _tours = _serializer.FromCSV(FilePath);
+            BindLocations();
             return _tours.FindAll(tour => TourStartesToday(tour) && !tour.IsStarted);
         }
 

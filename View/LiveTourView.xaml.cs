@@ -1,42 +1,42 @@
-﻿using BookingApp.Model;
-using System;
+﻿using System;
 using System.Collections.ObjectModel;
 using System.Windows;
-using System.Windows.Input;
+using BookingApp.Controller;
+using BookingApp.Model;
+using BookingApp.Repository;
+using BookingApp.Service;
+
 
 namespace BookingApp.View
 {
     public partial class LiveTourView : Window
     {
-        public ObservableCollection<Tour> Tours { get; set; } // Prikaz liste tura
+        public ObservableCollection<Tour> Tours { get; set; }
+        public Tour SelectedTour { get; set; }
 
-        public ICommand ActivateTourCommand { get; private set; } // ICommand za aktiviranje ture
+        private TourController _tourController;
 
         public LiveTourView()
         {
             InitializeComponent();
             DataContext = this;
-
-            Tours = new ObservableCollection<Tour>(); // Inicijalizacija liste tura
-
-           
-           // Tours.Add(new Tour { Name = "Tour 1", StartDate = DateTime.Now });
-           // Tours.Add(new Tour { Name = "Tour 2", StartDate = DateTime.Now });
-           // Tours.Add(new Tour { Name = "Tour 3", StartDate = DateTime.Now });
-
-            //ActivateTourCommand = new RelayCommand(ActivateTour); // Inicijalizacija ICommand-a
+            _tourController = new TourController();
+            Tours = new ObservableCollection<Tour>(_tourController.GetTodayTours());
         }
 
-        private void ActivateTour(object tour)
+
+        private void Activate_Click(object sender, RoutedEventArgs e)
         {
-            // Otvori novi prozor za aktiviranu turu sa ključnim tačkama
-            Tour activatedTour = tour as Tour;
-            if (activatedTour != null)
+            if(SelectedTour == null)
             {
-                //TourKeyPointsView keyPointsView = new TourKeyPointsView(activatedTour);
-                //keyPointsView.ShowDialog();
+                MessageBox.Show("Please select a tour.", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                return;
             }
+            _tourController.StartTour(SelectedTour.Id);
+            TourDetails tourDetails = new TourDetails(SelectedTour);
+            tourDetails.ShowDialog();
+
+
         }
     }
 }
-

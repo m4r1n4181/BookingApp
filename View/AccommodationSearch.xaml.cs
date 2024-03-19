@@ -37,6 +37,7 @@ namespace BookingApp.View
         public Accommodation SelectedAccommodation { get; set; }
 
 
+
         private string _name;
         public string AccommodationName
         {
@@ -173,6 +174,18 @@ namespace BookingApp.View
             {
                 Accommodations.Add(accommodation);
             }
+        }
+
+        private void Button_Click_1(object sender, RoutedEventArgs e)
+        {
+            if(SelectedAccommodation == null)
+            {
+                return;
+            }
+            AccommodationReservationForm accommodationReservation = new AccommodationReservationForm(SelectedAccommodation);
+            accommodationReservation.Show();
+
+            Close();
         }
     }
 }

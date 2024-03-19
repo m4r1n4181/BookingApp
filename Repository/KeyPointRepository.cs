@@ -65,7 +65,7 @@ namespace BookingApp.Repository
         public void Delete(KeyPoint keyPoint)
         {
             _keyPoint = _serializer.FromCSV(FilePath);
-            KeyPoint founded = _keyPoint.Find(keyPoint => keyPoint.Id == keyPoint.Id);
+            KeyPoint founded = _keyPoint.Find(kp => kp.Id == keyPoint.Id);
             _keyPoint.Remove(founded);
             _serializer.ToCSV(FilePath, _keyPoint);
         }
@@ -73,7 +73,7 @@ namespace BookingApp.Repository
         public KeyPoint Update(KeyPoint keyPoint)
         {
             _keyPoint = _serializer.FromCSV(FilePath);
-            KeyPoint current = _keyPoint.Find(keyPoint => keyPoint.Id == keyPoint.Id);
+            KeyPoint current = _keyPoint.Find(kp => kp.Id == keyPoint.Id);
             int index = _keyPoint.IndexOf(current);
             _keyPoint.Remove(current);
             _keyPoint.Insert(index, keyPoint);
