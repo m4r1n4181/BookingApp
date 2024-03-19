@@ -155,9 +155,9 @@ namespace BookingApp.View
 
         private void RegisterAccommodation_Click(object sender, RoutedEventArgs e)
         {
-            if(SelectedType == null)
+            if (SelectedType == null)
             {
-                MessageBoxResult result = MessageBox.Show("Must select type"); 
+                MessageBoxResult result = MessageBox.Show("Must select type");
                 return;
             }
             if (SelectedLocation == null)
@@ -185,5 +185,6 @@ namespace BookingApp.View
         {
 
         }
+
     }
 }

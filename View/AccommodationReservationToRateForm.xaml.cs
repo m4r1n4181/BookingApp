@@ -9,21 +9,23 @@ using System.Windows;
 
 namespace BookingApp.View
 {
-    public partial class AccommodationReservationToRateForm : Window, INotifyPropertyChanged
+    public partial class AccommodationReservationToRateForm : Window//, INotifyPropertyChanged
     {
         public ObservableCollection<AccommodationReservation> AccommodationReservations { get; set; }
         public AccommodationReservation SelectedReservation { get; set; }
+        public User LoggedInUser { get; set; }
 
         private readonly AccommodationReservationRepository _accommodationReservationRepository;
         private readonly AccommodationReservationService _accommodationReservationService;
 
-        public AccommodationReservationToRateForm()
+        public AccommodationReservationToRateForm(User user)
         {
             InitializeComponent();
             DataContext = this;
+            LoggedInUser = user;
             _accommodationReservationRepository = new AccommodationReservationRepository();
             _accommodationReservationService = new AccommodationReservationService();
-            AccommodationReservations = new ObservableCollection<AccommodationReservation>(_accommodationReservationService.GetAllByOwnerForRating(SignInForm.LoggedUser.Id));
+            AccommodationReservations = new ObservableCollection<AccommodationReservation>(_accommodationReservationService.GetAllByOwnerForRating(user.Id));
         }
 
         private void Activate_Click(object sender, RoutedEventArgs e)
@@ -33,6 +35,7 @@ namespace BookingApp.View
                 MessageBox.Show("Please select a reservation before activating.");
                 return;
             }
+
             GuestReviewForm guestReviewForm = new GuestReviewForm(SelectedReservation);
             guestReviewForm.ShowDialog();
         }

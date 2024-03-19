@@ -34,11 +34,17 @@ namespace BookingApp.View
             SelectedAccommodationReservation = accommodationReservation;
         }
         private int _cleanliness;
-        public int Cleanliness
+        public int Clean
         {
             get => _cleanliness;
             set
             {
+                if (value < 1 || value > 5)
+                {
+                    MessageBox.Show("Cleanliness and Rule Adherence must be between 1 and 5.", "Invalid Input", MessageBoxButton.OK, MessageBoxImage.Warning);
+                    return;
+                }
+
                 if (value != _cleanliness)
                 {
                     _cleanliness = value;
@@ -46,12 +52,19 @@ namespace BookingApp.View
                 }
             }
         }
+
         private int _rules;
-        public int RuleAdherence
+        public int Rule
         {
             get => _rules;
             set
             {
+                if (value < 1 || value > 5)
+                {
+                    MessageBox.Show("Cleanliness and Rule Adherence must be between 1 and 5.", "Invalid Input", MessageBoxButton.OK, MessageBoxImage.Warning);
+                    return;
+                }
+
                 if (value != _rules)
                 {
                     _rules = value;
@@ -59,6 +72,7 @@ namespace BookingApp.View
                 }
             }
         }
+
         private string _comment;
         public string Comment
         {
@@ -84,8 +98,8 @@ namespace BookingApp.View
             GuestReview guestReview = new GuestReview()
             {
                 AccommodationReservation = SelectedAccommodationReservation,
-                Cleanliness = Cleanliness,
-                RuleAdherence = RuleAdherence,
+                Cleanliness = Clean,
+                RuleAdherence = Rule,
                 Comment = Comment,
             };
 

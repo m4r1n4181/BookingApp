@@ -13,7 +13,8 @@ namespace BookingApp.Service
     {
         private AccommodationRepository _accommodationRepository;
 
-        public AccommodationService() { 
+        public AccommodationService()
+        {
             _accommodationRepository = new AccommodationRepository();
         }
 
@@ -24,7 +25,7 @@ namespace BookingApp.Service
             return accommodation;
         }
 
-     
+
 
         public List<Accommodation> SearchAccommodations(AccommodationSearchParams searchParams)
         {

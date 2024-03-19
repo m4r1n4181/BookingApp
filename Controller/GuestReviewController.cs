@@ -17,7 +17,7 @@ namespace BookingApp.Controller
         {
             _guestReviewService.RateGuest(guestReview);
         }
-       
+
         public void NotifyToRate(Owner owner)
         {
 

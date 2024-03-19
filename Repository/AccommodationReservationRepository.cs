@@ -72,6 +72,6 @@ namespace BookingApp.Repository
             return accommodationReservation;
         }
 
-        
+
     }
 }

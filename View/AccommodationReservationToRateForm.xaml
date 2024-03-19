@@ -8,10 +8,10 @@
         Title="AccommodationReservationToRateForm" Height="450" Width="800">
     <Grid>
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="5*"/>
             <ColumnDefinition Width="249"/>
-            <ColumnDefinition Width="511"/>
-            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="527"/>
+            <ColumnDefinition/>
         </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
             <RowDefinition Height="40"/>
@@ -20,19 +20,22 @@
             <RowDefinition Height="15"/>
         </Grid.RowDefinitions>
         <StackPanel Grid.Row="2" Grid.Column="1" Grid.ColumnSpan="2">
-            <DataGrid ItemsSource="{Binding AccommodationReservation}" SelectedItem="{Binding Path=SelectedReservation}" IsReadOnly="True" SelectionMode="Single" 
-AutoGenerateColumns="False" Height="325" HeadersVisibility="Column" FontSize="13">
+            <DataGrid ItemsSource="{Binding AccommodationReservations}"
+                      SelectedItem="{Binding SelectedReservation}"
+                      IsReadOnly="True" SelectionMode="Single" 
+              AutoGenerateColumns="False" Height="325" HeadersVisibility="Column" FontSize="13">
                 <DataGrid.Columns>
-                    <DataGridTextColumn Header="Name of Accommodation" Binding="{Binding Accommodation.Name }" Width="200"/>
-                    <DataGridTextColumn Header="Arrival " Binding="{Binding Arrival}" Width="*"/>
-                    <DataGridTextColumn Header="departure" Binding="{Binding Departure}" Width="*"/>
+                    <DataGridTextColumn Header="Name of Accommodation" Binding="{Binding Accommodation.Name}" Width="200"/>
+                    <DataGridTextColumn Header="Arrival" Binding="{Binding Arrival}" Width="*"/>
+                    <DataGridTextColumn Header="Departure" Binding="{Binding Departure}" Width="*"/>
                 </DataGrid.Columns>
             </DataGrid>
         </StackPanel>
 
+
         <ToolBar Grid.Row="0" Grid.ColumnSpan="4">
             <Button Click="Activate_Click" FontSize="14" VerticalAlignment="Center" Margin="5,0,0,0">
-                Activate
+                AddReview
             </Button>
         </ToolBar>
     </Grid>

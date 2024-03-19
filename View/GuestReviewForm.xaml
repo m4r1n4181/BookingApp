@@ -9,11 +9,11 @@
     <Grid>
         <Label Content="Guewst Review" HorizontalAlignment="Left" Margin="51,46,0,0" VerticalAlignment="Top" Width="172" FontSize="16"/>
         <Label Content="Cleanlness" HorizontalAlignment="Left" Margin="53,113,0,0" VerticalAlignment="Top" FontSize="16"/>
-        <TextBox Name ="Cleanliness1" Text="{Binding Path=Clean, UpdateSourceTrigger=PropertyChanged}" HorizontalAlignment="Left" Margin="201,120,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120"/>
+        <TextBox Name ="CleanlinessTextBox" Text="{Binding Path=Clean, UpdateSourceTrigger=PropertyChanged}" HorizontalAlignment="Left" Margin="201,120,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120"/>
         <Label Content="RuleAdherence" HorizontalAlignment="Left" Margin="53,186,0,0" VerticalAlignment="Top" FontSize="16"/>
-        <TextBox x:Name ="RuleAdherence1" Text="{Binding Path=Rule, UpdateSourceTrigger=PropertyChanged}" HorizontalAlignment="Left" Margin="201,0,0,0" TextWrapping="Wrap" VerticalAlignment="Center" Width="120"/>
+        <TextBox x:Name ="RuleAdherenceTextBox" Text="{Binding Path=Rule, UpdateSourceTrigger=PropertyChanged}" HorizontalAlignment="Left" Margin="201,0,0,0" TextWrapping="Wrap" VerticalAlignment="Center" Width="120"/>
         <Label Content="Comment" HorizontalAlignment="Left" Margin="53,307,0,0" VerticalAlignment="Top" FontSize="16"/>
-        <TextBox x:Name ="Comment1" HorizontalAlignment="Left" Margin="201,320,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120"/>
+        <TextBox Name ="CommentTextBox" Text="{Binding Path=Comment, UpdateSourceTrigger=PropertyChanged}" HorizontalAlignment="Left" Margin="201,320,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120"/>
         <Button Name ="Cancel"  Content="cancel" HorizontalAlignment="Left" Margin="490,227,0,0" VerticalAlignment="Top" Click="Cancel_Click"/>
         <Button Name ="Save" Content="save" HorizontalAlignment="Left" Margin="670,227,0,0" VerticalAlignment="Top" Click="Save_Click"/>
 

@@ -39,7 +39,7 @@ namespace BookingApp.Repository
             Accommodations.ForEach(locR => { locR.Location = locationRepository.GetById(locR.Location.Id); });
         }
 
-     
+
         public Accommodation Save(Accommodation accommodation)
         {
             accommodation.Id = NextId();
@@ -73,7 +73,7 @@ namespace BookingApp.Repository
             Accommodation current = Accommodations.Find(a => a.Id == accommodation.Id);
             int index = Accommodations.IndexOf(current);
             Accommodations.Remove(current);
-            Accommodations.Insert(index, accommodation);        
+            Accommodations.Insert(index, accommodation);
             _serializer.ToCSV(FilePath, Accommodations);
             return accommodation;
         }
@@ -97,7 +97,7 @@ namespace BookingApp.Repository
         }
 
 
-        public List<Accommodation> SearchAccommodation(AccommodationSearchParams searchParams) 
+        public List<Accommodation> SearchAccommodation(AccommodationSearchParams searchParams)
         {
             Accommodations = _serializer.FromCSV(FilePath);
             BindLocations();
@@ -115,15 +115,15 @@ namespace BookingApp.Repository
             {
                 Accommodations = Accommodations.FindAll(a => a.Location.Country.Contains(searchParams.Country, StringComparison.OrdinalIgnoreCase));
             }
-            if(searchParams.Type != null)
+            if (searchParams.Type != null)
             {
                 Accommodations = Accommodations.FindAll(a => a.Type == searchParams.Type);
             }
-            if(searchParams.MaxGests != 0)
+            if (searchParams.MaxGests != 0)
             {
                 Accommodations = Accommodations.FindAll(a => a.MaxGuests >= searchParams.MaxGests);
             }
-            if(searchParams.MinReservationDays != 0)
+            if (searchParams.MinReservationDays != 0)
             {
                 Accommodations = Accommodations.FindAll(a => a.MinReservationDays <= searchParams.MinReservationDays);
             }
@@ -132,7 +132,7 @@ namespace BookingApp.Repository
             return Accommodations;
         }
 
-   
+
 
 
     }

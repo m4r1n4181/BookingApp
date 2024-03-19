@@ -22,9 +22,9 @@ namespace BookingApp.Service
             List<AccommodationReservation> allReservations = _accommodationReservationRepository.GetAllWithAccommodations();
             List<AccommodationReservation> ownersReservations = new List<AccommodationReservation>();
 
-            foreach(AccommodationReservation reservation in allReservations)
+            foreach (AccommodationReservation reservation in allReservations)
             {
-                if(reservation.Accommodation.Owner.Id == ownerId && reservation.Departure < DateTime.Now && reservation.Departure > DateTime.Now.AddDays(-5))
+                if (reservation.Accommodation.Owner.Id == ownerId && reservation.Departure < DateTime.Now && reservation.Departure > DateTime.Now.AddDays(-5))
                 {
                     ownersReservations.Add(reservation);
                 }
@@ -32,26 +32,5 @@ namespace BookingApp.Service
 
             return ownersReservations;
         }
-
-        /*public List<AccommodationReservation> GetAccommodationReservationsToRate(int ownerId)
-        {
-            List<AccommodationReservation> allAccommodationReservations = _accommodationReservationRepository.GetAll();
-            List<AccommodationReservation> accommodationReservationsToRate = new List<AccommodationReservation>();
-            DateTime currentDate = DateTime.Now;
-            foreach (AccommodationReservation accommodationReservation in allAccommodationReservations)
-            {
-                if (accommodationReservation.Departure < currentDate)
-                {
-                    if ((currentDate - accommodationReservation.Departure).TotalDays <= 5)
-                    {
-                        accommodationReservationsToRate.Add(accommodationReservation);
-                    }
-
-                }
-            }
-            return accommodationReservationsToRate;
-
-        }
-        */
     }
 }

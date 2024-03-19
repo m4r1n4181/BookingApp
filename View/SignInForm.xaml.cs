@@ -50,8 +50,8 @@ namespace BookingApp.View
             User user = _repository.GetByUsername(Username);
             if (user != null)
             {
-                
-                if(user.Password == txtPassword.Password)
+
+                if (user.Password == txtPassword.Password)
                 {
                     LoggedUser = user;
                     if (user.Type == UserType.TourGuide)
@@ -60,17 +60,17 @@ namespace BookingApp.View
                         CreateTourForm createTourForm = new CreateTourForm();
                         createTourForm.Show();
                     }
-                      else if (user.Type == UserType.Owner)
-                        {
-                            RegisterAccommodationForm registerAccommodationForm = new RegisterAccommodationForm();
-                            registerAccommodationForm.Show();
-                            AccommodationReservationToRateForm accommodationReservationToRateForm = new AccommodationReservationToRateForm();
-                            accommodationReservationToRateForm.Show();
-                        }
-                 
+                    else if (user.Type == UserType.Owner)
+                    {
+                        RegisterAccommodationForm registerAccommodationForm = new RegisterAccommodationForm();
+                        registerAccommodationForm.Show();
+                        AccommodationReservationToRateForm accommodationReservationToRateForm = new AccommodationReservationToRateForm(user);
+                        accommodationReservationToRateForm.Show();
+                    }
+
                     else if (user.Type == UserType.Tourist)
                     {
-                        
+
                     }
                     else
                     {
@@ -79,8 +79,8 @@ namespace BookingApp.View
                     CommentsOverview commentsOverview = new CommentsOverview(user);
                     commentsOverview.Show();
                     Close();
-                    
-                } 
+
+                }
                 else
                 {
                     MessageBox.Show("Wrong password!");
@@ -90,7 +90,7 @@ namespace BookingApp.View
             {
                 MessageBox.Show("Wrong username!");
             }
-            
+
         }
     }
 }

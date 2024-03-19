@@ -8,22 +8,27 @@ using static System.Net.Mime.MediaTypeNames;
 
 namespace BookingApp.Model
 {
-   
+
     public class Accommodation : ISerializable
     {
-        public int Id {  get; set; }
+        public int Id { get; set; }
         public User Owner { get; set; }
         public string Name { get; set; }
         public AccommodationType Type { get; set; }
         public Location Location { get; set; }
         public int MaxGuests { get; set; }
         public int MinReservationDays { get; set; }
-        public int CancellationDays { get; set; }
+        private int _cancellationDays = 1; // Inicijalizujemo na 1
+        public int CancellationDays
+        {
+            get { return _cancellationDays; }
+            set { _cancellationDays = value; }
+        }
         public List<string> Pictures { get; set; }
 
 
 
-        public Accommodation() 
+        public Accommodation()
         {
         }
         public Accommodation(string name, AccommodationType type, int maxGuests, int minReservationDays, int cancellationDays)
@@ -72,12 +77,12 @@ namespace BookingApp.Model
             Name = values[2];
             Enum.TryParse(values[3], out AccommodationType accommodationType);
             Type = accommodationType;
-            Location = new Location() { Id = Convert.ToInt32(values[4])};
+            Location = new Location() { Id = Convert.ToInt32(values[4]) };
             MaxGuests = Convert.ToInt32(values[5]);
             MinReservationDays = Convert.ToInt32(values[6]);
             CancellationDays = Convert.ToInt32(values[7]);
             Pictures = values[8].Split(",").ToList();
-            
+
         }
 
     }

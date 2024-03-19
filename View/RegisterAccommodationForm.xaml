@@ -18,7 +18,11 @@
         <Label Content="min reservation days" HorizontalAlignment="Left" Margin="57,290,0,0" VerticalAlignment="Top" FontSize="16"/>
         <TextBox x:Name="minDays" Text="{Binding Path=MinReservationDays, UpdateSourceTrigger=PropertyChanged}" TextWrapping="Wrap" Width="120" Margin="256,295,424,113"/>
         <Label Content="min cancellation days" HorizontalAlignment="Left" Margin="57,348,0,0" VerticalAlignment="Top" FontSize="16"/>
-        <TextBox x:Name="cancellationDays" Text="{Binding Path=CancellationDays, UpdateSourceTrigger=PropertyChanged}" TextWrapping="Wrap" Width="120" Margin="256,357,424,55"/>
+        <TextBox x:Name="cancellationDays" 
+         Text="{Binding Path=CancellationDays, UpdateSourceTrigger=PropertyChanged, StringFormat={}{0:1}}" 
+         TextWrapping="Wrap" 
+         Width="120" 
+         Margin="256,357,424,55"/>
         <Label Content="pictures" HorizontalAlignment="Left" Margin="57,393,0,0" VerticalAlignment="Top" FontSize="16"/>
         <Button x:Name="Cancel" Content="cancel" HorizontalAlignment="Left" Margin="494,381,0,0" VerticalAlignment="Top" FontSize="18" Click="Cancel_Click"/>
         <Button x:Name="RegisterAccommodation" Content="save accommodation" HorizontalAlignment="Left" Margin="604,381,0,0" VerticalAlignment="Top" FontSize="18" Click="RegisterAccommodation_Click"/>
