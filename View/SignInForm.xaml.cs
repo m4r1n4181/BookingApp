@@ -81,7 +81,8 @@ namespace BookingApp.View
                         createTourForm.Show();
                         Close();
 
-                    } 
+                    }
+                }
                 else
                 {
                     MessageBox.Show("Wrong password!");

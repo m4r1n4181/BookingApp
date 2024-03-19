@@ -1,6 +1,5 @@
 using System;
 using System.Collections.Generic;
-using Booking.App;
 using BookingApp.DTO;
 using BookingApp.Model;
 using BookingApp.Model.Enums;
