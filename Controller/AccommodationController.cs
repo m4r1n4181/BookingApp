@@ -11,7 +11,6 @@ namespace BookingApp.Controller
     public class AccommodationController
     {
         private AccommodationService _accommodationService;
-
         public AccommodationController()
         {
             _accommodationService = new AccommodationService();
@@ -20,6 +19,11 @@ namespace BookingApp.Controller
         public List<Accommodation> GetAll()
         {
             return _accommodationService.GetAll();
+        }
+
+        public Accommodation Create(Accommodation accommodation)
+        {
+            return _accommodationService.RegisterAccommondation(accommodation);
         }
 
         public List<Accommodation> GetAllWithLocations()
@@ -38,6 +42,7 @@ namespace BookingApp.Controller
             return _accommodationService.SearchAccommodations(searchParams);
         }
 
+        
 
     }
 

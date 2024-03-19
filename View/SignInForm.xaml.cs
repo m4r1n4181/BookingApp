@@ -78,12 +78,14 @@ namespace BookingApp.View
                     }
                     else
                     {
+                        AccommodationSearch accommodationSearch = new AccommodationSearch();
+                        accommodationSearch.Show();
+                        Close();
+                        CreateTourForm createTourForm = new CreateTourForm();
+                        createTourForm.Show();
+                        Close();
 
                     }
-                    CommentsOverview commentsOverview = new CommentsOverview(user);
-                    commentsOverview.Show();
-                    Close();
-
                 }
                 else
                 {

@@ -1,4 +1,5 @@
-﻿using BookingApp.Service;
+﻿using BookingApp.Model;
+using BookingApp.Service;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -15,9 +16,23 @@ namespace BookingApp.Controller
             _accommodationReservationService = new AccommodationReservationService();
         }
 
-        public void GetAccommodationReservationsToRate(int ownerId)
+        public AccommodationReservation Create(AccommodationReservation accommodationReservation)
         {
-            _accommodationReservationService.GetAllByOwnerForRating(ownerId);
+            if (accommodationReservation.Guest == null)
+            {
+                accommodationReservation.Guest = new Guest();
+            }
+
+            // Postavljanje Id svojstva za Guest
+            accommodationReservation.Guest.Id = 4;
+            return _accommodationReservationService.Create(accommodationReservation);
         }
+
+        public List<AccommodationReservation> GetFreeRangeDays(int accommodationId, DateTime start, DateTime end, int numberOfDays)
+        {
+            return _accommodationReservationService.GetFreeDateRanges(accommodationId, start, end, numberOfDays);
+        }
+
+
     }
 }
