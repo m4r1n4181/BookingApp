@@ -12,7 +12,8 @@ namespace BookingApp.Model
 {
     public class Tourist : ISerializable
     {
-        public int Id { get; set; } 
+        public int Id { get; set; }
+
         public string FirstName { get; set; }
         public string LastName { get; set; }
 
@@ -24,11 +25,12 @@ namespace BookingApp.Model
 
         public Tourist(int id, string firstName, string lastName, int age)
         {
-            Id = id;
+            Id = Id;
             FirstName = firstName;
             LastName = lastName;
             Age = age;
         }
+
 
         public string[] ToCSV()
         {
@@ -46,6 +48,5 @@ namespace BookingApp.Model
             Age = Convert.ToInt32(values[3]);
         }
     }
-
 
 }

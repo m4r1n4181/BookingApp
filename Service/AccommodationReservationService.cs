@@ -1,4 +1,4 @@
-﻿using Booking.App;
+﻿using BookingApp.Model;
 using BookingApp.Repository;
 using System;
 using System.Collections.Generic;
@@ -22,9 +22,9 @@ namespace BookingApp.Service
             List<AccommodationReservation> allReservations = _accommodationReservationRepository.GetAllWithAccommodations();
             List<AccommodationReservation> ownersReservations = new List<AccommodationReservation>();
 
-            foreach(AccommodationReservation reservation in allReservations)
+            foreach (AccommodationReservation reservation in allReservations)
             {
-                if(reservation.Accommodation.Owner.Id == ownerId && reservation.Departure < DateTime.Now && reservation.Departure > DateTime.Now.AddDays(-5))
+                if (reservation.Accommodation.Owner.Id == ownerId && reservation.Departure < DateTime.Now && reservation.Departure > DateTime.Now.AddDays(-5))
                 {
                     ownersReservations.Add(reservation);
                 }
