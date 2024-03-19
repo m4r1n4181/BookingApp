@@ -19,7 +19,7 @@
         <TextBox x:Name="minDays" Text="{Binding Path=MinReservationDays, UpdateSourceTrigger=PropertyChanged}" TextWrapping="Wrap" Width="120" Margin="256,295,424,113"/>
         <Label Content="min cancellation days" HorizontalAlignment="Left" Margin="57,348,0,0" VerticalAlignment="Top" FontSize="16"/>
         <TextBox x:Name="cancellationDays" 
-         Text="{Binding Path=CancellationDays, UpdateSourceTrigger=PropertyChanged, StringFormat={}{0:1}}" 
+         Text="{Binding Path=CancellationDays, UpdateSourceTrigger=PropertyChanged}" 
          TextWrapping="Wrap" 
          Width="120" 
          Margin="256,357,424,55"/>
