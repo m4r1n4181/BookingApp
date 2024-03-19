@@ -1,9 +1,12 @@
 ﻿using BookingApp.Controller;
+using BookingApp.DTO;
 using BookingApp.Model;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.ComponentModel;
 using System.Linq;
+using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
@@ -26,7 +29,7 @@ namespace BookingApp.View
 
         public TourController _tourController;
 
-        public string Country { get; set; }
+       /* public string Country { get; set; }
 
         public string City { get; set; }
 
@@ -34,9 +37,87 @@ namespace BookingApp.View
 
         public string Duration { get; set; }
 
-        public string MaxTourists { get; set; }
+        public string MaxTourists { get; set; }*/
         public Tour SelectedTour { get; set; }
-        
+
+        private string _country;
+        public string Country
+        {
+            get => _country;
+            set
+            {
+                if(value != _country)
+                {
+                    _country = value;
+                    OnPropertyChanged();
+                }
+            }
+        }
+
+        private string _city;
+        public string City
+        {
+            get => _city;
+            set
+            {
+                if (value != _city)
+                {
+                    _city = value;
+                    OnPropertyChanged();
+                }
+            }
+        }
+
+        private int _duration;
+        public int Duration
+        {
+            get => _duration;
+            set
+            {
+                if (value != _duration)
+                {
+                    _duration  = value;
+                    OnPropertyChanged();
+                }
+            }
+        }
+
+        private string _language;
+        public string Language
+        {
+            get => _language;
+            set
+            {
+                if (value != _language)
+                {
+                    _language = value;
+                    OnPropertyChanged();
+                }
+            }
+        }
+
+        private int _maxTourists;
+        public int MaxTourists
+        {
+            get => _maxTourists;
+            set
+            {
+                if (value != _maxTourists)
+                {
+                    _maxTourists = value;
+                    OnPropertyChanged();
+                }
+            }
+        }
+
+        public event PropertyChangedEventHandler PropertyChanged;
+
+        protected virtual void OnPropertyChanged([CallerMemberName] string propertyName = null)
+        {
+            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
+        }
+
+
         public TourOverviewForm()
         {
             InitializeComponent();
@@ -46,22 +127,31 @@ namespace BookingApp.View
             City = "";
             Country = "";
             Language = "";
-            Duration = "";
-            MaxTourists = "";
+            //Duration =;
+            //MaxTourists = "";
         }
-        private void RefreshTours(List<Tour> tours)
+
+        private void buttonSearch_Click(object sender, RoutedEventArgs e)
         {
+            TourSearchParams searchParams = new TourSearchParams();
+            searchParams.City = City;
+            searchParams.Country= Country;
+            searchParams.Language = Language;
+            searchParams.Duration = Duration;
+            searchParams.MaxTourists = MaxTourists;
             Tours.Clear();
-            foreach (Tour tour in tours)
-            {
+            foreach(Tour tour in _tourController.SearchTours(searchParams)){
                 Tours.Add(tour);
             }
         }
-        private void buttonSearch_Click(object sender, RoutedEventArgs e)
-        {
 
-            List<Tour> searchedTours = _tourController.SearchTours(Country, City, Language, MaxTourists, Duration);
-            RefreshTours(searchedTours);
-        }
+
+
+        /* private void buttonSearch_Click(object sender, RoutedEventArgs e)
+         {
+
+             List<Tour> searchedTours = _tourController.SearchTours();
+             RefreshTours(searchedTours);
+         }*/
     }
 }

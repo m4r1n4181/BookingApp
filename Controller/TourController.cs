@@ -20,9 +20,9 @@ namespace BookingApp.Controller
         }
 
         // Add public access modifier
-        public List<Tour> SearchTours(string country, string city, string language, string numberOfPeople, string duration)
+        public List<Tour> SearchTours(TourSearchParams tourSearchParams)
         {
-            return _tourService.SearchTours(country, city, language, numberOfPeople, duration);
+            return _tourService.SearchTours(tourSearchParams);
         }
 
         public List<Tour> GetAll()

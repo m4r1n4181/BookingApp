@@ -5,6 +5,8 @@ using Microsoft.VisualBasic;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Windows;
+using System.Xml.Linq;
 
 
 namespace BookingApp.Model
@@ -40,6 +42,14 @@ namespace BookingApp.Model
             this.Id = id;
         }
 
+        public Tour(string language, Location location, int maxTourists, int duration)
+        {
+            Language = language;
+            Location = location;
+            MaxTourists = maxTourists;
+            Duration = duration;
+        }
+
         public Tour(int id, TourGuide tourGuide, string name, string description, string language, Location location, int maxTourists, int avaibleSeats, List<DateTime> startDates, int duration, List<string> pictures, bool isStarted)
         {
             Id = id;
@@ -62,7 +72,7 @@ namespace BookingApp.Model
             string startDatesString = string.Join(";", StartDates);
             // string? picturesString = Pictures != null ? string.Join(",", Pictures) : null;
             //takodje nista se ne upisuje u tour.csv i proeriti saveAll keypoints
-            string picturesString = string.Join(",", Pictures); //greska buni se jer je null...
+            string picturesString = string.Join(",", Pictures); 
             string[] csvValues = { Id.ToString(), TourGuide.Id.ToString(), Name, Description, Language, Location.Id.ToString(), MaxTourists.ToString(), AvaibleSeats.ToString(), startDatesString, Duration.ToString(), picturesString, IsStarted.ToString() };
             return csvValues;
         }
@@ -90,9 +100,11 @@ namespace BookingApp.Model
        
     }
 
-      /*  public List<Tour> GetAllTours()
-    {
-        
-    }*/
- 
+    /*  public List<Tour> GetAllTours()
+  {
+
+  }*/
+
+   
+
 }

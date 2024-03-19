@@ -95,28 +95,19 @@ namespace BookingApp.Repository
             return _tours.FindAll(tour => TourStartsToday(tour) && !tour.IsStarted);
         }
 
-        public void BindTourLocation()
-        {
-            foreach (Tour tour in _tours)
-            {
-                int locationId = tour.Location.Id;
-                Location location = LocationRepository.GetInstance().Get(locationId);
-                if (location != null)
-                {
-                    tour.Location = location;
-                }
-                else
-                {
-                    Console.WriteLine("Error in tourLocation binding");
-                }
-            }
-        }
         public void BindLocations()
         {
             LocationRepository locationRepository = new LocationRepository();
-            _tours.ForEach(locR=> {locR.Location = locationRepository.GetById(locR.Location.Id); });
-
+            _tours.ForEach(tour =>
+            {
+                if (tour.Location != null) // Provjera je li tura već povezana s lokacijom
+                {
+                    tour.Location = locationRepository.GetById(tour.Location.Id);
+                }
+            });
         }
+
+
         public List<Tour> GetAllWithLocations()
         {
             _tours = _serializer.FromCSV(FilePath);
@@ -124,38 +115,38 @@ namespace BookingApp.Repository
             return _tours;
         }
 
-       /* public List<Tour> SearchTours(TourSearchParams searchParams)
+        public List<Tour> SearchTours(TourSearchParams searchParams)
         {
-            BindTourLocation();
-
-            List<Tour> filteredTours = _tours;
+            _tours = _serializer.FromCSV(FilePath);
+            BindLocations();
 
             if (!string.IsNullOrWhiteSpace(searchParams.City))
             {
-                filteredTours = filteredTours.FindAll(tour => tour.Location.City.Contains(searchParams.City, StringComparison.OrdinalIgnoreCase));
+                _tours = _tours.FindAll(tour => tour.Location != null && tour.Location.City.Contains(searchParams.City, StringComparison.OrdinalIgnoreCase));
             }
 
             if (!string.IsNullOrWhiteSpace(searchParams.Country))
             {
-                filteredTours = filteredTours.FindAll(tour => tour.Location.Country.Contains(searchParams.Country, StringComparison.OrdinalIgnoreCase));
+                _tours = _tours.FindAll(tour => tour.Location != null && tour.Location.Country.Contains(searchParams.Country, StringComparison.OrdinalIgnoreCase));
             }
 
             if (searchParams.Duration != 0)
             {
-                filteredTours = filteredTours.FindAll(tour => tour.Duration >= searchParams.Duration);
+                _tours = _tours.FindAll(tour => tour.Duration >= searchParams.Duration);
             }
 
             if (!string.IsNullOrWhiteSpace(searchParams.Language))
             {
-                filteredTours = filteredTours.FindAll(tour => tour.Language.Equals(searchParams.Language));
+                _tours = _tours.FindAll(tour => tour.Language.Equals(searchParams.Language));
             }
 
             if (searchParams.MaxTourists != 0)
             {
-                filteredTours = filteredTours.FindAll(tour => tour.MaxTourists >= searchParams.MaxTourists);
+                _tours = _tours.FindAll(tour => tour.MaxTourists >= searchParams.MaxTourists);
             }
 
-            return filteredTours;
-        }*/
+            return _tours;
+        }
+
     }
 }

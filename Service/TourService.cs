@@ -104,52 +104,12 @@ namespace BookingApp.Service
 
 
         // Move this method inside the class TourService
-        public List<Tour> SearchTours(string country, string city, string language, string numberOfPeople, string duration)
+        public List<Tour> SearchTours(TourSearchParams tourSearchParams)
         {
-            try
-            {
-                List<Tour> tours = TourSearchLogic(country, city, language, numberOfPeople, duration);
-                return tours;
-            }
-            catch (Exception e)
-            {
-                return new List<Tour>();
-            }
+            return _tourRepository.SearchTours(tourSearchParams);
         }
 
-        private List<Tour> TourSearchLogic(string country, string city, string language, string numberOfPeople, string duration)
-        {
-            List<Tour> tours = new List<Tour>();
-
-            foreach (Tour tour in _tourRepository.GetAll())
-            {
-                if (SearchCondition(tour, country, city, language, numberOfPeople, duration))
-                {
-                    tours.Add(tour);
-                }
-            }
-            return tours;
-        }
-
-        private bool SearchCondition(Tour tour, string country, string city, string language, string numberOfPeople, string duration)
-        {
-            bool retVal = tour.Location.Country.Contains(country) && tour.Location.City.Contains(city) && tour.Language.Contains(language);
-
-            if (numberOfPeople != null && numberOfPeople != "")
-            {
-                int numberOfPeopleNum = Convert.ToInt32(numberOfPeople);
-                retVal = retVal && tour.MaxTourists > numberOfPeopleNum;
-            }
-
-            if (duration != null && duration != "")
-            {
-                int durationNum = Convert.ToInt32(duration);
-                retVal = retVal && tour.Duration > durationNum;
-            }
-            return retVal;
-
-        }
-
+      
         public List<Tour> GetAll()
         {
             return _tourRepository.GetAll();
