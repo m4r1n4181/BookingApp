@@ -39,13 +39,8 @@
         <TextBlock Text="{Binding MaxTourists}" Grid.Row="4" Grid.Column="1" Margin="5"/>
 
         <TextBlock Text="StartDate and time:" FontWeight="Bold" Margin="5" Grid.Row="5"/>
-        <ItemsControl ItemsSource="{Binding StartDates}" Grid.Row="5" Grid.Column="1" Margin="5">
-            <ItemsControl.ItemTemplate>
-                <DataTemplate>
-                    <TextBlock Text="{Binding}" Margin="2"/>
-                </DataTemplate>
-            </ItemsControl.ItemTemplate>
-        </ItemsControl>
+        <TextBlock Text="{Binding TourDate}" Grid.Row="5" Grid.Column="1" Margin="5"/>
+
 
         <TextBlock Text="Duration in hours:" FontWeight="Bold" Margin="5" Grid.Row="6"/>
         <TextBlock Text="{Binding Duration}" Grid.Row="6" Grid.Column="1" Margin="5"/>
@@ -57,12 +52,20 @@
               AutoGenerateColumns="False" Height="325" HeadersVisibility="Column" FontSize="13" Width="661"
               HorizontalAlignment="Left">
                 <DataGrid.Columns>
-                    <DataGridTextColumn Header="KeyPoint" Binding="{Binding KeyPointName}" Width="*"/>
+                    <DataGridTextColumn Header="KeyPoint" Binding="{Binding Name}" Width="*"/>
+                    <DataGridTextColumn Header="IsActive" Binding="{Binding IsActive}" Width="*"/>
                 </DataGrid.Columns>
             </DataGrid>
             <ToolBar Grid.Row="0" Grid.ColumnSpan="3">
-                <Button Click="MarkKeyPoint_Click" FontSize="14" HorizontalAlignment="Center" Margin="5,0,0,0">
+                <Button Click="ActivateKeyPoint_Click" FontSize="14" HorizontalAlignment="Center" Margin="5,0,0,0">
                     Activate KeyPoint
+                </Button>
+                <Button Click="MarkTourist_Click" FontSize="14" HorizontalAlignment="Center" Margin="5,0,0,0">
+                    Mark Tourist
+                </Button>
+
+                <Button Click="EndTour_Click" FontSize="14" HorizontalAlignment="Center" Margin="5,0,0,0">
+                    End tour
                 </Button>
             </ToolBar>
 

@@ -1,5 +1,6 @@
 ﻿using BookingApp.Controller;
 using BookingApp.Model;
+using BookingApp.Repository;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -22,9 +23,10 @@ namespace BookingApp.View
     /// <summary>
     /// Interaction logic for TouristSelectionForm.xaml
     /// </summary>
-    public partial class TouristSelectionForm : Window, INotifyPropertyChanged
+    public partial class TouristSelectionForm : Window
     {
         private readonly TouristController _touristController;
+        private TouristEntryController _touristEntryController;
         public ObservableCollection<Tourist> Tourists { get; set; }
         public KeyPoint SelectedKeyPoint { get; set; }
 
@@ -33,22 +35,17 @@ namespace BookingApp.View
         public TouristSelectionForm(KeyPoint selectedKeyPoint)
         {
             InitializeComponent();
+            this.DataContext = this;
             SelectedKeyPoint = selectedKeyPoint;
 
-            TouristController touristController = new TouristController();
-            Tourists = new ObservableCollection<Tourist>(touristController.GetAll()); 
+            _touristController = new TouristController();
+            _touristEntryController = new TouristEntryController();
+            Tourists = new ObservableCollection<Tourist>(_touristController.GetAllNotOnTour(selectedKeyPoint.Tour.Id)); 
 
-            DataContext = this;
         }
 
-        public event PropertyChangedEventHandler PropertyChanged;
-
-        protected virtual void OnPropertyChanged([CallerMemberName] string propertyName = null)
-        {
-            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
-        }
-
-        private void AddTouristEntryClick(object sender, RoutedEventArgs e)
+        
+        private void AddTouristEntry_Click(object sender, RoutedEventArgs e)
         {
             if (SelectedTourist == null)
             {
@@ -63,12 +60,15 @@ namespace BookingApp.View
                    
             };
 
-            TouristEntryController touristEntryController = new TouristEntryController();
-            touristEntryController.AddTouristEntry(touristEntry); 
+            _touristEntryController.AddTouristEntry(touristEntry); 
 
             MessageBox.Show("Tourist entry added successfully.", "Success", MessageBoxButton.OK, MessageBoxImage.Information);
+            Close();
          }
            
      }
+      // u taj novi prozor posalji SelectedKeyPoint
+        //tamo sklopis objecat ToursitEntry
+        // i samo ga creiras u controlleru
     
  }

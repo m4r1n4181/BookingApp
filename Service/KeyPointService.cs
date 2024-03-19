@@ -14,11 +14,12 @@ namespace BookingApp.Service
     public class KeyPointService
     { 
         private readonly KeyPointRepository _keyPointRepository;
-        private readonly TourRepository tourRepository;
+        private readonly TourRepository _tourRepository;
 
         public KeyPointService()
         {
             _keyPointRepository = new KeyPointRepository();
+            _tourRepository = new TourRepository();
         }
 
         public void CreateKeyPoints(List<KeyPoint> keyPoints)
@@ -48,9 +49,10 @@ namespace BookingApp.Service
             //ako je zadnji postaviti da je tour Active=false
             if (keyPoints.All(kp => kp.IsActive))
             {
-                Tour tour = keyPoint.Tour;
-                keyPoint.IsActive = false;
-                tourRepository.Update(tour);
+                Tour tour = _tourRepository.GetById(tourId);
+
+                tour.IsStarted = false;
+                _tourRepository.Update(tour);
             }
         }
 

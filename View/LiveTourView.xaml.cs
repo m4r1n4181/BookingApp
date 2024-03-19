@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.ObjectModel;
 using System.Windows;
+using BookingApp.Controller;
 using BookingApp.Model;
 using BookingApp.Repository;
 using BookingApp.Service;
@@ -13,16 +14,14 @@ namespace BookingApp.View
         public ObservableCollection<Tour> Tours { get; set; }
         public Tour SelectedTour { get; set; }
 
-        private readonly TourRepository _tourRepository;
-        private readonly TourService _tourService;
+        private TourController _tourController;
 
         public LiveTourView()
         {
             InitializeComponent();
             DataContext = this;
-            _tourRepository = new TourRepository();
-            _tourService = new TourService();
-            Tours = new ObservableCollection<Tour>(_tourRepository.GetTodayTours());
+            _tourController = new TourController();
+            Tours = new ObservableCollection<Tour>(_tourController.GetTodayTours());
         }
 
 
@@ -33,6 +32,7 @@ namespace BookingApp.View
                 MessageBox.Show("Please select a tour.", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
                 return;
             }
+            _tourController.StartTour(SelectedTour.Id);
             TourDetails tourDetails = new TourDetails(SelectedTour);
             tourDetails.ShowDialog();
 

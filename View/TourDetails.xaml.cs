@@ -122,8 +122,8 @@ namespace BookingApp.View
             }
         }
 
-        private DateTime _tourDate;
-        public DateTime TourDate
+        private string _tourDate;
+        public string TourDate
         {
             get => _tourDate;
             set
@@ -145,8 +145,13 @@ namespace BookingApp.View
 
         public Tour SelectedTour { get; set; }
         private KeyPointController _keyPointController;
+   
         public ObservableCollection<KeyPoint> KeyPoints { get; set; }
         public KeyPoint SelectedKeyPoint { get; set; }
+
+        public Tourist SelectedTourist { get; set; }
+
+        private TourController _tourController;
         public TourDetails(Tour tour)
         {
             InitializeComponent();
@@ -154,41 +159,68 @@ namespace BookingApp.View
             SelectedTour = tour;
 
             TourName = tour.Name;
-            //Location = tour.Location;
             Location = $"{tour.Location.City}, {tour.Location.Country}";
             Description = tour.Description;
             Languages = tour.Language;
             MaxTourists = tour.MaxTourists;
             Duration = tour.Duration;
-            //TourDate = tour.StartDates;
- 
+            TourDate = string.Join(", ", tour.StartDates);
+
 
             _keyPointController = new KeyPointController();
+            _tourController = new TourController();
             KeyPoints = new ObservableCollection<KeyPoint>(_keyPointController.GetAllForTour(tour.Id));
+
+
+
 
         }
 
-        public void MarkKeyPoint_Click(object sender, RoutedEventArgs e)
+        public void ActivateKeyPoint_Click(object sender, RoutedEventArgs e)
+        {
+            if (SelectedKeyPoint == null)
+            {
+                MessageBox.Show("Please select a keyPoint.", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                return;
+
+            }
+            _keyPointController.ActivateKeyPoint(SelectedKeyPoint.Id);
+            KeyPoints.Clear();
+            foreach (KeyPoint keyPoint in _keyPointController.GetAllForTour(SelectedTour.Id))
+            {
+                KeyPoints.Add(keyPoint);
+            }
+        }
+
+        public void MarkTourist_Click(object sender, RoutedEventArgs e)
         {
             if(SelectedKeyPoint == null)
             {
                 MessageBox.Show("Please select a keyPoint.", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
                 return;
-               
             }
-
-            _keyPointController.ActivateKeyPoint(SelectedKeyPoint.Id);
+            if (SelectedKeyPoint.IsActive == false)
+            {
+                MessageBox.Show("Please select active keyPoint.", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                return;
+            }
             TouristSelectionForm touristSelectionForm = new TouristSelectionForm(SelectedKeyPoint);
             touristSelectionForm.ShowDialog();
 
-            //refresh KeyPoints
-            KeyPoints.Clear();
-            foreach(KeyPoint keyPoint in _keyPointController.GetAllForTour(SelectedTour.Id))
-            {
-                KeyPoints.Add(keyPoint);
-            }
+        }
+
+        public void EndTour_Click(object sender, RoutedEventArgs e)
+        {
+            //tourId
+            _tourController.EndTour(SelectedTour.Id);
+            Close();
 
         }
+        
+
+    }
+
+   }
 
         //za dodavanje turiste
         // selectujem keypoint i click dugme nadji tutistu
@@ -196,5 +228,4 @@ namespace BookingApp.View
         // u taj novi prozor posalji SelectedKeyPoint
         //tamo sklopis objecat ToursitEntry
         // i samo ga creiras u controlleru
-    }
-}
+

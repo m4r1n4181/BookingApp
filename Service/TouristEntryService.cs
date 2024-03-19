@@ -11,14 +11,20 @@ namespace BookingApp.Service
     public class TouristEntryService
     {
         private TouristEntryRepository _touristEntryRepository;
+        private TourRepository _tourRepository;
 
         public TouristEntryService()
         {
             _touristEntryRepository = new TouristEntryRepository();
+            _tourRepository = new TourRepository();
         }
 
         public void AddTouristEntry(TouristEntry touristEntry)
         {
+            int tourId = touristEntry.KeyPoint.Tour.Id;
+            Tour tour = _tourRepository.GetById(tourId);
+
+            touristEntry.Tour = tour;
             _touristEntryRepository.Save(touristEntry);
         }
     }

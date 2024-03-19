@@ -18,19 +18,16 @@ namespace BookingApp.Model
 
         public int Age { get; set; }
 
-        public Tour Tour { get; set; }
-
         
 
         public Tourist() { }
 
-        public Tourist(int id, string firstName, string lastName, int age, Tour tour)
+        public Tourist(int id, string firstName, string lastName, int age)
         {
             Id = id;
             FirstName = firstName;
             LastName = lastName;
             Age = age;
-            Tour = tour;
         }
 
         public string[] ToCSV()

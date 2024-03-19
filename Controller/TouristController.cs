@@ -21,5 +21,10 @@ namespace BookingApp.Controller
         {
             return _touristService.GetAll();
         }
+
+        public List<Tourist> GetAllNotOnTour(int tourId)
+        {
+            return _touristService.GetAllNotOnTour(tourId);
+        }
     }
 }
