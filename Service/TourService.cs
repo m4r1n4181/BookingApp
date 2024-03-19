@@ -1,3 +1,4 @@
+﻿using BookingApp.DTO;
 using BookingApp.Model;
 using BookingApp.Repository;
 using System;
@@ -22,9 +23,9 @@ namespace BookingApp.Service
         {
             _tourRepository = new TourRepository();
             _keyPointRepository = new KeyPointRepository();
+            _touristRepository = new TouristRepository(); // Initialize tourist repository
+            _entryRepository = new TouristEntryRepository(); // Initialize tourist entry repository
         }
-        //metoda da se kreira pa doda tura u repository
-
 
 
         public Tour CreateTour(Tour tour)
@@ -90,8 +91,8 @@ namespace BookingApp.Service
                 return;
             }
             List<KeyPoint> keyPoints = _keyPointRepository.GetKeyPointsForTour(id);
-           
-            foreach(KeyPoint keyPoint in keyPoints)
+
+            foreach (KeyPoint keyPoint in keyPoints)
 
             {
                 keyPoint.IsActive = false;
@@ -101,6 +102,22 @@ namespace BookingApp.Service
             _tourRepository.Update(tour);
         }
 
-    }
 
+        // Move this method inside the class TourService
+        public List<Tour> SearchTours(TourSearchParams tourSearchParams)
+        {
+            return _tourRepository.SearchTours(tourSearchParams);
+        }
+
+      
+        public List<Tour> GetAll()
+        {
+            return _tourRepository.GetAll();
+        }
+
+        public List<Tour> GetAllWithLocations()
+        {
+            return _tourRepository.GetAllWithLocations();
+        }
+    }
 }
