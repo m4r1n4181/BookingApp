@@ -11,16 +11,17 @@
         <!-- Pretraga tura -->
         <StackPanel Orientation="Horizontal" Margin="5">
             <Label Content="Država:" VerticalAlignment="Center"/>
-            <TextBox x:Name="tbCountry" Text = "{Binding Path=Country,UpdateSourceTrigger=PropertyChanged}" VerticalAlignment="Center" Margin="5"/>
+            <TextBox x:Name="tbCountry" Text = "{Binding Path=Country,UpdateSourceTrigger=PropertyChanged}" VerticalAlignment="Center" Margin="5" Width="37"/>
             <Label Content="Grad:" VerticalAlignment="Center"/>
-            <TextBox x:Name="tbCity" Text = "{Binding Path=City,UpdateSourceTrigger=PropertyChanged}" VerticalAlignment="Center" Margin="5"/>
+            <TextBox x:Name="tbCity" Text = "{Binding Path=City,UpdateSourceTrigger=PropertyChanged}" VerticalAlignment="Center" Margin="5" Width="41"/>
             <Label Content="Broj ljudi:" VerticalAlignment="Center"/>
-            <TextBox x:Name="tbNumberOfPeople" Text = "{Binding Path=MaxTourists,UpdateSourceTrigger=PropertyChanged}"  VerticalAlignment="Center" Margin="5"/>
+            <TextBox x:Name="tbNumberOfPeople" Text = "{Binding Path=MaxTourists,UpdateSourceTrigger=PropertyChanged}"  VerticalAlignment="Center" Margin="5" Width="40"/>
             <Label Content="Jezik:" VerticalAlignment="Center"/>
-            <TextBox x:Name="tbLanguage" Text = "{Binding Path=Language,UpdateSourceTrigger=PropertyChanged}" VerticalAlignment="Center" Margin="5"/>
+            <TextBox x:Name="tbLanguage" Text = "{Binding Path=Language,UpdateSourceTrigger=PropertyChanged}" VerticalAlignment="Center" Margin="5" Width="32"/>
             <Label Content="Trajanje:" VerticalAlignment="Center"/>
-            <TextBox x:Name="tbDuration" Text = "{Binding Path=Duration,UpdateSourceTrigger=PropertyChanged}" VerticalAlignment="Center" Margin="5"/>
+            <TextBox x:Name="tbDuration" Text = "{Binding Path=Duration,UpdateSourceTrigger=PropertyChanged}" VerticalAlignment="Center" Margin="5" Width="32"/>
             <Button x:Name="buttonSearch" Content="Pretraži" Margin="5" Click="buttonSearch_Click"/>
+            <Button x:Name="buttonReserve" Content="Rezerviši" Margin="5" Click="buttonReserve_Click"/>
         </StackPanel>
 
         <!-- Prikaz tura -->

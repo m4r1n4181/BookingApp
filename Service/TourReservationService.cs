@@ -12,7 +12,7 @@ namespace BookingApp.Service
     {
         private TourReservationRepository _tourReservationRepository;
         private TourRepository _tourRepository;
-
+ 
         public TourReservationService()
         {
             _tourReservationRepository = new TourReservationRepository();
@@ -69,6 +69,12 @@ namespace BookingApp.Service
 
             return availableReservations;
         }
+
+       /* public void AddParticipant(TourParticipants participant, TourReservation reservation)
+        {
+            participant.AddParticipant(participant);
+            _tourParticipantRepository.AddParticipant(participant);
+        }*/
 
 
     }

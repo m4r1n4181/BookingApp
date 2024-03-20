@@ -66,6 +66,10 @@ namespace BookingApp.Model
             IsStarted = isStarted;
         }
 
+       
+        
+
+
         public string[] ToCSV()
         {
 

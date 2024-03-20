@@ -29,15 +29,17 @@ namespace BookingApp.View
 
         public TourController _tourController;
 
-       /* public string Country { get; set; }
+        public TourReservationController _tourReservationController;
 
-        public string City { get; set; }
+        /* public string Country { get; set; }
 
-        public string Language { get; set; }
+         public string City { get; set; }
 
-        public string Duration { get; set; }
+         public string Language { get; set; }
 
-        public string MaxTourists { get; set; }*/
+         public string Duration { get; set; }
+
+         public string MaxTourists { get; set; }*/
         public Tour SelectedTour { get; set; }
 
         private string _country;
@@ -46,7 +48,7 @@ namespace BookingApp.View
             get => _country;
             set
             {
-                if(value != _country)
+                if (value != _country)
                 {
                     _country = value;
                     OnPropertyChanged();
@@ -76,7 +78,7 @@ namespace BookingApp.View
             {
                 if (value != _duration)
                 {
-                    _duration  = value;
+                    _duration = value;
                     OnPropertyChanged();
                 }
             }
@@ -135,13 +137,23 @@ namespace BookingApp.View
         {
             TourSearchParams searchParams = new TourSearchParams();
             searchParams.City = City;
-            searchParams.Country= Country;
+            searchParams.Country = Country;
             searchParams.Language = Language;
             searchParams.Duration = Duration;
             searchParams.MaxTourists = MaxTourists;
             Tours.Clear();
-            foreach(Tour tour in _tourController.SearchTours(searchParams)){
+            foreach (Tour tour in _tourController.SearchTours(searchParams))
+            {
                 Tours.Add(tour);
+            }
+        }
+
+        private void buttonReserve_Click(object sender, RoutedEventArgs e)
+        {
+            if(SelectedTour != null)
+            {
+                TourReservationForm viewReservationForm = new TourReservationForm(SelectedTour);
+                viewReservationForm.Show();
             }
         }
 

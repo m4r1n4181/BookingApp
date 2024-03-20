@@ -32,6 +32,8 @@ namespace BookingApp.View
             }
         }
 
+        private Tour SelectedTour { get; set; }
+
         public event PropertyChangedEventHandler PropertyChanged;
 
         protected virtual void OnPropertyChanged([CallerMemberName] string propertyName = null)
@@ -75,6 +77,9 @@ namespace BookingApp.View
                     {
                         TourOverviewForm tourOverviewForm = new TourOverviewForm();
                         tourOverviewForm.Show();
+
+                        /*TourReservationForm tourReservationForm = new TourReservationForm(SelectedTour);
+                        tourReservationForm.Show();*/
                     }
                     else
                     {

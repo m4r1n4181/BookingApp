@@ -27,6 +27,12 @@ namespace BookingApp.Repository
             TourReservations.ForEach(tR => { tR.Tour = tourRepository.GetById(tR.Tour.Id); });
         }
 
+        public void BindTourParticipants()
+        {
+            TourParticipantRepository tourParticipantsRepository = new TourParticipantRepository();
+            TourReservations.ForEach(tR => { tourParticipantsRepository.GetById(tR.Tour.Id); });
+        }
+
         public TourReservation GetById(int id)
         {
             TourReservations = _serializer.FromCSV(FilePath);

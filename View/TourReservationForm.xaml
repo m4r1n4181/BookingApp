@@ -1,0 +1,43 @@
+﻿<Window x:Class="BookingApp.View.TourReservationForm"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:BookingApp.View"
+        mc:Ignorable="d"
+        Title="Create new reservation" Height="400" Width="600" WindowStartupLocation="CenterScreen">
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*" MinWidth="300"/>
+            <ColumnDefinition Width="*" MinWidth="300"/>
+        </Grid.ColumnDefinitions>
+
+        <!-- Reservation Details Section -->
+        <Border Grid.Column="0" CornerRadius="20" Margin="20">
+            <StackPanel>
+                <TextBlock Text="Reservation Details" FontSize="22" TextAlignment="Center" FontWeight="Bold" FontStyle="Italic"/>
+                <TextBlock Text="Number of Participants:" Margin="5,10,5,5"/>
+                <TextBox x:Name="ParticipantsNumberTextBox" Margin="5,0,5,5" Width="80" Height="20"/>
+                <TextBlock Text="Participants Information:" Margin="5,10,5,5"/>
+                <StackPanel x:Name="ParticipantsStackPanel" Margin="10,0,10,5">
+                    <StackPanel Orientation="Horizontal">
+                        <TextBlock Text="Name:" VerticalAlignment="Center"/>
+                        <TextBox x:Name="ParticipantNameTextBox" Margin="10,2,2,2" Width="150"/>
+                    </StackPanel>
+                    <StackPanel Orientation="Horizontal">
+                        <TextBlock Text="Last Name:" VerticalAlignment="Center"/>
+                        <TextBox x:Name="ParticipantLastNameTextBox" Margin="10,2,2,2" Width="150"/>
+                    </StackPanel>
+                    <StackPanel Orientation="Horizontal">
+                        <TextBlock Text="Age:" VerticalAlignment="Center"/>
+                        <TextBox x:Name="ParticipantAgeTextBox" Margin="10,2,2,2" Width="50"/>
+                    </StackPanel>
+                </StackPanel>
+                <Button Content="Add Participant" Click="AddParticipant_Button_Click" Height="25" Width="140" HorizontalAlignment="Center" Margin="5"/>
+            </StackPanel>
+        </Border>
+
+        <!-- Participants List Section -->
+        <ListBox Grid.Column="1" x:Name="ParticipantsListBox" Margin="20" MinWidth="200" HorizontalAlignment="Left" VerticalAlignment="Top" Height="Auto"/>
+    </Grid>
+</Window>

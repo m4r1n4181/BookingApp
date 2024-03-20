@@ -147,6 +147,22 @@ namespace BookingApp.Repository
 
             return _tours;
         }
+            public int GetAvailableSeats(int tourId)
+            {
+                // Učitavanje tura iz CSV datoteke
+                List<Tour> tours = _serializer.FromCSV(FilePath);
 
-    }
+                // Pronalaženje ture sa datim ID-jem
+                Tour tour = tours.FirstOrDefault(t => t.Id == tourId);
+
+                if (tour == null)
+                {
+                    throw new ArgumentException("Tura sa datim ID-jem nije pronađena.");
+                }
+
+                // Vraćanje broja dostupnih mesta
+                return tour.AvaibleSeats;
+            }
+
+        }
 }
