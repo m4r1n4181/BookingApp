@@ -22,7 +22,10 @@ namespace BookingApp.Model
         public Tourist() { }
 
 
-
+        public Tourist(int id)
+        {
+            Id = id;
+        }
 
         public Tourist(int id, string firstName, string lastName, int age)
         {
