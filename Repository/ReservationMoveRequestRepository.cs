@@ -21,6 +21,10 @@ namespace BookingApp.Repository
             _serializer = new Serializer<ReservationMoveRequest>();
             _reservationMoveRequests = _serializer.FromCSV(FilePath);
         }
+        public List<ReservationMoveRequest> GetAll()
+        {
+            return _serializer.FromCSV(FilePath);
+        }
 
     }
 
