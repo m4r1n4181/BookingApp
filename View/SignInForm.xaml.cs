@@ -81,9 +81,7 @@ namespace BookingApp.View
                         AccommodationSearch accommodationSearch = new AccommodationSearch();
                         accommodationSearch.Show();
                         Close();
-                        CreateTourForm createTourForm = new CreateTourForm();
-                        createTourForm.Show();
-                        Close();
+                     
 
                     }
                 }
