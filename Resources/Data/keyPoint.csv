@@ -21,6 +21,9 @@
 21|777|True|7
 22|7771|False|7
 23|77712|False|7
-24|kk|False|8
-25|cc|False|8
+24|kk|True|8
+25|cc|True|8
 26|mm|False|8
+27|kk|True|9
+28|zl|True|9
+29|ns|True|9

@@ -37,6 +37,8 @@ namespace BookingApp.Model
             Guest = new User(Convert.ToInt32(values[2]));
             Arrival = DateTime.ParseExact(values[3], "dd.MM.yyyy. HH:mm:ss", CultureInfo.InvariantCulture);
             Departure = DateTime.ParseExact(values[4], "dd.MM.yyyy. HH:mm:ss", CultureInfo.InvariantCulture);
+            //Arrival = Convert.ToDateTime(values[3]);
+            //Departure = Convert.ToDateTime(values[4]);
         }
     }
 }
