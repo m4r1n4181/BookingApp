@@ -1,7 +1,8 @@
 ﻿using BookingApp.Service;
 using BookingApp.Model;
 using System.Collections.Generic;
-using BookingApp.DTO; // Import the necessary namespace for TourSearchParams
+using BookingApp.DTO;
+using System; // Import the necessary namespace for TourSearchParams
 
 namespace BookingApp.Controller
 {
@@ -33,6 +34,11 @@ namespace BookingApp.Controller
         public List<Tour> GetAllWithLocations()
         {
             return _tourService.GetAllWithLocations();
+        }
+
+        internal void EndTour(int id)
+        {
+            throw new NotImplementedException();
         }
     }
 

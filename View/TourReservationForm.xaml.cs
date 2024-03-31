@@ -29,7 +29,10 @@ namespace BookingApp.View
 
         public Tour SelectedTour { get; set; }
 
+        public TourParticipants TourParticipants { get; set; }
+
         private readonly TourReservationRepository _repository;
+        private readonly TourParticipantService _service;
 
         private string _firstName;
         public string FirstName
@@ -104,56 +107,47 @@ namespace BookingApp.View
 
         private void AddParticipant_Button_Click(object sender, RoutedEventArgs e)
         {
-            // Kreiramo novog učesnika na osnovu unesenih podataka
-            TourParticipants participant = new TourParticipants()
+            TourParticipants tourParticipants = new TourParticipants
             {
-                FirstName = ParticipantNameTextBox.Text,
-                LastName = ParticipantLastNameTextBox.Text,
-                Age = int.Parse(ParticipantAgeTextBox.Text)
+                FirstName = Name,
+                LastName = LastName,
+                Age = Age,
             };
 
-            // Provera da li DataContext sadrži TourReservation
-            if (DataContext is TourReservation tourReservation)
-            {
-                // Dodajemo novog učesnika u listu učesnika rezervacije ture
-                tourReservation.Tourists.Add(participant);
-
-                // Osvježavamo ListBox sa učesnicima
-                ParticipantsListBox.Items.Add(participant);
-            }
         }
 
 
-       /* private void ReserveTour_Click(object sender, RoutedEventArgs e)
-        {
-            if (SelectedTour != null)
-            {
-                // Kreiranje rezervacije ture na osnovu unesenih podataka
-                int participantsNumber = int.Parse(ParticipantsNumberTextBox.Text);
+        /* private void ReserveTour_Click(object sender, RoutedEventArgs e)
+         {
+             if (SelectedTour != null)
+             {
+                 // Kreiranje rezervacije ture na osnovu unesenih podataka
+                 int participantsNumber = int.Parse(ParticipantsNumberTextBox.Text);
 
-                // Dodatna logika za kreiranje rezervacije ture
-                TourReservation reservation = new TourReservation()
-                {
-                    GuestsNumber = participantsNumber,
-                    Tour = SelectedTour,
-                    Tourists = new List<TourParticipants>()
-                };
+                 // Dodatna logika za kreiranje rezervacije ture
+                 TourReservation reservation = new TourReservation()
+                 {
+                     GuestsNumber = participantsNumber,
+                     Tour = SelectedTour,
+                     Tourists = new List<TourParticipants>()
+                 };
 
-                // Dodavanje rezervacije ture u bazu podataka
-                _repository.Save(reservation);
+                 // Dodavanje rezervacije ture u bazu podataka
+                 _repository.Save(reservation);
 
-                // Dodatna logika, na primjer, ažuriranje korisničkog interfejsa ili provjera
-            }
-            else
-            {
-                // Dodatna logika ako tura nije odabrana
-            }
-        }*/
+                 // Dodatna logika, na primjer, ažuriranje korisničkog interfejsa ili provjera
+             }
+             else
+             {
+                 // Dodatna logika ako tura nije odabrana
+             }
+         }*/
 
 
-        private void Cancel(object sender, RoutedEventArgs e)
-        {
-            Close();
-        }
+        /*  private void Cancel(object sender, RoutedEventArgs e)
+          {
+              Close();
+          }*/
     }
 }
+

@@ -19,6 +19,8 @@ namespace BookingApp.Model
       
 
         public Tourist() { }
+
+        public Tourist(int id) { this.Id = id; }
         public Tourist(string firstName, string lastName, int age)
         {
             
