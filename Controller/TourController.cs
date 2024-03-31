@@ -3,6 +3,7 @@ using BookingApp.Model;
 using System.Collections.Generic;
 using BookingApp.DTO;
 using System; // Import the necessary namespace for TourSearchParams
+using System.Linq;
 
 namespace BookingApp.Controller
 {
@@ -39,6 +40,17 @@ namespace BookingApp.Controller
         internal void EndTour(int id)
         {
             throw new NotImplementedException();
+        }
+
+        public List<Tour> GetAllByLocations(Location location)
+        {
+            // Dohvati sve ture iz TourService
+            List<Tour> allTours = _tourService.GetAll(); // Prilagodi ovoj liniji prema strukturi tvog koda
+
+            // Filtriraj ture na osnovu lokacije
+            List<Tour> toursWithLocation = allTours.Where(t => t.Location == location).ToList();
+
+            return toursWithLocation;
         }
     }
 

@@ -16,9 +16,11 @@ namespace BookingApp.Repository
 
         public List<TourParticipants> _participants = new List<TourParticipants>();
 
+
         public TourParticipantRepository()
         {
-
+            _serializer = new Serializer<TourParticipants>();
+            _participants = _serializer.FromCSV(FilePath);
         }
 
         public TourParticipants GetById(int id)
@@ -31,10 +33,12 @@ namespace BookingApp.Repository
         {
             participant.Id = NextId();
             _participants = _serializer.FromCSV(FilePath);
-            _participants.Add(participant);
-            _serializer.ToCSV(FilePath, _participants);
+            _participants.Add(participant); // Dodajemo učesnika u listu
+            _serializer.ToCSV(FilePath, _participants); // Čuvamo promjene u CSV datoteci
             return participant;
         }
+
+
 
         public int NextId()
         {

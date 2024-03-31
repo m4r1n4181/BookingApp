@@ -1,38 +1,40 @@
-﻿using BookingApp.Model;
+﻿using BookingApp.Controller;
+using BookingApp.Model;
 using BookingApp.Repository;
 using BookingApp.Service;
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Linq;
 using System.Runtime.CompilerServices;
 using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Shapes;
-using static System.Net.Mime.MediaTypeNames;
 
 namespace BookingApp.View
 {
-    /// <summary>
-    /// Interaction logic for TourReservationForm.xaml
-    /// </summary>
-    public partial class TourReservationForm : Window
+    public partial class TourReservationForm : Window, INotifyPropertyChanged
     {
-        public User LoggedInUser { get; set; }
+        private TourReservationService _tourReservationService;
+        private TourParticipantService _tourParticipantService;
+        private TourRepository _tourRepository;
 
-        public Tour SelectedTour { get; set; }
+        public Tour SelectedTour {  get; set; }
+        public ObservableCollection<TourParticipants> Participants { get; set; }
 
-        public TourParticipants TourParticipants { get; set; }
-
-        private readonly TourReservationRepository _repository;
-        private readonly TourParticipantService _service;
+        private string _addedParticipant;
+        public string AddedParticipant
+        {
+            get => _addedParticipant;
+            set
+            {
+                if (value != _addedParticipant)
+                {
+                    _addedParticipant = value;
+                    OnPropertyChanged("AddedParticipant");
+                }
+            }
+        }
 
         private string _firstName;
         public string FirstName
@@ -83,71 +85,150 @@ namespace BookingApp.View
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
         }
 
-        public TourReservationForm(User user)
+        public TourReservationForm()
         {
             InitializeComponent();
-            Title = "Create reservation";
             DataContext = this;
-            LoggedInUser = user;
-            _repository = new TourReservationRepository();
+            _tourReservationService = new TourReservationService();
+            _tourParticipantService = new TourParticipantService();
+            Participants = new ObservableCollection<TourParticipants>();
+            _tourRepository = new TourRepository();
         }
 
-        public TourReservationForm(Tour selectedTour)
+        public TourReservationForm(Tour selectedTour) : this()
         {
-            InitializeComponent();
-            DataContext = this;
-            Title = "Reserve tour";
-            /*txtCommentText.IsEnabled = false;
-            btnSave.Visibility = Visibility.Collapsed;*/
             SelectedTour = selectedTour;
-            //Text = selectedComment.Text;
-            _repository = new TourReservationRepository();
         }
-
 
         private void AddParticipant_Button_Click(object sender, RoutedEventArgs e)
         {
-            TourParticipants tourParticipants = new TourParticipants
+            int numberOfParticipants = Convert.ToInt32(ParticipantsNumberTextBox.Text);
+
+            if (Participants.Count >= numberOfParticipants)
             {
-                FirstName = Name,
-                LastName = LastName,
-                Age = Age,
+                MessageBox.Show($"You have already entered {numberOfParticipants} participants.", "Warning", MessageBoxButton.OK, MessageBoxImage.Warning);
+                return;
+            }
+
+            TourParticipants participant = new TourParticipants
+            {
+                FirstName = ParticipantNameTextBox.Text,
+                LastName = ParticipantLastNameTextBox.Text,
+                Age = Convert.ToInt32(ParticipantAgeTextBox.Text)
             };
 
+            // Dodaj učesnika u listu
+            Participants.Add(participant);
+
+            // Ažuriraj prikaz dodatih učesnika
+            UpdateAddedParticipants();
+
+            // Spremi učesnika u CSV datoteku
+            _tourParticipantService.CreateParticipant(participant);
+
+            // Očisti tekstualna polja nakon dodavanja učesnika
+            ParticipantNameTextBox.Text = "";
+            ParticipantLastNameTextBox.Text = "";
+            ParticipantAgeTextBox.Text = "";
         }
 
 
-        /* private void ReserveTour_Click(object sender, RoutedEventArgs e)
-         {
-             if (SelectedTour != null)
-             {
-                 // Kreiranje rezervacije ture na osnovu unesenih podataka
-                 int participantsNumber = int.Parse(ParticipantsNumberTextBox.Text);
 
-                 // Dodatna logika za kreiranje rezervacije ture
-                 TourReservation reservation = new TourReservation()
-                 {
-                     GuestsNumber = participantsNumber,
-                     Tour = SelectedTour,
-                     Tourists = new List<TourParticipants>()
-                 };
-
-                 // Dodavanje rezervacije ture u bazu podataka
-                 _repository.Save(reservation);
-
-                 // Dodatna logika, na primjer, ažuriranje korisničkog interfejsa ili provjera
-             }
-             else
-             {
-                 // Dodatna logika ako tura nije odabrana
-             }
-         }*/
+        private void UpdateAddedParticipants()
+        {
+            StringBuilder sb = new StringBuilder();
+            foreach (var participant in Participants)
+            {
+                sb.Append($"{participant.FirstName} {participant.LastName} ({participant.Age}), ");
+            }
+            // Ukloni poslednji zarez i prazan prostor
+            string addedParticipants = sb.ToString().TrimEnd(' ', ',');
+            AddedParticipant = addedParticipants;
+        }
 
 
-        /*  private void Cancel(object sender, RoutedEventArgs e)
-          {
-              Close();
-          }*/
+
+        private void CheckAvailability_Button_Click(object sender, RoutedEventArgs e)
+        {
+            int participantsNumber = Convert.ToInt32(ParticipantsNumberTextBox.Text);
+
+            if (participantsNumber > SelectedTour.AvailableSeats)
+            {
+                MessageBoxResult result = MessageBox.Show("The number of participants exceeds the available seats. Do you want to check alternative tours?", "Availability Check", MessageBoxButton.YesNo, MessageBoxImage.Question);
+
+                if (result == MessageBoxResult.Yes)
+                {
+                    // Otvaranje AlternativeToursWindow prozora
+                   // AlternativeToursView alternativeToursWindow = new AlternativeToursView(SelectedTour.Location); // Prosleđujemo lokaciju ture
+                   // alternativeToursWindow.Show();
+                }
+                else
+                {
+                    // Korisnik ne želi da proveri alternativne ture
+                }
+            }
+            else
+            {
+                MessageBox.Show("The selected tour has enough available seats. You can proceed with the reservation.", "Availability Check", MessageBoxButton.OK, MessageBoxImage.Information);
+            }
+        }
+
+
+
+
+        private void ShowAlternativeTours()
+        {
+            // Dobijemo lokaciju odabrane ture
+            Location selectedLocation = SelectedTour.Location;
+
+            // Dobijemo alternative sa istom lokacijom kao odabrana tura
+            var alternativeTours = _tourRepository.GetAlternativesByLocation(selectedLocation);
+
+            // Kreiramo prozor za prikaz alternativnih tura i prosleđujemo listu tura
+           // AlternativeToursView alternativeToursWindow = new AlternativeToursView(alternativeTours);
+
+            // Prikažemo prozor
+            //alternativeToursWindow.ShowDialog();
+        }
+
+
+        private void ReserveTour_Click(object sender, RoutedEventArgs e)
+        {
+            int participantsNumber = Participants.Count;
+            TourReservation reservation = new TourReservation()
+            {
+                GuestsNumber = participantsNumber,
+                Tour = SelectedTour,
+                Tourists = Participants.ToList<TourParticipants>()
+            };
+            _tourReservationService.Create(reservation);
+
+            // Ažuriraj broj dostupnih mjesta za turu
+            UpdateAvailableSeats(SelectedTour.Id, participantsNumber);
+
+            MessageBox.Show("Tour reserved with participants: " + Participants.Count);
+            // Clear participants list after reservation
+            Participants.Clear();
+        }
+
+        private void UpdateAvailableSeats(int tourId, int reservedSeats)
+        {
+            // Učitaj sve ture iz CSV datoteke
+            List<Tour> tours = _tourRepository.GetAll();
+
+            // Pronađi odgovarajuću turu koja se ažurira
+            Tour tourToUpdate = tours.Find(t => t.Id == tourId);
+
+            if (tourToUpdate != null)
+            {
+                // Ažuriraj broj dostupnih mjesta
+                tourToUpdate.AvailableSeats -= reservedSeats;
+
+                // Ažuriraj turu u CSV datoteci
+                _tourRepository.Update(tourToUpdate);
+            }
+        }
+
+
     }
 }
-

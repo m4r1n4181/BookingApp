@@ -27,11 +27,11 @@ namespace BookingApp.Repository
             TourReservations.ForEach(tR => { tR.Tour = tourRepository.GetById(tR.Tour.Id); });
         }
 
-        public void BindTourParticipants()
+        /*public void BindTourParticipants()
         {
             TourParticipantRepository tourParticipantsRepository = new TourParticipantRepository();
             TourReservations.ForEach(tR => { tourParticipantsRepository.GetById(tR.Tour.Id); });
-        }
+        }*/
 
         public TourReservation GetById(int id)
         {
@@ -79,7 +79,15 @@ namespace BookingApp.Repository
             _serializer.ToCSV(FilePath, TourReservations);
             return tourReservation;
         }
-     
+
+        public void Delete(TourReservation tourreservation)
+        {
+            TourReservations = _serializer.FromCSV(FilePath);
+            TourReservation founded = TourReservations.Find(c => c.Id == tourreservation.Id);
+            TourReservations.Remove(founded);
+            _serializer.ToCSV(FilePath, TourReservations);
+        }
+
         public List<TourReservation> GetByTour(int tourId)
         {
             TourReservations = _serializer.FromCSV(FilePath);

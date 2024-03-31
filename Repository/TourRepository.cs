@@ -161,8 +161,13 @@ namespace BookingApp.Repository
                 }
 
                 // Vraćanje broja dostupnih mesta
-                return tour.AvaibleSeats;
+                return tour.AvailableSeats;
             }
 
-        }
+            public List<Tour> GetAlternativesByLocation(Location location)
+            {
+                return _tours.Where(t => t.Location.City == location.City && t.Location.Country == location.Country && t.Id != location.Id).ToList();
+            }
+
+    }
 }

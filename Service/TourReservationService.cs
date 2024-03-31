@@ -18,14 +18,14 @@ namespace BookingApp.Service
             _tourReservationRepository = new TourReservationRepository();
             _tourRepository = new TourRepository();
         }
-        public bool DatesIntertwine(DateTime start1, DateTime end1, DateTime start2, DateTime end2)
+        /*public bool DatesIntertwine(DateTime start1, DateTime end1, DateTime start2, DateTime end2)
         {
             if (end1 < start2 || start1 > end2)
             {
                 return false;
             }
             return true;
-        }
+        }*/
 
        /* public List<TourRepository> GetReservationsForTour(int tourId, DateTime start, DateTime end)
         {
@@ -70,11 +70,17 @@ namespace BookingApp.Service
             return availableReservations;
         }
 
-       /* public void AddParticipant(TourParticipants participant, TourReservation reservation)
+        public List<Tour> GetAlternativeTours(Location location)
         {
-            participant.AddParticipant(participant);
-            _tourParticipantRepository.AddParticipant(participant);
-        }*/
+            // Pretpostavljamo da imamo listu tura i da želimo vratiti one koje su na istoj lokaciji
+            return _tourRepository.GetAll().Where(tour => tour.Location == location && tour.AvailableSeats > 0).ToList();
+        }
+
+        /* public void AddParticipant(TourParticipants participant, TourReservation reservation)
+         {
+             participant.AddParticipant(participant);
+             _tourParticipantRepository.AddParticipant(participant);
+         }*/
 
 
     }

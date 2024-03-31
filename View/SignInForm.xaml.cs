@@ -1,5 +1,4 @@
-﻿
-using BookingApp.Model;
+﻿using BookingApp.Model;
 using BookingApp.Model.Enums;
 using BookingApp.Repository;
 using System.ComponentModel;
@@ -32,8 +31,6 @@ namespace BookingApp.View
             }
         }
 
-        private Tour SelectedTour { get; set; }
-
         public event PropertyChangedEventHandler PropertyChanged;
 
         protected virtual void OnPropertyChanged([CallerMemberName] string propertyName = null)
@@ -59,36 +56,35 @@ namespace BookingApp.View
                     LoggedUser = user;
                     if (user.Type == UserType.TourGuide)
                     {
-                        /*
-                        CreateTourForm createTourForm = new CreateTourForm();
-                        createTourForm.Show();
-                        */
+                       /* TourGuideHomePage tourGuideHomePage = new TourGuideHomePage();
+                        tourGuideHomePage.Show();
+                         CreateTourForm createTourForm = new CreateTourForm();
+                         createTourForm.Show();
+                         LiveTourView liveTourView = new LiveTourView();
+                         liveTourView.Show();*/
+
                     }
                     else if (user.Type == UserType.Owner)
                     {
-                       /* RegisterAccommodationForm registerAccommodationForm = new RegisterAccommodationForm();
+                        RegisterAccommodationForm registerAccommodationForm = new RegisterAccommodationForm();
                         registerAccommodationForm.Show();
                         AccommodationReservationToRateForm accommodationReservationToRateForm = new AccommodationReservationToRateForm(user);
                         accommodationReservationToRateForm.Show();
-                       */
                     }
 
                     else if (user.Type == UserType.Tourist)
                     {
                         TourOverviewForm tourOverviewForm = new TourOverviewForm();
                         tourOverviewForm.Show();
-
-                        /*TourReservationForm tourReservationForm = new TourReservationForm(SelectedTour);
-                        tourReservationForm.Show();*/
                     }
                     else
                     {
+                        AccommodationSearch accommodationSearch = new AccommodationSearch();
+                        accommodationSearch.Show();
+                        Close();
+
 
                     }
-                    CommentsOverview commentsOverview = new CommentsOverview(user);
-                    commentsOverview.Show();
-                    Close();
-
                 }
                 else
                 {

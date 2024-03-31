@@ -125,7 +125,7 @@ namespace BookingApp.View
             InitializeComponent();
             this.DataContext = this;
             _tourController = new TourController();
-            Tours = new ObservableCollection<Tour>(_tourController.GetAllWithLocations());
+            Tours = new ObservableCollection<Tour>(_tourController.GetAll());
             City = "";
             Country = "";
             Language = "";
