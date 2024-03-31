@@ -125,5 +125,12 @@ namespace BookingApp.Service
         {
             return _tourRepository.GetAllWithLocations();
         }
+
+        public List<Tour> GetAllWithDateTime()
+        {
+            return _tourRepository.GetAllWithDateTime();
+        }
+
+        
     }
 }

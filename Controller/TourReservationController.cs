@@ -21,6 +21,13 @@ namespace BookingApp.Controller
             _tourReservationService.GetAllTours();
         }
 
+        public void GetAllWithTours()
+        {
+            _tourReservationService.GetAllWithTours();
+        }
+
+
+
         public List<TourReservation> GetAvaibleSeats(int id)
         {
             return _tourReservationService.GetAvailableSeats(id);
@@ -28,6 +35,18 @@ namespace BookingApp.Controller
         public TourReservation Update(TourReservation tourReservation)
         {
             return _tourReservationService.Update(tourReservation);
+        }
+
+
+        public void CancelTourReservation(TourReservation tourReservation)
+        {
+            _tourReservationService.CancelTourReservation(tourReservation);
+        }
+
+
+        public void CancelAllTourReservationsForTour(int tourEventId)
+        {
+            _tourReservationService.CancelAllTourReservationsForTour(tourEventId);
         }
     }
 }

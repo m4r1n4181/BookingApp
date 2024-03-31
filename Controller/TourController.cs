@@ -27,7 +27,11 @@ namespace BookingApp.Controller
         {
             _tourService.CreateTour(tour);
         }
-
+        public List<Tour> GetAllWithDateTime()
+        {
+            return _tourService.GetAllWithDateTime();
+        }
+        
         public List<Tour> GetAllWithLocations()
         {
             return _tourService.GetAllWithLocations();
@@ -47,6 +51,12 @@ namespace BookingApp.Controller
         {
             return _tourService.SearchTours(searchParams);
         }
+
+        public List<Tour> GetAll()
+        {
+            return _tourService.GetAll();
+        }
+
     }
 
 

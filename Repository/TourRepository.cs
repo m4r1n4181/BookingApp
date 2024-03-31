@@ -23,9 +23,27 @@ namespace BookingApp.Repository
             _serializer = new Serializer<Tour>();
             _tours = _serializer.FromCSV(FilePath);
         }
+       /* public void BindDateTime()
+        {
+            foreach (var tour in _tours)
+            {
+                // Postavite svojstva Date i Time na osnovu liste StartDates iz ture
+                if (tour.StartDates != null && tour.StartDates.Any())
+                {
+                    // Pretpostavka: StartDates je lista DateTime objekata
+                    List<DateTime> = tour.StartDates.First().Date;
+                }
+            }
+        }*/
 
+        public List<Tour> GetAllWithDateTime()
+        {
+            _tours = _serializer.FromCSV(FilePath);
+           // BindDateTime();
+            return _tours;
+        }
 
-
+        
         public void BindLocations()
         {
             LocationRepository locationRepository = new LocationRepository();
