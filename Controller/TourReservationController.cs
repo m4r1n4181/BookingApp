@@ -21,17 +21,18 @@ namespace BookingApp.Controller
             _tourReservationService.GetAllTours();
         }
 
-        public void GetAllWithTours()
-        {
-            _tourReservationService.GetAllWithTours();
-        }
+        /* public void GetAllWithTours()
+         {
+             _tourReservationService.GetAllWithTours();
+         }*/
 
 
 
-        public List<TourReservation> GetAvaibleSeats(int id)
+        public List<TourReservation> GetAvailableSeats(int id)
         {
             return _tourReservationService.GetAvailableSeats(id);
         }
+
         public TourReservation Update(TourReservation tourReservation)
         {
             return _tourReservationService.Update(tourReservation);

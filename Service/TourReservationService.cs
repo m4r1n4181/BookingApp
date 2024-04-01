@@ -32,19 +32,20 @@ namespace BookingApp.Service
         }
 
        
-        public List<TourReservation> GetAllTours()
+         public List<TourReservation> GetAllTours()
         {
             List<TourReservation> allTourReservations = _tourReservationRepository.GetAll();
             
             return allTourReservations;
         }
-
-        public List<TourReservation> GetAllWithTours()
+      
+       /* public List<TourReservation> GetAllWithTours()
         {
             List<TourReservation> allTourReservations = _tourReservationRepository.GetAllWithTours();
 
             return allTourReservations;
-        }
+        }*/
+
         public TourReservation Create(TourReservation tourReservation)
         {
             return _tourReservationRepository.Save(tourReservation);

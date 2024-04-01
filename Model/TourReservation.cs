@@ -14,31 +14,51 @@ namespace BookingApp.Model
         public int Id { get; set; } // Id rezervacije
         public int GuestsNumber { get; set; }
 
-        public Tour Tour { get; set; }  
-        public User Tourist { get; set; }
+        public Tour Tour { get; set; }
+
+        //public Tourist Tourist { get; set; }
+        public List<TourParticipants> Tourists { get; set; }
+
         public TourReservation() { }
 
-        public TourReservation(int id, int guestsNumber, Tour tour, User tourist)
+        public TourReservation(int id, int guestsNumber, Tour tour, List<TourParticipants> tourists)
         {
             Id = id;
             GuestsNumber = guestsNumber;
             this.Tour = tour;
-            Tourist = tourist;
+            Tourists = tourists;
+        }
+
+        public TourReservation(int guestsNumber, List<TourParticipants> participants)
+        {
+            GuestsNumber = guestsNumber;
+            Tourists = participants;
         }
 
         public string[] ToCSV()
-        { 
-            string[] csvValues = { Id.ToString(), GuestsNumber.ToString(), Tour.Id.ToString(),Tourist.Id.ToString()};
+        {
+            string touristIds = string.Join(";", Tourists.Select(t => t.Id.ToString()));
+            string[] csvValues = { Id.ToString(), GuestsNumber.ToString(), Tour.Id.ToString(), touristIds };
             return csvValues;
         }
 
-       
         public void FromCSV(string[] values)
-        { 
+        {
             Id = Convert.ToInt32(values[0]);
             GuestsNumber = Convert.ToInt32(values[1]);
             Tour = new Tour() { Id = Convert.ToInt32(values[2]) };
-            Tourist = new User() {  Id = Convert.ToInt32(values[3]) };
+
+            // Kreiramo novu listu za učesnike rezervacije
+            Tourists = new List<TourParticipants>();
+
+            // Dodajemo sve učesnike u listu
+            string[] touristIds = values[3].Split(';');
+            foreach (string touristId in touristIds)
+            {
+                TourParticipants participant = new TourParticipants() { Id = Convert.ToInt32(touristId) };
+                Tourists.Add(participant);
+            }
         }
+
     }
 }
