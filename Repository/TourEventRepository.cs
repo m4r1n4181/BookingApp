@@ -11,7 +11,7 @@ namespace BookingApp.Repository
     public class TourEventRepository
     {
 
-        private const string FilePath = "../../../Resources/Data/tourEvents.csv";
+        private const string FilePath = "../../../Resources/Data/tourEvent.csv";
 
 
 
