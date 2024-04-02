@@ -17,6 +17,8 @@ namespace BookingApp.Controller
             _ownerReviewService = ownerReviewService;
         }
 
+        public OwnerReviewController() { }
+
         public void RateOwner(OwnerReview ownerReview)
         {
             _ownerReviewService.RateOwner(ownerReview);

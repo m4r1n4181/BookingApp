@@ -13,7 +13,7 @@ namespace BookingApp.Model
     {
 
         public int Id { get; set; }
-        public AccommodationReservation AccommodationReservation { get; set; }
+        public AccommodationReservation Reservation { get; set; }
         public int Cleanliness { get; set; }
         public int RuleAdherence { get; set; }
         public string Comment { get; set; }
@@ -26,7 +26,7 @@ namespace BookingApp.Model
         public OwnerReview(AccommodationReservation accommodationReservation, int cleanliness, int ruleAdherence, string comment,List<string> pictures)
         {
 
-            this.AccommodationReservation = accommodationReservation;
+            this.Reservation = accommodationReservation;
             this.Cleanliness = cleanliness;
             this.RuleAdherence = ruleAdherence;
             this.Comment = comment;
@@ -37,7 +37,7 @@ namespace BookingApp.Model
         public void FromCSV(string[] values)
         {
             Id = Convert.ToInt32(values[0]);
-            AccommodationReservation = new AccommodationReservation() { Id = Convert.ToInt32(values[1]) };
+            Reservation = new AccommodationReservation() { Id = Convert.ToInt32(values[1]) };
             Cleanliness = Convert.ToInt32(values[2]);
             RuleAdherence = Convert.ToInt32(values[3]);
             Comment = values[4];
@@ -47,7 +47,7 @@ namespace BookingApp.Model
         public string[] ToCSV()
         {
             string picturesString = string.Join(",", Pictures);
-            string[] csvValues = {Id.ToString(),AccommodationReservation.Id.ToString(),Cleanliness.ToString(),RuleAdherence.ToString(),Comment};
+            string[] csvValues = {Id.ToString(),Reservation.Id.ToString(),Cleanliness.ToString(),RuleAdherence.ToString(),Comment};
             return csvValues;
         }
     }

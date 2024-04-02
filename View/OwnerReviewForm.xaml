@@ -1,0 +1,20 @@
+﻿<Window x:Class="BookingApp.View.OwnerReviewForm"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:BookingApp.View"
+        mc:Ignorable="d"
+        Title="OwnerReviewForm" Height="450" Width="800">
+    <Grid>
+        <Button Content="Save" HorizontalAlignment="Left" Margin="218,358,0,0" VerticalAlignment="Top" Click="Button_Click"/>
+        <Button Content="Cancel" HorizontalAlignment="Left" Margin="580,368,0,0" VerticalAlignment="Top" Click="Button_Click_1"/>
+        <TextBox x:Name="CleanlinessTextBox" HorizontalAlignment="Left" Margin="238,65,0,0" TextWrapping="Wrap" Text="{Binding Path = Clean, UpdateSourceTrigger=PropertyChanged}"  VerticalAlignment="Top" Width="120" />
+        <TextBox x:Name="OwnerTextBox" HorizontalAlignment="Left" Margin="238,146,0,0" TextWrapping="Wrap" Text="{Binding Path = Rule, UpdateSourceTrigger=PropertyChanged}" VerticalAlignment="Top" Width="120"/>
+        <TextBox x:Name="CommentTextBox" HorizontalAlignment="Left" Margin="238,240,0,0" TextWrapping="Wrap" Text="{Binding Path=Comment,UpdateSourceTrigger=PropertyChanged}" VerticalAlignment="Top" Width="120"/>
+        <Label Content="Cleanliness" HorizontalAlignment="Left" Margin="63,65,0,0" VerticalAlignment="Top"/>
+        <Label Content="Owner" HorizontalAlignment="Left" Margin="63,155,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.491,3.334"/>
+        <Label Content="Comment" HorizontalAlignment="Left" Margin="63,249,0,0" VerticalAlignment="Top"/>
+
+    </Grid>
+</Window>
