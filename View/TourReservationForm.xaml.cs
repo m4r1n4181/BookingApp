@@ -10,6 +10,7 @@ using System.Linq;
 using System.Runtime.CompilerServices;
 using System.Text;
 using System.Windows;
+using System.Security.Principal;
 
 namespace BookingApp.View
 {
@@ -18,6 +19,9 @@ namespace BookingApp.View
         private TourReservationService _tourReservationService;
         private TourParticipantService _tourParticipantService;
         private TourRepository _tourRepository;
+        private TouristRepository _touristRepository;
+        private UserRepository _userRepository;
+        private User User { get; set; }
 
         public Tour SelectedTour {  get; set; }
         public ObservableCollection<TourParticipants> Participants { get; set; }
@@ -93,12 +97,37 @@ namespace BookingApp.View
             _tourParticipantService = new TourParticipantService();
             Participants = new ObservableCollection<TourParticipants>();
             _tourRepository = new TourRepository();
+            _touristRepository = new TouristRepository();
+            _userRepository = new UserRepository();
         }
 
-        public TourReservationForm(Tour selectedTour) : this()
+        public TourReservationForm(Tour selectedTour, User user) : this()
         {
             SelectedTour = selectedTour;
+            User = user;
         }
+
+
+        private void UseMyInfo_Button_Click(object sender, RoutedEventArgs e)
+        {
+            Tourist tourist1 = _touristRepository.GetByUserId(User.Id);
+            TourParticipants tourist = new TourParticipants
+            {
+                Id = tourist1.Id,
+                FirstName = tourist1.FirstName,
+                LastName = tourist1.LastName,
+                Age = Convert.ToInt32(tourist1.Age)
+            };
+
+            Participants.Add(tourist);
+
+            // Ažuriraj prikaz dodatih učesnika
+            UpdateAddedParticipants();
+
+            // Spremi učesnika u CSV datoteku
+            _tourParticipantService.CreateParticipant(tourist);
+        }
+
 
         private void AddParticipant_Button_Click(object sender, RoutedEventArgs e)
         {
@@ -158,9 +187,8 @@ namespace BookingApp.View
 
                 if (result == MessageBoxResult.Yes)
                 {
-                    // Otvaranje AlternativeToursWindow prozora
-                   // AlternativeToursView alternativeToursWindow = new AlternativeToursView(SelectedTour.Location); // Prosleđujemo lokaciju ture
-                   // alternativeToursWindow.Show();
+                    // Pozivamo metod za prikaz alternativnih tura
+                    ShowAlternativeTours();
                 }
                 else
                 {
@@ -173,9 +201,6 @@ namespace BookingApp.View
             }
         }
 
-
-
-
         private void ShowAlternativeTours()
         {
             // Dobijemo lokaciju odabrane ture
@@ -185,11 +210,12 @@ namespace BookingApp.View
             var alternativeTours = _tourRepository.GetAlternativesByLocation(selectedLocation);
 
             // Kreiramo prozor za prikaz alternativnih tura i prosleđujemo listu tura
-           // AlternativeToursView alternativeToursWindow = new AlternativeToursView(alternativeTours);
+            //AlternativeToursView alternativeToursView = new AlternativeToursView(alternativeTours);
 
             // Prikažemo prozor
-            //alternativeToursWindow.ShowDialog();
+            //alternativeToursView.ShowDialog();
         }
+
 
 
         private void ReserveTour_Click(object sender, RoutedEventArgs e)

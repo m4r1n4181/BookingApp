@@ -8,7 +8,7 @@ namespace BookingApp.Repository
     public class TouristRepository
     {
 
-        private const string FilePath = "../../../Resources/Data/users.csv";
+        private const string FilePath = "../../../Resources/Data/tourist.csv";
 
         private readonly Serializer<Tourist> _serializer;
 
@@ -16,8 +16,9 @@ namespace BookingApp.Repository
 
         public TouristRepository()
         {
-           
-    }
+            _serializer = new Serializer<Tourist>();
+            _tourist = _serializer.FromCSV(FilePath);
+        }
 
         public Tourist GetById(int id)
         {
@@ -65,6 +66,12 @@ namespace BookingApp.Repository
             _tourist.Insert(index, tourist);
             _serializer.ToCSV(FilePath, _tourist);
             return tourist;
+        }
+
+        public Tourist GetByUserId(int id)
+        {
+            _tourist = _serializer.FromCSV(FilePath);
+            return _tourist.FirstOrDefault(tourist => tourist.UserId == id);
         }
 
 

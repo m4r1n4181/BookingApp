@@ -41,6 +41,7 @@ namespace BookingApp.View
 
          public string MaxTourists { get; set; }*/
         public Tour SelectedTour { get; set; }
+        public User User {  get; set; }
 
         private string _country;
         public string Country
@@ -84,6 +85,8 @@ namespace BookingApp.View
             }
         }
 
+
+
         private string _language;
         public string Language
         {
@@ -112,6 +115,8 @@ namespace BookingApp.View
             }
         }
 
+        
+
         public event PropertyChangedEventHandler PropertyChanged;
 
         protected virtual void OnPropertyChanged([CallerMemberName] string propertyName = null)
@@ -120,12 +125,13 @@ namespace BookingApp.View
         }
 
 
-        public TourOverviewForm()
+        public TourOverviewForm(User user)
         {
             InitializeComponent();
             this.DataContext = this;
             _tourController = new TourController();
             Tours = new ObservableCollection<Tour>(_tourController.GetAll());
+            User = user;
             City = "";
             Country = "";
             Language = "";
@@ -152,7 +158,7 @@ namespace BookingApp.View
         {
             if(SelectedTour != null)
             {
-                TourReservationForm viewReservationForm = new TourReservationForm(SelectedTour);
+                TourReservationForm viewReservationForm = new TourReservationForm(SelectedTour, User);
                 viewReservationForm.Show();
             }
         }

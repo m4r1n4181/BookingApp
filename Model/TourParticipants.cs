@@ -31,7 +31,7 @@ namespace BookingApp.Model
 
         public string[] ToCSV()
         {
-            string[] csvValues = {Id.ToString(),FirstName, LastName, Age.ToString() };
+            string[] csvValues = {Id.ToString(),FirstName, LastName, Age.ToString()};
             return csvValues;
         }
 

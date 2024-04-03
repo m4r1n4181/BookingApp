@@ -34,6 +34,7 @@
                     </StackPanel>
                 </StackPanel>
                 <Button Content="Add Participant" Click="AddParticipant_Button_Click" Height="25" Width="140" HorizontalAlignment="Center" Margin="5"/>
+                <Button Content="Use My Info" Click="UseMyInfo_Button_Click" Height="25" Width="140" HorizontalAlignment="Center" Margin="5"/>
                 <Button Content="Check Availability" Click="CheckAvailability_Button_Click" Height="25" Width="140" HorizontalAlignment="Center" Margin="5"/>
             </StackPanel>
         </Border>

@@ -14,9 +14,9 @@ namespace BookingApp.Model
         public int Id { get; set; } // Id rezervacije
         public int GuestsNumber { get; set; }
 
-        public Tour Tour { get; set; }  
+        public Tour Tour { get; set; }
         public List<TourParticipants> Tourists { get; set; }
-
+   
         public TourReservation() { }
 
         public TourReservation(int id, int guestsNumber, Tour tour, List<TourParticipants> tourists)
