@@ -131,6 +131,36 @@ namespace BookingApp.Service
             return _tourRepository.GetAllWithDateTime();
         }
 
-        
+
+        public List<Tour> GetTourForNow()
+        {
+            List<Tour> _tourForNow = new List<Tour>();
+
+            foreach (Tour tour in _tourRepository.GetAll())
+            {
+                if (tour.StartDates.Any(startDate => startDate.Date == DateTime.Today))
+                {
+                    _tourForNow.Add(tour);
+                }
+            }
+            return _tourForNow;
+        }
+
+        public List<Tour> GetTourInFuture()
+        {
+            List<Tour> _tourInFuture = new List<Tour>();
+
+            foreach (Tour tour in _tourRepository.GetAll())
+            {
+                if (tour.StartDates.Any(startDate => startDate.Date > DateTime.Today.AddDays(2))) // 48 hours before the tour starts
+                {
+                    _tourInFuture.Add(tour);
+                }
+            }
+            return _tourInFuture;
+        }
+
+
+
     }
 }

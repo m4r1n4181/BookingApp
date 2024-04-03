@@ -45,9 +45,10 @@ namespace BookingApp.Controller
         }
 
 
-        public void CancelAllTourReservationsForTour(int tourEventId)
+        public void CancelAllTourReservationsForTourEvent(int tourEventId)
         {
-            _tourReservationService.CancelAllTourReservationsForTour(tourEventId);
+            _tourReservationService.CancelAllTourReservationsForTourEvent(tourEventId);
         }
+
     }
 }

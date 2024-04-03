@@ -37,7 +37,7 @@ namespace BookingApp.View
             liveTourView.Show();
         }
 
-        private void AllTours_Click(object sender, RoutedEventArgs e)
+        private void AllFutureTours_Click(object sender, RoutedEventArgs e)
         {
             TourReservation tourReservation = new TourReservation();
 

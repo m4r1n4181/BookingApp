@@ -159,13 +159,13 @@ namespace BookingApp.View
 
      
 
-        public CancelTourView(TourReservation tourReservation)
+        public CancelTourView()
         {
             InitializeComponent();
             this.DataContext = this;
-            SelectedTourReservation = tourReservation;
+           // SelectedTourReservation = tourReservation;
 
-            TourName = tourReservation.Tour.Name;
+           // TourName = tourReservation.Tour.Name;
 
             _tourReservationController = new TourReservationController();
 

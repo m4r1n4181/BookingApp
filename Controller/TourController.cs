@@ -57,6 +57,17 @@ namespace BookingApp.Controller
             return _tourService.GetAll();
         }
 
+        public List<Tour> GetTourInFuture()
+        {
+            return _tourService.GetTourInFuture();
+        }
+
+        public List<Tour> GetTourForNow()
+        {
+            return _tourService.GetTourForNow();
+        }
+
+
     }
 
 

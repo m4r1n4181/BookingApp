@@ -31,20 +31,26 @@ namespace BookingApp.Service
             return true;
         }
 
-       
-         public List<TourReservation> GetAllTours()
+       /* public IEnumerable<TourReservation> GetAllTours()
+        {
+            List<TourReservation> allTourReservations = _tourReservationRepository.GetAll();
+            return allTourReservations;
+        }
+       */
+
+        public List<TourReservation> GetAllTours()
         {
             List<TourReservation> allTourReservations = _tourReservationRepository.GetAll();
             
             return allTourReservations;
         }
       
-       /* public List<TourReservation> GetAllWithTours()
-        {
-            List<TourReservation> allTourReservations = _tourReservationRepository.GetAllWithTours();
+        /* public List<TourReservation> GetAllWithTours()
+         {
+             List<TourReservation> allTourReservations = _tourReservationRepository.GetAllWithTours();
 
-            return allTourReservations;
-        }*/
+             return allTourReservations;
+         }*/
 
         public TourReservation Create(TourReservation tourReservation)
         {
@@ -88,7 +94,7 @@ namespace BookingApp.Service
             _tourReservationRepository.Delete(tourReservation);
         }
 
-        public void CancelAllTourReservationsForTour(int tourEventId)
+        public void CancelAllTourReservationsForTourEvent(int tourEventId)
         {
             foreach (TourReservation tourReservation in _tourReservationRepository.GetAll())
             {
@@ -99,8 +105,6 @@ namespace BookingApp.Service
                 }
             }
         }
-
-
 
     }
 }

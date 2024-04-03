@@ -24,47 +24,68 @@ namespace BookingApp.View
     /// </summary>
     public partial class AllTourGuideReservations : Window,INotifyPropertyChanged
     {
-        public event PropertyChangedEventHandler PropertyChanged;
+        public event PropertyChangedEventHandler  PropertyChanged;
 
         protected virtual void OnPropertyChanged([CallerMemberName] string propertyName = null)
         {
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
         }
 
-        private ObservableCollection<TourReservation> _tourReservations;
-        public ObservableCollection<TourReservation> TourReservations
+
+        private TourController _tourController;
+
+        private ObservableCollection<Tour> _tours;
+        public ObservableCollection<Tour> Tours
         {
-            get { return _tourReservations; }
+            get { return _tours; }
             set
             {
-                if (_tourReservations != value)
+                if (_tours != value)
                 {
-                    _tourReservations = value;
+                    _tours = value;
                     OnPropertyChanged();
                 }
             }
         }
 
-        private TourReservationController _tourReservationController;
-        public TourReservation SelectedTourReservation { get; set; }
+        private Tour _selectedTour;
+        public Tour SelectedTour
+        {
+            get { return _selectedTour; }
+            set
+            {
+                if (_selectedTour != value)
+                {
+                    _selectedTour = value;
+                    OnPropertyChanged();
+                }
+            }
+        }
+
+
 
         public AllTourGuideReservations()
         {
             InitializeComponent();
             this.DataContext = this;
 
-            _tourReservationController = new TourReservationController();
-           // TourReservations = new ObservableCollection<TourReservation>(_tourReservationController.GetByTour(tourId));
+            _tourController = new TourController();
+
+            Tours = new ObservableCollection<Tour>(_tourController.GetTourInFuture());
         }
 
-        private void View_Click(object sender, RoutedEventArgs e)
+
+        private void ViewButton_Click(object sender, RoutedEventArgs e)
         {
-            if (SelectedTourReservation == null)
+            if (SelectedTour == null)
             {
-                MessageBox.Show("Please select a tour reservation.", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                MessageBox.Show("Please select a tour.", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
                 return;
             }
-            //cancelTour
+            
+            CancelTourView cancelTourView = new CancelTourView(); //SelectedTour mozda 
+            cancelTourView.ShowDialog();
+
         }
     }
 }
