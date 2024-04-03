@@ -6,13 +6,21 @@
         xmlns:local="clr-namespace:BookingApp.View"
         mc:Ignorable="d"
         Title="AllTourGuideReservations" Height="450" Width="800">
+
     <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*"/>
+
+            <ColumnDefinition Width="760"/>
+            <ColumnDefinition Width="*"/>
+        </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
-            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="40"/>
+            <RowDefinition Height="15"/>
             <RowDefinition Height="*"/>
+            <RowDefinition Height="15"/>
         </Grid.RowDefinitions>
 
-        <!-- DataGrid for displaying tours -->
         <StackPanel Grid.Row="2" Grid.Column="1">
             <DataGrid ItemsSource="{Binding Tours}" SelectedItem="{Binding Path=SelectedTour}" IsReadOnly="True" SelectionMode="Single" 
 AutoGenerateColumns="False" Height="325" HeadersVisibility="Column" FontSize="13">
@@ -20,14 +28,6 @@ AutoGenerateColumns="False" Height="325" HeadersVisibility="Column" FontSize="13
                     <DataGridTextColumn Header="Name" Binding="{Binding Name}" Width="200"/>
                     <DataGridTextColumn Header="City" Width="*" Binding="{Binding Location.City}" />
                     <DataGridTextColumn Header="Country" Width="*" Binding="{Binding Location.Country}" />
-
-                    <DataGridTemplateColumn Header="Start" Width="200">
-                        <DataGridTemplateColumn.CellTemplate>
-                            <DataTemplate>
-                                <TextBlock Text="{Binding StartDates}" TextWrapping="Wrap"/>
-                            </DataTemplate>
-                        </DataGridTemplateColumn.CellTemplate>
-                    </DataGridTemplateColumn>
                 </DataGrid.Columns>
             </DataGrid>
         </StackPanel>

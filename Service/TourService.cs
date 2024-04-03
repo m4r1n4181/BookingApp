@@ -18,7 +18,7 @@ namespace BookingApp.Service
         private KeyPointRepository _keyPointRepository;
         private TouristRepository _touristRepository;
         private TouristEntryRepository _entryRepository;
-
+       
         public TourService()
         {
             _tourRepository = new TourRepository();
@@ -130,13 +130,13 @@ namespace BookingApp.Service
         {
             return _tourRepository.GetAllWithDateTime();
         }
-
-
         public List<Tour> GetTourForNow()
         {
             List<Tour> _tourForNow = new List<Tour>();
+            List<Tour> allTours = _tourRepository.GetAllWithLocations();
+            _tourRepository.BindLocations();
 
-            foreach (Tour tour in _tourRepository.GetAll())
+            foreach (Tour tour in allTours)
             {
                 if (tour.StartDates.Any(startDate => startDate.Date == DateTime.Today))
                 {
@@ -149,8 +149,10 @@ namespace BookingApp.Service
         public List<Tour> GetTourInFuture()
         {
             List<Tour> _tourInFuture = new List<Tour>();
+            List<Tour> allTours = _tourRepository.GetAllWithLocations();
+            _tourRepository.BindLocations();
 
-            foreach (Tour tour in _tourRepository.GetAll())
+            foreach (Tour tour in allTours)
             {
                 if (tour.StartDates.Any(startDate => startDate.Date > DateTime.Today.AddDays(2))) // 48 hours before the tour starts
                 {
@@ -159,6 +161,7 @@ namespace BookingApp.Service
             }
             return _tourInFuture;
         }
+
 
 
 
