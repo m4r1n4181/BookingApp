@@ -91,6 +91,11 @@ namespace BookingApp.Repository
             AccommodationReservations = _serializer.FromCSV(FilePath);
             return AccommodationReservations.FindAll(c => c.Accommodation.Id == accommodationId);
         }
+        public List<AccommodationReservation> GetByAccommodationId(int id)
+        {
+            List<AccommodationReservation> reservations = GetAll();
+            return reservations.Where(reservation => reservation.Accommodation.Id == id).ToList();
+        }
 
     }
 }

@@ -1,3 +1,4 @@
+using BookingApp.Domain.Models;
 using BookingApp.Model;
 using BookingApp.Model.Enums;
 using BookingApp.Serializer;
@@ -16,6 +17,8 @@ namespace BookingApp.Model
         public User Guest { get; set; }
         public DateTime Arrival { get; set; }
         public DateTime Departure { get; set; }
+        public AccommodationOwnerReview AccommodationReview { get; set; }
+        public GuestReview GuestReview { get; set; }
 
         public AccommodationReservation() { }
         public AccommodationReservation(Accommodation accommodation, User guest, DateTime arrival, DateTime departure)
