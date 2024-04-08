@@ -12,6 +12,7 @@ namespace BookingApp.Repository
         private readonly Serializer<User> _serializer;
 
         private List<User> _users;
+        private static UserRepository instance = null;
 
         public UserRepository()
         {
@@ -23,6 +24,19 @@ namespace BookingApp.Repository
         {
             _users = _serializer.FromCSV(FilePath);
             return _users.FirstOrDefault(u => u.Username == username);
+        }
+
+        public static UserRepository GetInstance()
+        {
+            if (instance == null)
+            {
+                instance = new UserRepository();
+            }
+            return instance;
+        }
+        public User Get(int id)
+        {
+            return _users.Find(u => u.Id == id);
         }
     }
 }

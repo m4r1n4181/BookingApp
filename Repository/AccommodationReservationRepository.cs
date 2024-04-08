@@ -13,11 +13,24 @@ namespace BookingApp.Repository
         private const string FilePath = "../../../Resources/Data/accommodation-reservation.csv";
         private readonly Serializer<AccommodationReservation> _serializer;
         public List<AccommodationReservation> AccommodationReservations;
+        private static AccommodationReservationRepository instance = null;
 
         public AccommodationReservationRepository()
         {
             _serializer = new Serializer<AccommodationReservation>();
             AccommodationReservations = _serializer.FromCSV(FilePath);
+        }
+        public static AccommodationReservationRepository GetInstance()
+        {
+            if (instance == null)
+            {
+                instance = new AccommodationReservationRepository();
+            }
+            return instance;
+        }
+        public AccommodationReservation Get(int id)
+        {
+            return AccommodationReservations.Find(ar => ar.Id == id);
         }
 
         public void BindAccommodations()

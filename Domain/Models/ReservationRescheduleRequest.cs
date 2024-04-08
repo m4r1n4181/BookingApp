@@ -1,15 +1,18 @@
-﻿using BookingApp.Model.Enums;
-using BookingApp.Serializer;
-using System;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
-using System.Windows;
-using static System.Net.Mime.MediaTypeNames;
+using System.Security.Policy;
+using System.Text;
+using System.Threading.Tasks;
+using System.Xml.Linq;
+using BookingApp.Model;
+using BookingApp.Model.Enums;
+using BookingApp.Serializer;
 
-
-namespace BookingApp.Model
+namespace BookingApp.Domain.Models
 {
-    public class ReservationMoveRequest : ISerializable
+    public class ReservationRescheduleRequest : ISerializable
     {
         public int Id { get; set; }
         public AccommodationReservation Reservation { get; set; }
@@ -18,12 +21,13 @@ namespace BookingApp.Model
         public DateTime NewEnd { get; set; }
         public string Comment { get; set; }
         public RequestStatusType Status { get; set; }
-        public ReservationMoveRequest()
+
+        public ReservationRescheduleRequest()
         {
 
         }
 
-        public ReservationMoveRequest(int id, AccommodationReservation reservation, User guest, DateTime newStart, DateTime newEnd, string comment, RequestStatusType status)
+        public ReservationRescheduleRequest(int id, AccommodationReservation reservation, User guest, DateTime newStart, DateTime newEnd, string comment, RequestStatusType status)
         {
             Id = id;
             Reservation = reservation;
@@ -60,6 +64,5 @@ namespace BookingApp.Model
             Status = (RequestStatusType)Enum.Parse(typeof(RequestStatusType), values[6]);
         }
     }
-
 }
 
