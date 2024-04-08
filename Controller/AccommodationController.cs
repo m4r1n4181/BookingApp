@@ -41,8 +41,13 @@ namespace BookingApp.Controller
         {
             return _accommodationService.SearchAccommodations(searchParams);
         }
+        public List<Accommodation> GetByOwner(int id)
+        {
 
-        
+            return _accommodationService.GetByOwner(id);
+        }
+
+
 
     }
 

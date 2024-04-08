@@ -1,6 +1,7 @@
 ﻿using BookingApp.Model;
 using BookingApp.Model.Enums;
 using BookingApp.Repository;
+using BookingApp.View.Owner;
 using System.ComponentModel;
 using System.Runtime.CompilerServices;
 using System.Windows;
@@ -70,6 +71,7 @@ namespace BookingApp.View
                         registerAccommodationForm.Show();
                         AccommodationReservationToRateForm accommodationReservationToRateForm = new AccommodationReservationToRateForm(user);
                         accommodationReservationToRateForm.Show();
+                       
                     }
 
                     else if (user.Type == UserType.Tourist)
