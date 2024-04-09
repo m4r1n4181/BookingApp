@@ -13,14 +13,14 @@ namespace BookingApp.Service
 {
     public class AccommodationOwnerReviewService
     {
-        private IAccommodationOwnerReviewRepository _accommodationOwnerReviewRepository;
+        private AccommodationOwnerReviewRepository _accommodationOwnerReviewRepository;
 
         private AccommodationReservationRepository _accommodationReservationRepository;
 
         public AccommodationOwnerReviewService()
         {
-            //_accommodationOwnerReviewRepository = AccommodationOwnerReviewRepository.GetInstance();
-            _accommodationOwnerReviewRepository = Injector.Injector.CreateInstance<IAccommodationOwnerReviewRepository>();
+            _accommodationOwnerReviewRepository = AccommodationOwnerReviewRepository.GetInstance();
+           // _accommodationOwnerReviewRepository = Injector.Injector.CreateInstance<IAccommodationOwnerReviewRepository>();
 
             _accommodationReservationRepository = AccommodationReservationRepository.GetInstance();
         }
@@ -51,10 +51,11 @@ namespace BookingApp.Service
             return _accommodationOwnerReviewRepository.GetByReservation(accommodationOwnerReview.Reservation.Id);
         }
 
-        public AccommodationOwnerReview SaveImages(AccommodationOwnerReview accommodationOwnerReview)
+        /*public AccommodationOwnerReview SaveImages(AccommodationOwnerReview accommodationOwnerReview)
         {
             return _accommodationOwnerReviewRepository.SaveImages(accommodationOwnerReview);
         }
+        */
         private bool isValidReview(AccommodationReservation reservation)
         {
             return reservation.GuestReview.Id != -1 && reservation.AccommodationReview.Id != -1 && reservation.Accommodation.Owner.Id == SignInForm.LoggedUser.Id;

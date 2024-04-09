@@ -15,14 +15,22 @@ namespace BookingApp.Repository
         private const string FilePath = "../../../Resources/Data/accommodationOwnerReviews.csv";
         private readonly Serializer<AccommodationOwnerReview> _serializer;
 
-        private ImageRepository _imageRepository;
+        // private ImageRepository _imageRepository;
+       private static AccommodationOwnerReviewRepository instance = null;
 
         private List<AccommodationOwnerReview> _accommodationOwnerReviews;
-
+        public static AccommodationOwnerReviewRepository GetInstance()
+        {
+            if (instance == null)
+            {
+                instance = new AccommodationOwnerReviewRepository();
+            }
+            return instance;
+        }
         public AccommodationOwnerReviewRepository()
         {
             _serializer = new Serializer<AccommodationOwnerReview>();
-            _imageRepository = ImageRepository.GetInstance();
+          //  _imageRepository = ImageRepository.GetInstance();
             _accommodationOwnerReviews = _serializer.FromCSV(FilePath);
         }
         public void BindAccommodationOwnerReviewWithAccommodationReservation()
@@ -77,17 +85,18 @@ namespace BookingApp.Repository
             AccommodationOwnerReview current = _accommodationOwnerReviews.Find(aor => aor.Id == accommodationOwnerReview.Id);
             int index = _accommodationOwnerReviews.IndexOf(current);
             _accommodationOwnerReviews.Remove(current);
-            _accommodationOwnerReviews.Insert(index, accommodationOwnerReview);       // keep ascending order of ids in file 
+            _accommodationOwnerReviews.Insert(index, accommodationOwnerReview);
             _serializer.ToCSV(FilePath, _accommodationOwnerReviews);
             return accommodationOwnerReview;
         }
 
-        public List<AccommodationOwnerReview> GetByReservation(int reservationId) //nema bas nekog smisla
+        public List<AccommodationOwnerReview> GetByReservation(int reservationId)
         {
             return _accommodationOwnerReviews.FindAll(aor => aor.Reservation.Id == reservationId);
         }
+    }
 
-        public AccommodationOwnerReview SaveImages(AccommodationOwnerReview accommodationOwnerReview)
+      /*  public AccommodationOwnerReview SaveImages(AccommodationOwnerReview accommodationOwnerReview)
         {
             accommodationOwnerReview.Id = NextId();
 
@@ -96,10 +105,10 @@ namespace BookingApp.Repository
                 image.ResourceId = accommodationOwnerReview.Id;
                 _imageRepository.Save(image);
             }
-
+      
             _accommodationOwnerReviews.Add(accommodationOwnerReview);
             _serializer.ToCSV(FilePath, _accommodationOwnerReviews);
             return accommodationOwnerReview;
         }
-    }
+    }*/
 }

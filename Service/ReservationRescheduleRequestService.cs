@@ -14,11 +14,11 @@ namespace BookingApp.Service
 {
    public class ReservationRescheduleRequestService
     {
-        private IReservationRescheduleRequestRepository _reservationRescheduleRequestRepository;
+        private ReservationRescheduleRequestRepository _reservationRescheduleRequestRepository;
         public ReservationRescheduleRequestService()
         {
-            _reservationRescheduleRequestRepository = Injector.Injector.CreateInstance<IReservationRescheduleRequestRepository>();
-
+            //_reservationRescheduleRequestRepository = Injector.Injector.CreateInstance<IReservationRescheduleRequestRepository>();
+            _reservationRescheduleRequestRepository = ReservationRescheduleRequestRepository.GetInstance();
         }
         public List<ReservationRescheduleRequest> GetAll()
         {

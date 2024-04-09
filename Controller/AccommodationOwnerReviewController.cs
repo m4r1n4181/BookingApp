@@ -39,11 +39,12 @@ namespace BookingApp.Controller
         {
             _accommodationOwnerReviewService.Update(accommodationOwnerReview);
         }
-
+        /*
         public AccommodationOwnerReview SaveImages(AccommodationOwnerReview accommodationOwnerReview)
         {
             return _accommodationOwnerReviewService.SaveImages(accommodationOwnerReview);
         }
+        */
         public List<AccommodationOwnerReview> GetAllValidReviews(Accommodation accommodation)
         {
             return _accommodationOwnerReviewService.GetAllValidReviews(accommodation);

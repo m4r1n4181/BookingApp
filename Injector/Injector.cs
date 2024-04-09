@@ -17,24 +17,18 @@ namespace BookingApp.Injector
         public static void BindComponents()
         {
 
-           /* VoucherRepository voucherRepository = new VoucherRepository();
-            voucherRepository.BindVoucherUser();
-
             AccommodationOwnerReviewRepository accommodationOwnerReviewRepository = new AccommodationOwnerReviewRepository();
-            accommodationOwnerReviewRepository.BindAccommodationOwnerReviewWithAccommodationReservation();
-           */
             ReservationRescheduleRequestRepository reservationRescheduleRequestRepository = new ReservationRescheduleRequestRepository();
+           
+      
+            _implementations.Add(typeof(IAccommodationOwnerReviewRepository), accommodationOwnerReviewRepository);
+            _implementations.Add(typeof(IReservationRescheduleRequestRepository), reservationRescheduleRequestRepository);
+           
             reservationRescheduleRequestRepository.BindReservationRescheduleRequestWithAccommodationReservation();
             reservationRescheduleRequestRepository.BindReservationRescheduleRequestWithUser();
+            accommodationOwnerReviewRepository.BindAccommodationOwnerReviewWithAccommodationReservation();
+          
 
-            /*
-            NotificationRepository notificationRepository = new NotificationRepository();
-            notificationRepository.BindNotificationTourReservation();
-            */
-           // _implementations.Add(typeof(IVoucherRepository), voucherRepository);
-            //_implementations.Add(typeof(IAccommodationOwnerReviewRepository), accommodationOwnerReviewRepository);
-            _implementations.Add(typeof(IReservationRescheduleRequestRepository), reservationRescheduleRequestRepository);
-            //_implementations.Add(typeof(INotificationRepository), notificationRepository);
         }
         public static T CreateInstance<T>()
         {

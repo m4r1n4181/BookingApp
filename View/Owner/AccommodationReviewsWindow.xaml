@@ -18,9 +18,9 @@
             <ColumnDefinition Width="140"/>
         </Grid.ColumnDefinitions>
         <Label Grid.Row="0" Grid.Column="1" Height="50" FontSize="24" Margin="0,90,0,0" Content="Recenzije"/>
-        <DataGrid Grid.Row="1" Grid.Column="1" AutoGenerateColumns="False" x:Name="AccommodationReviewsDataGrid" 
+        <DataGrid Grid.Row="1" AutoGenerateColumns="False" x:Name="AccommodationReviewsDataGrid" 
                   IsReadOnly="True" SelectionMode="Single"
-                  ItemsSource="{Binding Path=AccommodationReviews, UpdateSourceTrigger=PropertyChanged}" Grid.ColumnSpan="2" Margin="0,0,92,29" Grid.RowSpan="2">
+                  ItemsSource="{Binding Path=AccommodationReviews, UpdateSourceTrigger=PropertyChanged}" Grid.ColumnSpan="3" Margin="27,0,43,29" Grid.RowSpan="2">
             <DataGrid.Columns>
                 <DataGridTextColumn Header="Gost" Binding="{Binding Reservation.Guest.FirstName}" Width="120"></DataGridTextColumn>
                 <DataGridTextColumn Header="Prezime" Binding="{Binding Reservation.Guest.LastName}" Width="120" ></DataGridTextColumn>
