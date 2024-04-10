@@ -18,6 +18,7 @@ namespace BookingApp.Service
         private KeyPointRepository _keyPointRepository;
         private TouristRepository _touristRepository;
         private TouristEntryRepository _entryRepository;
+        private TourReservationService _tourReservationService;
        
         public TourService()
         {
@@ -25,6 +26,7 @@ namespace BookingApp.Service
             _keyPointRepository = new KeyPointRepository();
             _touristRepository = new TouristRepository(); // Initialize tourist repository
             _entryRepository = new TouristEntryRepository(); // Initialize tourist entry repository
+            _tourReservationService = new TourReservationService();
         }
 
 
@@ -162,6 +164,76 @@ namespace BookingApp.Service
             return _tourInFuture;
         }
 
+        public List<Tour> GetAllToursForTourGuide(int tourId)
+        {
+
+            List<Tour> tours = new List<Tour>();
+
+            foreach (Tour tour in _tourRepository.GetAll())
+            {
+                if (tour.TourGuide.Id == tourId)
+                {
+                    tours.Add(tour);
+                }
+            }
+            return tours;
+
+        }
+
+        public Tour MostVisitedTour(int year = -1)
+        {
+            Tour mostVisitedTour = null;
+            int maxPeopleCame = -1;
+
+            foreach (Tour tour in _tourRepository.GetAll())
+            {
+                if (!tour.IsStarted) 
+                {
+                    continue;
+                }
+                if (year == -1 || tour.StartDates.Any(date => date.Year == year)) // Provera da li je godina postavljena i da li datum odgovara godini
+                {
+                    int peopleCame = _tourReservationService.GetAllTourReservationsForTourWherePeopleShowed(tour.Id).Count();
+                    if (peopleCame > maxPeopleCame)
+                    {
+                        mostVisitedTour = tour;
+                        maxPeopleCame = peopleCame;
+                    }
+                }
+            }
+            return mostVisitedTour;
+        }
+
+
+
+        public List<int> YearForTour(int tourGuideId)
+        {
+            List<int> years = new List<int>();
+            foreach (Tour tour in _tourRepository.GetAll())
+            {
+                if (tour.TourGuide.Id == tourGuideId)
+                {
+                    years.Add(tour.StartDates.FirstOrDefault().Year);
+                }
+            }
+            return years.Distinct().ToList();
+        }
+
+
+
+        public List<Tour> GetAllTour(int tourGuideId)
+        {
+            List<Tour> _allTour = new List<Tour>();
+
+            foreach (Tour tour in _tourRepository.GetAll())
+            {
+                if (tour.TourGuide.Id == tourGuideId)
+                {
+                    _allTour.Add(tour);
+                }
+            }
+            return _allTour;
+        }
 
 
 

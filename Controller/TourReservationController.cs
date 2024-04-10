@@ -1,4 +1,6 @@
-﻿using BookingApp.Model;
+﻿using BookingApp.DTO;
+using BookingApp.Model;
+using BookingApp.Repository;
 using BookingApp.Service;
 using System;
 using System.Collections.Generic;
@@ -15,17 +17,14 @@ namespace BookingApp.Controller
         {
             _tourReservationService = new TourReservationService();
         }
-
+        public List<TourReservation> GetAllParticipants(int reservationId)
+        {
+            return _tourReservationService.GetAllParticipants(reservationId);
+        }
         public void GetAllTours()
         {
             _tourReservationService.GetAllTours();
         }
-
-        /* public void GetAllWithTours()
-         {
-             _tourReservationService.GetAllWithTours();
-         }*/
-
 
 
         public List<TourReservation> GetAvailableSeats(int id)
@@ -45,10 +44,16 @@ namespace BookingApp.Controller
         }
 
 
-        public void CancelAllTourReservationsForTourEvent(int tourEventId)
+        public void CancelAllTourReservationsForTour(int tourId)
         {
-            _tourReservationService.CancelAllTourReservationsForTourEvent(tourEventId);
+            _tourReservationService.CancelAllTourReservationsForTour(tourId); //brisem zapravo sve rezervacije tj participants
         }
+
+        public TourAgeGroupStatistic GetAgeStatisticsForTour(int tourId)
+        {
+            return _tourReservationService.GetAgeStatisticsForTour(tourId);
+        }
+
 
     }
 }

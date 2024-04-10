@@ -16,10 +16,11 @@ namespace BookingApp.Controller
         {
             _tourParticipantService = new TourParticipantService();
         }
+
         /* public void AddParticipant(TourReservation reservation, TourParticipants participant)
-         {
-             _tourParticipantService.AddParticipant(reservation, participant);
-         }*/
+{
+    _tourParticipantService.AddParticipant(reservation, participant);
+}*/
     }
 }
 

@@ -6,6 +6,7 @@ using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Linq;
 using System.Runtime.CompilerServices;
+using System.Security.Cryptography.Xml;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
@@ -22,6 +23,7 @@ namespace BookingApp.View
     /// <summary>
     /// Interaction logic for AllTourGuideReservations.xaml
     /// </summary>
+    /// mozda dodati polje za datetime cisto da imam uvid u to kad treba tura da se desi al svakako radi 48sati pre...
     public partial class AllTourGuideReservations : Window,INotifyPropertyChanged
     {
         public event PropertyChangedEventHandler  PropertyChanged;
@@ -31,6 +33,11 @@ namespace BookingApp.View
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
         }
 
+
+        private TourReservationController _tourReservationController;
+
+        private ObservableCollection<TourReservation> TourReservation;
+   
 
         private TourController _tourController;
 
@@ -75,17 +82,26 @@ namespace BookingApp.View
         }
 
 
-        private void ViewButton_Click(object sender, RoutedEventArgs e)
+        private void CancelButton_Click(object sender, RoutedEventArgs e)
         {
             if (SelectedTour == null)
             {
                 MessageBox.Show("Please select a tour.", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
                 return;
             }
-            
-            CancelTourView cancelTourView = new CancelTourView(); //SelectedTour mozda 
-            cancelTourView.ShowDialog();
+            else
+            {
+                /*if (_tourReservationController == null)
+                {
+                    _tourReservationController = new TourReservationController(); // Inicijalizacija ako nije već inicijalizovan
+                }
 
+                _tourReservationController.CancelAllTourReservationsForTour(SelectedTour.Id);*/
+               // CancelTourView cancelTourView = new CancelTourView();
+                //cancelTourView.Show();
+            }
         }
+
+
     }
 }

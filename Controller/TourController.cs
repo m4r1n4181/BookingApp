@@ -67,6 +67,26 @@ namespace BookingApp.Controller
             return _tourService.GetTourForNow();
         }
 
+        public List<Tour> GetAllToursForTourGuide(int tourId)
+        {
+            return _tourService.GetAllToursForTourGuide(tourId);
+        }
+
+        public List<int> YearForTour(int tourGuideId)
+        {
+            return _tourService.YearForTour(tourGuideId);
+        }
+
+        public Tour MostVisitedTour(int year = -1)
+        {
+            return _tourService.MostVisitedTour(year);
+        }
+
+        public List<Tour> GetAllTour(int tourGuideId)
+        {
+            return _tourService.GetAllTour(tourGuideId);
+        }
+      
 
     }
 

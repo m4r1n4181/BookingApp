@@ -45,5 +45,12 @@ namespace BookingApp.View
             allTourGuideReservations.Show();
         }
 
+        private void TourStatistics_Click(object sender, RoutedEventArgs e)
+        { 
+
+            TourStatisticsOverview tourStatisticsOverview = new TourStatisticsOverview();
+            tourStatisticsOverview.Show();
+        }
+
     }
 }

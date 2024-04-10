@@ -13,6 +13,7 @@ namespace BookingApp.Repository
         private const string FilePath = "../../../Resources/Data/tour-reservation.csv";
         private readonly Serializer<TourReservation> _serializer;
         public List<TourReservation> _tourReservations;
+        public List<TourParticipants> _tourParticipants;
         
 
         public TourReservationRepository()
@@ -40,7 +41,7 @@ namespace BookingApp.Repository
             return _tourReservations;
         }
 
-        private void BindTours()
+        private void BindTours() //bind touru sa njegovim rezervacijama 
         {
             TourRepository tourRepository = new TourRepository();
             foreach (var tourReservation in _tourReservations)
@@ -89,11 +90,18 @@ namespace BookingApp.Repository
             _serializer.ToCSV(FilePath, _tourReservations);
         }
 
-        public List<TourReservation> GetByTour(int tourId)
+        public List<TourReservation> GetByTour(int tourId) // sve rezervacije za tu turu 
         {
             _tourReservations = _serializer.FromCSV(FilePath);
             return _tourReservations.FindAll(c => c.Tour.Id == tourId);
         }
+        public List<TourReservation> GetAllParticipants(int reservationId) //uzela sve participants za jednu tu rez
+        {
+            _tourReservations = _serializer.FromCSV(FilePath);
+            return _tourReservations.Where(t => t.Tourists.Any(p => p.Id == reservationId)).ToList();
+        }
+
+
 
     }
 }

@@ -46,6 +46,12 @@ namespace BookingApp.Repository
             return _tours;
         }
 
+        public void BindTourGuide() //tourguide sa turom 
+        {
+            TourGuideRepository tourGuideRepository = new TourGuideRepository();
+            _tours.ForEach(t => t.TourGuide = tourGuideRepository.GetById(t.TourGuide.Id));
+        }
+
         public List<Tour> SearchTours(TourSearchParams searchParams)
         {
             _tours = _serializer.FromCSV(FilePath);
