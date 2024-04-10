@@ -29,6 +29,7 @@
                 <DataGridTextColumn Header="Smeštaj" Binding="{Binding Reservation.Accommodation.Name}" Width="150"></DataGridTextColumn>
                 <DataGridTextColumn Header="Od" Binding="{Binding Reservation.Start}" Width="150"></DataGridTextColumn>
                 <DataGridTextColumn Header="Do" Binding="{Binding Reservation.End}" Width="*"></DataGridTextColumn>
+                <DataGridTextColumn Header="komentar" Binding="{Binding Reservation.Comment}" Width="*"></DataGridTextColumn>
 
             </DataGrid.Columns>
         </DataGrid>

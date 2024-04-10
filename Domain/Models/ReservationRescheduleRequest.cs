@@ -60,7 +60,7 @@ namespace BookingApp.Domain.Models
             Guest = new User() { Id = Convert.ToInt32(values[2]) };
             NewStart = Convert.ToDateTime(values[3]);
             NewEnd = Convert.ToDateTime(values[4]);
-            Comment = values[5];
+            Comment = values[5];           
             Status = (RequestStatusType)Enum.Parse(typeof(RequestStatusType), values[6]);
         }
     }
