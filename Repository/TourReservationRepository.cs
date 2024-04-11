@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Input;
 using System.Xml.Linq;
 namespace BookingApp.Repository
 {
@@ -14,7 +15,7 @@ namespace BookingApp.Repository
         private readonly Serializer<TourReservation> _serializer;
         public List<TourReservation> _tourReservations;
         public List<TourParticipants> _tourParticipants;
-        
+
 
         public TourReservationRepository()
         {
@@ -22,7 +23,7 @@ namespace BookingApp.Repository
             _tourReservations = _serializer.FromCSV(FilePath);
         }
 
-       
+
 
         public TourReservation GetById(int id)
         {
@@ -69,7 +70,7 @@ namespace BookingApp.Repository
             }
             return _tourReservations.Max(a => a.Id) + 1;
         }
-     
+
         public TourReservation Update(TourReservation tourReservation)
         {
             _tourReservations = _serializer.FromCSV(FilePath);
@@ -78,7 +79,7 @@ namespace BookingApp.Repository
             _tourReservations.Remove(current);
             _tourReservations.Insert(index, tourReservation);
             _serializer.ToCSV(FilePath, _tourReservations);
-           
+
             return tourReservation;
         }
 
@@ -101,7 +102,25 @@ namespace BookingApp.Repository
             return _tourReservations.Where(t => t.Tourists.Any(p => p.Id == reservationId)).ToList();
         }
 
+        public void BindTourReservationVoucher()
+        {
+            foreach (TourReservation tourReservation in _tourReservations)
+            {
+                int voucherId = tourReservation.Voucher.Id;
 
+            }
+        }
+        public void BindTourReservationKeyPoint()
+        {
+            TourReservationRepository tourReservationRepository = new TourReservationRepository();
+            foreach (var tourReservation in _tourReservations)
+            {
+                if (tourReservation.TouristEntry != null && tourReservation.TouristEntry.KeyPoint != null)
+                {
+                   // KeyPoint keyPoint = KeyPointRepository.GetById(tourReservation.TouristEntry.KeyPoint.Id); nece da radi zasto 
+                }   
+            }
+        }
 
     }
 }

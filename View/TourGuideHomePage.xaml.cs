@@ -46,10 +46,17 @@ namespace BookingApp.View
         }
 
         private void TourStatistics_Click(object sender, RoutedEventArgs e)
-        { 
+        {
 
             TourStatisticsOverview tourStatisticsOverview = new TourStatisticsOverview();
             tourStatisticsOverview.Show();
+        }
+
+        private void TourGuideReviews_Click(object sender, RoutedEventArgs e)
+        {
+
+            TourGuideReviews tourGuideReviews = new TourGuideReviews();
+            tourGuideReviews.Show();
         }
 
     }

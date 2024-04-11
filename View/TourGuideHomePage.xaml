@@ -12,7 +12,7 @@
             <Button Content="Live tour" Width="200" Height="50" Margin="0 0 0 20" Click="LiveTour_Click"/>
             <Button Content="All future tours" Width="200" Height="50" Margin="0 0 0 20" Click="AllFutureTours_Click"/>
             <Button Content="Tour statistics" Width="200" Height="50" Margin="0 0 0 20" Click="TourStatistics_Click"/>
-
+            <Button Content="All reviews" Width="200" Height="50" Margin="0 0 0 20" Click="TourGuideReviews_Click"/>
 
         </StackPanel>
     </Grid>

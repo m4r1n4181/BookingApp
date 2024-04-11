@@ -16,7 +16,7 @@ namespace BookingApp.Model
         public string LastName { get; set; }
         public int Age { get; set; }
 
-        public TourReservation TourReservation { get; set; }
+       // public TourReservation TourReservation { get; set; }
         public TourParticipants() { }
 
         public TourParticipants(int id) { Id = id; }
