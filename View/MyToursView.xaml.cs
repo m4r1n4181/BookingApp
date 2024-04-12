@@ -30,7 +30,7 @@ namespace BookingApp.View
             }
         }
 
-        public Tour SelectedTour { get; set; }
+        public TourReservation SelectedTour { get; set; }
 
         private ObservableCollection<TourReservation> _reservations;
         public ObservableCollection<TourReservation> Reservations
@@ -92,6 +92,21 @@ namespace BookingApp.View
             foreach (var reservation in activeReservations)
             {
                 Reservations.Add(reservation);
+            }
+        }
+
+        private void RateTour_Click(object sender, RoutedEventArgs e)
+        {
+            // Provera da li je selektovana neka tura
+            if (SelectedTour != null)
+            {
+                // Kreiranje i otvaranje prozora za ocenjivanje ture
+                TourReviewForm tourReviewForm = new TourReviewForm(SelectedTour);
+                tourReviewForm.ShowDialog();
+            }
+            else
+            {
+                MessageBox.Show("Please select a reservation to rate the tour.");
             }
         }
 

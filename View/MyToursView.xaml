@@ -16,7 +16,7 @@
         </Grid.RowDefinitions>
 
         <StackPanel Grid.Row="2" Grid.Column="1">
-            <DataGrid ItemsSource="{Binding Reservations}" SelectedItem="{Binding Path=SelectedReservation}" IsReadOnly="True" SelectionMode="Single" AutoGenerateColumns="False" Height="325" HeadersVisibility="Column" FontSize="13">
+            <DataGrid ItemsSource="{Binding Reservations}" SelectedItem="{Binding Path=SelectedTour}" IsReadOnly="True" SelectionMode="Single" AutoGenerateColumns="False" Height="325" HeadersVisibility="Column" FontSize="13">
                 <DataGrid.Columns>
                     <DataGridTextColumn Header="Tour Name" Binding="{Binding Tour.Name}" Width="200"/>
                     <DataGridTextColumn Header="Description" Binding="{Binding Tour.Description}" Width="*"/>
@@ -31,6 +31,7 @@
             <Button Click="ActiveTours_Click" FontSize="14" VerticalAlignment="Center" Margin="5,0,0,0">
                 Active Tours
             </Button>
+            <Button Content="Rate Tour" Click="RateTour_Click"/>
         </ToolBar>
 
     </Grid>

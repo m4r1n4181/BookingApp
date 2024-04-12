@@ -7,18 +7,68 @@
         mc:Ignorable="d"
         Title="TourReviewForm" Height="450" Width="800">
     <Grid>
-        <Label Content="Tour Review" HorizontalAlignment="Left" Margin="51,46,0,0" VerticalAlignment="Top" Width="172" FontSize="16"/>
-        <Label Content="Guide's knowledge" HorizontalAlignment="Left" Margin="53,113,0,0" VerticalAlignment="Top" FontSize="16"/>
-        <TextBox Name ="KnowledgeTextBox" Text="{Binding Path=Knowledge, UpdateSourceTrigger=PropertyChanged}" HorizontalAlignment="Left" Margin="201,120,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120"/>
-        <Label Content="Guide's fluency" HorizontalAlignment="Left" Margin="53,186,0,0" VerticalAlignment="Top" FontSize="16"/>
-        <TextBox x:Name ="FluencyTextBox" Text="{Binding Path=Fluency, UpdateSourceTrigger=PropertyChanged}" HorizontalAlignment="Left" Margin="201,0,0,0" TextWrapping="Wrap" VerticalAlignment="Center" Width="120"/>
-        <Label Content="Tour appealance" HorizontalAlignment="Left" Margin="49,253,0,0" VerticalAlignment="Top" FontSize="16"/>
-        <TextBox x:Name ="TourAppealTextBox" Text="{Binding Path=TourAppeal, UpdateSourceTrigger=PropertyChanged}" HorizontalAlignment="Left" Margin="201,0,0,0" TextWrapping="Wrap" VerticalAlignment="Center" Width="120"/>
-        <Label Content="Comment" HorizontalAlignment="Left" Margin="53,307,0,0" VerticalAlignment="Top" FontSize="16"/>
-        <TextBox Name ="CommentTextBox" Text="{Binding Path=Comment, UpdateSourceTrigger=PropertyChanged}" HorizontalAlignment="Left" Margin="201,320,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120"/>
-        <Button Name ="Cancel"  Content="cancel" HorizontalAlignment="Left" Margin="490,227,0,0" VerticalAlignment="Top" Click="Cancel_Click"/>
-        <Button Name ="Save" Content="save" HorizontalAlignment="Left" Margin="670,227,0,0" VerticalAlignment="Top" Click="Save_Click"/>
-        <TextBox x:Name ="CommentTextBox_Copy" Text="{Binding Comment, UpdateSourceTrigger=PropertyChanged}" HorizontalAlignment="Left" Margin="201,269,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120"/>
-
+        <StackPanel>
+            <!-- Znanje vodiča -->
+            <StackPanel Orientation="Horizontal" Width="300" HorizontalAlignment="Center" Margin="0,20,0,0" >
+                <Label Content="Znanje vodiča" Width="100"></Label>
+                <RadioButton Name="knowledge1" Content="1" HorizontalAlignment="Center" VerticalAlignment="Center" Width="32" Margin="0,0,3,0" IsChecked="True" ></RadioButton>
+                <RadioButton Name="knowledge2" Content="2"  HorizontalAlignment="Center" VerticalAlignment="Center" Width="32" Margin="0,0,3,0" ></RadioButton>
+                <RadioButton Name="knowledge3" Content="3"  HorizontalAlignment="Center" VerticalAlignment="Center" Width="32" Margin="0,0,3,0" ></RadioButton>
+                <RadioButton Name="knowledge4" Content="4"  HorizontalAlignment="Center" VerticalAlignment="Center" Width="32" Margin="0,0,3,0" ></RadioButton>
+                <RadioButton Name="knowledge5" Content="5"  HorizontalAlignment="Center" VerticalAlignment="Center" Width="32" />
+            </StackPanel>
+            <!-- Validacija za znanje vodiča -->
+            <TextBlock x:Name="validationMessage" Foreground="Red" Margin="180,1,0,5" Height="12" FontSize="10"/>
+            <!-- Jezik vodiča -->
+            <StackPanel Orientation="Horizontal" Width="300" >
+                <Label Content="Jezik vodiča" Width="100"></Label>
+                <RadioButton Name="language1" Content="1"  HorizontalAlignment="Center" VerticalAlignment="Center" Width="32" Margin="0,0,3,0" IsChecked="True"></RadioButton>
+                <RadioButton Name="language2" Content="2"  HorizontalAlignment="Center" VerticalAlignment="Center" Width="32" Margin="0,0,3,0"></RadioButton>
+                <RadioButton Name="language3" Content="3"  HorizontalAlignment="Center" VerticalAlignment="Center" Width="32" Margin="0,0,3,0"></RadioButton>
+                <RadioButton Name="language4" Content="4"  HorizontalAlignment="Center" VerticalAlignment="Center" Width="32" Margin="0,0,3,0"></RadioButton>
+                <RadioButton Name="language5" Content="5"  HorizontalAlignment="Center" VerticalAlignment="Center" Width="32" />
+            </StackPanel>
+            <!-- Validacija za jezik vodiča -->
+            <TextBlock x:Name="validationMessageLanguage" Foreground="Red" Margin="180,1,0,5" Height="12" FontSize="10"/>
+            <!-- Zanimljivost ture -->
+            <StackPanel Orientation="Horizontal" Width="300" Margin="0,0,0,15">
+                <Label Content="Zanimljivost ture" Width="100"></Label>
+                <RadioButton Name="interestingness1" Content="1"  HorizontalAlignment="Center" VerticalAlignment="Center" Width="32" Margin="0,0,3,0" IsChecked="True"></RadioButton>
+                <RadioButton Name="interestingness2" Content="2" HorizontalAlignment="Center" VerticalAlignment="Center" Width="32" Margin="0,0,3,0"></RadioButton>
+                <RadioButton Name="interestingness3" Content="3"  HorizontalAlignment="Center" VerticalAlignment="Center" Width="32" Margin="0,0,3,0"></RadioButton>
+                <RadioButton Name="interestingness4" Content="4"  HorizontalAlignment="Center" VerticalAlignment="Center" Width="32" Margin="0,0,3,0"></RadioButton>
+                <RadioButton Name="interestingness5" Content="5"  HorizontalAlignment="Center" VerticalAlignment="Center" Width="32" />
+            </StackPanel>
+            <!-- Dodavanje slike -->
+            <StackPanel Orientation="Horizontal" Width="300" Margin="0,0,0,10">
+                <Label Content="Dodaj sliku" Width="100" Height="27"></Label>
+                <TextBox Text="{Binding Url, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True}" Width="90" Margin="0,0,13,0" Height="27"></TextBox>
+                <Button x:Name="AddImageButton" Content="+" Width="27" Background="White" FontWeight="Bold" Command="{Binding AddImageCommand}"></Button>
+                <Button x:Name="RemoveImageButton" Content="-" Width="27"  Margin="8,0,0,0" Background="White" FontWeight="Bold" Command="{Binding RemoveImageCommand}"></Button>
+            </StackPanel>
+            <!-- Pregled dodatih slika -->
+            <StackPanel Orientation="Horizontal" Width="300" Margin="0,0,0,15" Height="85">
+                <DataGrid 
+                  ItemsSource="{Binding Path=Images, UpdateSourceTrigger=PropertyChanged}"
+                  SelectedItem="{Binding Path=SelectedUrl}"
+                  AutoGenerateColumns="False" IsReadOnly="True"
+                  x:Name="myImagesOverview"  Width="165" Margin="135,0,0,0" Height="82" Background="White">
+                    <DataGrid.Columns>
+                        <DataGridTextColumn Header="Url" Binding="{Binding}" Width="*"></DataGridTextColumn>
+                    </DataGrid.Columns>
+                </DataGrid>
+            </StackPanel>
+            <!-- Komentar -->
+            <StackPanel Orientation="Horizontal" Width="300" Height="60">
+                <Label Content="Komentar" Width="100"></Label>
+                <TextBox Width="165" Height="50" Margin="0,0,0,10" Text="{Binding Path=Comment, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True}"></TextBox>
+            </StackPanel>
+            <!-- Dugme za dodavanje recenzije -->
+            <Button x:Name="AddReviewButton" Width="150" Height="30" HorizontalAlignment="Right" Margin="0,20,42,0" Command="{Binding AddReviewCommand}" Background="#FFFFFF">
+                <StackPanel Orientation="Horizontal">
+                    <ContentControl Content="Oceni"></ContentControl>
+                </StackPanel>
+            </Button>
+        </StackPanel>
     </Grid>
 </Window>
