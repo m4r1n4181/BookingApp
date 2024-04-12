@@ -82,6 +82,12 @@ namespace BookingApp.Repository
             return touristEntry;
         }
 
+        public List<TouristEntry> GetAllByKeyPoint(int keyPointId)
+        {
+            _touristEntry = _serializer.FromCSV(FilePath);
+            return _touristEntry.FindAll(te => te.KeyPoint.Id == keyPointId);
+        }
+
 
 
     }

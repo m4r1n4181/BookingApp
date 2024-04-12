@@ -76,11 +76,32 @@ namespace BookingApp.Service
             return _tourRepository.GetAll().Where(tour => tour.Location == location && tour.AvailableSeats > 0).ToList();
         }
 
-        /* public void AddParticipant(TourParticipants participant, TourReservation reservation)
-         {
-             participant.AddParticipant(participant);
-             _tourParticipantRepository.AddParticipant(participant);
-         }*/
+       /* public List<TourReservation> GetAllTourReservationsForTourEventWherePeopleShowed(int tourEventId)
+        {
+            List<TourReservation> tourReservations = new List<TourReservation>();
+            foreach (TourReservation tourReservation in _tourReservationRepository.GetAll())
+            {
+                if (tourReservation.Tour.Id == tourEventId && tourReservation.KeyPointWhenGuestCame.Id != -1)
+                {
+                    tourReservations.Add(tourReservation);
+
+                }
+            }
+            return tourReservations;
+        }*/
+        public List<TourReservation> GetReservationsByUserId(int userId)
+        {
+            return _tourReservationRepository.GetAll().Where(r => r.UserId == userId).ToList();
+        }
+        public List<TourReservation> GetPreviousReservationsByUserId(int userId)
+        {
+            return _tourReservationRepository.GetAllWithTours().Where(r => r.Tour.IsCompleted && r.UserId == userId).ToList();
+        }
+
+        public List<TourReservation> GetActiveReservationsByUserId(int userId)
+        {
+            return _tourReservationRepository.GetAllWithTours().Where(r => r.Tour.IsStarted && r.UserId == userId).ToList();
+        }
 
 
     }

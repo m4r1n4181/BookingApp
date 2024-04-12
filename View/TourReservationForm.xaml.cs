@@ -224,6 +224,7 @@ namespace BookingApp.View
             TourReservation reservation = new TourReservation()
             {
                 GuestsNumber = participantsNumber,
+                UserId = User.Id, // Dodajemo UserId korisnika koji je napravio rezervaciju
                 Tour = SelectedTour,
                 Tourists = Participants.ToList<TourParticipants>()
             };
@@ -236,6 +237,7 @@ namespace BookingApp.View
             // Clear participants list after reservation
             Participants.Clear();
         }
+
 
         private void UpdateAvailableSeats(int tourId, int reservedSeats)
         {

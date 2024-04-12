@@ -27,7 +27,9 @@ namespace BookingApp.View
     {
         public ObservableCollection<Tour> Tours { get; set; }
 
+        public User User {  get; set; }
         public TourController _tourController;
+        public Tour _tour;
 
         public TourReservationController _tourReservationController;
 
@@ -41,7 +43,6 @@ namespace BookingApp.View
 
          public string MaxTourists { get; set; }*/
         public Tour SelectedTour { get; set; }
-        public User User {  get; set; }
 
         private string _country;
         public string Country
@@ -132,11 +133,16 @@ namespace BookingApp.View
             _tourController = new TourController();
             Tours = new ObservableCollection<Tour>(_tourController.GetAll());
             User = user;
-            City = "";
-            Country = "";
+            City = Tours.First().Location.City;
+            Country = Tours.First().Location.Country;
+            
+
             Language = "";
             //Duration =;
             //MaxTourists = "";
+
+            // Postavite DataContext na Tours umjesto na this
+           
         }
 
         private void buttonSearch_Click(object sender, RoutedEventArgs e)
@@ -163,6 +169,11 @@ namespace BookingApp.View
             }
         }
 
+        private void MyTours_Click(object sender, RoutedEventArgs e)
+        {
+            MyToursView myToursView = new MyToursView(User);
+            myToursView.Show();
+        }
 
 
         /* private void buttonSearch_Click(object sender, RoutedEventArgs e)

@@ -27,14 +27,14 @@ namespace BookingApp.Service
         }
 
 
-      /*  private bool IsTouristOnKeyPoint(Tourist tourist, KeyPoint keyPoint)
+        private bool IsTouristOnKeyPoint(Tourist tourist, KeyPoint keyPoint)
         {
             List<TouristEntry> touristEntries = _touristEntryRepository.GetAllByKeyPoint(keyPoint.Id);
             return touristEntries.Any(te => te.Tourist.Id == tourist.Id);
-        }*/
+        }
 
 
-        /*public List<Tourist> GetAllNotOnTour(int tourId)
+        public List<Tourist> GetAllNotOnTour(int tourId)
         {
             List<KeyPoint> keyPoints = _keyPointRepository.GetKeyPointsForTour(tourId);
             List<Tourist> tourists = new List<Tourist>();
@@ -47,6 +47,6 @@ namespace BookingApp.Service
             }
 
             return tourists;
-        }*/
+        }
     }
 }

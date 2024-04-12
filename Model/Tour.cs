@@ -5,6 +5,7 @@ using Microsoft.VisualBasic;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Runtime.CompilerServices;
 using System.Windows;
 using System.Xml.Linq;
 
@@ -30,7 +31,7 @@ namespace BookingApp.Model
         public bool IsStarted { get; set; } // da li je tura započela
        // public List<TouristEntry> TouristEntries { get; set; } // koji od prijavljenih turista su došli na turu
 
-     
+        public bool IsCompleted {  get; set; }
 
         public Tour()
         { 
@@ -50,7 +51,7 @@ namespace BookingApp.Model
             Duration = duration;
         }
 
-        public Tour(int id, TourGuide tourGuide, string name, string description, string language, Location location, int maxTourists, int availableSeats, List<DateTime> startDates, int duration, List<string> pictures, bool isStarted)
+        public Tour(int id, TourGuide tourGuide, string name, string description, string language, Location location, int maxTourists, int availableSeats, List<DateTime> startDates, int duration, List<string> pictures, bool isStarted, bool isCompleted)
         {
             Id = id;
             TourGuide = tourGuide;
@@ -64,6 +65,7 @@ namespace BookingApp.Model
             Duration = duration;
             Pictures = pictures;
             IsStarted = isStarted;
+            IsCompleted = isCompleted;
         }
 
        
@@ -77,7 +79,7 @@ namespace BookingApp.Model
             // string? picturesString = Pictures != null ? string.Join(",", Pictures) : null;
             //takodje nista se ne upisuje u tour.csv i proeriti saveAll keypoints
             string picturesString = string.Join(",", Pictures); 
-            string[] csvValues = { Id.ToString(), TourGuide.Id.ToString(), Name, Description, Language, Location.Id.ToString(), MaxTourists.ToString(), AvailableSeats.ToString(), startDatesString, Duration.ToString(), picturesString, IsStarted.ToString() };
+            string[] csvValues = { Id.ToString(), TourGuide.Id.ToString(), Name, Description, Language, Location.Id.ToString(), MaxTourists.ToString(), AvailableSeats.ToString(), startDatesString, Duration.ToString(), picturesString, IsStarted.ToString(), IsCompleted.ToString() };
             return csvValues;
         }
 
@@ -98,6 +100,7 @@ namespace BookingApp.Model
             Duration = Convert.ToInt32(values[9]);
             Pictures = values[10].Split(",").ToList();
             IsStarted = Convert.ToBoolean(values[11]);
+            IsCompleted = Convert.ToBoolean(values[12]);
 
         }
 

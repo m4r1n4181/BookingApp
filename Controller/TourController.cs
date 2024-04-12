@@ -37,6 +37,16 @@ namespace BookingApp.Controller
             return _tourService.GetAllWithLocations();
         }
 
+        public List<Tour> GetTodayTours()
+        {
+            return _tourService.GetTodayTours();
+        }
+
+        public void StartTour(int id)
+        {
+            _tourService.StartTour(id);
+        }
+
         internal void EndTour(int id)
         {
             throw new NotImplementedException();
