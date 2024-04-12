@@ -1,4 +1,6 @@
-﻿using BookingApp.Model;
+﻿using BookingApp.DTO;
+using BookingApp.Model;
+using BookingApp.Model.Enums;
 using BookingApp.Repository;
 using System;
 using System.Collections.Generic;
@@ -12,32 +14,33 @@ namespace BookingApp.Service
     {
         private TourReservationRepository _tourReservationRepository;
         private TourRepository _tourRepository;
- 
+        private VoucherRepository _voucherRepository;
+
         public TourReservationService()
         {
             _tourReservationRepository = new TourReservationRepository();
             _tourRepository = new TourRepository();
+            _voucherRepository = new VoucherRepository();
+
         }
-        /*public bool DatesIntertwine(DateTime start1, DateTime end1, DateTime start2, DateTime end2)
+        public bool DatesIntertwine(DateTime start1, DateTime end1, DateTime start2, DateTime end2)
         {
             if (end1 < start2 || start1 > end2)
             {
                 return false;
             }
             return true;
-        }*/
+        }
 
-       /* public List<TourRepository> GetReservationsForTour(int tourId, DateTime start, DateTime end)
-        {
-            List<TourReservation> tourReservations = _tourReservationRepository.GetByTour(tourId);
-            return tourReservations.FindAll(tR => ;
-        }*/
+
         public List<TourReservation> GetAllTours()
         {
             List<TourReservation> allTourReservations = _tourReservationRepository.GetAll();
-            
+
             return allTourReservations;
         }
+
+
         public TourReservation Create(TourReservation tourReservation)
         {
             return _tourReservationRepository.Save(tourReservation);
@@ -48,13 +51,14 @@ namespace BookingApp.Service
             return _tourReservationRepository.Update(tourReservation);
         }
 
+
         public List<TourReservation> GetAvailableSeats(int id)
         {
             // Dobijamo sve rezervacije za turu sa datim ID-jem
             List<TourReservation> tourReservations = _tourReservationRepository.GetByTour(id);
 
             // Pronalazimo maksimalan broj sedišta za datu turu
-            Tour tour = _tourRepository.Get(id);
+            Tour tour = _tourRepository.GetById(id);
             int maxSeats = tour.MaxTourists;
 
             // Racunamo ukupan broj rezervisanih sedišta
@@ -70,39 +74,92 @@ namespace BookingApp.Service
             return availableReservations;
         }
 
-        public List<Tour> GetAlternativeTours(Location location)
+       /* public void CancelTourReservation(TourReservation tourReservation)
         {
-            // Pretpostavljamo da imamo listu tura i da želimo vratiti one koje su na istoj lokaciji
-            return _tourRepository.GetAll().Where(tour => tour.Location == location && tour.AvailableSeats > 0).ToList();
-        }
+            Tourist tourist = tourReservation.Tourist;
+            DateTime expires = DateTime.Now.AddDays(365); // Postavljanje datuma isteka na 365 dana od danasnjeg datuma
+            Voucher voucher = new Voucher(-1, tourist, StatusType.active, expires, VoucherType.cancellation);
+            _voucherRepository.Save(voucher);
 
-       /* public List<TourReservation> GetAllTourReservationsForTourEventWherePeopleShowed(int tourEventId)
+            //_tourReservationRepository.Delete(tourReservation);
+        }*/
+
+        /*public void CancelAllTourReservationsForTour(int tourId)
+        {
+            Tour tour = _tourRepository.GetById(tourId);
+            tour.TourStatus = TourStatusType.cancelled;
+            _tourRepository.Update(tour);
+
+            _tourReservationRepository.GetByTour(tourId).ForEach(res => CancelTourReservation(res));
+
+        }*/
+
+        /*public List<TourReservation> GetAllParticipants(int reservationId)
+        {
+            return _tourReservationRepository.GetAllParticipants(reservationId);
+        }*/
+
+        public List<TourReservation> GetAllTourReservationsForTourWherePeopleShowed(int tourId)
         {
             List<TourReservation> tourReservations = new List<TourReservation>();
             foreach (TourReservation tourReservation in _tourReservationRepository.GetAll())
             {
-                if (tourReservation.Tour.Id == tourEventId && tourReservation.KeyPointWhenGuestCame.Id != -1)
+                if (tourReservation.Tour.Id == tourId) //moda mi treba i logika kada su se turisti prikljucili na turu - preko keypointa
                 {
                     tourReservations.Add(tourReservation);
 
                 }
             }
             return tourReservations;
-        }*/
+        }
+
+        /* public TourAgeGroupStatistic GetAgeStatisticsForTour(int tourId)
+         {
+             TourAgeGroupStatistic tourAgeGroupStatistic = new TourAgeGroupStatistic(0, 0, 0);
+             foreach (TourReservation tourReservation in GetAllTourReservationsForTourWherePeopleShowed(tourId))
+             {
+                 foreach (TourParticipants tourist in tourReservation.Tourists)
+                 {
+                     if (tourist.Age <= 18)
+                     {
+                         tourAgeGroupStatistic.To18 += 1;
+                     }
+                     else if (tourist.Age > 18 && tourist.Age <= 50)
+                     {
+                         tourAgeGroupStatistic.From18To50 += 1;
+                     }
+                     else
+                     {
+                         tourAgeGroupStatistic.From50 += 1;
+                     }
+                 }
+             }
+             return tourAgeGroupStatistic;
+         }*/
         public List<TourReservation> GetReservationsByUserId(int userId)
         {
-            return _tourReservationRepository.GetAll().Where(r => r.UserId == userId).ToList();
+            var reservations = _tourReservationRepository.GetAll().Where(r => r.UserId == userId).ToList();
+            return reservations;
         }
-        public List<TourReservation> GetPreviousReservationsByUserId(int userId)
+
+        public TourStatusType GetTourStatus(TourReservation reservation)
         {
-            return _tourReservationRepository.GetAllWithTours().Where(r => r.Tour.IsCompleted && r.UserId == userId).ToList();
+            // Dobavljanje ture na osnovu rezervacije
+            Tour tour = _tourRepository.GetById(reservation.Tour.Id);
+
+            // Provera statusa ture
+            return tour.TourStatus;
         }
+        /* public List<TourReservation> GetPreviousReservationsByUserId(int userId)
+         {
+             return _tourReservationRepository.GetAllWithTours().Where(r => r.Tour.IsCompleted && r.UserId == userId).ToList();
+         }
 
-        public List<TourReservation> GetActiveReservationsByUserId(int userId)
-        {
-            return _tourReservationRepository.GetAllWithTours().Where(r => r.Tour.IsStarted && r.UserId == userId).ToList();
-        }
+         public List<TourReservation> GetActiveReservationsByUserId(int userId)
+         {
+             return _tourReservationRepository.GetAllWithTours().Where(r => r.Tour.IsStarted && r.UserId == userId).ToList();
+         }
 
-
+         */
     }
 }

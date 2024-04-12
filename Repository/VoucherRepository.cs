@@ -24,6 +24,11 @@ namespace BookingApp.Repository
             _vouchers = _serializer.FromCSV(FilePath);
         }
 
+        public void BindVoucher() //treba da bajndujem voucher sa turistom samo 
+        {
+            TouristRepository touristRepository = new TouristRepository();
+            _vouchers.ForEach(voucher => { voucher.Tourist = touristRepository.GetById(voucher.Tourist.Id); });
+        }
         public Voucher GetById(int id)
         {
             _vouchers = _serializer.FromCSV(FilePath);
@@ -73,10 +78,11 @@ namespace BookingApp.Repository
             return voucher;
         }
 
-        public List<Voucher> GetByTourGuide(TourGuide tourGuide)
+        public List<Voucher> GetAllByTourist(int touristId)
         {
-            _vouchers = _serializer.FromCSV(FilePath);
-            return _vouchers.FindAll(v => v.TourGuide.Id == tourGuide.Id);
+            return _vouchers.Where(voucher => voucher.Tourist.Id == touristId).ToList();
         }
+
+
     }
 }

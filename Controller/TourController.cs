@@ -1,10 +1,12 @@
 ﻿using BookingApp.Service;
 using BookingApp.Model;
 using System.Collections.Generic;
-using BookingApp.DTO;
-using System; // Import the necessary namespace for TourSearchParams
 using System.Linq;
-
+using System.Text;
+using System.Threading.Tasks;
+using BookingApp.Repository;
+using BookingApp.DTO;
+using System;
 namespace BookingApp.Controller
 {
     public class TourController
@@ -16,20 +18,18 @@ namespace BookingApp.Controller
             _tourService = new TourService();
         }
 
-        public void CreateTour(Tour tour)
+        public void EndTour(int id)
         {
-            _tourService.CreateTour(tour);
+            _tourService.EndTour(id);
         }
 
-        // Add public access modifier
-        public List<Tour> SearchTours(TourSearchParams tourSearchParams)
+        public void CreateTour(Tour tour, List<DateTime> dateTimes, List<KeyPoint> keyPoints)
         {
-            return _tourService.SearchTours(tourSearchParams);
+            _tourService.CreateTour(tour, dateTimes, keyPoints);
         }
-
-        public List<Tour> GetAll()
+        public List<Tour> GetAllWithDateTime()
         {
-            return _tourService.GetAll();
+            return _tourService.GetAllWithDateTime();
         }
 
         public List<Tour> GetAllWithLocations()
@@ -47,21 +47,47 @@ namespace BookingApp.Controller
             _tourService.StartTour(id);
         }
 
-        internal void EndTour(int id)
+        public List<Tour> SearchTours(TourSearchParams searchParams)
         {
-            throw new NotImplementedException();
+            return _tourService.SearchTours(searchParams);
         }
 
-        public List<Tour> GetAllByLocations(Location location)
+        public List<Tour> GetAll()
         {
-            // Dohvati sve ture iz TourService
-            List<Tour> allTours = _tourService.GetAll(); // Prilagodi ovoj liniji prema strukturi tvog koda
-
-            // Filtriraj ture na osnovu lokacije
-            List<Tour> toursWithLocation = allTours.Where(t => t.Location == location).ToList();
-
-            return toursWithLocation;
+            return _tourService.GetAll();
         }
+
+        public List<Tour> GetTourInFuture()
+        {
+            return _tourService.GetTourInFuture();
+        }
+
+        public List<Tour> GetTourForNow()
+        {
+            return _tourService.GetTourForNow();
+        }
+
+        public List<Tour> GetAllToursForTourGuide(int tourId)
+        {
+            return _tourService.GetAllToursForTourGuide(tourId);
+        }
+
+        public List<int> YearForTour(int tourGuideId)
+        {
+            return _tourService.YearForTour(tourGuideId);
+        }
+
+        public Tour MostVisitedTour(int year = -1)
+        {
+            return _tourService.MostVisitedTour(year);
+        }
+
+        public List<Tour> GetAllTour(int tourGuideId)
+        {
+            return _tourService.GetAllTour(tourGuideId);
+        }
+
+
     }
 
 

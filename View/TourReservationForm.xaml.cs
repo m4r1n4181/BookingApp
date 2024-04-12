@@ -188,7 +188,7 @@ namespace BookingApp.View
                 if (result == MessageBoxResult.Yes)
                 {
                     // Pozivamo metod za prikaz alternativnih tura
-                    ShowAlternativeTours();
+                    //ShowAlternativeTours();
                 }
                 else
                 {
@@ -201,7 +201,7 @@ namespace BookingApp.View
             }
         }
 
-        private void ShowAlternativeTours()
+       /* private void ShowAlternativeTours()
         {
             // Dobijemo lokaciju odabrane ture
             Location selectedLocation = SelectedTour.Location;
@@ -214,7 +214,7 @@ namespace BookingApp.View
 
             // Prikažemo prozor
             //alternativeToursView.ShowDialog();
-        }
+        }*/
 
 
 

@@ -1,9 +1,11 @@
-﻿using System.Collections.ObjectModel;
+﻿using System;
+using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Linq;
 using System.Runtime.CompilerServices;
 using System.Windows;
 using BookingApp.Model;
+using BookingApp.Model.Enums;
 using BookingApp.Repository;
 using BookingApp.Service;
 
@@ -16,7 +18,7 @@ namespace BookingApp.View
         private readonly UserRepository _userRepository;
         private readonly TourReservationService _tourReservationService;
         private User _user;
-
+        public TourStatusType Status { get; set; }
         public User User
         {
             get => _user;
@@ -60,7 +62,7 @@ namespace BookingApp.View
             _entryRepository = new TouristEntryRepository();
             _userRepository = new UserRepository();
             _tourReservationService = new TourReservationService();
-            DataContext = this;
+            this.DataContext = this;
 
             if (User != null)
             {
@@ -78,24 +80,59 @@ namespace BookingApp.View
         private void PreviousTours_Click(object sender, RoutedEventArgs e)
         {
             Reservations.Clear();
-            var previousReservations = _tourReservationService.GetPreviousReservationsByUserId(User.Id);
+            var previousReservations = _tourReservationService.GetReservationsByUserId(User.Id)
+                                                 .Where(r => _tourReservationService.GetTourStatus(r) == TourStatusType.finished);
             foreach (var reservation in previousReservations)
             {
                 Reservations.Add(reservation);
             }
+
+            // Dodajte ovde kod za proveru broja rezervacija i ispis poruke ako nema rezervacija
+            if (Reservations.Count == 0)
+            {
+                MessageBox.Show("No previous tours found for the user.");
+            }
         }
+
 
         private void ActiveTours_Click(object sender, RoutedEventArgs e)
         {
             Reservations.Clear();
-            var activeReservations = _tourReservationService.GetActiveReservationsByUserId(User.Id);
+            var activeReservations = _tourReservationService.GetReservationsByUserId(User.Id)
+                                              .Where(r => _tourReservationService.GetTourStatus(r) == TourStatusType.started);
             foreach (var reservation in activeReservations)
             {
                 Reservations.Add(reservation);
             }
+
+            // Dodajte ovde kod za proveru broja rezervacija i ispis poruke ako nema rezervacija
+            if (Reservations.Count == 0)
+            {
+                MessageBox.Show("No active tours found for the user.");
+            }
         }
 
+
+
+
+
+
         private void RateTour_Click(object sender, RoutedEventArgs e)
+        {
+            // Provera da li je selektovana neka tura
+            if (SelectedTour != null)
+            {
+                // Kreiranje i otvaranje prozora za ocenjivanje ture
+                TourReviewForm tourReviewForm = new TourReviewForm(SelectedTour);
+                tourReviewForm.ShowDialog();
+            }
+            else
+            {
+                MessageBox.Show("Please select a reservation to rate the tour.");
+            }
+        }
+
+        private void TrackTour_Click(object sender, RoutedEventArgs e)
         {
             // Provera da li je selektovana neka tura
             if (SelectedTour != null)

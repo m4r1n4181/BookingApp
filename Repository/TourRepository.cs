@@ -13,9 +13,10 @@ namespace BookingApp.Repository
     public class TourRepository
     {
         private const string FilePath = "../../../Resources/Data/tours.csv";
-        private static TourRepository instance = null;
+
         private readonly Serializer<Tour> _serializer;
-        private List<Tour> _tours;
+
+        private List<Tour> _tours;//Tours
 
         public TourRepository()
         {
@@ -23,96 +24,32 @@ namespace BookingApp.Repository
             _tours = _serializer.FromCSV(FilePath);
         }
 
-        public static TourRepository GetInstance()
+
+        public List<Tour> GetAllWithDateTime()
         {
-            if (instance == null)
-            {
-                instance = new TourRepository();
-            }
-            return instance;
-        }
-
-        public Tour Get(int id)
-        {
-
-            return _tours.Find(x => x.Id == id);
-
-        }
-
-        public Tour GetById(int id)
-        {
-            return _tours.FirstOrDefault(tour => tour.Id == id);
-        }
-
-        public List<Tour> GetAll()
-        {
+            _tours = _serializer.FromCSV(FilePath);
+            // BindDateTime();
             return _tours;
         }
 
-        public Tour Save(Tour tour)
-        {
-            tour.Id = NextId();
-            _tours.Add(tour);
-            _serializer.ToCSV(FilePath, _tours);
-            return tour;
-        }
-
-        public int NextId()
-        {
-            if (_tours.Count < 1)
-            {
-                return 1;
-            }
-            return _tours.Max(tour => tour.Id) + 1;
-        }
-
-        public void Delete(Tour tour)
-        {
-            _tours.Remove(tour);
-            _serializer.ToCSV(FilePath, _tours);
-        }
-
-        public Tour Update(Tour tour)
-        {
-            int index = _tours.FindIndex(t => t.Id == tour.Id);
-            _tours[index] = tour;
-            _serializer.ToCSV(FilePath, _tours);
-            return tour;
-        }
-
-        public List<Tour> GetByTourGuide(TourGuide tourGuide)
-        {
-            return _tours.FindAll(tour => tour.TourGuide.Id == tourGuide.Id);
-        }
-
-        private bool TourStartsToday(Tour tour)
-        {
-            return tour.StartDates.Any(date => date.Date == DateTime.Now.Date);
-        }
-
-        public List<Tour> GetTodayTours()
-        {
-            return _tours.FindAll(tour => TourStartsToday(tour) && !tour.IsStarted);
-        }
 
         public void BindLocations()
         {
             LocationRepository locationRepository = new LocationRepository();
-            _tours.ForEach(tour =>
-            {
-                if (tour.Location != null) // Provjera je li tura već povezana s lokacijom
-                {
-                    tour.Location = locationRepository.GetById(tour.Location.Id);
-                }
-            });
+            _tours.ForEach(t => t.Location = locationRepository.GetById(t.Location.Id));
         }
-
 
         public List<Tour> GetAllWithLocations()
         {
             _tours = _serializer.FromCSV(FilePath);
             BindLocations();
             return _tours;
+        }
+
+        public void BindTourGuide() //tourguide sa turom 
+        {
+            TourGuideRepository tourGuideRepository = new TourGuideRepository();
+            _tours.ForEach(t => t.TourGuide = tourGuideRepository.GetById(t.TourGuide.Id));
         }
 
         public List<Tour> SearchTours(TourSearchParams searchParams)
@@ -147,27 +84,77 @@ namespace BookingApp.Repository
 
             return _tours;
         }
-            public int GetAvailableSeats(int tourId)
+
+        public Tour GetById(int id)
+        {
+            _tours = _serializer.FromCSV(FilePath);
+            return _tours.FirstOrDefault(tour => tour.Id == id);
+        }
+
+        public List<Tour> GetAll()
+        {
+            return _serializer.FromCSV(FilePath);
+        }
+
+        public Tour Save(Tour tour)
+        {
+            tour.Id = NextId();
+            _tours = _serializer.FromCSV(FilePath);
+            _tours.Add(tour);
+            _serializer.ToCSV(FilePath, _tours);
+            return tour;
+        }
+
+        public int NextId()
+        {
+            _tours = _serializer.FromCSV(FilePath);
+            if (_tours.Count < 1)
             {
-                // Učitavanje tura iz CSV datoteke
-                List<Tour> tours = _serializer.FromCSV(FilePath);
-
-                // Pronalaženje ture sa datim ID-jem
-                Tour tour = tours.FirstOrDefault(t => t.Id == tourId);
-
-                if (tour == null)
-                {
-                    throw new ArgumentException("Tura sa datim ID-jem nije pronađena.");
-                }
-
-                // Vraćanje broja dostupnih mesta
-                return tour.AvailableSeats;
+                return 1;
             }
+            return _tours.Max(tour => tour.Id) + 1;
+        }
 
-            public List<Tour> GetAlternativesByLocation(Location location)
-            {
-                return _tours.Where(t => t.Location.City == location.City && t.Location.Country == location.Country && t.Id != location.Id).ToList();
-            }
+        public void Delete(Tour tour)
+        {
+            _tours = _serializer.FromCSV(FilePath);
+            Tour founded = _tours.Find(t => t.Id == tour.Id);
+            _tours.Remove(founded);
+            _serializer.ToCSV(FilePath, _tours);
+        }
+
+        public Tour Update(Tour tour)
+        {
+            _tours = _serializer.FromCSV(FilePath);
+            Tour current = _tours.Find(t => t.Id == tour.Id);
+            int index = _tours.IndexOf(current);
+            _tours.Remove(current);
+            _tours.Insert(index, tour);
+            _serializer.ToCSV(FilePath, _tours);
+            return tour;
+        }
+
+        public List<Tour> GetByTourGuide(TourGuide tourGuide)
+        {
+            _tours = _serializer.FromCSV(FilePath);
+            return _tours.FindAll(tour => tour.TourGuide.Id == tourGuide.Id);
+
+        }
+
+
+        public List<Tour> GetTodayTours()
+        {
+            _tours = _serializer.FromCSV(FilePath);
+            BindLocations();
+
+            DateTime today = DateTime.Now.Date;
+
+            return _tours.FindAll(tour => tour.StartDate.Date == today && tour.TourStatus == Model.Enums.TourStatusType.not_started);
+        }
+
+
 
     }
+
+
 }

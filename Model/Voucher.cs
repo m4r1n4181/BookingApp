@@ -19,9 +19,11 @@ namespace BookingApp.Model
 
         public VoucherType Type { get; set; }
 
+        public DateTime ExpirationDate { get; set; }
+
         public Voucher() { }
 
-        public Voucher(int id, User tourGuide, Tourist tourist, bool isUsed, int duration, VoucherType type)
+        public Voucher(int id, User tourGuide, Tourist tourist, bool isUsed, int duration, VoucherType type, DateTime expirationDate)    
         {
             Id = id;
             TourGuide = tourGuide;
@@ -29,11 +31,12 @@ namespace BookingApp.Model
             IsUsed = isUsed;
             Duration = duration;
             Type = type;
+            ExpirationDate = expirationDate;
         }
 
         public string[] ToCSV()
         {
-            string[] csvValues = { Id.ToString(), TourGuide.Id.ToString(), Tourist.Id.ToString(), IsUsed.ToString(), Duration.ToString(), Type.ToString() };
+            string[] csvValues = { Id.ToString(), TourGuide.Id.ToString(), Tourist.Id.ToString(), IsUsed.ToString(), Duration.ToString(), Type.ToString(), ExpirationDate.ToString() };
             return csvValues;
         }
 
@@ -46,6 +49,7 @@ namespace BookingApp.Model
             Duration = Convert.ToInt32(values[4]);
             Enum.TryParse(values[5], out VoucherType voucherType);
             Type = voucherType;
+            ExpirationDate = Convert.ToDateTime(values[6]);
         }
     }
 

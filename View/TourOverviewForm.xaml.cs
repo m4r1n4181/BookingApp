@@ -182,5 +182,12 @@ namespace BookingApp.View
              List<Tour> searchedTours = _tourController.SearchTours();
              RefreshTours(searchedTours);
          }*/
+
+        private void buttonVouchers_Click(object sender, RoutedEventArgs e)
+        {
+                MyVouchersView myVouchersView = new MyVouchersView(User);
+                myVouchersView.Show();
+            
+        }
     }
 }

@@ -12,7 +12,7 @@ using System.Xml.Linq;
 namespace BookingApp.Service
 {
     public class KeyPointService
-    { 
+    {
         private readonly KeyPointRepository _keyPointRepository;
         private readonly TourRepository _tourRepository;
 
@@ -24,7 +24,7 @@ namespace BookingApp.Service
 
         public void CreateKeyPoints(List<KeyPoint> keyPoints)
         {
-            foreach(KeyPoint keyPoint in keyPoints)
+            foreach (KeyPoint keyPoint in keyPoints)
             {
                 _keyPointRepository.Save(keyPoint);
             }
@@ -33,15 +33,15 @@ namespace BookingApp.Service
 
         public void ActivateKeyPoint(int keyPointId)
         {
-            
+
             KeyPoint keyPoint = _keyPointRepository.GetById(keyPointId);
-            if(keyPoint == null)
+            if (keyPoint == null)
             {
                 return;
             }
-            
-            keyPoint.IsActive = true; 
-            _keyPointRepository.Update(keyPoint); 
+
+            keyPoint.IsActive = true;
+            _keyPointRepository.Update(keyPoint);
 
             int tourId = keyPoint.Tour.Id;
             List<KeyPoint> keyPoints = _keyPointRepository.GetKeyPointsForTour(tourId);
@@ -51,7 +51,7 @@ namespace BookingApp.Service
             {
                 Tour tour = _tourRepository.GetById(tourId);
 
-                tour.IsStarted = false;
+                tour.TourStatus = Model.Enums.TourStatusType.not_started;
                 _tourRepository.Update(tour);
             }
         }
@@ -60,13 +60,6 @@ namespace BookingApp.Service
         {
             return _keyPointRepository.GetKeyPointsForTour(tourId);
         }
-        public void SaveAll(List<KeyPoint> keyPoints)
-        {
-            foreach (KeyPoint keyPoint in keyPoints)
-            {
-                _keyPointRepository.Save(keyPoint);
-            }
-        }
+
     }
 }
-

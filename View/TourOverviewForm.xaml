@@ -23,6 +23,7 @@
             <Button x:Name="buttonSearch" Content="Pretraži" Margin="5" Click="buttonSearch_Click"/>
             <Button x:Name="buttonReserve" Content="Rezerviši" Margin="5" Click="buttonReserve_Click"/>
             <Button Content="My Tours" Click="MyTours_Click" Margin="5"/>
+            <Button Content="My Vouchers" Click="buttonVouchers_Click" Margin="5"/>
         </StackPanel>
 
         <!-- Prikaz tura -->

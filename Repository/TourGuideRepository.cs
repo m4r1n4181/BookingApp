@@ -49,7 +49,7 @@ namespace BookingApp.Repository
         public void Delete(TourGuide tourGuide)
         {
             _tourGuide = _serializer.FromCSV(FilePath);
-            TourGuide founded = _tourGuide.Find(tourGuide => tourGuide.Id == tourGuide.Id);
+            TourGuide founded = _tourGuide.Find(tg => tg.Id == tourGuide.Id);
             _tourGuide.Remove(founded);
             _serializer.ToCSV(FilePath, _tourGuide);
         }
@@ -57,14 +57,18 @@ namespace BookingApp.Repository
         public TourGuide Update(TourGuide tourGuide)
         {
             _tourGuide = _serializer.FromCSV(FilePath);
-            TourGuide current = _tourGuide.Find(tourGuide => tourGuide.Id == tourGuide.Id);
+            TourGuide current = _tourGuide.Find(tg => tg.Id == tourGuide.Id);
             int index = _tourGuide.IndexOf(current);
             _tourGuide.Remove(current);
             _tourGuide.Insert(index, tourGuide);
             _serializer.ToCSV(FilePath, _tourGuide);
             return tourGuide;
         }
-
+        public TourGuide GetById(int id)
+        {
+            _tourGuide = _serializer.FromCSV(FilePath);
+            return _tourGuide.FirstOrDefault(tG => tG.Id == id);
+        }
 
     }
 

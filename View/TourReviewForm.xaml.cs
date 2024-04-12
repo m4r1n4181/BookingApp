@@ -110,12 +110,31 @@ namespace BookingApp.View
 
         private void AddReviewButton_Click(object sender, RoutedEventArgs e)
         {
+            // Uzmi ocjene iz RadioButton kontrola
+            int knowledgeRating = Convert.ToInt32((knowledge5.IsChecked == true) ? 5 :
+                                                  (knowledge4.IsChecked == true) ? 4 :
+                                                  (knowledge3.IsChecked == true) ? 3 :
+                                                  (knowledge2.IsChecked == true) ? 2 :
+                                                  (knowledge1.IsChecked == true) ? 1 : 0);
+
+            int languageRating = Convert.ToInt32((language5.IsChecked == true) ? 5 :
+                                                  (language4.IsChecked == true) ? 4 :
+                                                  (language3.IsChecked == true) ? 3 :
+                                                  (language2.IsChecked == true) ? 2 :
+                                                  (language1.IsChecked == true) ? 1 : 0);
+
+            int interestingnessRating = Convert.ToInt32((interestingness5.IsChecked == true) ? 5 :
+                                                         (interestingness4.IsChecked == true) ? 4 :
+                                                         (interestingness3.IsChecked == true) ? 3 :
+                                                         (interestingness2.IsChecked == true) ? 2 :
+                                                         (interestingness1.IsChecked == true) ? 1 : 0);
+
             TourReview tourReview = new TourReview()
             {
                 TourReservation = SelectedTourReservation,
-                Knowledge = Knowledge,
-                Fluency = Fluency,
-                TourAppeal = TourAppeal,
+                Knowledge = knowledgeRating,
+                Fluency = languageRating,
+                TourAppeal = interestingnessRating,
                 Comment = Comment,
                 Pictures = Pictures,
             };
