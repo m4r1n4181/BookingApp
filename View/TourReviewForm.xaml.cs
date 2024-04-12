@@ -1,5 +1,6 @@
 ﻿using BookingApp.Controller;
 using BookingApp.Model;
+using Microsoft.Win32;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -18,21 +19,12 @@ using System.Windows.Shapes;
 
 namespace BookingApp.View
 {
-    /// <summary>
-    /// Interaction logic for GuestReviewForm.xaml
-    /// </summary>
     public partial class TourReviewForm : Window
     {
         private TourReviewController _tourReviewController;
         public TourReservation SelectedTourReservation { get; set; }
+        public List<string> Pictures { get; set; }
 
-        public TourReviewForm(TourReservation tourReservation)
-        {
-            InitializeComponent();
-            this.DataContext = this;
-            _tourReviewController = new TourReviewController();
-            SelectedTourReservation = tourReservation;
-        }
         private int _knowledge;
         public int Knowledge
         {
@@ -41,7 +33,7 @@ namespace BookingApp.View
             {
                 if (value < 1 || value > 5)
                 {
-                    MessageBox.Show("Knowledge, Fluency  and Tour Appeal must be between 1 and 5.", "Invalid Input", MessageBoxButton.OK, MessageBoxImage.Warning);
+                    MessageBox.Show("Knowledge, Fluency and Tour Appeal must be between 1 and 5.", "Invalid Input", MessageBoxButton.OK, MessageBoxImage.Warning);
                     return;
                 }
 
@@ -61,7 +53,7 @@ namespace BookingApp.View
             {
                 if (value < 1 || value > 5)
                 {
-                    MessageBox.Show("Knowledge, Fluency  and Tour Appeal must be between 1 and 5.", "Invalid Input", MessageBoxButton.OK, MessageBoxImage.Warning);
+                    MessageBox.Show("Knowledge, Fluency and Tour Appeal must be between 1 and 5.", "Invalid Input", MessageBoxButton.OK, MessageBoxImage.Warning);
                     return;
                 }
 
@@ -81,13 +73,13 @@ namespace BookingApp.View
             {
                 if (value < 1 || value > 5)
                 {
-                    MessageBox.Show("Knowledge, Fluency  and Tour Appeal must be between 1 and 5.", "Invalid Input", MessageBoxButton.OK, MessageBoxImage.Warning);
+                    MessageBox.Show("Knowledge, Fluency and Tour Appeal must be between 1 and 5.", "Invalid Input", MessageBoxButton.OK, MessageBoxImage.Warning);
                     return;
                 }
 
-                if (value != _fluency)
+                if (value != _tourAppeal)
                 {
-                    _fluency = value;
+                    _tourAppeal = value;
                     OnPropertyChanged();
                 }
             }
@@ -106,14 +98,17 @@ namespace BookingApp.View
                 }
             }
         }
-        public event PropertyChangedEventHandler PropertyChanged;
 
-        protected virtual void OnPropertyChanged([CallerMemberName] string propertyName = null)
+        public TourReviewForm(TourReservation tourReservation)
         {
-            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
+            InitializeComponent();
+            this.DataContext = this;
+            _tourReviewController = new TourReviewController();
+            SelectedTourReservation = tourReservation;
+            Pictures = new List<string>();
         }
 
-        private void Save_Click(object sender, RoutedEventArgs e)
+        private void AddReviewButton_Click(object sender, RoutedEventArgs e)
         {
             TourReview tourReview = new TourReview()
             {
@@ -122,6 +117,7 @@ namespace BookingApp.View
                 Fluency = Fluency,
                 TourAppeal = TourAppeal,
                 Comment = Comment,
+                Pictures = Pictures,
             };
 
             _tourReviewController.RateTour(tourReview);
@@ -129,9 +125,29 @@ namespace BookingApp.View
             this.Close();
         }
 
-        private void Cancel_Click(object sender, RoutedEventArgs e)
+        private void AddImages_Click(object sender, RoutedEventArgs e)
         {
-            Close();
+            OpenFileDialog openFileDialog1 = new OpenFileDialog();
+            openFileDialog1.FileName = "";
+            openFileDialog1.Title = "Images";
+            openFileDialog1.Filter = "All Image Files|*.png;*.jpg;*.jpeg;*.bmp";
+            openFileDialog1.ShowDialog();
+
+            if (!string.IsNullOrEmpty(openFileDialog1.FileName))
+            {
+                string imagePath = openFileDialog1.FileName;
+                string imageFileName = System.IO.Path.GetFileName(imagePath);
+                string imageDestinationPath = "../Resources/Images/" + imageFileName;
+
+                Pictures.Add(imageDestinationPath);
+            }
+        }
+
+        public event PropertyChangedEventHandler PropertyChanged;
+
+        protected virtual void OnPropertyChanged([CallerMemberName] string propertyName = null)
+        {
+            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
         }
     }
 }

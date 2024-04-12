@@ -39,24 +39,12 @@
                 <RadioButton Name="interestingness4" Content="4"  HorizontalAlignment="Center" VerticalAlignment="Center" Width="32" Margin="0,0,3,0"></RadioButton>
                 <RadioButton Name="interestingness5" Content="5"  HorizontalAlignment="Center" VerticalAlignment="Center" Width="32" />
             </StackPanel>
-            <!-- Dodavanje slike -->
-            <StackPanel Orientation="Horizontal" Width="300" Margin="0,0,0,10">
-                <Label Content="Dodaj sliku" Width="100" Height="27"></Label>
-                <TextBox Text="{Binding Url, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True}" Width="90" Margin="0,0,13,0" Height="27"></TextBox>
-                <Button x:Name="AddImageButton" Content="+" Width="27" Background="White" FontWeight="Bold" Command="{Binding AddImageCommand}"></Button>
-                <Button x:Name="RemoveImageButton" Content="-" Width="27"  Margin="8,0,0,0" Background="White" FontWeight="Bold" Command="{Binding RemoveImageCommand}"></Button>
-            </StackPanel>
             <!-- Pregled dodatih slika -->
-            <StackPanel Orientation="Horizontal" Width="300" Margin="0,0,0,15" Height="85">
-                <DataGrid 
-                  ItemsSource="{Binding Path=Images, UpdateSourceTrigger=PropertyChanged}"
-                  SelectedItem="{Binding Path=SelectedUrl}"
-                  AutoGenerateColumns="False" IsReadOnly="True"
-                  x:Name="myImagesOverview"  Width="165" Margin="135,0,0,0" Height="82" Background="White">
-                    <DataGrid.Columns>
-                        <DataGridTextColumn Header="Url" Binding="{Binding}" Width="*"></DataGridTextColumn>
-                    </DataGrid.Columns>
-                </DataGrid>
+            <StackPanel Orientation="Horizontal" Width="300" Margin="0,0,0,15">
+                <TextBlock Width="100" Text="Slike:"/>
+                <Button Height="30" Width="50" Click="AddImages_Click" Content="Add"/>
+
+
             </StackPanel>
             <!-- Komentar -->
             <StackPanel Orientation="Horizontal" Width="300" Height="60">
@@ -64,7 +52,7 @@
                 <TextBox Width="165" Height="50" Margin="0,0,0,10" Text="{Binding Path=Comment, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True}"></TextBox>
             </StackPanel>
             <!-- Dugme za dodavanje recenzije -->
-            <Button x:Name="AddReviewButton" Width="150" Height="30" HorizontalAlignment="Right" Margin="0,20,42,0" Command="{Binding AddReviewCommand}" Background="#FFFFFF">
+            <Button x:Name="AddReviewButton" Width="150" Height="30" HorizontalAlignment="Right" Margin="0,20,42,0" Click="AddReviewButton_Click" Background="#FFFFFF">
                 <StackPanel Orientation="Horizontal">
                     <ContentControl Content="Oceni"></ContentControl>
                 </StackPanel>
