@@ -164,7 +164,7 @@ namespace BookingApp.View
             Languages = tour.Language;
             MaxTourists = tour.MaxTourists;
             Duration = tour.Duration;
-            TourDate = string.Join(", ", tour.StartDates);
+            TourDate = string.Join(", ", tour.StartDate);
 
 
             _keyPointController = new KeyPointController();

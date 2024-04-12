@@ -19,12 +19,15 @@ namespace BookingApp.View
 
         public ObservableCollection<Location> Locations { get; set; }
         public ObservableCollection<string> PossibleTimes { get; set; }
+
+
         private LocationController _locationController;
         private KeyPointController _keyPointController;
         public Location SelectedLocation { get; set; }
 
         public List<string> Pictures { get; set; }
         public List<KeyPoint> KeyPoints { get; set; }
+        public List<DateTime> DateTimes { get; set; }
 
         public string SelectedTime { get; set; }
 
@@ -160,6 +163,7 @@ namespace BookingApp.View
             Locations = new ObservableCollection<Location>(_locationController.GetAll());
             Pictures = new List<string>();
             KeyPoints = new List<KeyPoint>();
+            DateTimes = new List<DateTime>();
             AddedKeyPoint = "";
             TourDate = DateTime.Now;
 
@@ -179,22 +183,12 @@ namespace BookingApp.View
                 Description = Description,
                 Language = TourLanguage,
                 MaxTourists = MaxTourists,
-                StartDates = new List<DateTime>(),
                 Duration = Duration,
                 Pictures = Pictures,
             };
 
-            TourDate = TourDate.Date;
-            TimeSpan timeOfDay = TimeSpan.Parse(SelectedTime);
-            TourDate = TourDate.Add(timeOfDay);
+            _tourController.CreateTour(newTour, DateTimes, KeyPoints);
 
-            newTour.StartDates.Add(TourDate);
-
-            _tourController.CreateTour(newTour);
-
-            KeyPoints.ForEach(kp => kp.Tour = newTour);
-
-            _keyPointController.SaveAll(KeyPoints);
 
             Close();
         }
@@ -232,6 +226,16 @@ namespace BookingApp.View
             KeyPoint keyPoint = new KeyPoint() { Name = KeyPoint, IsActive = false };
             KeyPoints.Add(keyPoint);
             AddedKeyPoint += KeyPoint + ", ";
+        }
+
+        private void Add_DateTime_Click(object sender, RoutedEventArgs e)
+        {
+
+            TourDate = TourDate.Date;
+            TimeSpan timeOfDay = TimeSpan.Parse(SelectedTime);
+            TourDate = TourDate.Add(timeOfDay);
+
+            DateTimes.Add(TourDate);
         }
     }
 }

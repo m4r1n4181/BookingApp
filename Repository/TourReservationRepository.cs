@@ -102,14 +102,7 @@ namespace BookingApp.Repository
             return _tourReservations.Where(t => t.Tourists.Any(p => p.Id == reservationId)).ToList();
         }
 
-        public void BindTourReservationVoucher()
-        {
-            foreach (TourReservation tourReservation in _tourReservations)
-            {
-                int voucherId = tourReservation.Voucher.Id;
-
-            }
-        }
+        
         public void BindTourReservationKeyPoint()
         {
             TourReservationRepository tourReservationRepository = new TourReservationRepository();

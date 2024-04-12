@@ -19,19 +19,19 @@ namespace BookingApp.Model
 
         public TouristEntry TouristEntry { get; set; }
 
-        public Voucher Voucher { get; set; }
+        public Tourist Tourist { get; set; }    
 
 
         public TourReservation() { }
 
-        public TourReservation(int id, int guestsNumber, Tour tour, List<TourParticipants> tourists, TouristEntry touristEntry, Voucher voucher)
+        public TourReservation(int id, int guestsNumber, Tour tour, List<TourParticipants> tourists, TouristEntry touristEntry, Tourist tourist)
         {
             Id = id;
             GuestsNumber = guestsNumber;
             this.Tour = tour;
             Tourists = tourists;
             this.TouristEntry = touristEntry;
-            Voucher = voucher;
+            Tourist = tourist;
         }
 
         public TourReservation(int guestsNumber, List<TourParticipants> participants)
@@ -43,7 +43,7 @@ namespace BookingApp.Model
         public string[] ToCSV()
         {
             string touristIds = string.Join(";", Tourists.Select(t => t.Id.ToString()));
-            string[] csvValues = { Id.ToString(), GuestsNumber.ToString(), Tour.Id.ToString(), touristIds, TouristEntry.Id.ToString(), Voucher.Id.ToString() };
+            string[] csvValues = { Id.ToString(), GuestsNumber.ToString(), Tour.Id.ToString(), touristIds, TouristEntry.Id.ToString(), Tourist.Id.ToString() };
             return csvValues;
         }
 
@@ -63,8 +63,8 @@ namespace BookingApp.Model
                 TourParticipants participant = new TourParticipants() { Id = Convert.ToInt32(touristId) };
                 Tourists.Add(participant);
             }
-            //TouristEntry = new TouristEntry() { Id = Convert.ToInt32(values[4]) }; //PUCA ne prikazuje se stranica uopste 
-            Voucher = new Voucher() { Id = Convert.ToInt32(values[5]) };
+            TouristEntry = new TouristEntry() { Id = Convert.ToInt32(values[4]) }; //PUCA ne prikazuje se stranica uopste 
+            Tourist = new Tourist() { Id = Convert.ToInt32(values[5]) };
 
         }
 

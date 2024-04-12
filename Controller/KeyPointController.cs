@@ -18,10 +18,6 @@ namespace BookingApp.Controller
             _keyPointService = new KeyPointService();
         }
 
-        public void SaveAll(List<KeyPoint> keyPoints)
-        {
-            _keyPointService.SaveAll(keyPoints);
-        }
         public List<KeyPoint> GetAllForTour(int tourId)
         {
             return _keyPointService.GetAllForTour(tourId);

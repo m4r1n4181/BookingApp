@@ -1,4 +1,5 @@
-﻿using BookingApp.DTO;
+﻿using BookingApp.Controller;
+using BookingApp.DTO;
 using BookingApp.Model;
 using BookingApp.Repository;
 using System;
@@ -30,12 +31,17 @@ namespace BookingApp.Service
         }
 
 
-        public Tour CreateTour(Tour tour)
+        public void CreateTour(Tour tour, List<DateTime> dateTimes, List<KeyPoint> keyPoints)
         {
-            tour = _tourRepository.Save(tour);
+            foreach(DateTime dateTime in dateTimes)
+            {
+                tour.StartDate = dateTime;
+                tour = _tourRepository.Save(tour);
 
+                keyPoints.ForEach(kp => kp.Tour = tour);
 
-            return tour;
+                _keyPointRepository.SaveAll(keyPoints);
+            }
 
         }
 
@@ -47,7 +53,7 @@ namespace BookingApp.Service
         public void StartTour(int id)
         {
             Tour tour = _tourRepository.GetById(id);
-            if (tour == null || tour.IsStarted)
+            if (tour == null || tour.TourStatus == Model.Enums.TourStatusType.started)
             {
                 return;
             }
@@ -58,7 +64,8 @@ namespace BookingApp.Service
                 return;
             }
 
-            tour.IsStarted = true;
+            //tour.IsStarted = true;
+             tour.TourStatus = Model.Enums.TourStatusType.started;
             _tourRepository.Update(tour);
 
             foreach(KeyPoint keyPoint in keyPoints)
@@ -94,7 +101,7 @@ namespace BookingApp.Service
         public void EndTour(int id)
         {
             Tour tour = _tourRepository.GetById(id);
-            if (tour == null || !tour.IsStarted)
+            if (tour == null || tour.TourStatus == Model.Enums.TourStatusType.not_started)
             {
                 return;
             }
@@ -106,7 +113,7 @@ namespace BookingApp.Service
                 keyPoint.IsActive = false;
                 _keyPointRepository.Update(keyPoint);
             }
-            tour.IsStarted = false;
+            tour.TourStatus = Model.Enums.TourStatusType.not_started;
             _tourRepository.Update(tour);
         }
 
@@ -140,7 +147,7 @@ namespace BookingApp.Service
 
             foreach (Tour tour in allTours)
             {
-                if (tour.StartDates.Any(startDate => startDate.Date == DateTime.Today))
+                if (tour.StartDate == DateTime.Today)
                 {
                     _tourForNow.Add(tour);
                 }
@@ -156,7 +163,7 @@ namespace BookingApp.Service
 
             foreach (Tour tour in allTours)
             {
-                if (tour.StartDates.Any(startDate => startDate.Date > DateTime.Today.AddDays(2))) // 48 hours before the tour starts
+                if (tour.StartDate > DateTime.Today.AddDays(2)) // 48 hours before the tour starts
                 {
                     _tourInFuture.Add(tour);
                 }
@@ -187,11 +194,11 @@ namespace BookingApp.Service
 
             foreach (Tour tour in _tourRepository.GetAll())
             {
-                if (!tour.IsStarted) 
+                if (tour.TourStatus == Model.Enums.TourStatusType.not_started) 
                 {
                     continue;
                 }
-                if (year == -1 || tour.StartDates.Any(date => date.Year == year)) // Provera da li je godina postavljena i da li datum odgovara godini
+                if (year == -1 || tour.StartDate.Year == year) // Provera da li je godina postavljena i da li datum odgovara godini
                 {
                     int peopleCame = _tourReservationService.GetAllTourReservationsForTourWherePeopleShowed(tour.Id).Count();
                     if (peopleCame > maxPeopleCame)
@@ -213,7 +220,7 @@ namespace BookingApp.Service
             {
                 if (tour.TourGuide.Id == tourGuideId)
                 {
-                    years.Add(tour.StartDates.FirstOrDefault().Year);
+                    years.Add(tour.StartDate.Year);
                 }
             }
             return years.Distinct().ToList();

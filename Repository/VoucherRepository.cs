@@ -78,10 +78,6 @@ namespace BookingApp.Repository
             return voucher;
         }
 
-        public List<Voucher> GetByTourGuide(TourGuide tourGuide)
-        {
-            _vouchers = _serializer.FromCSV(FilePath);
-            return _vouchers.FindAll(v => v.TourGuide.Id == tourGuide.Id);
-        }
+        
     }
 }

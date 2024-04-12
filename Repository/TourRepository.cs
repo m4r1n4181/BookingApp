@@ -141,18 +141,17 @@ namespace BookingApp.Repository
 
         }
 
-        private bool TourStartesToday(Tour tour)
-        {
-            return tour.StartDates.Any(date => date.Date == DateTime.Now.Date);
-        }
 
         public List<Tour> GetTodayTours()
         {
-
             _tours = _serializer.FromCSV(FilePath);
             BindLocations();
-            return _tours.FindAll(tour => TourStartesToday(tour) && !tour.IsStarted);
+
+            DateTime today = DateTime.Now.Date; 
+
+            return _tours.FindAll(tour => tour.StartDate.Date == today && tour.TourStatus == Model.Enums.TourStatusType.not_started);
         }
+
 
 
     }

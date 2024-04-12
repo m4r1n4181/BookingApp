@@ -23,9 +23,9 @@ namespace BookingApp.Controller
             _tourService.EndTour(id);
         }
 
-        public void CreateTour(Tour tour)
+        public void CreateTour(Tour tour, List<DateTime> dateTimes, List<KeyPoint> keyPoints)
         {
-            _tourService.CreateTour(tour);
+            _tourService.CreateTour(tour, dateTimes, keyPoints);
         }
         public List<Tour> GetAllWithDateTime()
         {

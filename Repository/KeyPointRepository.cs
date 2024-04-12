@@ -51,6 +51,13 @@ namespace BookingApp.Repository
             _serializer.ToCSV(FilePath, _keyPoint);
             return keyPoint;
         }
+        public void SaveAll(List<KeyPoint> keyPoints)
+        {
+            foreach (KeyPoint keyPoint in keyPoints)
+            {
+                Save(keyPoint);
+            }
+        }
 
         public int NextId()
         {

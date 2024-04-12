@@ -76,24 +76,22 @@ namespace BookingApp.Service
 
         public void CancelTourReservation(TourReservation tourReservation)
         {
-            Tourist tourist = new Tourist(); //tourParticipant mozda 
+            Tourist tourist = tourReservation.Tourist; 
             DateTime expires = DateTime.Now.AddDays(365); // Postavljanje datuma isteka na 365 dana od danasnjeg datuma
-            Voucher voucher = new Voucher(-1, null, tourist, false, 365, expires, VoucherType.resignation);
+            Voucher voucher = new Voucher(-1, tourist, StatusType.active, expires, VoucherType.cancellation);
             _voucherRepository.Save(voucher);
 
-            _tourReservationRepository.Delete(tourReservation);
+            //_tourReservationRepository.Delete(tourReservation);
         }
 
         public void CancelAllTourReservationsForTour(int tourId)
         {
-            foreach (TourReservation tourReservation in _tourReservationRepository.GetAll())
-            {
-                if (tourReservation.Tour.Id == tourId)
-                {
-                    CancelTourReservation(tourReservation);
+            Tour tour = _tourRepository.GetById(tourId);
+            tour.TourStatus = TourStatusType.cancelled;
+            _tourRepository.Update(tour);
 
-                }
-            }
+            _tourReservationRepository.GetByTour(tourId).ForEach(res => CancelTourReservation(res));
+            
         }
 
         public List<TourReservation> GetAllParticipants(int reservationId)

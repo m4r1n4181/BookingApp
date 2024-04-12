@@ -24,9 +24,9 @@ namespace BookingApp.View
     /// Interaction logic for AllTourGuideReservations.xaml
     /// </summary>
     /// mozda dodati polje za datetime cisto da imam uvid u to kad treba tura da se desi al svakako radi 48sati pre...
-    public partial class AllTourGuideReservations : Window,INotifyPropertyChanged
+    public partial class AllTourGuideReservations : Window, INotifyPropertyChanged
     {
-        public event PropertyChangedEventHandler  PropertyChanged;
+        public event PropertyChangedEventHandler PropertyChanged;
 
         protected virtual void OnPropertyChanged([CallerMemberName] string propertyName = null)
         {
@@ -37,23 +37,11 @@ namespace BookingApp.View
         private TourReservationController _tourReservationController;
 
         private ObservableCollection<TourReservation> TourReservation;
-   
+
 
         private TourController _tourController;
 
-        private ObservableCollection<Tour> _tours;
-        public ObservableCollection<Tour> Tours
-        {
-            get { return _tours; }
-            set
-            {
-                if (_tours != value)
-                {
-                    _tours = value;
-                    OnPropertyChanged();
-                }
-            }
-        }
+        public ObservableCollection<Tour> Tours { get; set; }
 
         private Tour _selectedTour;
         public Tour SelectedTour
@@ -77,6 +65,7 @@ namespace BookingApp.View
             this.DataContext = this;
 
             _tourController = new TourController();
+            _tourReservationController = new TourReservationController();
 
             Tours = new ObservableCollection<Tour>(_tourController.GetTourInFuture());
         }
@@ -89,17 +78,12 @@ namespace BookingApp.View
                 MessageBox.Show("Please select a tour.", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
                 return;
             }
-            else
-            {
-                /*if (_tourReservationController == null)
-                {
-                    _tourReservationController = new TourReservationController(); // Inicijalizacija ako nije već inicijalizovan
-                }
 
-                _tourReservationController.CancelAllTourReservationsForTour(SelectedTour.Id);*/
-               // CancelTourView cancelTourView = new CancelTourView();
-                //cancelTourView.Show();
-            }
+
+            _tourReservationController.CancelAllTourReservationsForTour(SelectedTour.Id);
+            // CancelTourView cancelTourView = new CancelTourView();
+            //cancelTourView.Show();
+
         }
 
 

@@ -51,7 +51,7 @@ namespace BookingApp.Service
             {
                 Tour tour = _tourRepository.GetById(tourId);
 
-                tour.IsStarted = false;
+                tour.TourStatus = Model.Enums.TourStatusType.not_started;
                 _tourRepository.Update(tour);
             }
         }
@@ -60,13 +60,7 @@ namespace BookingApp.Service
         {
             return _keyPointRepository.GetKeyPointsForTour(tourId);
         }
-        public void SaveAll(List<KeyPoint> keyPoints)
-        {
-            foreach (KeyPoint keyPoint in keyPoints)
-            {
-                _keyPointRepository.Save(keyPoint);
-            }
-        }
+        
     }
 }
 

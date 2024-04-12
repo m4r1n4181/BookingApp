@@ -12,10 +12,8 @@ namespace BookingApp.Model
     {
 
         public int Id { get; set; }
-        public User TourGuide { get; set; }
         public Tourist Tourist { get; set; }
-        public bool IsUsed {  get; set; }
-        public int Duration { get; set; }
+        public StatusType StatusType {  get; set; }   //status active used expired
 
         public DateTime Expires { get; set; }
 
@@ -23,32 +21,29 @@ namespace BookingApp.Model
 
         public Voucher() { }
 
-        public Voucher(int id, User tourGuide, Tourist tourist, bool isUsed, int duration, DateTime expires, VoucherType type)
+        public Voucher(int id, Tourist tourist, StatusType statusType, DateTime expires, VoucherType type)
         {
             Id = id;
-            TourGuide = tourGuide;
             Tourist = tourist;
-            IsUsed = isUsed;
-            Duration = duration;
+            StatusType = statusType;
             Expires = expires;
             Type = type;
         }
 
         public string[] ToCSV()
         {
-            string[] csvValues = { Id.ToString(), TourGuide.Id.ToString(), Tourist.Id.ToString(),IsUsed.ToString(), Duration.ToString(), Expires.ToString(), Type.ToString() };
+            string[] csvValues = { Id.ToString(), Tourist.Id.ToString(), StatusType.ToString(),Expires.ToString(), Type.ToString() };
             return csvValues;
         }
 
         public void FromCSV(string[] values)
         {
             Id = Convert.ToInt32(values[0]);
-            TourGuide = new User(Convert.ToInt32(values[1]));
-            Tourist = new Tourist(Convert.ToInt32(values[2]));
-            IsUsed = bool.Parse(values[3]);
-            Duration = Convert.ToInt32(values[4]);
-            Expires = DateTime.Parse(values[5]);
-            Enum.TryParse(values[6], out VoucherType voucherType);
+            Tourist = new Tourist(Convert.ToInt32(values[1]));
+            Enum.TryParse(values[2], out StatusType statusType);
+            StatusType = statusType;
+            Expires = DateTime.Parse(values[3]);
+            Enum.TryParse(values[4], out VoucherType voucherType);
             Type = voucherType;
         }
     }
