@@ -37,6 +37,22 @@ namespace BookingApp.Service
             return ownersReservations;
         }
 
+        public List<AccommodationReservation> GetAllByGuestForRating(int guestId)
+        {
+            List<AccommodationReservation> allReservations = _accommodationReservationRepository.GetAllWithAccommodations();
+            List<AccommodationReservation> ownersReservations = new List<AccommodationReservation>();
+
+            foreach (AccommodationReservation reservation in allReservations)
+            {
+                if (reservation.Guest.Id == guestId && reservation.Departure < DateTime.Now && reservation.Departure > DateTime.Now.AddDays(-5))
+                {
+                    ownersReservations.Add(reservation);
+                }
+            }
+
+            return ownersReservations;
+        }
+
         public bool DatesIntertwine(DateTime start1, DateTime end1, DateTime start2, DateTime end2)
         {
             if (end1 < start2 || start1 > end2)

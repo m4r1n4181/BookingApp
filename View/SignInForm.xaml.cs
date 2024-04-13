@@ -87,13 +87,13 @@ namespace BookingApp.View
                     {
 
                     }
-                    else
+                    else if(user.Type == UserType.Guest)
                     {
                         AccommodationSearch accommodationSearch = new AccommodationSearch();
                         accommodationSearch.Show();
 
-                        //OwnerReviewForm ownerReviewForm = new OwnerReviewForm(user);
-                        //ownerReviewForm.Show();
+                        GuestWindows.AccommodationReservationToRateForm accommodationReservationToRateForm = new GuestWindows.AccommodationReservationToRateForm(user);
+                        accommodationReservationToRateForm.Show();
                         //ovaj deo se odkomentarise kad se doradi bas za tu rezervaciju ocenjivanje trenutno to nije povezano
                         Close();
                      

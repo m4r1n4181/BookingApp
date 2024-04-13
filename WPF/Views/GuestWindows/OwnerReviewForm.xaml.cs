@@ -1,8 +1,11 @@
 ﻿using BookingApp.Controller;
 using BookingApp.Model;
+using BookingApp.Service;
+using Microsoft.Win32;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
+using System.IO;
 using System.Linq;
 using System.Runtime.CompilerServices;
 using System.Text;
@@ -25,12 +28,14 @@ namespace BookingApp.View
     {
         private OwnerReviewController _ownerReviewController;
         public AccommodationReservation SelectedAccommodationReservation;
+        public List<string> Pictures { get; set; }
         public OwnerReviewForm(AccommodationReservation accommodationReservation)
         {
             InitializeComponent();
             this.DataContext = this;
-            _ownerReviewController = new OwnerReviewController();
+            _ownerReviewController = new OwnerReviewController(new OwnerReviewService());
             SelectedAccommodationReservation = accommodationReservation;
+            Pictures = new List<string>();
         }
 
         private int _cleanliness;
@@ -102,6 +107,7 @@ namespace BookingApp.View
                 Cleanliness = Clean,
                 RuleAdherence = Rule,
                 Comment = Comment,
+                Pictures = Pictures,
             };
 
             _ownerReviewController.RateOwner(ownerReview);
@@ -113,6 +119,28 @@ namespace BookingApp.View
         private void Button_Click_1(object sender, RoutedEventArgs e)
         {
             Close();
+        }
+
+        private void Button_Click_2(object sender, RoutedEventArgs e)
+        {
+
+            OpenFileDialog openFileDialog1 = new OpenFileDialog();
+            openFileDialog1.FileName = "";
+            openFileDialog1.Title = "Images";
+            openFileDialog1.Filter = "All Image Files|*.png;*.jpg;*.jpeg;*.bmp";
+            openFileDialog1.ShowDialog();
+
+            if (!string.IsNullOrEmpty(openFileDialog1.FileName))
+            {
+                string imagePath = openFileDialog1.FileName;//stara putanja
+                string imageFileName = System.IO.Path.GetFileName(imagePath);
+                string imageDestinationPath = "../../../Resources/Images/" + imageFileName; //nova putanja
+                File.Copy(imagePath, imageDestinationPath);
+
+                Pictures.Add(imageDestinationPath);
+
+            }
+
         }
     }
 }
