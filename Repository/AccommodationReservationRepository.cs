@@ -99,7 +99,10 @@ namespace BookingApp.Repository
             return reservations.Where(reservation => reservation.Accommodation.Id == id).ToList();
         }
 
-
-
+        public List<AccommodationReservation> GetByOwnerId(int id)
+        {
+            List<AccommodationReservation> reservations = GetAll();
+            return reservations.Where(reservation => reservation.Accommodation.Owner.Id == id).ToList();
+        }
     }
 }

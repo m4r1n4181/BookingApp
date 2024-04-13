@@ -49,7 +49,10 @@ namespace BookingApp.Controller
         {
             return _accommodationOwnerReviewService.GetAllValidReviews(accommodation);
         }
-
+        public List<AccommodationOwnerReview> GetAllValidReviewsForUser(User owner)
+        {
+            return _accommodationOwnerReviewService.GetAllValidReviewsForUser(owner);
+        }
         public bool IsSuperOwner(int ownerId)
         {
             return _accommodationOwnerReviewService.IsSuperOwner(ownerId);

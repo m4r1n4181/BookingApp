@@ -29,9 +29,5 @@
     </Resource>
   </ItemGroup>
 
-  <ItemGroup>
-    <Folder Include="WPF\ViewModels\" />
-  </ItemGroup>
-
 
 </Project>

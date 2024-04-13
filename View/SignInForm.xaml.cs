@@ -1,7 +1,7 @@
 ﻿using BookingApp.Model;
 using BookingApp.Model.Enums;
 using BookingApp.Repository;
-using BookingApp.View.Owner;
+using BookingApp.View.OwnerWindows;
 using System.ComponentModel;
 using System.Runtime.CompilerServices;
 using System.Windows;
@@ -70,16 +70,18 @@ namespace BookingApp.View
                     {
                         //OwnerMainWindow ownerMainWindow = new OwnerMainWindow();
                         //ownerMainWindow.Show();
-                        ReservationRescheduleRequestsWindow reservationRescheduleRequestsWindow = new ReservationRescheduleRequestsWindow();
-                        reservationRescheduleRequestsWindow.Show();
-                       // RegisterAccommodationForm registerAccommodationForm = new RegisterAccommodationForm();
+                        // ReservationRescheduleRequestsWindow reservationRescheduleRequestsWindow = new ReservationRescheduleRequestsWindow();
+                        //reservationRescheduleRequestsWindow.Show();
+                        // RegisterAccommodationForm registerAccommodationForm = new RegisterAccommodationForm();
                         //registerAccommodationForm.Show();
                         //AccommodationReservationToRateForm accommodationReservationToRateForm = new AccommodationReservationToRateForm(user);
                         //accommodationReservationToRateForm.Show();
-                       AccommodationOverviewWindow accommodationOverviewWindow = new AccommodationOverviewWindow();
-                       accommodationOverviewWindow.Show();
-                        
-
+                        // AccommodationsOverviewWindow accommodationOverviewWindow = new AccommodationsOverviewWindow();
+                        //accommodationOverviewWindow.Show();
+                        //ReservationRescheduleRequestsWindow reservationRescheduleRequestsWindow = new ReservationRescheduleRequestsWindow();
+                        //reservationRescheduleRequestsWindow.Show();
+                        AccommodationOwnerReviewsWindow accommodationOwnerReviewsWindow = new AccommodationOwnerReviewsWindow();
+                        accommodationOwnerReviewsWindow.Show();
 
                     }
 

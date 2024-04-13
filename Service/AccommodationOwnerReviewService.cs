@@ -74,6 +74,20 @@ namespace BookingApp.Service
 
             return reviews;
         }
+        public List<AccommodationOwnerReview> GetAllValidReviewsForUser(User user)
+        {
+            List<AccommodationOwnerReview> reviews = new List<AccommodationOwnerReview>();
+
+            foreach (AccommodationReservation reservation in _accommodationReservationRepository.GetByOwnerId(user.Id))
+            {
+                if (isValidReview(reservation))
+                {
+                    reviews.Add(reservation.AccommodationReview);
+                }
+            }
+
+            return reviews;
+        }
 
         public int GetReviewsCountForOwner(int ownerId)
         {

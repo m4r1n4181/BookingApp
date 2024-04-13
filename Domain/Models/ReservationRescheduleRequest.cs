@@ -57,7 +57,7 @@ namespace BookingApp.Domain.Models
         {
             Id = Convert.ToInt32(values[0]);
             Reservation = new AccommodationReservation() { Id = Convert.ToInt32(values[1]) };
-            Guest = new User() { Id = Convert.ToInt32(values[2]) };
+            Guest = new User(Id = Convert.ToInt32(values[2]));
             NewStart = Convert.ToDateTime(values[3]);
             NewEnd = Convert.ToDateTime(values[4]);
             Comment = values[5];           
