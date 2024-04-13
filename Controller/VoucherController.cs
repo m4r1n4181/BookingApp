@@ -54,15 +54,15 @@ namespace BookingApp.Controller
         }
 
 
-        public List<Voucher> GetVouchersThatDidntExpire()
+        public List<Voucher> GetVouchersThatDidntExpire(int id)
         {
-            return _voucherService.GetVouchersThatDidntExpire();
+            return _voucherService.GetVouchersThatDidntExpire(id);
         }
 
-        public List<Voucher> GetVouchersThatArentUsed(List<Voucher> vouchers)
+       /* public List<Voucher> GetVouchersThatArentUsed(List<Voucher> vouchers)
         {
             return _voucherService.GetVouchersThatArentUsed(vouchers);
-        }
+        }*/
 
     }
 }

@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:BookingApp.View"
         mc:Ignorable="d"
-        Title="Create new reservation" Height="400" Width="600" WindowStartupLocation="CenterScreen">
+        Title="Create new reservation" Height="500" Width="600" WindowStartupLocation="CenterScreen">
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="*" MinWidth="300"/>
@@ -61,6 +61,7 @@
         <!-- Reserve Tour Section -->
         <StackPanel Grid.Column="1" Margin="20" VerticalAlignment="Bottom">
             <Button Content="Reserve Tour" Click="ReserveTour_Click" Height="35" Width="140" HorizontalAlignment="Center" Margin="5"/>
+            <Button Content="Vouchers" Click="Voucher_Click" Height="35" Width="140" HorizontalAlignment="Center" Margin="5"/>
         </StackPanel>
         
 

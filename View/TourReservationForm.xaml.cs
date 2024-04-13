@@ -257,6 +257,13 @@ namespace BookingApp.View
             }
         }
 
+        private void Voucher_Click(object sender, RoutedEventArgs e)
+        {
+            UsableVouchers usableVouchers = new UsableVouchers(User);
+            usableVouchers.Show();
+
+        }
+
 
     }
 }

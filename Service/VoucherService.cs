@@ -53,45 +53,62 @@ namespace BookingApp.Service
 
         }
 
-        public List<Voucher> GetVouchersThatDidntExpire()
+        /* public List<Voucher> GetVouchersThatDidntExpire(int id)
+         {
+             List<Voucher> voucherList = new List<Voucher>();
+             var allVouchers = _voucherRepository.GetAll();
+             for (int i = 0; i < allVouchers.Count(); i++)
+             {
+                 var voucher = allVouchers.ElementAt(i);
+                 if (voucher.ExpirationDate >= DateTime.Now)
+                 {
+                     voucherList.Add(voucher);
+                 }
+                 else
+                 {
+                     //ako vaucer nije iskoristen
+                     var unusedVouchers = GetVouchersThatArentUsed(allVouchers, id);
+                     if (voucher.ExpirationDate >= DateTime.Now)
+                     {
+                         foreach (Voucher unusedVoucher in unusedVouchers)
+                         {
+                             _voucherRepository.Delete(unusedVoucher);
+                         }
+                     }
+
+                 }
+             }
+             return voucherList;
+         }
+
+         public List<Voucher> GetVouchersThatArentUsed(List<Voucher> vouchers, int id)
+         {
+             List<Voucher> voucherList = new List<Voucher>();
+             foreach (Voucher voucher in vouchers)
+             {
+                 if (voucher.IsUsed == false)
+                 {
+                     voucherList.Add(voucher);
+                 }
+             }
+             return voucherList;
+         }*/
+
+        public List<Voucher> GetVouchersThatDidntExpire(int userId)
         {
             List<Voucher> voucherList = new List<Voucher>();
             var allVouchers = _voucherRepository.GetAll();
-            for (int i = 0; i < allVouchers.Count(); i++)
-            {
-                var voucher = allVouchers.ElementAt(i);
-                if (voucher.ExpirationDate >= DateTime.Now)
-                {
-                    voucherList.Add(voucher);
-                }
-                else
-                {
-                    //ako vaucer nije iskoristen
-                    var unusedVouchers = GetVouchersThatArentUsed(allVouchers);
-                    if (voucher.ExpirationDate >= DateTime.Now)
-                    {
-                        foreach (Voucher unusedVoucher in unusedVouchers)
-                        {
-                            _voucherRepository.Delete(unusedVoucher);
-                        }
-                    }
 
-                }
-            }
-            return voucherList;
-        }
-
-        public List<Voucher> GetVouchersThatArentUsed(List<Voucher> vouchers)
-        {
-            List<Voucher> voucherList = new List<Voucher>();
-            foreach (Voucher voucher in vouchers)
+            foreach (var voucher in allVouchers)
             {
-                if (voucher.IsUsed == false)
+                if (voucher.Tourist.Id == userId && !voucher.IsUsed && voucher.ExpirationDate >= DateTime.Now)
                 {
                     voucherList.Add(voucher);
                 }
             }
+
             return voucherList;
         }
+
     }
 }
