@@ -17,7 +17,7 @@ namespace BookingApp.Model
         public Tour Tour { get; set; }
         public List<TourParticipants> Tourists { get; set; }
 
-        public TouristEntry TouristEntry { get; set; }
+        public TouristEntry TouristEntry { get; set; }          //Moze biti NULL
 
         public Tourist Tourist { get; set; }    
 

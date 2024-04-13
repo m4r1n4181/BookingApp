@@ -17,10 +17,7 @@ namespace BookingApp.Controller
         {
             _tourReservationService = new TourReservationService();
         }
-        public List<TourReservation> GetAllParticipants(int reservationId)
-        {
-            return _tourReservationService.GetAllParticipants(reservationId);
-        }
+        
         public void GetAllTours()
         {
             _tourReservationService.GetAllTours();

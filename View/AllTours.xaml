@@ -1,16 +1,15 @@
-﻿
-    <Window x:Class="BookingApp.View.LiveTourView"
+﻿<Window x:Class="BookingApp.View.AllTours"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:BookingApp.View"
         mc:Ignorable="d"
-        Title="LiveTourView" Height="450" Width="800">
+        Title="AllTours" Height="450" Width="800">
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="*"/>
-            
+
             <ColumnDefinition Width="760"/>
             <ColumnDefinition Width="*"/>
         </Grid.ColumnDefinitions>
@@ -34,12 +33,16 @@ AutoGenerateColumns="False" Height="325" HeadersVisibility="Column" FontSize="13
             </DataGrid>
         </StackPanel>
 
+
         <ToolBar Grid.Row="0" Grid.ColumnSpan="3">
-            <Button Click="Activate_Click" FontSize="14" VerticalAlignment="Center" Margin="5,0,0,0">
-                Activate
+            <Button Click="View_Click" FontSize="14" VerticalAlignment="Center" Margin="5,0,0,0">
+                View
+            </Button>
+            <Button Click="ActiveTours_Click" FontSize="14" VerticalAlignment="Center" Margin="5,0,0,0">
+                Active tours
             </Button>
         </ToolBar>
 
     </Grid>
-    
+
 </Window>

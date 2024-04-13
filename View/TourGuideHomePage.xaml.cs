@@ -58,6 +58,12 @@ namespace BookingApp.View
             TourGuideReviews tourGuideReviews = new TourGuideReviews();
             tourGuideReviews.Show();
         }
+        private void AllTours_Click(object sender, RoutedEventArgs e)
+        {
+
+            AllTours allTours = new AllTours();
+            allTours.Show();
+        }
 
     }
 }

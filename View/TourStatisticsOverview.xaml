@@ -38,6 +38,6 @@
 
         <!-- View Button -->
         <Button Content="View" HorizontalAlignment="Left" VerticalAlignment="Top" 
-                Margin="400,153,0,0" Width="80" Click="ViewButton_Click"/>
+                Margin="400,153,0,0" Width="80" Click="ViewAgeButton_Click"/>
     </Grid>
 </Window>

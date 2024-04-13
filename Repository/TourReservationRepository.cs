@@ -51,6 +51,14 @@ namespace BookingApp.Repository
             }
         }
 
+        private void BindTourists() //bind touru sa njegovim rezervacijama 
+        {
+            TouristRepository touristRepository = new TouristRepository();
+            foreach (var tourReservation in _tourReservations)
+            {
+                tourReservation.Tourist = touristRepository.GetById(tourReservation.Tourist.Id);
+            }
+        }
 
         public TourReservation Save(TourReservation tourReservation)
         {
@@ -94,6 +102,7 @@ namespace BookingApp.Repository
         public List<TourReservation> GetByTour(int tourId) // sve rezervacije za tu turu 
         {
             _tourReservations = _serializer.FromCSV(FilePath);
+            BindTourists();
             return _tourReservations.FindAll(c => c.Tour.Id == tourId);
         }
         public List<TourReservation> GetAllParticipants(int reservationId) //uzela sve participants za jednu tu rez
@@ -102,18 +111,12 @@ namespace BookingApp.Repository
             return _tourReservations.Where(t => t.Tourists.Any(p => p.Id == reservationId)).ToList();
         }
 
-        
-        public void BindTourReservationKeyPoint()
+        public TourReservation GetByTourAndTourist(int tourId, int touristId)
         {
-            TourReservationRepository tourReservationRepository = new TourReservationRepository();
-            foreach (var tourReservation in _tourReservations)
-            {
-                if (tourReservation.TouristEntry != null && tourReservation.TouristEntry.KeyPoint != null)
-                {
-                   // KeyPoint keyPoint = KeyPointRepository.GetById(tourReservation.TouristEntry.KeyPoint.Id); nece da radi zasto 
-                }   
-            }
+            _tourReservations = _serializer.FromCSV(FilePath);
+            return _tourReservations.FirstOrDefault(tr => tr.Tour.Id == tourId && tr.Tourist.Id == touristId);
         }
+        
 
     }
 }

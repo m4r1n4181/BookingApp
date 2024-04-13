@@ -9,7 +9,9 @@ namespace BookingApp.Model.Enums
     public enum TourStatusType
     {
         not_started, 
-        started, 
+        started,
+        finished,
         cancelled
+        
     }
 }

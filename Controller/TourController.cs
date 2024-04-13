@@ -86,7 +86,12 @@ namespace BookingApp.Controller
         {
             return _tourService.GetAllTour(tourGuideId);
         }
-      
+
+        public List<Tour> GetAllActiveTours()
+        {
+            return _tourService.GetAllActiveTours();
+        }
+
 
     }
 

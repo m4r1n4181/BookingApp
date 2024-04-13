@@ -94,48 +94,9 @@ namespace BookingApp.Service
             
         }
 
-        public List<TourReservation> GetAllParticipants(int reservationId)
-        {
-            return _tourReservationRepository.GetAllParticipants(reservationId);
-        }
+       
 
-        public List<TourReservation> GetAllTourReservationsForTourWherePeopleShowed(int tourId)
-        {
-            List<TourReservation> tourReservations = new List<TourReservation>();
-            foreach (TourReservation tourReservation in _tourReservationRepository.GetAll())
-            {
-                if (tourReservation.Tour.Id == tourId ) //moda mi treba i logika kada su se turisti prikljucili na turu - preko keypointa
-                {
-                    tourReservations.Add(tourReservation);
-
-                }
-            }
-            return tourReservations;
-        }
-
-        public TourAgeGroupStatistic GetAgeStatisticsForTour(int tourId)
-        {
-            TourAgeGroupStatistic tourAgeGroupStatistic = new TourAgeGroupStatistic(0, 0, 0);
-            foreach (TourReservation tourReservation in GetAllTourReservationsForTourWherePeopleShowed(tourId))
-            {
-                foreach (TourParticipants tourist in tourReservation.Tourists)
-                {
-                    if (tourist.Age <= 18)
-                    {
-                        tourAgeGroupStatistic.To18 += 1;
-                    }
-                    else if (tourist.Age > 18 && tourist.Age <= 50)
-                    {
-                        tourAgeGroupStatistic.From18To50 += 1;
-                    }
-                    else
-                    {
-                        tourAgeGroupStatistic.From50 += 1;
-                    }
-                }
-            }
-            return tourAgeGroupStatistic;
-        }
+        
 
     }
 }

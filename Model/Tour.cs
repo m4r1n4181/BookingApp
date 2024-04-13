@@ -35,7 +35,7 @@ namespace BookingApp.Model
         public DateTime StartDate { get; set; }
         public int Duration { get; set; }
         public List<string> Pictures { get; set; }
-
+        
         public TourStatusType TourStatus { get; set; } // status // not started, started, otkazana
                                             // public List<TouristEntry> TouristEntries { get; set; } // koji od prijavljenih turista su došli na turu
 
@@ -81,7 +81,7 @@ namespace BookingApp.Model
             // string? picturesString = Pictures != null ? string.Join(",", Pictures) : null;
             //takodje nista se ne upisuje u tour.csv i proeriti saveAll keypoints
             string picturesString = string.Join(",", Pictures);
-            string[] csvValues = { Id.ToString(), TourGuide.Id.ToString(), Name, Description, Language, Location.Id.ToString(), MaxTourists.ToString(), AvailableSeats.ToString(), startDatesString, Duration.ToString(), picturesString, TourStatus.ToString() };
+            string[] csvValues = { Id.ToString(), TourGuide.Id.ToString(), Name, Description, Language, Location.Id.ToString(), MaxTourists.ToString(), AvailableSeats.ToString(), startDatesString, Duration.ToString(), picturesString,  TourStatus.ToString() };
             return csvValues;
         }
 
@@ -96,8 +96,7 @@ namespace BookingApp.Model
             MaxTourists = Convert.ToInt32(values[6]);
             AvailableSeats = Convert.ToInt32(values[7]);
 
-            StartDate = DateTime.ParseExact(values[8], "MM/dd/yyyy", CultureInfo.InvariantCulture);
-
+            StartDate = Convert.ToDateTime(values[8]);
 
             Duration = Convert.ToInt32(values[9]);
             Pictures = values[10].Split(",").ToList();

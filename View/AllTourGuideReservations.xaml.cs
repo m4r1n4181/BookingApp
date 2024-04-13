@@ -81,9 +81,16 @@ namespace BookingApp.View
 
 
             _tourReservationController.CancelAllTourReservationsForTour(SelectedTour.Id);
+            Refresh();
             // CancelTourView cancelTourView = new CancelTourView();
             //cancelTourView.Show();
 
+        }
+
+        private void Refresh()
+        {
+            Tours.Clear();
+            _tourController.GetTourInFuture().ForEach(t => Tours.Add(t));
         }
 
 

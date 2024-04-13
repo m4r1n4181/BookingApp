@@ -92,7 +92,7 @@ namespace BookingApp.View
             BestTour = _tourController.MostVisitedTour(SelectedYear);
         }
 
-        private void ViewButton_Click(object sender, RoutedEventArgs e)
+        private void ViewAgeButton_Click(object sender, RoutedEventArgs e)
         {
             if (SelectedTour == null)
             {
