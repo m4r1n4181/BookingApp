@@ -1,5 +1,6 @@
 ﻿using BookingApp.Controller;
 using BookingApp.Domain.Models;
+using BookingApp.WPF.Views.OwnerWindows;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -44,8 +45,8 @@ namespace BookingApp.View.Owner
             {
                 return;
             }
-           // ReservationRescheduleRequestHandlingWindow ReservationRescheduleRequestHandling = new ReservationRescheduleRequestHandlingWindow(SelectedReservationRescheduleRequest);
-            //ReservationRescheduleRequestHandling.Show();
+            ReservationRescheduleRequestHandle ReservationRescheduleRequestHandling = new ReservationRescheduleRequestHandle(SelectedReservationRescheduleRequest);
+            ReservationRescheduleRequestHandling.Show();
             Close();
         }
     }

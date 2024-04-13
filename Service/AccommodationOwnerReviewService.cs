@@ -58,7 +58,7 @@ namespace BookingApp.Service
         */
         private bool isValidReview(AccommodationReservation reservation)
         {
-            return reservation.GuestReview.Id != -1 && reservation.AccommodationReview.Id != -1 && reservation.Accommodation.Owner.Id == SignInForm.LoggedUser.Id;
+            return reservation.GuestReview.Id != -1 && reservation.AccommodationReview.Id != -1;//&& reservation.Accommodation.Owner.Id == SignInForm.LoggedUser.Id;
         }
 
         public List<AccommodationOwnerReview> GetAllValidReviews(Accommodation accommodation)
