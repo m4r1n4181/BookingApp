@@ -29,10 +29,5 @@
     </Resource>
   </ItemGroup>
 
-  <ItemGroup>
-    <Folder Include="View\Owner\" />
-    <Folder Include="WPF\ViewModels\" />
-  </ItemGroup>
-
 
 </Project>

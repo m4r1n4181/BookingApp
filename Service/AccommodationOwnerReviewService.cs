@@ -58,13 +58,27 @@ namespace BookingApp.Service
         */
         private bool isValidReview(AccommodationReservation reservation)
         {
-            return reservation.GuestReview.Id != -1 && reservation.AccommodationReview.Id != -1 && reservation.Accommodation.Owner.Id == SignInForm.LoggedUser.Id;
+            return reservation.GuestReview.Id != -1 && reservation.AccommodationReview.Id != -1;//&& reservation.Accommodation.Owner.Id == SignInForm.LoggedUser.Id;
         }
 
         public List<AccommodationOwnerReview> GetAllValidReviews(Accommodation accommodation)
         {
             List<AccommodationOwnerReview> reviews = new List<AccommodationOwnerReview>();
             foreach (AccommodationReservation reservation in _accommodationReservationRepository.GetByAccommodationId(accommodation.Id))
+            {
+                if (isValidReview(reservation))
+                {
+                    reviews.Add(reservation.AccommodationReview);
+                }
+            }
+
+            return reviews;
+        }
+        public List<AccommodationOwnerReview> GetAllValidReviewsForUser(User user)
+        {
+            List<AccommodationOwnerReview> reviews = new List<AccommodationOwnerReview>();
+
+            foreach (AccommodationReservation reservation in _accommodationReservationRepository.GetByOwnerId(user.Id))
             {
                 if (isValidReview(reservation))
                 {

@@ -1,4 +1,6 @@
-﻿using System;
+﻿using BookingApp.Controller;
+using BookingApp.Domain.Models;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -12,16 +14,18 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 
-namespace BookingApp.WPF.Views.OwnerWindows
+namespace BookingApp.View.OwnerWindows
 {
     /// <summary>
-    /// Interaction logic for ReservationRescheduleRequestHandle.xaml
+    /// Interaction logic for ReservationRescheduleRequestsWindow.xaml
     /// </summary>
-    public partial class ReservationRescheduleRequestHandle : Window
-    {
-        public ReservationRescheduleRequestHandle()
+    public partial class ReservationRescheduleRequestsWindow : Window
+    { 
+        public ReservationRescheduleRequestsWindow()
         {
             InitializeComponent();
+              this.DataContext = new ViewModels.OwnerViewModels.ReservationRescheduleRequestsViewModel();
+            
         }
     }
 }
