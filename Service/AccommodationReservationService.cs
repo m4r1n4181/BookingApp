@@ -37,6 +37,23 @@ namespace BookingApp.Service
             return ownersReservations;
         }
 
+
+
+        public List<AccommodationReservation> GetAllByGuest(int guestId)
+        {
+            List<AccommodationReservation> allReservations = _accommodationReservationRepository.GetAllWithAccommodations();
+            List<AccommodationReservation> guestsReservations = new List<AccommodationReservation>();
+
+            foreach (AccommodationReservation reservation in allReservations)
+            {
+                if (reservation.Guest.Id == guestId)
+                {
+                    guestsReservations.Add(reservation);
+                }
+            }
+            return guestsReservations;
+        }
+
         public List<AccommodationReservation> GetAllByGuestForRating(int guestId)
         {
             List<AccommodationReservation> allReservations = _accommodationReservationRepository.GetAllWithAccommodations();

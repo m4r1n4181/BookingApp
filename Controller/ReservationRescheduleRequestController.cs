@@ -60,5 +60,10 @@ namespace BookingApp.Controller
         {
             return _reservationRescheduleRequestService.GetDeclined(guest);
         }
+
+        public List<ReservationRescheduleRequest> GetAllForGuest(int guestId)
+        {
+            return _reservationRescheduleRequestService.GetAllForGuest(guestId);
+        }
     }
 }

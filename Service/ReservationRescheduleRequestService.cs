@@ -120,7 +120,6 @@ namespace BookingApp.Service
 
             return reservationRescheduleRequests;
         }
-
         public List<ReservationRescheduleRequest> GetDeclined(int guest)
         {
             List<ReservationRescheduleRequest> reservationRescheduleRequests = new List<ReservationRescheduleRequest>();
@@ -136,6 +135,11 @@ namespace BookingApp.Service
             }
 
             return reservationRescheduleRequests;
+        }
+
+        public List<ReservationRescheduleRequest> GetAllForGuest(int guestId)
+        {
+            return _reservationRescheduleRequestRepository.GetAllForGuest(guestId);  
         }
     }
 

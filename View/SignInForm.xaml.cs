@@ -2,6 +2,7 @@
 using BookingApp.Model.Enums;
 using BookingApp.Repository;
 using BookingApp.View.Owner;
+using BookingApp.WPF.Views.GuestWindows;
 using System.ComponentModel;
 using System.Runtime.CompilerServices;
 using System.Windows;
@@ -94,7 +95,14 @@ namespace BookingApp.View
 
                         GuestWindows.AccommodationReservationToRateForm accommodationReservationToRateForm = new GuestWindows.AccommodationReservationToRateForm(user);
                         accommodationReservationToRateForm.Show();
-                        //ovaj deo se odkomentarise kad se doradi bas za tu rezervaciju ocenjivanje trenutno to nije povezano
+                        
+
+                        GuestWindows.AccommodationAllReservations accommodationAllReservations = new GuestWindows.AccommodationAllReservations(user);
+                        accommodationAllReservations.Show();
+
+                        GuestHomePage guestHomePage = new GuestHomePage();
+                        guestHomePage.Show();
+
                         Close();
                      
 

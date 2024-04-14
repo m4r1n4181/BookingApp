@@ -108,6 +108,13 @@ namespace BookingApp.Repository
             _serializer.ToCSV(FilePath, _reservationRescheduleRequests);
             return reservationRescheduleRequest;
         }
+
+        public List<ReservationRescheduleRequest> GetAllForGuest(int guestId)
+        {
+            _reservationRescheduleRequests = _serializer.FromCSV(FilePath);
+            BindReservationRescheduleRequestWithAccommodationReservation();
+            return _reservationRescheduleRequests.FindAll(rr => rr.Guest.Id == guestId);
+        }
     }
 }
 

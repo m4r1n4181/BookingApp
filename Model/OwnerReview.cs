@@ -47,7 +47,7 @@ namespace BookingApp.Model
         public string[] ToCSV()
         {
             string picturesString = string.Join(",", Pictures);
-            string[] csvValues = {Id.ToString(),Reservation.Id.ToString(),Cleanliness.ToString(),RuleAdherence.ToString(),Comment};
+            string[] csvValues = {Id.ToString(),Reservation.Id.ToString(),Cleanliness.ToString(),RuleAdherence.ToString(),Comment, picturesString };
             return csvValues;
         }
     }
