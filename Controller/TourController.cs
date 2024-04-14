@@ -92,6 +92,11 @@ namespace BookingApp.Controller
             return _tourService.GetAllActiveTours();
         }
 
+        public TourAgeGroupStatistic GetAgeStatisticsForTour(int tourId)
+        {
+            return _tourService.GetAgeStatisticsForTour(tourId);
+        }
+
 
     }
 

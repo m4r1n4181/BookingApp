@@ -46,10 +46,7 @@ namespace BookingApp.Controller
             _tourReservationService.CancelAllTourReservationsForTour(tourId); //brisem zapravo sve rezervacije tj participants
         }
 
-        public TourAgeGroupStatistic GetAgeStatisticsForTour(int tourId)
-        {
-            return _tourReservationService.GetAgeStatisticsForTour(tourId);
-        }
+      
 
 
     }

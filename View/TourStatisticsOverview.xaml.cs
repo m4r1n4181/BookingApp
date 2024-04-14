@@ -98,7 +98,7 @@ namespace BookingApp.View
             {
                 return;
             }
-            TourAge = _tourReservationController.GetAgeStatisticsForTour(SelectedTour.Id);
+            TourAge = _tourController.GetAgeStatisticsForTour(SelectedTour.Id);
 
         }
 
