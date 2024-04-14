@@ -20,6 +20,8 @@ namespace BookingApp.Model
         public AccommodationOwnerReview AccommodationReview { get; set; }
         public GuestReview GuestReview { get; set; }
 
+        //public AccommodationReservationStatus Status { get; set; }
+
         public AccommodationReservation() { }
         public AccommodationReservation(Accommodation accommodation, User guest, DateTime arrival, DateTime departure)
         {

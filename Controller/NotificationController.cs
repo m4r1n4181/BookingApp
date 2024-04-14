@@ -1,4 +1,6 @@
-﻿using BookingApp.Service;
+﻿using BookingApp.Model;
+using BookingApp.Repository;
+using BookingApp.Service;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -19,5 +21,21 @@ namespace BookingApp.Controller
             _notificationService = new NotificationService();
             
         }
+
+        public List<Notification> GetAll()
+        {
+            return _notificationService.GetAllNotifications();
+        }
+
+        public List<Notification> GetAllByUser(int userId)
+        {
+            return _notificationService.GetAllUnseenByUser(userId);
+        }
+
+        public void SetSeenNotificationsForUser(int userId)
+        {
+            _notificationService.SetSeenNotificationsForUser(userId);
+        }
+
     }
 }

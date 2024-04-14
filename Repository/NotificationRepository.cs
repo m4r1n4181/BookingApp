@@ -63,6 +63,11 @@ namespace BookingApp.Repository
             return Notifications.FirstOrDefault(acc => acc.Id == id);
         }
 
+        public List<Notification> GetAllByUser(int userId)
+        {
+            Notifications = _serializer.FromCSV(FilePath);
+            return Notifications.FindAll(n => n.User.Id == userId);
+        }
 
 
     }
