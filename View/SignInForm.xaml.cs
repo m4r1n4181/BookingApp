@@ -1,6 +1,8 @@
-﻿using BookingApp.Model;
+﻿using BookingApp.Controller;
+using BookingApp.Model;
 using BookingApp.Model.Enums;
 using BookingApp.Repository;
+using System.Collections.Generic;
 using System.ComponentModel;
 using System.Runtime.CompilerServices;
 using System.Windows;
@@ -14,6 +16,7 @@ namespace BookingApp.View
     {
 
         private readonly UserRepository _repository;
+        private NotificationController _notificationController;
 
         public static User LoggedUser { get; set; }
 
@@ -43,6 +46,7 @@ namespace BookingApp.View
             InitializeComponent();
             DataContext = this;
             _repository = new UserRepository();
+            _notificationController = new NotificationController();
         }
 
         private void SignIn(object sender, RoutedEventArgs e)
@@ -76,6 +80,13 @@ namespace BookingApp.View
                     {
                         TourOverviewForm tourOverviewForm = new TourOverviewForm(user);
                         tourOverviewForm.Show();
+
+                        List<Notification> notifications = _notificationController.GetByUserId(LoggedUser.Id);
+                        foreach(Notification notification in notifications)
+                        {
+                            MessageBox.Show(notification.Message, "Notifications", MessageBoxButton.OK, MessageBoxImage.Information);
+                        }
+                       // _notificationController.ReadAllUserNotifications(LoggedUser.Id);
                     }
                     else
                     {

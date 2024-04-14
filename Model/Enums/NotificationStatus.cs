@@ -4,9 +4,11 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace BookingApp.Model
+namespace BookingApp.Model.Enums
 {
-    internal class RateTour
+    public enum NotificationStatus
     {
+        unread,
+        read
     }
 }

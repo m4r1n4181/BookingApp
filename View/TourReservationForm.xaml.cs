@@ -188,7 +188,7 @@ namespace BookingApp.View
                 if (result == MessageBoxResult.Yes)
                 {
                     // Pozivamo metod za prikaz alternativnih tura
-                    //ShowAlternativeTours();
+                    ShowAlternativeTours();
                 }
                 else
                 {
@@ -201,20 +201,17 @@ namespace BookingApp.View
             }
         }
 
-       /* private void ShowAlternativeTours()
+         private void ShowAlternativeTours()
         {
             // Dobijemo lokaciju odabrane ture
             Location selectedLocation = SelectedTour.Location;
 
-            // Dobijemo alternative sa istom lokacijom kao odabrana tura
-            var alternativeTours = _tourRepository.GetAlternativesByLocation(selectedLocation);
+           // var alternativeTours = _tourRepository.GetAlternativeTours(selectedLocation);
 
-            // Kreiramo prozor za prikaz alternativnih tura i prosleđujemo listu tura
-            //AlternativeToursView alternativeToursView = new AlternativeToursView(alternativeTours);
+            AlternativeToursView alternativeToursView = new AlternativeToursView(selectedLocation);
 
-            // Prikažemo prozor
-            //alternativeToursView.ShowDialog();
-        }*/
+            alternativeToursView.ShowDialog();
+        }
 
 
 

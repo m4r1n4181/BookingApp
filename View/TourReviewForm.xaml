@@ -38,9 +38,9 @@
                 <RadioButton Name="interestingness5" Content="5" HorizontalAlignment="Center" VerticalAlignment="Center" Width="32" GroupName="InterestingnessGroup" />
             </StackPanel>
 
-            <!-- Pregled dodatih slika -->
+            <!-- Slike -->
             <StackPanel Orientation="Horizontal" Width="300" Margin="0,0,0,15">
-                <TextBlock Width="100" Text="Slike:"/>
+                <TextBlock Width="100" Text="{Binding Path=Pictures, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True}"/>
                 <Button Height="30" Width="50" Click="AddImages_Click" Content="Add"/>
             </StackPanel>
 

@@ -18,6 +18,7 @@ namespace BookingApp.Repository
 
         private List<Tour> _tours;//Tours
 
+
         public TourRepository()
         {
             _serializer = new Serializer<Tour>();
@@ -93,7 +94,9 @@ namespace BookingApp.Repository
 
         public List<Tour> GetAll()
         {
-            return _serializer.FromCSV(FilePath);
+            _tours = _serializer.FromCSV(FilePath);
+            BindLocations();
+            return _tours;
         }
 
         public Tour Save(Tour tour)
@@ -152,6 +155,12 @@ namespace BookingApp.Repository
             return _tours.FindAll(tour => tour.StartDate.Date == today && tour.TourStatus == Model.Enums.TourStatusType.not_started);
         }
 
+        public List<Tour> GetAlternativeTours(int locationId)
+        {
+            _tours = _serializer.FromCSV(FilePath);
+            BindLocations();
+            return _tours.FindAll(tour => tour.Location.Id == locationId && tour.AvailableSeats > 0);
+        }
 
 
     }

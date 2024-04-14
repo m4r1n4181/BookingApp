@@ -1,6 +1,7 @@
 ﻿using BookingApp.Controller;
 using BookingApp.Model;
 using BookingApp.Repository;
+using BookingApp.View.ViewModel;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -25,48 +26,17 @@ namespace BookingApp.View
     /// </summary>
     public partial class TouristSelectionForm : Window
     {
-        private readonly TouristController _touristController;
-        private TouristEntryController _touristEntryController;
-        public ObservableCollection<Tourist> Tourists { get; set; }
-        public KeyPoint SelectedKeyPoint { get; set; }
-
-        public Tourist SelectedTourist { get; set; }    
-
+        
         public TouristSelectionForm(KeyPoint selectedKeyPoint)
         {
             InitializeComponent();
-            this.DataContext = this;
-            SelectedKeyPoint = selectedKeyPoint;
-
-            _touristController = new TouristController();
-            _touristEntryController = new TouristEntryController();
-            Tourists = new ObservableCollection<Tourist>(_touristController.GetAllNotOnTour(selectedKeyPoint.Tour.Id)); 
+            this.DataContext = new TouristSelectionFormViewModel(selectedKeyPoint);
+          
 
         }
 
         
-        private void AddTouristEntry_Click(object sender, RoutedEventArgs e)
-        {
-            if (SelectedTourist == null)
-            {
-                MessageBox.Show("Please select a tourist.", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
-                return;
-            }
-            
-            TouristEntry touristEntry = new TouristEntry
-            {
-                   KeyPoint = SelectedKeyPoint,
-                   Tourist = SelectedTourist,
-                   
-            };
-
-            _touristEntryController.AddTouristEntry(touristEntry); 
-
-            MessageBox.Show("Tourist entry added successfully.", "Success", MessageBoxButton.OK, MessageBoxImage.Information);
-            Close();
-         }
-           
-     }
+       
       // u taj novi prozor posalji SelectedKeyPoint
         //tamo sklopis objecat ToursitEntry
         // i samo ga creiras u controlleru

@@ -95,6 +95,21 @@ namespace BookingApp.Repository
 
         }
 
+        public List<KeyPoint> GetActiveKeyPointByTour(int tourId)
+        {
+            List<KeyPoint> keyPoints = GetKeyPointsForTour(tourId);
+            List<KeyPoint> activeKeyPoints = new List<KeyPoint>();
+
+            foreach (KeyPoint keyPoint in keyPoints)
+            {
+                if (keyPoint.IsActive)
+                {
+                    activeKeyPoints.Add(keyPoint);
+                }
+            }
+            return activeKeyPoints;
+        }
+
 
     }
 }

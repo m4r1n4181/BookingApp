@@ -38,25 +38,14 @@ namespace BookingApp.Model
 
         public void FromCSV(string[] values)
         {
-            // Proverite da li niz values ima dovoljno elemenata pre nego što pristupite indeksima
-            if (values.Length >= 7)
-            {
-                // Postavite vrednosti svojstava objekta koristeći indekse niza values
                 Id = Convert.ToInt32(values[0]);
                 TourReservation = new TourReservation() { Id = Convert.ToInt32(values[1]) };
                 Knowledge = Convert.ToInt32(values[2]);
                 Fluency = Convert.ToInt32(values[3]);
                 TourAppeal = Convert.ToInt32(values[4]);
                 Comment = values[5];
-
-                // Splitujte string na listu koristeći zarez kao separator i postavite svojstvo Pictures
-                Pictures = values[6].Split(',').ToList();
-            }
-            else
-            {
-                // Ako niz values nema dovoljno elemenata, možete baciti izuzetak ili obraditi grešku na neki drugi način
-                throw new ArgumentException("Not enough elements in the values array.");
-            }
+                Pictures = values[6].Split(';').ToList();
+            
         }
 
 
@@ -64,7 +53,7 @@ namespace BookingApp.Model
         public string[] ToCSV()
         {
             string picturesString = string.Join(",", Pictures);
-            string[] csvValues = { Id.ToString(), TourReservation.Id.ToString(), Knowledge.ToString(), Fluency.ToString(), TourAppeal.ToString(), Comment };
+            string[] csvValues = { Id.ToString(), TourReservation.Id.ToString(), Knowledge.ToString(), Fluency.ToString(), TourAppeal.ToString(), Comment, picturesString };
             return csvValues;
         }
     }

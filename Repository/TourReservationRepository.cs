@@ -1,4 +1,5 @@
 ﻿using BookingApp.Model;
+using BookingApp.Model.Enums;
 using BookingApp.Serializer;
 using System;
 using System.Collections.Generic;
@@ -13,12 +14,14 @@ namespace BookingApp.Repository
         private const string FilePath = "../../../Resources/Data/tour-reservation.csv";
         private readonly Serializer<TourReservation> _serializer;
         public List<TourReservation> TourReservations;
+        public TourRepository _tourRepository;
         
 
         public TourReservationRepository()
         {
             _serializer = new Serializer<TourReservation>();
             TourReservations = _serializer.FromCSV(FilePath);
+            _tourRepository = new TourRepository();
         }
 
         public void BindTours()
@@ -92,6 +95,19 @@ namespace BookingApp.Repository
         {
             TourReservations = _serializer.FromCSV(FilePath);
             return TourReservations.FindAll(c => c.Tour.Id == tourId);
+        }
+
+        public List<TourReservation> GetByUser(int id)
+        {
+            TourReservations = _serializer.FromCSV(FilePath);
+            BindTours();
+            return TourReservations.FindAll(c => c.UserId == id);
+        }
+
+        public TourStatusType GetTourStatus(TourReservation reservation)
+        {
+            Tour tour = _tourRepository.GetById(reservation.Tour.Id);
+            return tour.TourStatus;
         }
 
     }

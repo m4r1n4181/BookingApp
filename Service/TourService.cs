@@ -127,6 +127,7 @@ namespace BookingApp.Service
 
         public List<Tour> GetAll()
         {
+
             return _tourRepository.GetAll();
         }
 
@@ -242,7 +243,9 @@ namespace BookingApp.Service
             return _allTour;
         }
 
-
-
+        public List<Tour> GetAlternativeTours(int locationId)
+        {
+            return _tourRepository.GetAlternativeTours(locationId);
+        }
     }
 }

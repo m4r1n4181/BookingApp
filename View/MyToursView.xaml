@@ -35,6 +35,10 @@
             </Button>
             <Button Content="Rate Tour" Click="RateTour_Click"/>
             <Button Content="Track Tour" Click="TrackTour_Click"/>
+            <Button x:Name="NotificationButton" Click="NotificationButton_Click" FontSize="14" VerticalAlignment="Center" Margin="5,0,0,0">
+                Notifications
+            </Button>
+            <ComboBox x:Name="NotificationsListBox" ItemsSource="{Binding Notifications}" Width="200" DisplayMemberPath="Message" HorizontalContentAlignment="Stretch" VerticalContentAlignment="Stretch" Margin="5,0,0,0" />
         </ToolBar>
 
     </Grid>
