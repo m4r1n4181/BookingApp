@@ -56,5 +56,11 @@ namespace BookingApp.Repository
             BindReservation();
             return TourReviews.FindAll(tr => tr.TourReservation.Tour.Id == tourId);
         }
+
+        public void BindReservation()//reservation sa review
+        {
+            TourReservationRepository tourReservationRepository = new TourReservationRepository();
+            TourReviews.ForEach(tr => tr.TourReservation = tourReservationRepository.GetById(tr.TourReservation.Id));
+        }
     }
 }
