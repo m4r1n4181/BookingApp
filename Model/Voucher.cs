@@ -28,6 +28,7 @@ namespace BookingApp.Model
             StatusType = statusType;
             Expires = expires;
             Type = type;
+            
         }
 
         public string[] ToCSV()

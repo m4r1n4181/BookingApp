@@ -10,28 +10,19 @@ using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Shapes;
 
-namespace BookingApp.View
+namespace BookingApp.View.ViewModels.TourGuideViewModels
 {
-    /// <summary>
-    /// Interaction logic for TourStatisticsOverview.xaml
-    /// </summary>
-    public partial class TourStatisticsOverview : Window, INotifyPropertyChanged
+    public class TourStatisticsOverviewViewModel : INotifyPropertyChanged
     {
-
         public ObservableCollection<int> Years { get; set; }
         public int SelectedYear { get; set; }
         public TourReservationController _tourReservationController;
         public TourController _tourController;
         public ObservableCollection<Tour> Tours { get; set; }
         public Tour SelectedTour { get; set; }
+
+        public RelayCommand ViewAgeCommand { get; set; }
 
 
         private Tour _bestTour;
@@ -70,20 +61,21 @@ namespace BookingApp.View
         }
 
 
-        public TourStatisticsOverview()
+        public TourStatisticsOverviewViewModel()
         {
-            InitializeComponent();
-            this.DataContext = this;
             _tourController = new TourController();
             _tourReservationController = new TourReservationController();
             Years = new ObservableCollection<int>(_tourController.YearForTour(SignInForm.LoggedUser.Id));
             BestTour = _tourController.MostVisitedTour();
             SelectedYear = -1;
-            Tours = new ObservableCollection<Tour>(_tourController.GetAllTour(SignInForm.LoggedUser.Id));
+            Tours = new ObservableCollection<Tour>(_tourController.GetAllFinished());
+
+            ViewAgeCommand = new RelayCommand(ViewAgeButton_Click, CanExecuteViewAgeClick);
+
 
         }
 
-        private void ViewMostVisitedTourInGeneral_Click(object sender, RoutedEventArgs e)
+        public void ViewMostVisitedTourInGeneral_Click(object sender, RoutedEventArgs e)
         {
             if (SelectedYear == -1)
             {
@@ -92,7 +84,7 @@ namespace BookingApp.View
             BestTour = _tourController.MostVisitedTour(SelectedYear);
         }
 
-        private void ViewAgeButton_Click(object sender, RoutedEventArgs e)
+        public void ViewAgeButton_Click(object param)
         {
             if (SelectedTour == null)
             {
@@ -102,7 +94,15 @@ namespace BookingApp.View
 
         }
 
+        public bool CanExecuteViewAgeClick(object param)
+        {
+            return true;
+            // if (SelectedTour == null)
+            //{
+            // MessageBox.Show("Please select a tour.", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+            //  return false;
+            //}
+            //return true;
+        }
     }
-
 }
-

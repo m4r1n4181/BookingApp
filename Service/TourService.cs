@@ -68,12 +68,6 @@ namespace BookingApp.Service
              tour.TourStatus = Model.Enums.TourStatusType.started;
             _tourRepository.Update(tour);
 
-            foreach(KeyPoint keyPoint in keyPoints)
-            {
-                keyPoint.IsActive = false;
-                _keyPointRepository.Update(keyPoint);
-            }
-
             KeyPoint firstPoint = keyPoints.ElementAt(0);
             firstPoint.IsActive = true;
             _keyPointRepository.Update(firstPoint);
@@ -105,15 +99,7 @@ namespace BookingApp.Service
             {
                 return;
             }
-            List<KeyPoint> keyPoints = _keyPointRepository.GetKeyPointsForTour(id);
-
-            foreach (KeyPoint keyPoint in keyPoints)
-
-            {
-                keyPoint.IsActive = false;
-                _keyPointRepository.Update(keyPoint);
-            }
-            tour.TourStatus = Model.Enums.TourStatusType.not_started;
+            tour.TourStatus = Model.Enums.TourStatusType.finished;
             _tourRepository.Update(tour);
         }
 
@@ -278,6 +264,15 @@ namespace BookingApp.Service
             return _tourRepository.GetAllActiveTours();
         }
 
+        public List<Tour> GetAlternativeTours(int locationId)
+        {
+            return _tourRepository.GetAlternativeTours(locationId);
+        }
+
+        public List<Tour> GetAllFinished()
+        {
+            return _tourRepository.GetAllFinished();
+        }
 
 
     }

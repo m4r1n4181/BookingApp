@@ -9,20 +9,10 @@ using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Shapes;
 
-namespace BookingApp.View
+namespace BookingApp.View.ViewModels.TourGuideViewModels
 {
-    /// <summary>
-    /// Interaction logic for ReviewDetails.xaml
-    /// </summary>
-    public partial class ReviewDetails : Window, INotifyPropertyChanged
+    public class ReviewDetailsViewModel
     {
         public string _tourName;
         public string TourName
@@ -151,10 +141,13 @@ namespace BookingApp.View
         public Tourist SelectedTourist { get; set; }
 
         private TourController _tourController;
-        public ReviewDetails(Tour tour)
+        private TourReviewController _tourReviewController;
+        public RelayCommand ValidityCheckCommand { get; set; }
+
+        public ObservableCollection<TourReview> TourReviews { get; set; } 
+
+        public ReviewDetailsViewModel(Tour tour)
         {
-            InitializeComponent();
-            this.DataContext = this;
             SelectedTour = tour;
 
             TourName = tour.Name;
@@ -168,19 +161,29 @@ namespace BookingApp.View
 
             _keyPointController = new KeyPointController();
             _tourController = new TourController();
+            _tourReviewController = new TourReviewController();
             KeyPoints = new ObservableCollection<KeyPoint>(_keyPointController.GetAllForTour(tour.Id));
 
+            ValidityCheckCommand = new RelayCommand(ValidityCheck_Click, CanExecuteValidityClick);
 
-
+            TourReviews = new ObservableCollection<TourReview>(_tourReviewController.GetByTour(SelectedTour.Id));
 
         }
-        public void ValidityCheck_Click(object sender, RoutedEventArgs e)
+        public void ValidityCheck_Click(object param)
         {
-  
-            Close();
 
         }
 
+        public bool CanExecuteValidityClick(object param)
+        {
+            return true;
+            // if (SelectedTour == null)
+            //{
+            // MessageBox.Show("Please select a tour.", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+            //  return false;
+            //}
+            //return true;
+        }
 
     }
 }

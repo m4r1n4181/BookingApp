@@ -7,35 +7,28 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Shapes;
 
-namespace BookingApp.View
+namespace BookingApp.View.ViewModels.TourGuideViewModels
 {
-    /// <summary>
-    /// Interaction logic for ActiveTours.xaml
-    /// </summary>
-    public partial class ActiveTours : Window //trebaju mi samo active tours 
+    public class ActiveToursViewModel
     {
         public ObservableCollection<Tour> Tours { get; set; }
         public Tour SelectedTour { get; set; }
 
         private TourController _tourController;
 
-        public ActiveTours()
+        public RelayCommand ViewCommand { get; set; }
+
+
+        public ActiveToursViewModel()
         {
-            InitializeComponent();
-            DataContext = this;
             _tourController = new TourController();
             Tours = new ObservableCollection<Tour>(_tourController.GetAllActiveTours());
+            ViewCommand = new RelayCommand(View_Click, CanExecuteViewClick);
+
         }
 
-        private void View_Click(object sender, RoutedEventArgs e)
+        public void View_Click(object param)
         {
             if (SelectedTour == null)
             {
@@ -47,6 +40,17 @@ namespace BookingApp.View
             tourDetails.ShowDialog();
 
 
+        }
+
+        public bool CanExecuteViewClick(object param)
+        {
+            return true;
+            // if (SelectedTour == null)
+            //{
+            // MessageBox.Show("Please select a tour.", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+            //  return false;
+            //}
+            //return true;
         }
     }
 }

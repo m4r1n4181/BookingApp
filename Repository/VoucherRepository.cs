@@ -78,6 +78,11 @@ namespace BookingApp.Repository
             return voucher;
         }
 
-        
+        public List<Voucher> GetAllByTourist(int touristId)
+        {
+            return _vouchers.Where(voucher => voucher.Tourist.Id == touristId).ToList();
+        }
+
+
     }
 }

@@ -1,18 +1,19 @@
-using BookingApp.Controller;
+﻿using BookingApp.Controller;
 using BookingApp.Model;
-using BookingApp.Repository;
 using Microsoft.Win32;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
+using System.Linq;
 using System.Runtime.CompilerServices;
+using System.Text;
+using System.Threading.Tasks;
 using System.Windows;
-using System.Windows.Controls;
 
-namespace BookingApp.View
+namespace BookingApp.View.ViewModels.TourGuideViewModels
 {
-    public partial class CreateTourForm : Window, INotifyPropertyChanged
+    public class CreateTourFormViewModel : INotifyPropertyChanged
     {
         private readonly TourController _tourController;
 
@@ -31,6 +32,13 @@ namespace BookingApp.View
 
         public string SelectedTime { get; set; }
 
+        public RelayCommand AddKeyPointCommand { get; set; }
+        public RelayCommand AddDateTimeCommand { get; set; }
+
+        public RelayCommand AddImagesCommand { get; set; }
+        public RelayCommand CancelCommand { get; set; }
+
+        public RelayCommand SaveCommand { get; set; }
 
         private string _addedKeyPoint;
         public string AddedKeyPoint
@@ -153,10 +161,8 @@ namespace BookingApp.View
         {
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
         }
-        public CreateTourForm()
+        public CreateTourFormViewModel()
         {
-            InitializeComponent();
-            this.DataContext = this;
             _tourController = new TourController();
             _locationController = new LocationController();
             _keyPointController = new KeyPointController();
@@ -170,11 +176,19 @@ namespace BookingApp.View
 
 
             PossibleTimes = new ObservableCollection<string>() { "9:00", "12:00", "15:00", "18:00" };
+
+            AddKeyPointCommand = new RelayCommand(Add_Key_Point_Click, CanExecuteAddKeyPointClick);
+            AddDateTimeCommand = new RelayCommand(Add_DateTime_Click, CanExecuteAddDateTimeClick);
+            AddImagesCommand = new RelayCommand(AddImages_Click, CanExecuteAddImagesClick);
+            CancelCommand = new RelayCommand(Cancel, CanExecuteCancelClick);
+            SaveCommand = new RelayCommand(CreateTourForm, CanExecuteCreateClick);
+
+
         }
 
-        private void CreateTourFrom(object sender, RoutedEventArgs e)
+        public void CreateTourForm(object param)
         {
-            
+
             Tour newTour = new Tour
             {
                 Name = TourName,
@@ -190,16 +204,40 @@ namespace BookingApp.View
             _tourController.CreateTour(newTour, DateTimes, KeyPoints);
 
 
-            Close();
+            //Close();
         }
 
-        private void Cancel(object sender, RoutedEventArgs e)
+
+        public bool CanExecuteCreateClick(object param)
+        {
+            return true;
+            // if (SelectedTour == null)
+            //{
+            // MessageBox.Show("Please select a tour.", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+            //  return false;
+            //}
+            //return true;
+        }
+
+        public void Cancel(object param)
         {
 
-            Close();
+            //Close();
         }
 
-        private void AddImages_Click(object sender, RoutedEventArgs e)
+
+        public bool CanExecuteCancelClick(object param)
+        {
+            return true;
+            // if (SelectedTour == null)
+            //{
+            // MessageBox.Show("Please select a tour.", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+            //  return false;
+            //}
+            //return true;
+        }
+
+        public void AddImages_Click(object param)
         {
 
             OpenFileDialog openFileDialog1 = new OpenFileDialog();
@@ -211,7 +249,7 @@ namespace BookingApp.View
             if (!string.IsNullOrEmpty(openFileDialog1.FileName))
             {
                 string imagePath = openFileDialog1.FileName;
-                string imageFileName = System.IO.Path.GetFileName(imagePath); 
+                string imageFileName = System.IO.Path.GetFileName(imagePath);
                 string imageDestinationPath = "../Resources/Images/" + imageFileName;
 
                 Pictures.Add(imageDestinationPath);
@@ -221,14 +259,37 @@ namespace BookingApp.View
 
         }
 
-        private void Add_Key_Point_Click(object sender, RoutedEventArgs e)
+        public bool CanExecuteAddImagesClick(object param)
+        {
+            return true;
+            // if (SelectedTour == null)
+            //{
+            // MessageBox.Show("Please select a tour.", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+            //  return false;
+            //}
+            //return true;
+        }
+
+        public void Add_Key_Point_Click(object param)
         {
             KeyPoint keyPoint = new KeyPoint() { Name = KeyPoint, IsActive = false };
             KeyPoints.Add(keyPoint);
             AddedKeyPoint += KeyPoint + ", ";
         }
 
-        private void Add_DateTime_Click(object sender, RoutedEventArgs e)
+
+        public bool CanExecuteAddKeyPointClick(object param)
+        {
+            return true;
+            // if (SelectedTour == null)
+            //{
+            // MessageBox.Show("Please select a tour.", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+            //  return false;
+            //}
+            //return true;
+        }
+
+        public void Add_DateTime_Click(object param)
         {
 
             TourDate = TourDate.Date;
@@ -237,8 +298,17 @@ namespace BookingApp.View
 
             DateTimes.Add(TourDate);
         }
+
+
+        public bool CanExecuteAddDateTimeClick(object param)
+        {
+            return true;
+            // if (SelectedTour == null)
+            //{
+            // MessageBox.Show("Please select a tour.", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+            //  return false;
+            //}
+            //return true;
+        }
     }
 }
-
-
-

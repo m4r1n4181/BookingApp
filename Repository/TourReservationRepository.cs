@@ -1,4 +1,5 @@
 ﻿using BookingApp.Model;
+using BookingApp.Model.Enums;
 using BookingApp.Serializer;
 using System;
 using System.Collections.Generic;
@@ -15,12 +16,13 @@ namespace BookingApp.Repository
         private readonly Serializer<TourReservation> _serializer;
         public List<TourReservation> _tourReservations;
         public List<TourParticipants> _tourParticipants;
-
+        public TourRepository _tourRepository;
 
         public TourReservationRepository()
         {
             _serializer = new Serializer<TourReservation>();
             _tourReservations = _serializer.FromCSV(FilePath);
+            _tourRepository = new TourRepository();
         }
 
 
@@ -59,6 +61,15 @@ namespace BookingApp.Repository
                 tourReservation.Tourist = touristRepository.GetById(tourReservation.Tourist.Id);
             }
         }
+        private void BindParticipants()  
+        {
+            TourParticipantRepository tourParticipantRepository = new TourParticipantRepository();
+            foreach (var tourReservation in _tourReservations)
+            {
+                tourReservation.Tourists = tourParticipantRepository.FindParticipants(tourReservation.Tourists);
+            }
+        }
+
 
         public TourReservation Save(TourReservation tourReservation)
         {
@@ -114,9 +125,23 @@ namespace BookingApp.Repository
         public TourReservation GetByTourAndTourist(int tourId, int touristId)
         {
             _tourReservations = _serializer.FromCSV(FilePath);
+            BindParticipants();
             return _tourReservations.FirstOrDefault(tr => tr.Tour.Id == tourId && tr.Tourist.Id == touristId);
         }
-        
+
+        public List<TourReservation> GetByUser(int id)
+        {
+            _tourReservations = _serializer.FromCSV(FilePath);
+            BindTours();
+            return _tourReservations.FindAll(c => c.UserId == id);
+        }
+
+        public TourStatusType GetTourStatus(TourReservation reservation)
+        {
+            Tour tour = _tourRepository.GetById(reservation.Tour.Id);
+            return tour.TourStatus;
+        }
+
 
     }
 }

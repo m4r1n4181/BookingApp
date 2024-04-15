@@ -49,8 +49,12 @@ namespace BookingApp.Repository
             return tourReview;
         }
 
-
-
-
+       
+        public List<TourReview> GetByTour(int tourId)
+        {
+            TourReviews = _serializer.FromCSV(FilePath);
+            BindReservation();
+            return TourReviews.FindAll(tr => tr.TourReservation.Tour.Id == tourId);
+        }
     }
 }

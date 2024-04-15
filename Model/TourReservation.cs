@@ -14,6 +14,7 @@ namespace BookingApp.Model
         public int Id { get; set; } // Id rezervacije
         public int GuestsNumber { get; set; }
 
+        public int UserId { get; set; }
         public Tour Tour { get; set; }
         public List<TourParticipants> Tourists { get; set; }
 
@@ -24,10 +25,11 @@ namespace BookingApp.Model
 
         public TourReservation() { }
 
-        public TourReservation(int id, int guestsNumber, Tour tour, List<TourParticipants> tourists, TouristEntry touristEntry, Tourist tourist)
+        public TourReservation(int id, int guestsNumber,int userId, Tour tour, List<TourParticipants> tourists, TouristEntry touristEntry, Tourist tourist)
         {
             Id = id;
             GuestsNumber = guestsNumber;
+            UserId = userId;
             this.Tour = tour;
             Tourists = tourists;
             this.TouristEntry = touristEntry;
@@ -43,7 +45,7 @@ namespace BookingApp.Model
         public string[] ToCSV()
         {
             string touristIds = string.Join(";", Tourists.Select(t => t.Id.ToString()));
-            string[] csvValues = { Id.ToString(), GuestsNumber.ToString(), Tour.Id.ToString(), touristIds, TouristEntry.Id.ToString(), Tourist.Id.ToString() };
+            string[] csvValues = { Id.ToString(), GuestsNumber.ToString(), UserId.ToString(), Tour.Id.ToString(), touristIds, TouristEntry.Id.ToString(), Tourist.Id.ToString() };
             return csvValues;
         }
 
@@ -51,20 +53,21 @@ namespace BookingApp.Model
         {
             Id = Convert.ToInt32(values[0]);
             GuestsNumber = Convert.ToInt32(values[1]);
-            Tour = new Tour() { Id = Convert.ToInt32(values[2]) };
+            UserId = Convert.ToInt32(values[2]);
+            Tour = new Tour() { Id = Convert.ToInt32(values[3]) };
 
             // Kreiramo novu listu za učesnike rezervacije
             Tourists = new List<TourParticipants>();
 
             // Dodajemo sve učesnike u listu
-            string[] touristIds = values[3].Split(';');
+            string[] touristIds = values[4].Split(';');
             foreach (string touristId in touristIds)
             {
                 TourParticipants participant = new TourParticipants() { Id = Convert.ToInt32(touristId) };
                 Tourists.Add(participant);
             }
-            TouristEntry = new TouristEntry() { Id = Convert.ToInt32(values[4]) }; //PUCA ne prikazuje se stranica uopste 
-            Tourist = new Tourist() { Id = Convert.ToInt32(values[5]) };
+            TouristEntry = new TouristEntry() { Id = Convert.ToInt32(values[5]) }; //PUCA ne prikazuje se stranica uopste 
+            Tourist = new Tourist() { Id = Convert.ToInt32(values[6]) };
 
         }
 

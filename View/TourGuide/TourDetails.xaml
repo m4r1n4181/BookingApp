@@ -57,14 +57,14 @@
                 </DataGrid.Columns>
             </DataGrid>
             <ToolBar Grid.Row="0" Grid.ColumnSpan="3">
-                <Button Click="ActivateKeyPoint_Click" FontSize="14" HorizontalAlignment="Center" Margin="5,0,0,0">
+                <Button Command="{Binding ActivateKeyPointCommand}" FontSize="14" HorizontalAlignment="Center" Margin="5,0,0,0">
                     Activate KeyPoint
                 </Button>
-                <Button Click="MarkTourist_Click" FontSize="14" HorizontalAlignment="Center" Margin="5,0,0,0">
+                <Button Command="{Binding MarkTouristCommand}" FontSize="14" HorizontalAlignment="Center" Margin="5,0,0,0">
                     Mark Tourist
                 </Button>
 
-                <Button Click="EndTour_Click" FontSize="14" HorizontalAlignment="Center" Margin="5,0,0,0">
+                <Button Command="{Binding EndTourCommand}" FontSize="14" HorizontalAlignment="Center" Margin="5,0,0,0">
                     End tour
                 </Button>
             </ToolBar>

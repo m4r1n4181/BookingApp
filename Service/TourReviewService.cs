@@ -1,5 +1,6 @@
 ﻿using BookingApp.Model;
 using BookingApp.Repository;
+using BookingApp.Serializer;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -24,21 +25,12 @@ namespace BookingApp.Service
             return tourReview;
         }
 
-        public List<TourReview> GetAllTourGuideReviews(int tourGuideId, int touristId)
-
+        public List<TourReview> GetByTour(int tourId)
         {
-
-            List<TourReview> tourGuideReviews = new List<TourReview>();
-
-            foreach (TourReview tourReview in _tourReviewRepository.GetAll())
-            {
-                if (tourReview.TourReservation.TouristEntry.Id == touristId && tourReview.TourReservation.Tour.TourGuide.Id == tourGuideId)
-                {
-                    tourGuideReviews.Add(tourReview);
-                }
-            }
-            return tourGuideReviews;
+            return _tourReviewRepository.GetByTour(tourId);
 
         }
+
+
     }
 }

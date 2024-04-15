@@ -1,4 +1,5 @@
 ﻿using BookingApp.Model;
+using BookingApp.Repository;
 using BookingApp.Service;
 using System;
 using System.Collections.Generic;
@@ -22,9 +23,12 @@ namespace BookingApp.Controller
             _tourReviewService.RateTour(tourReview);
         }
 
-        public List<TourReview> GetAllTourGuideReviews(int tourGuideId, int touristid)
+        public List<TourReview> GetByTour(int tourId)
         {
-            return _tourReviewService.GetAllTourGuideReviews(tourGuideId, touristid);
+            return _tourReviewService.GetByTour(tourId);
+
         }
+
+
     }
 }

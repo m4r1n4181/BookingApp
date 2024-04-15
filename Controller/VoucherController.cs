@@ -28,5 +28,40 @@ namespace BookingApp.Controller
         {
             return _voucherService.Update(voucher);
         }
+
+        public List<Voucher> GetAll()
+        {
+            return _voucherService.GetAll();
+        }
+
+        public Voucher GetById(int id)
+        {
+
+            return _voucherService.GetById(id);
+
+        }
+
+        public List<Voucher> GetAllByTourist(int id)
+        {
+
+            return _voucherService.GetAllByTourist(id);
+
+        }
+
+        public void Delete(Voucher voucher)
+        {
+            _voucherService.Delete(voucher);
+        }
+
+
+        public List<Voucher> GetVouchersThatDidntExpire(int id)
+        {
+            return _voucherService.GetVouchersThatDidntExpire(id);
+        }
+
+        /* public List<Voucher> GetVouchersThatArentUsed(List<Voucher> vouchers)
+         {
+             return _voucherService.GetVouchersThatArentUsed(vouchers);
+         }*/
     }
 }

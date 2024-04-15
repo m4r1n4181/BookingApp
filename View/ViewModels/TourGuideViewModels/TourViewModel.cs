@@ -8,21 +8,10 @@ using System.Linq;
 using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
-using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Shapes;
 
-namespace BookingApp.View
+namespace BookingApp.View.ViewModels.TourGuideViewModels
 {
-    /// <summary>
-    /// Interaction logic for TourView.xaml
-    /// </summary>
-    public partial class TourView : Window, INotifyPropertyChanged
+    public class TourViewModel
     {
 
         public string _tourName;
@@ -152,10 +141,8 @@ namespace BookingApp.View
         public Tourist SelectedTourist { get; set; }
 
         private TourController _tourController;
-        public TourView(Tour tour)
+        public TourViewModel(Tour tour)
         {
-            InitializeComponent();
-            this.DataContext = this;
             SelectedTour = tour;
 
             TourName = tour.Name;
@@ -175,9 +162,5 @@ namespace BookingApp.View
 
 
         }
-
-      
-
-
     }
 }

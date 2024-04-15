@@ -41,8 +41,8 @@ namespace BookingApp.View
         {
             TourReservation tourReservation = new TourReservation();
 
-            AllTourGuideReservations allTourGuideReservations = new AllTourGuideReservations();
-            allTourGuideReservations.Show();
+            FutureTours futureTours = new FutureTours();
+            futureTours.Show();
         }
 
         private void TourStatistics_Click(object sender, RoutedEventArgs e)

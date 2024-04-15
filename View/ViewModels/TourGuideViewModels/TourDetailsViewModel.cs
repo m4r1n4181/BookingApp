@@ -9,22 +9,11 @@ using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Shapes;
 
-namespace BookingApp.View
+namespace BookingApp.View.ViewModels.TourGuideViewModels
 {
-    /// <summary>
-    /// Interaction logic for TourDetails.xaml
-    /// </summary>
-    public partial class TourDetails : Window, INotifyPropertyChanged
+    public class TourDetailsViewModel
     {
-
         public string _tourName;
         public string TourName
         {
@@ -145,17 +134,21 @@ namespace BookingApp.View
 
         public Tour SelectedTour { get; set; }
         private KeyPointController _keyPointController;
-   
+
         public ObservableCollection<KeyPoint> KeyPoints { get; set; }
         public KeyPoint SelectedKeyPoint { get; set; }
 
         public Tourist SelectedTourist { get; set; }
 
         private TourController _tourController;
-        public TourDetails(Tour tour)
+
+        public RelayCommand ActivateKeyPointCommand { get; set; }
+        public RelayCommand MarkTouristCommand { get; set; }
+        public RelayCommand EndTourCommand { get; set; }
+
+
+        public TourDetailsViewModel(Tour tour)
         {
-            InitializeComponent();
-            this.DataContext = this;
             SelectedTour = tour;
 
             TourName = tour.Name;
@@ -171,12 +164,13 @@ namespace BookingApp.View
             _tourController = new TourController();
             KeyPoints = new ObservableCollection<KeyPoint>(_keyPointController.GetAllForTour(tour.Id));
 
-
-
+            ActivateKeyPointCommand = new RelayCommand(ActivateKeyPoint_Click, CanExecuteActivateKeyPointClick);
+            MarkTouristCommand = new RelayCommand(MarkTourist_Click, CanExecuteMarkTouristClick);
+            EndTourCommand = new RelayCommand(EndTour_Click, CanExecuteEndTourClick);
 
         }
 
-        public void ActivateKeyPoint_Click(object sender, RoutedEventArgs e)
+        public void ActivateKeyPoint_Click(object param)
         {
             if (SelectedKeyPoint == null)
             {
@@ -192,9 +186,20 @@ namespace BookingApp.View
             }
         }
 
-        public void MarkTourist_Click(object sender, RoutedEventArgs e)
+        public bool CanExecuteActivateKeyPointClick(object param)
         {
-            if(SelectedKeyPoint == null)
+            return true;
+            // if (SelectedTour == null)
+            //{
+            // MessageBox.Show("Please select a tour.", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+            //  return false;
+            //}
+            //return true;
+        }
+
+        public void MarkTourist_Click(object param)
+        {
+            if (SelectedKeyPoint == null)
             {
                 MessageBox.Show("Please select a keyPoint.", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
                 return;
@@ -209,23 +214,34 @@ namespace BookingApp.View
 
         }
 
-        public void EndTour_Click(object sender, RoutedEventArgs e)
+        public bool CanExecuteMarkTouristClick(object param)
+        {
+            return true;
+            // if (SelectedTour == null)
+            //{
+            // MessageBox.Show("Please select a tour.", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+            //  return false;
+            //}
+            //return true;
+        }
+
+        public void EndTour_Click(object param)
         {
             //tourId
             _tourController.EndTour(SelectedTour.Id);
-            Close();
+           // Close();
 
         }
-        
+        public bool CanExecuteEndTourClick(object param)
+        {
+            return true;
+            // if (SelectedTour == null)
+            //{
+            // MessageBox.Show("Please select a tour.", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+            //  return false;
+            //}
+            //return true;
+        }
 
     }
-
-   }
-
-        //za dodavanje turiste
-        // selectujem keypoint i click dugme nadji tutistu
-        //novi prozor sa svim turistama gde selektujemo jednog
-        // u taj novi prozor posalji SelectedKeyPoint
-        //tamo sklopis objecat ToursitEntry
-        // i samo ga creiras u controlleru
-
+}

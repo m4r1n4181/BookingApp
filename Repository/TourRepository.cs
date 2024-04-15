@@ -98,6 +98,7 @@ namespace BookingApp.Repository
         public List<Tour> GetAllFinished()
         {
             _tours = _serializer.FromCSV(FilePath);
+            BindLocations();
             return _tours.FindAll(t => t.TourStatus == Model.Enums.TourStatusType.finished);
         }
 
@@ -164,6 +165,13 @@ namespace BookingApp.Repository
             DateTime today = DateTime.Now.Date;
 
             return _tours.FindAll(tour => tour.StartDate.Date == today && tour.TourStatus == Model.Enums.TourStatusType.started);
+        }
+
+        public List<Tour> GetAlternativeTours(int locationId)
+        {
+            _tours = _serializer.FromCSV(FilePath);
+            BindLocations();
+            return _tours.FindAll(tour => tour.Location.Id == locationId && tour.AvailableSeats > 0);
         }
 
 

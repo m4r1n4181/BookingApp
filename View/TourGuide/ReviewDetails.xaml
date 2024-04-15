@@ -58,8 +58,9 @@
 
         <!-- ToolBar for Validity Check -->
         <ToolBar Grid.Row="8" Grid.Column="1" Margin="534,260,10,10">
-            <Button Click="ValidityCheck_Click" FontSize="14" HorizontalAlignment="Center"
-                    Margin="5,0,0,0" Content="Check validity"/>
+            <Button Command="{Binding ValidityCheckCommand}" FontSize="14" VerticalAlignment="Center" Margin="5,0,0,0">
+               Check Validity
+            </Button>
         </ToolBar>
 
     </Grid>
