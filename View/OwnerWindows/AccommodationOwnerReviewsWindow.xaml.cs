@@ -23,7 +23,6 @@ namespace BookingApp.View.OwnerWindows
     /// </summary>
     public partial class AccommodationOwnerReviewsWindow : Window
     {
-        public User User {  get; set; }
         public ObservableCollection<AccommodationOwnerReview> AccommodationOwnerReviews { get; set; }
         public AccommodationOwnerReviewController _accommodationOwnerReviewController;
         public AccommodationOwnerReviewsWindow()
@@ -31,15 +30,8 @@ namespace BookingApp.View.OwnerWindows
             InitializeComponent();
             this.DataContext = this;
             _accommodationOwnerReviewController = new AccommodationOwnerReviewController();
-            //AccommodationOwnerReviews = new ObservableCollection<AccommodationOwnerReview>(_accommodationOwnerReviewController.GetAllReviewsTest(User.Id));
+            AccommodationOwnerReviews = new ObservableCollection<AccommodationOwnerReview>(_accommodationOwnerReviewController.GetAllValidReviewsForOwner(SignInForm.LoggedUser.Id));
         }
-        public AccommodationOwnerReviewsWindow(User user)
-        {
-            InitializeComponent();
-            this.DataContext = this;
-            _accommodationOwnerReviewController = new AccommodationOwnerReviewController();
-            User = user; 
-            AccommodationOwnerReviews = new ObservableCollection<AccommodationOwnerReview>(_accommodationOwnerReviewController.GetAllReviewsTest(User.Id));
-        }
+    
     }
 }

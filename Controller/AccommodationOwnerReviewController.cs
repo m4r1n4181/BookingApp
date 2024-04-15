@@ -45,18 +45,12 @@ namespace BookingApp.Controller
             return _accommodationOwnerReviewService.SaveImages(accommodationOwnerReview);
         }
         */
-        public List<AccommodationOwnerReview> GetAllValidReviews(Accommodation accommodation)
+  
+        public List<AccommodationOwnerReview> GetAllValidReviewsForOwner(int id)
         {
-            return _accommodationOwnerReviewService.GetAllValidReviews(accommodation);
+            return _accommodationOwnerReviewService.GetAllValidReviewsForOwner(id);
         }
-        public List<AccommodationOwnerReview> GetAllReviewsTest(int id)
-        {
-            return _accommodationOwnerReviewService.GetAllReviewsTest(id);
-        }
-        public List<AccommodationOwnerReview> GetAllValidReviewsForOwner(User owner)
-        {
-            return _accommodationOwnerReviewService.GetAllValidReviewsForOwner(owner);
-        }
+   
         public bool IsSuperOwner(int ownerId)
         {
             return _accommodationOwnerReviewService.IsSuperOwner(ownerId);

@@ -56,8 +56,9 @@ namespace BookingApp.ViewModels.OwnerViewModels
             _reservationRescheduleRequestController = new ReservationRescheduleRequestController();
             _accommodationReservationController = new AccommodationReservationController();
 
-            rescheduleRequest = reservationRescheduleRequest;
-           // Guest = rescheduleRequest.Guest.Username;
+            //rescheduleRequest = reservationRescheduleRequest;
+            rescheduleRequest = _reservationRescheduleRequestController.GetWithGuest(reservationRescheduleRequest.Reservation.Guest.Id);
+            Guest = rescheduleRequest.Reservation.Guest.Username;
             if (!_accommodationReservationController.IsReschedulePossible(rescheduleRequest))
             {
                 Available = "Smeštaj je zauzet.";

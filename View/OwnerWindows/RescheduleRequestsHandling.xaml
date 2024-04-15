@@ -36,7 +36,7 @@
             <Label Grid.Row="3" x:Name="EndLabel" Content="Do" FontSize="20" VerticalAlignment="Center" HorizontalAlignment="Left" Margin="10"/>
             <Label Grid.Row="4" x:Name="AvailableLabel" Content="Dostupnost" FontSize="20" VerticalAlignment="Center" HorizontalAlignment="Left" Margin="10"/>
 
-            <Label Grid.Row="0" Grid.Column="1" Content="{Binding Guest.Username}" FontSize="20" VerticalAlignment="Center" Margin="10"/>
+            <Label Grid.Row="0" Grid.Column="1" Content="{Binding Guest}" FontSize="20" VerticalAlignment="Center" Margin="10"/>
             <Label Grid.Row="1" Grid.Column="1" Content="{Binding rescheduleRequest.Reservation.Accommodation.Name}" FontSize="20" VerticalAlignment="Center" Margin="10"/>
             <Label Grid.Row="2" Grid.Column="1" Content="{Binding rescheduleRequest.NewStart}" FontSize="20" VerticalAlignment="Center" Margin="10"/>
             <Label Grid.Row="3" Grid.Column="1" Content="{Binding rescheduleRequest.NewEnd}" FontSize="20" VerticalAlignment="Center" Margin="10"/>
