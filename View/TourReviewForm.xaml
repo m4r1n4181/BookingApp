@@ -11,51 +11,39 @@
             <!-- Znanje vodiča -->
             <StackPanel Orientation="Horizontal" Width="300" HorizontalAlignment="Center" Margin="0,20,0,0" >
                 <Label Content="Znanje vodiča" Width="100"></Label>
-                <RadioButton Name="knowledge1" Content="1" HorizontalAlignment="Center" VerticalAlignment="Center" Width="32" GroupName="KnowledgeGroup" />
-                <RadioButton Name="knowledge2" Content="2" HorizontalAlignment="Center" VerticalAlignment="Center" Width="32" GroupName="KnowledgeGroup" />
-                <RadioButton Name="knowledge3" Content="3" HorizontalAlignment="Center" VerticalAlignment="Center" Width="32" GroupName="KnowledgeGroup" />
-                <RadioButton Name="knowledge4" Content="4" HorizontalAlignment="Center" VerticalAlignment="Center" Width="32" GroupName="KnowledgeGroup" />
-                <RadioButton Name="knowledge5" Content="5" HorizontalAlignment="Center" VerticalAlignment="Center" Width="32" GroupName="KnowledgeGroup" />
+                <TextBox Name ="ZnanjeTextBox" Text="{Binding Path = Knowledge, UpdateSourceTrigger = PropertyChanged}" Width="200"></TextBox>
             </StackPanel>
 
             <!-- Jezik vodiča -->
             <StackPanel Orientation="Horizontal" Width="300" >
                 <Label Content="Jezik vodiča" Width="100"></Label>
-                <RadioButton Name="language1" Content="1" HorizontalAlignment="Center" VerticalAlignment="Center" Width="32" GroupName="LanguageGroup" />
-                <RadioButton Name="language2" Content="2" HorizontalAlignment="Center" VerticalAlignment="Center" Width="32" GroupName="LanguageGroup" />
-                <RadioButton Name="language3" Content="3" HorizontalAlignment="Center" VerticalAlignment="Center" Width="32" GroupName="LanguageGroup" />
-                <RadioButton Name="language4" Content="4" HorizontalAlignment="Center" VerticalAlignment="Center" Width="32" GroupName="LanguageGroup" />
-                <RadioButton Name="language5" Content="5" HorizontalAlignment="Center" VerticalAlignment="Center" Width="32" GroupName="LanguageGroup" />
+                <TextBox Width="200"  Name ="JezikTextBox" Text="{Binding Path = Fluency, UpdateSourceTrigger = PropertyChanged}"></TextBox>
             </StackPanel>
 
             <!-- Zanimljivost ture -->
             <StackPanel Orientation="Horizontal" Width="300" Margin="0,0,0,15">
                 <Label Content="Zanimljivost ture" Width="100"></Label>
-                <RadioButton Name="interestingness1" Content="1" HorizontalAlignment="Center" VerticalAlignment="Center" Width="32" GroupName="InterestingnessGroup" />
-                <RadioButton Name="interestingness2" Content="2" HorizontalAlignment="Center" VerticalAlignment="Center" Width="32" GroupName="InterestingnessGroup" />
-                <RadioButton Name="interestingness3" Content="3" HorizontalAlignment="Center" VerticalAlignment="Center" Width="32" GroupName="InterestingnessGroup" />
-                <RadioButton Name="interestingness4" Content="4" HorizontalAlignment="Center" VerticalAlignment="Center" Width="32" GroupName="InterestingnessGroup" />
-                <RadioButton Name="interestingness5" Content="5" HorizontalAlignment="Center" VerticalAlignment="Center" Width="32" GroupName="InterestingnessGroup" />
+                <TextBox Width="200"  Name ="ZanimljivostTextBox" Text="{Binding Path = TourAppeal, UpdateSourceTrigger = PropertyChanged}"></TextBox>
             </StackPanel>
+
+
 
             <!-- Slike -->
-            <StackPanel Orientation="Horizontal" Width="300" Margin="0,0,0,15">
-                <TextBlock Width="100" Text="{Binding Path=Pictures, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True}"/>
-                <Button Height="30" Width="50" Click="AddImages_Click" Content="Add"/>
-            </StackPanel>
+            <ListBox ItemsSource="{Binding Pictures}" Width="300" Height="100" Margin="0,0,0,15">
+                <ListBox.ItemTemplate>
+                    <DataTemplate>
+                        <Image Source="{Binding}" Width="100" Height="100"/>
+                    </DataTemplate>
+                </ListBox.ItemTemplate>
+            </ListBox>
+            <Button Content="Add Image" Command="{Binding AddImagesCommand}" Margin="0,0,0,15"/>
 
             <!-- Komentar -->
-            <StackPanel Orientation="Horizontal" Width="300" Height="60">
-                <Label Content="Komentar" Width="100"></Label>
-                <TextBox Width="165" Height="50" Margin="0,0,0,10" Text="{Binding Path=Comment, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True}"></TextBox>
-            </StackPanel>
+            <Label Content="Komentar" Width="100"></Label>
+            <TextBox Width="300" Height="60" Margin="0,0,0,15" Text="{Binding Comment, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
 
             <!-- Dugme za dodavanje recenzije -->
-            <Button x:Name="AddReviewButton" Width="150" Height="30" HorizontalAlignment="Right" Margin="0,20,42,0" Click="AddReviewButton_Click" Background="#FFFFFF">
-                <StackPanel Orientation="Horizontal">
-                    <ContentControl Content="Oceni"></ContentControl>
-                </StackPanel>
-            </Button>
+            <Button Content="Oceni" Command="{Binding AddReviewCommand}" />
         </StackPanel>
     </Grid>
 </Window>

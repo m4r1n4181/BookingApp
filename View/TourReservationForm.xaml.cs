@@ -23,7 +23,7 @@ namespace BookingApp.View
         private UserRepository _userRepository;
         private User User { get; set; }
 
-        public Tour SelectedTour {  get; set; }
+        public Tour SelectedTour { get; set; }
         public ObservableCollection<TourParticipants> Participants { get; set; }
 
         private string _addedParticipant;
@@ -201,12 +201,12 @@ namespace BookingApp.View
             }
         }
 
-         private void ShowAlternativeTours()
+        private void ShowAlternativeTours()
         {
             // Dobijemo lokaciju odabrane ture
             Location selectedLocation = SelectedTour.Location;
 
-           // var alternativeTours = _tourRepository.GetAlternativeTours(selectedLocation);
+            // var alternativeTours = _tourRepository.GetAlternativeTours(selectedLocation);
 
             AlternativeToursView alternativeToursView = new AlternativeToursView(selectedLocation);
 

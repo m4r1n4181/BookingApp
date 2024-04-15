@@ -79,7 +79,7 @@ namespace BookingApp.View
 
                     else if (user.Type == UserType.Tourist)
                     {
-                        TourOverviewForm tourOverviewForm = new TourOverviewForm();
+                        TourOverviewForm tourOverviewForm = new TourOverviewForm(LoggedUser);
                         tourOverviewForm.Show();
 
                         List<Notification> notifications = _notificationController.GetByUserId(LoggedUser.Id);

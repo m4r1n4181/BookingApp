@@ -19,13 +19,20 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
+using BookingApp.View.ViewModel.TouristViewModels;
 
-public partial class TourOverviewForm : Window
+namespace BookingApp.View
 {
-    public TourOverviewForm(User user)
+    /// <summary>
+    /// Interaction logic for TourOverviewForm.xaml
+    /// </summary>
+    public partial class TourOverviewForm : Window
     {
-        InitializeComponent();
-        this.DataContext = new TourOverviewFormViewModel(user);
-    }
+        public TourOverviewForm(User user)
+        {
+            InitializeComponent();
+            this.DataContext = new TourOverviewFormViewModel(user);
+        }
 
+    }
 }

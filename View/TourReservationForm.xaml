@@ -63,7 +63,7 @@
             <Button Content="Reserve Tour" Click="ReserveTour_Click" Height="35" Width="140" HorizontalAlignment="Center" Margin="5"/>
             <Button Content="Vouchers" Click="Voucher_Click" Height="35" Width="140" HorizontalAlignment="Center" Margin="5"/>
         </StackPanel>
-        
+
 
     </Grid>
 </Window>

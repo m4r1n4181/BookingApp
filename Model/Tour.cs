@@ -96,8 +96,7 @@ namespace BookingApp.Model
             MaxTourists = Convert.ToInt32(values[6]);
             AvailableSeats = Convert.ToInt32(values[7]);
 
-            StartDate = DateTime.ParseExact(values[8], "MM/dd/yyyy hh:mm:ss tt", CultureInfo.InvariantCulture);
-
+            StartDate = Convert.ToDateTime(values[8]);
 
             Duration = Convert.ToInt32(values[9]);
             Pictures = values[10].Split(",").ToList();

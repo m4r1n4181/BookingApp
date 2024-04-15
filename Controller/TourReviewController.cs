@@ -17,6 +17,11 @@ namespace BookingApp.Controller
             _tourReviewService = new TourReviewService();
         }
 
+        public TourReviewController(TourReviewService tourReviewService)
+        {
+            _tourReviewService = tourReviewService;
+        }
+
         public void RateTour(TourReview tourReview)
         {
             _tourReviewService.RateTour(tourReview);
