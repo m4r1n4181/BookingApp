@@ -70,7 +70,7 @@ namespace BookingApp.Service
 
             return ownersReservations;
         }
-
+      
         public bool DatesIntertwine(DateTime start1, DateTime end1, DateTime start2, DateTime end2)
         {
             if (end1 < start2 || start1 > end2)

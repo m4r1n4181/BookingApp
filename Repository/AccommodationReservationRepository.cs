@@ -30,7 +30,7 @@ namespace BookingApp.Repository
         }
         public AccommodationReservation Get(int id)
         {
-            AccommodationReservations = _serializer.FromCSV(FilePath);
+            AccommodationReservations = _serializer.FromCSV(FilePath);   
             BindAccommodations();
             return AccommodationReservations.Find(ar => ar.Id == id);
         }
@@ -103,7 +103,7 @@ namespace BookingApp.Repository
 
         public List<AccommodationReservation> GetByOwnerId(int id)
         {
-            List<AccommodationReservation> reservations = GetAll();
+            List<AccommodationReservation> reservations = GetAllWithAccommodations();
             return reservations.Where(reservation => reservation.Accommodation.Owner.Id == id).ToList();
         }
     }

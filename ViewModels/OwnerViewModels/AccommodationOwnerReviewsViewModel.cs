@@ -17,7 +17,7 @@ namespace BookingApp.ViewModels.OwnerViewModels
 
         public AccommodationOwnerReviewsViewModel(User owner) { 
         _accommodationOwnerReviewController = new AccommodationOwnerReviewController();
-            AccommodationOwnerReviews = new ObservableCollection<AccommodationOwnerReview>(_accommodationOwnerReviewController.GetAllValidReviewsForUser(owner));
+            AccommodationOwnerReviews = new ObservableCollection<AccommodationOwnerReview>(_accommodationOwnerReviewController.GetAllReviewsTest(owner.Id));
         }
     }
 }

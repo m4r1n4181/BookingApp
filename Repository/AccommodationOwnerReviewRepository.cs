@@ -42,7 +42,7 @@ namespace BookingApp.Repository
                 if (reservation != null)
                 {
                     accommodationOwnerReview.Reservation = reservation;
-                    reservation.AccommodationReview = accommodationOwnerReview;
+                   // reservation.AccommodationReview = accommodationOwnerReview;
                 }
                 else
                 {
@@ -50,10 +50,14 @@ namespace BookingApp.Repository
                 }
             }
         }
+
+
         public List<AccommodationOwnerReview> GetAll()
         {
-            return _accommodationOwnerReviews;
+            BindAccommodationOwnerReviewWithAccommodationReservation();
+            return _serializer.FromCSV(FilePath);
         }
+
         public AccommodationOwnerReview Get(int id)
         {
             return _accommodationOwnerReviews.Find(aor => aor.Id == id);
