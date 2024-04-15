@@ -19,14 +19,14 @@ namespace BookingApp.View.GuestWindows
         private readonly AccommodationReservationRepository _accommodationReservationRepository;
         private readonly AccommodationReservationService _accommodationReservationService;
 
-        public AccommodationAllReservations(User user)
+        public AccommodationAllReservations()
         {
             InitializeComponent();
             DataContext = this;
-            LoggedInUser = user;
+            LoggedInUser = SignInForm.LoggedUser;
             _accommodationReservationRepository = new AccommodationReservationRepository();
             _accommodationReservationService = new AccommodationReservationService();
-            AccommodationReservations = new ObservableCollection<AccommodationReservation>(_accommodationReservationService.GetAllByGuest(user.Id));
+            AccommodationReservations = new ObservableCollection<AccommodationReservation>(_accommodationReservationService.GetAllByGuest(LoggedInUser.Id));
         }
 
       /*  private void Activate_Click(object sender, RoutedEventArgs e)
@@ -58,7 +58,7 @@ namespace BookingApp.View.GuestWindows
             AccommodationReservationEdit accommodationReservationEdit = new AccommodationReservationEdit(SelectedReservation);
             accommodationReservationEdit.Show();
 
-            this.Close();
+            //this.Close();
         }
 
         private void Cancel_Click(object sender, RoutedEventArgs e)
@@ -68,8 +68,21 @@ namespace BookingApp.View.GuestWindows
                 MessageBox.Show("Please select a reservation before canceling.");
                 return;
             }
+            _accommodationReservationService.CancelReservation(SelectedReservation.Id);
+           // MessageBox.Show("Reservation canceled successfully.");
+            Refresh();
+            
+            
+        }
 
-            this.Close();
+        private void Refresh()
+        {
+            AccommodationReservations.Clear();
+            int loggedId = SignInForm.LoggedUser.Id;
+            foreach(AccommodationReservation reservation in _accommodationReservationService.GetAllByGuest(loggedId))
+            {
+                AccommodationReservations.Add(reservation);
+            }
         }
     }
 }

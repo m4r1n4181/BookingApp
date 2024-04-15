@@ -20,7 +20,7 @@ namespace BookingApp.Model
         public AccommodationOwnerReview AccommodationReview { get; set; }
         public GuestReview GuestReview { get; set; }
 
-        //public AccommodationReservationStatus Status { get; set; }
+        public AccommodationReservationStatus Status { get; set; }
 
         public AccommodationReservation() { }
         public AccommodationReservation(Accommodation accommodation, User guest, DateTime arrival, DateTime departure)
@@ -32,7 +32,7 @@ namespace BookingApp.Model
         }
         public string[] ToCSV()
         {
-            string[] csvValues = { Id.ToString(), Accommodation.Id.ToString(), Guest.Id.ToString(), Arrival.ToString(), Departure.ToString() };
+            string[] csvValues = { Id.ToString(), Accommodation.Id.ToString(), Guest.Id.ToString(), Arrival.ToString(), Departure.ToString(), Status.ToString() };
             return csvValues;
         }
         public void FromCSV(string[] values)
@@ -44,6 +44,8 @@ namespace BookingApp.Model
             //Departure = DateTime.ParseExact(values[4], "MM/dd/yyyy HH:mm:ss", CultureInfo.InvariantCulture);
              Arrival = Convert.ToDateTime(values[3]);
              Departure = Convert.ToDateTime(values[4]);
+             Enum.TryParse(values[5], out Enums.AccommodationReservationStatus status);
+             Status = status;
         }
     }
 }

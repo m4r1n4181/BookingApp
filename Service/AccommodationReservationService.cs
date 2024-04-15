@@ -156,5 +156,55 @@ namespace BookingApp.Service
             return (StartSecond.Date <= EndFirst.Date && EndSecond.Date >= StartFirst.Date);
         }
 
+
+        public bool CancelReservation(int reservationId)
+        {
+            AccommodationReservation reservation = _accommodationReservationRepository.Get(reservationId);
+
+            if (reservation != null)
+            {
+                if (DateTime.Now > reservation.Arrival.AddDays(-reservation.Accommodation.CancellationDays))
+                {
+                    MessageBox.Show("Prošao je krajnji rok za otkazivanje ove rezervacije koji je vlasnik zadao!", "Greška!", MessageBoxButton.OK, MessageBoxImage.Error);
+                    return false;
+                }
+                else if (reservation.Accommodation.CancellationDays == 0)
+                {
+                    if (DateTime.Now > reservation.Arrival.AddDays(-1))
+                    {
+                        MessageBox.Show("Ne mozes otkazati rezervaciju dan pred!", "Greška!", MessageBoxButton.OK, MessageBoxImage.Error);
+                        return false;
+                    }
+                    else
+                    {
+                        _accommodationReservationRepository.Delete(reservation);
+                        MessageBox.Show("Uspešno ste otkazali rezervaciju!", "Otkazano!", MessageBoxButton.OK);
+                        reservation.Status = Model.Enums.AccommodationReservationStatus.Canceled;
+                        _accommodationReservationRepository.Update(reservation);
+                        return true;
+
+                    }
+                }
+                else
+                {
+                    MessageBox.Show("Uspešno ste otkazali rezervaciju!", "Otkazano!", MessageBoxButton.OK);
+
+                    reservation.Status = Model.Enums.AccommodationReservationStatus.Canceled;
+                    _accommodationReservationRepository.Update(reservation);
+                    return true;
+                }
+
+            }
+            else
+            {
+                MessageBox.Show("Prvo morate izabrati rezervaciju!", "Greška!", MessageBoxButton.OK, MessageBoxImage.Error);
+
+                return false;
+            }
+
+         
+            //notification
+        }
+
     }
 }

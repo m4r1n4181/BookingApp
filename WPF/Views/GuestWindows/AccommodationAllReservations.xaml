@@ -23,11 +23,12 @@
             <DataGrid ItemsSource="{Binding AccommodationReservations}"
                       SelectedItem="{Binding SelectedReservation}"
                       IsReadOnly="True" SelectionMode="Single" 
-              AutoGenerateColumns="False" Height="325" HeadersVisibility="Column" FontSize="13">
+              AutoGenerateColumns="False" Height="325" HeadersVisibility="Column" FontSize="13" Width="763">
                 <DataGrid.Columns>
                     <DataGridTextColumn Header="Name of Accommodation" Binding="{Binding Accommodation.Name}" Width="200"/>
                     <DataGridTextColumn Header="Arrival" Binding="{Binding Arrival}" Width="*"/>
                     <DataGridTextColumn Header="Departure" Binding="{Binding Departure}" Width="*"/>
+                    <DataGridTextColumn Header="Status" Binding="{Binding Status}" Width="*"/>
                 </DataGrid.Columns>
             </DataGrid>
         </StackPanel>

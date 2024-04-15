@@ -106,5 +106,9 @@ namespace BookingApp.Repository
             List<AccommodationReservation> reservations = GetAll();
             return reservations.Where(reservation => reservation.Accommodation.Owner.Id == id).ToList();
         }
+
+
+
+
     }
 }

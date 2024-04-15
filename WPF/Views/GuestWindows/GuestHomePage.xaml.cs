@@ -1,4 +1,6 @@
-﻿using System;
+﻿using BookingApp.View;
+using BookingApp.View.GuestWindows;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -29,6 +31,30 @@ namespace BookingApp.WPF.Views.GuestWindows
         {
             GuestRequests guestRequests = new GuestRequests();
             guestRequests.Show();
+        }
+
+        private void Accommodation_Search_Button_Click(object sender, RoutedEventArgs e)
+        {
+            AccommodationSearch accommodationSearch = new AccommodationSearch();
+            accommodationSearch.Show();
+        }
+
+        private void Guests_Requests_Button_Click(object sender, RoutedEventArgs e)
+        {
+            GuestRequests guestsRequests = new GuestRequests();
+            guestsRequests.Show();
+        }
+
+        private void Owner_Review_Button_Click(object sender, RoutedEventArgs e)
+        {
+          AccommodationReservationToRateOwnerForm accommodationReservationToRateForm = new AccommodationReservationToRateOwnerForm();
+            accommodationReservationToRateForm.Show();
+        }
+
+        private void Guests_Reservations_Button_Click(object sender, RoutedEventArgs e)
+        {
+            AccommodationAllReservations accommodationAllReservations = new AccommodationAllReservations();
+            accommodationAllReservations.Show();    
         }
     }
 }

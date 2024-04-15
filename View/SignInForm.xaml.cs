@@ -96,15 +96,15 @@ namespace BookingApp.View
                     }
                     else if(user.Type == UserType.Guest)
                     {
-                        AccommodationSearch accommodationSearch = new AccommodationSearch();
-                        accommodationSearch.Show();
+                        //AccommodationSearch accommodationSearch = new AccommodationSearch();
+                        //accommodationSearch.Show();
 
-                        GuestWindows.AccommodationReservationToRateForm accommodationReservationToRateForm = new GuestWindows.AccommodationReservationToRateForm(user);
-                        accommodationReservationToRateForm.Show();
+                       // GuestWindows.AccommodationReservationToRateOwnerForm accommodationReservationToRateForm = new GuestWindows.AccommodationReservationToRateOwnerForm(user);
+                        //accommodationReservationToRateForm.Show();
                         
 
-                        GuestWindows.AccommodationAllReservations accommodationAllReservations = new GuestWindows.AccommodationAllReservations(user);
-                        accommodationAllReservations.Show();
+                       // GuestWindows.AccommodationAllReservations accommodationAllReservations = new GuestWindows.AccommodationAllReservations(user);
+                        //accommodationAllReservations.Show();
 
                         GuestHomePage guestHomePage = new GuestHomePage();
                         guestHomePage.Show();

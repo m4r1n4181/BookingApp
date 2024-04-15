@@ -9,7 +9,7 @@ using System.Windows;
 
 namespace BookingApp.View.GuestWindows
 {
-    public partial class AccommodationReservationToRateForm : Window//, INotifyPropertyChanged
+    public partial class AccommodationReservationToRateOwnerForm : Window//, INotifyPropertyChanged
     {
         public ObservableCollection<AccommodationReservation> AccommodationReservations { get; set; }
         public AccommodationReservation SelectedReservation { get; set; }
@@ -18,14 +18,14 @@ namespace BookingApp.View.GuestWindows
         private readonly AccommodationReservationRepository _accommodationReservationRepository;
         private readonly AccommodationReservationService _accommodationReservationService;
 
-        public AccommodationReservationToRateForm(User user)
+        public AccommodationReservationToRateOwnerForm()
         {
             InitializeComponent();
             DataContext = this;
-            LoggedInUser = user;
+            LoggedInUser = SignInForm.LoggedUser;
             _accommodationReservationRepository = new AccommodationReservationRepository();
             _accommodationReservationService = new AccommodationReservationService();
-            AccommodationReservations = new ObservableCollection<AccommodationReservation>(_accommodationReservationService.GetAllByGuestForRating(user.Id));
+            AccommodationReservations = new ObservableCollection<AccommodationReservation>(_accommodationReservationService.GetAllByGuestForRating(LoggedInUser.Id));
         }
 
         private void Activate_Click(object sender, RoutedEventArgs e)
