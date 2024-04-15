@@ -52,7 +52,7 @@ namespace BookingApp.Repository
         }
         public List<AccommodationOwnerReview> GetAll()
         {
-            return _accommodationOwnerReviews;
+            return _serializer.FromCSV(FilePath);
         }
         public AccommodationOwnerReview Get(int id)
         {

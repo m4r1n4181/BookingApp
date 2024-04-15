@@ -141,6 +141,10 @@ namespace BookingApp.Service
         {
             return _reservationRescheduleRequestRepository.GetAllForGuest(guestId);  
         }
+        public List<ReservationRescheduleRequest> GetAllForOwner(int id)
+        {
+            return _reservationRescheduleRequestRepository.GetAllForOwner(id);
+        }
     }
 
 }

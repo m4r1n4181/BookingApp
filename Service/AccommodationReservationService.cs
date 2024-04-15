@@ -133,14 +133,14 @@ namespace BookingApp.Service
         public bool IsReschedulePossible(ReservationRescheduleRequest reservationRescheduleRequest)
         {
             List<AccommodationReservation> reservations = _accommodationReservationRepository.GetByAccommodationId(reservationRescheduleRequest.Reservation.Accommodation.Id);
-            foreach (AccommodationReservation reservation in reservations)
+          /*  foreach (AccommodationReservation reservation in reservations)
             {
                 if (reservation.Id == reservationRescheduleRequest.Reservation.Id)
                 {
                     reservations.Remove(reservation);
                     break;
                 }
-            }
+            }*/
             foreach (AccommodationReservation reservation in reservations)
             {
                 if (IsDatesIntertwine(reservation.Arrival, reservation.Departure, reservationRescheduleRequest.NewStart, reservationRescheduleRequest.NewEnd))

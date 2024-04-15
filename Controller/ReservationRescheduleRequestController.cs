@@ -65,5 +65,9 @@ namespace BookingApp.Controller
         {
             return _reservationRescheduleRequestService.GetAllForGuest(guestId);
         }
+        public List<ReservationRescheduleRequest> GetAllForOwner(int ownerId)
+        {
+            return _reservationRescheduleRequestService.GetAllForOwner(ownerId);
+        }
     }
 }

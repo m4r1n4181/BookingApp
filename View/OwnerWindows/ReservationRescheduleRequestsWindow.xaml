@@ -25,5 +25,6 @@
 
             </DataGrid.Columns>
         </DataGrid>
+        <Button x:Name="RescheduleHandleButton" Content="Obradi zahtev" HorizontalAlignment="Left" Margin="662,35,0,0" Grid.Row="2" VerticalAlignment="Top" Click="RescheduleHandleButton_Click"/>
     </Grid>
 </Window>
