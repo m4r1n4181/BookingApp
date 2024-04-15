@@ -11,7 +11,7 @@ namespace BookingApp.Controller
 {
     public class AccommodationOwnerReviewController
     {
-        private readonly AccommodationOwnerReviewService _accommodationOwnerReviewService;
+        private AccommodationOwnerReviewService _accommodationOwnerReviewService;
 
         public AccommodationOwnerReviewController()
         {

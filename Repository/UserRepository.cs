@@ -38,5 +38,10 @@ namespace BookingApp.Repository
         {
             return _users.Find(u => u.Id == id);
         }
+        public User GetById(int id)
+        {
+            _users = _serializer.FromCSV(FilePath);
+            return _users.FirstOrDefault(user => user.Id == id);
+        }
     }
 }

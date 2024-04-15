@@ -13,9 +13,9 @@ namespace BookingApp.Service
 {
     public class AccommodationOwnerReviewService
     {
-        private AccommodationOwnerReviewRepository _accommodationOwnerReviewRepository;
+        public AccommodationOwnerReviewRepository _accommodationOwnerReviewRepository;
 
-        private AccommodationReservationRepository _accommodationReservationRepository;
+        public AccommodationReservationRepository _accommodationReservationRepository;
         /*
         public AccommodationOwnerReviewService()
         {
@@ -27,6 +27,7 @@ namespace BookingApp.Service
         public AccommodationOwnerReviewService()
         {
             _accommodationOwnerReviewRepository = new AccommodationOwnerReviewRepository();
+            _accommodationReservationRepository = new AccommodationReservationRepository();
         }
         public List<AccommodationOwnerReview> GetAll()
         {
@@ -61,20 +62,25 @@ namespace BookingApp.Service
         */
         public bool isValidReview(AccommodationReservation reservation)
         {
-            return reservation.GuestReview.Id != -1 && reservation.AccommodationReview.Id != -1 && reservation.Accommodation.Owner.Id == SignInForm.LoggedUser.Id;
+            return reservation.GuestReview.Id != -1 && reservation.AccommodationReview.Id != -1;//&& reservation.Accommodation.Owner.Id == SignInForm.LoggedUser.Id;
         }
-        public List<AccommodationOwnerReview> GetAllReviewsTest(int ownerId)
+    public List<AccommodationOwnerReview> GetAllReviewsTest(int ownerId)
+    {
+        List<AccommodationOwnerReview> reviews = new List<AccommodationOwnerReview>();
+        foreach(AccommodationOwnerReview accommodationOwnerReview in _accommodationOwnerReviewRepository.GetAll())
         {
-           List<AccommodationOwnerReview> reviews = new List<AccommodationOwnerReview>();
-            foreach(AccommodationOwnerReview accommodationOwnerReview in _accommodationOwnerReviewRepository.GetAll())
+            AccommodationReservation reservation = _accommodationReservationRepository.GetById(accommodationOwnerReview.Reservation.Id);
+            if (reservation.Accommodation.Owner.Id == ownerId)
             {
-               // if(accommodationOwnerReview.Reservation.Accommodation.Owner.Id == ownerId)
-                //{
+                if (isValidReview(reservation))
+                {
                     reviews.Add(accommodationOwnerReview);
-                //}
+                }
+                   
             }
-            return reviews;
         }
+        return reviews;
+    }
         public List<AccommodationOwnerReview> GetAllValidReviews(Accommodation accommodation)
         {
             List<AccommodationOwnerReview> reviews = new List<AccommodationOwnerReview>();

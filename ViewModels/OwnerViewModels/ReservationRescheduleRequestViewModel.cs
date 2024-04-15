@@ -3,12 +3,7 @@ using BookingApp.Domain.Models;
 using BookingApp.View;
 using BookingApp.View.OwnerWindows;
 using GalaSoft.MvvmLight.Command;
-using System;
-using System.Collections.Generic;
 using System.Collections.ObjectModel;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Input;
 
@@ -16,7 +11,9 @@ namespace BookingApp.ViewModels.OwnerViewModels
 {
     public class ReservationRescheduleRequestsViewModel : ViewModelBase
     {
+        public ReservationRescheduleRequest SelectedReservationRescheduleRequest { get; set; }
         private ObservableCollection<ReservationRescheduleRequest> reservationRescheduleRequests;
+
         public ObservableCollection<ReservationRescheduleRequest> ReservationRescheduleRequests
         {
             get { return reservationRescheduleRequests; }
@@ -26,25 +23,32 @@ namespace BookingApp.ViewModels.OwnerViewModels
                 OnPropertyChanged();
             }
         }
-        public ReservationRescheduleRequestController _reservationRescheduleRequestsController;
-       // public ICommand RescheduleHandleCommand { get; private set; }
-        public ReservationRescheduleRequest SelectedReservationRescheduleRequest { get; set; }
 
+        public ReservationRescheduleRequestController _reservationRescheduleRequestsController;
+        public ICommand RescheduleHandleCommand { get; private set; }
 
         public ReservationRescheduleRequestsViewModel()
         {
             _reservationRescheduleRequestsController = new ReservationRescheduleRequestController();
 
             ReservationRescheduleRequests = new ObservableCollection<ReservationRescheduleRequest>(_reservationRescheduleRequestsController.GetAllForOwner(SignInForm.LoggedUser.Id));
-           
+
+            RescheduleHandleCommand = new RelayCommand(ExecuteRescheduleHandleCommand, CanExecuteRescheduleHandleCommand);
         }
 
-     
-        public void RescheduleHandleButton_Click(object sender, RoutedEventArgs e)
+        private void ExecuteRescheduleHandleCommand()
         {
-            RescheduleRequestsHandling rescheduleRequestsWindow = new RescheduleRequestsHandling(SelectedReservationRescheduleRequest);
-            rescheduleRequestsWindow.Show();
+            if (SelectedReservationRescheduleRequest != null)
+            {
+                RescheduleRequestsHandling rescheduleRequestsWindow = new RescheduleRequestsHandling(SelectedReservationRescheduleRequest);
+                rescheduleRequestsWindow.Show();
+            }
         }
 
+        private bool CanExecuteRescheduleHandleCommand()
+        {
+            // Add any conditions for when the command can execute, if needed
+            return true;
+        }
     }
 }

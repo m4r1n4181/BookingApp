@@ -1,5 +1,9 @@
-﻿using System;
+﻿using BookingApp.Controller;
+using BookingApp.Domain.Models;
+using BookingApp.Model;
+using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -19,10 +23,23 @@ namespace BookingApp.View.OwnerWindows
     /// </summary>
     public partial class AccommodationOwnerReviewsWindow : Window
     {
+        public User User {  get; set; }
+        public ObservableCollection<AccommodationOwnerReview> AccommodationOwnerReviews { get; set; }
+        public AccommodationOwnerReviewController _accommodationOwnerReviewController;
         public AccommodationOwnerReviewsWindow()
         {
             InitializeComponent();
-            this.DataContext = new ViewModels.OwnerViewModels.AccommodationOwnerReviewsViewModel(SignInForm.LoggedUser);
+            this.DataContext = this;
+            _accommodationOwnerReviewController = new AccommodationOwnerReviewController();
+            //AccommodationOwnerReviews = new ObservableCollection<AccommodationOwnerReview>(_accommodationOwnerReviewController.GetAllReviewsTest(User.Id));
+        }
+        public AccommodationOwnerReviewsWindow(User user)
+        {
+            InitializeComponent();
+            this.DataContext = this;
+            _accommodationOwnerReviewController = new AccommodationOwnerReviewController();
+            User = user; 
+            AccommodationOwnerReviews = new ObservableCollection<AccommodationOwnerReview>(_accommodationOwnerReviewController.GetAllReviewsTest(User.Id));
         }
     }
 }

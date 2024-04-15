@@ -16,9 +16,8 @@ namespace BookingApp.Repository
         private readonly Serializer<AccommodationOwnerReview> _serializer;
 
         // private ImageRepository _imageRepository;
-       private static AccommodationOwnerReviewRepository instance = null;
-
-        private List<AccommodationOwnerReview> _accommodationOwnerReviews;
+        private static AccommodationOwnerReviewRepository instance = null;
+        public List<AccommodationOwnerReview> _accommodationOwnerReviews;
         public static AccommodationOwnerReviewRepository GetInstance()
         {
             if (instance == null)
@@ -42,7 +41,7 @@ namespace BookingApp.Repository
                 if (reservation != null)
                 {
                     accommodationOwnerReview.Reservation = reservation;
-                   // reservation.AccommodationReview = accommodationOwnerReview;
+                    reservation.AccommodationReview = accommodationOwnerReview;
                 }
                 else
                 {
@@ -50,14 +49,21 @@ namespace BookingApp.Repository
                 }
             }
         }
+        public void BindAccommodationReservation()
+        {
+            AccommodationReservationRepository accommodationReservationRepository = new AccommodationReservationRepository();   
+            foreach(var accommodationOwnerReview in _accommodationOwnerReviews)
+            {
+                accommodationOwnerReview.Reservation = accommodationReservationRepository.GetById(accommodationOwnerReview.Reservation.Id);
+            }
+        }
 
 
         public List<AccommodationOwnerReview> GetAll()
         {
-<<<<<<< HEAD
-            BindAccommodationOwnerReviewWithAccommodationReservation();
-=======
->>>>>>> 6bfec837d3b79ac157415ab999dc42f662fbed8d
+           // _accommodationOwnerReviews = _serializer.FromCSV(FilePath);
+            // BindAccommodationOwnerReviewWithAccommodationReservation();
+            BindAccommodationReservation();
             return _serializer.FromCSV(FilePath);
         }
 
@@ -97,8 +103,12 @@ namespace BookingApp.Repository
             return accommodationOwnerReview;
         }
 
+
         public List<AccommodationOwnerReview> GetByReservation(int reservationId)
         {
+            // BindAccommodationOwnerReviewWithAccommodationReservation();
+            _accommodationOwnerReviews = _serializer.FromCSV(FilePath);
+             BindAccommodationReservation();
             return _accommodationOwnerReviews.FindAll(aor => aor.Reservation.Id == reservationId);
         }
     }
@@ -118,4 +128,5 @@ namespace BookingApp.Repository
             return accommodationOwnerReview;
         }
     }*/
+
 }
