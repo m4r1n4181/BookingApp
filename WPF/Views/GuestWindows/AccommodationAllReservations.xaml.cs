@@ -52,7 +52,7 @@ namespace BookingApp.View.GuestWindows
         {
             if (SelectedReservation == null)
             {
-                MessageBox.Show("Please select a reservation before editing.");
+                MessageBox.Show("Please select a reservation for editing.", "Error!", MessageBoxButton.OK, MessageBoxImage.Error);
                 return;
             }
             AccommodationReservationEdit accommodationReservationEdit = new AccommodationReservationEdit(SelectedReservation);
@@ -65,11 +65,21 @@ namespace BookingApp.View.GuestWindows
         {
             if (SelectedReservation == null)
             {
-                MessageBox.Show("Please select a reservation before canceling.");
+                MessageBox.Show("Please select a reservation for canceling.", "Error!", MessageBoxButton.OK, MessageBoxImage.Error);
                 return;
             }
-            _accommodationReservationService.CancelReservation(SelectedReservation.Id);
-           // MessageBox.Show("Reservation canceled successfully.");
+            bool result = _accommodationReservationService.CancelReservation(SelectedReservation.Id);
+            if (result == false)
+            {
+                MessageBox.Show("Cannot cancel reservation.", "Error!", MessageBoxButton.OK, MessageBoxImage.Error);
+            }
+
+            if (result == true)
+            {
+                MessageBox.Show("You have successfully canceled your reservation!", "Canceled!", MessageBoxButton.OK);
+            }
+
+            
             Refresh();
             
             

@@ -53,21 +53,33 @@ namespace BookingApp.Service
             return reservationRescheduleRequest.Status == Model.Enums.RequestStatusType.Standby;
         }
 
-       /* public List<ReservationRescheduleRequest> GetAllRequestsForHandling()
+        private bool IsRequestApproved(ReservationRescheduleRequest reservationRescheduleRequest)
         {
-            List<ReservationRescheduleRequest> reservationRescheduleRequests = new List<ReservationRescheduleRequest>();
-            foreach (ReservationRescheduleRequest reservationRescheduleRequest in _reservationRescheduleRequestRepository.GetAll())
-            {
-                if (IsRequestOnStandby(reservationRescheduleRequest) && SignInForm.LoggedUser.Id == reservationRescheduleRequest.Reservation.Accommodation.Owner.Id)
-                {
-                    reservationRescheduleRequests.Add(reservationRescheduleRequest);
-                }
-            }
+         return reservationRescheduleRequest.Status == Model.Enums.RequestStatusType.Approved;
+        }
 
-            return reservationRescheduleRequests;
-        } */
-        
-       public List<ReservationRescheduleRequest> GetAllRequestsForHandling()
+        private bool IsRequestDeclined(ReservationRescheduleRequest reservationRescheduleRequest)
+        {
+            return reservationRescheduleRequest.Status == Model.Enums.RequestStatusType.Declined;
+        }
+
+
+
+        /* public List<ReservationRescheduleRequest> GetAllRequestsForHandling()
+         {
+             List<ReservationRescheduleRequest> reservationRescheduleRequests = new List<ReservationRescheduleRequest>();
+             foreach (ReservationRescheduleRequest reservationRescheduleRequest in _reservationRescheduleRequestRepository.GetAll())
+             {
+                 if (IsRequestOnStandby(reservationRescheduleRequest) && SignInForm.LoggedUser.Id == reservationRescheduleRequest.Reservation.Accommodation.Owner.Id)
+                 {
+                     reservationRescheduleRequests.Add(reservationRescheduleRequest);
+                 }
+             }
+
+             return reservationRescheduleRequests;
+         } */
+
+        public List<ReservationRescheduleRequest> GetAllRequestsForHandling()
         {
             List<ReservationRescheduleRequest> reservationRescheduleRequests = new List<ReservationRescheduleRequest>();
             foreach (ReservationRescheduleRequest reservationRescheduleRequest in _reservationRescheduleRequestRepository.GetAll())

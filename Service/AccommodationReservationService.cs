@@ -2,6 +2,7 @@
 using BookingApp.DTO;
 using BookingApp.Model;
 using BookingApp.Repository;
+using BookingApp.View;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -16,10 +17,12 @@ namespace BookingApp.Service
     {
         private AccommodationReservationRepository _accommodationReservationRepository;
         private AccommodationRepository _accommodationRepository;
+        private NotificationRepository _notificationRepository;
         public AccommodationReservationService()
         {
             _accommodationReservationRepository = new AccommodationReservationRepository();
             _accommodationRepository = new AccommodationRepository();
+            _notificationRepository = new NotificationRepository();
         }
 
         public List<AccommodationReservation> GetAllByOwnerForRating(int ownerId)
@@ -90,10 +93,10 @@ namespace BookingApp.Service
 
 
 
-        public List<AccommodationReservation> GetFreeDateRanges(int accommodationId,  DateTime start, DateTime end, int numberOfDays)
+        public List<AccommodationReservation> GetFreeDateRanges(int accommodationId, DateTime start, DateTime end, int numberOfDays)
         {
             Accommodation accommodation = _accommodationRepository.GetById(accommodationId);
-            if(accommodation == null)
+            if (accommodation == null)
             {
                 return new List<AccommodationReservation>();
             }
@@ -101,7 +104,7 @@ namespace BookingApp.Service
             DateTime iterDate = start;
             List<AccommodationReservation> freeReservations = new List<AccommodationReservation>();
 
-            while(iterDate.AddDays(numberOfDays) <= end)
+            while (iterDate.AddDays(numberOfDays) <= end)
             {
                 DateTime endIterDate = iterDate.AddDays(numberOfDays);
                 if (!accommodationReservations.Any(accR => DatesIntertwine(accR.Arrival, accR.Departure, iterDate, endIterDate)))
@@ -160,50 +163,31 @@ namespace BookingApp.Service
         public bool CancelReservation(int reservationId)
         {
             AccommodationReservation reservation = _accommodationReservationRepository.Get(reservationId);
-
-            if (reservation != null)
+            if (reservation == null)
             {
-                if (DateTime.Now > reservation.Arrival.AddDays(-reservation.Accommodation.CancellationDays))
-                {
-                    MessageBox.Show("Prošao je krajnji rok za otkazivanje ove rezervacije koji je vlasnik zadao!", "Greška!", MessageBoxButton.OK, MessageBoxImage.Error);
-                    return false;
-                }
-                else if (reservation.Accommodation.CancellationDays == 0)
-                {
-                    if (DateTime.Now > reservation.Arrival.AddDays(-1))
-                    {
-                        MessageBox.Show("Ne mozes otkazati rezervaciju dan pred!", "Greška!", MessageBoxButton.OK, MessageBoxImage.Error);
-                        return false;
-                    }
-                    else
-                    {
-                        _accommodationReservationRepository.Delete(reservation);
-                        MessageBox.Show("Uspešno ste otkazali rezervaciju!", "Otkazano!", MessageBoxButton.OK);
-                        reservation.Status = Model.Enums.AccommodationReservationStatus.Canceled;
-                        _accommodationReservationRepository.Update(reservation);
-                        return true;
-
-                    }
-                }
-                else
-                {
-                    MessageBox.Show("Uspešno ste otkazali rezervaciju!", "Otkazano!", MessageBoxButton.OK);
-
-                    reservation.Status = Model.Enums.AccommodationReservationStatus.Canceled;
-                    _accommodationReservationRepository.Update(reservation);
-                    return true;
-                }
-
+                return false;
             }
-            else
-            {
-                MessageBox.Show("Prvo morate izabrati rezervaciju!", "Greška!", MessageBoxButton.OK, MessageBoxImage.Error);
+            int cancellationDays = (reservation.Accommodation.CancellationDays < 1) ? 1 : reservation.Accommodation.CancellationDays;
 
+            if (DateTime.Now > reservation.Arrival.AddDays(-cancellationDays))
+            {
                 return false;
             }
 
-         
-            //notification
+            reservation.Status = Model.Enums.AccommodationReservationStatus.Canceled;
+            _accommodationReservationRepository.Update(reservation);
+
+            User logged = SignInForm.LoggedUser;
+            string message = "Guest: " + logged.Username + " has cancelled reservation for accommodation " 
+                + reservation.Accommodation.Name + " for date " + reservation.Arrival;
+            Notification notification = new Notification()
+            {
+                User = reservation.Accommodation.Owner,
+                Status = Model.Enums.NotificationStatus.Unseen,
+                Message = message
+            };
+            _notificationRepository.Save(notification);
+            return true;
         }
 
     }
