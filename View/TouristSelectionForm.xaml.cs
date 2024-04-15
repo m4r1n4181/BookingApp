@@ -26,19 +26,20 @@ namespace BookingApp.View
     /// </summary>
     public partial class TouristSelectionForm : Window
     {
-        
+
         public TouristSelectionForm(KeyPoint selectedKeyPoint)
         {
             InitializeComponent();
             this.DataContext = new TouristSelectionFormViewModel(selectedKeyPoint);
-          
+
 
         }
 
-        
-       
-      // u taj novi prozor posalji SelectedKeyPoint
+
+
+        // u taj novi prozor posalji SelectedKeyPoint
         //tamo sklopis objecat ToursitEntry
         // i samo ga creiras u controlleru
-    
- }
+
+    }
+}
