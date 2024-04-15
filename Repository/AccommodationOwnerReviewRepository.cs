@@ -59,12 +59,12 @@ namespace BookingApp.Repository
         }
 
 
-        public List<AccommodationOwnerReview> GetAll()
+        public List<AccommodationOwnerReview> GetAll() //mora za ownera ovako ne menjaj!!!!!!!!!!!!!!!!!!!!
         {
-           // _accommodationOwnerReviews = _serializer.FromCSV(FilePath);
+            _accommodationOwnerReviews = _serializer.FromCSV(FilePath);
             // BindAccommodationOwnerReviewWithAccommodationReservation();
             BindAccommodationReservation();
-            return _serializer.FromCSV(FilePath);
+            return _accommodationOwnerReviews;
         }
 
         public AccommodationOwnerReview Get(int id)

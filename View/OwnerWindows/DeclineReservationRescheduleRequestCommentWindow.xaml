@@ -12,7 +12,7 @@
                 <RowDefinition Height="80"/>
             </Grid.RowDefinitions>
             <TextBox Name="CommentTextBox" Grid.Row="0" Height="100" Width="280" Text="{Binding Path=Comment}"/>
-        <Button x:Name="AddCommentButton" Content="Dodaj komentar" Click="AddCommentButton_Click" Margin="112,204,112,22" Height="58" Grid.RowSpan="2">
+        <Button x:Name="AddCommentButton" Content="Dodaj komentar" Command="{Binding AddCommentButtonCommand}" Margin="112,204,112,22" Height="58" Grid.RowSpan="2">
         </Button>
         </Grid>
 </Window>

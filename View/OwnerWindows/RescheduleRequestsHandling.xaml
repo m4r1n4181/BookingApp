@@ -8,47 +8,44 @@
         Title="RescheduleRequestsHandling" Height="450" Width="800">
     <Grid>
         <Grid.RowDefinitions>
-            <RowDefinition Height="30"/>
-            <RowDefinition/>
-            <RowDefinition Height="140"/>
+            <RowDefinition Height="Auto"/>
+            
+            <RowDefinition Height="*"/>
+           
+            <RowDefinition Height="Auto"/>
+          
         </Grid.RowDefinitions>
-        <Grid Grid.Row="1">
+        <Grid Margin="10">
+          
             <Grid.RowDefinitions>
-                <RowDefinition Height="60"/>
-                <RowDefinition Height="60"/>
-                <RowDefinition Height="60"/>
-                <RowDefinition Height="60"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
                 <RowDefinition Height="*"/>
             </Grid.RowDefinitions>
             <Grid.ColumnDefinitions>
-                <ColumnDefinition/>
-                <ColumnDefinition/>
+                <ColumnDefinition Width="Auto"/>
+                
+                <ColumnDefinition Width="*"/>
+               
             </Grid.ColumnDefinitions>
-            <Label x:Name="GuestLabel" Content="Gost" Height="40" FontSize="20" HorizontalAlignment="Left" Margin="141,18,0,12" Width="154"/>
-            <Label Grid.Row="1" x:Name="AccommodationLabel" Content="Smeštaj" FontSize="20" Height="40" Width="120" HorizontalAlignment="Left" Margin="141,12,0,8" />
-            <Label Grid.Row="2" x:Name="StartLabel" Content="Od" FontSize="20" Height="40" HorizontalAlignment="Left" Width="120" Margin="141,6,0,14" />
-            <Label Grid.Row="3" x:Name="EndLabel" Content="Do" FontSize="20" Height="40" HorizontalAlignment="Left" Margin="141,8,0,12" Width="120"/>
-            <Label Grid.Row="4" x:Name="AvailableLabel" Content="Dostupnost" FontSize="20" Height="40" HorizontalAlignment="Left" Margin="141,8,0,12" Width="120"/>
+            <Label x:Name="GuestLabel" Content="Gost" FontSize="20" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="10"/>
+            <Label Grid.Row="1" x:Name="AccommodationLabel" Content="Smeštaj" FontSize="20" VerticalAlignment="Center" HorizontalAlignment="Left" Margin="10"/>
+            <Label Grid.Row="2" x:Name="StartLabel" Content="Od" FontSize="20" VerticalAlignment="Center" HorizontalAlignment="Left" Margin="10"/>
+            <Label Grid.Row="3" x:Name="EndLabel" Content="Do" FontSize="20" VerticalAlignment="Center" HorizontalAlignment="Left" Margin="10"/>
+            <Label Grid.Row="4" x:Name="AvailableLabel" Content="Dostupnost" FontSize="20" VerticalAlignment="Center" HorizontalAlignment="Left" Margin="10"/>
 
-            <Label Grid.Row="0" Grid.Column="1" Content="{Binding Guest.Username}" Margin="10,18,10,2" FontSize="20" Height="40" />
-            <Label Grid.Row="1" Grid.Column="1" Content="{Binding rescheduleRequest.Reservation.Accommodation.Name}" Margin="10,12,10,8" FontSize="20" Height="40" />
-            <Label Grid.Row="2" Grid.Column="1" Content="{Binding rescheduleRequest.NewStart}" Margin="10,10,10,10" FontSize="20" Height="40"/>
-            <Label Grid.Row="3" Grid.Column="1" Content="{Binding rescheduleRequest.NewEnd}" Margin="10,10,10,10" FontSize="20" Height="40"/>
-            <Label Grid.Row="4" Grid.Column="1" Content="{Binding Available}" Margin="10,10,10,10" FontSize="20" FontWeight="Bold" Height="40"/>
+            <Label Grid.Row="0" Grid.Column="1" Content="{Binding Guest.Username}" FontSize="20" VerticalAlignment="Center" Margin="10"/>
+            <Label Grid.Row="1" Grid.Column="1" Content="{Binding rescheduleRequest.Reservation.Accommodation.Name}" FontSize="20" VerticalAlignment="Center" Margin="10"/>
+            <Label Grid.Row="2" Grid.Column="1" Content="{Binding rescheduleRequest.NewStart}" FontSize="20" VerticalAlignment="Center" Margin="10"/>
+            <Label Grid.Row="3" Grid.Column="1" Content="{Binding rescheduleRequest.NewEnd}" FontSize="20" VerticalAlignment="Center" Margin="10"/>
+            <Label Grid.Row="4" Grid.Column="1" Content="{Binding Available}" FontSize="20" FontWeight="Bold" VerticalAlignment="Center" Margin="10"/>
         </Grid>
-        <Grid Grid.Row="2">
-            <Grid.RowDefinitions>
-                <RowDefinition/>
-            </Grid.RowDefinitions>
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition/>
-                <ColumnDefinition/>
-            </Grid.ColumnDefinitions>
-
-            <Button x:Name="AcceptRequestButton" Content="Accept" Click="AcceptRequestButton_Click" Grid.Column="1" Height="70" Width="100" FontSize="17" Margin="47,35,148,35">
-            </Button>
-            <Button x:Name="DeclineRequestButton" Content="Decline" Click="DeclineRequestButton_Click" Grid.Column="1" Height="70" Width="100" FontSize="17" Margin="152,35,43,35">
-            </Button>
-        </Grid>
+        <StackPanel Grid.Row="2" Orientation="Horizontal" HorizontalAlignment="Center" Margin="0,10,0,0">
+           
+            <Button x:Name="AcceptRequestButton" Content="Accept" Command ="{Binding AcceptRequestButtonCommand}" Height="70" Width="100" FontSize="17" Margin="5"/>
+            <Button x:Name="DeclineRequestButton" Content="Decline" Command ="{Binding DeclineRequestButtonCommand}" Height="70" Width="100" FontSize="17" Margin="5"/>
+        </StackPanel>
     </Grid>
 </Window>

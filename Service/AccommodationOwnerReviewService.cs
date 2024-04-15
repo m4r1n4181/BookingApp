@@ -141,7 +141,7 @@ namespace BookingApp.Service
         {
             int count = GetReviewsCountForOwner(ownerId);
             double average = GetReviewsAverageForOwner(ownerId);
-            return count >= 50 && average >= 4.5;
+            return count >= 1 && average >= 4.5; //treba 50 ali radi testa sam stavila 1 da ne pisem 50 reviews
         }
 
 

@@ -1,6 +1,7 @@
 ﻿using BookingApp.Controller;
 using BookingApp.Domain.Models;
 using BookingApp.Model;
+using BookingApp.ViewModels.OwnerViewModels;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -25,13 +26,9 @@ namespace BookingApp.View.OwnerWindows
         public DeclineReservationRescheduleRequestCommentWindow(ReservationRescheduleRequest reservationRescheduleRequest)
         {
             InitializeComponent();
-            this.DataContext = new ViewModels.OwnerViewModels.DeclineReservationRescheduleRequestCommentViewModel(reservationRescheduleRequest);
+            this.DataContext = new DeclineReservationRescheduleRequestCommentViewModel(reservationRescheduleRequest);
 
         }
 
-        private void AddCommentButton_Click(object sender, RoutedEventArgs e)
-        {
-
-        }
     }
 }

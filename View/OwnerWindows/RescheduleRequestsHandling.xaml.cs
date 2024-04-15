@@ -1,4 +1,5 @@
 ﻿using BookingApp.Domain.Models;
+using BookingApp.ViewModels.OwnerViewModels;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -23,18 +24,10 @@ namespace BookingApp.View.OwnerWindows
         public RescheduleRequestsHandling(ReservationRescheduleRequest reservationRescheduleRequest)
         {
             InitializeComponent();
-            this.DataContext = new ViewModels.OwnerViewModels.ReservationRescheduleRequestHandlingViewModel(reservationRescheduleRequest);
+            this.DataContext = new ReservationRescheduleRequestHandlingViewModel(reservationRescheduleRequest);
 
         }
 
-        private void AcceptRequestButton_Click(object sender, RoutedEventArgs e)
-        {
-
-        }
-
-        private void DeclineRequestButton_Click(object sender, RoutedEventArgs e)
-        {
-
-        }
+      
     }
 }

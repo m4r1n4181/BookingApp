@@ -1,11 +1,13 @@
 ﻿using BookingApp.Controller;
 using BookingApp.Domain.Models;
+using GalaSoft.MvvmLight.Command;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
+using System.Windows.Input;
 
 namespace BookingApp.ViewModels.OwnerViewModels
 {
@@ -30,21 +32,28 @@ namespace BookingApp.ViewModels.OwnerViewModels
         #endregion
         public ReservationRescheduleRequest ReservationRescheduleRequest { get; set; }
 
-       
+        public ICommand AddCommentButtonCommand { get; private set; }
+
         public DeclineReservationRescheduleRequestCommentViewModel(ReservationRescheduleRequest reservationRescheduleRequest)
         {
             _reservationRescheduleRequestController = new ReservationRescheduleRequestController();
 
             ReservationRescheduleRequest = reservationRescheduleRequest;
+            AddCommentButtonCommand = new RelayCommand(ExecuteAddCommentButtonCommand, CanExecuteAddCommentButtonCommand);
 
 
         }
-        private void AddCommentButton_Click(object sender, RoutedEventArgs e)
+        private void ExecuteAddCommentButtonCommand()
         {
 
             ReservationRescheduleRequest.Status = Model.Enums.RequestStatusType.Declined;
             ReservationRescheduleRequest.Comment = Comment;
             _reservationRescheduleRequestController.Update(ReservationRescheduleRequest);
+        }
+        private bool CanExecuteAddCommentButtonCommand()
+        {
+            // Add any conditions for when the command can execute, if needed
+            return true;
         }
 
     }
