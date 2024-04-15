@@ -54,7 +54,10 @@ namespace BookingApp.Repository
 
         public List<AccommodationOwnerReview> GetAll()
         {
+<<<<<<< HEAD
             BindAccommodationOwnerReviewWithAccommodationReservation();
+=======
+>>>>>>> 6bfec837d3b79ac157415ab999dc42f662fbed8d
             return _serializer.FromCSV(FilePath);
         }
 

@@ -32,6 +32,7 @@ namespace BookingApp.Repository
         {
             AccommodationReservations = _serializer.FromCSV(FilePath);   
             BindAccommodations();
+            BindGuests();
             return AccommodationReservations.Find(ar => ar.Id == id);
         }
 
@@ -40,6 +41,18 @@ namespace BookingApp.Repository
             AccommodationRepository accommodationRepository = new AccommodationRepository();
             AccommodationReservations.ForEach(accR => { accR.Accommodation = accommodationRepository.GetById(accR.Accommodation.Id); });
         }
+        public void BindGuests()
+        {
+            UserRepository userRepository = new UserRepository();
+            AccommodationReservations.ForEach(accR => { accR.Guest = userRepository.Get(accR.Guest.Id); });
+        }
+        public List<AccommodationReservation> GetAllWithGuests()
+        {
+            AccommodationReservations = _serializer.FromCSV(FilePath);
+            BindGuests();
+            return AccommodationReservations;
+        }
+
         public List<AccommodationReservation> GetAll()
         {
             return _serializer.FromCSV(FilePath);
@@ -49,6 +62,7 @@ namespace BookingApp.Repository
         {
             AccommodationReservations = _serializer.FromCSV(FilePath);
             BindAccommodations();
+            BindGuests();
             return AccommodationReservations;
         }
 
@@ -97,7 +111,7 @@ namespace BookingApp.Repository
         }
         public List<AccommodationReservation> GetByAccommodationId(int id)
         {
-            List<AccommodationReservation> reservations = GetAll();
+            List<AccommodationReservation> reservations = GetAllWithAccommodations();
             return reservations.Where(reservation => reservation.Accommodation.Id == id).ToList();
         }
 

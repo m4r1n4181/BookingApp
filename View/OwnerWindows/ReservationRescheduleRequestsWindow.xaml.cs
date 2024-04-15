@@ -2,7 +2,9 @@
 using BookingApp.Domain.Models;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Linq;
+using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
@@ -19,13 +21,28 @@ namespace BookingApp.View.OwnerWindows
     /// <summary>
     /// Interaction logic for ReservationRescheduleRequestsWindow.xaml
     /// </summary>
-    public partial class ReservationRescheduleRequestsWindow : Window
-    { 
+    public partial class ReservationRescheduleRequestsWindow : Window, INotifyPropertyChanged
+    {
+        public ReservationRescheduleRequest SelectedReservationRescheduleRequest { get; set; }
         public ReservationRescheduleRequestsWindow()
         {
             InitializeComponent();
-              this.DataContext = new ViewModels.OwnerViewModels.ReservationRescheduleRequestsViewModel();
+            this.DataContext = new ViewModels.OwnerViewModels.ReservationRescheduleRequestsViewModel();
             
+        }
+        public event PropertyChangedEventHandler PropertyChanged;
+
+        protected virtual void OnPropertyChanged([CallerMemberName] string propertyName = null)
+        {
+            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
+        }
+        private void RescheduleHandleButton_Click(object sender, RoutedEventArgs e)
+        {
+            if (SelectedReservationRescheduleRequest != null)
+            {
+                RescheduleRequestsHandling rescheduleRequestsWindow = new RescheduleRequestsHandling(SelectedReservationRescheduleRequest);
+                rescheduleRequestsWindow.Show();
+            }
         }
     }
 }
