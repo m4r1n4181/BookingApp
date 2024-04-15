@@ -12,8 +12,9 @@ using System.Windows.Input;
 
 namespace BookingApp.ViewModels.OwnerViewModels
 {
-    public class ReservationRescheduleRequestHandlingViewModel : ViewModelBase
+    public class ReservationRescheduleRequestHandlingViewModel : ViewModelBase//, IClose
     {
+       // public Action Close { get; set; }
         public ReservationRescheduleRequestController _reservationRescheduleRequestController;
         public AccommodationReservationController _accommodationReservationController;
 
@@ -84,6 +85,7 @@ namespace BookingApp.ViewModels.OwnerViewModels
             _accommodationReservationController.Update(rescheduleRequest.Reservation);
             _reservationRescheduleRequestController.Update(rescheduleRequest);
             MessageBox.Show("uspesno pomerena rezervacija");
+            return;
         }
         private void ExecuteDeclineRequestButtonCommand() 
         {

@@ -25,7 +25,7 @@ namespace BookingApp.ViewModels.OwnerViewModels
         }
 
         public ReservationRescheduleRequestController _reservationRescheduleRequestsController;
-        public ICommand RescheduleHandleCommand { get; private set; }
+        public RelayCommand RescheduleHandleCommand { get; set; }
 
         public ReservationRescheduleRequestsViewModel()
         {
@@ -35,6 +35,14 @@ namespace BookingApp.ViewModels.OwnerViewModels
 
             RescheduleHandleCommand = new RelayCommand(ExecuteRescheduleHandleCommand, CanExecuteRescheduleHandleCommand);
         }
+        public void Refresh()
+        {
+            ReservationRescheduleRequests.Clear();
+            foreach (ReservationRescheduleRequest request in _reservationRescheduleRequestsController.GetAllForOwner(SignInForm.LoggedUser.Id))
+            {
+                ReservationRescheduleRequests.Add(request);
+            }
+        }
 
         private void ExecuteRescheduleHandleCommand()
         {
@@ -42,13 +50,15 @@ namespace BookingApp.ViewModels.OwnerViewModels
             {
                 RescheduleRequestsHandling rescheduleRequestsWindow = new RescheduleRequestsHandling(SelectedReservationRescheduleRequest);
                 rescheduleRequestsWindow.Show();
+
+                Refresh();
             }
         }
 
         private bool CanExecuteRescheduleHandleCommand()
         {
-            // Add any conditions for when the command can execute, if needed
             return true;
+            //return SelectedReservationRescheduleRequest != null; ;
         }
     }
 }

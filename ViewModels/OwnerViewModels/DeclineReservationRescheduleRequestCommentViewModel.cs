@@ -11,10 +11,10 @@ using System.Windows.Input;
 
 namespace BookingApp.ViewModels.OwnerViewModels
 {
-    public class DeclineReservationRescheduleRequestCommentViewModel : ViewModelBase
+    public class DeclineReservationRescheduleRequestCommentViewModel : ViewModelBase, IClose
     {
         public ReservationRescheduleRequestController _reservationRescheduleRequestController;
-
+        public Action Close { get; set; }
         #region NotifyProperties
         private string _comment;
         public string Comment
@@ -49,6 +49,8 @@ namespace BookingApp.ViewModels.OwnerViewModels
             ReservationRescheduleRequest.Status = Model.Enums.RequestStatusType.Declined;
             ReservationRescheduleRequest.Comment = Comment;
             _reservationRescheduleRequestController.Update(ReservationRescheduleRequest);
+            MessageBox.Show("uspesno odbijeno pomeranje rezervacije");
+            return;
         }
         private bool CanExecuteAddCommentButtonCommand()
         {

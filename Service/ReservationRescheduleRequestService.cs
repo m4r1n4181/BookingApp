@@ -143,7 +143,12 @@ namespace BookingApp.Service
         }
         public List<ReservationRescheduleRequest> GetAllForOwner(int id)
         {
-            return _reservationRescheduleRequestRepository.GetAllForOwner(id);
+            var allRequests = _reservationRescheduleRequestRepository.GetAllForOwner(id);
+
+            // Zatim primenite filtriranje koristeći LINQ
+            var standbyRequests = allRequests.Where(request => IsRequestOnStandby(request)).ToList();
+
+            return standbyRequests;
         }
         public ReservationRescheduleRequest GetWithGuest(int guestId)
         {
