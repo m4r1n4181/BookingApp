@@ -1,41 +1,44 @@
-﻿using System;
+﻿// TourReservation.cs
+
+using System;
 using System.Collections.Generic;
+using System.Globalization;
+using System.Linq;
+using BookingApp.Model;
+using BookingApp.Serializer;
 
 namespace BookingApp.Model
 {
-    public class TourReservation
+    public class TourReservation : ISerializable
     {
-        public Tour Tour { get; set; } // Tura koja je rezervisana
-        public List<Tourist> Participants { get; set; } // Lista učesnika rezervacije (turista)
-        public DateTime ReservationDate { get; set; } // Datum kada je rezervacija napravljena
+        public int Id { get; set; } // Id rezervacije
+        public int GuestsNumber { get; set; }
 
-        public TourReservation(Tour tour)
+        public Tour Tour { get; set; }  
+        public User Tourist { get; set; }
+        public TourReservation() { }
+
+        public TourReservation(int id, int guestsNumber, Tour tour, User tourist)
         {
-            Tour = tour;
-            Participants = new List<Tourist>();
-            ReservationDate = DateTime.Now; // Postavljamo trenutni datum kao podrazumijevani datum rezervacije
+            Id = id;
+            GuestsNumber = guestsNumber;
+            this.Tour = tour;
+            Tourist = tourist;
         }
 
-        public bool ReserveTour(int numberOfPeople)
-        {
-            if (Tour.MaxTourists - Tour.AvaibleSeats < numberOfPeople)
-            {
-                // Nema dovoljno slobodnih mjesta na turi
-                Console.WriteLine("Nema dovoljno slobodnih mjesta na turi.");
-                Console.WriteLine($"Trenutno je dostupno {Tour.AvaibleSeats} slobodnih mjesta.");
-                return false;
-            }
-
-            // Rezervišemo ture
-            Tour.AvaibleSeats -= numberOfPeople;
-            return true;
+        public string[] ToCSV()
+        { 
+            string[] csvValues = { Id.ToString(), GuestsNumber.ToString(), Tour.Id.ToString(),Tourist.Id.ToString()};
+            return csvValues;
         }
 
-        public void CancelReservation()
-        {
-            // Vraćamo mjesta ako je rezervacija otkazana
-            Tour.AvaibleSeats += Participants.Count;
-            Participants.Clear();
+       
+        public void FromCSV(string[] values)
+        { 
+            Id = Convert.ToInt32(values[0]);
+            GuestsNumber = Convert.ToInt32(values[1]);
+            Tour = new Tour() { Id = Convert.ToInt32(values[2]) };
+            Tourist = new User() {  Id = Convert.ToInt32(values[3]) };
         }
     }
 }

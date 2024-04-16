@@ -1,44 +1,52 @@
 ﻿using BookingApp.Service;
 using BookingApp.Model;
-using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using BookingApp.Repository;
-
+using BookingApp.DTO;
+using System;
 namespace BookingApp.Controller
 {
     public class TourController
     {
-        private TourService tourService;
+        private TourService _tourService;
 
         public TourController()
         {
-            tourService = new TourService();
+            _tourService = new TourService();
         }
 
         public void EndTour(int id)
         {
-            tourService.EndTour(id);
+            _tourService.EndTour(id);
         }
 
         public void CreateTour(Tour tour)
         {
-            tourService.CreateTour(tour);
+            _tourService.CreateTour(tour);
+        }
 
+        public List<Tour> GetAllWithLocations()
+        {
+            return _tourService.GetAllWithLocations();
         }
 
         public List<Tour> GetTodayTours()
         {
-            return tourService.GetTodayTours();
+            return _tourService.GetTodayTours();
         }
 
         public void StartTour(int id)
         {
-            tourService.StartTour(id);
+            _tourService.StartTour(id);
         }
 
+        public List<Tour>SearchTours(TourSearchParams searchParams)
+        {
+            return _tourService.SearchTours(searchParams);
+        }
     }
 
 

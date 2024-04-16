@@ -1,3 +1,4 @@
+using BookingApp.DTO;
 using BookingApp.Model;
 using BookingApp.Serializer;
 using System;
@@ -31,7 +32,45 @@ namespace BookingApp.Repository
             _tours.ForEach(t => t.Location = locationRepository.GetById(t.Location.Id));
         }
 
-     
+        public List<Tour> GetAllWithLocations()
+        {
+            _tours = _serializer.FromCSV(FilePath);
+            BindLocations();
+            return _tours;
+        }
+
+        public List<Tour> SearchTours(TourSearchParams searchParams)
+        {
+            _tours = _serializer.FromCSV(FilePath);
+            BindLocations();
+
+            if (!string.IsNullOrWhiteSpace(searchParams.City))
+            {
+                _tours = _tours.FindAll(tour => tour.Location != null && tour.Location.City.Contains(searchParams.City, StringComparison.OrdinalIgnoreCase));
+            }
+
+            if (!string.IsNullOrWhiteSpace(searchParams.Country))
+            {
+                _tours = _tours.FindAll(tour => tour.Location != null && tour.Location.Country.Contains(searchParams.Country, StringComparison.OrdinalIgnoreCase));
+            }
+
+            if (searchParams.Duration != 0)
+            {
+                _tours = _tours.FindAll(tour => tour.Duration >= searchParams.Duration);
+            }
+
+            if (!string.IsNullOrWhiteSpace(searchParams.Language))
+            {
+                _tours = _tours.FindAll(tour => tour.Language.Equals(searchParams.Language));
+            }
+
+            if (searchParams.MaxTourists != 0)
+            {
+                _tours = _tours.FindAll(tour => tour.MaxTourists >= searchParams.MaxTourists);
+            }
+
+            return _tours;
+        }
 
         public Tour GetById(int id)
         {

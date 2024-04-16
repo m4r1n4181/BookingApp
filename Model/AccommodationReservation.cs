@@ -48,6 +48,7 @@ namespace BookingApp.Model
              Departure = Convert.ToDateTime(values[4]);
              AccommodationReview = new AccommodationOwnerReview() { Id = Convert.ToInt32(values[5]) };
             GuestReview = new GuestReview() {  Id = Convert.ToInt32(values[6]) };
+
         }
     }
 }
