@@ -66,6 +66,7 @@ namespace BookingApp.Repository
                 }
             }
         }
+    
 
         public ReservationRescheduleRequest Save(ReservationRescheduleRequest reservationRescheduleRequest)
         {
@@ -114,6 +115,12 @@ namespace BookingApp.Repository
             _reservationRescheduleRequests = _serializer.FromCSV(FilePath);
             BindReservationRescheduleRequestWithAccommodationReservation();
             return _reservationRescheduleRequests.FindAll(rr => rr.Guest.Id == guestId);
+        }
+        public List<ReservationRescheduleRequest> GetAllForOwner(int id)
+        {
+            _reservationRescheduleRequests = _serializer.FromCSV(FilePath);
+            BindReservationRescheduleRequestWithAccommodationReservation();
+            return _reservationRescheduleRequests.FindAll(rr => rr.Reservation.Accommodation.Owner.Id == id);
         }
     }
 }

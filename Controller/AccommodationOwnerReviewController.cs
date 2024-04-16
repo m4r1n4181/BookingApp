@@ -11,7 +11,7 @@ namespace BookingApp.Controller
 {
     public class AccommodationOwnerReviewController
     {
-        private readonly AccommodationOwnerReviewService _accommodationOwnerReviewService;
+        private AccommodationOwnerReviewService _accommodationOwnerReviewService;
 
         public AccommodationOwnerReviewController()
         {
@@ -49,9 +49,13 @@ namespace BookingApp.Controller
         {
             return _accommodationOwnerReviewService.GetAllValidReviews(accommodation);
         }
-        public List<AccommodationOwnerReview> GetAllValidReviewsForUser(User owner)
+        public List<AccommodationOwnerReview> GetAllReviewsTest(int id)
         {
-            return _accommodationOwnerReviewService.GetAllValidReviewsForUser(owner);
+            return _accommodationOwnerReviewService.GetAllReviewsTest(id);
+        }
+        public List<AccommodationOwnerReview> GetAllValidReviewsForOwner(User owner)
+        {
+            return _accommodationOwnerReviewService.GetAllValidReviewsForOwner(owner);
         }
         public bool IsSuperOwner(int ownerId)
         {

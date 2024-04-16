@@ -73,7 +73,7 @@ namespace BookingApp.Service
 
             return ownersReservations;
         }
-
+      
         public bool DatesIntertwine(DateTime start1, DateTime end1, DateTime start2, DateTime end2)
         {
             if (end1 < start2 || start1 > end2)
@@ -136,14 +136,14 @@ namespace BookingApp.Service
         public bool IsReschedulePossible(ReservationRescheduleRequest reservationRescheduleRequest)
         {
             List<AccommodationReservation> reservations = _accommodationReservationRepository.GetByAccommodationId(reservationRescheduleRequest.Reservation.Accommodation.Id);
-            foreach (AccommodationReservation reservation in reservations)
+          /*  foreach (AccommodationReservation reservation in reservations)
             {
                 if (reservation.Id == reservationRescheduleRequest.Reservation.Id)
                 {
                     reservations.Remove(reservation);
                     break;
                 }
-            }
+            }*/
             foreach (AccommodationReservation reservation in reservations)
             {
                 if (IsDatesIntertwine(reservation.Arrival, reservation.Departure, reservationRescheduleRequest.NewStart, reservationRescheduleRequest.NewEnd))

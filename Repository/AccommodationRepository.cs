@@ -97,6 +97,7 @@ namespace BookingApp.Repository
         }
         public List<Accommodation> GetByOwner(int ownerId)
         {
+            BindLocations();
             return Accommodations.FindAll(i => i.Owner.Id == ownerId);
         }
 

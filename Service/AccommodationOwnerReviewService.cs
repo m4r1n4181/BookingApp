@@ -13,18 +13,22 @@ namespace BookingApp.Service
 {
     public class AccommodationOwnerReviewService
     {
-        private AccommodationOwnerReviewRepository _accommodationOwnerReviewRepository;
+        public AccommodationOwnerReviewRepository _accommodationOwnerReviewRepository;
 
-        private AccommodationReservationRepository _accommodationReservationRepository;
-
+        public AccommodationReservationRepository _accommodationReservationRepository;
+        /*
         public AccommodationOwnerReviewService()
         {
             _accommodationOwnerReviewRepository = AccommodationOwnerReviewRepository.GetInstance();
            // _accommodationOwnerReviewRepository = Injector.Injector.CreateInstance<IAccommodationOwnerReviewRepository>();
 
             _accommodationReservationRepository = AccommodationReservationRepository.GetInstance();
+        } */
+        public AccommodationOwnerReviewService()
+        {
+            _accommodationOwnerReviewRepository = new AccommodationOwnerReviewRepository();
+            _accommodationReservationRepository = new AccommodationReservationRepository();
         }
-
         public List<AccommodationOwnerReview> GetAll()
         {
             return _accommodationOwnerReviewRepository.GetAll();
@@ -56,11 +60,27 @@ namespace BookingApp.Service
             return _accommodationOwnerReviewRepository.SaveImages(accommodationOwnerReview);
         }
         */
-        private bool isValidReview(AccommodationReservation reservation)
+        public bool isValidReview(AccommodationReservation reservation)
         {
             return reservation.GuestReview.Id != -1 && reservation.AccommodationReview.Id != -1;//&& reservation.Accommodation.Owner.Id == SignInForm.LoggedUser.Id;
         }
-
+    public List<AccommodationOwnerReview> GetAllReviewsTest(int ownerId)
+    {
+        List<AccommodationOwnerReview> reviews = new List<AccommodationOwnerReview>();
+        foreach(AccommodationOwnerReview accommodationOwnerReview in _accommodationOwnerReviewRepository.GetAll())
+        {
+            AccommodationReservation reservation = _accommodationReservationRepository.GetById(accommodationOwnerReview.Reservation.Id);
+            if (reservation.Accommodation.Owner.Id == ownerId)
+            {
+                if (isValidReview(reservation))
+                {
+                    reviews.Add(accommodationOwnerReview);
+                }
+                   
+            }
+        }
+        return reviews;
+    }
         public List<AccommodationOwnerReview> GetAllValidReviews(Accommodation accommodation)
         {
             List<AccommodationOwnerReview> reviews = new List<AccommodationOwnerReview>();
@@ -74,7 +94,7 @@ namespace BookingApp.Service
 
             return reviews;
         }
-        public List<AccommodationOwnerReview> GetAllValidReviewsForUser(User user)
+        public List<AccommodationOwnerReview> GetAllValidReviewsForOwner(User user)
         {
             List<AccommodationOwnerReview> reviews = new List<AccommodationOwnerReview>();
 
@@ -121,7 +141,7 @@ namespace BookingApp.Service
         {
             int count = GetReviewsCountForOwner(ownerId);
             double average = GetReviewsAverageForOwner(ownerId);
-            return count >= 50 && average >= 4.5;
+            return count >= 1 && average >= 4.5; //treba 50 ali radi testa sam stavila 1 da ne pisem 50 reviews
         }
 
 

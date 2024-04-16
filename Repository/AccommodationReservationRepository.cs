@@ -13,6 +13,7 @@ namespace BookingApp.Repository
         private const string FilePath = "../../../Resources/Data/accommodation-reservation.csv";
         private readonly Serializer<AccommodationReservation> _serializer;
         public List<AccommodationReservation> AccommodationReservations;
+        public List<User> _guests;
         private static AccommodationReservationRepository instance = null;
 
         public AccommodationReservationRepository()
@@ -20,6 +21,35 @@ namespace BookingApp.Repository
             _serializer = new Serializer<AccommodationReservation>();
             AccommodationReservations = _serializer.FromCSV(FilePath);
         }
+     
+        public List<AccommodationReservation> GetAll()
+        {
+            return _serializer.FromCSV(FilePath);
+        }
+        public List<AccommodationReservation> GetAllWithAccommodations()
+        {
+            AccommodationReservations = _serializer.FromCSV(FilePath);
+            BindAccommodations();
+            return AccommodationReservations;
+        }
+        public void BindAccommodations() // sa rezervacijama
+        {
+            AccommodationRepository accommodationRepository = new AccommodationRepository();
+           /* foreach(var accommodationReservation in AccommodationReservations)
+            {
+                accommodationReservation.Accommodation = accommodationRepository.GetById(accommodationReservation.Accommodation.Id);
+            }*/
+            AccommodationReservations.ForEach(accR => { accR.Accommodation = accommodationRepository.GetById(accR.Accommodation.Id); });
+        }
+        public void BindGuests()
+        {
+            UserRepository userRepository = new UserRepository();
+           /* foreach(var accommodationReservation in AccommodationReservations){
+                accommodationReservation.Guest = userRepository.GetById(accommodationReservation.Guest.Id);
+            }*/
+            AccommodationReservations.ForEach(accR => { accR.Guest = userRepository.Get(accR.Guest.Id); });
+        }
+
         public static AccommodationReservationRepository GetInstance()
         {
             if (instance == null)
@@ -30,26 +60,32 @@ namespace BookingApp.Repository
         }
         public AccommodationReservation Get(int id)
         {
-            AccommodationReservations = _serializer.FromCSV(FilePath);
+            AccommodationReservations = _serializer.FromCSV(FilePath);   
             BindAccommodations();
+            BindGuests();
             return AccommodationReservations.Find(ar => ar.Id == id);
         }
 
-        public void BindAccommodations()
-        {
-            AccommodationRepository accommodationRepository = new AccommodationRepository();
-            AccommodationReservations.ForEach(accR => { accR.Accommodation = accommodationRepository.GetById(accR.Accommodation.Id); });
-        }
-        public List<AccommodationReservation> GetAll()
-        {
-            return _serializer.FromCSV(FilePath);
-        }
-
-        public List<AccommodationReservation> GetAllWithAccommodations()
+       
+  
+        public List<AccommodationReservation> GetAllWithGuests()
         {
             AccommodationReservations = _serializer.FromCSV(FilePath);
+            BindGuests();
+            return AccommodationReservations;
+        }
+
+
+        public List<AccommodationReservation> GetAllWithGuestsAndAccommodations()
+        {
+            AccommodationReservations = GetAllWithGuests();
             BindAccommodations();
             return AccommodationReservations;
+        }
+           public AccommodationReservation GetById(int id)
+        {
+            AccommodationReservations = GetAllWithGuestsAndAccommodations();
+            return AccommodationReservations.FirstOrDefault(t => t.Id == id);
         }
 
         public AccommodationReservation Save(AccommodationReservation accommodationReservation)
@@ -97,13 +133,13 @@ namespace BookingApp.Repository
         }
         public List<AccommodationReservation> GetByAccommodationId(int id)
         {
-            List<AccommodationReservation> reservations = GetAll();
+            List<AccommodationReservation> reservations = GetAllWithAccommodations();
             return reservations.Where(reservation => reservation.Accommodation.Id == id).ToList();
         }
 
         public List<AccommodationReservation> GetByOwnerId(int id)
         {
-            List<AccommodationReservation> reservations = GetAll();
+            List<AccommodationReservation> reservations = GetAllWithAccommodations();
             return reservations.Where(reservation => reservation.Accommodation.Owner.Id == id).ToList();
         }
 

@@ -12,18 +12,18 @@
             <RowDefinition/>
             <RowDefinition Height="110"/>
         </Grid.RowDefinitions>
-        <DataGrid Grid.Row="1"  AutoGenerateColumns="False" x:Name="ReservationRescheduleRequestsDataGrid"
+        <DataGrid Grid.Row="1" AutoGenerateColumns="False" x:Name="ReservationRescheduleRequestsDataGrid"
                   IsReadOnly="True" SelectionMode="Single"
                   ItemsSource="{Binding Path=ReservationRescheduleRequests, UpdateSourceTrigger=PropertyChanged}"
                   SelectedItem="{Binding Path=SelectedReservationRescheduleRequest, UpdateSourceTrigger=PropertyChanged}">
             <DataGrid.Columns>
-                <DataGridTextColumn Header="Gost" Binding="{Binding Reservation.Guest.Username}" Width="150"></DataGridTextColumn>
-                <DataGridTextColumn Header="Smeštaj" Binding="{Binding Reservation.Accommodation.Name}" Width="150"></DataGridTextColumn>
-                <DataGridTextColumn Header="Od" Binding="{Binding Reservation.Arrival}" Width="150"></DataGridTextColumn>
-                <DataGridTextColumn Header="Do" Binding="{Binding Reservation.Departure}" Width="*"></DataGridTextColumn>
-                <DataGridTextColumn Header="Komentar" Binding="{Binding Comment}" Width="150"></DataGridTextColumn>
-
+                <DataGridTextColumn Header="Gost" Binding="{Binding Reservation.Guest.Username}" Width="150"/>
+                <DataGridTextColumn Header="Smeštaj" Binding="{Binding Reservation.Accommodation.Name}" Width="150"/>
+                <DataGridTextColumn Header="Od" Binding="{Binding Reservation.Arrival}" Width="150"/>
+                <DataGridTextColumn Header="Do" Binding="{Binding Reservation.Departure}" Width="*"/>
+                <DataGridTextColumn Header="Komentar" Binding="{Binding Comment}" Width="150"/>
             </DataGrid.Columns>
         </DataGrid>
+        <Button x:Name="RescheduleHandleButton" Content="Obradi zahtev" HorizontalAlignment="Left" Margin="662,35,0,0" Grid.Row="2" VerticalAlignment="Top" Command="{Binding RescheduleHandleCommand}"/>
     </Grid>
 </Window>
