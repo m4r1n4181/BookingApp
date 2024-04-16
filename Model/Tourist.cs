@@ -18,14 +18,14 @@ namespace BookingApp.Model
         public int Age { get; set; }
 
         public int UserId { get; set; }
-
+      
 
         public Tourist() { }
 
         public Tourist(int id) { this.Id = id; }
         public Tourist(string firstName, string lastName, int age)
         {
-
+            
             FirstName = firstName;
             LastName = lastName;
             Age = age;
@@ -37,7 +37,7 @@ namespace BookingApp.Model
             LastName = lastName;
             Age = age;
         }
-        public Tourist(int id, string firstName, string lastName, int age, string username, string password, int userId)
+        public Tourist(int id, string firstName, string lastName, int age, string username, string password, int userId) 
         {
             Id = id;
             FirstName = firstName;

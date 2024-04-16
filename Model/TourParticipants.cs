@@ -20,7 +20,7 @@ namespace BookingApp.Model
 
         public TourParticipants(int id) { Id = id; }
 
-
+      
 
         public TourParticipants(int id, string firstName, string lastName, int age)
         {
@@ -29,7 +29,7 @@ namespace BookingApp.Model
             LastName = lastName;
             Age = age;
         }
-        
+
         public string[] ToCSV()
         {
             string[] csvValues = { Id.ToString(), FirstName, LastName, Age.ToString()

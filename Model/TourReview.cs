@@ -41,15 +41,17 @@ namespace BookingApp.Model
 
         public void FromCSV(string[] values)
         {
-            Id = Convert.ToInt32(values[0]);
-            TourReservation = new TourReservation() { Id = Convert.ToInt32(values[1]) };
-            Knowledge = Convert.ToInt32(values[2]);
-            Fluency = Convert.ToInt32(values[3]);
-            TourAppeal = Convert.ToInt32(values[4]);
-            Comment = values[5];
+                Id = Convert.ToInt32(values[0]);
+                TourReservation = new TourReservation() { Id = Convert.ToInt32(values[1]) };
+                Knowledge = Convert.ToInt32(values[2]);
+                Fluency = Convert.ToInt32(values[3]);
+                TourAppeal = Convert.ToInt32(values[4]);
+                Comment = values[5];
             Pictures = values[6].Split(",").ToList();
             Validity = bool.Parse(values[7]);
         }
+
+
 
         public string[] ToCSV()
         {

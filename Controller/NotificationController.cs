@@ -24,7 +24,7 @@ namespace BookingApp.Controller
         }
         public Notification GetById(int id)
         {
-            return _notificationService.GetById(id);
+                return _notificationService.GetById(id);
         }
         public List<Notification> GetByUserId(int id)
         {

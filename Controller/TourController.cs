@@ -47,7 +47,7 @@ namespace BookingApp.Controller
             _tourService.StartTour(id);
         }
 
-        public List<Tour>SearchTours(TourSearchParams searchParams)
+        public List<Tour> SearchTours(TourSearchParams searchParams)
         {
             return _tourService.SearchTours(searchParams);
         }

@@ -41,6 +41,12 @@ namespace BookingApp.Service
         {
             return _accommodationRepository.GetAllWithLocations();
         }
+        public List<Accommodation> GetByOwner(int id)
+        {
+
+            return _accommodationRepository.GetByOwner(id);
+        }
+
     }
 
 }

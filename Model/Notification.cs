@@ -30,7 +30,7 @@ namespace BookingApp.Model
             User = user;
             Message = message;
             NotificationStatus = notificationStatus;
-
+            
         }
 
         public string[] ToCSV()
@@ -49,3 +49,4 @@ namespace BookingApp.Model
         }
     }
 }
+

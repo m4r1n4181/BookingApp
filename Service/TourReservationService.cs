@@ -36,7 +36,7 @@ namespace BookingApp.Service
         public List<TourReservation> GetAllTours()
         {
             List<TourReservation> allTourReservations = _tourReservationRepository.GetAll();
-            
+
             return allTourReservations;
         }
       
@@ -98,5 +98,79 @@ namespace BookingApp.Service
 
         
 
+        /*public void CancelAllTourReservationsForTour(int tourId)
+        {
+            Tour tour = _tourRepository.GetById(tourId);
+            tour.TourStatus = TourStatusType.cancelled;
+            _tourRepository.Update(tour);
+
+            _tourReservationRepository.GetByTour(tourId).ForEach(res => CancelTourReservation(res));
+
+        }*/
+
+        /*public List<TourReservation> GetAllParticipants(int reservationId)
+        {
+            return _tourReservationRepository.GetAllParticipants(reservationId);
+        }*/
+
+        public List<TourReservation> GetAllTourReservationsForTourWherePeopleShowed(int tourId)
+        {
+            List<TourReservation> tourReservations = new List<TourReservation>();
+            foreach (TourReservation tourReservation in _tourReservationRepository.GetAll())
+            {
+                if (tourReservation.Tour.Id == tourId) //moda mi treba i logika kada su se turisti prikljucili na turu - preko keypointa
+                {
+                    tourReservations.Add(tourReservation);
+
+                }
+            }
+            return tourReservations;
+        }
+
+        /* public TourAgeGroupStatistic GetAgeStatisticsForTour(int tourId)
+         {
+             TourAgeGroupStatistic tourAgeGroupStatistic = new TourAgeGroupStatistic(0, 0, 0);
+             foreach (TourReservation tourReservation in GetAllTourReservationsForTourWherePeopleShowed(tourId))
+             {
+                 foreach (TourParticipants tourist in tourReservation.Tourists)
+                 {
+                     if (tourist.Age <= 18)
+                     {
+                         tourAgeGroupStatistic.To18 += 1;
+                     }
+                     else if (tourist.Age > 18 && tourist.Age <= 50)
+                     {
+                         tourAgeGroupStatistic.From18To50 += 1;
+                     }
+                     else
+                     {
+                         tourAgeGroupStatistic.From50 += 1;
+                     }
+                 }
+             }
+             return tourAgeGroupStatistic;
+         }*/
+       /* public List<TourReservation> GetReservationsByUserId(int userId)
+        {
+            var reservations = _tourReservationRepository.GetAll().Where(r => r.UserId == userId).ToList();
+            return reservations;
+        }*/
+
+        /*public TourStatusType GetTourStatus(TourReservation reservation)
+        {
+            Tour tour = _tourRepository.GetById(reservation.Tour.Id);
+            return tour.TourStatus;
+        }*/
+        /* public List<TourReservation> GetPreviousReservationsByUserId(int userId)
+         {
+             return _tourReservationRepository.GetAllWithTours().Where(r => r.Tour.IsCompleted && r.UserId == userId).ToList();
+         }
+
+         public List<TourReservation> GetActiveReservationsByUserId(int userId)
+         {
+             return _tourReservationRepository.GetAllWithTours().Where(r => r.Tour.IsStarted && r.UserId == userId).ToList();
+         }
+
+         */
     }
 }

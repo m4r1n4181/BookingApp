@@ -18,6 +18,7 @@ namespace BookingApp.Repository
 
         private List<Tour> _tours;//Tours
 
+
         public TourRepository()
         {
             _serializer = new Serializer<Tour>();
@@ -31,6 +32,7 @@ namespace BookingApp.Repository
            // BindDateTime();
             return _tours;
         }
+
 
         public void BindLocations()
         {
@@ -92,7 +94,9 @@ namespace BookingApp.Repository
 
         public List<Tour> GetAll()
         {
-            return _serializer.FromCSV(FilePath);
+            _tours = _serializer.FromCSV(FilePath);
+            BindLocations();
+            return _tours;
         }
 
         public List<Tour> GetAllFinished()
@@ -135,7 +139,7 @@ namespace BookingApp.Repository
             Tour current = _tours.Find(t => t.Id == tour.Id);
             int index = _tours.IndexOf(current);
             _tours.Remove(current);
-            _tours.Insert(index, tour);      
+            _tours.Insert(index, tour);
             _serializer.ToCSV(FilePath, _tours);
             return tour;
         }

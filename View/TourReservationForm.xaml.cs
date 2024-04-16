@@ -206,14 +206,11 @@ namespace BookingApp.View
             // Dobijemo lokaciju odabrane ture
             Location selectedLocation = SelectedTour.Location;
 
-            // Dobijemo alternative sa istom lokacijom kao odabrana tura
-          //  var alternativeTours = _tourRepository.GetAlternativesByLocation(selectedLocation);
+            // var alternativeTours = _tourRepository.GetAlternativeTours(selectedLocation);
 
-            // Kreiramo prozor za prikaz alternativnih tura i prosleđujemo listu tura
-            //AlternativeToursView alternativeToursView = new AlternativeToursView(alternativeTours);
+            AlternativeToursView alternativeToursView = new AlternativeToursView(selectedLocation);
 
-            // Prikažemo prozor
-            //alternativeToursView.ShowDialog();
+            alternativeToursView.ShowDialog();
         }
 
 
@@ -224,6 +221,7 @@ namespace BookingApp.View
             TourReservation reservation = new TourReservation()
             {
                 GuestsNumber = participantsNumber,
+                UserId = User.Id, // Dodajemo UserId korisnika koji je napravio rezervaciju
                 Tour = SelectedTour,
                 Tourists = Participants.ToList<TourParticipants>()
             };
@@ -236,6 +234,7 @@ namespace BookingApp.View
             // Clear participants list after reservation
             Participants.Clear();
         }
+
 
         private void UpdateAvailableSeats(int tourId, int reservedSeats)
         {
@@ -253,6 +252,13 @@ namespace BookingApp.View
                 // Ažuriraj turu u CSV datoteci
                 _tourRepository.Update(tourToUpdate);
             }
+        }
+
+        private void Voucher_Click(object sender, RoutedEventArgs e)
+        {
+            UsableVouchers usableVouchers = new UsableVouchers();
+            usableVouchers.Show();
+
         }
 
 

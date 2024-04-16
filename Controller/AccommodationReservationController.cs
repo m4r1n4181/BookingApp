@@ -1,4 +1,5 @@
-﻿using BookingApp.Model;
+﻿using BookingApp.Domain.Models;
+using BookingApp.Model;
 using BookingApp.Service;
 using System;
 using System.Collections.Generic;
@@ -11,6 +12,7 @@ namespace BookingApp.Controller
     public class AccommodationReservationController
     {
         private AccommodationReservationService _accommodationReservationService;
+       // private readonly AccommodationReservationService _accommodationReservationService;
         public AccommodationReservationController()
         {
             _accommodationReservationService = new AccommodationReservationService();
@@ -31,6 +33,14 @@ namespace BookingApp.Controller
         public List<AccommodationReservation> GetFreeRangeDays(int accommodationId, DateTime start, DateTime end, int numberOfDays)
         {
             return _accommodationReservationService.GetFreeDateRanges(accommodationId, start, end, numberOfDays);
+        }
+        public AccommodationReservation Update(AccommodationReservation accommodationReservation)
+        {
+            return _accommodationReservationService.Update(accommodationReservation);
+        }
+        public bool IsReschedulePossible(ReservationRescheduleRequest reservationRescheduleRequest)
+        {
+            return _accommodationReservationService.IsReschedulePossible(reservationRescheduleRequest);
         }
 
 

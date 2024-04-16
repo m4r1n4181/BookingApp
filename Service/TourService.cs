@@ -19,6 +19,8 @@ namespace BookingApp.Service
         private KeyPointRepository _keyPointRepository;
         private TouristRepository _touristRepository;
         private TouristEntryRepository _entryRepository;
+        private TourReservationService _tourReservationService;
+
         private TourReservationRepository _tourReservationRepository;
        
         public TourService()
@@ -27,6 +29,7 @@ namespace BookingApp.Service
             _keyPointRepository = new KeyPointRepository();
             _touristRepository = new TouristRepository(); // Initialize tourist repository
             _entryRepository = new TouristEntryRepository(); // Initialize tourist entry repository
+            _tourReservationService = new TourReservationService();
             _tourReservationRepository = new TourReservationRepository();
         }
 
@@ -99,7 +102,15 @@ namespace BookingApp.Service
             {
                 return;
             }
-            tour.TourStatus = Model.Enums.TourStatusType.finished;
+            List<KeyPoint> keyPoints = _keyPointRepository.GetKeyPointsForTour(id);
+
+            foreach (KeyPoint keyPoint in keyPoints)
+
+            {
+                keyPoint.IsActive = false;
+                _keyPointRepository.Update(keyPoint);
+            }
+            tour.TourStatus = Model.Enums.TourStatusType.not_started;
             _tourRepository.Update(tour);
         }
 
@@ -110,9 +121,10 @@ namespace BookingApp.Service
             return _tourRepository.SearchTours(tourSearchParams);
         }
 
-      
+
         public List<Tour> GetAll()
         {
+
             return _tourRepository.GetAll();
         }
 

@@ -12,7 +12,7 @@ namespace BookingApp.Service
     public class TourReviewService
     {
         private TourReviewRepository _tourReviewRepository;
-        private TouristEntryRepository _touristEntryRepository;
+        public TourReservationRepository _tourReservationRepository;
 
         public TourReviewService()
         {

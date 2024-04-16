@@ -1,9 +1,13 @@
-﻿using BookingApp.Model;
+﻿using BookingApp.Controller;
+using BookingApp.Model;
 using BookingApp.Model.Enums;
 using BookingApp.Repository;
+using BookingApp.View.OwnerWindows;
+using System.Collections.Generic;
 using System.ComponentModel;
 using System.Runtime.CompilerServices;
 using System.Windows;
+using BookingApp.View.ViewModel;
 
 namespace BookingApp.View
 {
@@ -14,6 +18,7 @@ namespace BookingApp.View
     {
 
         private readonly UserRepository _repository;
+        private NotificationController _notificationController;
 
         public static User LoggedUser { get; set; }
 
@@ -43,6 +48,7 @@ namespace BookingApp.View
             InitializeComponent();
             DataContext = this;
             _repository = new UserRepository();
+            _notificationController = new NotificationController();
         }
 
         private void SignIn(object sender, RoutedEventArgs e)
@@ -50,10 +56,11 @@ namespace BookingApp.View
             User user = _repository.GetByUsername(Username);
             if (user != null)
             {
-
+               
                 if (user.Password == txtPassword.Password)
                 {
                     LoggedUser = user;
+                    
                     if (user.Type == UserType.TourGuide)
                     {
                         TourGuideHomePage tourGuideHomePage= new TourGuideHomePage();
@@ -66,23 +73,56 @@ namespace BookingApp.View
                     }
                     else if (user.Type == UserType.Owner)
                     {
-                        RegisterAccommodationForm registerAccommodationForm = new RegisterAccommodationForm();
+                        OwnerMainWindow ownerMainWindow = new OwnerMainWindow();
+                        ownerMainWindow.Show();
+                         ReservationRescheduleRequestsWindow reservationRescheduleRequestsWindow = new ReservationRescheduleRequestsWindow();
+                        reservationRescheduleRequestsWindow.Show();
+                         RegisterAccommodationForm registerAccommodationForm = new RegisterAccommodationForm();
                         registerAccommodationForm.Show();
-                        AccommodationReservationToRateForm accommodationReservationToRateForm = new AccommodationReservationToRateForm(user);
-                        accommodationReservationToRateForm.Show();
+                       //AccommodationReservationToRateForm accommodationReservationToRateForm = new AccommodationReservationToRateForm(user);
+                        //accommodationReservationToRateForm.Show();
+                         //AccommodationsOverviewWindow accommodationOverviewWindow = new AccommodationsOverviewWindow();
+                        //accommodationOverviewWindow.Show();
+                      AccommodationOwnerReviewsWindow accommodationOwnerReviewsWindow = new AccommodationOwnerReviewsWindow();
+                       accommodationOwnerReviewsWindow.Show();
+
                     }
 
                     else if (user.Type == UserType.Tourist)
                     {
-                        TourOverviewForm tourOverviewForm = new TourOverviewForm();
+                        TourOverviewForm tourOverviewForm = new TourOverviewForm(LoggedUser);
                         tourOverviewForm.Show();
+
+                        List<Notification> notifications = _notificationController.GetByUserId(LoggedUser.Id);
+                        foreach(Notification notification in notifications)
+                        {
+                            MessageBox.Show(notification.Message, "Notifications", MessageBoxButton.OK, MessageBoxImage.Information);
+                        }
+                       // _notificationController.ReadAllUserNotifications(LoggedUser.Id);
                     }
-                    else
+                    else if(user.Type == UserType.Guest)
                     {
-                        AccommodationSearch accommodationSearch = new AccommodationSearch();
+                      /*  AccommodationSearch accommodationSearch = new AccommodationSearch();
                         accommodationSearch.Show();
+
+                        GuestWindows.AccommodationReservationToRateForm accommodationReservationToRateForm = new GuestWindows.AccommodationReservationToRateForm(user);
+                        accommodationReservationToRateForm.Show();
+                        
+
+                        GuestWindows.AccommodationAllReservations accommodationAllReservations = new GuestWindows.AccommodationAllReservations(user);
+                        accommodationAllReservations.Show();
+
+                        GuestHomePage guestHomePage = new GuestHomePage();
+                        guestHomePage.Show();
+
+                        List<Notification> notifications = _notificationController.GetAllByUser(LoggedUser.Id);
+                        foreach(Notification notification in notifications)
+                        {
+                            MessageBox.Show(notification.Message, "Notification", MessageBoxButton.OK, MessageBoxImage.Information);
+                        }
+                        _notificationController.SetSeenNotificationsForUser(LoggedUser.Id);
                         Close();
-                     
+                     */
 
                     }
                 }

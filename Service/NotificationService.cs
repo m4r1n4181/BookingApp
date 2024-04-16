@@ -15,7 +15,7 @@ namespace BookingApp.Service
 
         public NotificationService()
         {
-
+            
             _notificationRepository = new NotificationRepository();
         }
 

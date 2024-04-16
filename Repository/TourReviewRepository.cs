@@ -49,7 +49,7 @@ namespace BookingApp.Repository
             return tourReview;
         }
 
-       
+
         public List<TourReview> GetByTour(int tourId)
         {
             TourReviews = _serializer.FromCSV(FilePath);
