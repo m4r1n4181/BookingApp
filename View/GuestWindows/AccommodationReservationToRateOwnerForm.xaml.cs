@@ -35,7 +35,7 @@ namespace BookingApp.View.GuestWindows
                 MessageBox.Show("Please select a reservation before activating.");
                 return;
             }
-
+            //treba refresh?
             OwnerReviewForm ownerReviewForm = new OwnerReviewForm(SelectedReservation);
             ownerReviewForm.ShowDialog();
         }

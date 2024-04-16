@@ -1,5 +1,6 @@
 ﻿using BookingApp.Controller;
 using BookingApp.Domain.Models;
+using BookingApp.Model;
 using BookingApp.View.OwnerWindows;
 using GalaSoft.MvvmLight.Command;
 using System;
@@ -16,6 +17,7 @@ namespace BookingApp.ViewModels.OwnerViewModels
     {
         public ReservationRescheduleRequestController _reservationRescheduleRequestController;
         public AccommodationReservationController _accommodationReservationController;
+        public NotificationController _notificationController;
 
         #region NotifyProperties
         private string _guest;
@@ -55,6 +57,7 @@ namespace BookingApp.ViewModels.OwnerViewModels
         {
             _reservationRescheduleRequestController = new ReservationRescheduleRequestController();
             _accommodationReservationController = new AccommodationReservationController();
+            _notificationController = new NotificationController();
 
             rescheduleRequest = reservationRescheduleRequest;
            // Guest = rescheduleRequest.Guest.Username;
@@ -82,6 +85,15 @@ namespace BookingApp.ViewModels.OwnerViewModels
             rescheduleRequest.Reservation.Departure = rescheduleRequest.NewEnd;
             _accommodationReservationController.Update(rescheduleRequest.Reservation);
             _reservationRescheduleRequestController.Update(rescheduleRequest);
+
+            string message = "Your reservation for accommodation " + rescheduleRequest.Reservation.Accommodation.Name + " has been Approved"; 
+            Notification notification = new Notification()
+            {
+                User = rescheduleRequest.Reservation.Guest,
+                Message = message,
+                Status = Model.Enums.NotificationStatus.Unseen
+            };
+            _notificationController.Create(notification);
             MessageBox.Show("uspesno pomerena rezervacija");
         }
         private void ExecuteDeclineRequestButtonCommand(object param) 

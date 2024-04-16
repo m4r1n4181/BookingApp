@@ -26,7 +26,10 @@ namespace BookingApp.Controller
         {
             return _notificationService.GetAllNotifications();
         }
-
+        public Notification Create(Notification notification)
+        {
+            return _notificationService.CreateNotification(notification);
+        }
         public List<Notification> GetAllByUser(int userId)
         {
             return _notificationService.GetAllUnseenByUser(userId);

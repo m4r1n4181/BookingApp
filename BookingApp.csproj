@@ -35,6 +35,7 @@
 
   <ItemGroup>
     <Folder Include="ViewModels\GuestViewModels\" />
+    <Folder Include="WPF\Views\" />
   </ItemGroup>
 
 

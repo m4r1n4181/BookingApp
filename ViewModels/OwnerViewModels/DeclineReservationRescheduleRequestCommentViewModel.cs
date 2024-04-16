@@ -1,5 +1,6 @@
 ﻿using BookingApp.Controller;
 using BookingApp.Domain.Models;
+using BookingApp.Model;
 using GalaSoft.MvvmLight.Command;
 using System;
 using System.Collections.Generic;
@@ -14,6 +15,7 @@ namespace BookingApp.ViewModels.OwnerViewModels
     public class DeclineReservationRescheduleRequestCommentViewModel : ViewModelBase
     {
         public ReservationRescheduleRequestController _reservationRescheduleRequestController;
+        private NotificationController _notificationController;
 
         #region NotifyProperties
         private string _comment;
@@ -37,7 +39,7 @@ namespace BookingApp.ViewModels.OwnerViewModels
         public DeclineReservationRescheduleRequestCommentViewModel(ReservationRescheduleRequest reservationRescheduleRequest)
         {
             _reservationRescheduleRequestController = new ReservationRescheduleRequestController();
-
+            _notificationController = new NotificationController();
             ReservationRescheduleRequest = reservationRescheduleRequest;
             AddCommentButtonCommand = new RelayCommand(ExecuteAddCommentButtonCommand, CanExecuteAddCommentButtonCommand);
 
@@ -49,6 +51,15 @@ namespace BookingApp.ViewModels.OwnerViewModels
             ReservationRescheduleRequest.Status = Model.Enums.RequestStatusType.Declined;
             ReservationRescheduleRequest.Comment = Comment;
             _reservationRescheduleRequestController.Update(ReservationRescheduleRequest);
+
+            string message = "Your reservation for accommodation " + ReservationRescheduleRequest.Reservation.Accommodation.Name + " has been Approved";
+            Notification notification = new Notification()
+            {
+                User = ReservationRescheduleRequest.Reservation.Guest,
+                Message = message,
+                Status = Model.Enums.NotificationStatus.Unseen
+            };
+            _notificationController.Create(notification);
         }
         private bool CanExecuteAddCommentButtonCommand(object param)
         {

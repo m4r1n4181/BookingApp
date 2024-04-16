@@ -1,16 +1,22 @@
 ﻿using BookingApp.Model;
 using BookingApp.Repository;
 using BookingApp.Service;
+using BookingApp.View;
 using BookingApp.WPF.Views.GuestWindows;
 using System;
+using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
+using System.Diagnostics.Contracts;
+using System.Linq;
 using System.Runtime.CompilerServices;
+using System.Text;
+using System.Threading.Tasks;
 using System.Windows;
 
-namespace BookingApp.View.GuestWindows
+namespace BookingApp.ViewModels.GuestViewModels
 {
-    public partial class AccommodationAllReservations : Window//, INotifyPropertyChanged
+    public class AccommodationAllReservationsViewModel
     {
         public ObservableCollection<AccommodationReservation> AccommodationReservations { get; set; }
         public AccommodationReservation SelectedReservation { get; set; }
@@ -19,27 +25,21 @@ namespace BookingApp.View.GuestWindows
         private readonly AccommodationReservationRepository _accommodationReservationRepository;
         private readonly AccommodationReservationService _accommodationReservationService;
 
-        public AccommodationAllReservations()
+        public RelayCommand EditCommand { get; set; }
+        public RelayCommand CancelCommand { get; set; }
+
+      
+
+        public AccommodationAllReservationsViewModel()
         {
-            InitializeComponent();
-            DataContext = this;
             LoggedInUser = SignInForm.LoggedUser;
             _accommodationReservationRepository = new AccommodationReservationRepository();
             _accommodationReservationService = new AccommodationReservationService();
             AccommodationReservations = new ObservableCollection<AccommodationReservation>(_accommodationReservationService.GetAllByGuest(LoggedInUser.Id));
+
+            EditCommand = new RelayCommand(Edit_Click);
+            CancelCommand = new RelayCommand(Cancel_Click);
         }
-
-      /*  private void Activate_Click(object sender, RoutedEventArgs e)
-        {
-            if (SelectedReservation == null)
-            {
-                MessageBox.Show("Please select a reservation before activating.");
-                return;
-            }
-
-            OwnerReviewForm ownerReviewForm = new OwnerReviewForm(SelectedReservation);
-            ownerReviewForm.ShowDialog();
-        }*/
 
         public event PropertyChangedEventHandler PropertyChanged;
 
@@ -48,7 +48,7 @@ namespace BookingApp.View.GuestWindows
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
         }
 
-        private void Edit_Click(object sender, RoutedEventArgs e)
+        public void Edit_Click(object sender)
         {
             if (SelectedReservation == null)
             {
@@ -60,8 +60,8 @@ namespace BookingApp.View.GuestWindows
 
             //this.Close();
         }
-
-        private void Cancel_Click(object sender, RoutedEventArgs e)
+        
+        private void Cancel_Click(object sender)
         {
             if (SelectedReservation == null)
             {
@@ -79,17 +79,17 @@ namespace BookingApp.View.GuestWindows
                 MessageBox.Show("You have successfully canceled your reservation!", "Canceled!", MessageBoxButton.OK);
             }
 
-            
+
             Refresh();
-            
-            
+
+
         }
 
         private void Refresh()
         {
             AccommodationReservations.Clear();
             int loggedId = SignInForm.LoggedUser.Id;
-            foreach(AccommodationReservation reservation in _accommodationReservationService.GetAllByGuest(loggedId))
+            foreach (AccommodationReservation reservation in _accommodationReservationService.GetAllByGuest(loggedId))
             {
                 AccommodationReservations.Add(reservation);
             }

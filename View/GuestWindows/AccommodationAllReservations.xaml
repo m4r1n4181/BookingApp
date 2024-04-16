@@ -35,8 +35,8 @@
 
 
         <ToolBar Grid.Row="0" Grid.ColumnSpan="4">
-            <Button Click="Edit_Click" FontSize="14" VerticalAlignment="Center" Margin="5,0,0,0" Content="Edit reservation"/>
-            <Button Click="Cancel_Click" FontSize="14" VerticalAlignment="Center" Margin="5,0,0,0" Content="Cancel reservation"/>
+            <Button Command="{Binding EditCommand}" Click="Button_Click" FontSize="14" VerticalAlignment="Center" Margin="5,0,0,0" Content="Edit reservation"/>
+            <Button Command="{Binding CancelCommand}" Click="Cancel_Click" FontSize="14" VerticalAlignment="Center" Margin="5,0,0,0" Content="Cancel reservation"/>
         </ToolBar>
     </Grid>
 </Window>
