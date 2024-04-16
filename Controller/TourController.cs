@@ -52,10 +52,6 @@ namespace BookingApp.Controller
             return _tourService.SearchTours(searchParams);
         }
 
-        public void StartTour(int id)
-        {
-            _tourService.StartTour(id);
-        }
 
         public List<Tour> GetTourInFuture()
         {
@@ -87,6 +83,10 @@ namespace BookingApp.Controller
             return _tourService.GetAllTour(tourGuideId);
         }
 
+        public List<Tour> GetAll()
+        {
+            return _tourService.GetAll();
+        }
 
     }
 

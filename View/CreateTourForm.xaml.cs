@@ -179,7 +179,7 @@ namespace BookingApp.View
                 Description = Description,
                 Language = TourLanguage,
                 MaxTourists = MaxTourists,
-                StartDates = new List<DateTime>(),
+                //StartDates = new List<DateTime>(),
                 Duration = Duration,
                 Pictures = Pictures,
             };
@@ -188,9 +188,9 @@ namespace BookingApp.View
             TimeSpan timeOfDay = TimeSpan.Parse(SelectedTime);
             TourDate = TourDate.Add(timeOfDay);
 
-            newTour.StartDates.Add(TourDate);
+           // newTour.StartDates.Add(TourDate);
 
-            _tourController.CreateTour(newTour);
+           // _tourController.CreateTour(newTour);
 
             KeyPoints.ForEach(kp => kp.Tour = newTour);
 

@@ -79,6 +79,10 @@ namespace BookingApp.Service
         {
             return _keyPointRepository.GetActiveKeyPointByTour(tourId);
         }
+        public void SaveAll(List<KeyPoint> keyPoints)
+        {
+            _keyPointRepository.SaveAll(keyPoints);
+        }
     }
 }
 

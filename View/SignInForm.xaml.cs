@@ -3,7 +3,6 @@ using BookingApp.Model;
 using BookingApp.Model.Enums;
 using BookingApp.Repository;
 using BookingApp.View.OwnerWindows;
-using BookingApp.WPF.Views.GuestWindows;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Runtime.CompilerServices;
@@ -103,7 +102,7 @@ namespace BookingApp.View
                     }
                     else if(user.Type == UserType.Guest)
                     {
-                        AccommodationSearch accommodationSearch = new AccommodationSearch();
+                      /*  AccommodationSearch accommodationSearch = new AccommodationSearch();
                         accommodationSearch.Show();
 
                         GuestWindows.AccommodationReservationToRateForm accommodationReservationToRateForm = new GuestWindows.AccommodationReservationToRateForm(user);
@@ -123,7 +122,7 @@ namespace BookingApp.View
                         }
                         _notificationController.SetSeenNotificationsForUser(LoggedUser.Id);
                         Close();
-                     
+                     */
 
                     }
                 }
