@@ -1,11 +1,11 @@
-﻿using BookingApp.Model;
-using BookingApp.Repository;
-using BookingApp.Serializer;
+﻿
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using BookingApp.Model;
+using BookingApp.Repository;
 
 namespace BookingApp.Service
 {
@@ -15,44 +15,41 @@ namespace BookingApp.Service
 
         public NotificationService()
         {
+            
             _notificationRepository = new NotificationRepository();
         }
 
-
-        public List<Notification> GetAllNotifications()
-        {
-            return _notificationRepository.GetAll();
-        }
-
-        public Notification CreateNotification(Notification notification)
+        public Notification Create(Notification notification)
         {
             return _notificationRepository.Save(notification);
         }
 
-        public Notification UpdateNotification(Notification notification)
+        public List<Notification> GetAll()
         {
-            return _notificationRepository.Update(notification);
+
+            return _notificationRepository.GetAll();
         }
 
-        public Notification GetNotificationById(int id)
+        public Notification GetById(int id)
         {
             return _notificationRepository.GetById(id);
         }
 
-        public List<Notification> GetAllUnseenByUser(int userId)
+        public List<Notification> GetByUserId(int id)
         {
-            List<Notification> notifications = _notificationRepository.GetAllByUser(userId);
-            return notifications.FindAll(n => n.Status == Model.Enums.NotificationStatus.Unseen);
+            return _notificationRepository.GetByUserId(id);
         }
 
-        public void SetSeenNotificationsForUser(int userId)
+        public void ReadAllUserNotifications(int userId)
         {
-            List<Notification> unseenNotifications = GetAllUnseenByUser(userId);
-            foreach(Notification notification in unseenNotifications)
+            List<Notification> userNotifications = _notificationRepository.GetByUserId(userId);
+            foreach (Notification notification in userNotifications)
             {
-                notification.Status = Model.Enums.NotificationStatus.Seen;
+                notification.NotificationStatus = Model.Enums.NotificationStatus.read;
                 _notificationRepository.Update(notification);
+
             }
         }
     }
 }
+

@@ -15,6 +15,7 @@ namespace BookingApp.ViewModels.OwnerViewModels
 {
     public class ReservationRescheduleRequestHandlingViewModel : ViewModelBase
     {
+        
         public ReservationRescheduleRequestController _reservationRescheduleRequestController;
         public AccommodationReservationController _accommodationReservationController;
         public NotificationController _notificationController;
@@ -59,8 +60,9 @@ namespace BookingApp.ViewModels.OwnerViewModels
             _accommodationReservationController = new AccommodationReservationController();
             _notificationController = new NotificationController();
 
-            rescheduleRequest = reservationRescheduleRequest;
-           // Guest = rescheduleRequest.Guest.Username;
+            //rescheduleRequest = reservationRescheduleRequest;
+            rescheduleRequest = _reservationRescheduleRequestController.GetWithGuest(reservationRescheduleRequest.Reservation.Guest.Id);
+            Guest = rescheduleRequest.Reservation.Guest.Username;
             if (!_accommodationReservationController.IsReschedulePossible(rescheduleRequest))
             {
                 Available = "Smeštaj je zauzet.";
@@ -91,10 +93,11 @@ namespace BookingApp.ViewModels.OwnerViewModels
             {
                 User = rescheduleRequest.Reservation.Guest,
                 Message = message,
-                Status = Model.Enums.NotificationStatus.Unseen
+                NotificationStatus = Model.Enums.NotificationStatus.unread
             };
             _notificationController.Create(notification);
             MessageBox.Show("uspesno pomerena rezervacija");
+            return;
         }
         private void ExecuteDeclineRequestButtonCommand(object param) 
         {
@@ -103,12 +106,10 @@ namespace BookingApp.ViewModels.OwnerViewModels
         }
         private bool CanExecuteAcceptRequestButtonCommand(object param)
         {
-            // Add any conditions for when the command can execute, if needed
-            return true;
+         return true;
         }
         private bool CanExecuteDeclineRequestButtonCommand(object param)
         {
-            // Add any conditions for when the command can execute, if needed
             return true;
         }
 

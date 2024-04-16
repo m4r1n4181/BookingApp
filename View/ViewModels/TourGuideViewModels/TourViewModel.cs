@@ -8,21 +8,10 @@ using System.Linq;
 using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
-using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Shapes;
 
-namespace BookingApp.View
+namespace BookingApp.View.ViewModels.TourGuideViewModels
 {
-    /// <summary>
-    /// Interaction logic for TourDetails.xaml
-    /// </summary>
-    public partial class TourDetails : Window, INotifyPropertyChanged
+    public class TourViewModel
     {
 
         public string _tourName;
@@ -145,17 +134,15 @@ namespace BookingApp.View
 
         public Tour SelectedTour { get; set; }
         private KeyPointController _keyPointController;
-   
+
         public ObservableCollection<KeyPoint> KeyPoints { get; set; }
         public KeyPoint SelectedKeyPoint { get; set; }
 
         public Tourist SelectedTourist { get; set; }
 
         private TourController _tourController;
-        public TourDetails(Tour tour)
+        public TourViewModel(Tour tour)
         {
-            InitializeComponent();
-            this.DataContext = this;
             SelectedTour = tour;
 
             TourName = tour.Name;
@@ -164,7 +151,7 @@ namespace BookingApp.View
             Languages = tour.Language;
             MaxTourists = tour.MaxTourists;
             Duration = tour.Duration;
-            TourDate = string.Join(", ", tour.StartDates);
+            TourDate = string.Join(", ", tour.StartDate);
 
 
             _keyPointController = new KeyPointController();
@@ -175,57 +162,5 @@ namespace BookingApp.View
 
 
         }
-
-        public void ActivateKeyPoint_Click(object sender, RoutedEventArgs e)
-        {
-            if (SelectedKeyPoint == null)
-            {
-                MessageBox.Show("Please select a keyPoint.", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
-                return;
-
-            }
-            _keyPointController.ActivateKeyPoint(SelectedKeyPoint.Id);
-            KeyPoints.Clear();
-            foreach (KeyPoint keyPoint in _keyPointController.GetAllForTour(SelectedTour.Id))
-            {
-                KeyPoints.Add(keyPoint);
-            }
-        }
-
-        public void MarkTourist_Click(object sender, RoutedEventArgs e)
-        {
-            if(SelectedKeyPoint == null)
-            {
-                MessageBox.Show("Please select a keyPoint.", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
-                return;
-            }
-            if (SelectedKeyPoint.IsActive == false)
-            {
-                MessageBox.Show("Please select active keyPoint.", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
-                return;
-            }
-            TouristSelectionForm touristSelectionForm = new TouristSelectionForm(SelectedKeyPoint);
-            touristSelectionForm.ShowDialog();
-
-        }
-
-        public void EndTour_Click(object sender, RoutedEventArgs e)
-        {
-            //tourId
-            _tourController.EndTour(SelectedTour.Id);
-            Close();
-
-        }
-        
-
     }
-
-   }
-
-        //za dodavanje turiste
-        // selectujem keypoint i click dugme nadji tutistu
-        //novi prozor sa svim turistama gde selektujemo jednog
-        // u taj novi prozor posalji SelectedKeyPoint
-        //tamo sklopis objecat ToursitEntry
-        // i samo ga creiras u controlleru
-
+}

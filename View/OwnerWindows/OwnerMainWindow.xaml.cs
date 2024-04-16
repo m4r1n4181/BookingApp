@@ -54,7 +54,9 @@ namespace BookingApp.View.OwnerWindows
 
         private void LogOutButton_Click(object sender, RoutedEventArgs e)
         {
-
+            SignInForm signInForm = new SignInForm();
+            signInForm.Show();
+            this.Close();
         }
     }
 }

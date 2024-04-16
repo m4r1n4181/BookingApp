@@ -1,0 +1,26 @@
+﻿<Window x:Class="BookingApp.View.AlternativeToursView"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:BookingApp.View"
+        mc:Ignorable="d"
+        Title="AlternativeToursView" Height="450" Width="800">
+    <Grid>
+        <DataGrid Grid.Row="1" 
+          ItemsSource="{Binding Path=Tours}" 
+          SelectedItem="{Binding Path=SelectedTour}" 
+          AutoGenerateColumns="False" 
+          IsReadOnly="True"
+          Width="750" Height="200" x:Name="tourOverview">
+            <DataGrid.Columns>
+                <DataGridTextColumn Header="Naziv" Binding="{Binding Name}" Width="*"/>
+                <DataGridTextColumn Header="Država" Binding="{Binding Location.Country}" Width="*"/>
+                <DataGridTextColumn Header="Grad" Binding="{Binding Location.City}" Width="*"/>
+                <DataGridTextColumn Header="Trajanje" Binding="{Binding Duration}" Width="*"/>
+                <DataGridTextColumn Header="Jezik" Binding="{Binding Language}" Width="*"/>
+                <DataGridTextColumn Header="Broj ljudi" Binding="{Binding MaxTourists}" Width="*"/>
+            </DataGrid.Columns>
+        </DataGrid>
+    </Grid>
+</Window>

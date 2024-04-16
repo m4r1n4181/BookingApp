@@ -42,11 +42,6 @@ namespace BookingApp.Controller
             return _reservationRescheduleRequestService.Update(reservationRescheduleRequest);
         }
 
-        public List<ReservationRescheduleRequest> GetAllRequestsForHandling()
-        {
-            return _reservationRescheduleRequestService.GetAllRequestsForHandling();
-        }
-
         public List<ReservationRescheduleRequest> GetStandBy(int guest)
         {
             return _reservationRescheduleRequestService.GetStandBy(guest);
@@ -68,6 +63,10 @@ namespace BookingApp.Controller
         public List<ReservationRescheduleRequest> GetAllForOwner(int ownerId)
         {
             return _reservationRescheduleRequestService.GetAllForOwner(ownerId);
+        }
+        public ReservationRescheduleRequest GetWithGuest(int guestId)
+        {
+            return _reservationRescheduleRequestService.GetWithGuest(guestId);
         }
     }
 }

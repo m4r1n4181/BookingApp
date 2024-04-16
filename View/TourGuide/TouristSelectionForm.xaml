@@ -16,6 +16,6 @@
             </DataGrid.Columns>
         </DataGrid>
 
-        <Button Content="Add Tourist" Click="AddTouristEntry_Click" Margin="10" HorizontalAlignment="Center" VerticalAlignment="Bottom"/>
+        <Button Content="Add Tourist" Command="{Binding AddTouristEntryCommand}" Margin="10" HorizontalAlignment="Center" VerticalAlignment="Bottom"/>
     </Grid>
 </Window>

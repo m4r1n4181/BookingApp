@@ -53,28 +53,16 @@ namespace BookingApp.Service
             return reservationRescheduleRequest.Status == Model.Enums.RequestStatusType.Standby;
         }
 
-        private bool IsRequestApproved(ReservationRescheduleRequest reservationRescheduleRequest)
+       /* public List<ReservationRescheduleRequest> GetAllRequestsForHandling()
         {
-         return reservationRescheduleRequest.Status == Model.Enums.RequestStatusType.Approved;
-        }
-
-        private bool IsRequestDeclined(ReservationRescheduleRequest reservationRescheduleRequest)
-        {
-            return reservationRescheduleRequest.Status == Model.Enums.RequestStatusType.Declined;
-        }
-
-
-
-        /* public List<ReservationRescheduleRequest> GetAllRequestsForHandling()
-         {
-             List<ReservationRescheduleRequest> reservationRescheduleRequests = new List<ReservationRescheduleRequest>();
-             foreach (ReservationRescheduleRequest reservationRescheduleRequest in _reservationRescheduleRequestRepository.GetAll())
-             {
-                 if (IsRequestOnStandby(reservationRescheduleRequest) && SignInForm.LoggedUser.Id == reservationRescheduleRequest.Reservation.Accommodation.Owner.Id)
-                 {
-                     reservationRescheduleRequests.Add(reservationRescheduleRequest);
-                 }
-             }
+            List<ReservationRescheduleRequest> reservationRescheduleRequests = new List<ReservationRescheduleRequest>();
+            foreach (ReservationRescheduleRequest reservationRescheduleRequest in _reservationRescheduleRequestRepository.GetAll())
+            {
+                if (IsRequestOnStandby(reservationRescheduleRequest) && SignInForm.LoggedUser.Id == reservationRescheduleRequest.Reservation.Accommodation.Owner.Id)
+                {
+                    reservationRescheduleRequests.Add(reservationRescheduleRequest);
+                }
+            }
 
              return reservationRescheduleRequests;
          } */
@@ -155,7 +143,14 @@ namespace BookingApp.Service
         }
         public List<ReservationRescheduleRequest> GetAllForOwner(int id)
         {
-            return _reservationRescheduleRequestRepository.GetAllForOwner(id);
+            var allRequests = _reservationRescheduleRequestRepository.GetAllForOwner(id);
+            var standbyRequests = allRequests.Where(request => IsRequestOnStandby(request)).ToList();
+
+            return standbyRequests;
+        }
+        public ReservationRescheduleRequest GetWithGuest(int guestId)
+        {
+            return _reservationRescheduleRequestRepository.GetWithGuest(guestId);
         }
     }
 

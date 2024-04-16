@@ -188,7 +188,7 @@ namespace BookingApp.Service
             Notification notification = new Notification()
             {
                 User = reservation.Accommodation.Owner,
-                Status = Model.Enums.NotificationStatus.Unseen,
+                NotificationStatus = Model.Enums.NotificationStatus.unread,
                 Message = message
             };
             _notificationRepository.Save(notification);

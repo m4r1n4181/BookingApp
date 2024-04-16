@@ -37,11 +37,11 @@ namespace BookingApp.Repository
         {
             foreach (ReservationRescheduleRequest reservationRescheduleRequest in _reservationRescheduleRequests)
             {
-                int guestId = reservationRescheduleRequest.Guest.Id;
-                User guest = UserRepository.GetInstance().Get(guestId);
+                int guestId = reservationRescheduleRequest.Reservation.Guest.Id;
+                User guest = UserRepository.GetInstance().GetById(guestId);
                 if (guest != null)
                 {
-                    reservationRescheduleRequest.Guest = guest;
+                    reservationRescheduleRequest.Reservation.Guest = guest;
                 }
                 else
                 {
@@ -49,7 +49,14 @@ namespace BookingApp.Repository
                 }
             }
         }
-
+        public void BindRequestwithGuest()
+        {
+            UserRepository userRepository = new UserRepository();
+            foreach (var request in _reservationRescheduleRequests)
+            {
+                request.Reservation.Guest = userRepository.GetById(request.Reservation.Guest.Id);
+            }
+        }
         public void BindReservationRescheduleRequestWithAccommodationReservation()
         {
             foreach (ReservationRescheduleRequest reservationRescheduleRequest in _reservationRescheduleRequests)
@@ -66,7 +73,7 @@ namespace BookingApp.Repository
                 }
             }
         }
-    
+
 
         public ReservationRescheduleRequest Save(ReservationRescheduleRequest reservationRescheduleRequest)
         {
@@ -78,7 +85,7 @@ namespace BookingApp.Repository
 
         public List<ReservationRescheduleRequest> GetAll()
         {
-            return _reservationRescheduleRequests;
+            return _serializer.FromCSV(FilePath);
         }
         public ReservationRescheduleRequest Get(int id)
         {
@@ -105,7 +112,7 @@ namespace BookingApp.Repository
             ReservationRescheduleRequest current = _reservationRescheduleRequests.Find(rrr => rrr.Id == reservationRescheduleRequest.Id);
             int index = _reservationRescheduleRequests.IndexOf(current);
             _reservationRescheduleRequests.Remove(current);
-            _reservationRescheduleRequests.Insert(index, reservationRescheduleRequest);       
+            _reservationRescheduleRequests.Insert(index, reservationRescheduleRequest);
             _serializer.ToCSV(FilePath, _reservationRescheduleRequests);
             return reservationRescheduleRequest;
         }
@@ -116,12 +123,23 @@ namespace BookingApp.Repository
             BindReservationRescheduleRequestWithAccommodationReservation();
             return _reservationRescheduleRequests.FindAll(rr => rr.Guest.Id == guestId);
         }
+        public List<ReservationRescheduleRequest> GetAllWitReservation()
+        {
+            _reservationRescheduleRequests = _serializer.FromCSV(FilePath);
+            BindReservationRescheduleRequestWithAccommodationReservation();
+            return _reservationRescheduleRequests;
+        }
         public List<ReservationRescheduleRequest> GetAllForOwner(int id)
         {
             _reservationRescheduleRequests = _serializer.FromCSV(FilePath);
             BindReservationRescheduleRequestWithAccommodationReservation();
             return _reservationRescheduleRequests.FindAll(rr => rr.Reservation.Accommodation.Owner.Id == id);
         }
+        public ReservationRescheduleRequest GetWithGuest(int id)
+        {
+            _reservationRescheduleRequests = GetAllWitReservation();
+            BindRequestwithGuest();
+            return _reservationRescheduleRequests.Find(rr => rr.Reservation.Guest.Id == id);
+        }
     }
 }
-

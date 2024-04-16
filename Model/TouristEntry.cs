@@ -9,8 +9,6 @@ using static System.Net.Mime.MediaTypeNames;
 namespace BookingApp.Model
 {
 
-
-
     public class TouristEntry : ISerializable
     {
         public int Id { get; set; }

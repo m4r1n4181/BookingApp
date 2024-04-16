@@ -3,11 +3,12 @@ using BookingApp.Model;
 using BookingApp.Model.Enums;
 using BookingApp.Repository;
 using BookingApp.View.OwnerWindows;
-using BookingApp.WPF.Views.GuestWindows;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Runtime.CompilerServices;
 using System.Windows;
+using BookingApp.View.ViewModel;
+using BookingApp.WPF.Views.GuestWindows;
 
 namespace BookingApp.View
 {
@@ -77,27 +78,33 @@ namespace BookingApp.View
                         ownerMainWindow.Show();
                          ReservationRescheduleRequestsWindow reservationRescheduleRequestsWindow = new ReservationRescheduleRequestsWindow();
                         reservationRescheduleRequestsWindow.Show();
-                        // RegisterAccommodationForm registerAccommodationForm = new RegisterAccommodationForm();
-                        //registerAccommodationForm.Show();
+                         RegisterAccommodationForm registerAccommodationForm = new RegisterAccommodationForm();
+                        registerAccommodationForm.Show();
                        //AccommodationReservationToRateForm accommodationReservationToRateForm = new AccommodationReservationToRateForm(user);
                         //accommodationReservationToRateForm.Show();
                          //AccommodationsOverviewWindow accommodationOverviewWindow = new AccommodationsOverviewWindow();
-                       // accommodationOverviewWindow.Show();
-                        //ReservationRescheduleRequestsWindow reservationRescheduleRequestsWindow = new ReservationRescheduleRequestsWindow();
-                        //reservationRescheduleRequestsWindow.Show();
-                       //AccommodationOwnerReviewsWindow accommodationOwnerReviewsWindow = new AccommodationOwnerReviewsWindow(LoggedUser);
-                        //accommodationOwnerReviewsWindow.Show();
+                        //accommodationOverviewWindow.Show();
+                      AccommodationOwnerReviewsWindow accommodationOwnerReviewsWindow = new AccommodationOwnerReviewsWindow();
+                       accommodationOwnerReviewsWindow.Show();
 
                     }
 
                     else if (user.Type == UserType.Tourist)
                     {
+                        TourOverviewForm tourOverviewForm = new TourOverviewForm(LoggedUser);
+                        tourOverviewForm.Show();
 
+                        List<Notification> notifications = _notificationController.GetByUserId(LoggedUser.Id);
+                        foreach(Notification notification in notifications)
+                        {
+                            MessageBox.Show(notification.Message, "Notifications", MessageBoxButton.OK, MessageBoxImage.Information);
+                        }
+                       // _notificationController.ReadAllUserNotifications(LoggedUser.Id);
                     }
                     else if(user.Type == UserType.Guest)
                     {
-                        //AccommodationSearch accommodationSearch = new AccommodationSearch();
-                        //accommodationSearch.Show();
+                      //  AccommodationSearch accommodationSearch = new AccommodationSearch();
+                       // accommodationSearch.Show();
 
                        // GuestWindows.AccommodationReservationToRateOwnerForm accommodationReservationToRateForm = new GuestWindows.AccommodationReservationToRateOwnerForm(user);
                         //accommodationReservationToRateForm.Show();
@@ -109,12 +116,12 @@ namespace BookingApp.View
                         GuestHomePage guestHomePage = new GuestHomePage();
                         guestHomePage.Show();
 
-                        List<Notification> notifications = _notificationController.GetAllByUser(LoggedUser.Id);
+                        List<Notification> notifications = _notificationController.GetByUserId(LoggedUser.Id);
                         foreach(Notification notification in notifications)
                         {
                             MessageBox.Show(notification.Message, "Notification", MessageBoxButton.OK, MessageBoxImage.Information);
                         }
-                        _notificationController.SetSeenNotificationsForUser(LoggedUser.Id);
+                        _notificationController.ReadAllUserNotifications(LoggedUser.Id);
                         Close();
                      
 

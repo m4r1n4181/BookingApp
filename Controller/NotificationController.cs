@@ -1,44 +1,43 @@
-﻿using BookingApp.Model;
-using BookingApp.Repository;
-using BookingApp.Service;
+﻿using BookingApp.Service;
+using BookingApp.Model;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using BookingApp.Repository;
 
 namespace BookingApp.Controller
 {
     public class NotificationController
     {
-
         private NotificationService _notificationService;
-        public NotificationController(NotificationService notificationService) 
+
+        public NotificationController()
         {
-            _notificationService = notificationService;
-        }
-        public NotificationController() {
             _notificationService = new NotificationService();
-            
         }
 
         public List<Notification> GetAll()
         {
-            return _notificationService.GetAllNotifications();
+            return _notificationService.GetAll();
+        }
+        public Notification GetById(int id)
+        {
+                return _notificationService.GetById(id);
         }
         public Notification Create(Notification notification)
         {
-            return _notificationService.CreateNotification(notification);
+            return _notificationService.Create(notification);
         }
-        public List<Notification> GetAllByUser(int userId)
+        
+        public List<Notification> GetByUserId(int id)
         {
-            return _notificationService.GetAllUnseenByUser(userId);
+            return _notificationService.GetByUserId(id);
         }
-
-        public void SetSeenNotificationsForUser(int userId)
+        public void ReadAllUserNotifications(int userId)
         {
-            _notificationService.SetSeenNotificationsForUser(userId);
+            _notificationService.ReadAllUserNotifications(userId);
         }
-
     }
 }

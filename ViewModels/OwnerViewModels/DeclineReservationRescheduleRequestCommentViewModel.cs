@@ -12,11 +12,12 @@ using System.Windows.Input;
 
 namespace BookingApp.ViewModels.OwnerViewModels
 {
-    public class DeclineReservationRescheduleRequestCommentViewModel : ViewModelBase
+    public class DeclineReservationRescheduleRequestCommentViewModel : ViewModelBase//, IClose
     {
         public ReservationRescheduleRequestController _reservationRescheduleRequestController;
         private NotificationController _notificationController;
 
+        //public Action Close { get; set; }
         #region NotifyProperties
         private string _comment;
         public string Comment
@@ -57,7 +58,7 @@ namespace BookingApp.ViewModels.OwnerViewModels
             {
                 User = ReservationRescheduleRequest.Reservation.Guest,
                 Message = message,
-                Status = Model.Enums.NotificationStatus.Unseen
+                NotificationStatus = Model.Enums.NotificationStatus.unread
             };
             _notificationController.Create(notification);
         }

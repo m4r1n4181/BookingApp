@@ -1,4 +1,4 @@
-using BookingApp.Serializer;
+﻿using BookingApp.Serializer;
 using System;
 using System.Collections.Generic;
 
@@ -23,9 +23,9 @@ namespace BookingApp.Model
             this.Id = id;
         }
 
-        public TourGuide(int Id, string firstName, string lastName, string email, string phone)
+        public TourGuide(int id, string firstName, string lastName, string email, string phone)
         {
-            Id = Id;
+            Id = id;
             FirstName = firstName;
             LastName = lastName;
             Email = email;
