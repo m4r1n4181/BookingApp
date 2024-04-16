@@ -1,4 +1,5 @@
-﻿using BookingApp.DTO;
+﻿using BookingApp.Domain.Models;
+using BookingApp.DTO;
 using BookingApp.Model;
 using BookingApp.Repository;
 using System;
@@ -37,6 +38,39 @@ namespace BookingApp.Service
             return ownersReservations;
         }
 
+
+
+        public List<AccommodationReservation> GetAllByGuest(int guestId)
+        {
+            List<AccommodationReservation> allReservations = _accommodationReservationRepository.GetAllWithAccommodations();
+            List<AccommodationReservation> guestsReservations = new List<AccommodationReservation>();
+
+            foreach (AccommodationReservation reservation in allReservations)
+            {
+                if (reservation.Guest.Id == guestId)
+                {
+                    guestsReservations.Add(reservation);
+                }
+            }
+            return guestsReservations;
+        }
+
+        public List<AccommodationReservation> GetAllByGuestForRating(int guestId)
+        {
+            List<AccommodationReservation> allReservations = _accommodationReservationRepository.GetAllWithAccommodations();
+            List<AccommodationReservation> ownersReservations = new List<AccommodationReservation>();
+
+            foreach (AccommodationReservation reservation in allReservations)
+            {
+                if (reservation.Guest.Id == guestId && reservation.Departure < DateTime.Now && reservation.Departure > DateTime.Now.AddDays(-5))
+                {
+                    ownersReservations.Add(reservation);
+                }
+            }
+
+            return ownersReservations;
+        }
+      
         public bool DatesIntertwine(DateTime start1, DateTime end1, DateTime start2, DateTime end2)
         {
             if (end1 < start2 || start1 > end2)
@@ -91,7 +125,36 @@ namespace BookingApp.Service
 
             return accommodationReservation;
         }
+        public AccommodationReservation Update(AccommodationReservation accommodationReservation)
+        {
+            accommodationReservation = _accommodationReservationRepository.Update(accommodationReservation);
+            return accommodationReservation;
+        }
+        public bool IsReschedulePossible(ReservationRescheduleRequest reservationRescheduleRequest)
+        {
+            List<AccommodationReservation> reservations = _accommodationReservationRepository.GetByAccommodationId(reservationRescheduleRequest.Reservation.Accommodation.Id);
+          /*  foreach (AccommodationReservation reservation in reservations)
+            {
+                if (reservation.Id == reservationRescheduleRequest.Reservation.Id)
+                {
+                    reservations.Remove(reservation);
+                    break;
+                }
+            }*/
+            foreach (AccommodationReservation reservation in reservations)
+            {
+                if (IsDatesIntertwine(reservation.Arrival, reservation.Departure, reservationRescheduleRequest.NewStart, reservationRescheduleRequest.NewEnd))
+                {
+                    return false;
+                }
+            }
 
+            return true;
+        }
+        public bool IsDatesIntertwine(DateTime StartFirst, DateTime EndFirst, DateTime StartSecond, DateTime EndSecond)
+        {
+            return (StartSecond.Date <= EndFirst.Date && EndSecond.Date >= StartFirst.Date);
+        }
 
     }
 }
