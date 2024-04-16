@@ -13,6 +13,6 @@
                 <DataGridTextColumn Header="Expiration Date" Binding="{Binding ExpirationDate}" />
             </DataGrid.Columns>
         </DataGrid>
-        <Button Content="Use Voucher" Click="UseVoucher_Click" Height="35" Width="140" HorizontalAlignment="Center" Margin="5"/>
+        <Button Content="Use Voucher" Command="{Binding UseVoucherCommand}" Height="35" Width="140" HorizontalAlignment="Center" Margin="5"/>
     </Grid>
 </Window>

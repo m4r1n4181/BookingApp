@@ -5,16 +5,16 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:BookingApp.View"
         mc:Ignorable="d"
-        Title="Tour Attendance" Height="450" Width="800">
+        Title="TourAttendanceView" Height="450" Width="800">
     <Grid>
         <!-- Prikaz trenutne ture -->
         <DataGrid ItemsSource="{Binding KeyPoints}"
-              SelectedItem="{Binding Path=SelectedTour}"
-              IsReadOnly="True" SelectionMode="Single" 
-              AutoGenerateColumns="False" Height="325" HeadersVisibility="Column" FontSize="13" Width="661" Margin="50"
-              HorizontalAlignment="Left">
+                  SelectedItem="{Binding Path=SelectedTour}"
+                  IsReadOnly="True" SelectionMode="Single" 
+                  AutoGenerateColumns="False" Height="325" HeadersVisibility="Column" FontSize="13" Width="661" Margin="50"
+                  HorizontalAlignment="Left">
             <DataGrid.Columns>
-                <DataGridTextColumn Header="Name" Binding="{Binding Name}" Width="*"/>
+                <DataGridTextColumn Header="Keypoint" Binding="{Binding Name}" Width="*"/>
                 <DataGridTextColumn Header="IsActive" Binding="{Binding IsActive}" Width="*"/>
             </DataGrid.Columns>
         </DataGrid>

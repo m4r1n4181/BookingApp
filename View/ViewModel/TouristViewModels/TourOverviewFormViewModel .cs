@@ -6,6 +6,8 @@ using System.ComponentModel;
 using System.Runtime.CompilerServices;
 using System.Windows.Input;
 using GalaSoft.MvvmLight.Command;
+using BookingApp.View;
+using BookingApp.View.ViewModel.TouristViewModels;
 
 namespace BookingApp.View.ViewModel.TouristViewModels
 {
@@ -139,12 +141,14 @@ namespace BookingApp.View.ViewModel.TouristViewModels
         {
             MyToursView myToursView = new MyToursView(User);
             myToursView.Show();
+
+
         }
 
         // Method to open MyVouchers view
         private void Vouchers()
         {
-            MyVouchersView myVouchersView = new MyVouchersView(User);
+            MyVouchersView myVouchersView = new MyVouchersView();
             myVouchersView.Show();
         }
 
