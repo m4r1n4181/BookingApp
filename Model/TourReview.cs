@@ -21,18 +21,21 @@ namespace BookingApp.Model
 
         public List<string> Pictures { get; set; }
 
+        public bool Validity { get; set; }
+
 
         public TourReview() { }
 
-        public TourReview(TourReservation tourReservation, int knowledge, int fluency, int tourAppeal, string comment, List<string> pictures)
+        public TourReview(TourReservation tourReservation, int knowledge, int fluency, int tourAppeal, string comment, List<string> pictures, bool validity)
         {
 
             this.TourReservation = tourReservation;
-            this.Knowledge =  knowledge;
+            this.Knowledge = knowledge;
             this.Fluency = fluency;
             this.TourAppeal = tourAppeal;
             this.Comment = comment;
             this.Pictures = pictures;
+            this.Validity = validity;
         }
 
 
@@ -44,8 +47,8 @@ namespace BookingApp.Model
                 Fluency = Convert.ToInt32(values[3]);
                 TourAppeal = Convert.ToInt32(values[4]);
                 Comment = values[5];
-                Pictures = values[6].Split(';').ToList();
-            
+            Pictures = values[6].Split(",").ToList();
+            Validity = bool.Parse(values[7]);
         }
 
 
@@ -53,7 +56,7 @@ namespace BookingApp.Model
         public string[] ToCSV()
         {
             string picturesString = string.Join(",", Pictures);
-            string[] csvValues = { Id.ToString(), TourReservation.Id.ToString(), Knowledge.ToString(), Fluency.ToString(), TourAppeal.ToString(), Comment, picturesString };
+            string[] csvValues = { Id.ToString(), TourReservation.Id.ToString(), Knowledge.ToString(), Fluency.ToString(), TourAppeal.ToString(), Comment, picturesString, Validity.ToString(), };
             return csvValues;
         }
     }

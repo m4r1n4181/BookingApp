@@ -101,7 +101,7 @@ namespace BookingApp.Service
 
             foreach (var voucher in allVouchers)
             {
-                if (voucher.Tourist.Id == userId && !voucher.IsUsed && voucher.ExpirationDate >= DateTime.Now)
+                if (voucher.Tourist.Id == userId && voucher.StatusType==Model.Enums.StatusType.active && voucher.Expires >= DateTime.Now)
                 {
                     voucherList.Add(voucher);
                 }

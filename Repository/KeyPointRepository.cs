@@ -93,7 +93,7 @@ namespace BookingApp.Repository
             _keyPoint = _serializer.FromCSV(FilePath);
             return _keyPoint.FindAll(kp => kp.Tour.Id == tourId);
 
-        } 
+        }
 
         public List<KeyPoint> GetActiveKeyPointByTour(int tourId)
         {
@@ -110,6 +110,7 @@ namespace BookingApp.Repository
             return activeKeyPoints;
         }
 
+       
 
     }
 }

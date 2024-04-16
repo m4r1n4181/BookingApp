@@ -1,4 +1,5 @@
-﻿using System;
+﻿using BookingApp.Model;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -34,6 +35,34 @@ namespace BookingApp.View
         {
             LiveTourView liveTourView = new LiveTourView();
             liveTourView.Show();
+        }
+
+        private void AllFutureTours_Click(object sender, RoutedEventArgs e)
+        {
+            TourReservation tourReservation = new TourReservation();
+
+            FutureTours futureTours = new FutureTours();
+            futureTours.Show();
+        }
+
+        private void TourStatistics_Click(object sender, RoutedEventArgs e)
+        {
+
+            TourStatisticsOverview tourStatisticsOverview = new TourStatisticsOverview();
+            tourStatisticsOverview.Show();
+        }
+
+        private void TourGuideReviews_Click(object sender, RoutedEventArgs e)
+        {
+
+            TourGuideReviews tourGuideReviews = new TourGuideReviews();
+            tourGuideReviews.Show();
+        }
+        private void AllTours_Click(object sender, RoutedEventArgs e)
+        {
+
+            AllTours allTours = new AllTours();
+            allTours.Show();
         }
 
     }

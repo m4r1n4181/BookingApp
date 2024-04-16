@@ -1,4 +1,5 @@
-﻿using BookingApp.Model;
+﻿
+using BookingApp.Model;
 using BookingApp.Service;
 using System;
 using System.Collections.Generic;
@@ -15,9 +16,11 @@ namespace BookingApp.Controller
         {
             _tourParticipantService = new TourParticipantService();
         }
+
        /* public void AddParticipant(TourReservation reservation, TourParticipants participant)
         {
             _tourParticipantService.AddParticipant(reservation, participant);
         }*/
     }
 }
+

@@ -21,6 +21,8 @@ namespace BookingApp.Service
         private TouristEntryRepository _entryRepository;
         private TourReservationService _tourReservationService;
 
+        private TourReservationRepository _tourReservationRepository;
+       
         public TourService()
         {
             _tourRepository = new TourRepository();
@@ -28,12 +30,13 @@ namespace BookingApp.Service
             _touristRepository = new TouristRepository(); // Initialize tourist repository
             _entryRepository = new TouristEntryRepository(); // Initialize tourist entry repository
             _tourReservationService = new TourReservationService();
+            _tourReservationRepository = new TourReservationRepository();
         }
 
 
         public void CreateTour(Tour tour, List<DateTime> dateTimes, List<KeyPoint> keyPoints)
         {
-            foreach (DateTime dateTime in dateTimes)
+            foreach(DateTime dateTime in dateTimes)
             {
                 tour.StartDate = dateTime;
                 tour = _tourRepository.Save(tour);
@@ -65,14 +68,8 @@ namespace BookingApp.Service
             }
 
             //tour.IsStarted = true;
-            tour.TourStatus = Model.Enums.TourStatusType.started;
+             tour.TourStatus = Model.Enums.TourStatusType.started;
             _tourRepository.Update(tour);
-
-            foreach (KeyPoint keyPoint in keyPoints)
-            {
-                keyPoint.IsActive = false;
-                _keyPointRepository.Update(keyPoint);
-            }
 
             KeyPoint firstPoint = keyPoints.ElementAt(0);
             firstPoint.IsActive = true;
@@ -160,11 +157,10 @@ namespace BookingApp.Service
         {
             List<Tour> _tourInFuture = new List<Tour>();
             List<Tour> allTours = _tourRepository.GetAllWithLocations();
-            _tourRepository.BindLocations();
-
+            
             foreach (Tour tour in allTours)
             {
-                if (tour.StartDate > DateTime.Today.AddDays(2)) // 48 hours before the tour starts
+                if (tour.StartDate > DateTime.Today.AddDays(2) && tour.TourStatus == Model.Enums.TourStatusType.not_started) // 48 hours before the tour starts
                 {
                     _tourInFuture.Add(tour);
                 }
@@ -188,20 +184,31 @@ namespace BookingApp.Service
 
         }
 
+        public List<TourParticipants> GetAllParticipantsForTour(int tourId)
+        {
+            List<TourParticipants> tourParticipants = new List<TourParticipants>();
+
+            List<TourReservation> reservations = new List<TourReservation>();
+            List<TouristEntry> touristEntries = new List<TouristEntry>();
+            List<KeyPoint> keyPoints = _keyPointRepository.GetKeyPointsForTour(tourId);
+            keyPoints.ForEach(kp => touristEntries.AddRange(_entryRepository.GetAllByKeyPoint(kp.Id)));
+
+            touristEntries.ForEach(te => reservations.Add(_tourReservationRepository.GetByTourAndTourist(tourId, te.Tourist.Id)));
+
+            reservations.ForEach(r => tourParticipants.AddRange(r.Tourists));
+            return tourParticipants;
+        }
+
         public Tour MostVisitedTour(int year = -1)
         {
             Tour mostVisitedTour = null;
             int maxPeopleCame = -1;
 
-            foreach (Tour tour in _tourRepository.GetAll())
+            foreach (Tour tour in _tourRepository.GetAllFinished())
             {
-                if (tour.TourStatus == Model.Enums.TourStatusType.not_started)
-                {
-                    continue;
-                }
                 if (year == -1 || tour.StartDate.Year == year) // Provera da li je godina postavljena i da li datum odgovara godini
                 {
-                    int peopleCame = _tourReservationService.GetAllTourReservationsForTourWherePeopleShowed(tour.Id).Count();
+                    int peopleCame = GetAllParticipantsForTour(tour.Id).Count();
                     if (peopleCame > maxPeopleCame)
                     {
                         mostVisitedTour = tour;
@@ -212,7 +219,28 @@ namespace BookingApp.Service
             return mostVisitedTour;
         }
 
-
+        public TourAgeGroupStatistic GetAgeStatisticsForTour(int tourId)
+        {
+            TourAgeGroupStatistic tourAgeGroupStatistic = new TourAgeGroupStatistic(0, 0, 0);
+           
+            foreach (TourParticipants tourist in GetAllParticipantsForTour(tourId))
+            {
+                if (tourist.Age <= 18)
+                {
+                    tourAgeGroupStatistic.To18 += 1;
+                }
+                else if (tourist.Age > 18 && tourist.Age <= 50)
+                {
+                    tourAgeGroupStatistic.From18To50 += 1;
+                }
+                else
+                {
+                    tourAgeGroupStatistic.From50 += 1;
+                }
+            }
+            
+            return tourAgeGroupStatistic;
+        }
 
         public List<int> YearForTour(int tourGuideId)
         {
@@ -243,9 +271,21 @@ namespace BookingApp.Service
             return _allTour;
         }
 
+        public List<Tour> GetAllActiveTours()
+        {
+            return _tourRepository.GetAllActiveTours();
+        }
+
         public List<Tour> GetAlternativeTours(int locationId)
         {
             return _tourRepository.GetAlternativeTours(locationId);
         }
+
+        public List<Tour> GetAllFinished()
+        {
+            return _tourRepository.GetAllFinished();
+        }
+
+
     }
 }

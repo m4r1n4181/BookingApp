@@ -32,7 +32,7 @@ namespace BookingApp.Model
         }
         public Tourist(int id, string firstName, string lastName, int age)
         {
-            
+            Id = id;
             FirstName = firstName;
             LastName = lastName;
             Age = age;
@@ -47,25 +47,22 @@ namespace BookingApp.Model
         }
 
 
-         public string[] ToCSV()
-         {
-             string[] csvValues = { Id.ToString(), FirstName, LastName, Age.ToString(), UserId.ToString() };
-             return csvValues;
-         }
+        public string[] ToCSV()
+        {
+            string[] csvValues = { Id.ToString(), FirstName, LastName, Age.ToString(), UserId.ToString() };
+            return csvValues;
+        }
 
-         public void FromCSV(string[] values)
-         {
-             Id = Convert.ToInt32(values[0]);
-             FirstName = values[1];
-             LastName = values[2];
-             Age = Convert.ToInt32(values[3]);
-             UserId = Convert.ToInt32(values[4]);
-         }
+        public void FromCSV(string[] values)
+        {
+            Id = Convert.ToInt32(values[0]);
+            FirstName = values[1];
+            LastName = values[2];
+            Age = Convert.ToInt32(values[3]);
+            UserId = Convert.ToInt32(values[4]);
+        }
 
 
     }
 
-    }
-
-
-
+}

@@ -1,4 +1,5 @@
-﻿using System;
+﻿
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -12,7 +13,8 @@ namespace BookingApp.Service
     {
         private NotificationRepository _notificationRepository;
 
-        public NotificationService() {
+        public NotificationService()
+        {
             
             _notificationRepository = new NotificationRepository();
         }
@@ -45,3 +47,4 @@ namespace BookingApp.Service
         }
     }
 }
+

@@ -29,6 +29,17 @@ namespace BookingApp.Repository
             return _participants.FirstOrDefault(participant => participant.Id == id);
         }
 
+        public List<TourParticipants> FindParticipants(List<TourParticipants> tourParticipants)
+        {
+            List<TourParticipants> participants = new List<TourParticipants>();
+            foreach(TourParticipants tourParticipant in tourParticipants)
+            {
+                participants.Add(GetById(tourParticipant.Id));
+            }
+
+            return participants;
+        }
+
         public TourParticipants Save(TourParticipants participant)
         {
             participant.Id = NextId();
@@ -74,5 +85,8 @@ namespace BookingApp.Repository
             string[] csvData = participant.ToCSV();
             string csvString = string.Join(",", csvData);
         }*/
+
+
+
     }
 }

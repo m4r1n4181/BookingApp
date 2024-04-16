@@ -72,5 +72,11 @@ namespace BookingApp.Repository
             _serializer.ToCSV(FilePath, _location);
             return location;
         }
+        public Location Get(int id)
+        {
+
+            return _location.Find(x => x.Id == id);
+
+        }
     }
 }

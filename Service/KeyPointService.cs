@@ -51,7 +51,7 @@ namespace BookingApp.Service
             {
                 Tour tour = _tourRepository.GetById(tourId);
 
-                tour.TourStatus = Model.Enums.TourStatusType.not_started;
+                tour.TourStatus = Model.Enums.TourStatusType.finished;
                 _tourRepository.Update(tour);
             }
         }
@@ -83,6 +83,7 @@ namespace BookingApp.Service
         {
             _keyPointRepository.SaveAll(keyPoints);
         }
+
     }
 }
 

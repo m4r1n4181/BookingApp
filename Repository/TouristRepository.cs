@@ -8,7 +8,7 @@ namespace BookingApp.Repository
     public class TouristRepository
     {
 
-        private const string FilePath = "../../../Resources/Data/tourist.csv";
+        private const string FilePath = "../../../Resources/Data/tourists.csv";
 
         private readonly Serializer<Tourist> _serializer;
 
@@ -73,8 +73,6 @@ namespace BookingApp.Repository
             _tourist = _serializer.FromCSV(FilePath);
             return _tourist.FirstOrDefault(tourist => tourist.UserId == id);
         }
-
-
     }
 }
 

@@ -29,7 +29,7 @@ namespace BookingApp.Repository
         public List<Tour> GetAllWithDateTime()
         {
             _tours = _serializer.FromCSV(FilePath);
-            // BindDateTime();
+           // BindDateTime();
             return _tours;
         }
 
@@ -99,6 +99,13 @@ namespace BookingApp.Repository
             return _tours;
         }
 
+        public List<Tour> GetAllFinished()
+        {
+            _tours = _serializer.FromCSV(FilePath);
+            BindLocations();
+            return _tours.FindAll(t => t.TourStatus == Model.Enums.TourStatusType.finished);
+        }
+
         public Tour Save(Tour tour)
         {
             tour.Id = NextId();
@@ -150,9 +157,18 @@ namespace BookingApp.Repository
             _tours = _serializer.FromCSV(FilePath);
             BindLocations();
 
-            DateTime today = DateTime.Now.Date;
+            DateTime today = DateTime.Now.Date; 
 
             return _tours.FindAll(tour => tour.StartDate.Date == today && tour.TourStatus == Model.Enums.TourStatusType.not_started);
+        }
+
+        public List<Tour> GetAllActiveTours()
+        {
+            _tours = _serializer.FromCSV(FilePath);
+            BindLocations();
+            DateTime today = DateTime.Now.Date;
+
+            return _tours.FindAll(tour => tour.StartDate.Date == today && tour.TourStatus == Model.Enums.TourStatusType.started);
         }
 
         public List<Tour> GetAlternativeTours(int locationId)
@@ -161,6 +177,7 @@ namespace BookingApp.Repository
             BindLocations();
             return _tours.FindAll(tour => tour.Location.Id == locationId && tour.AvailableSeats > 0);
         }
+
 
 
     }

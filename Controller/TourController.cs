@@ -31,7 +31,7 @@ namespace BookingApp.Controller
         {
             return _tourService.GetAllWithDateTime();
         }
-
+        
         public List<Tour> GetAllWithLocations()
         {
             return _tourService.GetAllWithLocations();
@@ -52,6 +52,10 @@ namespace BookingApp.Controller
             return _tourService.SearchTours(searchParams);
         }
 
+        public List<Tour> GetAll()
+        {
+            return _tourService.GetAll();
+        }
 
         public List<Tour> GetTourInFuture()
         {
@@ -83,10 +87,21 @@ namespace BookingApp.Controller
             return _tourService.GetAllTour(tourGuideId);
         }
 
-        public List<Tour> GetAll()
+        public List<Tour> GetAllActiveTours()
         {
-            return _tourService.GetAll();
+            return _tourService.GetAllActiveTours();
         }
+
+        public TourAgeGroupStatistic GetAgeStatisticsForTour(int tourId)
+        {
+            return _tourService.GetAgeStatisticsForTour(tourId);
+        }
+
+        public List<Tour> GetAllFinished()
+        {
+            return _tourService.GetAllFinished();
+        }
+
 
     }
 

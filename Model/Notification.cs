@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.DirectoryServices.ActiveDirectory;
 using System.Linq;
 using System.Runtime.Serialization;
 using System.Text;
@@ -8,13 +9,14 @@ using System.Windows;
 using BookingApp.Model.Enums;
 using BookingApp.Serializer;
 using ISerializable = BookingApp.Serializer.ISerializable;
+using NotificationStatus = BookingApp.Model.Enums.NotificationStatus;
 
 namespace BookingApp.Model
 {
     public class Notification : ISerializable
     {
-        public int Id {  get; set; }
-        public User User {  get; set; }
+        public int Id { get; set; }
+        public User User { get; set; }
 
         public String Message { get; set; }
 

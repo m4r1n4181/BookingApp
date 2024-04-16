@@ -12,5 +12,6 @@ namespace BookingApp.Model.Enums
         started,
         finished,
         cancelled
+        
     }
 }
