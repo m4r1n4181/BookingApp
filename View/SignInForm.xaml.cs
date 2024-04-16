@@ -8,6 +8,7 @@ using System.ComponentModel;
 using System.Runtime.CompilerServices;
 using System.Windows;
 using BookingApp.View.ViewModel;
+using BookingApp.WPF.Views.GuestWindows;
 
 namespace BookingApp.View
 {
@@ -102,27 +103,27 @@ namespace BookingApp.View
                     }
                     else if(user.Type == UserType.Guest)
                     {
-                      /*  AccommodationSearch accommodationSearch = new AccommodationSearch();
-                        accommodationSearch.Show();
+                      //  AccommodationSearch accommodationSearch = new AccommodationSearch();
+                       // accommodationSearch.Show();
 
-                        GuestWindows.AccommodationReservationToRateForm accommodationReservationToRateForm = new GuestWindows.AccommodationReservationToRateForm(user);
-                        accommodationReservationToRateForm.Show();
+                       // GuestWindows.AccommodationReservationToRateOwnerForm accommodationReservationToRateForm = new GuestWindows.AccommodationReservationToRateOwnerForm(user);
+                        //accommodationReservationToRateForm.Show();
                         
 
-                        GuestWindows.AccommodationAllReservations accommodationAllReservations = new GuestWindows.AccommodationAllReservations(user);
-                        accommodationAllReservations.Show();
+                       // GuestWindows.AccommodationAllReservations accommodationAllReservations = new GuestWindows.AccommodationAllReservations(user);
+                        //accommodationAllReservations.Show();
 
                         GuestHomePage guestHomePage = new GuestHomePage();
                         guestHomePage.Show();
 
-                        List<Notification> notifications = _notificationController.GetAllByUser(LoggedUser.Id);
+                        List<Notification> notifications = _notificationController.GetByUserId(LoggedUser.Id);
                         foreach(Notification notification in notifications)
                         {
                             MessageBox.Show(notification.Message, "Notification", MessageBoxButton.OK, MessageBoxImage.Information);
                         }
-                        _notificationController.SetSeenNotificationsForUser(LoggedUser.Id);
+                        _notificationController.ReadAllUserNotifications(LoggedUser.Id);
                         Close();
-                     */
+                     
 
                     }
                 }

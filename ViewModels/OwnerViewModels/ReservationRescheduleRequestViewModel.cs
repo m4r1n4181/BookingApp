@@ -36,7 +36,7 @@ namespace BookingApp.ViewModels.OwnerViewModels
             RescheduleHandleCommand = new RelayCommand(ExecuteRescheduleHandleCommand, CanExecuteRescheduleHandleCommand);
         }
 
-        private void ExecuteRescheduleHandleCommand()
+        private void ExecuteRescheduleHandleCommand(object param)
         {
             if (SelectedReservationRescheduleRequest != null)
             {
@@ -45,7 +45,7 @@ namespace BookingApp.ViewModels.OwnerViewModels
             }
         }
 
-        private bool CanExecuteRescheduleHandleCommand()
+        private bool CanExecuteRescheduleHandleCommand(object param)
         {
             // Add any conditions for when the command can execute, if needed
             return true;

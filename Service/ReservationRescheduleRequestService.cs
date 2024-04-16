@@ -64,9 +64,28 @@ namespace BookingApp.Service
                 }
             }
 
+             return reservationRescheduleRequests;
+         } */
+
+        public List<ReservationRescheduleRequest> GetAllRequestsForHandling()
+        {
+            List<ReservationRescheduleRequest> reservationRescheduleRequests = new List<ReservationRescheduleRequest>();
+            foreach (ReservationRescheduleRequest reservationRescheduleRequest in _reservationRescheduleRequestRepository.GetAll())
+            {
+                if (reservationRescheduleRequest != null &&
+                    reservationRescheduleRequest.Reservation != null &&
+                   // reservationRescheduleRequest.Reservation.Accommodation != null &&
+                    reservationRescheduleRequest.Reservation.Accommodation.Owner != null &&
+                    IsRequestOnStandby(reservationRescheduleRequest) &&
+                    //SignInForm.LoggedUser != null &&
+                    SignInForm.LoggedUser.Id == reservationRescheduleRequest.Reservation.Accommodation.Owner.Id)
+                {
+                    reservationRescheduleRequests.Add(reservationRescheduleRequest);
+                }
+            }
+
             return reservationRescheduleRequests;
-        } */
-        
+        }
 
         public List<ReservationRescheduleRequest> GetStandBy(int guest)
         {

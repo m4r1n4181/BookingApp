@@ -1,5 +1,6 @@
 ﻿using BookingApp.Controller;
 using BookingApp.Domain.Models;
+using BookingApp.Model;
 using BookingApp.View.OwnerWindows;
 using GalaSoft.MvvmLight.Command;
 using System;
@@ -17,6 +18,7 @@ namespace BookingApp.ViewModels.OwnerViewModels
         
         public ReservationRescheduleRequestController _reservationRescheduleRequestController;
         public AccommodationReservationController _accommodationReservationController;
+        public NotificationController _notificationController;
 
         #region NotifyProperties
         private string _guest;
@@ -56,6 +58,7 @@ namespace BookingApp.ViewModels.OwnerViewModels
         {
             _reservationRescheduleRequestController = new ReservationRescheduleRequestController();
             _accommodationReservationController = new AccommodationReservationController();
+            _notificationController = new NotificationController();
 
             //rescheduleRequest = reservationRescheduleRequest;
             rescheduleRequest = _reservationRescheduleRequestController.GetWithGuest(reservationRescheduleRequest.Reservation.Guest.Id);
@@ -77,26 +80,35 @@ namespace BookingApp.ViewModels.OwnerViewModels
         }
 
 
-        private void ExecuteAcceptRequestButtonCommand()
+        private void ExecuteAcceptRequestButtonCommand(object param)
         {
             rescheduleRequest.Status = Model.Enums.RequestStatusType.Approved;
             rescheduleRequest.Reservation.Arrival = rescheduleRequest.NewStart;
             rescheduleRequest.Reservation.Departure = rescheduleRequest.NewEnd;
             _accommodationReservationController.Update(rescheduleRequest.Reservation);
             _reservationRescheduleRequestController.Update(rescheduleRequest);
+
+            string message = "Your reservation for accommodation " + rescheduleRequest.Reservation.Accommodation.Name + " has been Approved"; 
+            Notification notification = new Notification()
+            {
+                User = rescheduleRequest.Reservation.Guest,
+                Message = message,
+                NotificationStatus = Model.Enums.NotificationStatus.unread
+            };
+            _notificationController.Create(notification);
             MessageBox.Show("uspesno pomerena rezervacija");
             return;
         }
-        private void ExecuteDeclineRequestButtonCommand()
+        private void ExecuteDeclineRequestButtonCommand(object param) 
         {
             DeclineReservationRescheduleRequestCommentWindow Comment = new DeclineReservationRescheduleRequestCommentWindow(rescheduleRequest);
             Comment.Show();
         }
-        private bool CanExecuteAcceptRequestButtonCommand()
+        private bool CanExecuteAcceptRequestButtonCommand(object param)
         {
          return true;
         }
-        private bool CanExecuteDeclineRequestButtonCommand()
+        private bool CanExecuteDeclineRequestButtonCommand(object param)
         {
             return true;
         }

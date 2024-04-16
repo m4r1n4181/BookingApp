@@ -2,6 +2,7 @@
 using BookingApp.DTO;
 using BookingApp.Model;
 using BookingApp.Repository;
+using BookingApp.View;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -16,10 +17,14 @@ namespace BookingApp.Service
     {
         private AccommodationReservationRepository _accommodationReservationRepository;
         private AccommodationRepository _accommodationRepository;
+        private NotificationRepository _notificationRepository;
+        private OwnerReviewRepository _ownerReviewRepository;
         public AccommodationReservationService()
         {
             _accommodationReservationRepository = new AccommodationReservationRepository();
             _accommodationRepository = new AccommodationRepository();
+            _notificationRepository = new NotificationRepository();
+            _ownerReviewRepository = new OwnerReviewRepository();
         }
 
         public List<AccommodationReservation> GetAllByOwnerForRating(int ownerId)
@@ -64,7 +69,10 @@ namespace BookingApp.Service
             {
                 if (reservation.Guest.Id == guestId && reservation.Departure < DateTime.Now && reservation.Departure > DateTime.Now.AddDays(-5))
                 {
-                    ownersReservations.Add(reservation);
+                    if (_ownerReviewRepository.GetOneByReservation(reservation.Id) == null)
+                    {
+                        ownersReservations.Add(reservation);
+                    }
                 }
             }
 
@@ -90,10 +98,10 @@ namespace BookingApp.Service
 
 
 
-        public List<AccommodationReservation> GetFreeDateRanges(int accommodationId,  DateTime start, DateTime end, int numberOfDays)
+        public List<AccommodationReservation> GetFreeDateRanges(int accommodationId, DateTime start, DateTime end, int numberOfDays)
         {
             Accommodation accommodation = _accommodationRepository.GetById(accommodationId);
-            if(accommodation == null)
+            if (accommodation == null)
             {
                 return new List<AccommodationReservation>();
             }
@@ -101,7 +109,7 @@ namespace BookingApp.Service
             DateTime iterDate = start;
             List<AccommodationReservation> freeReservations = new List<AccommodationReservation>();
 
-            while(iterDate.AddDays(numberOfDays) <= end)
+            while (iterDate.AddDays(numberOfDays) <= end)
             {
                 DateTime endIterDate = iterDate.AddDays(numberOfDays);
                 if (!accommodationReservations.Any(accR => DatesIntertwine(accR.Arrival, accR.Departure, iterDate, endIterDate)))
@@ -154,6 +162,37 @@ namespace BookingApp.Service
         public bool IsDatesIntertwine(DateTime StartFirst, DateTime EndFirst, DateTime StartSecond, DateTime EndSecond)
         {
             return (StartSecond.Date <= EndFirst.Date && EndSecond.Date >= StartFirst.Date);
+        }
+
+
+        public bool CancelReservation(int reservationId)
+        {
+            AccommodationReservation reservation = _accommodationReservationRepository.Get(reservationId);
+            if (reservation == null)
+            {
+                return false;
+            }
+            int cancellationDays = (reservation.Accommodation.CancellationDays < 1) ? 1 : reservation.Accommodation.CancellationDays;
+
+            if (DateTime.Now > reservation.Arrival.AddDays(-cancellationDays))
+            {
+                return false;
+            }
+
+            reservation.Status = Model.Enums.AccommodationReservationStatus.Canceled;
+            _accommodationReservationRepository.Update(reservation);
+
+            User logged = SignInForm.LoggedUser;
+            string message = "Guest: " + logged.Username + " has cancelled reservation for accommodation " 
+                + reservation.Accommodation.Name + " for date " + reservation.Arrival;
+            Notification notification = new Notification()
+            {
+                User = reservation.Accommodation.Owner,
+                NotificationStatus = Model.Enums.NotificationStatus.unread,
+                Message = message
+            };
+            _notificationRepository.Save(notification);
+            return true;
         }
 
     }

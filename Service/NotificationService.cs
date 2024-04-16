@@ -19,6 +19,11 @@ namespace BookingApp.Service
             _notificationRepository = new NotificationRepository();
         }
 
+        public Notification Create(Notification notification)
+        {
+            return _notificationRepository.Save(notification);
+        }
+
         public List<Notification> GetAll()
         {
 

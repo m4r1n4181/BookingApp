@@ -1,5 +1,6 @@
 ﻿using BookingApp.Controller;
 using BookingApp.Domain.Models;
+using BookingApp.Model;
 using GalaSoft.MvvmLight.Command;
 using System;
 using System.Collections.Generic;
@@ -14,6 +15,8 @@ namespace BookingApp.ViewModels.OwnerViewModels
     public class DeclineReservationRescheduleRequestCommentViewModel : ViewModelBase//, IClose
     {
         public ReservationRescheduleRequestController _reservationRescheduleRequestController;
+        private NotificationController _notificationController;
+
         //public Action Close { get; set; }
         #region NotifyProperties
         private string _comment;
@@ -37,23 +40,31 @@ namespace BookingApp.ViewModels.OwnerViewModels
         public DeclineReservationRescheduleRequestCommentViewModel(ReservationRescheduleRequest reservationRescheduleRequest)
         {
             _reservationRescheduleRequestController = new ReservationRescheduleRequestController();
-
+            _notificationController = new NotificationController();
             ReservationRescheduleRequest = reservationRescheduleRequest;
             AddCommentButtonCommand = new RelayCommand(ExecuteAddCommentButtonCommand, CanExecuteAddCommentButtonCommand);
 
 
         }
-        private void ExecuteAddCommentButtonCommand()
+        private void ExecuteAddCommentButtonCommand(object param)
         {
 
             ReservationRescheduleRequest.Status = Model.Enums.RequestStatusType.Declined;
             ReservationRescheduleRequest.Comment = Comment;
             _reservationRescheduleRequestController.Update(ReservationRescheduleRequest);
-            MessageBox.Show("uspesno odbijeno pomeranje rezervacije");
-            return;
+
+            string message = "Your reservation for accommodation " + ReservationRescheduleRequest.Reservation.Accommodation.Name + " has been Declined";
+            Notification notification = new Notification()
+            {
+                User = ReservationRescheduleRequest.Reservation.Guest,
+                Message = message,
+                NotificationStatus = Model.Enums.NotificationStatus.unread
+            };
+            _notificationController.Create(notification);
         }
-        private bool CanExecuteAddCommentButtonCommand()
-        {    
+        private bool CanExecuteAddCommentButtonCommand(object param)
+        {
+            // Add any conditions for when the command can execute, if needed
             return true;
         }
 
