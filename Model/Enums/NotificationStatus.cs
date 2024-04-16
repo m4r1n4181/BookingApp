@@ -7,7 +7,8 @@ using System.Threading.Tasks;
 namespace BookingApp.Model.Enums
 {
     public enum NotificationStatus
-    { 
-      Seen, Unseen
+    {
+        unread,
+        read
     }
 }

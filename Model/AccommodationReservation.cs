@@ -44,8 +44,8 @@ namespace BookingApp.Model
             Guest = new User(Convert.ToInt32(values[2]));
             //Arrival = DateTime.ParseExact(values[3], "MM/dd/yyyy HH:mm:ss", CultureInfo.InvariantCulture);
             //Departure = DateTime.ParseExact(values[4], "MM/dd/yyyy HH:mm:ss", CultureInfo.InvariantCulture);
-             Arrival = Convert.ToDateTime(values[3]);
-             Departure = Convert.ToDateTime(values[4]);
+            Arrival = Convert.ToDateTime(values[3]);
+            Departure = Convert.ToDateTime(values[4]);
              AccommodationReview = new AccommodationOwnerReview() { Id = Convert.ToInt32(values[5]) };
             GuestReview = new GuestReview() {  Id = Convert.ToInt32(values[6]) };
 

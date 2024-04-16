@@ -31,5 +31,10 @@ namespace BookingApp.Controller
         {
             _keyPointService.ActivateKeyPoint(keyPointId);
         }
+
+        public List<KeyPoint> GetActiveKeyPointByTour(int tourId)
+        {
+            return _keyPointService.GetActiveKeyPointByTour(tourId);
+        }
     }
 }

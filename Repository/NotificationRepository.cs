@@ -11,66 +11,72 @@ namespace BookingApp.Repository
     public class NotificationRepository
     {
         private const string FilePath = "../../../Resources/Data/notifications.csv";
+
         private readonly Serializer<Notification> _serializer;
-        public List<Notification> Notifications { get; set; }
-        public NotificationRepository() 
+
+        private List<Notification> _notifications;
+
+
+        public NotificationRepository()
         {
             _serializer = new Serializer<Notification>();
-            Notifications = _serializer.FromCSV(FilePath);
-
+            _notifications = _serializer.FromCSV(FilePath);
         }
-
+        public Notification GetById(int id)
+        {
+            _notifications = _serializer.FromCSV(FilePath);
+            return _notifications.FirstOrDefault(notification => notification.Id == id);
+        }
 
         public List<Notification> GetAll()
         {
             return _serializer.FromCSV(FilePath);
         }
 
-        public Notification Update(Notification notification)
-        {
-            Notifications = _serializer.FromCSV(FilePath);
-            Notification current = Notifications.Find(a => a.Id == notification.Id);
-            int index = Notifications.IndexOf(current);
-            Notifications.Remove(current);
-            Notifications.Insert(index, notification);
-            _serializer.ToCSV(FilePath, Notifications);
-            return notification;
-        }
-
-
         public Notification Save(Notification notification)
         {
             notification.Id = NextId();
-            Notifications = _serializer.FromCSV(FilePath);
-            Notifications.Add(notification);
-            _serializer.ToCSV(FilePath, Notifications);
+            _notifications = _serializer.FromCSV(FilePath);
+            _notifications.Add(notification);
+            _serializer.ToCSV(FilePath, _notifications);
             return notification;
         }
 
         public int NextId()
         {
-            Notifications = _serializer.FromCSV(FilePath);
-            if (Notifications.Count < 1)
+            _notifications = _serializer.FromCSV(FilePath);
+            if (_notifications.Count < 1)
             {
                 return 1;
             }
-            return Notifications.Max(a => a.Id) + 1;
+            return _notifications.Max(v => v.Id) + 1;
         }
 
-        public Notification GetById(int id)
+        public void Delete(Voucher voucher)
         {
-            Notifications = _serializer.FromCSV(FilePath);
-            return Notifications.FirstOrDefault(acc => acc.Id == id);
+            _notifications = _serializer.FromCSV(FilePath);
+            Notification founded = _notifications.Find(v => v.Id == voucher.Id);
+            _notifications.Remove(founded);
+            _serializer.ToCSV(FilePath, _notifications);
         }
 
-        public List<Notification> GetAllByUser(int userId)
+        public Notification Update(Notification notification)
         {
-            Notifications = _serializer.FromCSV(FilePath);
-            return Notifications.FindAll(n => n.User.Id == userId);
+            _notifications = _serializer.FromCSV(FilePath);
+            Notification current = _notifications.Find(v => v.Id == notification.Id);
+            int index = _notifications.IndexOf(current);
+            _notifications.Remove(current);
+            _notifications.Insert(index, notification);       // keep ascending order of ids in file 
+            _serializer.ToCSV(FilePath, _notifications);
+            return notification;
         }
 
+        public List<Notification> GetByUserId(int userId)
+        {
+            _notifications = _serializer.FromCSV(FilePath);
+            return _notifications.FindAll(n => n.User.Id == userId && n.NotificationStatus == Model.Enums.NotificationStatus.unread);
+
+        }
 
     }
-
-
 }

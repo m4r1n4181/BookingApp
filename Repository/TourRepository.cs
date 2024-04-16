@@ -18,12 +18,20 @@ namespace BookingApp.Repository
 
         private List<Tour> _tours;//Tours
 
+
         public TourRepository()
         {
             _serializer = new Serializer<Tour>();
             _tours = _serializer.FromCSV(FilePath);
         }
 
+
+        public List<Tour> GetAllWithDateTime()
+        {
+            _tours = _serializer.FromCSV(FilePath);
+            // BindDateTime();
+            return _tours;
+        }
 
 
         public void BindLocations()
@@ -37,6 +45,12 @@ namespace BookingApp.Repository
             _tours = _serializer.FromCSV(FilePath);
             BindLocations();
             return _tours;
+        }
+
+        public void BindTourGuide() //tourguide sa turom 
+        {
+            TourGuideRepository tourGuideRepository = new TourGuideRepository();
+            _tours.ForEach(t => t.TourGuide = tourGuideRepository.GetById(t.TourGuide.Id));
         }
 
         public List<Tour> SearchTours(TourSearchParams searchParams)
@@ -80,7 +94,9 @@ namespace BookingApp.Repository
 
         public List<Tour> GetAll()
         {
-            return _serializer.FromCSV(FilePath);
+            _tours = _serializer.FromCSV(FilePath);
+            BindLocations();
+            return _tours;
         }
 
         public Tour Save(Tour tour)
@@ -116,7 +132,7 @@ namespace BookingApp.Repository
             Tour current = _tours.Find(t => t.Id == tour.Id);
             int index = _tours.IndexOf(current);
             _tours.Remove(current);
-            _tours.Insert(index, tour);      
+            _tours.Insert(index, tour);
             _serializer.ToCSV(FilePath, _tours);
             return tour;
         }
@@ -128,17 +144,22 @@ namespace BookingApp.Repository
 
         }
 
-        private bool TourStartesToday(Tour tour)
-        {
-            return tour.StartDates.Any(date => date.Date == DateTime.Now.Date);
-        }
 
         public List<Tour> GetTodayTours()
         {
-
             _tours = _serializer.FromCSV(FilePath);
             BindLocations();
-            return _tours.FindAll(tour => TourStartesToday(tour) && !tour.IsStarted);
+
+            DateTime today = DateTime.Now.Date;
+
+            return _tours.FindAll(tour => tour.StartDate.Date == today && tour.TourStatus == Model.Enums.TourStatusType.not_started);
+        }
+
+        public List<Tour> GetAlternativeTours(int locationId)
+        {
+            _tours = _serializer.FromCSV(FilePath);
+            BindLocations();
+            return _tours.FindAll(tour => tour.Location.Id == locationId && tour.AvailableSeats > 0);
         }
 
 

@@ -8,6 +8,7 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Runtime.CompilerServices;
 using System.Windows;
+using BookingApp.View.ViewModel;
 
 namespace BookingApp.View
 {
@@ -90,8 +91,15 @@ namespace BookingApp.View
 
                     else if (user.Type == UserType.Tourist)
                     {
-                        TourOverviewForm tourOverviewForm = new TourOverviewForm();
+                        TourOverviewForm tourOverviewForm = new TourOverviewForm(LoggedUser);
                         tourOverviewForm.Show();
+
+                        List<Notification> notifications = _notificationController.GetByUserId(LoggedUser.Id);
+                        foreach(Notification notification in notifications)
+                        {
+                            MessageBox.Show(notification.Message, "Notifications", MessageBoxButton.OK, MessageBoxImage.Information);
+                        }
+                       // _notificationController.ReadAllUserNotifications(LoggedUser.Id);
                     }
                     else if(user.Type == UserType.Guest)
                     {

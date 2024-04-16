@@ -51,6 +51,13 @@ namespace BookingApp.Repository
             _serializer.ToCSV(FilePath, _keyPoint);
             return keyPoint;
         }
+        public void SaveAll(List<KeyPoint> keyPoints)
+        {
+            foreach (KeyPoint keyPoint in keyPoints)
+            {
+                Save(keyPoint);
+            }
+        }
 
         public int NextId()
         {
@@ -87,6 +94,21 @@ namespace BookingApp.Repository
             return _keyPoint.FindAll(kp => kp.Tour.Id == tourId);
 
         } 
+
+        public List<KeyPoint> GetActiveKeyPointByTour(int tourId)
+        {
+            List<KeyPoint> keyPoints = GetKeyPointsForTour(tourId);
+            List<KeyPoint> activeKeyPoints = new List<KeyPoint>();
+
+            foreach (KeyPoint keyPoint in keyPoints)
+            {
+                if (keyPoint.IsActive)
+                {
+                    activeKeyPoints.Add(keyPoint);
+                }
+            }
+            return activeKeyPoints;
+        }
 
 
     }
