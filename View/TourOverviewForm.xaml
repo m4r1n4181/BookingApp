@@ -20,7 +20,7 @@
             <Label Content="Grad:" VerticalAlignment="Center"/>
             <TextBox x:Name="tbCity" Text="{Binding City, UpdateSourceTrigger=PropertyChanged}" VerticalAlignment="Center" Margin="5"/>
             <Label Content="Broj ljudi:" VerticalAlignment="Center"/>
-            <TextBox x:Name="tbNumberOfPeople" Text="{Binding MaxTourists, UpdateSourceTrigger=PropertyChanged}"  VerticalAlignment="Center" Margin="5"/>
+            <TextBox x:Name="tbNumberOfPeople" Text="{Binding AvailableSeats, UpdateSourceTrigger=PropertyChanged}"  VerticalAlignment="Center" Margin="5"/>
             <Label Content="Jezik:" VerticalAlignment="Center"/>
             <TextBox x:Name="tbLanguage" Text="{Binding Language, UpdateSourceTrigger=PropertyChanged}" VerticalAlignment="Center" Margin="5"/>
             <Label Content="Trajanje:" VerticalAlignment="Center"/>
@@ -44,7 +44,7 @@
                 <DataGridTextColumn Header="Grad" Binding="{Binding Location.City}" Width="*"/>
                 <DataGridTextColumn Header="Trajanje" Binding="{Binding Duration}" Width="*"/>
                 <DataGridTextColumn Header="Jezik" Binding="{Binding Language}" Width="*"/>
-                <DataGridTextColumn Header="Broj ljudi" Binding="{Binding MaxTourists}" Width="*"/>
+                <DataGridTextColumn Header="Broj ljudi" Binding="{Binding AvailableSeats}" Width="*"/>
             </DataGrid.Columns>
         </DataGrid>
     </Grid>

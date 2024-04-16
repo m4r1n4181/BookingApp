@@ -1,7 +1,11 @@
-1|1|5|5|5|sdfg|img|True
-2|5|0|0|0|mrs|img|True
+1|1|5|5|5|sdfg|img|False
+2|5|0|0|0|mrs|img|False
 3|5|5|4|3|jebisse|img|True
 4|5|5|5|5|molimte|img|True
 5|5|3|4|2|lalala|img|True
 6|16|5|5|5|sdfg|img|False
-7|17|0|0|0|mrs|img|False
+7|17|0|0|0|mrs|img|True
+8|16|5|5|1|lalala11|../Resources/Images/b2a2d9f200ef6342a600b8861a01cd87.jpg|True
+9|9|5|4|1|kurcina|../Resources/Images/eiffel.jpg|False
+10|9|1|1|1|lepo|../Resources/Images/louvre.jpg|True
+11|9|3|3|4|ludnica|../Resources/Images/louvre.jpg|True

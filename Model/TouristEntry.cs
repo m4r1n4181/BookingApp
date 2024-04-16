@@ -19,7 +19,8 @@ namespace BookingApp.Model
 
 
 
-        public TouristEntry() { }  
+        public TouristEntry() { }
+        public TouristEntry(int id) { Id = id; }
         public TouristEntry(int id, KeyPoint keyPoint, Tourist tourist, Tour tour)
         {
             Id = id;

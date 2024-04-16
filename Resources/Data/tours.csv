@@ -1,7 +1,7 @@
 1|1|nova|as|asd|2|2|0|4/15/2024 12:00:00 PM|2|../Resources/Images/add.png|finished
-2|1|Name22|sasas|asasas|3|2|0|3/19/2024 3:00:00 PM|2|../Resources/Images/add.png|not_started
-3|1|nnn|as|as|2|2|0|3/19/2024 6:00:00 PM|3|../Resources/Images/add.png|not_started
-4|1|Nazif|asd|opopo|1|2|0|3/19/2024 9:00:00 AM|2|../Resources/Images/add.png|not_started
+2|1|Name22|sasas|asasas|2|2|2|3/19/2024 3:00:00 PM|2|../Resources/Images/add.png|finished
+3|1|nnn|as|as|2|2|0|3/19/2024 6:00:00 PM|3|../Resources/Images/add.png|started
+4|1|Nazif|asd|opopo|1|2|0|3/19/2024 9:00:00 AM|2|../Resources/Images/add.png|started
 5|1|ime1|opi|pipi|3|2|0|3/19/2024 6:00:00 PM|2|../Resources/Images/add.png|not_started
 6|1|lklk|nmnmn|mnmn|2|20|0|3/19/2024 12:00:00 PM|2|../Resources/Images/add.png|not_started
 7|1|mn|mnmn|hjh|3|70|0|3/19/2024 9:00:00 AM|2|../Resources/Images/add.png|not_started
@@ -19,7 +19,7 @@
 19|1|trying|hwhebdhbc|njs|3|4|0|4/3/2024 12:00:00 PM|3|../Resources/Images/edit.png|not_started
 20|1|test|test|eng|5|4|0|4/4/2024 12:00:00 PM|3||not_started
 21|1|Nova tura  Na petrovaradin|nova tura|srb|2|5|0|4/20/2024 12:00:00 PM|2|../Resources/Images/add.png,../Resources/Images/delete.png|cancelled
-22|1|Nova tura  Na petrovaradin|nova tura|srb|2|5|0|4/26/2024 12:00:00 PM|2|../Resources/Images/add.png,../Resources/Images/delete.png|not_started
+22|1|Nova tura  Na petrovaradin|nova tura|srb|2|5|0|4/26/2024 12:00:00 PM|2|../Resources/Images/add.png,../Resources/Images/delete.png|cancelled
 23|1|ponovo1|ponovo|eng|4|4|0|4/15/2024 12:00:00 PM|2|../Resources/Images/colloseum.jpg|finished
 24|1|ponovo1|ponovo|eng|4|4|0|4/13/2024 3:00:00 PM|2|../Resources/Images/colloseum.jpg|started
 25|1|aj ponovo|aj pliz|nem|6|4|0|4/13/2024 12:00:00 PM|3|../Resources/Images/palatine.jpg|not_started
@@ -28,4 +28,16 @@
 28|1|zdravo1|hej|3|5|4|0|4/15/2024 12:00:00 PM|3|../Resources/Images/colloseum.jpg|finished
 29|1|zdravo1|hej|3|5|4|0|4/15/2024 9:00:00 AM|3|../Resources/Images/colloseum.jpg|finished
 30|1|lepota|jnsjs|eng|4|4|0|4/15/2024 12:00:00 PM|2||started
-31|1|TURA|TURA|ss|1|5|0|4/15/2024 12:00:00 PM|7|../Resources/Images/notre_dame.jpg|finished
+31|1|TURA|TURA|ss|1|5|0|4/20/2024 12:00:00 PM|7|../Resources/Images/notre_dame.jpg|cancelled
+32|1|Petrovaradin|Predivan pejzaz i bogata istorija|Engleski|1|4|-3|3/19/2024 12:00:00 PM|2|../Resources/Images/delete.png|started
+33|1|Venecija|Bogata istorija i jedinstveni kanali|Engleski|2|3|3|3/18/2024 12:00:00 PM|2|../Resources/Images/delete.png|finished
+34|1|ItalijaTour|Pogledi i hrana fantasticni|Engleski|3|5|10|3/18/2024 12:00:00 PM|2|../Resources/Images/edit.png|finished
+35|1|Split|Sunce, more i zabava|Engleski|4|6|18|3/19/2024 12:00:00 PM|3|../Resources/Images/view.png|finished
+36|1|Bec|Bogata istorija i fascinantna arhitektura|Nemacki|1|20|2|3/19/2024 12:00:00 PM|6|../Resources/Images/delete.png|finished
+37|1|Bec|Bogata istorija i fascinantna arhitektura|Nemacki|2|20|20|3/19/2024 12:00:00 PM|6|../Resources/Images/delete.png|finished
+38|1|Bec|Bogata istorija i fascinantna arhitektura|Nemacki|1|20|20|3/19/2024 12:00:00 PM|6|../Resources/Images/delete.png|finished
+39|1|Bec|Bogata istorija i fascinantna arhitektura|Nemacki|2|20|20|3/19/2024 12:00:00 PM|6|../Resources/Images/delete.png|finished
+40|1|senegal|luda tura|kineski|10|20|0|4/17/2024 12:00:00 PM|16|../Resources/Images/edit.png|finished
+41|1|senegal|luda tura|kineski|10|20|0|4/17/2024 3:00:00 PM|16|../Resources/Images/edit.png|not_started
+42|1|rr|trstina|srpski|4|20|0|4/17/2024 9:00:00 AM|2|../Resources/Images/delete.png|started
+43|1|rr|trstina|srpski|4|20|0|4/17/2024 12:00:00 PM|2|../Resources/Images/delete.png|not_started

@@ -127,6 +127,7 @@ namespace BookingApp.ViewModel
                 TourAppeal = TourAppeal,
                 Comment = Comment,
                 Pictures = Pictures.ToList(),
+                Validity = true,
             };
 
             _tourReviewController.RateTour(tourReview);

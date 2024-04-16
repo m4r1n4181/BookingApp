@@ -13,7 +13,7 @@ namespace BookingApp.DTO
         public string Country { get; set; }
         public int Duration { get; set; }
         public string Language { get; set; }
-        public int MaxTourists { get; set; }
+        public int AvailableSeats { get; set; }
 
 
 

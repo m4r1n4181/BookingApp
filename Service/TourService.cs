@@ -188,16 +188,46 @@ namespace BookingApp.Service
         {
             List<TourParticipants> tourParticipants = new List<TourParticipants>();
 
-            List<TourReservation> reservations = new List<TourReservation>();
-            List<TouristEntry> touristEntries = new List<TouristEntry>();
+            // Dobavljanje svih tačaka ključeva za tura
             List<KeyPoint> keyPoints = _keyPointRepository.GetKeyPointsForTour(tourId);
-            keyPoints.ForEach(kp => touristEntries.AddRange(_entryRepository.GetAllByKeyPoint(kp.Id)));
 
-            touristEntries.ForEach(te => reservations.Add(_tourReservationRepository.GetByTourAndTourist(tourId, te.Tourist.Id)));
+            // Provera da li postoje tačke ključeva
+            if (keyPoints != null && keyPoints.Any())
+            {
+                // Prikupljanje svih ulaznih tačaka za tačke ključeva
+                List<TouristEntry> touristEntries = new List<TouristEntry>();
+                keyPoints.ForEach(kp => touristEntries.AddRange(_entryRepository.GetAllByKeyPoint(kp.Id)));
 
-            reservations.ForEach(r => tourParticipants.AddRange(r.Tourists));
+                // Provera da li postoje ulazne tačke
+                if (touristEntries != null && touristEntries.Any())
+                {
+                    // Prikupljanje svih rezervacija za turiste na ulaznim tačkama
+                    List<TourReservation> reservations = new List<TourReservation>();
+                    touristEntries.ForEach(te => {
+                        var reservation = _tourReservationRepository.GetByTourAndTourist(tourId, te.Tourist.Id);
+                        if (reservation != null)
+                        {
+                            reservations.Add(reservation);
+                        }
+                    });
+
+                    // Provera da li postoje rezervacije
+                    if (reservations != null && reservations.Any())
+                    {
+                        // Prikupljanje svih učesnika ture iz rezervacija
+                        reservations.ForEach(r => {
+                            if (r.Tourists != null)
+                            {
+                                tourParticipants.AddRange(r.Tourists);
+                            }
+                        });
+                    }
+                }
+            }
+
             return tourParticipants;
         }
+
 
         public Tour MostVisitedTour(int year = -1)
         {

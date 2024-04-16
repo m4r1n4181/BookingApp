@@ -78,9 +78,9 @@ namespace BookingApp.Repository
                 _tours = _tours.FindAll(tour => tour.Language.Equals(searchParams.Language));
             }
 
-            if (searchParams.MaxTourists != 0)
+            if (searchParams.AvailableSeats != 0)
             {
-                _tours = _tours.FindAll(tour => tour.MaxTourists >= searchParams.MaxTourists);
+                _tours = _tours.FindAll(tour => tour.MaxTourists >= searchParams.AvailableSeats);
             }
 
             return _tours;

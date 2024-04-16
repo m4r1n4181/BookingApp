@@ -27,8 +27,9 @@ namespace BookingApp.View
     public partial class AlternativeToursView : Window
     {
         public ObservableCollection<Tour> Tours { get; set; }
-        public TourService _tourService;
-        //public User User { get; set; }
+        public Tour SelectedTour { get; set; } // Dodano svojstvo SelectedTour
+
+        public TourController _tourController;
 
         public event PropertyChangedEventHandler PropertyChanged;
 
@@ -36,12 +37,17 @@ namespace BookingApp.View
         {
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
         }
-        public AlternativeToursView(Location location)
+
+        public AlternativeToursView(Tour tour)
         {
             InitializeComponent();
             this.DataContext = this;
-            _tourService = new TourService();
-            Tours = new ObservableCollection<Tour>(_tourService.GetAlternativeTours(location.Id));
+            _tourController = new TourController();
+            SelectedTour = tour;
+            Tours = new ObservableCollection<Tour>(_tourController.GetAlternativeTours(tour.Location.Id));
         }
     }
+
+
+
 }

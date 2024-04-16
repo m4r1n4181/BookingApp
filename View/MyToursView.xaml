@@ -35,8 +35,6 @@
             <Button Content="Active Tour" Command="{Binding ActiveToursCommand}" FontSize="14" VerticalAlignment="Center" Margin="5,0,0,0"/>
             <Button Content="Rate Tour" Command="{Binding RateTourCommand}"/>
             <Button Content="Track Tour" Command="{Binding TrackTourCommand}"/>
-            <Button Content="Notifications" Command="{Binding NotificationButtonCommand}" FontSize="14" VerticalAlignment="Center" Margin="5,0,0,0"/>
-            <ComboBox x:Name="NotificationsListBox" ItemsSource="{Binding Notifications}" Width="200" DisplayMemberPath="Message" HorizontalContentAlignment="Stretch" VerticalContentAlignment="Stretch" Margin="5,0,0,0" />
         </ToolBar>
 
     </Grid>

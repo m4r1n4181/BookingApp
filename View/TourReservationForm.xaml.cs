@@ -208,7 +208,7 @@ namespace BookingApp.View
 
             // var alternativeTours = _tourRepository.GetAlternativeTours(selectedLocation);
 
-            AlternativeToursView alternativeToursView = new AlternativeToursView(selectedLocation);
+            AlternativeToursView alternativeToursView = new AlternativeToursView(SelectedTour);
 
             alternativeToursView.ShowDialog();
         }
@@ -217,13 +217,18 @@ namespace BookingApp.View
 
         private void ReserveTour_Click(object sender, RoutedEventArgs e)
         {
+            int id = -1;
             int participantsNumber = Participants.Count;
+
             TourReservation reservation = new TourReservation()
             {
                 GuestsNumber = participantsNumber,
                 UserId = User.Id, // Dodajemo UserId korisnika koji je napravio rezervaciju
                 Tour = SelectedTour,
-                Tourists = Participants.ToList<TourParticipants>()
+                Tourists = Participants.ToList<TourParticipants>(),
+                TouristEntry = new TouristEntry(id),
+                Tourist = _touristRepository.GetByUserId(User.Id)
+
             };
             _tourReservationService.Create(reservation);
 

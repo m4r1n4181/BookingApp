@@ -17,10 +17,10 @@ namespace BookingApp.View
   
     public partial class MyToursView : Window
     {
-        public MyToursView(User user)
+        public MyToursView()
         {
             InitializeComponent();
-            this.DataContext = new MyToursViewModel(user);
+            this.DataContext = new MyToursViewModel();
         }
     }
 }

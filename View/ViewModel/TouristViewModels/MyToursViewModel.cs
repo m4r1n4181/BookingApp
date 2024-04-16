@@ -29,23 +29,12 @@ namespace BookingApp.View.ViewModel.TouristViewModels
         private readonly TourReservationService _tourReservationService;
         private readonly TourReservationRepository _tourReservationRepository;
         private readonly NotificationController _notificationController;
-        private User _user;
+       // private User _user;
         private MyToursViewState _windowState;
 
         public ObservableCollection<Notification> Notifications { get; set; }
         public TourStatusType Status { get; set; }
-        public User User
-        {
-            get => _user;
-            set
-            {
-                if (_user != value)
-                {
-                    _user = value;
-                    OnPropertyChanged();
-                }
-            }
-        }
+        
 
         public TourReservation SelectedTour { get; set; }
 
@@ -68,12 +57,8 @@ namespace BookingApp.View.ViewModel.TouristViewModels
         public ICommand ActiveToursCommand { get; private set; }
         public ICommand RateTourCommand { get; private set; }
         public ICommand TrackTourCommand { get; private set; }
-        public ICommand NotificationButtonCommand { get; private set; }
-        public MyToursViewModel(User user) : this()
-        {
-            User = user;
-            Reservations = new ObservableCollection<TourReservation>(_tourReservationRepository.GetByUser(User.Id));
-        }
+       // public ICommand NotificationButtonCommand { get; private set; }
+      
         public MyToursViewModel()
         {
             _touristRepository = new TouristRepository();
@@ -83,16 +68,18 @@ namespace BookingApp.View.ViewModel.TouristViewModels
             _tourReservationRepository = new TourReservationRepository();
             _notificationController = new NotificationController();
 
+            Reservations = new ObservableCollection<TourReservation>(_tourReservationRepository.GetByUser(SignInForm.LoggedUser.Id));
+
             PreviousToursCommand = new RelayCommand(PreviousTours_Click);
             ActiveToursCommand = new RelayCommand(ActiveTours_Click);
             RateTourCommand = new RelayCommand(RateTour_Click);
             TrackTourCommand = new RelayCommand(TrackTour_Click);
-            NotificationButtonCommand = new GalaSoft.MvvmLight.Command.RelayCommand(NotificationButton_Click);
+           // NotificationButtonCommand = new GalaSoft.MvvmLight.Command.RelayCommand(NotificationButton_Click);
 
-            if (User != null)
+            /*if (User != null)
             {
                 MessageBox.Show($"User ID: {User.Id}");
-            }
+            }*/
             _windowState = MyToursViewState.WatchingAllTours;
             Notifications = new ObservableCollection<Notification>();
         }
@@ -103,7 +90,7 @@ namespace BookingApp.View.ViewModel.TouristViewModels
         {
             _windowState = MyToursViewState.WatchingPreviousTours;
             Reservations.Clear();
-            var previousReservations = _tourReservationRepository.GetByUser(User.Id)
+            var previousReservations = _tourReservationRepository.GetByUser(SignInForm.LoggedUser.Id)
                                                  .Where(r => _tourReservationRepository.GetTourStatus(r) == TourStatusType.finished);
             foreach (var reservation in previousReservations)
             {
@@ -123,7 +110,7 @@ namespace BookingApp.View.ViewModel.TouristViewModels
             _windowState = MyToursViewState.WatcingActiveTours;
 
             Reservations.Clear();
-            var activeReservations = _tourReservationRepository.GetByUser(User.Id)
+            var activeReservations = _tourReservationRepository.GetByUser(SignInForm.LoggedUser.Id)
                                               .Where(r => _tourReservationRepository.GetTourStatus(r) == TourStatusType.started);
             foreach (var reservation in activeReservations)
             {
@@ -173,9 +160,9 @@ namespace BookingApp.View.ViewModel.TouristViewModels
             tourAttendanceView.ShowDialog();
         }
 
-        private void NotificationButton_Click()
+       /* private void NotificationButton_Click()
         {
-            List<Notification> notifications = _notificationController.GetByUserId(User.Id);
+            List<Notification> notifications = _notificationController.GetByUserId(SignInForm.LoggedUser.Id);
             if (notifications.Count == 0)
             {
                 MessageBox.Show("There are no new notifications.", "Notifications", MessageBoxButton.OK, MessageBoxImage.Information);
@@ -183,8 +170,8 @@ namespace BookingApp.View.ViewModel.TouristViewModels
             Notifications.Clear();
             notifications.ForEach(n => Notifications.Add(n));
 
-            _notificationController.ReadAllUserNotifications(User.Id);
-        }
+            _notificationController.ReadAllUserNotifications(SignInForm.LoggedUser.Id);
+        }*/
 
         public event PropertyChangedEventHandler PropertyChanged;
 

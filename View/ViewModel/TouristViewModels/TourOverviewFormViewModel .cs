@@ -75,15 +75,15 @@ namespace BookingApp.View.ViewModel.TouristViewModels
             }
         }
 
-        private int _maxTourists;
-        public int MaxTourists
+        private int _availableSeats;
+        public int AvailableSeats
         {
-            get => _maxTourists;
+            get => _availableSeats;
             set
             {
-                if (value != _maxTourists)
+                if (value != _availableSeats)
                 {
-                    _maxTourists = value;
+                    _availableSeats = value;
                     OnPropertyChanged();
                 }
             }
@@ -116,7 +116,7 @@ namespace BookingApp.View.ViewModel.TouristViewModels
                 Country = Country,
                 Language = Language,
                 Duration = Duration,
-                MaxTourists = MaxTourists
+                AvailableSeats = AvailableSeats
             };
 
             Tours.Clear();
@@ -139,7 +139,7 @@ namespace BookingApp.View.ViewModel.TouristViewModels
         // Method to open MyTours view
         private void MyTours()
         {
-            MyToursView myToursView = new MyToursView(User);
+            MyToursView myToursView = new MyToursView();
             myToursView.Show();
 
 

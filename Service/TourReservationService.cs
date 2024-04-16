@@ -78,7 +78,7 @@ namespace BookingApp.Service
         {
             Tourist tourist = tourReservation.Tourist; 
             DateTime expires = DateTime.Now.AddDays(365); // Postavljanje datuma isteka na 365 dana od danasnjeg datuma
-            Voucher voucher = new Voucher(-1, null, tourist, StatusType.active, expires, false, 1, VoucherType.cancellation);
+            Voucher voucher = new Voucher(-1,tourist, StatusType.active, expires, false, 1, VoucherType.cancellation);
             _voucherRepository.Save(voucher);
 
             //_tourReservationRepository.Delete(tourReservation);
