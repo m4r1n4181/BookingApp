@@ -79,12 +79,12 @@ namespace BookingApp.View
                         reservationRescheduleRequestsWindow.Show();
                          RegisterAccommodationForm registerAccommodationForm = new RegisterAccommodationForm();
                         registerAccommodationForm.Show();
-                       AccommodationReservationToRateForm accommodationReservationToRateForm = new AccommodationReservationToRateForm(user);
-                        accommodationReservationToRateForm.Show();
-                         AccommodationsOverviewWindow accommodationOverviewWindow = new AccommodationsOverviewWindow();
-                        accommodationOverviewWindow.Show();
-                      //AccommodationOwnerReviewsWindow accommodationOwnerReviewsWindow = new AccommodationOwnerReviewsWindow();
-                       // accommodationOwnerReviewsWindow.Show();
+                       //AccommodationReservationToRateForm accommodationReservationToRateForm = new AccommodationReservationToRateForm(user);
+                        //accommodationReservationToRateForm.Show();
+                         //AccommodationsOverviewWindow accommodationOverviewWindow = new AccommodationsOverviewWindow();
+                        //accommodationOverviewWindow.Show();
+                      AccommodationOwnerReviewsWindow accommodationOwnerReviewsWindow = new AccommodationOwnerReviewsWindow();
+                       accommodationOwnerReviewsWindow.Show();
 
                     }
 

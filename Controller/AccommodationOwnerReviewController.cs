@@ -26,26 +26,7 @@ namespace BookingApp.Controller
         public AccommodationOwnerReview Get(int id)
         {
             return _accommodationOwnerReviewService.Get(id);
-        }
-        public AccommodationOwnerReview Save(AccommodationOwnerReview accommodationOwnerReview)
-        {
-            return _accommodationOwnerReviewService.Save(accommodationOwnerReview);
-        }
-        public void Delete(AccommodationOwnerReview accommodationOwnerReview)
-        {
-            _accommodationOwnerReviewService.Delete(accommodationOwnerReview);
-        }
-        public void Update(AccommodationOwnerReview accommodationOwnerReview)
-        {
-            _accommodationOwnerReviewService.Update(accommodationOwnerReview);
-        }
-        /*
-        public AccommodationOwnerReview SaveImages(AccommodationOwnerReview accommodationOwnerReview)
-        {
-            return _accommodationOwnerReviewService.SaveImages(accommodationOwnerReview);
-        }
-        */
-  
+        }    
         public List<AccommodationOwnerReview> GetAllValidReviewsForOwner(int id)
         {
             return _accommodationOwnerReviewService.GetAllValidReviewsForOwner(id);

@@ -11,10 +11,10 @@ using System.Windows.Input;
 
 namespace BookingApp.ViewModels.OwnerViewModels
 {
-    public class DeclineReservationRescheduleRequestCommentViewModel : ViewModelBase, IClose
+    public class DeclineReservationRescheduleRequestCommentViewModel : ViewModelBase//, IClose
     {
         public ReservationRescheduleRequestController _reservationRescheduleRequestController;
-        public Action Close { get; set; }
+        //public Action Close { get; set; }
         #region NotifyProperties
         private string _comment;
         public string Comment
@@ -53,8 +53,7 @@ namespace BookingApp.ViewModels.OwnerViewModels
             return;
         }
         private bool CanExecuteAddCommentButtonCommand()
-        {
-            // Add any conditions for when the command can execute, if needed
+        {    
             return true;
         }
 

@@ -1,6 +1,7 @@
 ﻿using BookingApp.Controller;
 using BookingApp.Domain.Models;
 using BookingApp.Model;
+using BookingApp.View;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -17,7 +18,7 @@ namespace BookingApp.ViewModels.OwnerViewModels
 
         public AccommodationOwnerReviewsViewModel() { 
         _accommodationOwnerReviewController = new AccommodationOwnerReviewController();
-            AccommodationOwnerReviews = new ObservableCollection<AccommodationOwnerReview>(_accommodationOwnerReviewController.GetAll());
+            AccommodationOwnerReviews = new ObservableCollection<AccommodationOwnerReview>(_accommodationOwnerReviewController.GetAllValidReviewsForOwner(SignInForm.LoggedUser.Id));
         }
     }
 }

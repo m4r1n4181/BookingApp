@@ -42,11 +42,6 @@ namespace BookingApp.Controller
             return _reservationRescheduleRequestService.Update(reservationRescheduleRequest);
         }
 
-        public List<ReservationRescheduleRequest> GetAllRequestsForHandling()
-        {
-            return _reservationRescheduleRequestService.GetAllRequestsForHandling();
-        }
-
         public List<ReservationRescheduleRequest> GetStandBy(int guest)
         {
             return _reservationRescheduleRequestService.GetStandBy(guest);

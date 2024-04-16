@@ -11,9 +11,7 @@ namespace BookingApp.Domain.RepositoryInterfaces
     {
         public List<AccommodationOwnerReview> GetAll();
         public AccommodationOwnerReview Get(int id);
-        public AccommodationOwnerReview Save(AccommodationOwnerReview accommodationOwnerReview);
-        public void Delete(AccommodationOwnerReview accommodationOwnerReview);
-        public AccommodationOwnerReview Update(AccommodationOwnerReview accommodationOwnerReview);
+        public AccommodationOwnerReview Save(AccommodationOwnerReview accommodationOwnerReview);    
         public int NextId();
         public List<AccommodationOwnerReview> GetByReservation(int reservationId);
      //   public AccommodationOwnerReview SaveImages(AccommodationOwnerReview accommodationOwnerReview);

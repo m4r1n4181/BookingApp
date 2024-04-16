@@ -67,25 +67,6 @@ namespace BookingApp.Service
             return reservationRescheduleRequests;
         } */
         
-       public List<ReservationRescheduleRequest> GetAllRequestsForHandling()
-        {
-            List<ReservationRescheduleRequest> reservationRescheduleRequests = new List<ReservationRescheduleRequest>();
-            foreach (ReservationRescheduleRequest reservationRescheduleRequest in _reservationRescheduleRequestRepository.GetAll())
-            {
-                if (reservationRescheduleRequest != null &&
-                    reservationRescheduleRequest.Reservation != null &&
-                   // reservationRescheduleRequest.Reservation.Accommodation != null &&
-                    reservationRescheduleRequest.Reservation.Accommodation.Owner != null &&
-                    IsRequestOnStandby(reservationRescheduleRequest) &&
-                    //SignInForm.LoggedUser != null &&
-                    SignInForm.LoggedUser.Id == reservationRescheduleRequest.Reservation.Accommodation.Owner.Id)
-                {
-                    reservationRescheduleRequests.Add(reservationRescheduleRequest);
-                }
-            }
-
-            return reservationRescheduleRequests;
-        }
 
         public List<ReservationRescheduleRequest> GetStandBy(int guest)
         {
@@ -144,8 +125,6 @@ namespace BookingApp.Service
         public List<ReservationRescheduleRequest> GetAllForOwner(int id)
         {
             var allRequests = _reservationRescheduleRequestRepository.GetAllForOwner(id);
-
-            // Zatim primenite filtriranje koristeći LINQ
             var standbyRequests = allRequests.Where(request => IsRequestOnStandby(request)).ToList();
 
             return standbyRequests;

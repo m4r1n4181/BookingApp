@@ -52,12 +52,12 @@ namespace BookingApp.Repository
         public void BindRequestwithGuest()
         {
             UserRepository userRepository = new UserRepository();
-            foreach(var request in _reservationRescheduleRequests)
+            foreach (var request in _reservationRescheduleRequests)
             {
                 request.Reservation.Guest = userRepository.GetById(request.Reservation.Guest.Id);
             }
         }
-    public void BindReservationRescheduleRequestWithAccommodationReservation()
+        public void BindReservationRescheduleRequestWithAccommodationReservation()
         {
             foreach (ReservationRescheduleRequest reservationRescheduleRequest in _reservationRescheduleRequests)
             {
@@ -73,7 +73,7 @@ namespace BookingApp.Repository
                 }
             }
         }
-    
+
 
         public ReservationRescheduleRequest Save(ReservationRescheduleRequest reservationRescheduleRequest)
         {
@@ -112,7 +112,7 @@ namespace BookingApp.Repository
             ReservationRescheduleRequest current = _reservationRescheduleRequests.Find(rrr => rrr.Id == reservationRescheduleRequest.Id);
             int index = _reservationRescheduleRequests.IndexOf(current);
             _reservationRescheduleRequests.Remove(current);
-            _reservationRescheduleRequests.Insert(index, reservationRescheduleRequest);       
+            _reservationRescheduleRequests.Insert(index, reservationRescheduleRequest);
             _serializer.ToCSV(FilePath, _reservationRescheduleRequests);
             return reservationRescheduleRequest;
         }
@@ -142,6 +142,4 @@ namespace BookingApp.Repository
             return _reservationRescheduleRequests.Find(rr => rr.Reservation.Guest.Id == id);
         }
     }
- }
-
-
+}
