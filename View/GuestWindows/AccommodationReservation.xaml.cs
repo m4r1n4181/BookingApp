@@ -77,6 +77,20 @@ namespace BookingApp.View
             }
         }
 
+        private int _numberOfGuests;
+        public int NumberOfGuests
+        {
+            get => _numberOfGuests;
+            set
+            {
+                if (value != _numberOfGuests)
+                {
+                    _numberOfGuests = value;
+                    OnPropertyChanged();
+                }
+            }
+        }
+
         public event PropertyChangedEventHandler PropertyChanged;
 
         protected virtual void OnPropertyChanged([CallerMemberName] string propertyName = null)
@@ -120,7 +134,13 @@ namespace BookingApp.View
             List<AccommodationReservation> reservations;
             AccommodationReservations.Clear();
 
+            if(NumberOfGuests > SelectedAccommodation.MaxGuests)
+            {
+                MessageBox.Show("This number of guests is not allowed.");
+                return;
+            }
 
+            //dodati i u service
             DateTime startTime = Arrival;
             DateTime endTime = Departure; //pocetna vremena 
             do

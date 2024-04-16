@@ -52,7 +52,7 @@ namespace BookingApp.ViewModels.OwnerViewModels
             ReservationRescheduleRequest.Comment = Comment;
             _reservationRescheduleRequestController.Update(ReservationRescheduleRequest);
 
-            string message = "Your reservation for accommodation " + ReservationRescheduleRequest.Reservation.Accommodation.Name + " has been Approved";
+            string message = "Your reservation for accommodation " + ReservationRescheduleRequest.Reservation.Accommodation.Name + " has been Declined";
             Notification notification = new Notification()
             {
                 User = ReservationRescheduleRequest.Reservation.Guest,

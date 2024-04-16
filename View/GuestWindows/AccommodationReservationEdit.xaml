@@ -9,7 +9,7 @@
     <Grid>
         <Label Content="New departure :" HorizontalAlignment="Left" Margin="79,164,0,0" VerticalAlignment="Top"/>
         <Label Content="New arrival : " HorizontalAlignment="Left" Margin="79,53,0,0" VerticalAlignment="Top"/>
-        <Button Content="Confirm edit" Click="Button_Confirm_Click" HorizontalAlignment="Left" Margin="160,313,0,0" VerticalAlignment="Top"/>
+        <Button Command="{Binding ConfirmCommand}"  Content="Confirm edit" HorizontalAlignment="Left" Margin="160,313,0,0" VerticalAlignment="Top"/>
         <DatePicker SelectedDate="{Binding NewArrival}" HorizontalAlignment="Left" Margin="204,55,0,0" VerticalAlignment="Top"/>
         <DatePicker SelectedDate="{Binding NewDeparture}" HorizontalAlignment="Left" Margin="219,164,0,0" VerticalAlignment="Top"/>
 

@@ -49,7 +49,11 @@ namespace BookingApp.Repository
             return ownerReview;
         }
 
-
+        public OwnerReview GetOneByReservation(int reservationId)
+        {
+            OwnerReviews = _serializer.FromCSV(FilePath);
+            return OwnerReviews.FirstOrDefault(or => or.Reservation.Id == reservationId);
+        }
 
 
     }

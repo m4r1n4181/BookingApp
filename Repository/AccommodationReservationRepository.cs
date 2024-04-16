@@ -129,7 +129,7 @@ namespace BookingApp.Repository
         public List<AccommodationReservation> GetByAccommodation(int accommodationId)
         {
             AccommodationReservations = _serializer.FromCSV(FilePath);
-            return AccommodationReservations.FindAll(c => c.Accommodation.Id == accommodationId);
+            return AccommodationReservations.FindAll(c => c.Accommodation.Id == accommodationId && c.Status == Model.Enums.AccommodationReservationStatus.Active);
         }
         public List<AccommodationReservation> GetByAccommodationId(int id)
         {

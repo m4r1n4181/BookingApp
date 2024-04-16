@@ -18,11 +18,13 @@ namespace BookingApp.Service
         private AccommodationReservationRepository _accommodationReservationRepository;
         private AccommodationRepository _accommodationRepository;
         private NotificationRepository _notificationRepository;
+        private OwnerReviewRepository _ownerReviewRepository;
         public AccommodationReservationService()
         {
             _accommodationReservationRepository = new AccommodationReservationRepository();
             _accommodationRepository = new AccommodationRepository();
             _notificationRepository = new NotificationRepository();
+            _ownerReviewRepository = new OwnerReviewRepository();
         }
 
         public List<AccommodationReservation> GetAllByOwnerForRating(int ownerId)
@@ -67,7 +69,10 @@ namespace BookingApp.Service
             {
                 if (reservation.Guest.Id == guestId && reservation.Departure < DateTime.Now && reservation.Departure > DateTime.Now.AddDays(-5))
                 {
-                    ownersReservations.Add(reservation);
+                    if (_ownerReviewRepository.GetOneByReservation(reservation.Id) == null)
+                    {
+                        ownersReservations.Add(reservation);
+                    }
                 }
             }
 
