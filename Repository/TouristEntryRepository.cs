@@ -35,6 +35,18 @@ namespace BookingApp.Repository
             return _serializer.FromCSV(FilePath);
         }
 
+        public void BindKeyPoint()
+        {
+            KeyPointRepository keyPointRepository = new KeyPointRepository();
+            _touristEntry.ForEach(te => te.KeyPoint = keyPointRepository.GetById(te.KeyPoint.Id));
+        }
+
+        public TouristEntry GetById(int id)
+        {
+            _touristEntry = _serializer.FromCSV(FilePath);
+            BindKeyPoint();
+            return _touristEntry.FirstOrDefault(t => t.Id == id);
+        }
         public List<TouristEntry> GetAllWithTours()
         {
             _touristEntry = _serializer.FromCSV(FilePath);
@@ -81,6 +93,11 @@ namespace BookingApp.Repository
             return _touristEntry.FindAll(te => te.KeyPoint.Id == keyPointId);
         }
 
-
+        public TouristEntry GetByTourAndTourist(int tourId, int touristId)
+        {
+            _touristEntry = _serializer.FromCSV(FilePath);
+            BindKeyPoint();
+            return _touristEntry.FirstOrDefault(te => te.Tour.Id == tourId && te.Tourist.Id == touristId);
+        }
     }
 }

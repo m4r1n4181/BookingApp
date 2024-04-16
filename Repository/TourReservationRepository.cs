@@ -30,6 +30,8 @@ namespace BookingApp.Repository
         public TourReservation GetById(int id)
         {
             _tourReservations = _serializer.FromCSV(FilePath);
+            BindTourists();
+            BindKeyPoints();
             return _tourReservations.FirstOrDefault(t => t.Id == id);
         }
         public List<TourReservation> GetAll()
@@ -44,7 +46,13 @@ namespace BookingApp.Repository
             return _tourReservations;
         }
 
-        private void BindTours() //bind touru sa njegovim rezervacijama 
+        public void BindKeyPoints()
+        {
+            TouristEntryRepository touristEntryRepository = new TouristEntryRepository();
+            _tourReservations.ForEach(tr => tr.TouristEntry = touristEntryRepository.GetById(tr.TouristEntry.Id));
+        }
+
+        public void BindTours() //bind touru sa njegovim rezervacijama 
         {
             TourRepository tourRepository = new TourRepository();
             foreach (var tourReservation in _tourReservations)
@@ -53,7 +61,7 @@ namespace BookingApp.Repository
             }
         }
 
-        private void BindTourists() //bind touru sa njegovim rezervacijama 
+        public void BindTourists() //bind touru sa njegovim rezervacijama 
         {
             TouristRepository touristRepository = new TouristRepository();
             foreach (var tourReservation in _tourReservations)
@@ -61,7 +69,7 @@ namespace BookingApp.Repository
                 tourReservation.Tourist = touristRepository.GetById(tourReservation.Tourist.Id);
             }
         }
-        private void BindParticipants()  
+        public void BindParticipants()  
         {
             TourParticipantRepository tourParticipantRepository = new TourParticipantRepository();
             foreach (var tourReservation in _tourReservations)

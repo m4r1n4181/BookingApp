@@ -54,7 +54,7 @@ namespace BookingApp.Model
         public string[] ToCSV()
         {
             string picturesString = string.Join(",", Pictures);
-            string[] csvValues = { Id.ToString(), TourReservation.Id.ToString(), Knowledge.ToString(), Fluency.ToString(), TourAppeal.ToString(), Comment, Validity.ToString(), };
+            string[] csvValues = { Id.ToString(), TourReservation.Id.ToString(), Knowledge.ToString(), Fluency.ToString(), TourAppeal.ToString(), Comment, picturesString, Validity.ToString(), };
             return csvValues;
         }
     }

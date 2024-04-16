@@ -1,7 +1,7 @@
-﻿1|1|5|5|5|sdfg|../Resources/Images/delete.png|true
-2|5|0|0|0|mrs|../Resources/Images/delete.png|true
-3|5|5|4|3|jebisse|../Resources/Images/delete.png|true
-4|5|5|5|5|molimte|../Resources/Images/delete.png|true
-5|5|3|4|2|lalala|../Resources/Images/delete.png|true
-6|16|5|5|5|sdfg|../Resources/Images/delete.png|true
-7|17|0|0|0|mrs|../Resources/Images/delete.png|true
+1|1|5|5|5|sdfg|img|True
+2|5|0|0|0|mrs|img|True
+3|5|5|4|3|jebisse|img|True
+4|5|5|5|5|molimte|img|True
+5|5|3|4|2|lalala|img|True
+6|16|5|5|5|sdfg|img|False
+7|17|0|0|0|mrs|img|False

@@ -29,6 +29,11 @@ namespace BookingApp.Controller
 
         }
 
+        public TourReview Update(TourReview tourReview)
+        {
+            return _tourReviewService.Update(tourReview);
+        }
+
 
     }
 }

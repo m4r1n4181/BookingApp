@@ -1,18 +1,21 @@
 ﻿using BookingApp.Controller;
 using BookingApp.Model;
+using BookingApp.Repository;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Linq;
 using System.Runtime.CompilerServices;
+using System.Security.Cryptography;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
+using System.Windows.Input;
 
 namespace BookingApp.View.ViewModels.TourGuideViewModels
 {
-    public class ReviewDetailsViewModel
+    public class ReviewDetailsViewModel : INotifyPropertyChanged
     {
         public string _tourName;
         public string TourName
@@ -144,7 +147,9 @@ namespace BookingApp.View.ViewModels.TourGuideViewModels
         private TourReviewController _tourReviewController;
         public RelayCommand ValidityCheckCommand { get; set; }
 
-        public ObservableCollection<TourReview> TourReviews { get; set; } 
+        public ObservableCollection<TourReview> TourReviews { get; set; }
+
+        public TourReview SelectedReview { get; set; }
 
         public ReviewDetailsViewModel(Tour tour)
         {
@@ -171,8 +176,26 @@ namespace BookingApp.View.ViewModels.TourGuideViewModels
         }
         public void ValidityCheck_Click(object param)
         {
+            if (SelectedReview == null || SelectedReview.Validity == false)
+            {
+                MessageBox.Show("Please select a review to report.", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                return;
+            }
+
+            SelectedReview.Validity = false;
+            _tourReviewController.Update(SelectedReview);
+            Refresh();
 
         }
+
+        private void Refresh()
+        {
+            TourReviews.Clear();
+            _tourReviewController.GetByTour(SelectedTour.Id).ForEach(t => TourReviews.Add(t));
+        }
+
+
+
 
         public bool CanExecuteValidityClick(object param)
         {

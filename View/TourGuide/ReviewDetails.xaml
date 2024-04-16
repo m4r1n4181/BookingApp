@@ -43,22 +43,22 @@
         <TextBlock Text="Tourists:" FontWeight="Bold" Margin="5" Grid.Row="4"/>
 
         <!-- DataGrid for Tourists -->
-        <DataGrid ItemsSource="{Binding Tourist}" SelectedItem="{Binding SelectedTourist}"
+        <DataGrid ItemsSource="{Binding TourReviews}" SelectedItem="{Binding SelectedReview}"
                   IsReadOnly="True" SelectionMode="Single" AutoGenerateColumns="False" Grid.Row="5" Grid.Column="0" Grid.ColumnSpan="2" Margin="0,0,5,74" Grid.RowSpan="4">
             <DataGrid.Columns>
-                <DataGridTextColumn Header="FirstName" Binding="{Binding FirstName}" Width="*"/>
-                <DataGridTextColumn Header="LastName" Binding="{Binding LastName}" Width="*"/>
+                <DataGridTextColumn Header="FirstName" Binding="{Binding TourReservation.Tourist.FirstName}" Width="*"/>
+                <DataGridTextColumn Header="LastName" Binding="{Binding TourReservation.Tourist.LastName}" Width="*"/>
                 <DataGridTextColumn Header="Knowledge" Binding="{Binding Knowledge}" Width="*"/>
                 <DataGridTextColumn Header="TourAppeal" Binding="{Binding TourAppeal}" Width="*"/>
                 <DataGridTextColumn Header="Fluency" Binding="{Binding Fluency}" Width="*"/>
-                <DataGridTextColumn Header="KeyPoint entry" Binding="{Binding KeyPoint}" Width="*"/>
+                <DataGridTextColumn Header="KeyPoint entry" Binding="{Binding TourReservation.TouristEntry.KeyPoint.Name}" Width="*"/>
                 <DataGridTextColumn Header="Validity of Review" Binding="{Binding Validity}" Width="*"/>
             </DataGrid.Columns>
         </DataGrid>
 
 
         <Button Command="{Binding ValidityCheckCommand}" FontSize="14" VerticalAlignment="Top" Margin="555,271,10,0" Grid.Column="1" Grid.Row="8">
-            Check Validity
+            Report
         </Button>
 
 
