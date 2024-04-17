@@ -13,7 +13,7 @@
 13|1|Rabata|turnir u vaterpolu |srpski|1|13|0|3/20/2024 9:00:00 AM|10|../Resources/Images/add.png,../Resources/Images/colloseum.jpg|not_started
 14|1|Babina greda|opis|eng|2|2|0|3/23/2024 3:00:00 PM|4|../Resources/Images/palatine.jpg|not_started
 15|1|hej|hej|eng|3|6|0|3/31/2024 12:00:00 PM|5||not_started
-16|1|Savremenost|izlozba|eng|2|10|0|4/16/2024 12:00:00 PM|3||started
+16|1|Savremenost|izlozba|eng|2|10|0|4/17/2024 12:00:00 PM|3||started
 17|1|Umetnost|izlet|eng|5|8|0|4/20/2024 6:00:00 PM|3||cancelled
 18|1|Muzej|lepota|eng|3|20|0|4/4/2024 12:00:00 PM|2||not_started
 19|1|trying|hwhebdhbc|njs|3|4|0|4/3/2024 12:00:00 PM|3|../Resources/Images/edit.png|not_started
@@ -29,15 +29,16 @@
 29|1|zdravo1|hej|3|5|4|0|4/15/2024 9:00:00 AM|3|../Resources/Images/colloseum.jpg|finished
 30|1|lepota|jnsjs|eng|4|4|0|4/15/2024 12:00:00 PM|2||started
 31|1|TURA|TURA|ss|1|5|0|4/20/2024 12:00:00 PM|7|../Resources/Images/notre_dame.jpg|cancelled
-32|1|Petrovaradin|Predivan pejzaz i bogata istorija|Engleski|1|4|-3|3/19/2024 12:00:00 PM|2|../Resources/Images/delete.png|started
-33|1|Venecija|Bogata istorija i jedinstveni kanali|Engleski|2|3|3|3/18/2024 12:00:00 PM|2|../Resources/Images/delete.png|finished
-34|1|ItalijaTour|Pogledi i hrana fantasticni|Engleski|3|5|10|3/18/2024 12:00:00 PM|2|../Resources/Images/edit.png|finished
-35|1|Split|Sunce, more i zabava|Engleski|4|6|18|3/19/2024 12:00:00 PM|3|../Resources/Images/view.png|finished
-36|1|Bec|Bogata istorija i fascinantna arhitektura|Nemacki|1|20|2|3/19/2024 12:00:00 PM|6|../Resources/Images/delete.png|finished
-37|1|Bec|Bogata istorija i fascinantna arhitektura|Nemacki|2|20|20|3/19/2024 12:00:00 PM|6|../Resources/Images/delete.png|finished
-38|1|Bec|Bogata istorija i fascinantna arhitektura|Nemacki|1|20|20|3/19/2024 12:00:00 PM|6|../Resources/Images/delete.png|finished
-39|1|Bec|Bogata istorija i fascinantna arhitektura|Nemacki|2|20|20|3/19/2024 12:00:00 PM|6|../Resources/Images/delete.png|finished
-40|1|senegal|luda tura|kineski|10|20|0|4/17/2024 12:00:00 PM|16|../Resources/Images/edit.png|finished
+32|1|Petrovaradin|Predivan pejzaz i bogata istorija|Engleski|1|4|5|7/19/2024 12:00:00 PM|2|../Resources/Images/delete.png|not_started
+33|1|Venecija|Bogata istorija i jedinstveni kanali|Engleski|2|3|3|6/18/2024 12:00:00 PM|2|../Resources/Images/delete.png|not_started
+34|1|ItalijaTour|Pogledi i hrana fantasticni|Engleski|3|5|10|4/18/2024 12:00:00 PM|2|../Resources/Images/edit.png|not_started
+35|1|Split|Sunce, more i zabava|Engleski|4|6|0|5/19/2024 12:00:00 PM|3|../Resources/Images/view.png|not_started
+36|1|Bec|Bogata istorija i fascinantna arhitektura|Nemacki|1|20|2|6/19/2024 12:00:00 PM|6|../Resources/Images/delete.png|not_started
+37|1|Bec|Bogata istorija i fascinantna arhitektura|Nemacki|2|20|20|7/19/2024 12:00:00 PM|6|../Resources/Images/delete.png|not_started
+38|1|Bec|Bogata istorija i fascinantna arhitektura|Nemacki|1|20|20|8/19/2024 12:00:00 PM|6|../Resources/Images/delete.png|not_started
+39|1|Bec|Bogata istorija i fascinantna arhitektura|Nemacki|2|20|0|9/19/2024 12:00:00 PM|6|../Resources/Images/delete.png|not_started
+40|1|senegal|luda tura|kineski|10|20|0|4/17/2024 12:00:00 PM|16|../Resources/Images/edit.png|not_started
 41|1|senegal|luda tura|kineski|10|20|0|4/17/2024 3:00:00 PM|16|../Resources/Images/edit.png|not_started
-42|1|rr|trstina|srpski|4|20|0|4/17/2024 9:00:00 AM|2|../Resources/Images/delete.png|started
-43|1|rr|trstina|srpski|4|20|0|4/17/2024 12:00:00 PM|2|../Resources/Images/delete.png|not_started
+42|1|rr|trstina|srpski|4|20|0|4/17/2024 9:00:00 AM|2|../Resources/Images/delete.png|not_started
+43|1|rr|trstina|srpski|4|20|0|4/17/2024 12:00:00 PM|2|../Resources/Images/delete.png|started
+44|1|torino|lepo|srpski|2|50|0|4/30/2024 12:00:00 PM|73|../Resources/Images/delete.png|not_started

@@ -83,6 +83,35 @@ namespace BookingApp.Repository
             return _vouchers.Where(voucher => voucher.Tourist.Id == touristId).ToList();
         }
 
+        public List<Voucher> GetVouchersThatArentUsed(List<Voucher> vouchers)
+        {
+            List<Voucher> voucherList = new List<Voucher>();
+            foreach (Voucher voucher in vouchers)
+            {
+                if (!voucher.IsUsed)
+                {
+                    voucherList.Add(voucher);
+                }
+            }
+            return voucherList;
+        }
+
+        public List<Voucher> GetVouchersThatDidntExpire(int userId)
+        {
+            List<Voucher> unusedVouchers = GetVouchersThatArentUsed(GetAll());
+            List<Voucher> validVouchers = new List<Voucher>();
+
+            foreach (Voucher voucher in unusedVouchers)
+            {
+                if (voucher.Tourist.Id == userId && voucher.StatusType == Model.Enums.StatusType.active && voucher.Expires >= DateTime.Now)
+                {
+                    validVouchers.Add(voucher);
+                }
+            }
+
+            return validVouchers;
+        }
+
 
     }
 }

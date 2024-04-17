@@ -46,6 +46,12 @@ namespace BookingApp.View
             SelectedTour = tour;
             Tours = new ObservableCollection<Tour>(_tourController.GetAlternativeTours(tour.Location.Id));
         }
+
+        private void ReserveButton_Click(object sender, RoutedEventArgs e)
+        {
+            TourReservationForm tourReservation = new TourReservationForm(SelectedTour, SignInForm.LoggedUser);
+            tourReservation.Show();
+        }
     }
 
 

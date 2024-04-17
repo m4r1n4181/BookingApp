@@ -181,9 +181,9 @@ namespace BookingApp.View
         {
             int participantsNumber = Convert.ToInt32(ParticipantsNumberTextBox.Text);
 
-            if (participantsNumber > SelectedTour.AvailableSeats)
+            if (SelectedTour.AvailableSeats == 0)
             {
-                MessageBoxResult result = MessageBox.Show("The number of participants exceeds the available seats. Do you want to check alternative tours?", "Availability Check", MessageBoxButton.YesNo, MessageBoxImage.Question);
+                MessageBoxResult result = MessageBox.Show("Tour has no available seats. Do you want to check alternative tours?", "Availability Check", MessageBoxButton.YesNo, MessageBoxImage.Question);
 
                 if (result == MessageBoxResult.Yes)
                 {
@@ -192,12 +192,25 @@ namespace BookingApp.View
                 }
                 else
                 {
-                    // Korisnik ne želi da proveri alternativne ture
+                    return;
+                }
+            }
+            else if(participantsNumber > SelectedTour.AvailableSeats)
+            {
+                MessageBoxResult result = MessageBox.Show($"The selected tour has {SelectedTour.AvailableSeats} seats left. Do you want to edit the number of participants?", "Availability Check", MessageBoxButton.YesNo, MessageBoxImage.Question);
+                if (result == MessageBoxResult.Yes)
+                {
+                    // Pozivamo metod za prikaz alternativnih tura
+                    return;
+                }
+                else
+                {
+                    Close();
                 }
             }
             else
             {
-                MessageBox.Show("The selected tour has enough available seats. You can proceed with the reservation.", "Availability Check", MessageBoxButton.OK, MessageBoxImage.Information);
+                MessageBox.Show("Tour has enough seats, you can continue!");
             }
         }
 

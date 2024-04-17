@@ -22,5 +22,6 @@
                 <DataGridTextColumn Header="Broj ljudi" Binding="{Binding MaxTourists}" Width="*"/>
             </DataGrid.Columns>
         </DataGrid>
+        <Button Content="Reserve" HorizontalAlignment="Left" Margin="334,85,0,0" VerticalAlignment="Top" Click="ReserveButton_Click"/>
     </Grid>
 </Window>

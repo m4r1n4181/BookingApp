@@ -173,9 +173,24 @@ namespace BookingApp.Repository
 
         public List<Tour> GetAlternativeTours(int locationId)
         {
-            _tours = _serializer.FromCSV(FilePath);
+            _tours = GetFutureTours();
             BindLocations();
             return _tours.FindAll(tour => tour.Location.Id == locationId && tour.AvailableSeats > 0);
+        }
+
+        public List<Tour> GetFutureTours()
+        {
+            List<Tour> _tourInFuture = new List<Tour>();
+            List<Tour> allTours = GetAllWithLocations();
+
+            foreach (Tour tour in allTours)
+            {
+                if (tour.StartDate > DateTime.Today.AddDays(2) && tour.TourStatus == Model.Enums.TourStatusType.not_started) // 48 hours before the tour starts
+                {
+                    _tourInFuture.Add(tour);
+                }
+            }
+            return _tourInFuture;
         }
 
 

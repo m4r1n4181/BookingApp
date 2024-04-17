@@ -16,20 +16,20 @@
         <!-- Pretraga tura -->
         <StackPanel Orientation="Horizontal" Margin="5">
             <Label Content="Država:" VerticalAlignment="Center"/>
-            <TextBox x:Name="tbCountry" Text="{Binding Country, UpdateSourceTrigger=PropertyChanged}" VerticalAlignment="Center" Margin="5"/>
+            <TextBox x:Name="tbCountry" Text="{Binding Country, UpdateSourceTrigger=PropertyChanged}" VerticalAlignment="Center" Margin="5" Width="32"/>
             <Label Content="Grad:" VerticalAlignment="Center"/>
-            <TextBox x:Name="tbCity" Text="{Binding City, UpdateSourceTrigger=PropertyChanged}" VerticalAlignment="Center" Margin="5"/>
+            <TextBox x:Name="tbCity" Text="{Binding City, UpdateSourceTrigger=PropertyChanged}" VerticalAlignment="Center" Margin="5" Width="37"/>
             <Label Content="Broj ljudi:" VerticalAlignment="Center"/>
-            <TextBox x:Name="tbNumberOfPeople" Text="{Binding AvailableSeats, UpdateSourceTrigger=PropertyChanged}"  VerticalAlignment="Center" Margin="5"/>
+            <TextBox x:Name="tbNumberOfPeople" Text="{Binding AvailableSeats, UpdateSourceTrigger=PropertyChanged}"  VerticalAlignment="Center" Margin="5" Width="19"/>
             <Label Content="Jezik:" VerticalAlignment="Center"/>
-            <TextBox x:Name="tbLanguage" Text="{Binding Language, UpdateSourceTrigger=PropertyChanged}" VerticalAlignment="Center" Margin="5"/>
+            <TextBox x:Name="tbLanguage" Text="{Binding Language, UpdateSourceTrigger=PropertyChanged}" VerticalAlignment="Center" Margin="5" Width="36"/>
             <Label Content="Trajanje:" VerticalAlignment="Center"/>
-            <TextBox x:Name="tbDuration" Text="{Binding Duration, UpdateSourceTrigger=PropertyChanged}" VerticalAlignment="Center" Margin="5"/>
+            <TextBox x:Name="tbDuration" Text="{Binding Duration, UpdateSourceTrigger=PropertyChanged}" VerticalAlignment="Center" Margin="5" Width="20"/>
             <Button x:Name="buttonSearch" Content="Pretraži" Margin="5" Command="{Binding SearchCommand}"/>
             <Button x:Name="buttonReserve" Content="Rezerviši" Margin="5" Command="{Binding ReserveCommand}"/>
             <Button Content="My Tours" Command="{Binding MyToursCommand}" Margin="5"/>
             <Button Content="My Vouchers" Command="{Binding VouchersCommand}" Margin="5"/>
-            <Button Content="Logout" Command="{Binding LogoutCommand}"/>
+            <Button Content="Logout" Command="{Binding LogoutCommand}" Height="20"/>
         </StackPanel>
 
         <!-- Prikaz tura -->
@@ -38,7 +38,7 @@
                   SelectedItem="{Binding SelectedTour}" 
                   AutoGenerateColumns="False" 
                   IsReadOnly="True"
-                  Width="750" Height="200" x:Name="tourOverview">
+                  Width="750" Height="200" x:Name="tourOverview" Margin="24,39,26,155">
             <DataGrid.Columns>
                 <DataGridTextColumn Header="Naziv" Binding="{Binding Name}" Width="*"/>
                 <DataGridTextColumn Header="Država" Binding="{Binding Location.Country}" Width="*"/>

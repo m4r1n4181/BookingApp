@@ -10,7 +10,8 @@
         <DataGrid ItemsSource="{Binding Vouchers}" AutoGenerateColumns="False">
             <DataGrid.Columns>
                 <DataGridTextColumn Header="Voucher Type" Binding="{Binding Type}" />
-                <DataGridTextColumn Header="Expiration Date" Binding="{Binding ExpirationDate}" />
+                <DataGridTextColumn Header="Expiration Date" Binding="{Binding Expires, StringFormat={}{0:dd/MM/yyyy}}" />
+                <DataGridTextColumn Header="Is Used" Binding="{Binding IsUsed}" />
             </DataGrid.Columns>
         </DataGrid>
     </Grid>

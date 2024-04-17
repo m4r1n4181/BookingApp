@@ -10,7 +10,7 @@
         <DataGrid ItemsSource="{Binding Vouchers}" SelectedItem="{Binding Path=SelectedVoucher}" AutoGenerateColumns="False">
             <DataGrid.Columns>
                 <DataGridTextColumn Header="Voucher Type" Binding="{Binding Type}" />
-                <DataGridTextColumn Header="Expiration Date" Binding="{Binding ExpirationDate}" />
+                <DataGridTextColumn Header="Expiration Date" Binding="{Binding Expires}" />
             </DataGrid.Columns>
         </DataGrid>
         <Button Content="Use Voucher" Command="{Binding UseVoucherCommand}" Height="35" Width="140" HorizontalAlignment="Center" Margin="5"/>

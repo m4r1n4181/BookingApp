@@ -79,36 +79,18 @@ namespace BookingApp.Service
                  }
              }
              return voucherList;
-         }
-
-         public List<Voucher> GetVouchersThatArentUsed(List<Voucher> vouchers, int id)
-         {
-             List<Voucher> voucherList = new List<Voucher>();
-             foreach (Voucher voucher in vouchers)
-             {
-                 if (voucher.IsUsed == false)
-                 {
-                     voucherList.Add(voucher);
-                 }
-             }
-             return voucherList;
          }*/
+
+        public List<Voucher> GetVouchersThatArentUsed(List<Voucher> vouchers)
+        {
+            return _voucherRepository.GetVouchersThatArentUsed(vouchers);
+        }
 
         public List<Voucher> GetVouchersThatDidntExpire(int userId)
         {
-            List<Voucher> voucherList = new List<Voucher>();
-            var allVouchers = _voucherRepository.GetAll();
-
-            foreach (var voucher in allVouchers)
-            {
-                if (voucher.Tourist.Id == userId && voucher.StatusType==Model.Enums.StatusType.active && voucher.Expires >= DateTime.Now)
-                {
-                    voucherList.Add(voucher);
-                }
-            }
-
-            return voucherList;
+            return _voucherRepository.GetVouchersThatDidntExpire(userId);
         }
+
 
     }
 }
