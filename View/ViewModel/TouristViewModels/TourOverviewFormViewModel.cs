@@ -6,8 +6,12 @@ using System.ComponentModel;
 using System.Runtime.CompilerServices;
 using System.Windows.Input;
 using GalaSoft.MvvmLight.Command;
+using System.Windows;
 using BookingApp.View;
+using BookingApp.View.ViewModel;
 using BookingApp.View.ViewModel.TouristViewModels;
+using GalaSoft.MvvmLight.Messaging;
+
 
 namespace BookingApp.View.ViewModel.TouristViewModels
 {
@@ -93,6 +97,7 @@ namespace BookingApp.View.ViewModel.TouristViewModels
         public ICommand ReserveCommand { get; private set; }
         public ICommand MyToursCommand { get; private set; }
         public ICommand VouchersCommand { get; private set; }
+        public ICommand LogoutCommand { get; private set; }
 
         // Constructor
         public TourOverviewFormViewModel(User user)
@@ -105,6 +110,7 @@ namespace BookingApp.View.ViewModel.TouristViewModels
             ReserveCommand = new RelayCommand(Reserve);
             MyToursCommand = new RelayCommand(MyTours);
             VouchersCommand = new RelayCommand(Vouchers);
+            LogoutCommand = new RelayCommand(Logout);
         }
 
         // Method to handle searching for tours
@@ -151,6 +157,14 @@ namespace BookingApp.View.ViewModel.TouristViewModels
             MyVouchersView myVouchersView = new MyVouchersView();
             myVouchersView.Show();
         }
+
+        private void Logout()
+        {
+            SignInForm loginForm = new SignInForm();
+            loginForm.Show();
+
+        }
+
 
         // INotifyPropertyChanged implementation
         public event PropertyChangedEventHandler PropertyChanged;

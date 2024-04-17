@@ -99,7 +99,7 @@ namespace BookingApp.View
                         {
                             MessageBox.Show(notification.Message, "Notifications", MessageBoxButton.OK, MessageBoxImage.Information);
                         }
-                       // _notificationController.ReadAllUserNotifications(LoggedUser.Id);
+                        _notificationController.ReadAllUserNotifications(LoggedUser.Id);
                     }
                     else if(user.Type == UserType.Guest)
                     {

@@ -20,6 +20,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 using BookingApp.View.ViewModel.TouristViewModels;
+using GalaSoft.MvvmLight.Messaging;
 
 namespace BookingApp.View
 {
@@ -33,6 +34,5 @@ namespace BookingApp.View
             InitializeComponent();
             this.DataContext = new TourOverviewFormViewModel(user);
         }
-
     }
 }
