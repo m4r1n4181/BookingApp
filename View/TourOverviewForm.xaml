@@ -38,7 +38,7 @@
                   SelectedItem="{Binding SelectedTour}" 
                   AutoGenerateColumns="False" 
                   IsReadOnly="True"
-                  Width="750" Height="200" x:Name="tourOverview" Margin="24,39,26,155">
+                  Width="Auto" Height="Auto" x:Name="tourOverview" Margin="24,39,26,155">
             <DataGrid.Columns>
                 <DataGridTextColumn Header="Naziv" Binding="{Binding Name}" Width="*"/>
                 <DataGridTextColumn Header="Država" Binding="{Binding Location.Country}" Width="*"/>

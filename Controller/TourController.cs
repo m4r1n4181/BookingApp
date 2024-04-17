@@ -107,6 +107,10 @@ namespace BookingApp.Controller
             return _tourService.GetAlternativeTours(id);
         }
 
+        public List<Tour> GetFutureTours()
+        {
+            return _tourService.GetFutureTours();
+        }
 
     }
 

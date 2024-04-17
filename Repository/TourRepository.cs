@@ -185,7 +185,7 @@ namespace BookingApp.Repository
 
             foreach (Tour tour in allTours)
             {
-                if (tour.StartDate > DateTime.Today.AddDays(2) && tour.TourStatus == Model.Enums.TourStatusType.not_started) // 48 hours before the tour starts
+                if (tour.StartDate >= DateTime.Today && tour.TourStatus == Model.Enums.TourStatusType.not_started) // 48 hours before the tour starts
                 {
                     _tourInFuture.Add(tour);
                 }

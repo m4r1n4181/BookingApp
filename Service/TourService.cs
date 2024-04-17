@@ -316,6 +316,10 @@ namespace BookingApp.Service
             return _tourRepository.GetAllFinished();
         }
 
+        public List<Tour> GetFutureTours()
+        {
+            return _tourRepository.GetFutureTours();
+        }
 
     }
 }

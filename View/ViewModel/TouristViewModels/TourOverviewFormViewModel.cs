@@ -103,7 +103,7 @@ namespace BookingApp.View.ViewModel.TouristViewModels
         public TourOverviewFormViewModel(User user)
         {
             _tourController = new TourController();
-            Tours = new ObservableCollection<Tour>(_tourController.GetTourInFuture());
+            Tours = new ObservableCollection<Tour>(_tourController.GetFutureTours());
             User = user;
 
             SearchCommand = new RelayCommand(SearchTours);
