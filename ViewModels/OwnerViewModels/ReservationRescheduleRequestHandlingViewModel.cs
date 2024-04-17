@@ -60,7 +60,7 @@ namespace BookingApp.ViewModels.OwnerViewModels
             _accommodationReservationController = new AccommodationReservationController();
             _notificationController = new NotificationController();
 
-            //rescheduleRequest = reservationRescheduleRequest;
+            rescheduleRequest = reservationRescheduleRequest;
             rescheduleRequest = _reservationRescheduleRequestController.GetWithGuest(reservationRescheduleRequest.Reservation.Guest.Id);
             Guest = rescheduleRequest.Reservation.Guest.Username;
             if (!_accommodationReservationController.IsReschedulePossible(rescheduleRequest))
@@ -82,6 +82,8 @@ namespace BookingApp.ViewModels.OwnerViewModels
 
         private void ExecuteAcceptRequestButtonCommand(object param)
         {
+            //rescheduleRequest.Id = rescheduleRequest.Id;
+
             rescheduleRequest.Status = Model.Enums.RequestStatusType.Approved;
             rescheduleRequest.Reservation.Arrival = rescheduleRequest.NewStart;
             rescheduleRequest.Reservation.Departure = rescheduleRequest.NewEnd;

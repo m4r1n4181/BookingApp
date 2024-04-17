@@ -47,7 +47,7 @@ namespace BookingApp.ViewModels.OwnerViewModels
 
         private bool CanExecuteRescheduleHandleCommand(object param)
         {
-            // Add any conditions for when the command can execute, if needed
+            
             return true;
         }
     }

@@ -46,9 +46,9 @@ namespace BookingApp.ViewModels.OwnerViewModels
 
 
         }
+
         private void ExecuteAddCommentButtonCommand(object param)
         {
-
             ReservationRescheduleRequest.Status = Model.Enums.RequestStatusType.Declined;
             ReservationRescheduleRequest.Comment = Comment;
             _reservationRescheduleRequestController.Update(ReservationRescheduleRequest);
@@ -61,6 +61,24 @@ namespace BookingApp.ViewModels.OwnerViewModels
                 NotificationStatus = Model.Enums.NotificationStatus.unread
             };
             _notificationController.Create(notification);
+        
+            MessageBox.Show("Uspješno odbijen zahtjev", "Obavijest", MessageBoxButton.OK, MessageBoxImage.Information);
+
+            
+            CloseWindow();
+        }
+
+       
+        private void CloseWindow()
+        {
+            foreach (Window window in Application.Current.Windows)
+            {
+                if (window.DataContext == this)
+                {
+                    window.Close();
+                    break;
+                }
+            }
         }
         private bool CanExecuteAddCommentButtonCommand(object param)
         {
