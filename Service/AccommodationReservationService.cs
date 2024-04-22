@@ -1,4 +1,6 @@
-﻿using BookingApp.Domain.Models;
+﻿using BookingApp.DependencyInjection;
+using BookingApp.Domain.Models;
+using BookingApp.Domain.RepositoryInterfaces;
 using BookingApp.DTO;
 using BookingApp.Model;
 using BookingApp.Repository;
@@ -15,16 +17,16 @@ namespace BookingApp.Service
 {
     public class AccommodationReservationService
     {
-        private AccommodationReservationRepository _accommodationReservationRepository;
-        private AccommodationRepository _accommodationRepository;
-        private NotificationRepository _notificationRepository;
-        private OwnerReviewRepository _ownerReviewRepository;
+        private IAccommodationReservationRepository _accommodationReservationRepository;
+        private IAccommodationRepository _accommodationRepository;
+        private INotificationRepository _notificationRepository;
+        private IOwnerReviewRepository _ownerReviewRepository;
         public AccommodationReservationService()
         {
-            _accommodationReservationRepository = new AccommodationReservationRepository();
-            _accommodationRepository = new AccommodationRepository();
-            _notificationRepository = new NotificationRepository();
-            _ownerReviewRepository = new OwnerReviewRepository();
+            _accommodationReservationRepository = Injector.CreateInstance<IAccommodationReservationRepository>();
+            _accommodationRepository = Injector.CreateInstance<IAccommodationRepository>();
+            _notificationRepository = Injector.CreateInstance<INotificationRepository>();
+            _ownerReviewRepository = Injector.CreateInstance<IOwnerReviewRepository>();
         }
 
         public List<AccommodationReservation> GetAllByOwnerForRating(int ownerId)

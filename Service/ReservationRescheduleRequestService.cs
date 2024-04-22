@@ -8,17 +8,17 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using BookingApp.View;
+using BookingApp.DependencyInjection;
 
 
 namespace BookingApp.Service
 {
    public class ReservationRescheduleRequestService
     {
-        private ReservationRescheduleRequestRepository _reservationRescheduleRequestRepository;
+        private IReservationRescheduleRequestRepository _reservationRescheduleRequestRepository;
         public ReservationRescheduleRequestService()
         {
-            //_reservationRescheduleRequestRepository = Injector.Injector.CreateInstance<IReservationRescheduleRequestRepository>();
-            _reservationRescheduleRequestRepository = ReservationRescheduleRequestRepository.GetInstance();
+            _reservationRescheduleRequestRepository = Injector.CreateInstance<IReservationRescheduleRequestRepository>();
         }
         public List<ReservationRescheduleRequest> GetAll()
         {

@@ -1,6 +1,8 @@
 using System;
 using System.Collections.Generic;
 using System.Xml.Linq;
+using BookingApp.DependencyInjection;
+using BookingApp.Domain.RepositoryInterfaces;
 using BookingApp.DTO;
 using BookingApp.Model;
 using BookingApp.Model.Enums;
@@ -11,11 +13,11 @@ namespace BookingApp.Service
 {
     public class AccommodationService
     {
-        private AccommodationRepository _accommodationRepository;
+        private IAccommodationRepository _accommodationRepository;
 
         public AccommodationService()
         {
-            _accommodationRepository = new AccommodationRepository();
+            _accommodationRepository = Injector.CreateInstance<IAccommodationRepository>();
         }
 
         public Accommodation RegisterAccommondation(Accommodation accommodation)
