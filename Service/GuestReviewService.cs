@@ -25,6 +25,12 @@ namespace BookingApp.Service
 
         }
 
+        public List<GuestReview> GetGuestReviews(int id)
+        { 
+            //za svaku od guestReview proveri da li postoji OwnerReview za tu rezervaciju
+           return _guestReviewRepository.GetGuestReviews(id);
+        }
+
 
     }
 }

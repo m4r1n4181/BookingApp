@@ -23,5 +23,10 @@ namespace BookingApp.Controller
 
         }
 
+        public List<GuestReview> GetGuestReviews(int id) 
+        {
+            return _guestReviewService.GetGuestReviews(id);
+        }
+
     }
 }

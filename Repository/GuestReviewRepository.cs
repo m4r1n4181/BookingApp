@@ -1,4 +1,6 @@
-﻿using BookingApp.Model;
+﻿using BookingApp.DependencyInjection;
+using BookingApp.Domain.RepositoryInterfaces;
+using BookingApp.Model;
 using BookingApp.Serializer;
 using System;
 using System.Collections.Generic;
@@ -25,6 +27,12 @@ namespace BookingApp.Repository
         public List<GuestReview> GetAll()
         {
             return _serializer.FromCSV(FilePath);
+        }
+
+        public void BindReservations()
+        {
+            IAccommodationReservationRepository accommodationReservationRepository = Injector.CreateInstance<IAccommodationReservationRepository>();
+            GuestReviews.ForEach(gr => gr.AccommodationReservation = accommodationReservationRepository.GetById(gr.AccommodationReservation.Id));
         }
 
         public GuestReview Save(GuestReview guestReview)
@@ -64,6 +72,15 @@ namespace BookingApp.Repository
             _serializer.ToCSV(FilePath, GuestReviews);
             return guestReview;
         }
+
+        public List<GuestReview> GetGuestReviews(int id)
+        {
+            GuestReviews = _serializer.FromCSV(FilePath);
+            BindReservations();
+            return GuestReviews.FindAll(gr => gr.AccommodationReservation.Guest.Id == id);
+        }
+     
+
 
     }
 }

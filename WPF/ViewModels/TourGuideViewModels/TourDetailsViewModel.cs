@@ -1,21 +1,19 @@
 ﻿using BookingApp.Controller;
 using BookingApp.Model;
-using BookingApp.Repository;
+using BookingApp.ViewModel;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Linq;
 using System.Runtime.CompilerServices;
-using System.Security.Cryptography;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
-using System.Windows.Input;
 
 namespace BookingApp.View.ViewModels.TourGuideViewModels
 {
-    public class ReviewDetailsViewModel : INotifyPropertyChanged
+    public class TourDetailsViewModel
     {
         public string _tourName;
         public string TourName
@@ -144,14 +142,13 @@ namespace BookingApp.View.ViewModels.TourGuideViewModels
         public Tourist SelectedTourist { get; set; }
 
         private TourController _tourController;
-        private TourReviewController _tourReviewController;
-        public RelayCommand ValidityCheckCommand { get; set; }
 
-        public ObservableCollection<TourReview> TourReviews { get; set; }
+        public RelayCommand ActivateKeyPointCommand { get; set; }
+        public RelayCommand MarkTouristCommand { get; set; }
+        public RelayCommand EndTourCommand { get; set; }
 
-        public TourReview SelectedReview { get; set; }
 
-        public ReviewDetailsViewModel(Tour tour)
+        public TourDetailsViewModel(Tour tour)
         {
             SelectedTour = tour;
 
@@ -166,38 +163,77 @@ namespace BookingApp.View.ViewModels.TourGuideViewModels
 
             _keyPointController = new KeyPointController();
             _tourController = new TourController();
-            _tourReviewController = new TourReviewController();
             KeyPoints = new ObservableCollection<KeyPoint>(_keyPointController.GetAllForTour(tour.Id));
 
-            ValidityCheckCommand = new RelayCommand(ValidityCheck_Click, CanExecuteValidityClick);
-
-            TourReviews = new ObservableCollection<TourReview>(_tourReviewController.GetByTour(SelectedTour.Id));
+            ActivateKeyPointCommand = new RelayCommand(ActivateKeyPoint_Click, CanExecuteActivateKeyPointClick);
+            MarkTouristCommand = new RelayCommand(MarkTourist_Click, CanExecuteMarkTouristClick);
+            EndTourCommand = new RelayCommand(EndTour_Click, CanExecuteEndTourClick);
 
         }
-        public void ValidityCheck_Click(object param)
+
+        public void ActivateKeyPoint_Click(object param)
         {
-            if (SelectedReview == null || SelectedReview.Validity == false)
+            if (SelectedKeyPoint == null)
             {
-                MessageBox.Show("Please select a review to report.", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                MessageBox.Show("Please select a keyPoint.", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                return;
+
+            }
+            _keyPointController.ActivateKeyPoint(SelectedKeyPoint.Id);
+            KeyPoints.Clear();
+            foreach (KeyPoint keyPoint in _keyPointController.GetAllForTour(SelectedTour.Id))
+            {
+                KeyPoints.Add(keyPoint);
+            }
+        }
+
+        public bool CanExecuteActivateKeyPointClick(object param)
+        {
+            return true;
+            // if (SelectedTour == null)
+            //{
+            // MessageBox.Show("Please select a tour.", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+            //  return false;
+            //}
+            //return true;
+        }
+
+        public void MarkTourist_Click(object param)
+        {
+            if (SelectedKeyPoint == null)
+            {
+                MessageBox.Show("Please select a keyPoint.", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
                 return;
             }
-
-            SelectedReview.Validity = false;
-            _tourReviewController.Update(SelectedReview);
-            Refresh();
+            if (SelectedKeyPoint.IsActive == false)
+            {
+                MessageBox.Show("Please select active keyPoint.", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                return;
+            }
+            TouristSelectionForm touristSelectionForm = new TouristSelectionForm(SelectedKeyPoint);
+            touristSelectionForm.ShowDialog();
 
         }
 
-        private void Refresh()
+        public bool CanExecuteMarkTouristClick(object param)
         {
-            TourReviews.Clear();
-            _tourReviewController.GetByTour(SelectedTour.Id).ForEach(t => TourReviews.Add(t));
+            return true;
+            // if (SelectedTour == null)
+            //{
+            // MessageBox.Show("Please select a tour.", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+            //  return false;
+            //}
+            //return true;
         }
 
+        public void EndTour_Click(object param)
+        {
+            //tourId
+            _tourController.EndTour(SelectedTour.Id);
+           // Close();
 
-
-
-        public bool CanExecuteValidityClick(object param)
+        }
+        public bool CanExecuteEndTourClick(object param)
         {
             return true;
             // if (SelectedTour == null)
