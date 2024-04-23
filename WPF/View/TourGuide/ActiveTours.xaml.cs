@@ -1,6 +1,6 @@
 ﻿using BookingApp.Controller;
 using BookingApp.Model;
-using BookingApp.View.ViewModels.TourGuideViewModels;
+using BookingApp.WPF.ViewModels.TourGuideViewModels;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
