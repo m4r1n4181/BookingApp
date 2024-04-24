@@ -1,5 +1,6 @@
 ﻿using BookingApp.View;
 using BookingApp.View.GuestWindows;
+using BookingApp.WPF.View.GuestWindows;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -27,10 +28,10 @@ namespace BookingApp.WPF.Views.GuestWindows
             this.DataContext = this;
         }
 
-        private void Reschedule_View_Button_Click(object sender, RoutedEventArgs e)
+        private void GuestReviews_Button_Click(object sender, RoutedEventArgs e)
         {
-            GuestRequests guestRequests = new GuestRequests();
-            guestRequests.Show();
+            AllGuestReviews allGuestReviews = new AllGuestReviews();
+            allGuestReviews.Show();
         }
 
         private void Accommodation_Search_Button_Click(object sender, RoutedEventArgs e)

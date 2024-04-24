@@ -8,7 +8,7 @@
         Title="GuestHomePage" Height="450" Width="800">
     <Grid>
         <StackPanel Orientation="Vertical" Margin="20,20,20,20">
-            <Button Height="30" Width="150" Click="Reschedule_View_Button_Click">My Reschedule Requests</Button>
+            <Button Height="30" Width="150" Click="GuestReviews_Button_Click">Reviews</Button>
             <Button Height="30" Width="150" Click="Accommodation_Search_Button_Click">Accommodation search</Button>
             <Button Height="30" Width="150" Click="Guests_Requests_Button_Click">Guests requests</Button>
             <Button Height="30" Width="150" Click="Owner_Review_Button_Click">Rate owner and accommodation</Button>

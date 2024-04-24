@@ -14,6 +14,7 @@ namespace BookingApp.Service
         public GuestReviewService()
         {
             _guestReviewRepository = new GuestReviewRepository();
+            _ownerReviewRepository = new OwnerReviewRepository();
         }
         public GuestReview RateGuest(GuestReview guestReview)
         {

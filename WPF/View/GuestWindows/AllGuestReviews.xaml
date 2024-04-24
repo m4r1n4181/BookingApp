@@ -13,11 +13,11 @@
         IsReadOnly="True" SelectionMode="Single" 
 AutoGenerateColumns="False" Height="325" HeadersVisibility="Column" FontSize="13">
                 <DataGrid.Columns>
-                    <DataGridTextColumn Header="Name of Accommodation" Binding="{Binding Reservation.Accommodation.Name}" Width="200"/>
-                    <DataGridTextColumn Header="Arrival" Binding="{Binding Reservation.Arrival}" Width="*"/>
-                    <DataGridTextColumn Header="Departure" Binding="{Binding Reservation.Departure}" Width="*"/>
-                    <DataGridTextColumn Header="Cleanliness" Binding="{Binding User.Cleanliness}" Width="*"/>
-                    <DataGridTextColumn Header="Rule adherence" Binding="{Binding User.RuleAdherence}" Width="*"/>
+                    <DataGridTextColumn Header="Name of Accommodation" Binding="{Binding AccommodationReservation.Accommodation.Name}" Width="200"/>
+                    <DataGridTextColumn Header="Arrival" Binding="{Binding AccommodationReservation.Arrival}" Width="*"/>
+                    <DataGridTextColumn Header="Departure" Binding="{Binding AccommodationReservation.Departure}" Width="*"/>
+                    <DataGridTextColumn Header="Cleanliness" Binding="{Binding Cleanliness}" Width="*"/>
+                    <DataGridTextColumn Header="Rule adherence" Binding="{Binding RuleAdherence}" Width="*"/>
                     <DataGridTextColumn Header="Comment" Binding="{Binding Comment}" Width="*"/>
                 </DataGrid.Columns>
             </DataGrid>
