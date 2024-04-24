@@ -1,0 +1,113 @@
+﻿<Window x:Class="BookingApp.WPF.View.OwnerPages.OwnerUIWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:BookingApp.WPF.View.OwnerPages"
+        mc:Ignorable="d"
+        Title="OwnerUIWindow" Height="700" Width="430">
+    <Border Background="#FFDCDB"
+            CornerRadius="10">
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="40"/>
+                <RowDefinition/>
+                <RowDefinition Height="44.04"/>
+            </Grid.RowDefinitions>
+            <Border Grid.Row="0"
+                    CornerRadius="10,10,0,0"
+                    Background="#FBC0BF">
+                <StackPanel Orientation="Horizontal">
+                    <Label Name="Title1" Content="{Binding Path=Header, UpdateSourceTrigger=PropertyChanged}" 
+                           Background="#FBC0BF"
+                           Width="331" 
+                           Height="40"/>
+                    <Button 
+                        x:Name="Menu"                  
+                        BorderBrush="#FBC0BF"
+                        Background="#FBC0BF"
+                        Width="150" 
+                        Height="50" 
+                        Margin="-5"
+                        Click="Menu_Click">
+                        <Button.Template>
+                            <ControlTemplate>
+                                <Grid>
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="Auto"/>
+                                        <ColumnDefinition Width="Auto"/>
+                                    </Grid.ColumnDefinitions>
+                                    <TextBlock Grid.Column="0" FontSize="20" Text="Menu" VerticalAlignment="Top" Grid.ColumnSpan="2" Margin="40,22,-26,0"/>
+                                    <TextBlock FontSize="35" Text="&#x2630;" TextAlignment="Center" VerticalAlignment="Top" Height="46" Margin="49,-7,-26,0" Grid.Column="1"/>
+                                </Grid>
+                            </ControlTemplate>
+                        </Button.Template>
+                    </Button>
+                </StackPanel>
+            </Border>
+            <Frame NavigationUIVisibility="Hidden" x:Name="frame" Grid.Row="1" Source="ReservationRescheduleRequestsPage.xaml" />
+            <Border Grid.Row="2"
+                    CornerRadius="0,0,10,10"
+                    Background="#FBC0BF">
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="Auto"/>
+                        <ColumnDefinition Width="Auto"/>
+                        <ColumnDefinition Width="Auto"/>
+                        <ColumnDefinition Width="Auto"/>
+                    </Grid.ColumnDefinitions>
+                    <Button 
+                        x:Name="Back"                  
+                        BorderBrush="#FBC0BF"
+                        Background="#FBC0BF" 
+                        Height="50" 
+                        Margin="-20,-5,4,-3"
+                        Click="BackButton_Click" Grid.ColumnSpan="4">
+                        <Button.Template>
+                            <ControlTemplate>
+                                <Grid>
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="Auto"/>
+                                        <ColumnDefinition Width="Auto"/>
+                                    </Grid.ColumnDefinitions>
+                                    <TextBlock Grid.Column="0" FontSize="15" Text="Back" VerticalAlignment="Top" Grid.ColumnSpan="2" Margin="40,28,-26,0"/>
+                                    <TextBlock FontSize="45" Text="&#x3C;" TextAlignment="Center" VerticalAlignment="Top" Height="50" Margin="37,-11,-26,0" Grid.Column="1"/>
+                                </Grid>
+                            </ControlTemplate>
+                        </Button.Template>
+                    </Button>
+                    <Button x:Name="NotificationButton"
+                            Grid.Column="3"
+                            BorderBrush="#FBC0BF"
+                            Background="#FBC0BF"
+                            Width="45"
+                            Height="45"
+                            Margin="109,0,-85,-1"
+                            Click="NotificationButton_Click">
+                        <TextBlock FontSize="35" Text="&#x1F514;" TextAlignment="Center" VerticalAlignment="Center" Height="46" Grid.Column="1" Width="43"/>
+                    </Button>
+                    <Button x:Name="RegisterAccommodationButton"
+                            Grid.Column="3"
+                            BorderBrush="#FBC0BF"
+                            Background="#FBC0BF"
+                            Width="45"
+                            Height="45"
+                            Margin="209,0,-185,-1"
+                            Click="RegisterAccommodationButton_Click">
+                        <TextBlock FontSize="45" Text="&#x2A2E;" TextAlignment="Center" VerticalAlignment="Center" Height="60" Grid.RowSpan="2" Grid.Row="1" Width="51"/>
+                    </Button>
+                    <Button x:Name="AllAccommodationsButton"
+                            Grid.Column="3"
+                            BorderBrush="#FBC0BF"
+                            Background="#FBC0BF"
+                            Width="45"
+                            Margin="295,2,-271,-1"
+                            Click="AllAccommodationsButton_Click">
+                        <TextBlock FontSize="45" Text="&#x22EE;" TextAlignment="Center" VerticalAlignment="Center" Height="60" Grid.RowSpan="2" Grid.Row="1" Width="51"/>
+                    </Button>
+
+                </Grid>
+            </Border>
+        </Grid>
+    </Border>
+</Window>

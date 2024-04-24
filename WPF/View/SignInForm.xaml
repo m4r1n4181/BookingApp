@@ -7,7 +7,6 @@
         mc:Ignorable="d"
         Title="Sign in" Height="250" Width="450" WindowStartupLocation="CenterScreen" ResizeMode="NoResize">
     <Grid>
-
         <Grid.RowDefinitions>
             <RowDefinition></RowDefinition>
             <RowDefinition Height="150"></RowDefinition>
@@ -33,4 +32,5 @@
         <Button Grid.Row="2" Click="SignIn" Content="Sign in" HorizontalAlignment="Center" VerticalAlignment="Center" Height="20" Width="60"/>
 
     </Grid>
+   
 </Window>

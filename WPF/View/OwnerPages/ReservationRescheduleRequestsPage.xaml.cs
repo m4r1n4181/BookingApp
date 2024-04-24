@@ -11,19 +11,21 @@ using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
+using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace BookingApp.WPF.View.OwnerWindows
+namespace BookingApp.WPF.View.OwnerPages
 {
     /// <summary>
-    /// Interaction logic for ReservationRescheduleRequestsWindow.xaml
+    /// Interaction logic for ReservationRescheduleRequestsPage.xaml
     /// </summary>
-    public partial class ReservationRescheduleRequestsWindow : Window
+    public partial class ReservationRescheduleRequestsPage : Page
     {
-        public ReservationRescheduleRequestsWindow()
+        public ReservationRescheduleRequestsPage()
         {
             InitializeComponent();
             DataContext = new ReservationRescheduleRequestsViewModel();
+
         }
     }
 }

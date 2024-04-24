@@ -1,13 +1,13 @@
-﻿<Window x:Class="BookingApp.View.OwnerWindows.ReservationRescheduleRequestsWindow"
+﻿<Window x:Class="BookingApp.WPF.View.OwnerWindows.ReservationRescheduleRequestsWindow"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:local="clr-namespace:BookingApp.View.OwnerWindows"
+        xmlns:local="clr-namespace:BookingApp.WPF.View.OwnerWindows"
         mc:Ignorable="d"
         Title="ReservationRescheduleRequestsWindow" Height="450" Width="800">
     <Grid>
-        <Grid.RowDefinitions>
+             <Grid.RowDefinitions>
             <RowDefinition Height="50"/>
             <RowDefinition/>
             <RowDefinition Height="110"/>
@@ -26,4 +26,5 @@
         </DataGrid>
         <Button x:Name="RescheduleHandleButton" Content="Obradi zahtev" HorizontalAlignment="Left" Margin="662,35,0,0" Grid.Row="2" VerticalAlignment="Top" Command="{Binding RescheduleHandleCommand}"/>
     </Grid>
+
 </Window>
