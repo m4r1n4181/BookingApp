@@ -6,7 +6,7 @@
         xmlns:local="clr-namespace:BookingApp.View"
         mc:Ignorable="d"
         Title="TourGuideHomePage" Height="600" Width="850" >
-    
+
 
     <Grid>
         <Grid.RowDefinitions>
@@ -28,7 +28,7 @@
             <ColumnDefinition Width="1*"/>
             <ColumnDefinition Width="1*"/>
         </Grid.ColumnDefinitions>
-        
+
         <!-- za sad ovako butteni dok ne napravim prozore za to -->
         <Button Content="Create new Tour" Width="100" Height="50" Margin="10,0,10,0" Click="CreateNewTour_Click" Grid.Row="4" Grid.Column="3"/>
         <Button Content="All future tours" Width="100" Height="50" Margin="10,0,10,0" Click="AllFutureTours_Click" Grid.Row="3" Grid.Column="3"/>
@@ -130,9 +130,32 @@
             </Button.Template>
         </Button>
 
+        <!-- Profile Button -->
+        <Button Grid.Row="0" Grid.Column="1" Margin="10,0,10,0" Click="Profile_Click">
+            <Button.Template>
+                <ControlTemplate TargetType="Button">
+                    <Grid>
+                        <Ellipse Fill="Transparent" Stroke="Black" StrokeThickness="1" Width="63" Height="63" VerticalAlignment="Center" HorizontalAlignment="Center"/>
+                        <TextBlock FontFamily="Segoe UI Emoji" FontSize="32" TextAlignment="Center" VerticalAlignment="Top" Margin="1,16,0,0">&#x1F469;</TextBlock>
+                        <TextBlock Text="SuperGuide" FontSize="12" TextAlignment="Left" VerticalAlignment="Bottom" Margin="95,0,-150,6" Height="28"/>
+                    </Grid>
+                </ControlTemplate>
+            </Button.Template>
+        </Button>
+
         <Border Grid.Row="0" Grid.Column="1" Grid.ColumnSpan="6" BorderBrush="Black" BorderThickness="0,0.5,0,0.5" Margin="0,0,0,0"/>
         <Border Grid.Row="0" Grid.Column="0" Grid.RowSpan="7" BorderBrush="Black" BorderThickness="0,0.5,0.5,0.5" Margin="0,0,0,0"/>
 
+        <!-- Tutorial Button -->
+        <Button Grid.Row="0" Grid.Column="6" Margin="60,0,7,40" Click="Tutorial_Click">
+            <Button.Template>
+                <ControlTemplate TargetType="Button">
+                    <Grid>
+                        <TextBlock FontSize="26" TextAlignment="Center" VerticalAlignment="Center">&#x24D8;</TextBlock>
+                    </Grid>
+                </ControlTemplate>
+            </Button.Template>
+        </Button>
 
     </Grid>
 </Window>

@@ -22,12 +22,19 @@ namespace BookingApp.View.ViewModels.TourGuideViewModels
 
         public RelayCommand ActiveCommand { get; set; }
 
+        public RelayCommand AddCommand { get; set; }
+        public RelayCommand TourStatisticsCommand { get; set; }
+        public RelayCommand TutorialCommand { get; set; }
+
         public AllToursViewModel()
         {
             _tourController = new TourController();
             Tours = new ObservableCollection<Tour>(_tourController.GetAllWithLocations());
             ViewCommand = new RelayCommand(View_Click, CanExecuteViewClick);
             ActiveCommand = new RelayCommand(ActiveTours_Click, CanExecuteActiveToursClick);
+            AddCommand = new RelayCommand(AddTours_Click, CanExecuteAddToursClick);
+            TourStatisticsCommand = new RelayCommand(TourStatistics_Click, CanExecuteTourStatisticsClick);
+            TutorialCommand = new RelayCommand(Tutorial_Click, CanExecuteTutorialClick);
 
         }
 
@@ -74,5 +81,62 @@ namespace BookingApp.View.ViewModels.TourGuideViewModels
             //}
             //return true;
         }
+
+        public void AddTours_Click(object param)
+        {
+
+            CreateTourForm createTourForm = new CreateTourForm();
+            createTourForm.ShowDialog();
+
+
+        }
+        public bool CanExecuteAddToursClick(object param)
+        {
+            return true;
+            // if (SelectedTour == null)
+            //{
+            // MessageBox.Show("Please select a tour.", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+            //  return false;
+            //}
+            //return true;
+        }
+
+        public void TourStatistics_Click(object param)
+        {
+            TourStatisticsOverview tourStatisticsOverview = new TourStatisticsOverview();
+            tourStatisticsOverview.Show();
+            //napravi tako da mozes da zatvoris prethodniii obavezno za sve kao da te baci na nes drugo 
+
+
+        }
+        public bool CanExecuteTourStatisticsClick(object param)
+        {
+            return true;
+            // if (SelectedTour == null)
+            //{
+            // MessageBox.Show("Please select a tour.", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+            //  return false;
+            //}
+            //return true;
+        }
+
+        public void Tutorial_Click(object param)
+        {
+           
+         //prozor za tutorial 
+
+        }
+        public bool CanExecuteTutorialClick(object param)
+        {
+            return true;
+            // if (SelectedTour == null)
+            //{
+            // MessageBox.Show("Please select a tour.", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+            //  return false;
+            //}
+            //return true;
+        }
+
+
     }
 }

@@ -5,22 +5,29 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:BookingApp.View"
         mc:Ignorable="d"
-        Title="AllTours" Height="450" Width="800">
+        Title="AllTours" Height="600" Width="850">
     <Grid>
-        <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="*"/>
-
-            <ColumnDefinition Width="760"/>
-            <ColumnDefinition Width="*"/>
-        </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
-            <RowDefinition Height="40"/>
-            <RowDefinition Height="15"/>
-            <RowDefinition Height="*"/>
-            <RowDefinition Height="15"/>
+            <RowDefinition Height="1*"/>
+            <RowDefinition Height="1*"/>
+            <RowDefinition Height="1*"/>
+            <RowDefinition Height="1*"/>
+            <RowDefinition Height="1*"/>
+            <RowDefinition Height="1*"/>
+            <RowDefinition Height="1*"/>
         </Grid.RowDefinitions>
 
-        <StackPanel Grid.Row="2" Grid.Column="1">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="1*"/>
+            <ColumnDefinition Width="1*"/>
+            <ColumnDefinition Width="1*"/>
+            <ColumnDefinition Width="1*"/>
+            <ColumnDefinition Width="1*"/>
+            <ColumnDefinition Width="1*"/>
+            <ColumnDefinition Width="1*"/>
+        </Grid.ColumnDefinitions>
+
+        <StackPanel Grid.Row="2" Grid.Column="1"  Grid.ColumnSpan="5" Grid.RowSpan="4" Margin="15,0,0,0">
             <DataGrid ItemsSource="{Binding Tours}" SelectedItem="{Binding Path=SelectedTour}" IsReadOnly="True" SelectionMode="Single" 
 AutoGenerateColumns="False" Height="325" HeadersVisibility="Column" FontSize="13">
                 <DataGrid.Columns>
@@ -33,15 +40,141 @@ AutoGenerateColumns="False" Height="325" HeadersVisibility="Column" FontSize="13
             </DataGrid>
         </StackPanel>
 
+        <Button Grid.Row="0" Grid.Column="0" Margin="3,0,10,0" Click="Home_Click">
+            <Button.Template>
+                <ControlTemplate TargetType="Button">
+                    <Grid>
+                        <StackPanel Orientation="Vertical" VerticalAlignment="Center" HorizontalAlignment="Center">
+                            <TextBlock FontSize="30" TextAlignment="Center" Width="52"><Run Text="🏠"/></TextBlock>
+                            <TextBlock Text="Home" FontSize="12" TextAlignment="Center"/>
+                        </StackPanel>
+                    </Grid>
+                </ControlTemplate>
+            </Button.Template>
+        </Button>
+        <!-- All Tours Button -->
+        <Button Grid.Row="1" Grid.Column="0" Margin="3,0,10,0" Click="AllTours_Click" >
+            <Button.Template>
+                <ControlTemplate TargetType="Button">
+                    <Grid>
+                        <StackPanel Orientation="Vertical" VerticalAlignment="Center" HorizontalAlignment="Center">
+                            <TextBlock FontSize="30" TextAlignment="Center" Width="52"><Run Text="🌍"/></TextBlock>
+                            <TextBlock Text="Tour" FontSize="12" TextAlignment="Center"/>
+                        </StackPanel>
+                    </Grid>
+                </ControlTemplate>
+            </Button.Template>
+        </Button>
 
-        <ToolBar Grid.Row="0" Grid.ColumnSpan="3">
-            <Button Command="{Binding ViewCommand}" FontSize="14" VerticalAlignment="Center" Margin="5,0,0,0">
-                View
-            </Button>
-            <Button Command="{Binding ActiveCommand}" FontSize="14" VerticalAlignment="Center" Margin="5,0,0,0">
-                Active tours
-            </Button>
-        </ToolBar>
+        <!-- Live Tour Button -->
+        <Button Grid.Row="2" Grid.Column="0" Margin="3,0,10,0" Click="LiveTour_Click">
+            <Button.Template>
+                <ControlTemplate TargetType="Button">
+                    <Grid>
+                        <StackPanel Orientation="Vertical" VerticalAlignment="Center" HorizontalAlignment="Center">
+                            <TextBlock FontSize="30" TextAlignment="Center" Width="52">&#x1F3A7;</TextBlock>
+                            <TextBlock Text="Today" FontSize="12" TextAlignment="Center"/>
+                        </StackPanel>
+                    </Grid>
+                </ControlTemplate>
+            </Button.Template>
+        </Button>
+
+        <!-- Tour Statistics Button -->
+        <Button  Grid.Row="3" Grid.Column="0" Margin="3,0,10,0" Click="TourStatistics_Click">
+            <Button.Template>
+                <ControlTemplate TargetType="Button">
+                    <Grid>
+                        <StackPanel Orientation="Vertical" VerticalAlignment="Center" HorizontalAlignment="Center">
+                            <TextBlock FontSize="30" TextAlignment="Center" Width="52">📊</TextBlock>
+                            <TextBlock Text="Statistics" FontSize="12" TextAlignment="Center"/>
+                        </StackPanel>
+                    </Grid>
+                </ControlTemplate>
+            </Button.Template>
+        </Button>
+
+        <!-- Tour Guide Reviews Button -->
+        <Button Grid.Row="4" Grid.Column="0" Margin="3,0,10,0" Click="TourGuideReviews_Click">
+            <Button.Template>
+                <ControlTemplate TargetType="Button">
+                    <Grid>
+                        <StackPanel Orientation="Vertical" VerticalAlignment="Center" HorizontalAlignment="Center">
+                            <TextBlock FontSize="30" TextAlignment="Center" Width="52">👁️</TextBlock>
+                            <TextBlock Text="Reviews" FontSize="12" TextAlignment="Center"/>
+                        </StackPanel>
+                    </Grid>
+                </ControlTemplate>
+            </Button.Template>
+        </Button>
+
+        <!-- Requests Button -->
+        <Button Grid.Row="5" Grid.Column="0" Margin="3,0,10,0" Click="Requests_Click">
+            <Button.Template>
+                <ControlTemplate TargetType="Button">
+                    <Grid>
+                        <StackPanel Orientation="Vertical" VerticalAlignment="Center" HorizontalAlignment="Center">
+                            <TextBlock FontSize="30" TextAlignment="Center" Width="52">💬</TextBlock>
+                            <TextBlock Text="Requests" FontSize="12" TextAlignment="Center"/>
+                        </StackPanel>
+                    </Grid>
+                </ControlTemplate>
+            </Button.Template>
+        </Button>
+
+
+        <!-- Logout Button -->
+        <Button Click="Logout_Click" Grid.Row="6" Grid.Column="0" Margin="3,17,10,0">
+            <Button.Template>
+                <ControlTemplate TargetType="Button">
+                    <Grid>
+                        <Border BorderBrush="Black" BorderThickness="1.5" CornerRadius="5" Width="43" Height="43" VerticalAlignment="Center" HorizontalAlignment="Center">
+                            <TextBlock FontSize="26" TextAlignment="Center" VerticalAlignment="Top">&#x1F6AA;</TextBlock>
+                        </Border>
+                    </Grid>
+                </ControlTemplate>
+            </Button.Template>
+        </Button>
+
+        <!-- Profile Button -->
+        <Button Grid.Row="0" Grid.Column="1" Margin="10,0,10,0" Click="Profile_Click">
+            <Button.Template>
+                <ControlTemplate TargetType="Button">
+                    <Grid>
+                        <Ellipse Fill="Transparent" Stroke="Black" StrokeThickness="1" Width="63" Height="63" VerticalAlignment="Center" HorizontalAlignment="Center"/>
+                        <TextBlock FontFamily="Segoe UI Emoji" FontSize="32" TextAlignment="Center" VerticalAlignment="Top" Margin="1,16,0,0">&#x1F469;</TextBlock>
+                    </Grid>
+                </ControlTemplate>
+            </Button.Template>
+        </Button>
+        
+        <Border Grid.Row="0" Grid.Column="1" Grid.ColumnSpan="6" BorderBrush="Black" BorderThickness="0,0.5,0,0" Margin="0,0,0,0"/>
+        <Border Grid.Row="0" Grid.Column="0" Grid.RowSpan="7" BorderBrush="Black" BorderThickness="0,0.5,0.5,0.5" Margin="0,0,0,0"/>
+
+        <!-- za sad svi buttoni su dole -->
+        <Button Command="{Binding ViewCommand}" FontSize="14" VerticalAlignment="Center" Grid.Row="6" Grid.Column="5" Margin="10,0,10,0">
+            View
+        </Button>
+        <Button Command="{Binding AddCommand}" FontSize="14" VerticalAlignment="Center" Grid.Row="6" Grid.Column="4" Margin="10,0,10,0">
+            Add
+        </Button>
+        <Button Command="{Binding ActiveCommand}" FontSize="14" VerticalAlignment="Center" Grid.Row="6" Grid.Column="3" Margin="10,0,10,0">
+            Active tours
+        </Button>
+        <Button Command="{Binding TourStatisticsCommand}" FontSize="14" VerticalAlignment="Center" Grid.Row="6" Grid.Column="1" Margin="10,0,10,0">
+            Tour Statistics
+        </Button>
+
+        <!-- Tutorial Button -->
+        <Button Grid.Row="0" Grid.Column="6" Margin="60,0,7,40"  Command="{Binding TutorialCommand}">
+            <Button.Template>
+                <ControlTemplate TargetType="Button">
+                    <Grid>
+                        <TextBlock FontSize="26" TextAlignment="Center" VerticalAlignment="Center">&#x24D8;</TextBlock>
+                    </Grid>
+                </ControlTemplate>
+            </Button.Template>
+        </Button>
 
     </Grid>
 

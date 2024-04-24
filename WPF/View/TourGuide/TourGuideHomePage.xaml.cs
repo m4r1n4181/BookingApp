@@ -136,5 +136,12 @@ namespace BookingApp.View
             //otvara prozor za profil tourGuidea
         }
 
+        private void Tutorial_Click(object sender, RoutedEventArgs e)
+        {
+            //otvara prozor za tutorial 
+        }
+
+        
+
     }
 }
