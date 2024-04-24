@@ -1,7 +1,10 @@
-﻿using BookingApp.Model;
+﻿using BookingApp.Controller;
+using BookingApp.Model;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Linq;
+using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
@@ -18,11 +21,55 @@ namespace BookingApp.View
     /// <summary>
     /// Interaction logic for TourGuideHomePage.xaml
     /// </summary>
-    public partial class TourGuideHomePage : Window
+    public partial class TourGuideHomePage : Window, INotifyPropertyChanged
     {
-        public TourGuideHomePage()
+        public string _firstName;
+        public string FirstName
+        {
+            get => _firstName;
+            set
+            {
+                if (value != _firstName)
+                {
+                    _firstName = value;
+                    OnPropertyChanged();
+                }
+            }
+        }
+
+        public string _lastName;
+        public string LastName
+        {
+            get => _lastName;
+            set
+            {
+                if (value != _lastName)
+                {
+                    _lastName = value;
+                    OnPropertyChanged();
+                }
+            }
+        }
+
+        public event PropertyChangedEventHandler PropertyChanged;
+
+        protected virtual void OnPropertyChanged([CallerMemberName] string propertyName = null)
+        {
+            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
+        }
+
+        public TourGuide SelectedTourGuide { get; set; }
+        private TourGuideController _tourGuideController;
+
+
+        public TourGuideHomePage( )
         {
             InitializeComponent();
+            FirstName = FirstName;
+            LastName = LastName;
+
+            _tourGuideController = new TourGuideController();
+
         }
 
         private void CreateNewTour_Click(object sender, RoutedEventArgs e)
@@ -63,6 +110,30 @@ namespace BookingApp.View
 
             AllTours allTours = new AllTours();
             allTours.Show();
+        }
+
+        private void Home_Click(object sender, RoutedEventArgs e)
+        {
+           
+        }
+
+       private void Requests_Click(object sender, RoutedEventArgs e)
+        {
+            //ovde ce se otvarati prozor za requests 
+
+        }
+
+       private void Logout_Click(object sender, RoutedEventArgs e)
+        {
+
+            SignInForm signInForm = new SignInForm();
+            signInForm.Show(); 
+            //za sad me samo baca na signin, posle neka logika 
+        }
+
+        private void Profile_Click(object sender, RoutedEventArgs e)
+        {
+            //otvara prozor za profil tourGuidea
         }
 
     }
