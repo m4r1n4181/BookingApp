@@ -8,7 +8,7 @@
         Title="AllGuestReviews" Height="450" Width="800">
     <Grid>
         <StackPanel Grid.Row="2" Grid.Column="1" Grid.ColumnSpan="2">
-            <DataGrid ItemsSource="{Binding Reviews}"
+            <DataGrid ItemsSource="{Binding GuestReviews}"
         SelectedItem="{Binding SelectedReservation}"
         IsReadOnly="True" SelectionMode="Single" 
 AutoGenerateColumns="False" Height="325" HeadersVisibility="Column" FontSize="13">

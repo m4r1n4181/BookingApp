@@ -64,8 +64,8 @@ namespace BookingApp.View
                     
                     if (user.Type == UserType.TourGuide)
                     {
-                        TourGuideHomePage tourGuideHomePage= new TourGuideHomePage();
-                        tourGuideHomePage.Show();
+                        //TourGuideHomePage tourGuideHomePage= new TourGuideHomePage();
+                        //tourGuideHomePage.Show();
                         /* CreateTourForm createTourForm = new CreateTourForm();
                          createTourForm.Show();
                          LiveTourView liveTourView = new LiveTourView();

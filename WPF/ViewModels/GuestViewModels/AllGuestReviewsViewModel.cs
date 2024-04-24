@@ -15,8 +15,18 @@ namespace BookingApp.WPF.ViewModels.GuestViewModels
 {
     public class AllGuestReviewsViewModel : INotifyPropertyChanged
     {
-        public ObservableCollection<GuestReview> GuestReviews { get; set; }
+        private ObservableCollection<GuestReview> _guestReviews;
         public GuestReviewController _guestReviewController {  get; set; }
+
+        public ObservableCollection<GuestReview> GuestReviews
+        {
+            get { return _guestReviews; }
+            set
+            {
+                _guestReviews = value;
+                OnPropertyChanged();
+            }
+        }
 
         public User LoggedInUser { get; set; }
         public AllGuestReviewsViewModel()

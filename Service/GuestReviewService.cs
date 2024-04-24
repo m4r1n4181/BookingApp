@@ -8,6 +8,7 @@ namespace BookingApp.Service
     public class GuestReviewService
     {
         private GuestReviewRepository _guestReviewRepository;
+        private OwnerReviewRepository _ownerReviewRepository;
         public AccommodationReservationRepository _accommodationReservationRepository;
 
         public GuestReviewService()
@@ -28,7 +29,18 @@ namespace BookingApp.Service
         public List<GuestReview> GetGuestReviews(int id)
         { 
             //za svaku od guestReview proveri da li postoji OwnerReview za tu rezervaciju
-           return _guestReviewRepository.GetGuestReviews(id);
+            List<GuestReview> guestReviews = _guestReviewRepository.GetGuestReviews(id);
+            List<GuestReview> reviewsWithOwnerReview =  new List<GuestReview>();
+
+            foreach (GuestReview guestReview in guestReviews)
+            {
+                bool ownerReviewExists = _ownerReviewRepository.CheckOwnerReviewExistence(guestReview.AccommodationReservation.Id);
+                if (ownerReviewExists)
+                {
+                    reviewsWithOwnerReview.Add(guestReview);
+                }
+            }
+           return reviewsWithOwnerReview;
         }
 
 
