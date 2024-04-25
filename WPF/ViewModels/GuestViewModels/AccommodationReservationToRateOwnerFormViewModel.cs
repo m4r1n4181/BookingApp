@@ -23,7 +23,7 @@ namespace BookingApp.ViewModels.GuestViewModels
         private readonly AccommodationReservationRepository _accommodationReservationRepository;
         private readonly AccommodationReservationService _accommodationReservationService;
 
-        public RelayCommand ActivateCommand { get; set; }
+        public RelayCommand RateCommand { get; set; }
 
         public AccommodationReservationToRateOwnerFormViewModel() 
         { 
@@ -31,14 +31,14 @@ namespace BookingApp.ViewModels.GuestViewModels
             _accommodationReservationRepository = new AccommodationReservationRepository();
             _accommodationReservationService = new AccommodationReservationService();
             AccommodationReservations = new ObservableCollection<AccommodationReservation>(_accommodationReservationService.GetAllByGuestForRating(LoggedInUser.Id));
-            ActivateCommand = new RelayCommand(Activate_Click);
+            RateCommand = new RelayCommand(Rate_Click);
         }
 
-        private void Activate_Click(object sender)
+        private void Rate_Click(object sender)
         {
             if (SelectedReservation == null)
             {
-                MessageBox.Show("Please select a reservation before activating.");
+                MessageBox.Show("Please select a reservation before rating.");
                 return;
             }
             

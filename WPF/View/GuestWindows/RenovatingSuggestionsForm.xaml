@@ -1,0 +1,20 @@
+﻿<Window x:Class="BookingApp.WPF.View.GuestWindows.RenovatingSuggestionsForm"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:model="clr-namespace:BookingApp.Domain.Models.Enums"
+        xmlns:local="clr-namespace:BookingApp.WPF.View.GuestWindows"
+        mc:Ignorable="d"
+        Title="RenovatingSuggestions" Height="450" Width="800">
+    <Grid>
+        <Label Content="Insert some renovating suggestions" HorizontalAlignment="Left" Margin="62,10,0,0" VerticalAlignment="Top"/>
+        <ComboBox ItemsSource="{Binding RenovatingUrgencyLevels}" 
+          SelectedValue="{Binding SelectedRenovatingUrgencyLevel, Mode=TwoWay}" 
+          HorizontalAlignment="Left" Margin="198,201,0,0" VerticalAlignment="Top" Width="120" />
+
+        <Label Content="Level of urgency" HorizontalAlignment="Left" Margin="69,198,0,0" VerticalAlignment="Top"/>
+        <Button Command="{Binding AddSuggestionCommand}" Content="Add" HorizontalAlignment="Left" Margin="398,320,0,0" VerticalAlignment="Top"/>
+        <TextBox Text ="{Binding RenovatingSuggestions}" HorizontalAlignment="Left" Margin="69,54,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="501" Height="94"/>
+    </Grid>
+</Window>

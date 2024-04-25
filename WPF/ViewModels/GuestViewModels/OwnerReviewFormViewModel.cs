@@ -1,9 +1,12 @@
 ﻿using BookingApp.Controller;
+using BookingApp.Domain.Models.Enums;
 using BookingApp.Model;
 using BookingApp.Service;
+using BookingApp.WPF.View.GuestWindows;
 using Microsoft.Win32;
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.IO;
 using System.Linq;
@@ -23,6 +26,12 @@ namespace BookingApp.ViewModels.GuestViewModels
 
         public RelayCommand AddCommand {  get; set; }
         public RelayCommand SaveCommand { get; set; }
+
+        public RelayCommand RenovateCommand { get; set; }
+
+      
+
+        
         public OwnerReviewFormViewModel(AccommodationReservation accommodationReservation) 
         {
             _ownerReviewController = new OwnerReviewController(new OwnerReviewService());
@@ -30,6 +39,10 @@ namespace BookingApp.ViewModels.GuestViewModels
             Pictures = new List<string>();
             AddCommand = new RelayCommand(Button_Click_2);
             SaveCommand = new RelayCommand(Button_Click);
+            RenovateCommand = new RelayCommand(AddRenovatingSuggestions_Click);
+
+
+           
         }
 
         private int _cleanliness;
@@ -91,6 +104,12 @@ namespace BookingApp.ViewModels.GuestViewModels
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
         }
 
+
+        private void AddRenovatingSuggestions_Click(object sender)
+        {
+            RenovatingSuggestionsForm renovatingSuggestionsForm = new RenovatingSuggestionsForm(SelectedAccommodationReservation);
+            renovatingSuggestionsForm.Show();
+        }
 
         private void Button_Click(object sender)
         {

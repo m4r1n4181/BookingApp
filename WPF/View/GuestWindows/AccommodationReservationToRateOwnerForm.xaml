@@ -34,7 +34,7 @@
 
 
         <ToolBar Grid.Row="0" Grid.ColumnSpan="4">
-            <Button Command="{Binding ActivateCommand}"  FontSize="14" VerticalAlignment="Center" Margin="5,0,0,0">
+            <Button Command="{Binding RateCommand}"  FontSize="14" VerticalAlignment="Center" Margin="5,0,0,0">
                 AddReview
             </Button>
         </ToolBar>
