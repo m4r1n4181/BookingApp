@@ -1,5 +1,6 @@
 ﻿using BookingApp.Controller;
 using BookingApp.Model;
+using BookingApp.WPF.View.TourGuide;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -119,8 +120,8 @@ namespace BookingApp.View
 
        private void Requests_Click(object sender, RoutedEventArgs e)
         {
-            //ovde ce se otvarati prozor za requests 
-
+            SearchTourRequests searchTourRequests = new SearchTourRequests();
+            searchTourRequests.Show();
         }
 
        private void Logout_Click(object sender, RoutedEventArgs e)
