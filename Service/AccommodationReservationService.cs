@@ -171,26 +171,31 @@ namespace BookingApp.Service
             {
                 SuperGuest superGuest = _superGuestRepository.GetById(user.Id);
                 if (superGuest != null)
-                {
-                    // Ažuriranje poena
-                    superGuest.Points--;
+            {
+                // Ažuriranje poena
+                superGuest.Points--;
 
-                    // Provera isteka statusa super-gosta
-                    if (DateTime.Now >= superGuest.End)
-                    {
-                        // Poništavanje statusa super-gosta
-                        _superGuestRepository.Delete(superGuest);
-                    }
-                    else
-                    {
-                    _superGuestRepository.Update(superGuest);
-                    }
-                }
+                // Provera isteka statusa super-gosta
+                CheckSuperGuestPeriod(superGuest.Id);
             }
+        }
+
+        public void CheckSuperGuestPeriod(int superGuestId)
+        {
+            SuperGuest superGuest = _superGuestRepository.GetById(superGuestId);
+            if (DateTime.Now >= superGuest.End)
+            {
+                // Poništavanje statusa super-gosta
+                _superGuestRepository.Delete(superGuest);
+            }
+            else
+            {
+                _superGuestRepository.Update(superGuest);
+            }
+        }
 
 
-
-            public AccommodationReservation Update(AccommodationReservation accommodationReservation)
+        public AccommodationReservation Update(AccommodationReservation accommodationReservation)
             {
                 accommodationReservation = _accommodationReservationRepository.Update(accommodationReservation);
                 return accommodationReservation;

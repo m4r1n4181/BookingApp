@@ -1,4 +1,6 @@
-﻿using BookingApp.View;
+﻿using BookingApp.Domain.Models;
+using BookingApp.Service;
+using BookingApp.View;
 using BookingApp.View.GuestWindows;
 using BookingApp.WPF.View.GuestWindows;
 using System;
@@ -22,9 +24,11 @@ namespace BookingApp.WPF.Views.GuestWindows
     /// </summary>
     public partial class GuestHomePage : Window
     {
+        public AccommodationReservationService _accommodationReservationService;
         public GuestHomePage()
         {
             InitializeComponent();
+            _accommodationReservationService = new AccommodationReservationService();
             this.DataContext = this;
         }
 
@@ -62,6 +66,11 @@ namespace BookingApp.WPF.Views.GuestWindows
         {
             GuestProfile guestProfile = new GuestProfile();
             guestProfile.Show();
+        }
+
+        private void Window_Loaded(object sender, RoutedEventArgs e)
+        {
+            _accommodationReservationService.CheckSuperGuestPeriod(SignInForm.LoggedUser.Id);
         }
     }
 }
