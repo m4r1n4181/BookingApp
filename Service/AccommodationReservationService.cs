@@ -21,12 +21,15 @@ namespace BookingApp.Service
         private IAccommodationRepository _accommodationRepository;
         private INotificationRepository _notificationRepository;
         private IOwnerReviewRepository _ownerReviewRepository;
+        private ISuperGuestRepository _superGuestRepository;
+
         public AccommodationReservationService()
         {
             _accommodationReservationRepository = Injector.CreateInstance<IAccommodationReservationRepository>();
             _accommodationRepository = Injector.CreateInstance<IAccommodationRepository>();
             _notificationRepository = Injector.CreateInstance<INotificationRepository>();
             _ownerReviewRepository = Injector.CreateInstance<IOwnerReviewRepository>();
+            _superGuestRepository = Injector.CreateInstance<ISuperGuestRepository>();
         }
 
         public List<AccommodationReservation> GetAllByOwnerForRating(int ownerId)
@@ -80,7 +83,7 @@ namespace BookingApp.Service
 
             return ownersReservations;
         }
-      
+
         public bool DatesIntertwine(DateTime start1, DateTime end1, DateTime start2, DateTime end2)
         {
             if (end1 < start2 || start1 > end2)
@@ -128,74 +131,128 @@ namespace BookingApp.Service
             return freeReservations;
         }
 
-
-        public AccommodationReservation Create(AccommodationReservation accommodationReservation)
+        public bool IsSuperGuest(User user)
         {
+            return _superGuestRepository.GetById(user.Id) != null;
+        }
+        public AccommodationReservation Create(AccommodationReservation accommodationReservation,User user)
+        {
+            //ukoliko je ovo gostova 10 rezervacija u prethodnih god dana onda mu dodeli superguest
+            ////za logovanog br rez u god dana onda novi obj sup g
+            //kreir sup g i sac u repo
+            int reservationsLastYear = CountReservationsLastYear(user);
+            if (reservationsLastYear >= 3)
+            {
+                // Gost postaje super-gost
+                if (!IsSuperGuest(user))
+                {
+                    // Dodeli mu status super-gosta i bonus poene
+                    SuperGuest superGuest = new SuperGuest(user, DateTime.Now, DateTime.Now.AddYears(1), 5);
+                    _superGuestRepository.Save(superGuest);
+                }
+            }
+
+            // Kreiranje rezervacije
             accommodationReservation = _accommodationReservationRepository.Save(accommodationReservation);
 
+            // Ažuriranje statusa super-gosta i bonus poena
+            UpdateSuperGuestStatus(user);
+
             return accommodationReservation;
         }
-        public AccommodationReservation Update(AccommodationReservation accommodationReservation)
-        {
-            accommodationReservation = _accommodationReservationRepository.Update(accommodationReservation);
-            return accommodationReservation;
-        }
-        public bool IsReschedulePossible(ReservationRescheduleRequest reservationRescheduleRequest)
-        {
-            List<AccommodationReservation> reservations = _accommodationReservationRepository.GetByAccommodationId(reservationRescheduleRequest.Reservation.Accommodation.Id);
-          /*  foreach (AccommodationReservation reservation in reservations)
+
+            public int CountReservationsLastYear(User user)
             {
-                if (reservation.Id == reservationRescheduleRequest.Reservation.Id)
+                DateTime oneYearAgo = DateTime.Now.AddYears(-1);
+                return _accommodationReservationRepository.GetAll().Count(r => r.Guest.Id == user.Id && r.CreatedAt > oneYearAgo);
+            }
+
+            public void UpdateSuperGuestStatus(User user)
+            {
+                SuperGuest superGuest = _superGuestRepository.GetById(user.Id);
+                if (superGuest != null)
                 {
-                    reservations.Remove(reservation);
-                    break;
+                    // Ažuriranje poena
+                    superGuest.Points--;
+
+                    // Provera isteka statusa super-gosta
+                    if (DateTime.Now >= superGuest.End)
+                    {
+                        // Poništavanje statusa super-gosta
+                        _superGuestRepository.Delete(superGuest);
+                    }
+                    else
+                    {
+                    _superGuestRepository.Update(superGuest);
+                    }
                 }
-            }*/
-            foreach (AccommodationReservation reservation in reservations)
+            }
+
+
+
+            public AccommodationReservation Update(AccommodationReservation accommodationReservation)
             {
-                if (IsDatesIntertwine(reservation.Arrival, reservation.Departure, reservationRescheduleRequest.NewStart, reservationRescheduleRequest.NewEnd))
+                accommodationReservation = _accommodationReservationRepository.Update(accommodationReservation);
+                return accommodationReservation;
+            }
+            public bool IsReschedulePossible(ReservationRescheduleRequest reservationRescheduleRequest)
+            {
+                List<AccommodationReservation> reservations = _accommodationReservationRepository.GetByAccommodationId(reservationRescheduleRequest.Reservation.Accommodation.Id);
+                /*  foreach (AccommodationReservation reservation in reservations)
+                  {
+                      if (reservation.Id == reservationRescheduleRequest.Reservation.Id)
+                      {
+                          reservations.Remove(reservation);
+                          break;
+                      }
+                  }*/
+                foreach (AccommodationReservation reservation in reservations)
+                {
+                    if (IsDatesIntertwine(reservation.Arrival, reservation.Departure, reservationRescheduleRequest.NewStart, reservationRescheduleRequest.NewEnd))
+                    {
+                        return false;
+                    }
+                }
+
+                return true;
+            }
+
+            public bool IsDatesIntertwine(DateTime StartFirst, DateTime EndFirst, DateTime StartSecond, DateTime EndSecond)
+            {
+                return (StartSecond.Date <= EndFirst.Date && EndSecond.Date >= StartFirst.Date);
+            }
+
+
+            public bool CancelReservation(int reservationId)
+            {
+                AccommodationReservation reservation = _accommodationReservationRepository.Get(reservationId);
+                if (reservation == null)
                 {
                     return false;
                 }
+                int cancellationDays = (reservation.Accommodation.CancellationDays < 1) ? 1 : reservation.Accommodation.CancellationDays;
+
+                if (DateTime.Now > reservation.Arrival.AddDays(-cancellationDays))
+                {
+                    return false;
+                }
+
+                reservation.Status = Model.Enums.AccommodationReservationStatus.Canceled;
+                _accommodationReservationRepository.Update(reservation);
+
+                User logged = SignInForm.LoggedUser;
+                string message = "Guest: " + logged.Username + " has cancelled reservation for accommodation "
+                    + reservation.Accommodation.Name + " for date " + reservation.Arrival;
+                Notification notification = new Notification()
+                {
+                    User = reservation.Accommodation.Owner,
+                    NotificationStatus = Model.Enums.NotificationStatus.unread,
+                    Message = message
+                };
+                _notificationRepository.Save(notification);
+                return true;
             }
 
-            return true;
         }
-        public bool IsDatesIntertwine(DateTime StartFirst, DateTime EndFirst, DateTime StartSecond, DateTime EndSecond)
-        {
-            return (StartSecond.Date <= EndFirst.Date && EndSecond.Date >= StartFirst.Date);
-        }
-
-
-        public bool CancelReservation(int reservationId)
-        {
-            AccommodationReservation reservation = _accommodationReservationRepository.Get(reservationId);
-            if (reservation == null)
-            {
-                return false;
-            }
-            int cancellationDays = (reservation.Accommodation.CancellationDays < 1) ? 1 : reservation.Accommodation.CancellationDays;
-
-            if (DateTime.Now > reservation.Arrival.AddDays(-cancellationDays))
-            {
-                return false;
-            }
-
-            reservation.Status = Model.Enums.AccommodationReservationStatus.Canceled;
-            _accommodationReservationRepository.Update(reservation);
-
-            User logged = SignInForm.LoggedUser;
-            string message = "Guest: " + logged.Username + " has cancelled reservation for accommodation " 
-                + reservation.Accommodation.Name + " for date " + reservation.Arrival;
-            Notification notification = new Notification()
-            {
-                User = reservation.Accommodation.Owner,
-                NotificationStatus = Model.Enums.NotificationStatus.unread,
-                Message = message
-            };
-            _notificationRepository.Save(notification);
-            return true;
-        }
-
     }
-}
+

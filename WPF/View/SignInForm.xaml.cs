@@ -9,6 +9,8 @@ using System.Runtime.CompilerServices;
 using System.Windows;
 using BookingApp.View.ViewModel;
 using BookingApp.WPF.Views.GuestWindows;
+using BookingApp.DependencyInjection;
+using BookingApp.Domain.RepositoryInterfaces;
 
 namespace BookingApp.View
 {
@@ -18,7 +20,7 @@ namespace BookingApp.View
     public partial class SignInForm : Window
     {
 
-        private readonly UserRepository _repository;
+        private readonly IUserRepository _repository;
         private NotificationController _notificationController;
 
         public static User LoggedUser { get; set; }
@@ -48,7 +50,7 @@ namespace BookingApp.View
         {
             InitializeComponent();
             DataContext = this;
-            _repository = new UserRepository();
+            _repository = Injector.CreateInstance<IUserRepository>();
             _notificationController = new NotificationController();
         }
 

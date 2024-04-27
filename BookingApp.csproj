@@ -11,6 +11,7 @@
     <None Remove="Resources\Images\add.png" />
     <None Remove="Resources\Images\delete.png" />
     <None Remove="Resources\Images\edit.png" />
+    <None Remove="Resources\Images\superGuest.png" />
     <None Remove="Resources\Images\view.png" />
   </ItemGroup>
 
@@ -32,6 +33,10 @@
   <ItemGroup>
     <PackageReference Include="MvvmLight" Version="5.4.1.1" />
     <PackageReference Include="MvvmLightLibs" Version="5.4.1.1" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Resource Include="Resources\Images\superGuest.png" />
   </ItemGroup>
 
 

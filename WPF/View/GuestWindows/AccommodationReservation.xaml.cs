@@ -115,14 +115,13 @@ namespace BookingApp.View
 
         private void Button_Click(object sender, RoutedEventArgs e)
         {
-            AccommodationReservation accommodationReservation = new AccommodationReservation()
-            {
-                Accommodation = SelectedAccommodation,
-                Guest = null,//SignInForm.LoggedUser,
-                Arrival = SelectedReservation.Arrival,
-                Departure = SelectedReservation.Departure,
-            };
-            _accommodationReservationController.Create(accommodationReservation);
+            AccommodationReservation accommodationReservation = new AccommodationReservation(
+                SelectedAccommodation,
+                SignInForm.LoggedUser,
+                SelectedReservation.Arrival,
+                SelectedReservation.Departure
+            );
+            _accommodationReservationController.Create(accommodationReservation,SignInForm.LoggedUser);
 
         }
 

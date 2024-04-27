@@ -57,5 +57,11 @@ namespace BookingApp.WPF.Views.GuestWindows
             AccommodationAllReservations accommodationAllReservations = new AccommodationAllReservations();
             accommodationAllReservations.Show();    
         }
+
+        private void Guests_Profile_Button_Click(object sender, RoutedEventArgs e)
+        {
+            GuestProfile guestProfile = new GuestProfile();
+            guestProfile.Show();
+        }
     }
 }

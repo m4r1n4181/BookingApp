@@ -1,6 +1,7 @@
 ﻿using BookingApp.Domain.Models;
 using BookingApp.Model;
 using BookingApp.Service;
+using BookingApp.View;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -18,16 +19,17 @@ namespace BookingApp.Controller
             _accommodationReservationService = new AccommodationReservationService();
         }
 
-        public AccommodationReservation Create(AccommodationReservation accommodationReservation)
+        public AccommodationReservation Create(AccommodationReservation accommodationReservation,User user)
         {
-            if (accommodationReservation.Guest == null)
+          /*  if (accommodationReservation.Guest == null)
             {
                 accommodationReservation.Guest = new Guest();
-            }
+            }*/
 
             // Postavljanje Id svojstva za Guest
-            accommodationReservation.Guest.Id = 4;
-            return _accommodationReservationService.Create(accommodationReservation);
+            //accommodationReservation.Guest.Id = 4; ovo je bilo tu, a ovako ga postavim na logovanog
+            accommodationReservation.Guest = SignInForm.LoggedUser;
+            return _accommodationReservationService.Create(accommodationReservation,user);
         }
 
         public List<AccommodationReservation> GetFreeRangeDays(int accommodationId, DateTime start, DateTime end, int numberOfDays)
