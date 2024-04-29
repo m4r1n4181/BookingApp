@@ -37,8 +37,8 @@
                 </DataGrid.Columns>
             </DataGrid>
         </StackPanel>
-        <Button Content=" Approve" HorizontalAlignment="Left" Margin="680,496,0,0" VerticalAlignment="Top" Width="120" Height="42" Click="Approve_Click"/>
-        <Button Content=" Decline" HorizontalAlignment="Left" Margin="525,496,0,0" VerticalAlignment="Top" Width="120" Height="42" Click="Decline_Click"/>
+        <Button Content=" View" HorizontalAlignment="Left" Margin="680,496,0,0" VerticalAlignment="Top" Width="120" Height="42" Click="View_Click"/>
+       
 
     </Grid>
 </Window>

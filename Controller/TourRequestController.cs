@@ -1,8 +1,10 @@
 ﻿using BookingApp.Domain.Models;
 using BookingApp.DTO;
 using BookingApp.Model;
+using BookingApp.Repository;
 using BookingApp.Service;
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -54,9 +56,14 @@ namespace BookingApp.Controller
             return _tourRequestService.SearchTourRequest(tourRequestSearch);
         }
 
-        public List<TourRequest> GetTourRequestsForTourGuide(int tourGuideId, DateTime start, DateTime end)
+        public List<TourRequest> GetApprovedTourRequestsForTourGuide(int tourGuideId, DateTime date)
         {
-            return _tourRequestService.GetTourRequestsForTourGuide(tourGuideId,  start, end);
+            return _tourRequestService.GetApprovedTourRequestsForTourGuide(tourGuideId, date);
+        }
+
+        public void SaveTourFromRequest(TourRequest tourRequest, DateTime selectedDate)
+        {
+            _tourRequestService.SaveTourFromRequest(tourRequest, selectedDate);
         }
 
     }

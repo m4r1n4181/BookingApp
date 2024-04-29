@@ -179,33 +179,13 @@ namespace BookingApp.WPF.View.TourGuide
 
         }
 
-       
-
-        private void Approve_Click(object sender, RoutedEventArgs e)
+        private void View_Click(object sender, RoutedEventArgs e)
         {
-            if (SelectedTourRequest == null)
+            if (SelectedTourRequest != null) 
             {
-                return;
+                RequestDetails requestDetails = new RequestDetails(SelectedTourRequest);
+                requestDetails.Show();
             }
-
-            SelectedTourRequest.RequestStatus = RequestStatusType.Approved;
-            _tourRequestController.Update(SelectedTourRequest);
-            Close();   
-
-            //uraditi ovde refresh 
-        }
-
-        private void Decline_Click(object sender, RoutedEventArgs e)
-        {
-            if (SelectedTourRequest == null)
-            {
-                return;
-            }
-            SelectedTourRequest.RequestStatus = RequestStatusType.Declined;
-            _tourRequestController.Update(SelectedTourRequest);
-            Close();
-            //uraditi ovde refresh 
-
         }
 
     }
