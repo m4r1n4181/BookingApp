@@ -69,12 +69,6 @@ namespace BookingApp.WPF.View.OwnerPages
 
         }
 
-        private void HomeButton_Click(object sender, RoutedEventArgs e)
-        {
-            ReservationRescheduleRequestsPage reservationRescheduleRequestsPage = new ReservationRescheduleRequestsPage();
-            this.frame.Navigate(reservationRescheduleRequestsPage);
-
-        }
         private void RegisterAccommodationButton_Click(object sender, RoutedEventArgs e)
         {
 

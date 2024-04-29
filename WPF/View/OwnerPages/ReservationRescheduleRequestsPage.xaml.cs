@@ -1,7 +1,15 @@
-﻿using BookingApp.ViewModels.OwnerViewModels;
+﻿using BookingApp.Controller;
+using BookingApp.Domain.Models;
+using BookingApp.View;
+using BookingApp.View.OwnerWindows;
+using BookingApp.ViewModels.OwnerViewModels;
+using BookingApp.WPF.ViewModels.OwnerPageViewModels;
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
+using System.ComponentModel;
 using System.Linq;
+using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
@@ -21,11 +29,13 @@ namespace BookingApp.WPF.View.OwnerPages
     /// </summary>
     public partial class ReservationRescheduleRequestsPage : Page
     {
+        public NavigationService navigationService;   
         public ReservationRescheduleRequestsPage()
         {
             InitializeComponent();
-            DataContext = new ReservationRescheduleRequestsViewModel();
-
+            ReservationRescheduleRequestPageViewModel reservationRescheduleRequestPageViewModel = new ReservationRescheduleRequestPageViewModel(navigationService);  
+            DataContext = reservationRescheduleRequestPageViewModel;
         }
+
     }
 }

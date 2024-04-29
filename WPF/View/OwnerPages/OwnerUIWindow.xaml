@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:BookingApp.WPF.View.OwnerPages"
         mc:Ignorable="d"
-        Title="OwnerUIWindow" Height="700" Width="430">
+        Title="OwnerUIWindow" Height="700" Width="430"> 
     <Border Background="#FFDCDB"
             CornerRadius="10">
         <Grid>

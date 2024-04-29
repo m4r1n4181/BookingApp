@@ -31,6 +31,7 @@ namespace BookingApp.Repository
         public Accommodation GetById(int id)
         {
             Accommodations = _serializer.FromCSV(FilePath);
+            BindLocations();
             return Accommodations.FirstOrDefault(acc => acc.Id == id);
         }
 

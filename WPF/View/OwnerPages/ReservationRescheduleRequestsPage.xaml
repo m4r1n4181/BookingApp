@@ -7,67 +7,47 @@
       d:DesignHeight="750" d:DesignWidth="430"
       Title="ReservationRescheduleRequestsPage">
 
-    <Grid Background="White">
-        <!-- Action bar -->
-        <Grid Background="#007ACC" Height="50" Margin="0,0,0,700">
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="Auto"/>
-                <ColumnDefinition Width="*"/>
-                <ColumnDefinition Width="Auto"/>
-            </Grid.ColumnDefinitions>
-            <!-- Icon -->
-            <TextBlock Text="?" FontSize="20" Foreground="Black" VerticalAlignment="Center" Margin="10,0"/>
-            <!-- Title -->
-            <TextBlock Text="Requests to move reservation"  FontSize="20" Foreground="Black" VerticalAlignment="Center" Margin="27,0,108,0" Grid.ColumnSpan="2"/>
-        </Grid>
+    <DataGrid AutoGenerateColumns="False" x:Name="ReservationRescheduleRequestsDataGrid"
+          IsReadOnly="True" SelectionMode="Single"
+          ItemsSource="{Binding Path=ReservationRescheduleRequests, UpdateSourceTrigger=PropertyChanged}"
+          SelectedItem="{Binding Path=SelectedReservationRescheduleRequest, UpdateSourceTrigger=PropertyChanged}">
+        <DataGrid.Columns>
+            <DataGridTemplateColumn Width="*" Header="Reservation Details">
+                <DataGridTemplateColumn.CellTemplate>
+                    <DataTemplate>
+                        <StackPanel Orientation="Horizontal">
+                            <!-- Slika -->
+                            <Image Source="{Binding Reservation.Accommodation.Pictures[0]}" Width="50" Height="50"/>
+                            <!-- Tekst -->
+                            <StackPanel Margin="5,0,0,0">
+                                <!-- Naziv smeštaja, Lokacija -->
+                                <TextBlock>
+                                <Run Text="{Binding Reservation.Accommodation.Name}" FontWeight="Bold"/>
+                                <Run Text=", "/>
+                                <Run Text="{Binding Reservation.Accommodation.Location.City}"/>                                                                 
+                                <Run Text="{Binding Reservation.Accommodation.Location.Country}"/>
+                                </TextBlock>
+                                <!-- Duration: Arrival - Departure -->
+                                <TextBlock>
+                                <Run Text="Duration: "/>
+                                <Run Text="{Binding Reservation.Arrival}"/>
+                                <Run Text=" - "/>
+                                <Run Text="{Binding Reservation.Departure}"/>
+                                </TextBlock>
+                            </StackPanel>
+                        </StackPanel>
+                    </DataTemplate>
+                </DataGridTemplateColumn.CellTemplate>
+            </DataGridTemplateColumn>
 
-       
-        <Grid Margin="10,60,10,10">
-            <Grid.RowDefinitions>
-                <RowDefinition Height="Auto"/>
-                <RowDefinition Height="*"/>
-                <RowDefinition Height="Auto"/>
-            </Grid.RowDefinitions>
-            <DataGrid Grid.Row="1" AutoGenerateColumns="False" x:Name="ReservationRescheduleRequestsDataGrid"
-                      IsReadOnly="True" SelectionMode="Single"
-                      ItemsSource="{Binding Path=ReservationRescheduleRequests, UpdateSourceTrigger=PropertyChanged}"
-                      SelectedItem="{Binding Path=SelectedReservationRescheduleRequest, UpdateSourceTrigger=PropertyChanged}">
-                <DataGrid.Columns>
-                   
-                    <DataGridTemplateColumn Width="Auto">
-                        <DataGridTemplateColumn.CellTemplate>
-                            <DataTemplate>
-                                <Image Source="{Binding Reservation.Accommodation.Pictures[0]}" Width="50" Height="50"/>
-                            </DataTemplate>
-                        </DataGridTemplateColumn.CellTemplate>
-                    </DataGridTemplateColumn>
-                   
-                    <DataGridTextColumn Header="Smeštaj" Binding="{Binding Reservation.Accommodation.Name}" Width="*"/>
-                   
-                    <DataGridTextColumn Header="Lokacija" Width="*">
-                        <DataGridTextColumn.Binding>
-                            <MultiBinding StringFormat="{}{0}, {1}">
-                                <Binding Path="Reservation.Accommodation.Location.City"/>
-                                <Binding Path="Reservation.Accommodation.Location.Country"/>
-                            </MultiBinding>
-                        </DataGridTextColumn.Binding>
-                    </DataGridTextColumn>
-                   
-                    <DataGridTextColumn Header="Od" Binding="{Binding Reservation.Arrival}" Width="*"/>
-                    
-                    <DataGridTextColumn Header="Do" Binding="{Binding Reservation.Departure}" Width="*"/>
-                    
-                  
-                   
-                    <DataGridTemplateColumn Header="Akcije">
-                        <DataGridTemplateColumn.CellTemplate>
-                            <DataTemplate>
-                                <Button Content="View Request"  Command="{Binding RescheduleHandleCommand}"/>
-                            </DataTemplate>
-                        </DataGridTemplateColumn.CellTemplate>
-                    </DataGridTemplateColumn>
-                </DataGrid.Columns>
-            </DataGrid>
-        </Grid>
-    </Grid>
+            <!-- Dugme za pregled zahteva -->
+            <DataGridTemplateColumn Width="Auto">
+                <DataGridTemplateColumn.CellTemplate>
+                    <DataTemplate>
+                        <Button x:Name="ViewRequest" Content="View Request" Command="{Binding ViewRequestCommand}" Margin="5"/>
+                    </DataTemplate>
+                </DataGridTemplateColumn.CellTemplate>
+            </DataGridTemplateColumn>
+        </DataGrid.Columns>
+    </DataGrid>
 </Page>

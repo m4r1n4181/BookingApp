@@ -1,9 +1,9 @@
 1|2|Tree house|house|1|5|3|20|
-2|2|Cozy Cabin|hut|2|4|2|20|
-3|2|Beach Bungalow|house|3|2|1|10|
-4|2|Mountain Chalet|house|4|6|4|25|
-5|2|Lake House|apartment|5|8|3|30|
-6|2|Riverside Cottage|hut|6|4|2|20|
+2|2|Cozy Cabin|hut|2|4|2|20|C:\Users\Asus\Desktop\sims-in-2024-group-3-team-b\Resources\Images\louvre.jpg
+3|2|Beach Bungalow|house|3|2|1|10|../../../Resources/Images/louvre.jpg
+4|2|Mountain Chalet|house|4|6|4|25|../../../Resources/Images/eiffel.jpg
+5|2|Lake House|apartment|5|8|3|30|../../../Resources/Images/eiffel.jpg
+6|2|Riverside Cottage|hut|6|4|2|20|../../../Resources/Images/eiffel.jpg
 7|2|Countryside Farmhouse|hut|6|10|5|1|
 8|2|Desert Oasis|house|7|4|2|15|
 9|2|Snowy Retreat|house|9|7|3|25|
@@ -31,17 +31,17 @@
 31|2|Tropical Paradise|house|27|10|7|50|
 32|2|Urban Studio|apartment|22|2|1|15|
 33|2|Desert Hideaway|house|30|4|3|20|
-34|2|Island Getaway|house|26|6|5|45|
-35|2|Historic Townhouse|house|24|4|2|30|
-36|2|Lakefront Cabin|hut|25|4|3|20|
-37|2|Coastal Cottage|hut|26|6|4|25|
-38|2|Jungle Retreat|hut|29|8|5|30|
-39|2|Ski Chalet|house|28|6|4|40|
-40|2|Safari Tent|hut|29|4|3|35|
-41|2|Vineyard Villa|house|24|8|5|2|
-42|2|Mountain Hut|hut|25|4|2|2|
-43|2|Beach House|house|27|10|7|1|
-44|2|City View Apartment|apartment|22|3|2|1|
+34|2|Island Getaway|house|26|6|5|45|../../../Resources/Images/louvre.jpg
+35|2|Historic Townhouse|house|24|4|2|30|../../../Resources/Images/louvre.jpg
+36|2|Lakefront Cabin|hut|25|4|3|20|../../../Resources/Images/louvre.jpg
+37|2|Coastal Cottage|hut|26|6|4|25|../../../Resources/Images/louvre.jpg
+38|2|Jungle Retreat|hut|29|8|5|30|../../../Resources/Images/louvre.jpg
+39|2|Ski Chalet|house|28|6|4|40|../../../Resources/Images/louvre.jpg
+40|2|Safari Tent|hut|29|4|3|35|../../../Resources/Images/louvre.jpg
+41|2|Vineyard Villa|house|24|8|5|2|../../../Resources/Images/louvre.jpg
+42|2|Mountain Hut|hut|25|4|2|2|../../../Resources/Images/louvre.jpg
+43|2|Beach House|house|27|10|7|1|../../../Resources/Images/louvre.jpg
+44|2|City View Apartment|apartment|22|3|2|1|../../../Resources/Images/louvre.jpg
 45|2|Lake View Lodge|house|25|6|3|3|
 46|2|Oceanfront Retreat|house|26|8|5|4|
 47|2|Downtown Loft|apartment|21|2|1|2|

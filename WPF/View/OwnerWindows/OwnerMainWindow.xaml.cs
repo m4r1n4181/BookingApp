@@ -48,8 +48,8 @@ namespace BookingApp.View.OwnerWindows
 
         private void ReservationRescheduleRequestsButton_Click(object sender, RoutedEventArgs e)
         {
-            ReservationRescheduleRequestsWindow reservationRescheduleRequestsWindow = new ReservationRescheduleRequestsWindow();
-            reservationRescheduleRequestsWindow.Show();
+          //  ReservationRescheduleRequestsWindow reservationRescheduleRequestsWindow = new ReservationRescheduleRequestsWindow();
+            //reservationRescheduleRequestsWindow.Show();
 
         }
 

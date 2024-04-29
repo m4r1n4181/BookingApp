@@ -2,39 +2,28 @@
 using BookingApp.Domain.Models;
 using BookingApp.Model;
 using BookingApp.View.OwnerWindows;
-using GalaSoft.MvvmLight.Command;
+using BookingApp.ViewModels;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Input;
+using System.Windows.Navigation;
 
-namespace BookingApp.ViewModels.OwnerViewModels
+namespace BookingApp.WPF.ViewModels.OwnerPageViewModels
 {
-    public class ReservationRescheduleRequestHandlingViewModel : ViewModelBase
+    public class RescheduleRequestsHandlingPageVIewModel : ViewModelBase//, IClose
     {
-        
+        // Action Close { get; set; }
+        public NavigationService NavigationService { get; set; }
         public ReservationRescheduleRequestController _reservationRescheduleRequestController;
         public AccommodationReservationController _accommodationReservationController;
         public NotificationController _notificationController;
 
         #region NotifyProperties
-        private string _guest;
-        public string Guest
-        {
-            get => _guest;
-            set
-            {
-                if (value != _guest)
-                {
-                    _guest = value;
-                    OnPropertyChanged("Guest");
-                }
-            }
-        }
-
         private string _available;
         public string Available
         {
@@ -48,49 +37,60 @@ namespace BookingApp.ViewModels.OwnerViewModels
                 }
             }
         }
+
+        private string _comment;
+        public string Comment
+        {
+            get => _comment;
+            set
+            {
+                if (value != _comment)
+                {
+                    _comment = value;
+                    OnPropertyChanged("Comment");
+                }
+            }
+        }
         #endregion
-        public ICommand AcceptRequestButtonCommand { get; private set; }
-        public ICommand DeclineRequestButtonCommand { get; private set; }
+        public ICommand AcceptRequestCommand { get; private set; }
+        public ICommand DeclineRequestCommand { get; private set; }
 
         public ReservationRescheduleRequest rescheduleRequest { get; set; }
 
-        public ReservationRescheduleRequestHandlingViewModel(ReservationRescheduleRequest reservationRescheduleRequest)
+        public RescheduleRequestsHandlingPageVIewModel(NavigationService service,ReservationRescheduleRequest reservationRescheduleRequest)
         {
+            this.NavigationService = service;
             _reservationRescheduleRequestController = new ReservationRescheduleRequestController();
             _accommodationReservationController = new AccommodationReservationController();
             _notificationController = new NotificationController();
-
+            Comment = reservationRescheduleRequest.Comment;
             rescheduleRequest = reservationRescheduleRequest;
             rescheduleRequest = _reservationRescheduleRequestController.GetWithGuest(reservationRescheduleRequest.Reservation.Guest.Id);
-            Guest = rescheduleRequest.Reservation.Guest.Username;
+
             if (!_accommodationReservationController.IsReschedulePossible(rescheduleRequest))
             {
                 Available = "Smeštaj je zauzet.";
                 MessageBox.Show("Smeštaj je rezervisan u traženim datumima.");
-
             }
             else
             {
                 Available = "Smeštaj je slobodan.";
             }
 
-            AcceptRequestButtonCommand = new RelayCommand(ExecuteAcceptRequestButtonCommand, CanExecuteAcceptRequestButtonCommand);
-            DeclineRequestButtonCommand = new RelayCommand(ExecuteDeclineRequestButtonCommand, CanExecuteDeclineRequestButtonCommand);
-
+            AcceptRequestCommand = new RelayCommand(ExecuteAcceptRequestCommand, CanExecuteAcceptRequestCommand);
+            DeclineRequestCommand = new RelayCommand(ExecuteDeclineRequestCommand, CanExecuteDeclineRequestCommand);
         }
 
 
-        private void ExecuteAcceptRequestButtonCommand(object param)
+        private void ExecuteAcceptRequestCommand(object param)
         {
-            //rescheduleRequest.Id = rescheduleRequest.Id;
-
             rescheduleRequest.Status = Model.Enums.RequestStatusType.Approved;
             rescheduleRequest.Reservation.Arrival = rescheduleRequest.NewStart;
             rescheduleRequest.Reservation.Departure = rescheduleRequest.NewEnd;
             _accommodationReservationController.Update(rescheduleRequest.Reservation);
             _reservationRescheduleRequestController.Update(rescheduleRequest);
 
-            string message = "Your reservation for accommodation " + rescheduleRequest.Reservation.Accommodation.Name + " has been Approved"; 
+            string message = "Your reservation for accommodation " + rescheduleRequest.Reservation.Accommodation.Name + " has been Approved";
             Notification notification = new Notification()
             {
                 User = rescheduleRequest.Reservation.Guest,
@@ -101,20 +101,22 @@ namespace BookingApp.ViewModels.OwnerViewModels
             MessageBox.Show("uspesno pomerena rezervacija");
             return;
         }
-        private void ExecuteDeclineRequestButtonCommand(object param) 
+
+        private void ExecuteDeclineRequestCommand(object param)
         {
-            DeclineReservationRescheduleRequestCommentWindow Comment = new DeclineReservationRescheduleRequestCommentWindow(rescheduleRequest);
-            Comment.Show();
-        }
-        private bool CanExecuteAcceptRequestButtonCommand(object param)
-        {
-         return true;
-        }
-        private bool CanExecuteDeclineRequestButtonCommand(object param)
-        {
-            return true;
+            // Handle decline logic here
         }
 
+        private bool CanExecuteAcceptRequestCommand(object param)
+        {
+            return true; // Add your condition here if needed
+        }
+
+        private bool CanExecuteDeclineRequestCommand(object param)
+        {
+            return true; // Add your condition here if needed
+
+        }
 
     }
 }
