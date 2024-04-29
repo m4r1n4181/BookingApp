@@ -1,4 +1,5 @@
-﻿using BookingApp.Domain.Models;
+﻿using BookingApp.Controller;
+using BookingApp.Domain.Models;
 using BookingApp.Domain.RepositoryInterfaces;
 using BookingApp.DTO;
 using BookingApp.Model;
@@ -6,6 +7,7 @@ using BookingApp.Model.Enums;
 using BookingApp.Repository;
 using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -67,34 +69,19 @@ namespace BookingApp.Service
             }
             return true;
         }
-        public List<TourRequest> GetApprovedTourRequestsForTourGuide(int tourGuideId, DateTime date)
+       /* public List<TourRequest> GetApprovedTourRequestsForTourGuide(int tourGuideId, DateTime date)
         {
             List<TourRequest> tourRequests = _tourRequestRepository.GetByTourGuide(tourGuideId);
 
             return tourRequests.FindAll(tR => tR.RequestStatus == RequestStatusType.Approved && tR.StartDate.Date == date.Date);
-        }
+        }*/ 
 
-        /*  public List<TourRequest> GetTourRequestsForTourGuide(int tourGuideId, DateTime start, DateTime end)
+         public List<TourRequest> GetTourRequestsForTourGuide(int tourGuideId, DateTime start, DateTime end)
           {
               List<TourRequest> tourRequest = _tourRequestRepository.GetByTourGuide(tourGuideId);
 
               return tourRequest.FindAll(tR => DatesIntertwine(tR.StartDate, tR.EndDate, start, end));
-          }*/
-
-
-        //na nivou godine , a moze onda i ako odabere godinu na nivou meseci 
-        public List<int> YearsOfTourRequests(int tourGuideId)
-        {
-            List<int> years = new List<int>();
-            foreach (TourRequest tourRequest in _tourRequestRepository.GetAll())
-            {
-                if (tourRequest.TourGuide.Id == tourGuideId)
-                {
-                    years.Add(tourRequest.StartDate.Year);
-                }
-            }
-            return years.Distinct().ToList();
-        }
+          }
 
         public void SaveTourFromRequest(TourRequest tourRequest, DateTime selectedDate)
         {
@@ -106,16 +93,55 @@ namespace BookingApp.Service
                 Description = tourRequest.Description,
                 StartDate = selectedDate,
                 TourGuide = tourRequest.TourGuide,
-                Name = tourRequest.Description, // Pretpostavljam da želimo da ime tura bude isto kao i opis u TourRequest-u
-                Duration = 2, // Default duration postavljamo na 2 sata
-                AvailableSeats = tourRequest.MaxTourists, // Default available seats postavljamo na MaxTourists
-                Pictures = null, // Pictures postavljamo na null jer ne želimo da ih ima
-                TourStatus = TourStatusType.not_started // Postavljamo status tura na NotStarted
+                Name = tourRequest.Description, 
+                Duration = 2, 
+                AvailableSeats = tourRequest.MaxTourists, 
+                Pictures = null, 
+                TourStatus = TourStatusType.not_started 
             };
 
             _tourRepository.Save(tour);
         }
 
+        public List<string> GetUniqueLanguagesFromTourRequests()
+        {
+            return _tourRequestRepository.GetUniqueLanguagesFromTourRequests();
+        }
+
+        public List<Location> GetUniqueLocationsFromTourRequests()
+        {
+            return _tourRequestRepository.GetUniqueLocationsFromTourRequests();
+
+        }
+
+        public List<int> GetUniqueYearsFromTourRequests()
+        {
+            return _tourRequestRepository.GetUniqueYearsFromTourRequests();
+
+        }
+
+        public int CountRequestsByLocation(Location location)
+        {
+            return _tourRequestRepository.CountRequestsByLocation(location);
+
+        }
+
+        public int CountRequestsByLanguage(string language)
+        {
+            return _tourRequestRepository.CountRequestsByLanguage(language);
+
+        }
+
+        public int CountRequestsByYear(int year)
+        {
+            return _tourRequestRepository.CountRequestsByYear(year);
+        }
+
+
+        public Dictionary<string, int> CountRequestsByYearAndMonth(int year)
+        {
+            return _tourRequestRepository.CountRequestsByYearAndMonth(year);
+        }
 
     }
 }

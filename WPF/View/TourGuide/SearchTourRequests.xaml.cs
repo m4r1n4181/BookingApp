@@ -4,6 +4,7 @@ using BookingApp.DTO;
 using BookingApp.Model;
 using BookingApp.Model.Enums;
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
@@ -135,6 +136,7 @@ namespace BookingApp.WPF.View.TourGuide
             _tourRequestController = new TourRequestController();
 
             TourRequests = new ObservableCollection<TourRequest>(_tourRequestController.GetAllWithLocations());
+
             City = "";
             Country = "";
             Types = new ObservableCollection<RequestStatusType>
@@ -188,5 +190,12 @@ namespace BookingApp.WPF.View.TourGuide
             }
         }
 
+        private void Statistics_Click(object sender, RoutedEventArgs e)
+        {
+         
+              RequestStatisticsOverview requestStatisticsOverview = new RequestStatisticsOverview();
+              requestStatisticsOverview.Show();
+            
+        }
     }
 }

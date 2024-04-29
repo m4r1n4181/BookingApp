@@ -1,4 +1,5 @@
-﻿using BookingApp.Domain.RepositoryInterfaces;
+﻿using BookingApp.Domain.Models;
+using BookingApp.Domain.RepositoryInterfaces;
 using BookingApp.Model;
 using BookingApp.Serializer;
 using System;

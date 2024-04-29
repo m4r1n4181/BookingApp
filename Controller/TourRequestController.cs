@@ -1,4 +1,5 @@
 ﻿using BookingApp.Domain.Models;
+using BookingApp.Domain.RepositoryInterfaces;
 using BookingApp.DTO;
 using BookingApp.Model;
 using BookingApp.Repository;
@@ -56,15 +57,55 @@ namespace BookingApp.Controller
             return _tourRequestService.SearchTourRequest(tourRequestSearch);
         }
 
-        public List<TourRequest> GetApprovedTourRequestsForTourGuide(int tourGuideId, DateTime date)
+        public List<TourRequest> GetTourRequestsForTourGuide(int tourGuideId, DateTime start, DateTime end)
         {
-            return _tourRequestService.GetApprovedTourRequestsForTourGuide(tourGuideId, date);
+            return _tourRequestService.GetTourRequestsForTourGuide(tourGuideId, start, end);
         }
 
         public void SaveTourFromRequest(TourRequest tourRequest, DateTime selectedDate)
         {
             _tourRequestService.SaveTourFromRequest(tourRequest, selectedDate);
         }
+
+        public List<Location> GetUniqueLocationsFromTourRequests()
+        {
+            return _tourRequestService.GetUniqueLocationsFromTourRequests();
+
+        }
+
+        public List<string> GetUniqueLanguagesFromTourRequests()
+        {
+            return _tourRequestService.GetUniqueLanguagesFromTourRequests();
+        }
+
+        public List<int> GetUniqueYearsFromTourRequests()
+        {
+            return _tourRequestService.GetUniqueYearsFromTourRequests();
+
+        }
+
+        public int CountRequestsByLocation(Location location)
+        {
+            return _tourRequestService.CountRequestsByLocation(location);
+
+        }
+
+        public int CountRequestsByLanguage(string language)
+        {
+            return _tourRequestService.CountRequestsByLanguage(language);
+
+        }
+
+        public int CountRequestsByYear(int year)
+        {
+            return _tourRequestService.CountRequestsByYear(year);
+        }
+
+        public Dictionary<string, int> CountRequestsByYearAndMonth(int year)
+        {
+            return _tourRequestService.CountRequestsByYearAndMonth(year);
+        }
+
 
     }
 }

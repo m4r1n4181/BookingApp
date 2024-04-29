@@ -5,6 +5,7 @@ using BookingApp.Model;
 using BookingApp.Serializer;
 using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -90,8 +91,8 @@ namespace BookingApp.Repository
 
         public void BindTourRequestLocation() // za svaki request daj mi location
         {
-           LocationRepository locationRepository = new LocationRepository();
-           _tourRequest.ForEach(tR => tR.Location = locationRepository.GetById(tR.Location.Id));
+            LocationRepository locationRepository = new LocationRepository();
+            _tourRequest.ForEach(tR => tR.Location = locationRepository.GetById(tR.Location.Id));
 
         }
 
@@ -109,6 +110,7 @@ namespace BookingApp.Repository
 
         public List<TourRequest> GetByTourGuide(int tourGuideId) //bi trebalo da bude ovako
         {
+           // BindTourRequestLocation();
             return _tourRequest.FindAll(i => i.TourGuide.Id == tourGuideId);
         }
 
@@ -146,6 +148,66 @@ namespace BookingApp.Repository
             return _tourRequest;
         }
 
+        public List<string> GetUniqueLanguagesFromTourRequests()
+        {
+            var uniqueLanguages = _tourRequest.Select(tr => tr.Language).Distinct().ToList();
+            return uniqueLanguages;
+        }
+
+        public List<Location> GetUniqueLocationsFromTourRequests()
+        {
+            BindTourRequestLocation();
+            List<Location> uniqueLocations = _tourRequest
+                .Select(tr => tr.Location)
+                .Distinct()
+                .GroupBy(l => l.Id) // Grupiraj po ID-u lokacije
+                .Select(grp => grp.First()) // Odaberi prvu lokaciju iz svake grupe
+                .ToList();
+
+            return uniqueLocations;
+        }
+
+        public List<int> GetUniqueYearsFromTourRequests()
+        {
+            List<int> uniqueYears = _tourRequest
+                .Select(tr => tr.StartDate.Year) 
+                .Distinct()
+                .ToList();
+
+            return uniqueYears;
+        }
+
+        public int CountRequestsByLocation(Location location)
+        {
+            return _tourRequest.Count(tr => tr.Location.Id == location.Id);
+        }
+
+        public int CountRequestsByLanguage(string language)
+        {
+            return _tourRequest.Count(tr => tr.Language == language);
+        }
+
+        public int CountRequestsByYear(int year)
+        {
+            return _tourRequest.Count(tr => tr.StartDate.Year == year);
+        }
+
+        public Dictionary<string, int> CountRequestsByYearAndMonth(int year)
+        {
+            var requestsByYear = _tourRequest
+                .Where(tr => tr.StartDate.Year == year)
+                .ToList();
+
+            var requestsByYearAndMonth = new Dictionary<string, int>();
+
+            for (int month = 1; month <= 12; month++)
+            {
+                var requestsInMonth = requestsByYear.Count(tr => tr.StartDate.Month == month);
+                requestsByYearAndMonth.Add(CultureInfo.CurrentCulture.DateTimeFormat.GetMonthName(month), requestsInMonth);
+            }
+
+            return requestsByYearAndMonth;
+        }
     }
 
 
