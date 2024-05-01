@@ -1,4 +1,5 @@
 ﻿using BookingApp.Controller;
+using BookingApp.WPF.View.OwnerWindows;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -35,8 +36,7 @@ namespace BookingApp.View.OwnerWindows
 
         private void MyAccommodationsButton_Click(object sender, RoutedEventArgs e)
         {
-            AccommodationsOverviewWindow accommodations = new AccommodationsOverviewWindow();
-            accommodations.Show();
+            
 
         }
 
@@ -47,8 +47,8 @@ namespace BookingApp.View.OwnerWindows
 
         private void ReservationRescheduleRequestsButton_Click(object sender, RoutedEventArgs e)
         {
-            ReservationRescheduleRequestsWindow reservationRescheduleRequestsWindow = new ReservationRescheduleRequestsWindow();
-            reservationRescheduleRequestsWindow.Show();
+          //  ReservationRescheduleRequestsWindow reservationRescheduleRequestsWindow = new ReservationRescheduleRequestsWindow();
+            //reservationRescheduleRequestsWindow.Show();
 
         }
 

@@ -1,6 +1,7 @@
 ﻿using BookingApp.Controller;
 using BookingApp.Domain.Models;
 using BookingApp.Model;
+using BookingApp.View;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -16,7 +17,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 
-namespace BookingApp.View.OwnerWindows
+namespace BookingApp.WPF.View.OwnerWindows
 {
     /// <summary>
     /// Interaction logic for AccommodationOwnerReviewsWindow.xaml
