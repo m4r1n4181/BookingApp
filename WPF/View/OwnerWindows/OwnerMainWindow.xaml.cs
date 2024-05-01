@@ -36,8 +36,7 @@ namespace BookingApp.View.OwnerWindows
 
         private void MyAccommodationsButton_Click(object sender, RoutedEventArgs e)
         {
-            AccommodationsOverviewWindow accommodations = new AccommodationsOverviewWindow();
-            accommodations.Show();
+            
 
         }
 

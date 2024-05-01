@@ -27,15 +27,43 @@ namespace BookingApp.WPF.View.OwnerPages
     /// <summary>
     /// Interaction logic for ReservationRescheduleRequestsPage.xaml
     /// </summary>
-    public partial class ReservationRescheduleRequestsPage : Page
+    public partial class ReservationRescheduleRequestsPage : Page, INotifyPropertyChanged
     {
-        public NavigationService navigationService;   
+        //public NavigationService navigationService;   
+        public ReservationRescheduleRequest SelectedReservationRescheduleRequest { get; set; }
+        private ObservableCollection<ReservationRescheduleRequest> reservationRescheduleRequests;
+
+        public ObservableCollection<ReservationRescheduleRequest> ReservationRescheduleRequests
+        {
+            get { return reservationRescheduleRequests; }
+            set
+            {
+                reservationRescheduleRequests = value;
+                OnPropertyChanged();
+            }
+        }
+
+        public ReservationRescheduleRequestController _reservationRescheduleRequestsController;
+        public event PropertyChangedEventHandler PropertyChanged;
+        protected virtual void OnPropertyChanged([CallerMemberName] string propertyName = null)
+        {
+            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
+        }
         public ReservationRescheduleRequestsPage()
         {
             InitializeComponent();
-            ReservationRescheduleRequestPageViewModel reservationRescheduleRequestPageViewModel = new ReservationRescheduleRequestPageViewModel(navigationService);  
-            DataContext = reservationRescheduleRequestPageViewModel;
+            DataContext = this;
+            _reservationRescheduleRequestsController = new ReservationRescheduleRequestController();
+
+            ReservationRescheduleRequests = new ObservableCollection<ReservationRescheduleRequest>(_reservationRescheduleRequestsController.GetAllForOwner(SignInForm.LoggedUser.Id));
+
         }
 
+        private void ViewRequestButton_Click(object sender, RoutedEventArgs e)
+        {
+            
+            RescheduleRequestsHandlingPage rescheduleRequestsHandlingPage = new RescheduleRequestsHandlingPage(SelectedReservationRescheduleRequest);
+            this.NavigationService.Navigate(rescheduleRequestsHandlingPage);
+        }
     }
 }

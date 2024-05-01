@@ -57,7 +57,7 @@ namespace BookingApp.WPF.ViewModels.OwnerPageViewModels
 
         public ReservationRescheduleRequest rescheduleRequest { get; set; }
 
-        public RescheduleRequestsHandlingPageVIewModel(NavigationService service,ReservationRescheduleRequest reservationRescheduleRequest)
+        public RescheduleRequestsHandlingPageVIewModel(NavigationService service, ReservationRescheduleRequest reservationRescheduleRequest)
         {
             this.NavigationService = service;
             _reservationRescheduleRequestController = new ReservationRescheduleRequestController();
@@ -69,12 +69,12 @@ namespace BookingApp.WPF.ViewModels.OwnerPageViewModels
 
             if (!_accommodationReservationController.IsReschedulePossible(rescheduleRequest))
             {
-                Available = "Smeštaj je zauzet.";
-                MessageBox.Show("Smeštaj je rezervisan u traženim datumima.");
+                Available = "NOT AVAILABLE";
+                MessageBox.Show("Accommodation is not available!");
             }
             else
             {
-                Available = "Smeštaj je slobodan.";
+                Available = "AVAILABLE";
             }
 
             AcceptRequestCommand = new RelayCommand(ExecuteAcceptRequestCommand, CanExecuteAcceptRequestCommand);

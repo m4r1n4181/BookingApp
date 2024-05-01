@@ -47,7 +47,7 @@ namespace BookingApp.WPF.View.OwnerPages
         public OwnerUIWindow()
         {
             InitializeComponent();
-            DataContext = this;
+            this.DataContext = this;
 
         }
         private void BackButton_Click(object sender, RoutedEventArgs e)
@@ -75,7 +75,8 @@ namespace BookingApp.WPF.View.OwnerPages
         }
         private void AllAccommodationsButton_Click(object sender, RoutedEventArgs e)
         {
-
+            AllAccommodationsPage allAccommodationsPage = new AllAccommodationsPage();
+            this.frame.Navigate(allAccommodationsPage);
         }
 
         private void NotificationButton_Click(object sender, RoutedEventArgs e)

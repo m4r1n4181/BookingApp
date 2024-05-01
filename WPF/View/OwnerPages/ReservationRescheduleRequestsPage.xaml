@@ -4,15 +4,14 @@
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
       mc:Ignorable="d" 
-      d:DesignHeight="750" d:DesignWidth="430"
-      Title="ReservationRescheduleRequestsPage">
+      d:DesignHeight="750" d:DesignWidth="430">
 
     <DataGrid AutoGenerateColumns="False" x:Name="ReservationRescheduleRequestsDataGrid"
           IsReadOnly="True" SelectionMode="Single"
           ItemsSource="{Binding Path=ReservationRescheduleRequests, UpdateSourceTrigger=PropertyChanged}"
           SelectedItem="{Binding Path=SelectedReservationRescheduleRequest, UpdateSourceTrigger=PropertyChanged}">
         <DataGrid.Columns>
-            <DataGridTemplateColumn Width="*" Header="Reservation Details">
+            <DataGridTemplateColumn Width="*">
                 <DataGridTemplateColumn.CellTemplate>
                     <DataTemplate>
                         <StackPanel Orientation="Horizontal">
@@ -30,9 +29,9 @@
                                 <!-- Duration: Arrival - Departure -->
                                 <TextBlock>
                                 <Run Text="Duration: "/>
-                                <Run Text="{Binding Reservation.Arrival}"/>
+                                <Run Text="{Binding Reservation.Arrival,  StringFormat={}{0:d}}"/>
                                 <Run Text=" - "/>
-                                <Run Text="{Binding Reservation.Departure}"/>
+                                <Run Text="{Binding Reservation.Departure,  StringFormat={}{0:d}}"/>
                                 </TextBlock>
                             </StackPanel>
                         </StackPanel>
@@ -44,7 +43,9 @@
             <DataGridTemplateColumn Width="Auto">
                 <DataGridTemplateColumn.CellTemplate>
                     <DataTemplate>
-                        <Button x:Name="ViewRequest" Content="View Request" Command="{Binding ViewRequestCommand}" Margin="5"/>
+                        <!-- <Button x:Name="ViewRequest" Content="View Request" Command="{Binding ViewRequestCommand}" Margin="5"/> -->
+                        <Button x:Name="ViewRequest" Content="View Request" Click="ViewRequestButton_Click" Margin="5"/> 
+
                     </DataTemplate>
                 </DataGridTemplateColumn.CellTemplate>
             </DataGridTemplateColumn>

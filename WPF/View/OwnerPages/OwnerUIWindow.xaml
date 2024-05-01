@@ -4,8 +4,7 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:BookingApp.WPF.View.OwnerPages"
-        mc:Ignorable="d"
-        Title="OwnerUIWindow" Height="700" Width="430"> 
+        mc:Ignorable="d" Height="700" Width="430"> 
     <Border Background="#FFDCDB"
             CornerRadius="10">
         <Grid>
@@ -45,7 +44,7 @@
                     </Button>
                 </StackPanel>
             </Border>
-            <Frame NavigationUIVisibility="Hidden" x:Name="frame" Grid.Row="1" Source="ReservationRescheduleRequestsPage.xaml" />
+            <Frame NavigationUIVisibility="Hidden" x:Name="frame" Grid.Row="1" Source="AllAccommodationsPage.xaml" />
             <Border Grid.Row="2"
                     CornerRadius="0,0,10,10"
                     Background="#FBC0BF">

@@ -1,5 +1,4 @@
 ﻿using BookingApp.Domain.Models;
-using BookingApp.ViewModels.OwnerViewModels;
 using BookingApp.WPF.ViewModels.OwnerPageViewModels;
 using System;
 using System.Collections.Generic;
@@ -30,4 +29,5 @@ namespace BookingApp.WPF.View.OwnerPages
             this.DataContext = new RescheduleRequestsHandlingPageVIewModel(navigationService, reservationRescheduleRequest);
         }
     }
+
 }
