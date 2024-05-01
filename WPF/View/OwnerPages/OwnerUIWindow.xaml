@@ -44,7 +44,10 @@
                     </Button>
                 </StackPanel>
             </Border>
-            <Frame NavigationUIVisibility="Hidden" x:Name="frame" Grid.Row="1" Source="AllAccommodationsPage.xaml" />
+            <Frame NavigationUIVisibility="Hidden"
+                   x:Name="frame"
+                   Grid.Row="1"
+                   Source="ScheduleRenovationPage.xaml" />
             <Border Grid.Row="2"
                     CornerRadius="0,0,10,10"
                     Background="#FBC0BF">

@@ -1,4 +1,4 @@
-﻿using BookingApp.WPF.ViewModels.GuestViewModels;
+﻿using BookingApp.WPF.ViewModels.OwnerPageViewModels;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -11,19 +11,21 @@ using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
+using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace BookingApp.WPF.View.GuestWindows
+namespace BookingApp.WPF.View.OwnerPages
 {
     /// <summary>
-    /// Interaction logic for GuestProfile.xaml
+    /// Interaction logic for ScheduleRenovationPage.xaml
     /// </summary>
-    public partial class GuestProfile : Window
+    public partial class ScheduleRenovationPage : Page
     {
-        public GuestProfile()
+      //  public NavigationService navigationService;
+        public ScheduleRenovationPage()
         {
             InitializeComponent();
-            DataContext = new SuperGuestViewModel();
+            this.DataContext = new ScheduleRenovationPageViewModel();
         }
     }
 }
