@@ -1,4 +1,5 @@
 ﻿using BookingApp.Domain.Models;
+using BookingApp.DTO;
 using BookingApp.Model;
 using BookingApp.Service;
 using BookingApp.View;
@@ -43,6 +44,26 @@ namespace BookingApp.Controller
         public bool IsReschedulePossible(ReservationRescheduleRequest reservationRescheduleRequest)
         {
             return _accommodationReservationService.IsReschedulePossible(reservationRescheduleRequest);
+        }
+
+        public List<AccommodationByYearStatisticDto> GetYearStatisticForAccommodation(int accommodationId)
+        {
+            return _accommodationReservationService.GetYearStatisticForAccommodation(accommodationId);
+        }
+
+        public List<AccommodationByMonthStatisticDto> GetMonthStatisticForAccommodation(int year, int accommodationId)
+        {
+            return _accommodationReservationService.GetMonthStatisticForAccommodation(year, accommodationId);
+        }
+
+        public int GetBestYearForAccommodation(int accommodationId)
+        {
+            return _accommodationReservationService.GetBestYearForAccommodation(accommodationId);
+        }
+
+        public int GetBestMonthForAccommodation(int year, int accommodationId)
+        {
+            return _accommodationReservationService.GetBestMonthForAccommodation(year, accommodationId);
         }
 
 

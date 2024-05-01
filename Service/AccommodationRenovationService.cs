@@ -19,8 +19,8 @@ namespace BookingApp.Service
         private AccommodationReservationService _accommodationReservationService;
         public AccommodationRenovationService()
         {
-            //  _accommodationRenovationRepository = Injector.Injector.CreateInstance<IAccommodationRenovationRepository>();
-            _accommodationRenovationRepository = new AccommodationRenovationRepository();
+             _accommodationRenovationRepository = Injector.CreateInstance<IAccommodationRenovationRepository>();
+           // _accommodationRenovationRepository = new AccommodationRenovationRepository();
             _accommodationReservationService = new AccommodationReservationService();
 
         }

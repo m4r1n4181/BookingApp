@@ -16,11 +16,13 @@ namespace BookingApp.Service
         public AccommodationOwnerReviewRepository _accommodationOwnerReviewRepository;
 
         public AccommodationReservationRepository _accommodationReservationRepository;
+        public RenovatingRequestRepository _renovationRequestRepository;
 
         public AccommodationOwnerReviewService()
         {
             _accommodationOwnerReviewRepository = new AccommodationOwnerReviewRepository();
             _accommodationReservationRepository = new AccommodationReservationRepository();
+            _renovationRequestRepository = new RenovatingRequestRepository();
         }
         public List<AccommodationOwnerReview> GetAll()
         {
@@ -91,6 +93,29 @@ namespace BookingApp.Service
             int count = GetReviewsCountForOwner(ownerId);
             double average = GetReviewsAverageForOwner(ownerId);
             return count >= 50 && average >= 4.5; 
+        }
+        public bool IsReservationWithRenovationRecommendations(AccommodationReservation reservation)
+        {
+            List<AccommodationOwnerReview> reviews = _accommodationOwnerReviewRepository.GetAll();
+            foreach (AccommodationOwnerReview review in reviews)
+            {
+                foreach (RenovatingRequest renovationRequest in _renovationRequestRepository.GetAll())
+                {
+                    if (renovationRequest.AccommodationReservation.AccommodationReview.Id == review.Id)
+                    {
+                        review.RenovatingRequest.Add(renovationRequest);
+                    }
+                }
+
+            }
+            foreach (AccommodationOwnerReview review in reviews)
+            {
+                if (review.Reservation.Id == reservation.Id && review.RenovatingRequest.Any())
+                {
+                    return true;
+                }
+            }
+            return false;
         }
 
 
