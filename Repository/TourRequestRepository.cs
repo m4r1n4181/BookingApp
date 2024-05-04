@@ -208,6 +208,55 @@ namespace BookingApp.Repository
 
             return requestsByYearAndMonth;
         }
+        public Location GetMostRequestedLocationLastYear()
+        {
+            DateTime lastYearDate = DateTime.Now.AddYears(-1);
+            var requestsLastYear = _tourRequest.Where(tr => tr.StartDate >= lastYearDate).ToList();
+
+            var locationCount = requestsLastYear
+                .GroupBy(tr => new { tr.Location.City, tr.Location.Country })
+                .Select(group => new { Location = group.Key, Count = group.Count() })
+                .OrderByDescending(item => item.Count)
+                .FirstOrDefault();
+
+            if (locationCount != null && locationCount.Count > 0)
+            {
+                var mostRequestedLocation = new Location
+                {
+                    City = locationCount.Location.City,
+                    Country = locationCount.Location.Country
+                };
+
+                return mostRequestedLocation;
+            }
+
+            return null;
+        }
+
+        public string GetMostRequestedLanguageLastYear()
+        {
+            DateTime lastYearDate = DateTime.Now.AddYears(-1);
+            var requestsLastYear = _tourRequest.Where(tr => tr.StartDate >= lastYearDate).ToList();
+
+            var languageCount = new Dictionary<string, int>();
+
+            foreach (var request in requestsLastYear)
+            {
+                if (!languageCount.ContainsKey(request.Language))
+                {
+                    languageCount[request.Language] = 1;
+                }
+                else
+                {
+                    languageCount[request.Language]++;
+                }
+            }
+
+            var mostRequestedLanguage = languageCount.OrderByDescending(kv => kv.Value).FirstOrDefault().Key;
+
+            return mostRequestedLanguage;
+        }
+
     }
 
 

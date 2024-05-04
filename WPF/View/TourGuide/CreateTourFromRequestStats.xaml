@@ -1,0 +1,90 @@
+﻿<Window x:Class="BookingApp.WPF.View.TourGuide.CreateTourFromRequestStats"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:BookingApp.WPF.View.TourGuide"
+        mc:Ignorable="d"
+        Title="CreateTourFromRequestStats" Height="600" Width="400">
+
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
+
+        <!-- Header -->
+        <StackPanel Grid.Row="0" Margin="10">
+            <TextBlock Text="Create Tour:" FontWeight="Bold" FontSize="16"/>
+        </StackPanel>
+
+        <!-- Form Fields -->
+        <StackPanel Grid.Row="1" Margin="10">
+            <!-- Name -->
+            <StackPanel Orientation="Horizontal" Margin="0 0 0 10">
+                <TextBlock Width="100" Text="Name:" VerticalAlignment="Center"/>
+                <TextBox x:Name="txtTourName" Text="{Binding TourName, UpdateSourceTrigger=PropertyChanged}" Width="200"/>
+            </StackPanel>
+            <!-- Location -->
+            <StackPanel Orientation="Horizontal" Margin="0 0 0 10">
+                <TextBlock Width="100" Text="Location:" VerticalAlignment="Center"/>
+                <ComboBox x:Name="cmbLocation" Width="200" SelectedItem="{Binding TourLocation}" IsEnabled="True">
+                    <ComboBoxItem Content="{Binding TourLocation}"/>
+                </ComboBox>
+            </StackPanel>
+            <!-- Language -->
+            <StackPanel Orientation="Horizontal" Margin="0 0 0 10">
+                <TextBlock Width="100" Text="Language:" VerticalAlignment="Center"/>
+                <TextBox x:Name="txtLanguage" Text="{Binding TourLanguage, Mode=OneWay}" Width="200" IsEnabled="False"/>
+            </StackPanel>
+            <!-- Time -->
+            <StackPanel Orientation="Horizontal" Margin="0 0 0 10">
+                <TextBlock Width="100" Text="Time:" VerticalAlignment="Center"/>
+                <ComboBox x:Name="cbStartTime" ItemsSource="{Binding PossibleTimes}" SelectedItem="{Binding SelectedTime}" Width="85"/>
+            </StackPanel>
+            <!-- Date -->
+            <StackPanel Orientation="Horizontal" Margin="0 0 0 10">
+                <TextBlock Width="100" Text="Date:" VerticalAlignment="Center"/>
+                <DatePicker x:Name="dpDate" SelectedDate="{Binding TourDate, UpdateSourceTrigger=PropertyChanged}" Width="111"/>
+                <Button Width="40" Height="20" Content="Add" Margin="10, 0, 0, 0" Click="Add_DateTime_Click" FontSize="14" VerticalAlignment="Center"/>
+            </StackPanel>
+            <!-- Description -->
+            <StackPanel Orientation="Horizontal" Margin="0 0 0 10">
+                <TextBlock Width="100" Text="Description:" VerticalAlignment="Center"/>
+                <TextBox x:Name="txtDescription" Text="{Binding Description, UpdateSourceTrigger=PropertyChanged}" Width="200" Height="80" TextWrapping="Wrap"/>
+            </StackPanel>
+            <!-- Key Points -->
+            <StackPanel Orientation="Horizontal" Margin="0 0 0 10">
+                <TextBlock Width="100" Text="Key Points:" VerticalAlignment="Center"/>
+                <TextBox x:Name="txtKeyPoints" Text="{Binding KeyPoint, UpdateSourceTrigger=PropertyChanged}" Width="200"/>
+                <Button Width="40" Height="20" Content="Add" Margin="10, 0, 0, 0" Click="Add_Key_Point_Click" FontSize="14" VerticalAlignment="Center"/>
+            </StackPanel>
+            <!-- Added Key Points -->
+            <StackPanel Orientation="Horizontal" Margin="0 0 0 10">
+                <TextBlock Width="100" Text="Added Key Points:" VerticalAlignment="Center"/>
+                <TextBlock Width="300" Text="{Binding AddedKeyPoint, UpdateSourceTrigger=PropertyChanged}" VerticalAlignment="Center"/>
+            </StackPanel>
+            <!-- Max Tourists -->
+            <StackPanel Orientation="Horizontal" Margin="0 0 0 10">
+                <TextBlock Width="100" Text="Max Tourists:" VerticalAlignment="Center"/>
+                <TextBox x:Name="txtMaxTourists" Text="{Binding MaxTourists, UpdateSourceTrigger=PropertyChanged}" Width="70"/>
+            </StackPanel>
+            <!-- Duration -->
+            <StackPanel Orientation="Horizontal" Margin="0 0 0 10">
+                <TextBlock Width="100" Text="Duration (hours):" VerticalAlignment="Center"/>
+                <TextBox x:Name="txtDuration" Text="{Binding Duration, UpdateSourceTrigger=PropertyChanged}" Width="200"/>
+            </StackPanel>
+            <!-- Pictures -->
+            <StackPanel Orientation="Horizontal" Margin="0 0 0 10">
+                <TextBlock Width="100" Text="Pictures:" VerticalAlignment="Center"/>
+                <Button Width="50" Height="30" Content="Add" Margin="10, 0, 0, 0" Click="AddImages_Click" FontSize="14" VerticalAlignment="Center"/>
+            </StackPanel>
+        </StackPanel>
+
+        <!-- Buttons -->
+        <WrapPanel Grid.Row="2" HorizontalAlignment="Center" Margin="0 10">
+            <Button Content="Save" FontSize="14" VerticalAlignment="Center" Click="CreateFromRequestStats_Click" Width="38"/>
+        </WrapPanel>
+    </Grid>
+</Window>

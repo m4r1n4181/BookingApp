@@ -22,5 +22,9 @@ namespace BookingApp.Controller
             return _locationService.GetAll();
         }
 
+        public Location Get(int id)
+        {
+            return _locationService.Get(id);
+        }
     }
 }

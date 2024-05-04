@@ -106,6 +106,19 @@ namespace BookingApp.Controller
             return _tourRequestService.CountRequestsByYearAndMonth(year);
         }
 
+        public Location GetMostRequestedLocationLastYear()
+        {
+            return _tourRequestService.GetMostRequestedLocationLastYear();
+        }
 
+        public string GetMostRequestedLanguageLastYear()
+        {
+            return _tourRequestService.GetMostRequestedLanguageLastYear();
+        }
+
+        public void CreateTourFromRequest( List<DateTime> dateTimes, List<KeyPoint> keyPoints)
+        {
+             _tourRequestService.CreateTourFromRequest( dateTimes, keyPoints);
+        }
     }
 }

@@ -11,6 +11,8 @@ using System.Globalization;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows;
+using System.Xml.Linq;
 
 namespace BookingApp.Service
 {
@@ -18,12 +20,15 @@ namespace BookingApp.Service
     {
         private TourRequestRepository _tourRequestRepository;
         private TourRepository _tourRepository;
+        private KeyPointRepository _keyPointRepository;
+
 
 
         public TourRequestService()
         {
             _tourRequestRepository = new TourRequestRepository();
             _tourRepository = new TourRepository();
+            _keyPointRepository = new KeyPointRepository();
         }
 
         public TourRequest Save(TourRequest tourRequest)
@@ -69,12 +74,6 @@ namespace BookingApp.Service
             }
             return true;
         }
-       /* public List<TourRequest> GetApprovedTourRequestsForTourGuide(int tourGuideId, DateTime date)
-        {
-            List<TourRequest> tourRequests = _tourRequestRepository.GetByTourGuide(tourGuideId);
-
-            return tourRequests.FindAll(tR => tR.RequestStatus == RequestStatusType.Approved && tR.StartDate.Date == date.Date);
-        }*/ 
 
          public List<TourRequest> GetTourRequestsForTourGuide(int tourGuideId, DateTime start, DateTime end)
           {
@@ -111,25 +110,21 @@ namespace BookingApp.Service
         public List<Location> GetUniqueLocationsFromTourRequests()
         {
             return _tourRequestRepository.GetUniqueLocationsFromTourRequests();
-
         }
 
         public List<int> GetUniqueYearsFromTourRequests()
         {
             return _tourRequestRepository.GetUniqueYearsFromTourRequests();
-
         }
 
         public int CountRequestsByLocation(Location location)
         {
             return _tourRequestRepository.CountRequestsByLocation(location);
-
         }
 
         public int CountRequestsByLanguage(string language)
         {
             return _tourRequestRepository.CountRequestsByLanguage(language);
-
         }
 
         public int CountRequestsByYear(int year)
@@ -137,11 +132,43 @@ namespace BookingApp.Service
             return _tourRequestRepository.CountRequestsByYear(year);
         }
 
-
         public Dictionary<string, int> CountRequestsByYearAndMonth(int year)
         {
             return _tourRequestRepository.CountRequestsByYearAndMonth(year);
         }
+
+        public Location GetMostRequestedLocationLastYear()
+        {
+            return _tourRequestRepository.GetMostRequestedLocationLastYear();
+        }
+
+        public string GetMostRequestedLanguageLastYear()
+        {
+            return _tourRequestRepository.GetMostRequestedLanguageLastYear();
+        }
+
+        public void CreateTourFromRequest( List<DateTime> dateTimes, List<KeyPoint> keyPoints)
+        {
+            Location location = GetMostRequestedLocationLastYear();
+            string language = GetMostRequestedLanguageLastYear();
+
+            foreach (DateTime dateTime in dateTimes)
+            {
+                Tour tour = new Tour
+                {
+                    Location = location,
+                    Language = language,
+                    StartDate = dateTime
+                };
+
+                tour = _tourRepository.Save(tour);
+
+                keyPoints.ForEach(kp => kp.Tour = tour);
+
+                _keyPointRepository.SaveAll(keyPoints);
+            }
+        }
+
 
     }
 }

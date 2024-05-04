@@ -38,6 +38,7 @@
         <ComboBox Grid.Row="2" Grid.Column="1" Width="150" HorizontalAlignment="Center" ItemsSource="{Binding UniqueYears}" SelectedItem="{Binding SelectedYear}" Margin="0,10,0,80" SelectionChanged="YearComboBox_SelectionChanged"/>
 
         <Button Grid.Row="2" Grid.Column="1"  Content="View" HorizontalAlignment="Left" Margin="58,76,0,0" VerticalAlignment="Top" Width="102" Height="30" Click="Monthly_View_Click"/>
+        <Button Grid.Row="6" Grid.Column="6"  Content="Create Tour" HorizontalAlignment="Left" Margin="58,76,0,0" VerticalAlignment="Top" Width="102" Height="30" Click="CreateFromRequestStats_Click"/>
 
 
     </Grid>

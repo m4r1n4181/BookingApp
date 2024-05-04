@@ -175,6 +175,13 @@ namespace BookingApp.WPF.View.TourGuide
                 MessageBox.Show("Please select a year first.");
             }
         }
+
+        private void CreateFromRequestStats_Click(object sender, RoutedEventArgs e)
+        {
+           CreateTourFromRequestStats createTourFromRequestStats = new CreateTourFromRequestStats();
+           createTourFromRequestStats.Show();
+        }
+
     }
 }
 
