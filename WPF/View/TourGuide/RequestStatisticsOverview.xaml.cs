@@ -2,6 +2,7 @@
 using BookingApp.Domain.Models;
 using BookingApp.Model;
 using BookingApp.Model.Enums;
+using BookingApp.WPF.ViewModels.TourGuideViewModels;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -24,162 +25,38 @@ namespace BookingApp.WPF.View.TourGuide
     /// <summary>
     /// Interaction logic for RequestStatisticsOverview.xaml
     /// </summary>
-    public partial class RequestStatisticsOverview : Window, INotifyPropertyChanged
+    public partial class RequestStatisticsOverview : Window
     {
-        public event PropertyChangedEventHandler PropertyChanged;
-
-        protected virtual void OnPropertyChanged([CallerMemberName] string propertyName = null)
-        {
-            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
-        }
-
-        public ObservableCollection<TourRequest> TourRequests { get; set; }
-
-        private TourRequestController _tourRequestController;
-        public ObservableCollection<Location> UniqueLocations { get; set; }
-
-        private LocationController _locationController;
-        public Location SelectedLocation { get; set; }
-
-        public string SelectedLanguage { get; set; }
-
-        public ObservableCollection<string> UniqueLanguages { get; set; }
-        public ObservableCollection<int> UniqueYears { get; set; }
-
-        public int SelectedYear{ get; set; }
-
-
-        private string _language;
-        public string Languages
-        {
-            get => _language;
-            set
-            {
-                if (value != _language)
-                {
-                    _language = value;
-                    OnPropertyChanged();
-                }
-            }
-        }
-
-        private int _selectedLocationRequestCount;
-        public int SelectedLocationRequestCount
-        {
-            get => _selectedLocationRequestCount;
-            set
-            {
-                if (value != _selectedLocationRequestCount)
-                {
-                    _selectedLocationRequestCount = value;
-                    OnPropertyChanged();
-                }
-            }
-        }
-
-        private int _selectedLanguageRequestCount;
-        public int SelectedLanguageRequestCount
-        {
-            get => _selectedLanguageRequestCount;
-            set
-            {
-                if (value != _selectedLanguageRequestCount)
-                {
-                    _selectedLanguageRequestCount = value;
-                    OnPropertyChanged();
-                }
-            }
-        }
-
-        private int _selectedYearRequestCount;
-        public int SelectedYearRequestCount
-        {
-            get => _selectedYearRequestCount;
-            set
-            {
-                if (value != _selectedYearRequestCount)
-                {
-                    _selectedYearRequestCount = value;
-                    OnPropertyChanged();
-                }
-            }
-        }
 
         public RequestStatisticsOverview()
         {
             InitializeComponent();
-            DataContext = this;
-
-            _tourRequestController = new TourRequestController();
-            UniqueLocations = new ObservableCollection<Location>(_tourRequestController.GetUniqueLocationsFromTourRequests());
-            UniqueLanguages = new ObservableCollection<string>(_tourRequestController.GetUniqueLanguagesFromTourRequests());
-            UniqueYears = new ObservableCollection<int>(_tourRequestController.GetUniqueYearsFromTourRequests());
-
-            CalculateStatistics();
+            this.DataContext = new RequestStatisticsViewModel();
 
         }
 
         private void LocationComboBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            CalculateStatistics();
+            if (DataContext is RequestStatisticsViewModel viewModel)
+            {
+                viewModel.LocationComboBox_SelectionChangedCommand.Execute(null);
+            }
         }
 
         private void LanguageComboBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            CalculateStatistics();
+            if (DataContext is RequestStatisticsViewModel viewModel)
+            {
+                viewModel.LanguageComboBox_SelectionChangedCommand.Execute(null);
+            }
         }
 
         private void YearComboBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            CalculateStatistics();
-        }
-
-        private void CalculateStatistics()
-        {
-            if (SelectedYear != 0) 
+            if (DataContext is RequestStatisticsViewModel viewModel)
             {
-                SelectedYearRequestCount = _tourRequestController.CountRequestsByYear(SelectedYear);
+                viewModel.YearComboBox_SelectionChangedCommand.Execute(null);
             }
-
-            if (SelectedLocation != null && !string.IsNullOrEmpty(SelectedLanguage))
-            {
-                SelectedLocationRequestCount = _tourRequestController.CountRequestsByLocation(SelectedLocation);
-                SelectedLanguageRequestCount = _tourRequestController.CountRequestsByLanguage(SelectedLanguage);
-            }
-            else if (SelectedLocation != null)
-            {
-                SelectedLocationRequestCount = _tourRequestController.CountRequestsByLocation(SelectedLocation);
-                SelectedLanguageRequestCount = 0;
-            }
-            else if (!string.IsNullOrEmpty(SelectedLanguage))
-            {
-                SelectedLanguageRequestCount = _tourRequestController.CountRequestsByLanguage(SelectedLanguage);
-                SelectedLocationRequestCount = 0;
-            }
-            else
-            {
-                SelectedLocationRequestCount = 0;
-                SelectedLanguageRequestCount = 0;
-            }
-        }
-
-        private void Monthly_View_Click(object sender, RoutedEventArgs e)
-        {
-            if (SelectedYear != null)
-            {
-                MonthlyStats monthlyStats = new MonthlyStats(SelectedYear);
-                monthlyStats.ShowDialog();
-            }
-            else
-            {
-                MessageBox.Show("Please select a year first.");
-            }
-        }
-
-        private void CreateFromRequestStats_Click(object sender, RoutedEventArgs e)
-        {
-           CreateTourFromRequestStats createTourFromRequestStats = new CreateTourFromRequestStats();
-           createTourFromRequestStats.Show();
         }
 
     }

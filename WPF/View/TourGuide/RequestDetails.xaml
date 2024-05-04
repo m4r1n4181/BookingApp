@@ -23,7 +23,7 @@
         <TextBlock Text="Select date:" FontWeight="Bold" Margin="286,10,61,203"/>
         <ComboBox HorizontalAlignment="Left" ItemsSource="{Binding Dates}" SelectedItem="{Binding SelectedDate}" Margin="286,35,0,0" VerticalAlignment="Top" Width="100"/>
 
-        <Button Content="Approve" HorizontalAlignment="Left" Margin="437,214,0,0" VerticalAlignment="Top" Width="120" Height="30" Click="Approve_Click"/>
-        <Button Content="Decline" HorizontalAlignment="Left" Margin="281,214,0,0" VerticalAlignment="Top" Width="120" Height="30" Click="Decline_Click"/>
+        <Button Content="Approve" HorizontalAlignment="Left" Margin="437,214,0,0" VerticalAlignment="Top" Width="120" Height="30" Command="{Binding ApproveCommand}" />
+        <Button Content="Decline" HorizontalAlignment="Left" Margin="281,214,0,0" VerticalAlignment="Top" Width="120" Height="30" Command="{Binding DeclineCommand}" />
     </Grid>
 </Window>

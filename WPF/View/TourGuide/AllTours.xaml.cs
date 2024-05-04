@@ -15,6 +15,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 using System.Collections.ObjectModel;
 using BookingApp.View.ViewModels.TourGuideViewModels;
+using BookingApp.WPF.View.TourGuide;
 
 
 namespace BookingApp.View
@@ -79,7 +80,8 @@ namespace BookingApp.View
 
         private void Requests_Click(object sender, RoutedEventArgs e)
         {
-            //ovde ce se otvarati prozor za requests 
+            SearchTourRequests searchTourRequests = new SearchTourRequests();
+            searchTourRequests.Show();
 
         }
 

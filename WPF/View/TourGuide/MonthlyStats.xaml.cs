@@ -1,5 +1,6 @@
 ﻿using BookingApp.Controller;
 using BookingApp.Domain.Models;
+using BookingApp.WPF.ViewModels.TourGuideViewModels;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -22,16 +23,10 @@ namespace BookingApp.WPF.View.TourGuide
     /// </summary>
     public partial class MonthlyStats : Window
     {
-        private TourRequestController _tourRequestController;
-        public Dictionary<string, int> RequestsByYearAndMonth { get; set; }
         public MonthlyStats(int selectedYear)
         {
             InitializeComponent();
-            DataContext = this;
-
-            _tourRequestController = new TourRequestController();
-            RequestsByYearAndMonth = _tourRequestController.CountRequestsByYearAndMonth(selectedYear);
-
+            this.DataContext = new MonthlyStatsViewModel(selectedYear);
 
         }
     }

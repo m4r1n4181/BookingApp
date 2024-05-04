@@ -20,7 +20,7 @@
         <DatePicker HorizontalAlignment="Left" SelectedDate="{Binding StartDate}" Margin="10,360,0,0" VerticalAlignment="Top"/>
         <DatePicker HorizontalAlignment="Left" SelectedDate="{Binding EndDate}" Margin="136,360,0,0" VerticalAlignment="Top"/>
 
-        <Button Content="Search" HorizontalAlignment="Left" Margin="39,499,0,0" VerticalAlignment="Top" Width="119" Height="37" Click="Search_Click"/>
+        <Button Content="Search" HorizontalAlignment="Left" Margin="39,499,0,0" VerticalAlignment="Top" Width="119" Height="37" Command="{Binding SearchCommand}"/>
 
         <StackPanel Margin="250,70,50,0">
             <DataGrid ItemsSource="{Binding TourRequests}"
@@ -37,8 +37,8 @@
                 </DataGrid.Columns>
             </DataGrid>
         </StackPanel>
-        <Button Content=" View" HorizontalAlignment="Left" Margin="680,496,0,0" VerticalAlignment="Top" Width="120" Height="42" Click="View_Click"/>
-        <Button Content=" Statistics" HorizontalAlignment="Left" Margin="680,10,0,0" VerticalAlignment="Top" Width="120" Height="42" Click="Statistics_Click"/>
+        <Button Content=" View" HorizontalAlignment="Left" Margin="680,496,0,0" VerticalAlignment="Top" Width="120" Height="42" Command="{Binding ViewCommand}"/>
+        <Button Content=" Statistics" HorizontalAlignment="Left" Margin="680,10,0,0" VerticalAlignment="Top" Width="120" Height="42" Command="{Binding StatisticsCommand}"/>
 
 
     </Grid>

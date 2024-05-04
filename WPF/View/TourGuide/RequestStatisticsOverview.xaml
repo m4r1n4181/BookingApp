@@ -24,21 +24,23 @@
             <ColumnDefinition Width="1*"/>
         </Grid.ColumnDefinitions>
 
+        <!-- Location Label, Count TextBlock, and ComboBox -->
         <TextBlock Grid.Row="0" Grid.Column="0" Width="100" Text="Location:" Margin="10,10,0,0"/>
         <TextBlock Grid.Row="0" Grid.Column="0" Width="91" HorizontalAlignment="Left" Text="{Binding SelectedLocationRequestCount}" FontSize="20" Margin="35,35,0,0"/>
         <ComboBox Grid.Row="0" Grid.Column="1" Width="150" HorizontalAlignment="Center" ItemsSource="{Binding UniqueLocations}" SelectedItem="{Binding SelectedLocation}" Margin="0,10,0,80" SelectionChanged="LocationComboBox_SelectionChanged"/>
 
-        <!-- Language Label and ComboBox -->
+        <!-- Language Label, Count TextBlock, and ComboBox -->
         <TextBlock Grid.Row="1" Grid.Column="0" Width="100" Text="Language:" Margin="10,10,0,0"/>
         <TextBlock Grid.Row="1" Width="91" HorizontalAlignment="Left" Text="{Binding SelectedLanguageRequestCount}" FontSize="20" Margin="35,35,0,0"/>
         <ComboBox Grid.Row="1" Grid.Column="1" Width="150" HorizontalAlignment="Center" ItemsSource="{Binding UniqueLanguages}" SelectedItem="{Binding SelectedLanguage}" Margin="0,10,0,81" SelectionChanged="LanguageComboBox_SelectionChanged"/>
 
+        <!-- Year Label, Count TextBlock, and ComboBox -->
         <TextBlock Grid.Row="2" Grid.Column="0" Width="100" Text="Year:" Margin="10,10,0,0"/>
         <TextBlock Grid.Row="2" Width="91" HorizontalAlignment="Left" Text="{Binding SelectedYearRequestCount}" FontSize="20" Margin="35,35,0,0"/>
-        <ComboBox Grid.Row="2" Grid.Column="1" Width="150" HorizontalAlignment="Center" ItemsSource="{Binding UniqueYears}" SelectedItem="{Binding SelectedYear}" Margin="0,10,0,80" SelectionChanged="YearComboBox_SelectionChanged"/>
-
-        <Button Grid.Row="2" Grid.Column="1"  Content="View" HorizontalAlignment="Left" Margin="58,76,0,0" VerticalAlignment="Top" Width="102" Height="30" Click="Monthly_View_Click"/>
-        <Button Grid.Row="6" Grid.Column="6"  Content="Create Tour" HorizontalAlignment="Left" Margin="58,76,0,0" VerticalAlignment="Top" Width="102" Height="30" Click="CreateFromRequestStats_Click"/>
+        <ComboBox Grid.Row="2" Grid.Column="1" Width="150" HorizontalAlignment="Center" ItemsSource="{Binding UniqueYears}" SelectedItem="{Binding SelectedYear}" Margin="0,10,0,80" SelectionChanged= "YearComboBox_SelectionChanged"/>
+        
+        <Button Grid.Row="2" Grid.Column="1"  Content="View" HorizontalAlignment="Left" Margin="58,76,0,0" VerticalAlignment="Top" Width="102" Height="30" Command="{Binding MonthlyViewCommand}"/>
+        <Button Grid.Row="6" Grid.Column="6"  Content="Create Tour" HorizontalAlignment="Left" Margin="58,76,0,0" VerticalAlignment="Top" Width="102" Height="30" Command="{Binding CreateFromStatsCommand}"/>
 
 
     </Grid>
