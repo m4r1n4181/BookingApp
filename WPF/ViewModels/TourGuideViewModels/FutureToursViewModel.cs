@@ -13,7 +13,7 @@ using System.Windows;
 
 namespace BookingApp.View.ViewModels.TourGuideViewModels
 {
-    public class FutureToursViewModel
+    public class FutureToursViewModel : INotifyPropertyChanged
     {
         public event PropertyChangedEventHandler PropertyChanged;
 

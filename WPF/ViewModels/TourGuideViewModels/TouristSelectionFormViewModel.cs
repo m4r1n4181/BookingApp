@@ -4,7 +4,9 @@ using BookingApp.ViewModels;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.ComponentModel;
 using System.Linq;
+using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
@@ -12,8 +14,16 @@ using System.Windows.Input;
 
 namespace BookingApp.View.ViewModels.TourGuideViewModels
 {
-    public class TouristSelectionFormViewModel
+    public class TouristSelectionFormViewModel : INotifyPropertyChanged
     {
+
+        public event PropertyChangedEventHandler PropertyChanged;
+
+        protected virtual void OnPropertyChanged([CallerMemberName] string propertyName = null)
+        {
+            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
+        }
+
         private readonly TouristController _touristController;
         private TouristEntryController _touristEntryController;
         public ObservableCollection<Tourist> Tourists { get; set; }

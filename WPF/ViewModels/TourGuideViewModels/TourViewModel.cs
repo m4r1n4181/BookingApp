@@ -11,7 +11,7 @@ using System.Threading.Tasks;
 
 namespace BookingApp.View.ViewModels.TourGuideViewModels
 {
-    public class TourViewModel
+    public class TourViewModel : INotifyPropertyChanged
     {
 
         public string _tourName;

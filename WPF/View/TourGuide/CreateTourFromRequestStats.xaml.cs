@@ -210,15 +210,20 @@ namespace BookingApp.WPF.View.TourGuide
             Tour newTour = new Tour
             {
                 Name = TourName,
-                Location = mostRequestedLocation,
                 TourGuide = SignInForm.LoggedUser,
                 Description = Description,
-                Language = mostRequestedLanguage,
+                Location = mostRequestedLocation,
                 MaxTourists = MaxTourists,
+                AvailableSeats = MaxTourists,
                 Duration = Duration,
+                Language = mostRequestedLanguage, 
                 Pictures = Pictures,
             };
-            _tourRequestController.CreateTourFromRequest(new List<DateTime> { DateTime.Now }, new List<KeyPoint> { new KeyPoint { Tour = newTour } });
+
+            List<DateTime> dateTimes = new List<DateTime> { TourDate };
+            List<KeyPoint> keyPoints = KeyPoints.Select(kp => new KeyPoint { Name = kp.Name, IsActive = kp.IsActive, Tour = newTour }).ToList();
+
+            _tourRequestController.CreateTourFromRequest(dateTimes, keyPoints, newTour.Name, newTour.Description, newTour.MaxTourists, newTour.Duration, newTour.Pictures);
         }
 
         private void AddImages_Click(object sender, RoutedEventArgs e)

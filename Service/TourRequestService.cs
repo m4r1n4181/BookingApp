@@ -6,6 +6,7 @@ using BookingApp.DTO;
 using BookingApp.Model;
 using BookingApp.Model.Enums;
 using BookingApp.Repository;
+using BookingApp.View;
 using System;
 using System.Collections.Generic;
 using System.Globalization;
@@ -148,7 +149,7 @@ namespace BookingApp.Service
             return _tourRequestRepository.GetMostRequestedLanguageLastYear();
         }
 
-        public void CreateTourFromRequest( List<DateTime> dateTimes, List<KeyPoint> keyPoints)
+        public void CreateTourFromRequest(List<DateTime> dateTimes, List<KeyPoint> keyPoints, string name, string description, int maxTourists, int duration, List<string> pictures)
         {
             Location location = GetMostRequestedLocationLastYear();
             string language = GetMostRequestedLanguageLastYear();
@@ -157,9 +158,16 @@ namespace BookingApp.Service
             {
                 Tour tour = new Tour
                 {
+                    Name = name,
+                    TourGuide = SignInForm.LoggedUser,
+                    Description = description,
                     Location = location,
-                    Language = language,
-                    StartDate = dateTime
+                    Language = language, 
+                    MaxTourists = maxTourists,
+                    AvailableSeats = maxTourists,
+                    Duration = duration,
+                    StartDate = dateTime,
+                    Pictures = pictures,
                 };
 
                 tour = _tourRepository.Save(tour);
@@ -169,7 +177,5 @@ namespace BookingApp.Service
                 _keyPointRepository.SaveAll(keyPoints);
             }
         }
-
-
     }
 }
