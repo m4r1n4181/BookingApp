@@ -1,4 +1,5 @@
-﻿using BookingApp.Model;
+﻿using BookingApp.Domain.RepositoryInterfaces;
+using BookingApp.Model;
 using BookingApp.Serializer;
 using System;
 using System.Collections.Generic;
@@ -8,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace BookingApp.Repository
 {
-    public class KeyPointRepository
+    public class KeyPointRepository : IKeyPointRepository
     {
         private const string FilePath = "../../../Resources/Data/keyPoint.csv";
 

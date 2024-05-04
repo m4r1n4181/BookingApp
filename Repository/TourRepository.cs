@@ -1,3 +1,4 @@
+using BookingApp.Domain.RepositoryInterfaces;
 using BookingApp.DTO;
 using BookingApp.Model;
 using BookingApp.Serializer;
@@ -10,7 +11,7 @@ using System.Xml.Linq;
 
 namespace BookingApp.Repository
 {
-    public class TourRepository
+    public class TourRepository : ITourRepository
     {
         private const string FilePath = "../../../Resources/Data/tours.csv";
 
