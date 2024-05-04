@@ -1,4 +1,6 @@
 ﻿using BookingApp.Controller;
+using BookingApp.DependencyInjection;
+using BookingApp.Domain.RepositoryInterfaces;
 using BookingApp.DTO;
 using BookingApp.Model;
 using BookingApp.Repository;
@@ -15,22 +17,21 @@ namespace BookingApp.Service
 {
     public class TourService
     {
-        private TourRepository _tourRepository;
-        private KeyPointRepository _keyPointRepository;
-        private TouristRepository _touristRepository;
-        private TouristEntryRepository _entryRepository;
+        private ITourRepository _tourRepository;
+        private IKeyPointRepository _keyPointRepository;
+        private ITouristRepository _touristRepository;
+        private ITouristEntryRepository _entryRepository;
+        private ITourReservationRepository _tourReservationRepository;
         private TourReservationService _tourReservationService;
 
-        private TourReservationRepository _tourReservationRepository;
-       
         public TourService()
         {
-            _tourRepository = new TourRepository();
-            _keyPointRepository = new KeyPointRepository();
-            _touristRepository = new TouristRepository(); // Initialize tourist repository
-            _entryRepository = new TouristEntryRepository(); // Initialize tourist entry repository
+            _tourRepository = Injector.CreateInstance<ITourRepository>();
+            _keyPointRepository = Injector.CreateInstance<IKeyPointRepository>();
+            _touristRepository = Injector.CreateInstance<ITouristRepository>();
+            _entryRepository = Injector.CreateInstance<ITouristEntryRepository>();
+            _tourReservationRepository = Injector.CreateInstance<ITourReservationRepository>();
             _tourReservationService = new TourReservationService();
-            _tourReservationRepository = new TourReservationRepository();
         }
 
 

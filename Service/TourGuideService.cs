@@ -1,4 +1,6 @@
-﻿using BookingApp.Model;
+﻿using BookingApp.DependencyInjection;
+using BookingApp.Domain.RepositoryInterfaces;
+using BookingApp.Model;
 using BookingApp.Repository;
 using System;
 using System.Collections.Generic;
@@ -10,13 +12,11 @@ namespace BookingApp.Service
 {
     public class TourGuideService
     {
-        private TourGuideRepository _tourGuideRepository;
-       
+        private ITourGuideRepository _tourGuideRepository;
 
         public TourGuideService()
         {
-            _tourGuideRepository = new TourGuideRepository();
-           
+            _tourGuideRepository = Injector.CreateInstance<ITourGuideRepository>();
         }
 
         public List<TourGuide> GetAll()

@@ -1,4 +1,6 @@
-﻿using BookingApp.Model;
+﻿using BookingApp.DependencyInjection;
+using BookingApp.Domain.RepositoryInterfaces;
+using BookingApp.Model;
 using BookingApp.Repository;
 using BookingApp.Serializer;
 using System;
@@ -11,13 +13,13 @@ namespace BookingApp.Service
 {
     public class TourReviewService
     {
-        private TourReviewRepository _tourReviewRepository;
-        public TourReservationRepository _tourReservationRepository;
-        private TouristEntryRepository _touristEntryRepository;
+        private ITourReviewRepository _tourReviewRepository;
+        public ITourReservationRepository _tourReservationRepository;
+        private ITouristEntryRepository _touristEntryRepository;
         public TourReviewService()
         {
-            _tourReviewRepository = new TourReviewRepository();
-            _touristEntryRepository = new TouristEntryRepository();
+            _tourReviewRepository = Injector.CreateInstance<ITourReviewRepository>();
+            _touristEntryRepository = Injector.CreateInstance<ITouristEntryRepository>();
         }
 
         public TourReview RateTour(TourReview tourReview)
