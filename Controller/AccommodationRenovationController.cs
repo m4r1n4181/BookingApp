@@ -23,8 +23,21 @@ namespace BookingApp.Controller
         {
             return _accommodationRenovationService.GetAll();
         }
+        public List<AccommodationRenovation> GetAllPreviousRenovations(int id)
+        {
 
+            return _accommodationRenovationService.GetAllPreviousRenovations(id);
+        }
 
+        public List<AccommodationRenovation> GetAllScheduledRenovations(int id)
+        {
+            return _accommodationRenovationService.GetAllScheduledRenovations(id);
+        }
+        public List<AccommodationRenovation> GetAllForOwner(int id)
+
+        {
+            return _accommodationRenovationService.GetAllForOwner(id);
+        }
         public AccommodationRenovation Get(int id)
         {
             return _accommodationRenovationService.Get(id);

@@ -1,77 +1,46 @@
-﻿using BookingApp.Controller;
-using BookingApp.Domain.Models;
-using BookingApp.Model;
-using BookingApp.View;
-using System;
-using System.Collections.Generic;
-using System.Collections.ObjectModel;
-using System.ComponentModel;
-using System.Linq;
-using System.Runtime.CompilerServices;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows;
+﻿using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
+using BookingApp.Model; // Assuming your Accommodation model is located here
+using System.Collections.ObjectModel;
+using BookingApp.Controller;
+using BookingApp.View;
 
 namespace BookingApp.WPF.View.OwnerPages
 {
-    /// <summary>
-    /// Interaction logic for AllAccommodationsPage.xaml
-    /// </summary>
-    public partial class AllAccommodationsPage : Page, INotifyPropertyChanged
+    public partial class AllAccommodationsPage : Page
     {
-        public ObservableCollection<Accommodation> accommodations;
-        public ObservableCollection<Accommodation> Accommodations 
-        {
-            get { return accommodations; }
-            set
-            {
-                accommodations = value;
-                OnPropertyChanged();
-            }
+        // Assuming AccommodationController can fetch accommodations
+        private AccommodationController _accommodationController;
 
-        }
-        public AccommodationController _accommodationController;
-        public Accommodation SelectedAccommodation;
-        public ReservationRescheduleRequestController _reservationRescheduleRequestsController;
+        public ObservableCollection<Accommodation> Accommodations { get; set; }
 
         public AllAccommodationsPage()
         {
             InitializeComponent();
             _accommodationController = new AccommodationController();
-            Accommodations = new ObservableCollection<Accommodation>(_accommodationController.GetByOwner(SignInForm.LoggedUser.Id));
-            if (AllAccommodationsDataGrid.Items.Count == 0)
+            Accommodations = new ObservableCollection<Accommodation>(_accommodationController.GetByOwner(SignInForm.LoggedUser.Id)); // Assuming you have a method to fetch accommodations by owner
+            this.DataContext = this; // Set the DataContext to the current instance for binding
+        }
+
+        private void ViewAccommodationButton_Click(object sender, RoutedEventArgs e)
+        {
+            // Sender is the button that was clicked
+            var button = sender as Button;
+            if (button != null)
             {
-                AllAccommodationsDataGrid.ItemsSource = Accommodations;
+                // Retrieve the DataContext from the button, which should be an Accommodation object
+                Accommodation selectedAccommodation = button.DataContext as Accommodation;
+                if (selectedAccommodation != null)
+                {
+                    // Navigate to the AccommodationViewPage, passing the selected accommodation
+                    AccommodationViewPage accommodationViewPage = new AccommodationViewPage(selectedAccommodation);
+                    NavigationService.Navigate(accommodationViewPage);
+                }
+                else
+                {
+                    MessageBox.Show("No accommodation selected.");
+                }
             }
-            
         }
-
-        public event PropertyChangedEventHandler PropertyChanged;
-        protected virtual void OnPropertyChanged([CallerMemberName] string propertyName = null)
-        {
-            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
-        }
-
-      private void ViewAccommodationButton_Click(object sender, RoutedEventArgs e)
-      {
-          // Logika za prikaz detalja smještaja
-          // Dobijanje podataka o odabranom smještaju iz SelectedAccommodation
-          // Implementacija prikaza detalja odabranog smještaja
-      }
-        private void DeleteButton_Click(object sender, RoutedEventArgs e)
-        {
-            // Logika za brisanje
-            // Dobijanje podataka o odabranom smještaju iz SelectedAccommodation
-            // Implementacija brisanja odabranog smještaja
-        }
-
     }
 }

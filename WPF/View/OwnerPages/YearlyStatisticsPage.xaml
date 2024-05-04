@@ -1,0 +1,93 @@
+﻿<Page x:Class="BookingApp.WPF.View.OwnerPages.YearlyStatisticsPage"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+      xmlns:local="clr-namespace:BookingApp.WPF.View.OwnerPages"
+      mc:Ignorable="d"
+      d:DesignHeight="700"
+      d:DesignWidth="430"
+      Title="YearlyStatisticsPage">
+
+    <Grid Background="#FFDCDB">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="100" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto"
+                           MinHeight="250.04" />
+            <RowDefinition Height="Auto"
+                           MinHeight="149" />
+        </Grid.RowDefinitions>
+
+        <StackPanel Grid.Row="0"
+                    Orientation="Horizontal"
+                    VerticalAlignment="Top"
+                    Height="100">
+            <Image Source="{Binding accommodation.Pictures[0]}"
+                   Width="80"
+                   Margin="30,0,0,0"
+                   Height="80" />
+            <TextBlock Text="Sea paradise"
+                       FontSize="28"
+                       VerticalAlignment="Center"
+                       Margin="10,0,0,0" />
+
+            <ComboBox Width="84"
+                      SelectedIndex="0"
+                      Margin="170,0,50,-50"
+                      Height="24">
+                <ComboBoxItem Content="2023" />
+                <ComboBoxItem Content="2022" />
+                <ComboBoxItem Content="2021" />
+            </ComboBox>
+
+        </StackPanel>
+
+        <TextBlock Text="2023"
+                   FontSize="36"
+                   FontWeight="Bold"
+                   HorizontalAlignment="Left"
+                   Margin="27,95,0,118"
+                   Grid.RowSpan="3"
+                   TextDecorations="Underline"
+                   Width="83" />
+
+        <StackPanel Grid.Row="2"
+                    Margin="30,30,30,30">
+            <TextBlock Text="the year with the most reservations 187/365 days"
+                       FontSize="14" />
+            <TextBlock Text="Number of reservations: 93"
+                       FontSize="14" />
+            <TextBlock Text="Number of cancelled reservations: 4"
+                       FontSize="14" />
+            <TextBlock Text="Number of rescheduled reservation: 10"
+                       FontSize="14" />
+            <TextBlock Text="Number of renovation recommendations: 1"
+                       FontSize="14" />
+        </StackPanel>
+        <Button Content="Button"
+                HorizontalAlignment="Left"
+                Margin="341,0,0,129"
+                Grid.Row="4"
+                VerticalAlignment="Bottom"
+                Height="20"
+                Width="40" />
+        <Button Content="View monthly"
+                HorizontalAlignment="Left"
+                Margin="58,0,0,0"
+                Grid.Row="4"
+                VerticalAlignment="Top"
+                Height="20"
+                Width="40" />
+
+
+        <!--      <PieChart /> Placeholder for your Pie Chart control -->
+
+        <!--  <BarChart />  Placeholder for your Bar Chart control -->
+
+
+
+
+    </Grid>
+</Page>

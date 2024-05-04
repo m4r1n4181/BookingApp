@@ -1,0 +1,160 @@
+﻿<Page x:Class="BookingApp.WPF.View.OwnerPages.AccommodationViewPage"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+      xmlns:local="clr-namespace:BookingApp.WPF.View.OwnerPages"
+      mc:Ignorable="d"
+      d:DesignHeight="700"
+      d:DesignWidth="430"
+      Title="AccommodationViewPage">
+
+    <Grid Background="#FFDCDB">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="60" />
+            <RowDefinition Height="190" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto"
+                           MinHeight="82" />
+            <RowDefinition Height="Auto"
+                           MinHeight="64.96" />
+        </Grid.RowDefinitions>
+
+
+
+        <Grid Margin="0,10,0,0"
+              Grid.RowSpan="2">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="*" />
+            </Grid.ColumnDefinitions>
+            <Image Source="{Binding accommodation.Pictures[0]}"
+                   Width="140"
+                   Height="140"
+                   Margin="5" />
+            <Image Source="{Binding accommodation.Pictures[1]}"
+                   Width="140"
+                   Height="140"
+                   Margin="5"
+                   Grid.Column="1" />
+            <Button Content="&lt;"
+                    Width="50"
+                    Height="50"
+                    HorizontalAlignment="Left"
+                    VerticalAlignment="Center"
+                    Background="Transparent"
+                    BorderBrush="Transparent"
+                    FontWeight="Bold"
+                    FontSize="30"
+                    Grid.Column="0"
+                    Margin="-15,0,0,0" />
+            <Button Content="&gt;"
+                    Width="50"
+                    Height="50"
+                    FontSize="30"
+                    HorizontalAlignment="Right"
+                    VerticalAlignment="Center"
+                    Background="Transparent"
+                    BorderBrush="Transparent"
+                    FontWeight="Bold"
+                    Grid.Column="1"
+                    Margin="0,0,-15,0" />
+            <TextBlock HorizontalAlignment="Left"
+                       Margin="10,10,0,0"
+                       FontSize="28"
+                       TextWrapping="Wrap"
+                       Grid.Row="0"
+                       Text="{Binding accommodation.Name}"
+                       FontWeight="Bold"
+                       VerticalAlignment="Top"
+                       Width="269"
+                       Height="50"
+                       Grid.ColumnSpan="2" />
+        </Grid>
+
+        <StackPanel Grid.Row="2"
+                    Orientation="Horizontal"
+                    Margin="10,7,10,7">
+            <TextBlock Text="Location: "
+                       FontWeight="Bold"
+                       FontSize="18" />
+            <TextBlock Text="{Binding accommodation.Location.City}"
+                       FontSize="18" />
+            <TextBlock Text=", "
+                       FontSize="18" />
+            <TextBlock Text="{Binding accommodation.Location.Country}"
+                       FontSize="18" />
+
+        </StackPanel>
+
+        <StackPanel Grid.Row="3"
+                    Orientation="Horizontal"
+                    Margin="10,7,10,7">
+            <TextBlock Text="Type: "
+                       FontWeight="Bold"
+                       FontSize="18" />
+            <TextBlock Text="{Binding accommodation.Type}"
+                       FontSize="18" />
+        </StackPanel>
+
+        <StackPanel Grid.Row="4"
+                    Orientation="Horizontal"
+                    Margin="10,7,10,7">
+            <TextBlock Text="Maximum number of guests: "
+                       FontWeight="Bold"
+                       FontSize="18" />
+            <TextBlock Text="{Binding accommodation.MaxGuests}"
+                       FontSize="18" />
+        </StackPanel>
+
+        <StackPanel Grid.Row="5"
+                    Orientation="Horizontal"
+                    Margin="10,7,10,7">
+            <TextBlock Text="Minimum days for reservation: "
+                       FontWeight="Bold"
+                       FontSize="18" />
+            <TextBlock Text="{Binding accommodation.MinReservationDays}"
+                       FontSize="18" />
+        </StackPanel>
+
+        <StackPanel Grid.Row="6"
+                    Orientation="Horizontal"
+                    Margin="10,7,10,7">
+            <TextBlock Text="Minimum cancellation days: "
+                       FontWeight="Bold"
+                       FontSize="18" />
+            <TextBlock Text="{Binding accommodation.CancellationDays}"
+                       FontSize="18" />
+        </StackPanel>
+
+        <StackPanel Grid.Row="7"
+                    Orientation="Horizontal"
+                    Margin="10,7,10,7">
+            <TextBlock Text="Description:"
+                       FontWeight="Bold"
+                       FontSize="18" />
+            <TextBlock Text=" Cozy and pet-friendly!"
+                       TextWrapping="Wrap"
+                       FontSize="18"
+                       Width="400" />
+        </StackPanel>
+
+
+        <Button Content="edit"
+                Width="100"
+                Grid.Row="8"
+                Margin="34,5,0,33"
+                HorizontalAlignment="Left" />
+        <Button Content="view statistics"
+                Width="150"
+                Margin="242,5,0,33"
+                Click="ViewStatisticsButton_Click"
+                Grid.Row="8"
+                HorizontalAlignment="Left" />
+
+    </Grid>
+</Page>

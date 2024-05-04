@@ -12,8 +12,11 @@ namespace BookingApp.Domain.RepositoryInterfaces
         List<AccommodationRenovation> GetAll();
         AccommodationRenovation Get(int id);
         AccommodationRenovation Save(AccommodationRenovation accommodationRenovation);
-        void Delete(AccommodationRenovation accommodationRenovation);
+        void Delete(AccommodationRenovation accommodationRenovation);       
         AccommodationRenovation Update(AccommodationRenovation accommodationRenovation);
         List<AccommodationRenovation> GetByAccommodationId(int id);
+        List<AccommodationRenovation> GetAllForOwner(int id);
+        List<AccommodationRenovation> GetAllPreviousRenovations(int id);
+        List<AccommodationRenovation> GetAllScheduledRenovations(int id);
     }
 }

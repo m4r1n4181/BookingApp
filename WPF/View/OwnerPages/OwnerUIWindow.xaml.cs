@@ -1,4 +1,5 @@
-﻿using System;
+﻿using BookingApp.WPF.ViewModels.OwnerPageViewModels;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Linq;
@@ -11,6 +12,7 @@ using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
+using System.Windows.Navigation;
 using System.Windows.Shapes;
 
 namespace BookingApp.WPF.View.OwnerPages
@@ -48,7 +50,13 @@ namespace BookingApp.WPF.View.OwnerPages
         {
             InitializeComponent();
             this.DataContext = this;
+          //  var scheduleVM = new ScheduleRenovationPageViewModel();
+            //scheduleVM.OnHeaderChanged += .HandleHeaderChange;
 
+        }
+        public void HandleHeaderChange(string header)
+        {
+            Header = header;
         }
         private void BackButton_Click(object sender, RoutedEventArgs e)
         {

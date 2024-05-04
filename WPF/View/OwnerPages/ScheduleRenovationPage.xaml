@@ -10,17 +10,18 @@
       Title="ScheduleRenovationPage"
       Background="#FFDCDB">
 
-    <Grid>
+    <Grid HorizontalAlignment="Right"
+          Width="430">
         <Label Content="Select accommodation"
                HorizontalAlignment="Left"
-               Margin="30,56,0,0"
+               Margin="30,29,0,0"
                VerticalAlignment="Top"
                FontWeight="Bold"
                Width="186"
                FontSize="14" />
         <ComboBox Name="Accommodations"
                   HorizontalAlignment="Left"
-                  Margin="30,85,0,0"
+                  Margin="30,58,0,0"
                   VerticalAlignment="Top"
                   Width="164"
                   ItemsSource="{Binding Accommodations}"
@@ -47,60 +48,92 @@
             </ComboBox.ItemTemplate>
         </ComboBox>
         <DatePicker HorizontalAlignment="Left"
-                    Margin="30,168,0,0"
+                    Margin="33,120,0,0"
                     SelectedDate="{Binding Path=SelectedStartDate}"
                     Name="StartDatePicker"
                     VerticalAlignment="Top" />
         <DatePicker HorizontalAlignment="Left"
-                    Margin="287,168,0,0"
+                    Margin="290,120,0,0"                   
                     SelectedDate="{Binding Path=SelectedEndDate}"
                     Name="EndDatePicker"
                     VerticalAlignment="Top" />
         <Label Content="Start date&#xD;&#xA;"
                HorizontalAlignment="Left"
-               Margin="30,142,0,0"
+               Margin="33,94,0,0"
                VerticalAlignment="Top"
                Height="26"
                FontWeight="Bold" />
         <Label Content="End date&#xA;"
                HorizontalAlignment="Left"
-               Margin="287,142,0,0"
+               Margin="290,94,0,0"
                VerticalAlignment="Top"
                Height="26"
                FontWeight="Bold" />
         <Label Content="Expected duration (in days):"
                HorizontalAlignment="Left"
-               Margin="26,222,0,0"
+               Margin="26,156,0,0"
                VerticalAlignment="Top"
                Height="26"
-               FontWeight="Bold"/>
+               FontWeight="Bold" />
         <TextBox HorizontalAlignment="Left"
-                 Margin="30,253,0,0"
+                 Margin="30,187,0,0"
                  TextWrapping="Wrap"
                  VerticalAlignment="Top"
                  Text="{Binding Duration}"
                  Width="136" />
         <Label Content="Renovation description:"
                HorizontalAlignment="Left"
-               Margin="26,290,0,0"
+               Margin="26,224,0,0"
                VerticalAlignment="Top"
                Height="26"
                FontWeight="Bold" />
         <TextBox HorizontalAlignment="Left"
-                 Margin="30,321,0,0"
+                 Margin="30,255,0,0"
                  TextWrapping="Wrap"
                  VerticalAlignment="Top"
                  Width="146"
                  Text="{Binding Description}"
                  Height="64" />
         <Button Content="search for available appointments"
-                HorizontalAlignment="Center"
-                Margin="0,417,0,0"
+                HorizontalAlignment="Left"
+                Margin="109,342,0,0"
                 VerticalAlignment="Top"
                 BorderBrush="#FF6DECF5"
-                Background="#FFB2F4F9" 
-                Command="{Binding SearchCommand}"/>
-        
+                Background="#FFB2F4F9"
+                Command="{Binding SearchCommand}" />
+        <Label Content="Available appointments:"
+               HorizontalAlignment="Left"
+               Margin="33,367,0,0"
+               VerticalAlignment="Top"
+               Width="242"
+               FontWeight="Bold"
+               FontSize="14" />
+        <DataGrid x:Name="AvailableTermsDataGrid"
+                  Background="#FF87EEF4"
+                  ItemsSource="{Binding Path=AvailableTerms, UpdateSourceTrigger=PropertyChanged}"
+                  SelectedItem="{Binding Path=SelectedTerm, UpdateSourceTrigger=PropertyChanged}"
+                  Margin="66,401,66,51">
+            <DataGrid.Columns>
+                <DataGridTextColumn Header="From"
+                                    Width="*"
+                                    Binding="{Binding Start}"
+                                    CanUserResize="False" />
+                <DataGridTextColumn Header="To"
+                                    Width="*"
+                                    Binding="{Binding End}"
+                                    CanUserResize="False" />
+
+            </DataGrid.Columns>
+        </DataGrid>
+        <Button Content="schedule a renovation"
+                HorizontalAlignment="Left"
+                Margin="290,542,0,0"
+                VerticalAlignment="Top"
+                BorderBrush="#FF6DECF5"
+                Background="#FFB2F4F9"
+                Command="{Binding ScheduleRenovationCommand}" />
+
+
 
     </Grid>
 </Page>

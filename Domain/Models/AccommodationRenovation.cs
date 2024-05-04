@@ -2,6 +2,7 @@
 using BookingApp.Serializer;
 using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -48,11 +49,35 @@ namespace BookingApp.Domain.Models
         {
             Id = Convert.ToInt32(values[0]);
             Accommodation = new Accommodation() { Id = Convert.ToInt32(values[1]) };
-            Start = Convert.ToDateTime(values[2]);
-            End = Convert.ToDateTime(values[3]);
+
+            // Pravimo string koji sadrži očekivani format datuma
+            string dateFormat = "dd/MM/yyyy";
+
+            // Pokušavamo da parsiramo poznati format datuma iz CSV datoteke
+            if (DateTime.TryParseExact(values[2], dateFormat, CultureInfo.InvariantCulture, DateTimeStyles.None, out DateTime startDate))
+            {
+                Start = startDate;
+            }
+            else
+            {
+                // Ako parsiranje nije uspelo, možemo postaviti neku podrazumevanu vrednost ili baciti grešku
+                throw new FormatException("Datum početka nije u očekivanom formatu.");
+            }
+
+            // Ponavljamo isti postupak za krajnji datum
+            if (DateTime.TryParseExact(values[3], dateFormat, CultureInfo.InvariantCulture, DateTimeStyles.None, out DateTime endDate))
+            {
+                End = endDate;
+            }
+            else
+            {
+                throw new FormatException("Datum završetka nije u očekivanom formatu.");
+            }
+
             Description = values[4];
             IsCancelled = bool.Parse(values[5]);
         }
+
 
     }
 }

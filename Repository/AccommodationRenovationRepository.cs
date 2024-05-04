@@ -24,10 +24,10 @@ namespace BookingApp.Repository
             _serializer = new Serializer<AccommodationRenovation>();
             _accommodationRenovations = _serializer.FromCSV(FilePath);
         }
-       
+
         public void BindAccommodationRenovationWithAccommodation()
         {
-           AccommodationRepository accommodationRepository = new AccommodationRepository();
+            AccommodationRepository accommodationRepository = new AccommodationRepository();
             _accommodationRenovations.ForEach(ar => ar.Accommodation = accommodationRepository.GetById(ar.Accommodation.Id));
 
 
@@ -39,11 +39,40 @@ namespace BookingApp.Repository
             _serializer.ToCSV(FilePath, _accommodationRenovations);
             return accommodationRenovation;
         }
+        public List<AccommodationRenovation> GetAllForOwner(int id)
+
+        {
+            List<AccommodationRenovation> renovations = GetAllWithAccommodation();
+
+
+            return renovations.Where(renovations => renovations.Accommodation.Owner.Id == id).ToList();
+        }
+        public List<AccommodationRenovation> GetAllPreviousRenovations(int id)
+        {
+            List<AccommodationRenovation> renovations = GetAllWithAccommodation();
+            DateTime today = DateTime.Today;
+            return renovations.Where(renovation => renovation.End < today).ToList();
+        }
+
+        public List<AccommodationRenovation> GetAllScheduledRenovations(int id)
+        {
+            List<AccommodationRenovation> renovations = GetAllWithAccommodation();
+            DateTime today = DateTime.Today;
+            return renovations.Where(renovation => renovation.Start >= today).ToList();
+        }
 
         public List<AccommodationRenovation> GetAll()
         {
             return _accommodationRenovations;
         }
+        public List<AccommodationRenovation> GetAllWithAccommodation()
+        {
+            List<AccommodationRenovation> renovations = GetAll();
+            BindAccommodationRenovationWithAccommodation();
+
+            return renovations;
+        }
+
         public AccommodationRenovation Get(int id)
         {
             return _accommodationRenovations.Find(ar => ar.Id == id);

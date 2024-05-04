@@ -1,4 +1,5 @@
 ﻿using BookingApp.Controller;
+using BookingApp.Domain.Models;
 using BookingApp.DTO;
 using BookingApp.Model;
 using BookingApp.View;
@@ -15,19 +16,34 @@ namespace BookingApp.WPF.ViewModels.OwnerPageViewModels
 {
     public class ScheduleRenovationPageViewModel : ViewModelBase
     {
+        public event Action<string> OnHeaderChanged;
         public ObservableCollection<Accommodation> Accommodations { get; set; }
-        private AccommodationController _accommodationController { get; set; }
+        public AccommodationController _accommodationController { get; set; }
         public AccommodationRenovationController _accommodationRenovationController { get; set; }
         public Accommodation SelectedAccommodation { get; set; }
         public RelayCommand SearchCommand { get; set; }
         public ObservableCollection<DateRange> AvailableTerms { get; set; }
-       
+        public RelayCommand ScheduleRenovationCommand { get; set; }
+
 
         public DateRange SelectedTerm { get; set; }
         public Accommodation Accommodation { get; set; }
 
 
         #region NotifyProperties
+        private string _header;
+        public string Header
+        {
+            get { return _header; }
+            set
+            {
+                if (_header != value)
+                {
+                    _header = value;
+                    OnPropertyChanged(nameof(Header));
+                }
+            }
+        }
         private DateTime _selectedStartDate = DateTime.Now.Date;
         public DateTime SelectedStartDate
         {
@@ -69,8 +85,9 @@ namespace BookingApp.WPF.ViewModels.OwnerPageViewModels
                 }
             }
         }
-        public int _description;
-        public int Description
+
+        public string _description;
+        public string Description
         {
             get => _description;
             set
@@ -89,13 +106,28 @@ namespace BookingApp.WPF.ViewModels.OwnerPageViewModels
             _accommodationRenovationController = new AccommodationRenovationController();
             Accommodations = new ObservableCollection<Accommodation>( _accommodationController.GetByOwner(SignInForm.LoggedUser.Id));
             SearchCommand = new RelayCommand(Execute_SearchCommand, Can_SearchCommand);
-         
+            ScheduleRenovationCommand = new RelayCommand(Execute_ScheduleRenovationCommand);
 
             AvailableTerms = new ObservableCollection<DateRange>();
             SelectedTerm = new DateRange();
             Accommodation = SelectedAccommodation;
             //SelectedAccommodation = accommodation;
+            OnHeaderChanged?.Invoke("Schedule a Renovation");
 
+        }
+        public void UpdateHeader(string newHeader)
+        {
+            OnHeaderChanged?.Invoke(newHeader);
+        }
+        public bool CanExecute_ScheduleRenovationCommand(object param)
+        {
+            return SelectedTerm != null;
+        }
+        public void Execute_ScheduleRenovationCommand(object param)
+        {
+            AccommodationRenovation accommodationRenovation = new AccommodationRenovation() { Accommodation = SelectedAccommodation, Start = SelectedTerm.Start, End = SelectedTerm.End, Description = Description, IsCancelled = false };
+            _accommodationRenovationController.Save(accommodationRenovation);
+           
         }
         public bool Can_SearchCommand(object param)
         {
@@ -109,10 +141,12 @@ namespace BookingApp.WPF.ViewModels.OwnerPageViewModels
             {
                 AvailableTerms.Add(availableTerm);
             }
+           // OnPropertyChanged(nameof(AvailableTerms)); // Dodajte ovu liniju kako bi se osiguralo da se promjene u AvailableTerms reflektiraju u DataGridu
         }
+
         public void Execute_SearchCommand(object param)
         {
-            if (SelectedEndDate == default(DateTime) || Duration == 0 || SelectedEndDate < SelectedStartDate)
+            if (Duration == 0 || SelectedEndDate < SelectedStartDate) //SelectedEndDate == default(DateTime) ||
             {
                 MessageBox.Show("Niste uneli ispravane podatke, pokušajte ponovo.", "", MessageBoxButton.OK, MessageBoxImage.Error);
                 return;

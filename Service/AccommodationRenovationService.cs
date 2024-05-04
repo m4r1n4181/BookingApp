@@ -4,6 +4,7 @@ using BookingApp.Domain.RepositoryInterfaces;
 using BookingApp.DTO;
 using BookingApp.Model;
 using BookingApp.Repository;
+using BookingApp.Serializer;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -24,6 +25,17 @@ namespace BookingApp.Service
             _accommodationReservationService = new AccommodationReservationService();
 
         }
+        public List<AccommodationRenovation> GetAllPreviousRenovations(int id)
+        {
+           
+            return _accommodationRenovationRepository.GetAllPreviousRenovations(id);
+        }
+
+        public List<AccommodationRenovation> GetAllScheduledRenovations(int id)
+        {
+            return _accommodationRenovationRepository.GetAllScheduledRenovations(id);
+        }
+
 
         public List<AccommodationRenovation> GetAll()
         {
@@ -57,7 +69,11 @@ namespace BookingApp.Service
         {
             return _accommodationRenovationRepository.GetByAccommodationId(id);
         }
-        
+        public List<AccommodationRenovation> GetAllForOwner(int id)
+
+        {            
+            return _accommodationRenovationRepository.GetAllForOwner(id);
+        }
 
         public List<DateRange> FindAllAvailableTerms(Accommodation accommodation, DateTime Start, DateTime End, int Duration)
         {
@@ -120,6 +136,7 @@ namespace BookingApp.Service
 
             return renovations.Where(r => r.IsCancelled == false).ToList();
         }
+        
 
 
         public void CancelRenovation(AccommodationRenovation renovation)
