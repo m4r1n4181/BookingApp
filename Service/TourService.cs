@@ -4,6 +4,7 @@ using BookingApp.Domain.RepositoryInterfaces;
 using BookingApp.DTO;
 using BookingApp.Model;
 using BookingApp.Repository;
+using BookingApp.Serializer;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -320,6 +321,12 @@ namespace BookingApp.Service
         public List<Tour> GetFutureTours()
         {
             return _tourRepository.GetFutureTours();
+        }
+
+        public List<Tour> SearchTourForTourGuide(TourGuideSearch tourGuideSearch)
+        {
+            return _tourRepository.SearchTourForTourGuide(tourGuideSearch);
+
         }
 
     }

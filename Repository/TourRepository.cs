@@ -194,9 +194,39 @@ namespace BookingApp.Repository
             return _tourInFuture;
         }
 
+        public List<Tour> SearchTourForTourGuide(TourGuideSearch tourGuideSearch)
+        {
+            _tours = _serializer.FromCSV(FilePath);
+            BindLocations();
+
+            if (!string.IsNullOrWhiteSpace(tourGuideSearch.City))
+            {
+                _tours = _tours.FindAll(a => a.Location.City.Contains(tourGuideSearch.City, StringComparison.OrdinalIgnoreCase));
+            }
+
+            if (!string.IsNullOrWhiteSpace(tourGuideSearch.Country))
+            {
+                _tours = _tours.FindAll(a => a.Location.Country.Contains(tourGuideSearch.Country, StringComparison.OrdinalIgnoreCase));
+            }
+
+            if (tourGuideSearch.MaxTourists > 0)
+            {
+                _tours = _tours.FindAll(a => a.MaxTourists >= tourGuideSearch.MaxTourists);
+            }
+            if (tourGuideSearch.StartDate != null)
+            {
+                _tours = _tours.FindAll(a => a.StartDate >= tourGuideSearch.StartDate);
+            }
+
+            if (!string.IsNullOrWhiteSpace(tourGuideSearch.Language))
+            {
+                _tours = _tours.FindAll(tour => tour.Language.Equals(tourGuideSearch.Language, StringComparison.OrdinalIgnoreCase));
+            }
+
+            return _tours;
+        }
 
 
     }
-
 
 }

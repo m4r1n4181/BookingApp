@@ -6,7 +6,7 @@
         xmlns:local="clr-namespace:BookingApp.View"
         mc:Ignorable="d"
         Title="AllTours" Height="600" Width="850">
-    <Grid>
+    <Grid Margin="0,0,0,0">
         <Grid.RowDefinitions>
             <RowDefinition Height="1*"/>
             <RowDefinition Height="1*"/>
@@ -43,41 +43,101 @@
         <Border Grid.Row="4" Grid.Column="0" Grid.ColumnSpan="1" BorderBrush="Gray" BorderThickness="0,0,0,0.5" Margin="0,0,0,0"/>
         <Border Grid.Row="5" Grid.Column="0" Grid.ColumnSpan="1" BorderBrush="Gray" BorderThickness="0,0,0,0.5" Margin="0,0,0,0"/>
 
-        <StackPanel Grid.Row="3" Grid.Column="1" Grid.ColumnSpan="6" Grid.RowSpan="3" Margin="15,0,15,0">
-            <DataGrid ItemsSource="{Binding Tours}" SelectedItem="{Binding Path=SelectedTour}" IsReadOnly="True" SelectionMode="Single" AutoGenerateColumns="False" Height="325" HeadersVisibility="Column" FontSize="13" Background="#F0F0F0">
-                <DataGrid.Resources>
-                    <!-- Style for alternating rows -->
-                    <Style TargetType="DataGridRow">
-                        <Setter Property="Background" Value="{Binding RelativeSource={RelativeSource AncestorType={x:Type DataGrid}}, Path=Background}"/>
-                        <Setter Property="Foreground" Value="Black"/>
-                        <Style.Triggers>
-                            <Trigger Property="IsSelected" Value="True">
-                                <Setter Property="Background" Value="#0078D7"/>
-                                <Setter Property="Foreground" Value="White"/>
-                            </Trigger>
-                        </Style.Triggers>
-                    </Style>
-                    <!-- Style for DataGridTextColumns -->
-                    <Style TargetType="DataGridCell">
-                        <Setter Property="Padding" Value="10"/>
-                        <Setter Property="BorderThickness" Value="0"/>
+        <TextBlock  Grid.Row="1" Grid.Column="1"  Text="City:" Margin="15,7,0,5"  Foreground="#0F3057" />
+        <StackPanel Grid.Row="1" Grid.Column="1" Orientation="Horizontal" Margin="10">
+            <TextBox x:Name="CityTextBox" Text="{Binding City, UpdateSourceTrigger=PropertyChanged}" Width="100" VerticalAlignment="Center" Padding="5"
+             BorderBrush="#CCCCCC" BorderThickness="1" FontSize="13" Height="29">
+                <TextBox.Resources>
+                    <Style TargetType="TextBox">
+                        <Setter Property="HorizontalAlignment" Value="Left"/>
                         <Setter Property="VerticalAlignment" Value="Center"/>
-                        <Setter Property="TextBlock.FontFamily" Value="Segoe UI"/>
-                        <Setter Property="TextBlock.FontSize" Value="13"/>
-                        <Setter Property="TextBlock.Foreground" Value="Black"/>
-                        <Setter Property="TextBlock.TextAlignment" Value="Left"/>
-                        <Setter Property="Background" Value="{Binding RelativeSource={RelativeSource AncestorType={x:Type DataGridRow}}, Path=Background}"/>
+                        <Setter Property="Margin" Value="5,0,0,0"/>
+                        <Setter Property="Foreground" Value="Black"/>
+                        <Setter Property="FontSize" Value="12"/>
+                    </Style>
+                </TextBox.Resources>
+            </TextBox>
+        </StackPanel>
+
+        <TextBlock  Grid.Row="1" Grid.Column="2"  Text="Country:" Margin="10,7,5,5"  Foreground="#0F3057" />
+        <StackPanel Grid.Row="1" Grid.Column="2" Orientation="Horizontal" Margin="10">
+            <TextBox x:Name="CountryTextBox" Width="100" VerticalAlignment="Center" Padding="5"
+             BorderBrush="#CCCCCC" BorderThickness="1" FontSize="13"  Height="29"
+             Text="{Binding Country, UpdateSourceTrigger=PropertyChanged}">
+                <TextBox.Style>
+                    <Style TargetType="TextBox">
                         <Style.Triggers>
-                            <Trigger Property="IsSelected" Value="True">
-                                <Setter Property="Foreground" Value="White"/>
+                            <Trigger Property="Text" Value="Country">
+                                <Setter Property="Foreground" Value="Black"/>
+                            </Trigger>
+                            <Trigger Property="IsFocused" Value="True">
+                                <Setter Property="Foreground" Value="Black"/>
                             </Trigger>
                         </Style.Triggers>
                     </Style>
-                </DataGrid.Resources>
+                </TextBox.Style>
+            </TextBox>
+        </StackPanel>
+
+        <StackPanel Grid.Row="1" Grid.Column="3" Orientation="Horizontal" Margin="10">
+            <TextBlock FontFamily="Segoe UI Emoji" FontSize="18" Text="&#x1F465;"  Foreground="#0F3057" VerticalAlignment="Center" Margin="0,0,5,0"/>
+            <TextBox x:Name="MaxTouristsTextBox" Width="44" VerticalAlignment="Center" Padding="5"
+             BorderBrush="#CCCCCC" BorderThickness="1" FontSize="13" Height="29"  Text="{Binding MaxTourists, UpdateSourceTrigger=PropertyChanged}">
+                <TextBox.Resources>
+                    <Style TargetType="TextBox">
+                        <Setter Property="HorizontalAlignment" Value="Left"/>
+                        <Setter Property="VerticalAlignment" Value="Center"/>
+                        <Setter Property="Margin" Value="5,0,0,0"/>
+                        <Setter Property="Foreground" Value="Black"/>
+                        <Setter Property="Text" Value="Max"/>
+                        <Setter Property="FontSize" Value="11"/>
+                    </Style>
+                </TextBox.Resources>
+            </TextBox>
+        </StackPanel>
+
+        <TextBlock  Grid.Row="1" Grid.Column="4"  Text="Language:" Margin="15,7,0,5" Foreground="#0F3057" />
+        <StackPanel Grid.Row="1" Grid.Column="4" Orientation="Horizontal" Margin="10">
+            <TextBox x:Name="LanguageTextBox" Width="100" VerticalAlignment="Center" Padding="5"
+             BorderBrush="#CCCCCC" BorderThickness="1" FontSize="13" Height="29" Text="{Binding Language, UpdateSourceTrigger=PropertyChanged}">
+                <TextBox.Resources>
+                    <Style TargetType="TextBox">
+                        <Setter Property="HorizontalAlignment" Value="Left"/>
+                        <Setter Property="VerticalAlignment" Value="Center"/>
+                        <Setter Property="Margin" Value="5,0,0,0"/>
+                        <Setter Property="Foreground" Value="Black"/>
+                        <Setter Property="Text" Value="Language"/>
+                        <Setter Property="FontSize" Value="11"/>
+                    </Style>
+                </TextBox.Resources>
+            </TextBox>
+        </StackPanel>
+
+        <StackPanel Grid.Row="1" Grid.Column="5" Orientation="Horizontal" Margin="10">
+            <StackPanel Orientation="Horizontal">
+                <DatePicker x:Name="StartDatePicker" Width="103" VerticalAlignment="Center"  SelectedDate="{Binding StartDate}"/>
+            </StackPanel>
+        </StackPanel>
+
+        <!-- Search Button for filters -->
+        <StackPanel Grid.Row="1" Grid.Column="6" Orientation="Horizontal" Margin="20" HorizontalAlignment="Left">
+            <Button Width="26" Padding="5" Background="#0F3057" Foreground="White" FontSize="14" VerticalAlignment="Center" 
+            Command="{Binding SearchCommand}" >
+                <TextBlock FontFamily="Segoe MDL2 Assets" FontSize="14" Text="&#xE721;" />
+            </Button>
+        </StackPanel>
+
+
+        <StackPanel Grid.Row="3" Grid.Column="1" Grid.ColumnSpan="6" Grid.RowSpan="3" Margin="15,0,15,0">
+            <DataGrid ItemsSource="{Binding Tours}" SelectedItem="{Binding Path=SelectedTour}" IsReadOnly="True" SelectionMode="Single" 
+AutoGenerateColumns="False" Height="266" HeadersVisibility="Column" FontSize="13" Background="#F0F0F0">
+
                 <DataGrid.Columns>
                     <DataGridTextColumn Header="Name" Binding="{Binding Name}" Width="*" />
                     <DataGridTextColumn Header="City" Binding="{Binding Location.City}" Width="*" />
                     <DataGridTextColumn Header="Country" Binding="{Binding Location.Country}" Width="*" />
+                    <DataGridTextColumn Header="Max tourists" Binding="{Binding MaxTourists}" Width="*" />
+                    <DataGridTextColumn Header="Language" Binding="{Binding Language}" Width="*" />
                     <DataGridTextColumn Header="Date and time" Binding="{Binding StartDate}" Width="*" />
                 </DataGrid.Columns>
             </DataGrid>
@@ -192,10 +252,10 @@
 
 
         <Border Grid.Row="0" Grid.Column="1" Grid.ColumnSpan="6" BorderBrush="Black" BorderThickness="0,0.5,0,0.5" Margin="0,0,0,0"/>
-        <Border Grid.Row="0" Grid.Column="0" Grid.RowSpan="7" BorderBrush="Black" BorderThickness="0,0.5,0.5,0.5" Margin="0,0,0,0"/>
+        <Border Grid.Row="0" Grid.Column="0" Grid.RowSpan="7" BorderBrush="Black" BorderThickness="0,0.5,0.5,0.5" Margin="-14,0,0,0"/>
 
         <!-- Tutorial Button -->
-        <Button Grid.Row="0" Grid.Column="6" Margin="60,0,7,40" Click="Tutorial_Click">
+        <Button Grid.Row="0" Grid.Column="6" Margin="76,0,7,40" Click="Tutorial_Click">
             <Button.Template>
                 <ControlTemplate TargetType="Button">
                     <Grid>
@@ -228,7 +288,7 @@
                 </ControlTemplate>
             </Button.Template>
         </Button>
-        
+
         <Button Command="{Binding TourStatisticsCommand}" FontSize="14" VerticalAlignment="Center" Grid.Row="6" Grid.Column="1" Margin="10,0,10,0">
             <Button.Template>
                 <ControlTemplate TargetType="Button">
@@ -241,6 +301,13 @@
             </Button.Template>
         </Button>
 
+        <StackPanel Orientation="Vertical" Margin="10" Grid.Row="2" Grid.Column="1">
+            <RadioButton Content="All" IsChecked="{Binding IsAllToursSelected, Mode=TwoWay}" Width="65" Margin="10,0,10,0"/>
+            <RadioButton Content="Future" IsChecked="{Binding IsFutureToursSelected, Mode=TwoWay}" Width="65" Margin="10,2,10,0"/>
+            <RadioButton Content="Active" IsChecked="{Binding IsActiveToursSelected, Mode=TwoWay}" Width="65"  Margin="10,3,10,0" />
+        </StackPanel>
+
+        <!-- pretrazivac nije implementiran -->
         <Grid Margin="10" Grid.Column="2" Grid.ColumnSpan="4">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="*" />
@@ -248,9 +315,7 @@
             </Grid.ColumnDefinitions>
             <TextBox x:Name="SearchTextBox" Grid.Column="0" Padding="5" BorderThickness="0" Background="#F0F2F5" FontSize="14" 
         VerticalAlignment="Center" Margin="0,0,10,0" />
-            <Button Grid.Column="1" Padding="5" Background="#0F3057" Foreground="White" FontSize="14" VerticalAlignment="Center" 
-        Command="{Binding SearchCommand}" >
-                <!-- Emoji icon for search -->
+            <Button Grid.Column="1" Padding="5" Background="#0F3057" Foreground="White" FontSize="14" VerticalAlignment="Center" >
                 <TextBlock FontFamily="Segoe MDL2 Assets" FontSize="14" Text="&#xE721;" />
             </Button>
         </Grid>

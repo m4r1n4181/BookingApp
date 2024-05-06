@@ -7,6 +7,7 @@ using System.Threading.Tasks;
 using BookingApp.Repository;
 using BookingApp.DTO;
 using System;
+using BookingApp.Domain.RepositoryInterfaces;
 namespace BookingApp.Controller
 {
     public class TourController
@@ -111,6 +112,13 @@ namespace BookingApp.Controller
         {
             return _tourService.GetFutureTours();
         }
+
+        public List<Tour> SearchTourForTourGuide(TourGuideSearch tourGuideSearch)
+        {
+            return _tourService.SearchTourForTourGuide(tourGuideSearch);
+
+        }
+
 
     }
 

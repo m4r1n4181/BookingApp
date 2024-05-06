@@ -27,5 +27,6 @@ namespace BookingApp.Domain.RepositoryInterfaces
         List<Tour> GetAllActiveTours();
         List<Tour> GetAlternativeTours(int locationId);
         List<Tour> GetFutureTours();
+        List<Tour> SearchTourForTourGuide(TourGuideSearch tourGuideSearch);
     }
 }
