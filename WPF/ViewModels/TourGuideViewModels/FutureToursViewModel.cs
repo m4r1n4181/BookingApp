@@ -85,12 +85,7 @@ namespace BookingApp.View.ViewModels.TourGuideViewModels
         public bool CanExecuteCancelClick(object param)
         {
             return true;
-            // if (SelectedTour == null)
-            //{
-            // MessageBox.Show("Please select a tour.", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
-            //  return false;
-            //}
-            //return true;
+   
         }
 
 

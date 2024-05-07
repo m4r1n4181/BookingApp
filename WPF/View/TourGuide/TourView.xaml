@@ -5,47 +5,119 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:BookingApp.View"
         mc:Ignorable="d"
-        Title="TourView" Height="450" Width="800">
+         ResizeMode="NoResize"
+        Title="TourView" Height="400" Width="700">
     <Grid>
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="Auto"/>
-            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="1*"/>
+            <ColumnDefinition Width="1*"/>
         </Grid.ColumnDefinitions>
+
         <Grid.RowDefinitions>
-            <RowDefinition Height="Auto"/>
-            <RowDefinition Height="Auto"/>
-            <RowDefinition Height="Auto"/>
-            <RowDefinition Height="Auto"/>
-            <RowDefinition Height="Auto"/>
-            <RowDefinition Height="Auto"/>
-            <RowDefinition Height="Auto"/>
-            <RowDefinition Height="Auto"/>
-            <RowDefinition Height="*"/>
+            <RowDefinition Height="2*"/>
+            <RowDefinition Height="1*"/>
+            <RowDefinition Height="1*"/>
+            <RowDefinition Height="2*"/>
+            <RowDefinition Height="1*"/>
+            <RowDefinition Height="1*"/>
+            <RowDefinition Height="2*"/>
+
         </Grid.RowDefinitions>
 
-        <TextBlock Text="Name:" FontWeight="Bold" Margin="5"/>
-        <TextBlock Text="{Binding TourName}" Grid.Row="0" Grid.Column="1" Margin="5"/>
-
-        <TextBlock Text="Location:" FontWeight="Bold" Margin="5" Grid.Row="1"/>
-        <TextBlock Text="{Binding Location}" Grid.Row="1" Grid.Column="1" Margin="5"/>
-
-        <TextBlock Text="Description:" FontWeight="Bold" Margin="5" Grid.Row="2"/>
-        <TextBlock Text="{Binding Description}" Grid.Row="2" Grid.Column="1" Margin="5"/>
-
-        <TextBlock Text="Language:" FontWeight="Bold" Margin="5" Grid.Row="3"/>
-        <TextBlock Text="{Binding Languages}" Grid.Row="3" Grid.Column="1" Margin="5"/>
-
-        <TextBlock Text="Max number of tourists:" FontWeight="Bold" Margin="5" Grid.Row="4"/>
-        <TextBlock Text="{Binding MaxTourists}" Grid.Row="4" Grid.Column="1" Margin="5"/>
-
-        <TextBlock Text="StartDate and time:" FontWeight="Bold" Margin="5" Grid.Row="5"/>
-        <TextBlock Text="{Binding TourDate}" Grid.Row="5" Grid.Column="1" Margin="5"/>
+        <Grid Grid.Row="0" Grid.Column="1" Grid.RowSpan="7" Background="#F0F0F0" Margin="0"/>
+        <Grid Grid.Row="0" Grid.Column="0" Grid.RowSpan="7" Background="#0F3057" Margin="0"/>
 
 
-        <TextBlock Text="Duration in hours:" FontWeight="Bold" Margin="5" Grid.Row="6"/>
-        <TextBlock Text="{Binding Duration}" Grid.Row="6" Grid.Column="1" Margin="5"/>
-        
-        
+        <TextBlock Text="&#x1F30D;" FontSize="40" Foreground="White"  VerticalAlignment="Center" HorizontalAlignment="Center"  Margin="0,0,15,0" Grid.Row="0" Grid.Column="0"  />
+        <TextBlock Text="&#x1F4F7;" FontSize="40" Foreground="#0F3057"  VerticalAlignment="Center" HorizontalAlignment="Center"  Margin="0,0,15,0" Grid.Row="0" Grid.Column="1"  />
+
+
+
+        <StackPanel Grid.Row="1" Grid.Column="0">
+            <Grid HorizontalAlignment="Left">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="Auto"/>
+                    <ColumnDefinition Width="Auto"/>
+                </Grid.ColumnDefinitions>
+
+                <TextBlock Text="Name:" FontWeight="Bold" Margin="10,5,0,0" FontSize="14" Foreground="White" Width="101" Height="25" VerticalAlignment="Center" HorizontalAlignment="Left"/>
+                <TextBlock Text="{Binding TourName}"  Margin="5,5,0,0" Grid.Column="1" VerticalAlignment="Center" Height="25" Width="150" FontSize="14" Foreground="White"/>
+            </Grid>
+        </StackPanel>
+
+        <StackPanel Grid.Row="2" Grid.Column="0">
+            <Grid HorizontalAlignment="Left">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="Auto"/>
+                    <ColumnDefinition Width="Auto"/>
+                </Grid.ColumnDefinitions>
+
+                <TextBlock Text="Location:" FontWeight="Bold" Margin="10,5,0,0" FontSize="14" Foreground="White" Width="101" Height="25" VerticalAlignment="Center" HorizontalAlignment="Left"/>
+                <TextBlock Text="{Binding Location}" Margin="5,5,0,0" Grid.Column="1" VerticalAlignment="Center" Height="25" Width="150" FontSize="14" Foreground="White"/>
+            </Grid>
+        </StackPanel>
+
+
+        <StackPanel Grid.Row="3" Grid.Column="0">
+            <Grid HorizontalAlignment="Left">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="Auto"/>
+                    <ColumnDefinition Width="Auto"/>
+                </Grid.ColumnDefinitions>
+
+                <TextBlock Text="Description:" FontWeight="Bold" Margin="10,5,0,0" FontSize="14" Foreground="White" Width="101" Height="25" VerticalAlignment="Top" HorizontalAlignment="Left"/>
+                <TextBlock Text="{Binding Description}" Margin="5,5,0,0" Grid.Column="1" VerticalAlignment="Center" Height="70" Width="150" FontSize="14" Foreground="White"/>
+            </Grid>
+        </StackPanel>
+
+        <StackPanel Grid.Row="4" Grid.Column="0">
+            <Grid HorizontalAlignment="Left">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="Auto"/>
+                    <ColumnDefinition Width="Auto"/>
+                </Grid.ColumnDefinitions>
+
+                <TextBlock Text="Language:" FontWeight="Bold" Margin="10,5,0,0" FontSize="14" Foreground="White" Width="101" Height="25" VerticalAlignment="Center" HorizontalAlignment="Left"/>
+                <TextBlock Text="{Binding Languages}" Margin="5,5,0,0" Grid.Column="1" VerticalAlignment="Center" Height="25" Width="150" FontSize="14" Foreground="White"/>
+            </Grid>
+        </StackPanel>
+
+
+        <StackPanel Grid.Row="5" Grid.Column="0">
+            <Grid HorizontalAlignment="Left">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="Auto"/>
+                    <ColumnDefinition Width="Auto"/>
+                </Grid.ColumnDefinitions>
+
+                <TextBlock Text="Date and time:" TextWrapping="Wrap" FontWeight="Bold" Margin="10,5,0,0" FontSize="14" Foreground="White" Width="101" Height="25" VerticalAlignment="Center" HorizontalAlignment="Left"/>
+                <TextBlock Text="{Binding TourDate}" Margin="5,5,0,0" Grid.Column="1" VerticalAlignment="Center" Height="25" Width="150" FontSize="14" Foreground="White"/>
+            </Grid>
+        </StackPanel>
+
+
+        <StackPanel Grid.Row="6" Grid.Column="0" HorizontalAlignment="Left">
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                </Grid.RowDefinitions>
+
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="1*"/>
+                    <ColumnDefinition Width="1*"/>
+                </Grid.ColumnDefinitions>
+
+                <TextBlock Text="Max number of tourists:" TextWrapping="Wrap" FontWeight="Bold" Margin="10,5,0,0" FontSize="14" Foreground="White" Width="83" Height="55" VerticalAlignment="Top" HorizontalAlignment="Left" Grid.RowSpan="2"/>
+                <TextBlock Text="{Binding MaxTourists}" Margin="98,10,27,0" Grid.Column="0" VerticalAlignment="Top" Height="42" Width="50" FontSize="18" Grid.RowSpan="2"  Foreground="White"/>
+
+                <TextBlock Text="Duration in hours:" TextWrapping="Wrap" FontWeight="Bold" Margin="10,5,0,0" FontSize="14" Foreground="White" Width="83" Height="55" VerticalAlignment="Top" HorizontalAlignment="Left" Grid.Row="0" Grid.Column="1"  Grid.RowSpan="2"/>
+                <TextBlock Text="{Binding Duration}" Margin="98,10,27,0" Grid.Column="1" VerticalAlignment="Top" Height="42" Width="50" FontSize="18" Grid.RowSpan="2" Foreground="White"/>
+            </Grid>
+        </StackPanel>
+
+
+
 
     </Grid>
 </Window>

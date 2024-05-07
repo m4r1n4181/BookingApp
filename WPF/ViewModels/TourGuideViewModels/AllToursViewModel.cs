@@ -41,6 +41,9 @@ namespace BookingApp.View.ViewModels.TourGuideViewModels
                 {
                     _isFutureToursSelected = value;
                     OnPropertyChanged();
+
+                    IsCancelTourButtonVisible = value; 
+
                 }
             }
         }
@@ -55,6 +58,20 @@ namespace BookingApp.View.ViewModels.TourGuideViewModels
                 {
                     _isActiveToursSelected = value;
                     OnPropertyChanged();
+                }
+            }
+        }
+
+        private bool _isCancelTourButtonVisible;
+        public bool IsCancelTourButtonVisible
+        {
+            get => _isCancelTourButtonVisible;
+            set
+            {
+                if (_isCancelTourButtonVisible != value)
+                {
+                    _isCancelTourButtonVisible = value;
+                    OnPropertyChanged(nameof(IsCancelTourButtonVisible));
                 }
             }
         }
@@ -136,6 +153,10 @@ namespace BookingApp.View.ViewModels.TourGuideViewModels
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
         }
 
+        private TourReservationController _tourReservationController;
+
+        private ObservableCollection<TourReservation> TourReservation;
+
         public ObservableCollection<Tour> Tours { get; set; }
         public Tour SelectedTour { get; set; }
 
@@ -146,12 +167,14 @@ namespace BookingApp.View.ViewModels.TourGuideViewModels
         public RelayCommand ActiveCommand { get; set; }
 
         public RelayCommand AddCommand { get; set; }
-        public RelayCommand TourStatisticsCommand { get; set; }
         public RelayCommand TutorialCommand { get; set; }
         public RelayCommand SearchCommand { get; set; }
+        public RelayCommand CancelCommand { get; set; }
 
         public AllToursViewModel()
         {
+            _tourReservationController = new TourReservationController();
+
             _tourController = new TourController();
             Tours = new ObservableCollection<Tour>(_tourController.GetAllWithLocations());
 
@@ -163,9 +186,10 @@ namespace BookingApp.View.ViewModels.TourGuideViewModels
 
             ViewCommand = new RelayCommand(View_Click, CanExecuteViewClick);
             AddCommand = new RelayCommand(AddTours_Click, CanExecuteAddToursClick);
-            TourStatisticsCommand = new RelayCommand(TourStatistics_Click, CanExecuteTourStatisticsClick);
             TutorialCommand = new RelayCommand(Tutorial_Click, CanExecuteTutorialClick);
             SearchCommand = new RelayCommand(Search_Click, CanExecuteSearchClick);
+            CancelCommand = new RelayCommand(CancelButton_Click, CanExecuteCancelClick);
+
 
             PropertyChanged += (sender, e) =>
             {
@@ -266,20 +290,6 @@ namespace BookingApp.View.ViewModels.TourGuideViewModels
           
         }
 
-        public void TourStatistics_Click(object param)
-        {
-            TourStatisticsOverview tourStatisticsOverview = new TourStatisticsOverview();
-            tourStatisticsOverview.Show();
-            //napravi tako da mozes da zatvoris prethodniii obavezno za sve kao da te baci na nes drugo 
-
-
-        }
-        public bool CanExecuteTourStatisticsClick(object param)
-        {
-            return true;
-         
-        }
-
         public void Tutorial_Click(object param)
         {
            
@@ -290,6 +300,32 @@ namespace BookingApp.View.ViewModels.TourGuideViewModels
         {
             return true;
           
+        }
+
+        public void CancelButton_Click(object param)
+        {
+            if (SelectedTour == null)
+            {
+                MessageBox.Show("Please select a tour.", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                return;
+            }
+
+
+            _tourReservationController.CancelAllTourReservationsForTour(SelectedTour.Id);
+            Refresh();
+
+        }
+
+        private void Refresh()
+        {
+            Tours.Clear();
+            _tourController.GetTourInFuture().ForEach(t => Tours.Add(t));
+        }
+
+        public bool CanExecuteCancelClick(object param)
+        {
+            return true;
+
         }
 
     }
