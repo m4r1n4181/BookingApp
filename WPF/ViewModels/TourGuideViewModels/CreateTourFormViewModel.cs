@@ -41,6 +41,82 @@ namespace BookingApp.View.ViewModels.TourGuideViewModels
 
         public RelayCommand SaveCommand { get; set; }
 
+
+        private string _selectedCity;
+        public string SelectedCity
+        {
+            get => _selectedCity;
+            set
+            {
+                if (_selectedCity != value)
+                {
+                    _selectedCity = value;
+                    OnPropertyChanged(nameof(SelectedCity));
+
+                    UpdateCountriesBasedOnCity();
+
+                }
+            }
+        }
+
+        private string _selectedCountry;
+        public string SelectedCountry
+        {
+            get => _selectedCountry;
+            set
+            {
+                if (_selectedCountry != value)
+                {
+                    _selectedCountry = value;
+                    OnPropertyChanged(nameof(SelectedCountry));
+
+                    UpdateCitiesBasedOnCountry(); 
+                }
+            }
+        }
+
+        private ObservableCollection<string> _cities;
+        public ObservableCollection<string> Cities
+        {
+            get => _cities;
+            set
+            {
+                if (_cities != value)
+                {
+                    _cities = value;
+                    OnPropertyChanged(nameof(Cities));
+                }
+            }
+        }
+
+        private ObservableCollection<string> _countries;
+        public ObservableCollection<string> Countries
+        {
+            get => _countries;
+            set
+            {
+                if (_countries != value)
+                {
+                    _countries = value;
+                    OnPropertyChanged(nameof(Countries));
+
+                }
+            }
+        }
+
+        private void UpdateCitiesBasedOnCountry()
+        {
+                Cities = new ObservableCollection<string>(
+                Locations.Where(loc => loc.Country == SelectedCountry).Select(loc => loc.City).Distinct());
+        }
+
+        private void UpdateCountriesBasedOnCity()
+        {
+            Countries = new ObservableCollection<string>(
+            Locations.Where(loc => loc.City == SelectedCity).Select(loc => loc.Country).Distinct());
+        }
+
+
         private string _addedKeyPoint;
         public string AddedKeyPoint
         {
@@ -175,6 +251,8 @@ namespace BookingApp.View.ViewModels.TourGuideViewModels
             TourDate = DateTime.Now;
 
 
+            Cities = new ObservableCollection<string>(Locations.Select(loc => loc.City).Distinct());
+            Countries = new ObservableCollection<string>(Locations.Select(loc => loc.Country).Distinct());
 
             PossibleTimes = new ObservableCollection<string>() { "9:00", "12:00", "15:00", "18:00" };
 
@@ -190,10 +268,12 @@ namespace BookingApp.View.ViewModels.TourGuideViewModels
         public void CreateTourForm(object param)
         {
 
+            Location selectedLocation = Locations.FirstOrDefault(loc => loc.City == SelectedCity && loc.Country == SelectedCountry);
+
             Tour newTour = new Tour
             {
                 Name = TourName,
-                Location = SelectedLocation,
+                Location = selectedLocation,
                 TourGuide = SignInForm.LoggedUser,
                 Description = Description,
                 Language = TourLanguage,

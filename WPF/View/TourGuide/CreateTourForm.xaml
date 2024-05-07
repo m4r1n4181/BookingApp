@@ -5,78 +5,221 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:BookingApp.View"
         mc:Ignorable="d"
-        Title="Create New Tour" Height="600" Width="400" WindowStartupLocation="CenterScreen">
+        Title="Create New Tour" Height="400" Width="700" WindowStartupLocation="CenterScreen">
     <Grid>
         <Grid.RowDefinitions>
-            <RowDefinition Height="Auto"/>
-            <RowDefinition Height="*"/>
-            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="1*"/>
+            <RowDefinition Height="1*"/>
+            <RowDefinition Height="1*"/>
+            <RowDefinition Height="1*"/>
         </Grid.RowDefinitions>
 
-        <StackPanel Grid.Row="0" Margin="10">
-            <TextBlock Text="Create tour:" FontWeight="Bold" FontSize="16"/>
-        </StackPanel>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="1*"/>
+            <ColumnDefinition Width="1*"/>
+        </Grid.ColumnDefinitions>
 
-        <StackPanel Grid.Row="1" Margin="10">
-            <StackPanel Orientation="Horizontal" Margin="0 0 0 10">
-                <TextBlock Width="100" Text="Name:" VerticalAlignment="Center"/>
-                <TextBox x:Name="txtTourName" Text="{Binding Path=TourName, UpdateSourceTrigger=PropertyChanged}" Width="200"/>
-            </StackPanel>
-            <StackPanel Orientation="Horizontal" Margin="0 0 0 10">
-                <TextBlock Width="100" Text="Location:" VerticalAlignment="Center"/>
-                <ComboBox Grid.Row="1" Grid.Column="1" Height="25" Width="200" HorizontalAlignment="Left" ItemsSource="{Binding Locations}" SelectedItem="{Binding SelectedLocation}"/>
 
-            </StackPanel>
-            <StackPanel Orientation="Horizontal" Margin="0 0 0 10">
-                <TextBlock Width="100" Text="Description:" VerticalAlignment="Center"/>
-                <TextBox x:Name="txtDescription" Text="{Binding Path=Description, UpdateSourceTrigger=PropertyChanged}" Width="200" Height="80" TextWrapping="Wrap"/>
-            </StackPanel>
-            <StackPanel Orientation="Horizontal" Margin="0 0 0 10">
-                <TextBlock Width="100" Text="Languages:" VerticalAlignment="Center"/>
-                <TextBox x:Name="txtLanguages" Text="{Binding Path=TourLanguage, UpdateSourceTrigger=PropertyChanged}" Width="200"/>
-            </StackPanel>
-            <StackPanel Orientation="Horizontal" Margin="0 0 0 10">
-                <TextBlock Width="101" Text="Maximum number of tourists:" VerticalAlignment="Center" Height="22"/>
-                <TextBox x:Name="txtMaxTourists" Text="{Binding Path=MaxTourists, UpdateSourceTrigger=PropertyChanged}" Width="70"/>
-            </StackPanel>
-            <StackPanel Orientation="Horizontal" Margin="0 0 0 10">
-                <TextBlock Width="100" Text="Key Points:" VerticalAlignment="Center"/>
-                <TextBox x:Name="txtKeyPoints" Text="{Binding Path=KeyPoint, UpdateSourceTrigger=PropertyChanged}" Width="200"/>
-                <Button Width="40" Height="20" Margin="10, 0, 0, 0"  Command="{Binding AddKeyPointCommand}" FontSize="14" VerticalAlignment="Center">
-                    Add</Button>
-            </StackPanel>
-            <StackPanel Orientation="Horizontal" Margin="0 0 0 10">
-                <TextBlock Width="100" Text="Added Key Points:" VerticalAlignment="Center"/>
-                <TextBlock Width="300" Text="{Binding AddedKeyPoint, UpdateSourceTrigger=PropertyChanged}" VerticalAlignment="Center"/>
-            </StackPanel>
-            <StackPanel Orientation="Horizontal" Margin="0 0 0 10">
-                <TextBlock Width="100" Text="Date and time:" VerticalAlignment="Center"/>
-                <DatePicker x:Name="dpStartDate" SelectedDate="{Binding TourDate}" Width="111"/>
-                <ComboBox x:Name="cbStartTime" ItemsSource="{Binding PossibleTimes}" SelectedItem="{Binding SelectedTime}" Width="85" Margin="5 0 0 0">
-                </ComboBox>
-                <Button Width="39" Height="20" Margin="10, 0, 0, 0"  Command="{Binding AddDateTimeCommand}" FontSize="14" VerticalAlignment="Center">
-                   Add</Button>
+        <Border Width="30" Height="30" Background="#0F3057" CornerRadius="15" VerticalAlignment="Center" Margin="-300,0,0,0" >
+            <TextBlock Text="&#x2795;" FontSize="18" Foreground="White" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="0,-2,0,0" />
+        </Border>
+        <Grid Grid.Row="0" Grid.Column="0">
+            <TextBlock Text="Create tour:" FontWeight="Bold" FontSize="33" VerticalAlignment="Center" Margin="50,0,100,0" Foreground="#0F3057"/>
+        </Grid>
+        <!-- za name i city -->
+        <Grid Grid.Row="1" Grid.Column="0" Margin="0,0,0,0">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="1*"/>
+                <RowDefinition Height="1*"/>
+            </Grid.RowDefinitions>
+
+            <StackPanel Grid.Row="0" Grid.Column="0" Margin="0 0 0 0" Orientation="Horizontal">
+                <TextBlock Width="100" Text="Name:" VerticalAlignment="Center" Margin="15,0,0,0"  FontSize="16" Foreground="#0F3057" />
+                <TextBox x:Name="txtTourName" Text="{Binding Path=TourName, UpdateSourceTrigger=PropertyChanged}" Width="150" Height="25" Margin="0,0,0,0"  FontSize="16"/>
             </StackPanel>
 
 
-            <StackPanel Orientation="Horizontal" Margin="0 0 0 10">
-                <TextBlock Width="100" Text="Duration (in hours):" VerticalAlignment="Center"/>
-                <TextBox x:Name="txtDuration" Text="{Binding Path=Duration, UpdateSourceTrigger=PropertyChanged}" Width="200"/>
+            <StackPanel Grid.Row="1" Grid.Column="0" Margin="0 0 0 0" Orientation="Horizontal">
+                <TextBlock Width="100" Text="Country:" VerticalAlignment="Center" Margin="15,0,0,0" FontSize="16" Foreground="#0F3057"/>
+                <ComboBox Height="30" Width="200" ItemsSource="{Binding Countries}" SelectedItem="{Binding SelectedCountry}" Margin="0,0,0,0" FontSize="16"/>
             </StackPanel>
-            <StackPanel Orientation="Horizontal" Margin="0 0 0 10">
-                <TextBlock Width="100" Text="Pictures:" VerticalAlignment="Center" Height="40"/>
-                <Button Grid.Row="5" Grid.Column="1" Height="30" Width="50" Margin="10, 0, 0, 0" HorizontalAlignment="Left"  Command="{Binding AddImagesCommand}" FontSize="14" VerticalAlignment="Center" >
-                    Add</Button>
+            
+        </Grid>
 
+        <!-- za country i language -->
+        <Grid Grid.Row="2" Grid.Column="0" Margin="0,0,0,0">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="1*"/>
+                <RowDefinition Height="1*"/>
+            </Grid.RowDefinitions>
 
+            <StackPanel Grid.Row="0" Grid.Column="0" Margin="0 0 0 0" Orientation="Horizontal">
+                <TextBlock Width="100" Text="City:" VerticalAlignment="Center" Margin="15,0,0,0" FontSize="16" Foreground="#0F3057"/>
+                <ComboBox Height="30" Width="200" ItemsSource="{Binding Cities}" SelectedItem="{Binding SelectedCity}" Margin="0,0,0,0" FontSize="16"/>
             </StackPanel>
-        </StackPanel>
 
-        <WrapPanel Grid.Row="2" HorizontalAlignment="Center" Margin="0 10">
-            <Button Command="{Binding CancelCommand}" Content="Cancel" Margin="5" Height="20" Width="60"/>
-            <Button Command="{Binding SaveCommand}" FontSize="14" VerticalAlignment="Center" Margin="5,0,0,0">
-                Save
+            <StackPanel  Grid.Row="1" Grid.Column="0"  Orientation="Horizontal" Margin="0 0 0 0" >
+                <TextBlock Width="100" Text="Languages:" VerticalAlignment="Center" Margin="15,0,0,0" FontSize="16" Foreground="#0F3057"/>
+                <TextBox x:Name="txtLanguages" Text="{Binding Path=TourLanguage, UpdateSourceTrigger=PropertyChanged}" Width="200" Height="25"/>
+            </StackPanel>
+        </Grid>
+
+        <!-- za Max tourists i Duration -->
+        <Grid Grid.Row="3" Grid.Column="0" Margin="0,0,0,0">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="1*"/>
+                <RowDefinition Height="1*"/>
+            </Grid.RowDefinitions>
+
+            <StackPanel Grid.Row="0" Grid.Column="0" Orientation="Horizontal" Margin="0 0 0 0">
+                <TextBlock Width="150" Text="Maximum number of tourists:" VerticalAlignment="Center" Margin="15,0,0,0" FontSize="13" Foreground="#0F3057" TextWrapping="Wrap"/>
+                <TextBox x:Name="txtMaxTourists" Text="{Binding Path=MaxTourists, UpdateSourceTrigger=PropertyChanged}" Width="50" Height="25"/>
+            </StackPanel>
+
+            <StackPanel Grid.Row="1" Grid.Column="0" Orientation="Horizontal" Margin="0 0 0 0">
+                <TextBlock Width="113" Text="Duration (in hours):" VerticalAlignment="Center" Margin="15,0,0,0" FontSize="13" Foreground="#0F3057" TextWrapping="Wrap"/>
+                <TextBox x:Name="txtDuration" Text="{Binding Path=Duration, UpdateSourceTrigger=PropertyChanged}" Width="50" Height="25" Margin="37,0,0,0"/>
+            </StackPanel>
+
+        </Grid>
+
+        <Grid Grid.Row="0" Grid.Column="1" Margin="0,0,0,0">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="1*"/>
+                <ColumnDefinition Width="1*"/>
+            </Grid.ColumnDefinitions>
+
+            <StackPanel Grid.Row="0" Grid.Column="0" Orientation="Horizontal" Margin="0 0 0 0">
+                <TextBlock Width="85" Text="Key Points:" VerticalAlignment="Top"  Margin="10 10 0 0" FontSize="16" Foreground="#0F3057"/>
+                <TextBox x:Name="txtKeyPoints" Text="{Binding Path=KeyPoint, UpdateSourceTrigger=PropertyChanged}" Width="100" Height="25" VerticalAlignment="Center" Margin="-85 5 0 0"/>
+                <Button Width="40" Height="20" Margin="15, 5, 0, 0" Command="{Binding AddKeyPointCommand}" FontSize="14" VerticalAlignment="Center">
+                    <Button.Template>
+                        <ControlTemplate TargetType="Button">
+                            <Border Background="#0F3057" BorderBrush="#0F3057" BorderThickness="2" CornerRadius="5">
+                                <TextBlock Text="Add" Foreground="White" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                            </Border>
+                        </ControlTemplate>
+                    </Button.Template>
+                </Button>
+            </StackPanel>
+
+            <StackPanel Grid.Row="0" Grid.Column="1"  Orientation="Horizontal" Margin="10 10 0 0">
+                <TextBlock Width="100" Text="Added Key Points:" VerticalAlignment="Top" HorizontalAlignment="Center" Foreground="Gray" />
+                <ListBox Width="156"  Height="60" ItemsSource="{Binding AddedKeyPoint, UpdateSourceTrigger=PropertyChanged}"  VerticalAlignment="Center" Margin="-100 10 0 0" />
+            </StackPanel>
+        </Grid>
+
+
+
+        <StackPanel  Grid.Row="1" Grid.Column="1"  Orientation="Horizontal" Margin="10 10 0 0">
+            <TextBlock Width="113" Text="Date and time:"   FontSize="16" Foreground="#0F3057" VerticalAlignment="Top"/>
+            <DatePicker x:Name="dpStartDate" SelectedDate="{Binding TourDate}" Width="100" Height="25" Margin="-125 0 0 0"/>
+            <ComboBox x:Name="cbStartTime" ItemsSource="{Binding PossibleTimes}" SelectedItem="{Binding SelectedTime}" Width="85" Height="25" Margin="4 0 0 0">
+            </ComboBox>
+            <Button Width="39" Height="20" Margin="15, 0, 0, 0" Command="{Binding AddDateTimeCommand}" FontSize="14" VerticalAlignment="Center">
+                <Button.Template>
+                    <ControlTemplate TargetType="Button">
+                        <Border Background="#0F3057" BorderBrush="#0F3057" BorderThickness="2" CornerRadius="5">
+                            <TextBlock Text="Add" Foreground="White" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                        </Border>
+                    </ControlTemplate>
+                </Button.Template>
             </Button>
+        </StackPanel>
+
+        <Grid Grid.Row="2" Grid.Column="1" Margin="0,0,0,0">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="1*"/>
+                <ColumnDefinition Width="1*"/>
+            </Grid.ColumnDefinitions>
+
+            <StackPanel Orientation="Horizontal" Margin="50 0 0 0" Grid.Row="0" Grid.Column="1">
+                <Button Height="83" Width="78" Command="{Binding AddImagesCommand}" FontSize="14">
+                    <Button.Template>
+                        <ControlTemplate TargetType="{x:Type Button}">
+                            <Grid>
+                                <Ellipse Width="70" Height="70" Stroke="#0F3057" StrokeThickness="3" Fill="Transparent" VerticalAlignment="Center"/>
+
+                                <!-- Emoji sa polu-transparentnom bojom -->
+                                <TextBlock Text="&#x1F4F7;" Foreground="#800F3057" FontSize="40" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="0,0,0,5"/>
+
+                                <!-- Plus znak -->
+                                <TextBlock Text="+" Foreground="#0F3057" FontSize="40" FontWeight="Bold" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="0,0,0,5"/>
+                            </Grid>
+                        </ControlTemplate>
+                    </Button.Template>
+                </Button>
+            </StackPanel>
+
+            <StackPanel Grid.Row="0" Grid.Column="0" Orientation="Vertical" Margin="12 0 0 0">
+                <TextBlock Width="100" Text="Description:" VerticalAlignment="Top" FontSize="16" Foreground="#0F3057" HorizontalAlignment="Left" />
+                <TextBox x:Name="txtDescription" Text="{Binding Path=Description, UpdateSourceTrigger=PropertyChanged}" Width="148" Height="63" TextWrapping="Wrap" Margin="-10 5 0 0">
+                    <TextBox.Style>
+                        <Style TargetType="TextBox">
+                            <Style.Triggers>
+                                <Trigger Property="IsFocused" Value="True">
+                                    <Setter Property="Height" Value="100"/>
+                                </Trigger>
+                            </Style.Triggers>
+                        </Style>
+                    </TextBox.Style>
+                </TextBox>
+            </StackPanel>
+
+        </Grid>
+
+
+        <Grid Grid.Row="3" Grid.Column="1" Margin="0,0,0,0" >
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="1*"/>
+                <ColumnDefinition Width="1*"/>
+            </Grid.ColumnDefinitions>
+
+            <Grid Grid.Row="3" Grid.Column="1" Margin="0,0,0,0" >
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="1*"/>
+                    <ColumnDefinition Width="1*"/>
+                </Grid.ColumnDefinitions>
+
+
+                <StackPanel Grid.Row="3" Grid.Column="0" Margin="0,0,0,10" VerticalAlignment="Bottom" HorizontalAlignment="Center">
+                    <Button Click="Cancel_Click" Height="25" Width="70" FontSize="16">
+                        <Button.Template>
+                            <ControlTemplate TargetType="Button">
+                                <Border Background="#0F3057" BorderBrush="#0F3057" BorderThickness="2" CornerRadius="5">
+                                    <TextBlock Text="Cancel" Foreground="White" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                                </Border>
+                            </ControlTemplate>
+                        </Button.Template>
+                    </Button>
+                </StackPanel>
+
+                <StackPanel Grid.Row="3" Grid.Column="1" Margin="0,0,0,10" VerticalAlignment="Bottom" HorizontalAlignment="Center">
+                    <Button Command="{Binding SaveCommand}" Height="25" Width="70" FontSize="16">
+                        <Button.Template>
+                            <ControlTemplate TargetType="Button">
+                                <Border Background="#0F3057" BorderBrush="#0F3057" BorderThickness="2" CornerRadius="5">
+                                    <TextBlock Text="Save" Foreground="White" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                                </Border>
+                            </ControlTemplate>
+                        </Button.Template>
+                    </Button>
+                </StackPanel>
+
+
+            </Grid>
+
+        </Grid>
+
+
+
+
+
+
+
+
+        <WrapPanel Grid.Row="3" Grid.Column="1" HorizontalAlignment="Center" Margin="0 10">
+
 
         </WrapPanel>
     </Grid>

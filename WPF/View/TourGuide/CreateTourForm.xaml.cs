@@ -22,6 +22,11 @@ namespace BookingApp.View
             this.DataContext = new CreateTourFormViewModel();
         }
 
+        public void Cancel_Click(object sender, RoutedEventArgs e)
+        {
+            Close();
+        }
+
     }
 }
 

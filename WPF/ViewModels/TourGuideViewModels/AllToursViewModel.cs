@@ -159,8 +159,9 @@ namespace BookingApp.View.ViewModels.TourGuideViewModels
             IsFutureToursSelected = false;
             IsActiveToursSelected = false;
 
+            StartDate = DateTime.Now;
+
             ViewCommand = new RelayCommand(View_Click, CanExecuteViewClick);
-           // ActiveCommand = new RelayCommand(ActiveTours_Click, CanExecuteActiveToursClick);
             AddCommand = new RelayCommand(AddTours_Click, CanExecuteAddToursClick);
             TourStatisticsCommand = new RelayCommand(TourStatistics_Click, CanExecuteTourStatisticsClick);
             TutorialCommand = new RelayCommand(Tutorial_Click, CanExecuteTutorialClick);
@@ -211,22 +212,25 @@ namespace BookingApp.View.ViewModels.TourGuideViewModels
                 MaxTourists = MaxTourists,
                 Language = Language,
                 StartDate = StartDate,
-               
+
             };
 
             Tours.Clear();
-            foreach (Tour tour in _tourController.SearchTourForTourGuide(searchParams))
+            if (IsAllToursSelected)
             {
-                Tours.Add(tour);
+                foreach (Tour tour in _tourController.SearchTourForTourGuide(searchParams))
+                {
+                    Tours.Add(tour);
+                }
             }
         }
 
 
-        public bool CanExecuteSearchClick(object param)
-        {
+            public bool CanExecuteSearchClick(object param)
+            {
             return true;
 
-        }
+            }
 
         public void View_Click(object param)
         {
@@ -247,20 +251,6 @@ namespace BookingApp.View.ViewModels.TourGuideViewModels
             return true;
          
         }
-
-      /*  public void ActiveTours_Click(object param)
-        {
-
-            ActiveTours activeTours = new ActiveTours();
-            activeTours.Show();
-
-
-        }
-        public bool CanExecuteActiveToursClick(object param)
-        {
-            return true;
-         
-        }*/
 
         public void AddTours_Click(object param)
         {
