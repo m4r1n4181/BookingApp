@@ -123,7 +123,7 @@ namespace BookingApp.Repository
   
         public List<ReservationRescheduleRequest> GetAllForOwner(int id)
         {
-            _reservationRescheduleRequests = _serializer.FromCSV(FilePath);
+            _reservationRescheduleRequests = GetAllWitReservation();
             BindReservationRescheduleRequestWithAccommodationReservation();
             return _reservationRescheduleRequests.FindAll(rr => rr.Reservation.Accommodation.Owner.Id == id);
         }

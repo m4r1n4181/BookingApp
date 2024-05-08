@@ -18,7 +18,7 @@ namespace BookingApp.WPF.ViewModels.OwnerPageViewModels
     public class RescheduleRequestsHandlingPageVIewModel : ViewModelBase//, IClose
     {
         // Action Close { get; set; }
-        public NavigationService NavigationService { get; set; }
+       
         public ReservationRescheduleRequestController _reservationRescheduleRequestController;
         public AccommodationReservationController _accommodationReservationController;
         public NotificationController _notificationController;
@@ -57,9 +57,9 @@ namespace BookingApp.WPF.ViewModels.OwnerPageViewModels
 
         public ReservationRescheduleRequest rescheduleRequest { get; set; }
 
-        public RescheduleRequestsHandlingPageVIewModel(NavigationService service, ReservationRescheduleRequest reservationRescheduleRequest)
+        public RescheduleRequestsHandlingPageVIewModel(ReservationRescheduleRequest reservationRescheduleRequest)
         {
-            this.NavigationService = service;
+            
             _reservationRescheduleRequestController = new ReservationRescheduleRequestController();
             _accommodationReservationController = new AccommodationReservationController();
             _notificationController = new NotificationController();
@@ -69,12 +69,11 @@ namespace BookingApp.WPF.ViewModels.OwnerPageViewModels
 
             if (!_accommodationReservationController.IsReschedulePossible(rescheduleRequest))
             {
-                Available = "NOT AVAILABLE";
-                MessageBox.Show("Accommodation is not available!");
+                Available = "! NOT AVAILABLE";         
             }
             else
             {
-                Available = "AVAILABLE";
+                Available = "! AVAILABLE";
             }
 
             AcceptRequestCommand = new RelayCommand(ExecuteAcceptRequestCommand, CanExecuteAcceptRequestCommand);
@@ -83,38 +82,71 @@ namespace BookingApp.WPF.ViewModels.OwnerPageViewModels
 
 
         private void ExecuteAcceptRequestCommand(object param)
-        {
-            rescheduleRequest.Status = Model.Enums.RequestStatusType.Approved;
-            rescheduleRequest.Reservation.Arrival = rescheduleRequest.NewStart;
-            rescheduleRequest.Reservation.Departure = rescheduleRequest.NewEnd;
-            _accommodationReservationController.Update(rescheduleRequest.Reservation);
-            _reservationRescheduleRequestController.Update(rescheduleRequest);
-
-            string message = "Your reservation for accommodation " + rescheduleRequest.Reservation.Accommodation.Name + " has been Approved";
-            Notification notification = new Notification()
+        {  
+            var result = MessageBox.Show("Are you sure you want to accept the request?", "Confirmation", MessageBoxButton.YesNo, MessageBoxImage.Question);
+            if (result == MessageBoxResult.Yes)
             {
-                User = rescheduleRequest.Reservation.Guest,
-                Message = message,
-                NotificationStatus = Model.Enums.NotificationStatus.unread
-            };
-            _notificationController.Create(notification);
-            MessageBox.Show("uspesno pomerena rezervacija");
-            return;
+                rescheduleRequest.Status = Model.Enums.RequestStatusType.Approved;
+                rescheduleRequest.Reservation.Arrival = rescheduleRequest.NewStart;
+                rescheduleRequest.Reservation.Departure = rescheduleRequest.NewEnd;
+                //rescheduleRequest.Comment = Comment;
+                _accommodationReservationController.Update(rescheduleRequest.Reservation);
+                _reservationRescheduleRequestController.Update(rescheduleRequest);
+
+                string message = "Your reservation for accommodation " + rescheduleRequest.Reservation.Accommodation.Name + " has been Approved";
+                Notification notification = new Notification()
+                {
+                    User = rescheduleRequest.Reservation.Guest,
+                    Message = message,
+                    NotificationStatus = Model.Enums.NotificationStatus.unread
+                };
+                _notificationController.Create(notification);
+
+                MessageBox.Show("The reservation has been successfully rescheduled.", "Information", MessageBoxButton.OK, MessageBoxImage.Information); //ok
+            }
+            else
+            {
+                MessageBox.Show("Reservation rescheduling canceled.", "Information", MessageBoxButton.OK, MessageBoxImage.Information); //ok
+            }
         }
+
 
         private void ExecuteDeclineRequestCommand(object param)
         {
-            // Handle decline logic here
+            var result = MessageBox.Show("Are you sure you want to decline the request?", "Confirmation", MessageBoxButton.YesNo, MessageBoxImage.Question);
+            if (result == MessageBoxResult.Yes)
+            {
+                rescheduleRequest.Status = Model.Enums.RequestStatusType.Declined;
+                rescheduleRequest.Reservation.Arrival = rescheduleRequest.NewStart;
+              //  rescheduleRequest.Comment = Comment;
+                _accommodationReservationController.Update(rescheduleRequest.Reservation);
+                _reservationRescheduleRequestController.Update(rescheduleRequest);
+
+                string message = "Your reservation for accommodation " + rescheduleRequest.Reservation.Accommodation.Name + " has been DECLINED";
+                Notification notification = new Notification()
+                {
+                    User = rescheduleRequest.Reservation.Guest,
+                    Message = message,
+                    NotificationStatus = Model.Enums.NotificationStatus.unread
+                };
+                _notificationController.Create(notification);
+
+                MessageBox.Show("The reservation has been successfully declined.", "Information", MessageBoxButton.OK, MessageBoxImage.Information); //ok;
+            }
+            else
+            {
+                MessageBox.Show("Reservation rescheduling canceled.", "Information", MessageBoxButton.OK, MessageBoxImage.Information); //ok
+            }
         }
 
         private bool CanExecuteAcceptRequestCommand(object param)
         {
-            return true; // Add your condition here if needed
+            return true; 
         }
 
         private bool CanExecuteDeclineRequestCommand(object param)
         {
-            return true; // Add your condition here if needed
+            return true; 
 
         }
 

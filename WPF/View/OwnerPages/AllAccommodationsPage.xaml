@@ -9,7 +9,7 @@
       d:DesignWidth="430"
       Title="AllAccommodationsPage">
 
-    <ScrollViewer VerticalScrollBarVisibility="Auto">
+    <ScrollViewer VerticalScrollBarVisibility="Hidden">
         <StackPanel Margin="10">
             <ItemsControl ItemsSource="{Binding Accommodations}">
                 <ItemsControl.ItemTemplate>
@@ -20,7 +20,6 @@
                                 CornerRadius="10"
                                 Padding="10">
                             <StackPanel>
-                                <!-- Combined Name and Location in one line -->
                                 <TextBlock Margin="5">
                                     <Run Text="{Binding Name}"
                                          FontWeight="Bold"
@@ -36,7 +35,6 @@
                                          FontSize="16" />
                                 </TextBlock>
 
-                                <!-- Grid for two images with navigation buttons -->
                                 <Grid>
                                     <Grid.ColumnDefinitions>
                                         <ColumnDefinition Width="*" />
@@ -63,7 +61,6 @@
                                             Background="Transparent"
                                             Grid.Column="0"
                                             Margin="-20,0,0,0" />
-                                    <!-- Negative left margin -->
 
                                     <Button Content="&gt;"
                                             HorizontalAlignment="Right"
@@ -78,7 +75,6 @@
                                             Grid.Column="1" />
                                 </Grid>
 
-                                <!-- Action buttons using Grid for exact placement -->
                                 <Grid>
                                     <Grid.ColumnDefinitions>
                                         <ColumnDefinition Width="*" />
@@ -87,6 +83,7 @@
                                     <Button HorizontalAlignment="Left"
                                             Grid.Column="0"
                                             BorderBrush="#FBC0BF"
+                                            Click="DeleteAccommdationButton_Click"
                                             Background="#FBC0BF">
                                         <TextBlock>
                                             <Run Text="&#x1F5D1;" />

@@ -48,6 +48,10 @@ namespace BookingApp.Service
 
             return _accommodationRepository.GetByOwner(id);
         }
+        public void Delete(Accommodation accommodation)
+        {
+             _accommodationRepository.Delete(accommodation);
+        }
         public Accommodation GetById(int id)
         {
             return _accommodationRepository.GetById(id);

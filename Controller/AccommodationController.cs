@@ -25,7 +25,10 @@ namespace BookingApp.Controller
         {
             return _accommodationService.RegisterAccommondation(accommodation);
         }
-
+        public void Delete(Accommodation accommodation)
+        {
+            _accommodationService.Delete(accommodation);
+        }
         public List<Accommodation> GetAllWithLocations()
         {
             return _accommodationService.GetAllWithLocations();

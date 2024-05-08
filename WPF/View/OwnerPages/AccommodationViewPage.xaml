@@ -12,14 +12,19 @@
     <Grid Background="#FFDCDB">
         <Grid.RowDefinitions>
             <RowDefinition Height="60" />
-            <RowDefinition Height="190" />
-            <RowDefinition Height="Auto" />
-            <RowDefinition Height="Auto" />
-            <RowDefinition Height="Auto" />
-            <RowDefinition Height="Auto" />
-            <RowDefinition Height="Auto" />
+            <RowDefinition Height="161" />
             <RowDefinition Height="Auto"
-                           MinHeight="82" />
+                           MinHeight="48" />
+            <RowDefinition Height="Auto"
+                           MinHeight="45" />
+            <RowDefinition Height="Auto"
+                           MinHeight="46" />
+            <RowDefinition Height="Auto"
+                           MinHeight="47.82" />
+            <RowDefinition Height="Auto"
+                           MinHeight="43.94" />
+            <RowDefinition Height="Auto"
+                           MinHeight="69.94" />
             <RowDefinition Height="Auto"
                            MinHeight="64.96" />
         </Grid.RowDefinitions>
@@ -148,9 +153,11 @@
                 Width="100"
                 Grid.Row="8"
                 Margin="34,5,0,33"
-                HorizontalAlignment="Left" />
+                HorizontalAlignment="Left"
+                Background="#FFECB4B4" />
         <Button Content="view statistics"
                 Width="150"
+                Background="#FF8989F3"
                 Margin="242,5,0,33"
                 Click="ViewStatisticsButton_Click"
                 Grid.Row="8"

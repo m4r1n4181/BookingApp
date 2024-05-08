@@ -22,11 +22,11 @@ namespace BookingApp.WPF.View.OwnerPages
     /// </summary>
     public partial class RescheduleRequestsHandlingPage : Page
     {
-        public NavigationService navigationService;
+       
         public RescheduleRequestsHandlingPage(ReservationRescheduleRequest reservationRescheduleRequest)
         {
             InitializeComponent();
-            this.DataContext = new RescheduleRequestsHandlingPageVIewModel(navigationService, reservationRescheduleRequest);
+            this.DataContext = new RescheduleRequestsHandlingPageVIewModel(reservationRescheduleRequest);
         }
     }
 
