@@ -109,8 +109,9 @@ namespace BookingApp.WPF.ViewModels.TourGuideViewModels
 
         public RequestStatisticsViewModel()
         {
-            
             _tourRequestController = new TourRequestController();
+            TourRequests = new ObservableCollection<TourRequest>(_tourRequestController.GetAllWithLocations());
+
             UniqueLocations = new ObservableCollection<Location>(_tourRequestController.GetUniqueLocationsFromTourRequests());
             UniqueLanguages = new ObservableCollection<string>(_tourRequestController.GetUniqueLanguagesFromTourRequests());
             UniqueYears = new ObservableCollection<int>(_tourRequestController.GetUniqueYearsFromTourRequests());
@@ -174,30 +175,33 @@ namespace BookingApp.WPF.ViewModels.TourGuideViewModels
 
         private void CalculateStatistics()
         {
-            if (SelectedYear != 0)
+            if (_tourRequestController != null) 
             {
-                SelectedYearRequestCount = _tourRequestController.CountRequestsByYear(SelectedYear);
-            }
+                if (SelectedYear != 0)
+                {
+                    SelectedYearRequestCount = _tourRequestController.CountRequestsByYear(SelectedYear);
+                }
 
-            if (SelectedLocation != null && !string.IsNullOrEmpty(SelectedLanguage))
-            {
-                SelectedLocationRequestCount = _tourRequestController.CountRequestsByLocation(SelectedLocation);
-                SelectedLanguageRequestCount = _tourRequestController.CountRequestsByLanguage(SelectedLanguage);
-            }
-            else if (SelectedLocation != null)
-            {
-                SelectedLocationRequestCount = _tourRequestController.CountRequestsByLocation(SelectedLocation);
-                SelectedLanguageRequestCount = 0;
-            }
-            else if (!string.IsNullOrEmpty(SelectedLanguage))
-            {
-                SelectedLanguageRequestCount = _tourRequestController.CountRequestsByLanguage(SelectedLanguage);
-                SelectedLocationRequestCount = 0;
-            }
-            else
-            {
-                SelectedLocationRequestCount = 0;
-                SelectedLanguageRequestCount = 0;
+                if (SelectedLocation != null && !string.IsNullOrEmpty(SelectedLanguage))
+                {
+                    SelectedLocationRequestCount = _tourRequestController.CountRequestsByLocation(SelectedLocation);
+                    SelectedLanguageRequestCount = _tourRequestController.CountRequestsByLanguage(SelectedLanguage);
+                }
+                else if (SelectedLocation != null)
+                {
+                    SelectedLocationRequestCount = _tourRequestController.CountRequestsByLocation(SelectedLocation);
+                    SelectedLanguageRequestCount = 0;
+                }
+                else if (!string.IsNullOrEmpty(SelectedLanguage))
+                {
+                    SelectedLanguageRequestCount = _tourRequestController.CountRequestsByLanguage(SelectedLanguage);
+                    SelectedLocationRequestCount = 0;
+                }
+                else
+                {
+                    SelectedLocationRequestCount = 0;
+                    SelectedLanguageRequestCount = 0;
+                }
             }
         }
 

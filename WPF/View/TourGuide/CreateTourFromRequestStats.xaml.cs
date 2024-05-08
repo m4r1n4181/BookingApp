@@ -207,23 +207,25 @@ namespace BookingApp.WPF.View.TourGuide
             Location mostRequestedLocation = _tourRequestController.GetMostRequestedLocationLastYear();
             string mostRequestedLanguage = _tourRequestController.GetMostRequestedLanguageLastYear();
 
+            int locationId = _locationController.GetIdByCityAndCountry(mostRequestedLocation.City, mostRequestedLocation.Country);
+
             Tour newTour = new Tour
             {
                 Name = TourName,
                 TourGuide = SignInForm.LoggedUser,
                 Description = Description,
-                Location = mostRequestedLocation,
+                Location = mostRequestedLocation, 
                 MaxTourists = MaxTourists,
                 AvailableSeats = MaxTourists,
                 Duration = Duration,
-                Language = mostRequestedLanguage, 
-                Pictures = Pictures,
+                Language = mostRequestedLanguage,
+                Pictures = Pictures, 
             };
 
             List<DateTime> dateTimes = new List<DateTime> { TourDate };
             List<KeyPoint> keyPoints = KeyPoints.Select(kp => new KeyPoint { Name = kp.Name, IsActive = kp.IsActive, Tour = newTour }).ToList();
 
-            _tourRequestController.CreateTourFromRequest(dateTimes, keyPoints, newTour.Name, newTour.Description, newTour.MaxTourists, newTour.Duration, newTour.Pictures);
+            _tourRequestController.CreateTourFromRequest(dateTimes, keyPoints, newTour.Name, newTour.Location, newTour.Description, newTour.MaxTourists, newTour.Duration, newTour.Pictures);
         }
 
         private void AddImages_Click(object sender, RoutedEventArgs e)

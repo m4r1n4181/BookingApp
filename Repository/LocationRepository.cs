@@ -80,5 +80,14 @@ namespace BookingApp.Repository
             return _location.Find(x => x.Id == id);
 
         }
+
+        public int GetIdByCityAndCountry(string city, string country)
+        {
+            List<Location> locations = _serializer.FromCSV(FilePath);
+            Location location = locations.FirstOrDefault(loc => loc.City.Equals(city, StringComparison.OrdinalIgnoreCase) && loc.Country.Equals(country, StringComparison.OrdinalIgnoreCase));
+            return location.Id;
+        }
+
+
     }
 }

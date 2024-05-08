@@ -26,5 +26,11 @@ namespace BookingApp.Controller
         {
             return _locationService.Get(id);
         }
+
+        public int GetIdByCityAndCountry(string city, string country)
+        {
+            return _locationService.GetIdByCityAndCountry(city, country);
+        }
     }
+
 }

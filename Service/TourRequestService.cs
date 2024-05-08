@@ -9,8 +9,10 @@ using BookingApp.Repository;
 using BookingApp.View;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics.Metrics;
 using System.Globalization;
 using System.Linq;
+using System.Runtime.InteropServices;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
@@ -23,6 +25,7 @@ namespace BookingApp.Service
         private ITourRequestRepository _tourRequestRepository;
         private ITourRepository _tourRepository;
         private IKeyPointRepository _keyPointRepository;
+        private ILocationRepository _locationRepository;
 
 
 
@@ -31,6 +34,8 @@ namespace BookingApp.Service
             _tourRequestRepository = Injector.CreateInstance<ITourRequestRepository>();
             _tourRepository = Injector.CreateInstance<ITourRepository>();
             _keyPointRepository = Injector.CreateInstance<IKeyPointRepository>();
+            _locationRepository = Injector.CreateInstance<ILocationRepository>();
+
         }
 
         public TourRequest Save(TourRequest tourRequest)
@@ -149,20 +154,21 @@ namespace BookingApp.Service
             return _tourRequestRepository.GetMostRequestedLanguageLastYear();
         }
 
-        public void CreateTourFromRequest(List<DateTime> dateTimes, List<KeyPoint> keyPoints, string name, string description, int maxTourists, int duration, List<string> pictures)
+        public void CreateTourFromRequest(List<DateTime> dateTimes, List<KeyPoint> keyPoints, string name, Location location, string description, int maxTourists, int duration, List<string> pictures)
         {
-            Location location = GetMostRequestedLocationLastYear();
+            //Location location = GetMostRequestedLocationLastYear();
             string language = GetMostRequestedLanguageLastYear();
 
             foreach (DateTime dateTime in dateTimes)
             {
+               
                 Tour tour = new Tour
                 {
                     Name = name,
                     TourGuide = SignInForm.LoggedUser,
                     Description = description,
-                    Location = location,
-                    Language = language, 
+                    Location = location, 
+                    Language = language,
                     MaxTourists = maxTourists,
                     AvailableSeats = maxTourists,
                     Duration = duration,
