@@ -83,9 +83,31 @@ namespace BookingApp.View.ViewModels.TourGuideViewModels
             IsRegularTourSelected = true;
             IsComplexTourSelected = false;
 
-          
-        }
 
+            PropertyChanged += (sender, e) =>
+            {
+                if (e.PropertyName == nameof(IsRegularTourSelected) && IsRegularTourSelected)
+                {
+                    IsComplexTourSelected = false;
+                    Tours.Clear();
+                    foreach (var tour in _tourController.GetAllWithLocations())
+                    {
+                        Tours.Add(tour);
+                    }
+                }
+                else if (e.PropertyName == nameof(IsComplexTourSelected) && IsComplexTourSelected)
+                {
+                    IsRegularTourSelected = false;
+                    Tours.Clear();
+                    foreach (var tour in _tourController.GetFutureTours())
+                    {
+                        Tours.Add(tour);
+                    }
+                }
+
+
+            };
+        }
 
         public void Activate_Click(object param)
         {

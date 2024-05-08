@@ -28,7 +28,7 @@
 28|1|zdravo1|hej|3|5|4|0|4/15/2024 12:00:00 PM|3|../Resources/Images/colloseum.jpg|finished
 29|1|zdravo1|hej|3|5|4|0|4/15/2024 9:00:00 AM|3|../Resources/Images/colloseum.jpg|finished
 30|1|lepota|jnsjs|eng|4|4|0|4/15/2024 12:00:00 PM|2||started
-31|1|TURA|TURA|ss|1|5|0|4/20/2024 12:00:00 PM|7|../Resources/Images/notre_dame.jpg|cancelled
+31|1|TURA|TURA|ss|1|5|0|5/8/2024 12:00:00 PM|7|../Resources/Images/notre_dame.jpg|not_started
 32|1|Petrovaradin|Predivan pejzaz i bogata istorija|Engleski|1|4|5|7/19/2024 12:00:00 PM|2|../Resources/Images/delete.png|not_started
 33|1|Venecija|Bogata istorija i jedinstveni kanali|Engleski|2|3|3|6/18/2024 12:00:00 PM|2|../Resources/Images/delete.png|not_started
 34|1|ItalijaTour|Pogledi i hrana fantasticni|Engleski|3|5|10|4/18/2024 12:00:00 PM|2|../Resources/Images/edit.png|not_started
@@ -43,3 +43,4 @@
 43|1|rr|trstina|srpski|4|20|0|4/17/2024 12:00:00 PM|2|../Resources/Images/delete.png|started
 44|1|torino|lepo|srpski|2|50|0|4/30/2024 12:00:00 PM|73|../Resources/Images/delete.png|not_started
 45|1|zakintos|leto|srpski|1|10|8|4/17/2024 12:00:00 PM|12|../Resources/Images/notre_dame.jpg|not_started
+46|1|Venera|Its a beautiful city, with lots of historical landmarks.|italian|4|11|0|5/8/2024 12:00:00 PM|2|../Resources/Images/colloseum.jpg|not_started
