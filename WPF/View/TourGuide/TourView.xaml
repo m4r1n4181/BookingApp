@@ -7,6 +7,8 @@
         mc:Ignorable="d"
          ResizeMode="NoResize"
         Title="TourView" Height="400" Width="700">
+    
+    
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="1*"/>
@@ -116,6 +118,20 @@
             </Grid>
         </StackPanel>
 
+        <ListView x:Name="ListViewPictures" ItemsSource="{Binding Pictures}" BorderBrush="Transparent" Background="Transparent" Width="230" HorizontalAlignment="Left" Height="190" Grid.Row="2" Grid.Column="1" Grid.RowSpan="4" Margin="60,0,0,20">
+            <ListView.ItemsPanel>
+                <ItemsPanelTemplate>
+                    <WrapPanel Orientation="Horizontal"/>
+                </ItemsPanelTemplate>
+            </ListView.ItemsPanel>
+            <ListView.ItemTemplate>
+                <DataTemplate>
+                    <StackPanel Orientation="Horizontal">
+                        <Image Source="{Binding}" Width="90" Height="90" Margin="5"/>
+                    </StackPanel>
+                </DataTemplate>
+            </ListView.ItemTemplate>
+        </ListView>
 
 
 

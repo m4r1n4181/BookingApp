@@ -13,8 +13,8 @@ namespace BookingApp.DTO
         public string Country { get; set; }
         public RequestStatusType? Status { get; set; }
         public int MaxTourists { get; set; }
-        public DateTime StartDate { get; set; }
-        public DateTime EndDate { get; set; }
+        public DateTime? StartDate { get; set; }
+        public DateTime? EndDate { get; set; }
 
     }
 }

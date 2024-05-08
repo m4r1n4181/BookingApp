@@ -151,7 +151,12 @@ namespace BookingApp.Repository
             return _tours.FindAll(tour => tour.TourGuide.Id == tourGuide.Id);
 
         }
+        public List<Tour> GetByTourGuideNotStarted(int tourGuideId)
+        {
+            _tours = _serializer.FromCSV(FilePath);
+            return _tours.FindAll(tour => tour.TourGuide.Id == tourGuideId && tour.TourStatus == Model.Enums.TourStatusType.not_started);
 
+        }
 
         public List<Tour> GetTodayTours()
         {

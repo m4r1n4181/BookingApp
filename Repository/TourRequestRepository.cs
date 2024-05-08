@@ -110,7 +110,7 @@ namespace BookingApp.Repository
 
         public List<TourRequest> GetByTourGuide(int tourGuideId) //bi trebalo da bude ovako
         {
-           // BindTourRequestLocation();
+            // BindTourRequestLocation();
             return _tourRequest.FindAll(i => i.TourGuide.Id == tourGuideId);
         }
 
@@ -118,34 +118,40 @@ namespace BookingApp.Repository
         {
             _tourRequest = _serializer.FromCSV(FilePath);
             BindTourRequestLocation();
-           
+
+            var filteredRequests = _tourRequest;
+
             if (tourRequestSearch.City != null)
             {
-                _tourRequest = _tourRequest.FindAll(a => a.Location.City.Contains(tourRequestSearch.City, StringComparison.OrdinalIgnoreCase));
+                filteredRequests = filteredRequests.Where(a =>
+                    a.Location.City.Contains(tourRequestSearch.City, StringComparison.OrdinalIgnoreCase)).ToList();
             }
 
             if (tourRequestSearch.Country != null)
             {
-                _tourRequest = _tourRequest.FindAll(a => a.Location.Country.Contains(tourRequestSearch.Country, StringComparison.OrdinalIgnoreCase));
+                filteredRequests = filteredRequests.Where(a =>
+                    a.Location.Country.Contains(tourRequestSearch.Country, StringComparison.OrdinalIgnoreCase)).ToList();
             }
+
             if (tourRequestSearch.Status != null)
             {
-                _tourRequest = _tourRequest.FindAll(a => a.RequestStatus == tourRequestSearch.Status);
+                filteredRequests = filteredRequests.Where(a =>
+                    a.RequestStatus == tourRequestSearch.Status).ToList();
             }
+
             if (tourRequestSearch.MaxTourists != 0)
             {
-                _tourRequest = _tourRequest.FindAll(a => a.MaxTourists >= tourRequestSearch.MaxTourists);
+                filteredRequests = filteredRequests.Where(a =>
+                    a.MaxTourists >= tourRequestSearch.MaxTourists).ToList();
             }
 
-            if (tourRequestSearch.StartDate != null || tourRequestSearch.EndDate != null)
+            if (tourRequestSearch.StartDate != null && tourRequestSearch.EndDate != null)
             {
-                _tourRequest = _tourRequest.FindAll(a =>
-                    (tourRequestSearch.StartDate == null || a.StartDate >= tourRequestSearch.StartDate) &&
-                    (tourRequestSearch.EndDate == null || a.EndDate <= tourRequestSearch.EndDate));
+                filteredRequests = filteredRequests.Where(a => a.StartDate >= tourRequestSearch.StartDate &&
+                     a.EndDate <= tourRequestSearch.EndDate).ToList();
             }
 
-
-            return _tourRequest;
+            return filteredRequests;
         }
 
         public List<string> GetUniqueLanguagesFromTourRequests()
@@ -170,7 +176,7 @@ namespace BookingApp.Repository
         public List<int> GetUniqueYearsFromTourRequests()
         {
             List<int> uniqueYears = _tourRequest
-                .Select(tr => tr.StartDate.Year) 
+                .Select(tr => tr.StartDate.Year)
                 .Distinct()
                 .ToList();
 

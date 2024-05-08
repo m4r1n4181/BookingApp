@@ -93,7 +93,7 @@ namespace BookingApp.WPF.ViewModels.TourGuideViewModels
         public RequestDetailsViewModel(TourRequest tourRequest)
         {
             SelectedTourRequest = tourRequest;
-         
+
             Location = $"{tourRequest.Location.City}, {tourRequest.Location.Country}";
             Languages = tourRequest.Language;
             MaxTourists = tourRequest.MaxTourists;
@@ -118,54 +118,39 @@ namespace BookingApp.WPF.ViewModels.TourGuideViewModels
 
         public void Approve_Click(object param)
         {
-            if (SelectedDate != null)
+            if (SelectedDate == null || SelectedTourRequest == null)
             {
-                SelectedTourRequest.RequestStatus = RequestStatusType.Approved;
-                _tourRequestController.Update(SelectedTourRequest);
-                _tourRequestController.SaveTourFromRequest(SelectedTourRequest, SelectedDate);
-               
-                //uraditi ovde refresh 
-
-                _notificationController.SendNotification(SelectedTourRequest.Id, SelectedTourRequest.Tourist, "Vaš zahtev je odobren za datum " + SelectedDate.ToShortDateString(), NotificationStatus.unread);
+                return;
             }
+            TourRequest tourRequest = _tourRequestController.ApproveRequest(SelectedTourRequest.Id, SelectedDate);
+            if(tourRequest == null)
+            {
+                MessageBox.Show("Vec ste zauzeti na taj dan", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+
+            }
+
         }
 
         public bool CanExecuteApproveClick(object param)
         {
             return true;
-            // if (SelectedTour == null)
-            //{
-            // MessageBox.Show("Please select a tour.", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
-            //  return false;
-            //}
-            //return true;
+
         }
 
         public void Decline_Click(object param)
         {
-            if (SelectedTourRequest == null)
+            if (SelectedDate == null || SelectedTourRequest == null)
             {
                 return;
             }
-            SelectedTourRequest.RequestStatus = RequestStatusType.Declined;
-            _tourRequestController.Update(SelectedTourRequest);
-           
-            //uraditi ovde refresh 
-
-            string message = "Vaš zahtev je odbijen jer nema dostupnih termina";
-            _notificationController.SendNotification(SelectedTourRequest.Id, SelectedTourRequest.Tourist, message, NotificationStatus.unread);
+            _tourRequestController.DeclineRequest(SelectedTourRequest.Id);
 
         }
 
         public bool CanExecuteDeclineClick(object param)
         {
             return true;
-            // if (SelectedTour == null)
-            //{
-            // MessageBox.Show("Please select a tour.", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
-            //  return false;
-            //}
-            //return true;
+
         }
 
 

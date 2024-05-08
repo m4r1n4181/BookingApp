@@ -2,6 +2,7 @@
 using BookingApp.Domain.RepositoryInterfaces;
 using BookingApp.DTO;
 using BookingApp.Model;
+using BookingApp.Model.Enums;
 using BookingApp.Repository;
 using BookingApp.Service;
 using System;
@@ -119,6 +120,18 @@ namespace BookingApp.Controller
         public void CreateTourFromRequest(List<DateTime> dateTimes, List<KeyPoint> keyPoints, string name, Location location, string description, int maxTourists, int duration, List<string> pictures)
         {
              _tourRequestService.CreateTourFromRequest( dateTimes, keyPoints, name, location, description, maxTourists, duration, pictures);
+        }
+
+        public TourRequest ApproveRequest(int tourRequestId, DateTime selectedDate)
+        {
+            return _tourRequestService.ApproveRequest(tourRequestId, selectedDate);
+
+        }
+
+        public TourRequest DeclineRequest(int tourRequestId)
+        {
+            return _tourRequestService.DeclineRequest(tourRequestId);
+
         }
     }
 }

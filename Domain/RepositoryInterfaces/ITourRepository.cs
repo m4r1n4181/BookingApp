@@ -23,6 +23,8 @@ namespace BookingApp.Domain.RepositoryInterfaces
         void Delete(Tour tour);
         Tour Update(Tour tour);
         List<Tour> GetByTourGuide(TourGuide tourGuide);
+        List<Tour> GetByTourGuideNotStarted(int tourGuideId);
+
         List<Tour> GetTodayTours();
         List<Tour> GetAllActiveTours();
         List<Tour> GetAlternativeTours(int locationId);

@@ -22,6 +22,7 @@ namespace BookingApp.Domain.Models
         public User Tourist { get; set; } // proveri dal ovo ti odgovara jel nez dal treba particapanti mozda?
         public User TourGuide { get; set; }
         public RequestStatusType RequestStatus { get; set; }
+        public DateTime? SelectedDate { get; set; }
 
         public TourRequest() { }
 
@@ -41,7 +42,8 @@ namespace BookingApp.Domain.Models
 
         public string[] ToCSV()
         {
-            string[] csvValues = { Id.ToString(), Location.Id.ToString(), Language.ToString(), MaxTourists.ToString(), Description, StartDate.ToString(), EndDate.ToString(), Tourist.Id.ToString(), TourGuide.Id.ToString(), RequestStatus.ToString() };
+            string selectedDateStr = (SelectedDate == null) ? "null" : SelectedDate.ToString();
+            string[] csvValues = { Id.ToString(), Location.Id.ToString(), Language.ToString(), MaxTourists.ToString(), Description, StartDate.ToString(), EndDate.ToString(), Tourist.Id.ToString(), TourGuide.Id.ToString(), RequestStatus.ToString(), selectedDateStr };
             return csvValues;
         }
 
@@ -57,6 +59,15 @@ namespace BookingApp.Domain.Models
             Tourist = new User() { Id = Convert.ToInt32(values[7]) };
             TourGuide = new User() { Id = Convert.ToInt32(values[8]) };
             RequestStatus = (RequestStatusType)Enum.Parse(typeof(RequestStatusType), values[9]);
+            if (values.Length <= 10 || values[10] == "null")
+            {
+                SelectedDate = null;
+            }
+            else
+            {
+                SelectedDate = Convert.ToDateTime(values[10]);
+
+            }
 
         }
       

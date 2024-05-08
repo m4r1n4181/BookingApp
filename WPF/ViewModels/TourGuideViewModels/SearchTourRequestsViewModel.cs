@@ -87,8 +87,8 @@ namespace BookingApp.WPF.ViewModels.TourGuideViewModels
             }
         }
 
-        private DateTime _startDate;
-        public DateTime StartDate
+        private DateTime? _startDate;
+        public DateTime? StartDate
         {
             get => _startDate;
             set
@@ -101,8 +101,8 @@ namespace BookingApp.WPF.ViewModels.TourGuideViewModels
             }
         }
 
-        private DateTime _endDate;
-        public DateTime EndDate
+        private DateTime? _endDate;
+        public DateTime? EndDate
         {
             get => _endDate;
             set
@@ -137,8 +137,8 @@ namespace BookingApp.WPF.ViewModels.TourGuideViewModels
                 RequestStatusType.Declined
             };
             SelectedStatus = null;
-            StartDate = DateTime.Now;
-            EndDate = DateTime.Now;
+            StartDate = null;
+            EndDate = null;
 
             SearchCommand = new RelayCommand(Search_Click, CanExecuteSearchClick);
             ViewCommand = new RelayCommand(View_Click, CanExecuteViewClick);

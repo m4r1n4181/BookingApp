@@ -132,6 +132,8 @@ namespace BookingApp.View.ViewModels.TourGuideViewModels
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
         }
 
+        public ObservableCollection<string> Pictures { get; set; }
+
         public Tour SelectedTour { get; set; }
         private KeyPointController _keyPointController;
 
@@ -158,8 +160,7 @@ namespace BookingApp.View.ViewModels.TourGuideViewModels
             _tourController = new TourController();
             KeyPoints = new ObservableCollection<KeyPoint>(_keyPointController.GetAllForTour(tour.Id));
 
-
-
+            Pictures = new ObservableCollection<string>();
 
         }
     }
