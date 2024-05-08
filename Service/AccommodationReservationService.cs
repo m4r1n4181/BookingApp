@@ -354,8 +354,13 @@ namespace BookingApp.Service
 
             return statistics;
         }
+        public AccommodationByYearStatisticDto GetStatisticForYear(int accommodationId, int year)
+        {
+            return GetYearStatisticForAccommodation(accommodationId).FirstOrDefault(ss => ss.Year == year);
 
-        //Month statistic
+        }
+
+
         public AccommodationByMonthStatisticDto CheckIfReservationIsCancelledOrRescheduledForMonth(AccommodationByMonthStatisticDto byMonth, AccommodationReservation reservation)
         {
             if (reservation.Status == Model.Enums.AccommodationReservationStatus.Canceled)

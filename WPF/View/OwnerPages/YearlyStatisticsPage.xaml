@@ -9,85 +9,77 @@
       d:DesignWidth="430"
       Title="YearlyStatisticsPage">
 
-    <Grid Background="#FFDCDB">
-        <Grid.RowDefinitions>
-            <RowDefinition Height="100" />
-            <RowDefinition Height="Auto" />
-            <RowDefinition Height="Auto" />
-            <RowDefinition Height="Auto"
-                           MinHeight="250.04" />
-            <RowDefinition Height="Auto"
-                           MinHeight="149" />
-        </Grid.RowDefinitions>
+    
+     <Grid Margin="10"
+              Background="#FFDCDB">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="*" />
+                <RowDefinition Height="Auto" />
+            </Grid.RowDefinitions>
 
-        <StackPanel Grid.Row="0"
-                    Orientation="Horizontal"
-                    VerticalAlignment="Top"
-                    Height="100">
-            <Image Source="{Binding accommodation.Pictures[0]}"
-                   Width="80"
-                   Margin="30,0,0,0"
-                   Height="80" />
-            <TextBlock Text="Sea paradise"
-                       FontSize="28"
-                       VerticalAlignment="Center"
-                       Margin="10,0,0,0" />
+            <!-- Accommodation Name and Picture -->
+            <StackPanel Grid.Row="0"
+                        Orientation="Horizontal"
+                        VerticalAlignment="Top">
+                <Image Source="{Binding accommodation.Pictures[0]}"
+                       Width="50"
+                       Height="50" />
+                <TextBlock Text="{Binding accommodation.Name}"
+                           FontSize="16"
+                           FontWeight="Bold"
+                           VerticalAlignment="Center"
+                           Margin="5,0,0,0"
+                       Width="194" />
+            </StackPanel>
 
-            <ComboBox Width="84"
-                      SelectedIndex="0"
-                      Margin="170,0,50,-50"
-                      Height="24">
-                <ComboBoxItem Content="2023" />
-                <ComboBoxItem Content="2022" />
-                <ComboBoxItem Content="2021" />
+            <!-- Year Selection ComboBox -->
+            <ComboBox Grid.Row="1"
+                      SelectedItem="{Binding SelectedYear}"
+                      ItemsSource="{Binding Years}"
+                  Margin="247,5,5,5">
+                <ComboBox.ItemTemplate>
+                    <DataTemplate>
+                        <TextBlock Text="{Binding}" />
+                    </DataTemplate>
+                </ComboBox.ItemTemplate>
             </ComboBox>
 
-        </StackPanel>
+            <!-- Statistics -->
+            <StackPanel Grid.Row="2"
+                        Margin="5">
+                <TextBlock Text="Number of reservations:"
+                           FontWeight="Bold"
+                           Margin="5,0" />
+                <TextBlock Text="{Binding AccommodationStatistic.ReservationsNum}"
+                           Margin="10,0" />
+                <TextBlock Text="Number of cancelled reservations:"
+                           FontWeight="Bold"
+                           Margin="5,0" />
+            <TextBlock Text="{Binding AccommodationStatistic.CancelledReservationsNum}"
+                           Margin="10,0" />
+                <TextBlock Text="Number of rescheduled reservations:"
+                           FontWeight="Bold"
+                           Margin="5,0" />
+            <TextBlock Text="{Binding AccommodationStatistic.RescheduledReservationsNum}"
+                           Margin="10,0" />
+                <TextBlock Text="Number of renovation recommendations:"
+                           FontWeight="Bold"
+                           Margin="5,0" />
+            <TextBlock Text="{Binding AccommodationStatistic.RecommendationForRenovationNum}"
+                           Margin="10,0" />
+            </StackPanel>
 
-        <TextBlock Text="2023"
-                   FontSize="36"
-                   FontWeight="Bold"
-                   HorizontalAlignment="Left"
-                   Margin="27,95,0,118"
-                   Grid.RowSpan="3"
-                   TextDecorations="Underline"
-                   Width="83" />
-
-        <StackPanel Grid.Row="2"
-                    Margin="30,30,30,30">
-            <TextBlock Text="the year with the most reservations 187/365 days"
-                       FontSize="14" />
-            <TextBlock Text="Number of reservations: 93"
-                       FontSize="14" />
-            <TextBlock Text="Number of cancelled reservations: 4"
-                       FontSize="14" />
-            <TextBlock Text="Number of rescheduled reservation: 10"
-                       FontSize="14" />
-            <TextBlock Text="Number of renovation recommendations: 1"
-                       FontSize="14" />
-        </StackPanel>
-        <Button Content="Button"
-                HorizontalAlignment="Left"
-                Margin="341,0,0,129"
-                Grid.Row="4"
-                VerticalAlignment="Bottom"
-                Height="20"
-                Width="40" />
-        <Button Content="View monthly"
-                HorizontalAlignment="Left"
-                Margin="58,0,0,0"
-                Grid.Row="4"
-                VerticalAlignment="Top"
-                Height="20"
-                Width="40" />
-
-
-        <!--      <PieChart /> Placeholder for your Pie Chart control -->
-
-        <!--  <BarChart />  Placeholder for your Bar Chart control -->
-
-
-
-
-    </Grid>
+            <!-- Graphs and PDF Export -->
+            <StackPanel Grid.Row="3"
+                        Orientation="Horizontal"
+                        HorizontalAlignment="Center"
+                        Margin="5">
+                <Button Content="View Monthly"
+                        Margin="5" />
+                <Button Content="PDF View Report"
+                        Margin="5" />
+            </StackPanel>
+        </Grid>
 </Page>

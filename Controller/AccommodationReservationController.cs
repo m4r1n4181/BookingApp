@@ -50,6 +50,11 @@ namespace BookingApp.Controller
         {
             return _accommodationReservationService.GetYearStatisticForAccommodation(accommodationId);
         }
+        public AccommodationByYearStatisticDto GetStatisticForYear(int accommodationId, int year)
+        {
+            return _accommodationReservationService.GetStatisticForYear(accommodationId, year); 
+
+        }
 
         public List<AccommodationByMonthStatisticDto> GetMonthStatisticForAccommodation(int year, int accommodationId)
         {

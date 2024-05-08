@@ -41,7 +41,6 @@
                         FontWeight="Bold" />
                 <Run Text=", " />
                 <Run Text="{Binding Location.City}" />
-                <Run Text=", " />
                 <Run Text="{Binding Location.Country}" />
                     </TextBlock>
                 </DataTemplate>

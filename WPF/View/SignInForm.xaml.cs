@@ -10,6 +10,7 @@ using System.Windows;
 using BookingApp.DependencyInjection;
 using BookingApp.Domain.RepositoryInterfaces;
 using BookingApp.WPF.View.OwnerPages;
+using BookingApp.WPF.View.OwnerWindows;
 
 namespace BookingApp.View
 {
@@ -77,6 +78,8 @@ namespace BookingApp.View
                     {
                         OwnerUIWindow ownerUIWindow = new OwnerUIWindow();
                         ownerUIWindow.Show();
+                     // AllAccommodationsWindow allAccommodationsWindow = new AllAccommodationsWindow();
+                       // allAccommodationsWindow.Show(); 
 
                     }
 
