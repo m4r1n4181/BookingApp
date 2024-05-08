@@ -16,6 +16,49 @@ namespace BookingApp.View.ViewModels.TourGuideViewModels
     public class LiveTourViewModel : INotifyPropertyChanged
     {
 
+        private bool _isRegularTourSelected;
+        public bool IsRegularTourSelected
+        {
+            get => _isRegularTourSelected;
+            set
+            {
+                if (value != _isRegularTourSelected)
+                {
+                    _isRegularTourSelected = value;
+                    OnPropertyChanged();
+                }
+            }
+        }
+
+        private bool _isComplexTourSelected;
+        public bool IsComplexTourSelected
+        {
+            get => _isComplexTourSelected;
+            set
+            {
+                if (value != _isComplexTourSelected)
+                {
+                    _isComplexTourSelected = value;
+                    OnPropertyChanged();
+
+                }
+            }
+        }
+
+
+        private DateTime _today;
+
+        public DateTime Today
+        {
+            get { return _today; }
+            set
+            {
+                _today = value;
+                OnPropertyChanged(nameof(Today));
+            }
+        }
+
+
         public event PropertyChangedEventHandler PropertyChanged;
 
         protected virtual void OnPropertyChanged([CallerMemberName] string propertyName = null)
@@ -34,6 +77,13 @@ namespace BookingApp.View.ViewModels.TourGuideViewModels
             _tourController = new TourController();
             Tours = new ObservableCollection<Tour>(_tourController.GetTodayTours());
             ActivateCommand = new RelayCommand(Activate_Click, CanExecuteActivateClick);
+
+            Today = DateTime.Now;
+
+            IsRegularTourSelected = true;
+            IsComplexTourSelected = false;
+
+          
         }
 
 
@@ -52,12 +102,9 @@ namespace BookingApp.View.ViewModels.TourGuideViewModels
         public bool CanExecuteActivateClick(object param)
         {
             return true;
-           // if (SelectedTour == null)
-            //{
-                // MessageBox.Show("Please select a tour.", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
-              //  return false;
-            //}
-            //return true;
+          
         }
+
+
     }
 }
