@@ -6,6 +6,7 @@ using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
+using System.IO;
 using System.Linq;
 using System.Runtime.CompilerServices;
 using System.Text;
@@ -27,7 +28,7 @@ namespace BookingApp.View.ViewModels.TourGuideViewModels
         private KeyPointController _keyPointController;
         public Location SelectedLocation { get; set; }
 
-        public List<string> Pictures { get; set; }
+        public ObservableCollection<string> Pictures { get; set; }
         public List<KeyPoint> KeyPoints { get; set; }
         public List<DateTime> DateTimes { get; set; }
 
@@ -244,7 +245,7 @@ namespace BookingApp.View.ViewModels.TourGuideViewModels
             _locationController = new LocationController();
             _keyPointController = new KeyPointController();
             Locations = new ObservableCollection<Location>(_locationController.GetAll());
-            Pictures = new List<string>();
+            Pictures = new ObservableCollection<string>();
             KeyPoints = new List<KeyPoint>();
             DateTimes = new List<DateTime>();
             AddedKeyPoint = "";
@@ -279,7 +280,7 @@ namespace BookingApp.View.ViewModels.TourGuideViewModels
                 Language = TourLanguage,
                 MaxTourists = MaxTourists,
                 Duration = Duration,
-                Pictures = Pictures,
+                Pictures = Pictures.ToList(),
             };
 
             _tourController.CreateTour(newTour, DateTimes, KeyPoints);
@@ -321,20 +322,31 @@ namespace BookingApp.View.ViewModels.TourGuideViewModels
         public void AddImages_Click(object param)
         {
 
-            OpenFileDialog openFileDialog1 = new OpenFileDialog();
-            openFileDialog1.FileName = "";
-            openFileDialog1.Title = "Images";
-            openFileDialog1.Filter = "All Image Files|*.png;*.jpg;*.jpeg;*.bmp";
-            openFileDialog1.ShowDialog();
-
-            if (!string.IsNullOrEmpty(openFileDialog1.FileName))
+            OpenFileDialog fileDialog = new OpenFileDialog();
+            fileDialog.DefaultExt = ".png"; // Required file extension
+            fileDialog.Filter = "Image Files (*.png, *.jpg, *.jpeg)|*.png;*.jpg;*.jpeg"; // Optional file extensions
+            bool? res = fileDialog.ShowDialog();
+            if (res.HasValue && res.Value)
             {
-                string imagePath = openFileDialog1.FileName;
-                string imageFileName = System.IO.Path.GetFileName(imagePath);
-                string imageDestinationPath = "../Resources/Images/" + imageFileName;
+                string fileName = System.IO.Path.GetFileName(fileDialog.FileName);
 
-                Pictures.Add(imageDestinationPath);
+                string sourceFilePath = fileDialog.FileName;
 
+                string destinationFolder = "../../../Resources/Images/";
+                string destinationFilePath = System.IO.Path.Combine(destinationFolder, fileName);
+                try
+                {
+                    File.Copy(sourceFilePath, destinationFilePath, true);
+                }
+                catch (IOException ex)
+                {
+                    //MessageBox.Show("Error copying file: " + ex.Message);
+                }
+
+
+                destinationFolder = "../../../Resources/Images/";
+                destinationFilePath = System.IO.Path.Combine(destinationFolder, fileName);
+                Pictures.Add(destinationFilePath);
             }
 
 

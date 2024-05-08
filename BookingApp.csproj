@@ -14,6 +14,8 @@
     <None Remove="Resources\Images\edit.png" />
     <None Remove="Resources\Images\eiffel.jpg" />
     <None Remove="Resources\Images\notre_dame.jpg" />
+    <None Remove="Resources\Images\slika.jpg" />
+    <None Remove="Resources\Images\slika2.jpg" />
     <None Remove="Resources\Images\view.png" />
   </ItemGroup>
 
@@ -41,6 +43,8 @@
     <Resource Include="Resources\Images\colloseum.jpg" />
     <Resource Include="Resources\Images\eiffel.jpg" />
     <Resource Include="Resources\Images\notre_dame.jpg" />
+    <Resource Include="Resources\Images\slika.jpg" />
+    <Resource Include="Resources\Images\slika2.jpg" />
   </ItemGroup>
 
 

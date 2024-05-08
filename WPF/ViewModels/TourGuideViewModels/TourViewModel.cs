@@ -160,7 +160,7 @@ namespace BookingApp.View.ViewModels.TourGuideViewModels
             _tourController = new TourController();
             KeyPoints = new ObservableCollection<KeyPoint>(_keyPointController.GetAllForTour(tour.Id));
 
-            Pictures = new ObservableCollection<string>();
+            Pictures = new ObservableCollection<string>(tour.Pictures);
 
         }
     }

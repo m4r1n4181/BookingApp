@@ -16,35 +16,6 @@ namespace BookingApp.View.ViewModels.TourGuideViewModels
     public class LiveTourViewModel : INotifyPropertyChanged
     {
 
-        private bool _isRegularTourSelected;
-        public bool IsRegularTourSelected
-        {
-            get => _isRegularTourSelected;
-            set
-            {
-                if (value != _isRegularTourSelected)
-                {
-                    _isRegularTourSelected = value;
-                    OnPropertyChanged();
-                }
-            }
-        }
-
-        private bool _isComplexTourSelected;
-        public bool IsComplexTourSelected
-        {
-            get => _isComplexTourSelected;
-            set
-            {
-                if (value != _isComplexTourSelected)
-                {
-                    _isComplexTourSelected = value;
-                    OnPropertyChanged();
-
-                }
-            }
-        }
-
 
         private DateTime _today;
 
@@ -80,33 +51,6 @@ namespace BookingApp.View.ViewModels.TourGuideViewModels
 
             Today = DateTime.Now;
 
-            IsRegularTourSelected = true;
-            IsComplexTourSelected = false;
-
-
-            PropertyChanged += (sender, e) =>
-            {
-                if (e.PropertyName == nameof(IsRegularTourSelected) && IsRegularTourSelected)
-                {
-                    IsComplexTourSelected = false;
-                    Tours.Clear();
-                    foreach (var tour in _tourController.GetAllWithLocations())
-                    {
-                        Tours.Add(tour);
-                    }
-                }
-                else if (e.PropertyName == nameof(IsComplexTourSelected) && IsComplexTourSelected)
-                {
-                    IsRegularTourSelected = false;
-                    Tours.Clear();
-                    foreach (var tour in _tourController.GetFutureTours())
-                    {
-                        Tours.Add(tour);
-                    }
-                }
-
-
-            };
         }
 
         public void Activate_Click(object param)

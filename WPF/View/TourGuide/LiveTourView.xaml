@@ -169,12 +169,6 @@
             </Button.Template>
         </Button>
 
-        <StackPanel Orientation="Horizontal" Margin="10" Grid.Row="1" Grid.Column="6">
-            <RadioButton Content="Regular" IsChecked="{Binding IsRegularTourSelected, Mode=TwoWay}" Width="65" Margin="10,0,10,0" VerticalContentAlignment="Center"/>
-        </StackPanel>
-        <StackPanel Orientation="Horizontal" Margin="10" Grid.Row="1" Grid.Column="6">
-            <RadioButton Content="Complex" IsChecked="{Binding IsComplexTourSelected, Mode=TwoWay}" Width="65" Margin="10,0,10,0" VerticalContentAlignment="Bottom"/>
-        </StackPanel>
 
 
         <StackPanel Grid.Row="2" Grid.Column="1" Grid.ColumnSpan="6" Grid.RowSpan="4" Margin="15,0,15,0"  Height="270">
