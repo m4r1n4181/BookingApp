@@ -83,9 +83,14 @@
         </StackPanel>
 
         <StackPanel Grid.Row="1" Grid.Column="3" Orientation="Horizontal" Margin="10">
-            <TextBlock FontFamily="Segoe UI Emoji" FontSize="18" Text="&#x1F465;"  Foreground="#0F3057" VerticalAlignment="Center" Margin="0,0,5,0"/>
+            <TextBlock FontFamily="Segoe UI Emoji" FontSize="18" Text="&#x1F465;" Foreground="#0F3057" VerticalAlignment="Center" Margin="0,0,5,0"/>
             <TextBox x:Name="MaxTouristsTextBox" Width="44" VerticalAlignment="Center" Padding="5"
-             BorderBrush="#CCCCCC" BorderThickness="1" FontSize="13" Height="29"  Text="{Binding MaxTourists, UpdateSourceTrigger=PropertyChanged}">
+             BorderBrush="#CCCCCC" BorderThickness="1" FontSize="13" Height="29" Text="{Binding MaxTourists, UpdateSourceTrigger=PropertyChanged}">
+                <TextBox.ToolTip>
+                    <ToolTip>
+                        <TextBlock Text="Number of tourists: X" Foreground="Black"/>
+                    </ToolTip>
+                </TextBox.ToolTip>
                 <TextBox.Resources>
                     <Style TargetType="TextBox">
                         <Setter Property="HorizontalAlignment" Value="Left"/>

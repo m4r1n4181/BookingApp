@@ -137,6 +137,8 @@ namespace BookingApp.View.ViewModels.TourGuideViewModels
         private KeyPointController _keyPointController;
 
         public ObservableCollection<KeyPoint> KeyPoints { get; set; }
+
+        public ObservableCollection<string> Images { get; set; }
         public KeyPoint SelectedKeyPoint { get; set; }
 
         public Tourist SelectedTourist { get; set; }
@@ -168,6 +170,15 @@ namespace BookingApp.View.ViewModels.TourGuideViewModels
             ActivateKeyPointCommand = new RelayCommand(ActivateKeyPoint_Click, CanExecuteActivateKeyPointClick);
             MarkTouristCommand = new RelayCommand(MarkTourist_Click, CanExecuteMarkTouristClick);
             EndTourCommand = new RelayCommand(EndTour_Click, CanExecuteEndTourClick);
+
+            Images = new ObservableCollection<string>();
+
+            Images.Add("../../../Resources/Images/tourStart.jpg");
+            for(int i = 0; i < KeyPoints.Count - 2; i++)
+            {
+                Images.Add("../../../Resources/Images/tourKeyPoint" + i + ".png");
+            }
+            Images.Add("../../../Resources/Images/Finish.png");
 
         }
 
