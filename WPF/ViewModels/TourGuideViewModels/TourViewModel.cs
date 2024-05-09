@@ -1,5 +1,6 @@
 ﻿using BookingApp.Controller;
 using BookingApp.Model;
+using BookingApp.ViewModels;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -8,6 +9,7 @@ using System.Linq;
 using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows;
 
 namespace BookingApp.View.ViewModels.TourGuideViewModels
 {
@@ -132,6 +134,8 @@ namespace BookingApp.View.ViewModels.TourGuideViewModels
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
         }
 
+        public RelayCommand NextImageCommand { get; set; }
+        public RelayCommand PreviousImageCommand { get; set; }
         public ObservableCollection<string> Pictures { get; set; }
 
         public Tour SelectedTour { get; set; }
@@ -143,6 +147,20 @@ namespace BookingApp.View.ViewModels.TourGuideViewModels
         public Tourist SelectedTourist { get; set; }
 
         private TourController _tourController;
+        private string _imagePath;
+        public string ImagePath
+        {
+            get => _imagePath;
+            set
+            {
+                if (value != _imagePath)
+                {
+                    _imagePath = value;
+                    OnPropertyChanged();
+                }
+            }
+        }
+        private int pictureIndex;
         public TourViewModel(Tour tour)
         {
             SelectedTour = tour;
@@ -160,7 +178,54 @@ namespace BookingApp.View.ViewModels.TourGuideViewModels
             _tourController = new TourController();
             KeyPoints = new ObservableCollection<KeyPoint>(_keyPointController.GetAllForTour(tour.Id));
 
+            NextImageCommand = new RelayCommand(NextImage_Click, CanExecuteNextImageClick);
+            PreviousImageCommand = new RelayCommand(PreviousImage_Click, CanExecutePreviousImageClick);
+
+
             Pictures = new ObservableCollection<string>(tour.Pictures);
+            if(tour.Pictures.Count != 0)
+            {
+                ImagePath = tour.Pictures[0];
+            }
+            pictureIndex = 0;
+
+        }
+
+        public void NextImage_Click(object param)
+        {
+            if (pictureIndex == SelectedTour.Pictures.Count - 1)
+            {
+                pictureIndex = 0;
+            }
+            else
+            {
+                pictureIndex++;
+            }
+            ImagePath = SelectedTour.Pictures[pictureIndex];
+        }
+
+        public bool CanExecuteNextImageClick(object param)
+        {
+            return true;
+
+        }
+
+        public void PreviousImage_Click(object param)
+        {
+            if (pictureIndex == 0)
+            {
+                pictureIndex = SelectedTour.Pictures.Count - 1;
+            }
+            else
+            {
+                pictureIndex--;
+            }
+            ImagePath = SelectedTour.Pictures[pictureIndex];
+        }
+
+        public bool CanExecutePreviousImageClick(object param)
+        {
+            return true;
 
         }
     }

@@ -29,8 +29,8 @@ namespace BookingApp.View.ViewModels.TourGuideViewModels
         public Location SelectedLocation { get; set; }
 
         public ObservableCollection<string> Pictures { get; set; }
-        public List<KeyPoint> KeyPoints { get; set; }
-        public List<DateTime> DateTimes { get; set; }
+        public ObservableCollection<KeyPoint> KeyPoints { get; set; }
+        public ObservableCollection<DateTime> DateTimes { get; set; }
 
         public string SelectedTime { get; set; }
 
@@ -117,20 +117,6 @@ namespace BookingApp.View.ViewModels.TourGuideViewModels
             Locations.Where(loc => loc.City == SelectedCity).Select(loc => loc.Country).Distinct());
         }
 
-
-        private string _addedKeyPoint;
-        public string AddedKeyPoint
-        {
-            get => _addedKeyPoint;
-            set
-            {
-                if (value != _addedKeyPoint)
-                {
-                    _addedKeyPoint = value;
-                    OnPropertyChanged("AddedKeyPoint");
-                }
-            }
-        }
 
         private string _name;
         public string TourName
@@ -246,9 +232,8 @@ namespace BookingApp.View.ViewModels.TourGuideViewModels
             _keyPointController = new KeyPointController();
             Locations = new ObservableCollection<Location>(_locationController.GetAll());
             Pictures = new ObservableCollection<string>();
-            KeyPoints = new List<KeyPoint>();
-            DateTimes = new List<DateTime>();
-            AddedKeyPoint = "";
+            KeyPoints = new ObservableCollection<KeyPoint>();
+            DateTimes = new ObservableCollection<DateTime>();
             TourDate = DateTime.Now;
 
 
@@ -283,7 +268,7 @@ namespace BookingApp.View.ViewModels.TourGuideViewModels
                 Pictures = Pictures.ToList(),
             };
 
-            _tourController.CreateTour(newTour, DateTimes, KeyPoints);
+            _tourController.CreateTour(newTour, DateTimes.ToList(), KeyPoints.ToList());
 
 
             //Close();
@@ -293,12 +278,7 @@ namespace BookingApp.View.ViewModels.TourGuideViewModels
         public bool CanExecuteCreateClick(object param)
         {
             return true;
-            // if (SelectedTour == null)
-            //{
-            // MessageBox.Show("Please select a tour.", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
-            //  return false;
-            //}
-            //return true;
+           
         }
 
         public void Cancel(object param)
@@ -311,12 +291,7 @@ namespace BookingApp.View.ViewModels.TourGuideViewModels
         public bool CanExecuteCancelClick(object param)
         {
             return true;
-            // if (SelectedTour == null)
-            //{
-            // MessageBox.Show("Please select a tour.", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
-            //  return false;
-            //}
-            //return true;
+          
         }
 
         public void AddImages_Click(object param)
@@ -355,31 +330,20 @@ namespace BookingApp.View.ViewModels.TourGuideViewModels
         public bool CanExecuteAddImagesClick(object param)
         {
             return true;
-            // if (SelectedTour == null)
-            //{
-            // MessageBox.Show("Please select a tour.", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
-            //  return false;
-            //}
-            //return true;
+       
         }
 
         public void Add_Key_Point_Click(object param)
         {
             KeyPoint keyPoint = new KeyPoint() { Name = KeyPoint, IsActive = false };
             KeyPoints.Add(keyPoint);
-            AddedKeyPoint += KeyPoint + ", ";
         }
 
 
         public bool CanExecuteAddKeyPointClick(object param)
         {
             return true;
-            // if (SelectedTour == null)
-            //{
-            // MessageBox.Show("Please select a tour.", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
-            //  return false;
-            //}
-            //return true;
+           
         }
 
         public void Add_DateTime_Click(object param)
@@ -390,18 +354,14 @@ namespace BookingApp.View.ViewModels.TourGuideViewModels
             TourDate = TourDate.Add(timeOfDay);
 
             DateTimes.Add(TourDate);
+
         }
 
 
         public bool CanExecuteAddDateTimeClick(object param)
         {
             return true;
-            // if (SelectedTour == null)
-            //{
-            // MessageBox.Show("Please select a tour.", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
-            //  return false;
-            //}
-            //return true;
+           
         }
     }
 }

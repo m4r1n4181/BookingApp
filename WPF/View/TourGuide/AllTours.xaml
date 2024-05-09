@@ -311,19 +311,7 @@ AutoGenerateColumns="False" Height="245" HeadersVisibility="Column" FontSize="13
             <RadioButton Content="Active" IsChecked="{Binding IsActiveToursSelected, Mode=TwoWay}" Width="65"  Margin="10,3,10,0" />
         </StackPanel>
 
-        <!-- pretrazivac nije implementiran -->
-        <Grid Margin="10" Grid.Column="2" Grid.ColumnSpan="4">
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="*" />
-                <ColumnDefinition Width="Auto" />
-            </Grid.ColumnDefinitions>
-            <TextBox x:Name="SearchTextBox" Grid.Column="0" Padding="5" BorderThickness="0" Background="#F0F2F5" FontSize="14" 
-        VerticalAlignment="Center" Margin="0,0,10,0" />
-            <Button Grid.Column="1" Padding="5" Background="#0F3057" Foreground="White" FontSize="14" VerticalAlignment="Center" >
-                <TextBlock FontFamily="Segoe MDL2 Assets" FontSize="14" Text="&#xE721;" />
-            </Button>
-        </Grid>
-
+      
     </Grid>
 
 </Window>

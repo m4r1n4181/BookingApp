@@ -6,7 +6,7 @@
         xmlns:local="clr-namespace:BookingApp.View"
         mc:Ignorable="d"
         ResizeMode="NoResize"
-        Title="Create New Tour" Height="600" Width="800" WindowStartupLocation="CenterScreen">
+        Title="Create New Tour" Height="500" Width="800" WindowStartupLocation="CenterScreen">
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="1*"/>
@@ -65,33 +65,37 @@
             </StackPanel>
 
 
-            <StackPanel Grid.Column="0"  Orientation="Horizontal" Margin="0,73,0,-82" Grid.RowSpan="2" >
+            <StackPanel Grid.Column="0"  Orientation="Horizontal" Margin="0,73,218,-82" Grid.RowSpan="2" >
                 <TextBlock Width="100" Text="Description:" VerticalAlignment="Top" Margin="15,0,0,0" FontSize="15" Foreground="#0F3057"/>
-                <TextBox x:Name="txtDescription" Text="{Binding Path=Description, UpdateSourceTrigger=PropertyChanged}" Width="150" Height="126" FontSize="15" VerticalAlignment="Top"  Grid.Row="0" Grid.Column="0" Margin="-100,25,0,0"  Grid.RowSpan="2"/>
-
+                <TextBox x:Name="txtDescription" Text="{Binding Path=Description, UpdateSourceTrigger=PropertyChanged}" Width="150" Height="86" FontSize="15" VerticalAlignment="Top"  Grid.Row="0" Grid.Column="0" Margin="-100,25,0,0"  Grid.RowSpan="2"/>
             </StackPanel>
 
         </Grid>
 
-        <Grid Grid.Row="3" Grid.Column="0" Margin="0,0,0,0">
-            <Grid.RowDefinitions>
-                <RowDefinition Height="1*"/>
-                <RowDefinition Height="1*"/>
-            </Grid.RowDefinitions>
-
-            <StackPanel Grid.Row="1" Grid.Column="0" Orientation="Horizontal" Margin="0 0 0 0">
-                <TextBlock Width="81" Text="Maximum number of tourists:" VerticalAlignment="Center" Margin="15,0,0,0" FontSize="13" Foreground="#0F3057" TextWrapping="Wrap" Height="53"/>
-                <TextBox x:Name="txtMaxTourists" Text="{Binding Path=MaxTourists, UpdateSourceTrigger=PropertyChanged}" Width="50" Height="25"/>
-            </StackPanel>
-            
-
-            <StackPanel Grid.Row="1" Grid.Column="1"  Margin="0 0 0 0">
-                <TextBlock Width="61" Text="Duration (in hours):" VerticalAlignment="Center" Margin="15,0,0,0" FontSize="13" Foreground="#0F3057" TextWrapping="Wrap"/>
-                <TextBox x:Name="txtDuration" Text="{Binding Duration, UpdateSourceTrigger=PropertyChanged}" Width="50" Height="25"/>
-            </StackPanel>
 
 
-        </Grid>
+        <StackPanel Grid.Row="3" Grid.Column="0">
+            <TextBlock Text="⏳" Margin="50,0,0,0" FontSize="22" Foreground="#0F3057" Width="50" Height="34" HorizontalAlignment="Center" >
+                <TextBlock.ToolTip>
+                    <ToolTip>
+                        <TextBlock Text="Duration: X hours" Foreground="Black"/>
+                    </ToolTip>
+                </TextBlock.ToolTip>
+            </TextBlock>
+            <TextBox x:Name="txtDuration" Text="{Binding Duration, UpdateSourceTrigger=PropertyChanged}" Margin="200,0,0,0" Width="60" Height="30" HorizontalAlignment="Left"/>
+        </StackPanel>
+
+        <StackPanel Grid.Row="3" Grid.Column="0">
+            <TextBlock FontFamily="Segoe UI Emoji" FontSize="22" Text="👥" Foreground="#0F3057"  Margin="250,0,0,0"  Width="50" Height="34" HorizontalAlignment="Center" >
+                <TextBlock.ToolTip>
+                    <ToolTip>
+                        <TextBlock Text="Number of tourists: X" Foreground="Black"/>
+                    </ToolTip>
+                </TextBlock.ToolTip>
+                    </TextBlock>
+            <TextBox x:Name="txtMaxTourists" Text="{Binding Path=MaxTourists, UpdateSourceTrigger=PropertyChanged}" Margin="300,0,0,0" Width="60" Height="30" HorizontalAlignment="Left"/>
+        </StackPanel>
+
 
         <Grid Grid.Row="0" Grid.Column="1" Margin="0,0,0,0">
             <Grid.ColumnDefinitions>
@@ -101,8 +105,8 @@
 
             <StackPanel Grid.Row="0" Grid.Column="0" Orientation="Horizontal" Margin="0 0 0 0">
                 <TextBlock Width="85" Text="Key Points:" VerticalAlignment="Top"  Margin="10 10 0 0" FontSize="15" Foreground="#0F3057"/>
-                <TextBox x:Name="txtKeyPoints" Text="{Binding Path=KeyPoint, UpdateSourceTrigger=PropertyChanged}" Width="100" Height="25" VerticalAlignment="Center" Margin="-85 5 0 0" FontSize="15"/>
-                <Button Width="40" Height="20" Margin="15, 5, 0, 0" Command="{Binding AddKeyPointCommand}" FontSize="13" VerticalAlignment="Center">
+                <TextBox x:Name="txtKeyPoints" Text="{Binding Path=KeyPoint, UpdateSourceTrigger=PropertyChanged}" Width="100" Height="25" VerticalAlignment="Top" Margin="-85 35 0 0" FontSize="15"/>
+                <Button Width="40" Height="20" Margin="15, 35, 0, 0" Command="{Binding AddKeyPointCommand}" FontSize="13" VerticalAlignment="Top">
                     <Button.Template>
                         <ControlTemplate TargetType="Button">
                             <Border Background="#0F3057" BorderBrush="#0F3057" BorderThickness="2" CornerRadius="5">
@@ -113,19 +117,20 @@
                 </Button>
             </StackPanel>
 
-            <StackPanel Grid.Row="0" Grid.Column="1"  Orientation="Horizontal" Margin="10 10 0 0">
-                <TextBlock Width="100" Text="Added Key Points:" VerticalAlignment="Top" HorizontalAlignment="Center" Foreground="Gray" FontSize="12" />
-                <ListBox Width="156"  Height="60" ItemsSource="{Binding AddedKeyPoint, UpdateSourceTrigger=PropertyChanged}"  VerticalAlignment="Center" Margin="-100 10 0 0" FontSize="12" />
+            <StackPanel Grid.Row="0" Grid.Column="0"  Orientation="Horizontal" Margin="10 0 0 10">
+                <ListBox Width="155" Height="45" ItemsSource="{Binding KeyPoints, UpdateSourceTrigger=PropertyChanged}" VerticalAlignment="Bottom" Margin="0 2 0 0" FontSize="12" DisplayMemberPath="Name"/>
             </StackPanel>
         </Grid>
 
 
 
-        <StackPanel  Grid.Row="1" Grid.Column="1"  Orientation="Horizontal" Margin="10 10 0 0">
-            <DatePicker x:Name="dpStartDate" SelectedDate="{Binding TourDate}" Width="100" Height="25"/>
-            <TextBlock Width="113" Text="Date and time:"   FontSize="15" Foreground="#0F3057" VerticalAlignment="Top"/>
-            <ComboBox x:Name="cbStartTime" ItemsSource="{Binding PossibleTimes}" SelectedItem="{Binding SelectedTime}" Width="85" Height="25"/>
-            <Button Width="39" Height="20" Margin="15, 0, 0, 0" Command="{Binding AddDateTimeCommand}" FontSize="13" VerticalAlignment="Center">
+        <StackPanel Grid.Row="1" Grid.Column="1" Margin="0 0 0 0" Orientation="Horizontal">
+            <TextBlock  Text="Date and time:" FontSize="15" Foreground="#0F3057" Height="25" Width="100" VerticalAlignment="Top" Margin="10,0,0,0"/>
+            <StackPanel Orientation="Horizontal" Margin="-100 10 0 0" Height="60" VerticalAlignment="Top">
+                <DatePicker x:Name="dpStartDate" SelectedDate="{Binding TourDate}" Width="100" Height="25" VerticalAlignment="Center" HorizontalAlignment="Left"/>
+                <ComboBox x:Name="cbStartTime" ItemsSource="{Binding PossibleTimes}" SelectedItem="{Binding SelectedTime}" Width="85" Height="25" Margin="10,0,0,0"/>
+            </StackPanel>
+            <Button Width="39" Height="20" Margin="15 30 0 0" Command="{Binding AddDateTimeCommand}" FontSize="13" VerticalAlignment="Top">
                 <Button.Template>
                     <ControlTemplate TargetType="{x:Type Button}">
                         <Border Background="#0F3057" BorderBrush="#0F3057" BorderThickness="2" CornerRadius="5">
@@ -134,6 +139,10 @@
                     </ControlTemplate>
                 </Button.Template>
             </Button>
+
+            <StackPanel Grid.Row="1" Grid.Column="0"  Orientation="Horizontal" Margin="0 0 0 0">
+                <ListBox Width="195"  Height="61" ItemsSource="{Binding DateTimes, UpdateSourceTrigger=PropertyChanged}"  VerticalAlignment="Bottom" Margin="-303 10 0 0" FontSize="12" />
+            </StackPanel>
         </StackPanel>
 
         <Grid Grid.Row="2" Grid.Column="1" Margin="0,0,0,0">
@@ -141,24 +150,41 @@
                 <ColumnDefinition Width="1*"/>
                 <ColumnDefinition Width="1*"/>
             </Grid.ColumnDefinitions>
+            <Button Command="{Binding AddImagesCommand}" FontSize="14" Margin="7,33,138,30">
+                <Button.Template>
+                    <ControlTemplate TargetType="{x:Type Button}">
+                        <Grid>
+                            <Ellipse Width="50" Height="50" Stroke="#0F3057" StrokeThickness="3" Fill="Transparent" VerticalAlignment="Center"/>
 
-            <StackPanel Orientation="Horizontal" Margin="10,10,87,10" Grid.Row="0" Grid.Column="1">
-                <Button Height="57" Width="64" Command="{Binding AddImagesCommand}" FontSize="14">
-                    <Button.Template>
-                        <ControlTemplate TargetType="{x:Type Button}">
-                            <Grid>
-                                <Ellipse Width="50" Height="50" Stroke="#0F3057" StrokeThickness="3" Fill="Transparent" VerticalAlignment="Center"/>
+                            <!-- Emoji sa polu-transparentnom bojom -->
+                            <TextBlock Text="📷" Foreground="#800F3057" FontSize="30" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="0,0,0,5"/>
 
-                                <!-- Emoji sa polu-transparentnom bojom -->
-                                <TextBlock Text="&#x1F4F7;" Foreground="#800F3057" FontSize="30" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="0,0,0,5"/>
+                            <!-- Plus znak -->
+                            <TextBlock Text="+" Foreground="#0F3057" FontSize="30" FontWeight="Bold" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="0,0,0,5"/>
+                        </Grid>
+                    </ControlTemplate>
+                </Button.Template>
+                <Button.ToolTip>
+                    <ToolTip>
+                        <TextBlock Text="Add picture" Foreground="Black"/>
+                    </ToolTip>
+                </Button.ToolTip>
+            </Button>
 
-                                <!-- Plus znak -->
-                                <TextBlock Text="+" Foreground="#0F3057" FontSize="30" FontWeight="Bold" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="0,0,0,5"/>
-                            </Grid>
-                        </ControlTemplate>
-                    </Button.Template>
-                </Button>
-            </StackPanel>
+            <ListView x:Name="ListViewPictures" ItemsSource="{Binding Pictures}" BorderBrush="Transparent" Background="Transparent" Width="296" HorizontalAlignment="Left"  Margin="100,10,0,10" Grid.Column="0" Grid.ColumnSpan="2">
+                <ListView.ItemsPanel>
+                    <ItemsPanelTemplate>
+                        <WrapPanel Orientation="Horizontal"/>
+                    </ItemsPanelTemplate>
+                </ListView.ItemsPanel>
+                <ListView.ItemTemplate>
+                    <DataTemplate>
+                        <StackPanel Orientation="Horizontal">
+                            <Image Source="{Binding}" Width="90" Height="90" Margin="5"/>
+                        </StackPanel>
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+            </ListView>
 
 
 
@@ -180,7 +206,7 @@
                 </Grid.ColumnDefinitions>
 
 
-                <StackPanel Grid.Row="3" Grid.Column="0" Margin="0,0,0,10" VerticalAlignment="Bottom" HorizontalAlignment="Center">
+                <StackPanel Grid.Row="3" Grid.Column="0" Margin="5,0,0,10" VerticalAlignment="Bottom" HorizontalAlignment="Center">
                     <Button Click="Cancel_Click" Height="25" Width="70" FontSize="16">
                         <Button.Template>
                             <ControlTemplate TargetType="Button">
@@ -192,7 +218,7 @@
                     </Button>
                 </StackPanel>
 
-                <StackPanel Grid.Row="3" Grid.Column="1" Margin="0,0,0,10" VerticalAlignment="Bottom" HorizontalAlignment="Center">
+                <StackPanel Grid.Row="3" Grid.Column="1" Margin="0,0,5,10" VerticalAlignment="Bottom" HorizontalAlignment="Center">
                     <Button Command="{Binding SaveCommand}" Height="25" Width="70" FontSize="16">
                         <Button.Template>
                             <ControlTemplate TargetType="Button">
@@ -206,23 +232,6 @@
 
 
             </Grid>
-
-
-            <ListView x:Name="ListViewPictures" ItemsSource="{Binding Pictures}" BorderBrush="Transparent" Background="Transparent" Width="200" HorizontalAlignment="Left" Height="145" Grid.Row="1" Grid.Column="0"  Margin="0,0,0,0">
-                <ListView.ItemsPanel>
-                    <ItemsPanelTemplate>
-                        <WrapPanel Orientation="Horizontal"/>
-                    </ItemsPanelTemplate>
-                </ListView.ItemsPanel>
-                <ListView.ItemTemplate>
-                    <DataTemplate>
-                        <StackPanel Orientation="Horizontal">
-                            <Image Source="{Binding}" Width="90" Height="90" Margin="5"/>
-                        </StackPanel>
-                    </DataTemplate>
-                </ListView.ItemTemplate>
-            </ListView>
-
 
         </Grid>
 

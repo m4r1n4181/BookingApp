@@ -13,25 +13,29 @@
     <None Remove="Resources\Images\delete.png" />
     <None Remove="Resources\Images\edit.png" />
     <None Remove="Resources\Images\eiffel.jpg" />
+    <None Remove="Resources\Images\louvre.jpg" />
     <None Remove="Resources\Images\notre_dame.jpg" />
+    <None Remove="Resources\Images\palatine.jpg" />
     <None Remove="Resources\Images\slika.jpg" />
     <None Remove="Resources\Images\slika2.jpg" />
     <None Remove="Resources\Images\view.png" />
   </ItemGroup>
 
   <ItemGroup>
-    <Content Include="Resources\Images\add.png">
+    <Resource Include="Resources\Images\add.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Resources\Images\delete.png">
+    </Resource>
+    <Resource Include="Resources\Images\delete.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Resources\Images\edit.png">
+    </Resource>
+    <Resource Include="Resources\Images\edit.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Resources\Images\view.png">
+    </Resource>
+    <Resource Include="Resources\Images\louvre.jpg" />
+    <Resource Include="Resources\Images\palatine.jpg" />
+    <Resource Include="Resources\Images\view.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
+    </Resource>
   </ItemGroup>
 
   <ItemGroup>
