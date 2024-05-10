@@ -75,7 +75,7 @@ namespace BookingApp.View
                 DoubleAnimation animation = new DoubleAnimation();
                 animation.From = currentX;
                 currentX = pictureX;
-                if(keyPointNum == 3)
+                if (keyPointNum == 3)
                 {
                     currentX += 20;
                 }
@@ -89,14 +89,8 @@ namespace BookingApp.View
                 }
             }
         }
+
     }
 
 }
-
-//za dodavanje turiste
-// selectujem keypoint i click dugme nadji tutistu
-//novi prozor sa svim turistama gde selektujemo jednog
-// u taj novi prozor posalji SelectedKeyPoint
-//tamo sklopis objecat ToursitEntry
-// i samo ga creiras u controlleru
 

@@ -296,8 +296,19 @@ AutoGenerateColumns="False" Height="245" HeadersVisibility="Column" FontSize="13
                 </ControlTemplate>
             </Button.Template>
         </Button>
-
-
+        
+        <Button Command="{Binding EndActiveCommand}" FontSize="14" VerticalAlignment="Center" Grid.Row="6" Grid.Column="2" Margin="10,0,15,0" Visibility="{Binding IsEndTourButtonVisible, Converter={StaticResource BooleanToVisibilityConverter}}">
+            <Button.Template>
+                <ControlTemplate TargetType="Button">
+                    <Grid>
+                        <Border Background="#0F3057" BorderBrush="#0F3057" BorderThickness="2" CornerRadius="5">
+                            <TextBlock Text="End Tour" Foreground="White" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                        </Border>
+                    </Grid>
+                </ControlTemplate>
+            </Button.Template>
+        </Button>
+        
         <Button Command="{Binding CancelCommand}" FontSize="14" VerticalAlignment="Center" Grid.Row="6" Grid.Column="1" Margin="10,0,15,0" Visibility="{Binding IsCancelTourButtonVisible, Converter={StaticResource BooleanToVisibilityConverter}}">
             <Button.Template>
                 <ControlTemplate TargetType="Button">

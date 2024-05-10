@@ -143,7 +143,7 @@
                         <!-- Person icon -->
                         <TextBlock FontFamily="Segoe MDL2 Assets" Foreground="#0F3057" FontSize="30" TextAlignment="Center" VerticalAlignment="Center"  >&#xE77B;</TextBlock>
                         <!-- Text -->
-                        <TextBlock Text="ime prezime..." FontSize="10" TextAlignment="Left" VerticalAlignment="Bottom" Margin="67,0,-126,21" Height="28"/>
+                        <TextBlock Text="" FontSize="10" TextAlignment="Left" VerticalAlignment="Bottom" Margin="67,0,-126,21" Height="28"/>
                     </Grid>
                 </ControlTemplate>
             </Button.Template>

@@ -58,6 +58,8 @@ namespace BookingApp.View.ViewModels.TourGuideViewModels
                 {
                     _isActiveToursSelected = value;
                     OnPropertyChanged();
+
+                    IsEndTourButtonVisible = value;
                 }
             }
         }
@@ -76,6 +78,19 @@ namespace BookingApp.View.ViewModels.TourGuideViewModels
             }
         }
 
+        private bool _isEndTourButtonVisible;
+        public bool IsEndTourButtonVisible
+        {
+            get => _isEndTourButtonVisible;
+            set
+            {
+                if (_isEndTourButtonVisible != value)
+                {
+                    _isEndTourButtonVisible = value;
+                    OnPropertyChanged(nameof(_isEndTourButtonVisible));
+                }
+            }
+        }
         private string _city;
         public string City
         {
@@ -171,6 +186,8 @@ namespace BookingApp.View.ViewModels.TourGuideViewModels
         public RelayCommand SearchCommand { get; set; }
         public RelayCommand CancelCommand { get; set; }
 
+        public RelayCommand EndActiveCommand { get; set; }
+
         public AllToursViewModel()
         {
             _tourReservationController = new TourReservationController();
@@ -189,6 +206,7 @@ namespace BookingApp.View.ViewModels.TourGuideViewModels
             TutorialCommand = new RelayCommand(Tutorial_Click, CanExecuteTutorialClick);
             SearchCommand = new RelayCommand(Search_Click, CanExecuteSearchClick);
             CancelCommand = new RelayCommand(CancelButton_Click, CanExecuteCancelClick);
+            EndActiveCommand = new RelayCommand(EndActive_Click, CanExecuteEndActivelClick);
 
 
             PropertyChanged += (sender, e) =>
@@ -323,6 +341,20 @@ namespace BookingApp.View.ViewModels.TourGuideViewModels
         }
 
         public bool CanExecuteCancelClick(object param)
+        {
+            return true;
+
+        }
+
+        public void EndActive_Click(object param)
+        {
+
+            TourDetails tourDetails = new TourDetails(SelectedTour);
+            tourDetails.ShowDialog();
+
+
+        }
+        public bool CanExecuteEndActivelClick(object param)
         {
             return true;
 

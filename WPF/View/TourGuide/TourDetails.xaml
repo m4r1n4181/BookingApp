@@ -5,8 +5,8 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:BookingApp.View"
         mc:Ignorable="d"
+        ResizeMode="NoResize"
         Title="TourDetails" Height="600" Width="800"  Background="#F0F0F0">
-    
 
     <Grid>
         <Grid.ColumnDefinitions>
@@ -22,34 +22,82 @@
             <RowDefinition Height="1*"/>
         </Grid.RowDefinitions>
 
-        <Grid Grid.Row="0" Grid.Column="0" Grid.RowSpan="2" Background="#0F3057" Margin="10,10,0,0"/>
+        <Grid Grid.Row="0" Grid.Column="0" Grid.RowSpan="2" Background="#0F3057" Margin="10,10,0,12"/>
 
 
-        <StackPanel Grid.Row="0" Grid.Column="0" Grid.RowSpan="2" Margin="15,0,0,0" >
-            <TextBlock Text="Name:" FontWeight="Bold" Foreground="White" Margin="0,0,0,10" FontSize="16" />
-            <TextBlock Text="{Binding TourName}" Margin="0,0,0,5" Foreground="White"/>
+        <StackPanel Grid.Row="0" Grid.Column="0" Grid.RowSpan="2" Margin="10,10,0,0">
 
-            <TextBlock Text="Location:" FontWeight="Bold" Margin="0,0,0,10" Foreground="White" FontSize="16"/>
-            <TextBlock Text="{Binding Location}" Margin="0,0,0,5" Foreground="White"/>
+            <Grid Margin="10,10,0,10">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="Auto"/>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
 
-            <TextBlock Text="Language:" FontWeight="Bold" Margin="0,0,0,10" Foreground="White" FontSize="16"/>
-            <TextBlock Text="{Binding Languages}" Margin="0,0,0,5" Foreground="White"/>
+                <TextBlock Text="Name:" FontWeight="Bold" Foreground="White" Margin="0,0,10,5" FontSize="16" VerticalAlignment="Center"/>
+                <TextBlock Text="{Binding TourName}" Margin="0,0,10,5" Foreground="White" VerticalAlignment="Center"  HorizontalAlignment="Right" Grid.Column="1" />
 
-            <TextBlock FontFamily="Segoe UI Emoji" Text="👥" Margin="0,0,0,10" Foreground="White" FontSize="30"/>
-            <TextBlock Text="{Binding MaxTourists}" Margin="0,0,0,5" Foreground="White"/>
+            </Grid>
 
-            <TextBlock Text="StartDate and time:" FontWeight="Bold" Margin="0,0,0,10" Foreground="White" FontSize="16"/>
-            <TextBlock Text="{Binding TourDate}" Margin="0,0,0,5" Foreground="White"/>
+            <Grid Margin="10,0,0,10">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="Auto"/>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
 
-            <TextBlock Text="⏳" FontWeight="Bold" Margin="0,0,0,10" Foreground="White" FontSize="30"/>
-            <TextBlock Text="{Binding Duration}" Margin="0,0,0,5" Foreground="White"/>
+                <TextBlock Text="Location:" FontWeight="Bold" Margin="0,0,10,5" FontSize="16" VerticalAlignment="Center" Foreground="white" />
+                <TextBlock Text="{Binding Location}" Margin="0,5,10,5" Foreground="White" HorizontalAlignment="Right" Grid.Column="1" VerticalAlignment="Center"  />
+
+            </Grid>
+
+            <Grid Margin="10,0,0,10">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="Auto"/>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
+
+                <TextBlock Text="Language:" FontWeight="Bold" Margin="0,0,10,5" FontSize="16" VerticalAlignment="Center"  Foreground="white"/>
+                <TextBlock Text="{Binding Languages}" Margin="0,5,10,5" Foreground="White" HorizontalAlignment="Right" Grid.Column="1" VerticalAlignment="Center"  />
+
+            </Grid>
+
+            <Grid Margin="10,0,0,10">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="Auto"/>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
+
+                <TextBlock Text="Start:" FontWeight="Bold" Margin="0,0,10,5" FontSize="16" VerticalAlignment="Center" Foreground="White"/>
+                <TextBlock Text="{Binding TourDate}" Margin="0,5,10,5" Foreground="White" HorizontalAlignment="Right" Grid.Column="1" VerticalAlignment="Center"  />
+
+            </Grid>
+
+            <StackPanel Grid.Row="0" Grid.Column="0" Grid.RowSpan="2" Margin="10,10,0,0">
+                <!-- Max Tourists -->
+                <StackPanel Orientation="Horizontal" Margin="0,0,0,5" VerticalAlignment="Center">
+                    <TextBlock FontFamily="Segoe UI Emoji" Text="👥" Margin="0,0,5,0" Foreground="White" FontSize="22"/>
+                    <TextBlock Text="{Binding MaxTourists}" Foreground="White" Width="50" Height="40" FontSize="16" Margin="10,0,0,0" FontWeight="DemiBold" />
+                </StackPanel>
+
+                <!-- Duration -->
+                <StackPanel Orientation="Horizontal" Margin="0,0,0,5" VerticalAlignment="Center">
+                    <TextBlock FontWeight="Bold" Foreground="White" FontSize="22" >
+                        <TextBlock.ToolTip>
+                            <ToolTip>
+                                <TextBlock Text="Duration in hours" Foreground="Black"/>
+                            </ToolTip>
+                        </TextBlock.ToolTip><Run Text="⏳"/></TextBlock>
+                    <TextBlock Text="{Binding Duration}" Foreground="White" FontSize="20" FontWeight="DemiBold" Width="50" Height="39" Margin="22,0,0,7"/>
+                </StackPanel>
+            </StackPanel>
+
         </StackPanel>
 
-        <StackPanel Grid.Row="0" Grid.Column="1" Grid.ColumnSpan="2" Grid.RowSpan="2">
+
+        <StackPanel Grid.Row="0" Grid.Column="1" Grid.ColumnSpan="2" Grid.RowSpan="2" Margin="10,10,10,0">
             <DataGrid ItemsSource="{Binding KeyPoints}"
               SelectedItem="{Binding Path=SelectedKeyPoint}"
               IsReadOnly="True" SelectionMode="Single" 
-              AutoGenerateColumns="False" Height="125" HeadersVisibility="Column" FontSize="13" Width="661"
+              AutoGenerateColumns="False" Height="250" HeadersVisibility="Column" FontSize="13" Width="510"
               HorizontalAlignment="Left">
                 <DataGrid.Columns>
                     <DataGridTextColumn Header="KeyPoint" Binding="{Binding Name}" Width="*"/>
@@ -71,15 +119,19 @@
 
         </StackPanel>
 
-        <StackPanel  Grid.Row="2" Grid.ColumnSpan="3" >
-            
+        <StackPanel  Grid.Row="3" Grid.ColumnSpan="3" >
+
             <Image x:Name="cikaImage" Source="../../../Resources/Images/personFigure.png" Width="80" Height="90" HorizontalAlignment="Left" VerticalAlignment="Bottom" Margin="50,0,0,0">
                 <Image.RenderTransform>
                     <TranslateTransform X="0" Y="0"/>
                 </Image.RenderTransform>
             </Image>
         </StackPanel>
-        
+
+        <Grid Grid.Row="3" Grid.ColumnSpan="3">
+            <Line X1="45" Y1="100" X2="755" Y2="100" Stroke="Black" StrokeThickness="3" />
+        </Grid>
+
 
         <ItemsControl x:Name="tourFlowItemControl" Grid.Row="3" Grid.ColumnSpan="3" ItemsSource="{Binding Images}">
             <ItemsControl.ItemsPanel>

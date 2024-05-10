@@ -17,7 +17,9 @@
     <None Remove="Resources\Images\louvre.jpg" />
     <None Remove="Resources\Images\notre_dame.jpg" />
     <None Remove="Resources\Images\palatine.jpg" />
+    <None Remove="Resources\Images\people.png" />
     <None Remove="Resources\Images\personFigure.png" />
+    <None Remove="Resources\Images\personFigure2.png" />
     <None Remove="Resources\Images\slika.jpg" />
     <None Remove="Resources\Images\slika2.jpg" />
     <None Remove="Resources\Images\tourKeyPoint0.png" />
@@ -27,7 +29,6 @@
     <None Remove="Resources\Images\tourKeyPoint4.png" />
     <None Remove="Resources\Images\tourKeyPoint5.png" />
     <None Remove="Resources\Images\tourKeyPoint6.png" />
-    <None Remove="Resources\Images\tourStart.jpg" />
     <None Remove="Resources\Images\view.png" />
   </ItemGroup>
 
@@ -44,7 +45,9 @@
     <Resource Include="Resources\Images\Finish.png" />
     <Resource Include="Resources\Images\louvre.jpg" />
     <Resource Include="Resources\Images\palatine.jpg" />
+    <Resource Include="Resources\Images\people.png" />
     <Resource Include="Resources\Images\personFigure.png" />
+    <Resource Include="Resources\Images\personFigure2.png" />
     <Resource Include="Resources\Images\tourKeyPoint6.png" />
     <Resource Include="Resources\Images\tourKeyPoint5.png" />
     <Resource Include="Resources\Images\tourKeyPoint4.png" />
@@ -52,7 +55,6 @@
     <Resource Include="Resources\Images\tourKeyPoint2.png" />
     <Resource Include="Resources\Images\tourKeyPoint1.png" />
     <Resource Include="Resources\Images\tourKeyPoint0.png" />
-    <Resource Include="Resources\Images\tourStart.jpg" />
     <Resource Include="Resources\Images\view.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Resource>

@@ -173,7 +173,7 @@ namespace BookingApp.View.ViewModels.TourGuideViewModels
 
             Images = new ObservableCollection<string>();
 
-            Images.Add("../../../Resources/Images/tourStart.jpg");
+            Images.Add("../../../Resources/Images/people.png");
             for(int i = 0; i < KeyPoints.Count - 2; i++)
             {
                 Images.Add("../../../Resources/Images/tourKeyPoint" + i + ".png");
@@ -201,12 +201,7 @@ namespace BookingApp.View.ViewModels.TourGuideViewModels
         public bool CanExecuteActivateKeyPointClick(object param)
         {
             return true;
-            // if (SelectedTour == null)
-            //{
-            // MessageBox.Show("Please select a tour.", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
-            //  return false;
-            //}
-            //return true;
+           
         }
 
         public void MarkTourist_Click(object param)
@@ -229,12 +224,7 @@ namespace BookingApp.View.ViewModels.TourGuideViewModels
         public bool CanExecuteMarkTouristClick(object param)
         {
             return true;
-            // if (SelectedTour == null)
-            //{
-            // MessageBox.Show("Please select a tour.", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
-            //  return false;
-            //}
-            //return true;
+           
         }
 
         public void EndTour_Click(object param)
@@ -247,12 +237,7 @@ namespace BookingApp.View.ViewModels.TourGuideViewModels
         public bool CanExecuteEndTourClick(object param)
         {
             return true;
-            // if (SelectedTour == null)
-            //{
-            // MessageBox.Show("Please select a tour.", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
-            //  return false;
-            //}
-            //return true;
+          
         }
 
     }
