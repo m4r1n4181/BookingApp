@@ -3,6 +3,7 @@ using BookingApp.Domain.Models;
 using BookingApp.Model;
 using BookingApp.View;
 using BookingApp.ViewModels;
+using BookingApp.WPF.View.OwnerPages;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -10,6 +11,7 @@ using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Controls;
 using System.Windows.Input;
 
 namespace BookingApp.WPF.ViewModels.OwnerPageViewModels
@@ -17,7 +19,9 @@ namespace BookingApp.WPF.ViewModels.OwnerPageViewModels
     public class AccommodationRenovationsOverviewViewModelPage : ViewModelBase
     {
         private AccommodationRenovationController _controller;
+        private readonly OwnerUIWindow _ownerUIWindow;
         public string Type { get; set; }
+   
         //public AccommodationRenovation SelectedAccommodationRenovation { get; set; }
         private ObservableCollection<AccommodationRenovation> _accommodationRenovations;
         public ObservableCollection<AccommodationRenovation> AccommodationRenovations
@@ -48,7 +52,7 @@ namespace BookingApp.WPF.ViewModels.OwnerPageViewModels
             set
             {
                 if (_selectedType != value)
-                {                 
+                {
                     _selectedType = value;
                     OnPropertyChanged();
                     RefreshData();
@@ -57,7 +61,7 @@ namespace BookingApp.WPF.ViewModels.OwnerPageViewModels
         }
 
 
-
+        public ICommand ScheduleCommand { get; private set; }
 
         public ICommand LoadScheduledRenovationsCommand { get; private set; }
         public ICommand LoadPreviousRenovationsCommand { get; private set; }
@@ -67,6 +71,7 @@ namespace BookingApp.WPF.ViewModels.OwnerPageViewModels
 
         public AccommodationRenovationsOverviewViewModelPage()
         {
+            
             _controller = new AccommodationRenovationController();
             LoadScheduledRenovationsCommand = new RelayCommand(LoadScheduledRenovations);
             LoadPreviousRenovationsCommand = new RelayCommand(LoadPreviousRenovations);
@@ -76,6 +81,7 @@ namespace BookingApp.WPF.ViewModels.OwnerPageViewModels
             //SelectedType = "Scheduled Renovations"; // Set a default type
             RefreshData();
         }
+
 
 
 
@@ -107,21 +113,24 @@ namespace BookingApp.WPF.ViewModels.OwnerPageViewModels
 
         private void CancelRenovation(object param)
         {
-             
-             
-                 _controller.CancelRenovation(SelectedAccommodationRenovation);
-                 RefreshData();
-             
-                
-             
-           // var controller = new AccommodationRenovationController();
+
+
+            _controller.CancelRenovation(SelectedAccommodationRenovation);
+            RefreshData();
+
+
+
+            // var controller = new AccommodationRenovationController();
             //controller.CancelRenovation(SelectedAccommodationRenovation);
         }
 
 
         private bool CanCancelRenovation(object param)
-        {            
+        {
             return SelectedAccommodationRenovation != null;
         }
+       
+
     }
+
 }

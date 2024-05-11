@@ -23,22 +23,20 @@ namespace BookingApp.WPF.View.OwnerPages
     /// </summary>
     public partial class AccommodationViewPage : Page
     {
-        public AccommodationController _accommodationController { get; set; }
-        public Accommodation accommodation { get; set; }
+        
         public AccommodationViewPage(Accommodation selectedAccommodation)
         {
             InitializeComponent();
-           // this.DataContext = new AccommodationViewViewModel(accommodation);
-           this.DataContext = this;
-            _accommodationController = new AccommodationController();
-            accommodation = _accommodationController.GetById(selectedAccommodation.Id);
+           this.DataContext = new AccommodationViewModel(selectedAccommodation);
+         
         }
 
+        /*
         private void ViewStatisticsButton_Click(object sender, RoutedEventArgs e)
         {
             YearlyStatisticsPage yearlyStatisticsPage = new YearlyStatisticsPage(accommodation);
             this.NavigationService.Navigate(yearlyStatisticsPage);
 
-        }
+        } */
     }
 }

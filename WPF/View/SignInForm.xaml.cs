@@ -76,10 +76,14 @@ namespace BookingApp.View
                     }
                     else if (user.Type == UserType.Owner)
                     {
-                        OwnerUIWindow ownerUIWindow = new OwnerUIWindow();
-                        ownerUIWindow.Show();
+                       // OwnerUIWindow ownerUIWindow = new OwnerUIWindow();
+                        //ownerUIWindow.Show();
                      // AllAccommodationsWindow allAccommodationsWindow = new AllAccommodationsWindow();
                        // allAccommodationsWindow.Show(); 
+                       //OwnerMainWindow ownerMainWindow = new OwnerMainWindow();
+                        //ownerMainWindow.Show();
+                        SortedAccommodations sortedAccommodations = new SortedAccommodations();
+                        sortedAccommodations.Show();
 
                     }
 

@@ -10,7 +10,7 @@ using System.Threading.Tasks;
 
 namespace BookingApp.Repository
 {
-    public class GuestReviewRepository
+    public class GuestReviewRepository : IGuestReviewRepository
     {
         private const string FilePath = "../../../Resources/Data/guest-review.csv";
         private readonly Serializer<GuestReview> _serializer;

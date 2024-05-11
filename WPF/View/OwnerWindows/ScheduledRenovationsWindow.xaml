@@ -1,0 +1,71 @@
+﻿<Window x:Class="BookingApp.WPF.View.OwnerWindows.ScheduledRenovationsWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:BookingApp.WPF.View.OwnerWindows"
+        mc:Ignorable="d"
+        Title="ScheduledRenovationsWindow" Height="450" Width="800">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="60" />
+            <RowDefinition />
+            <RowDefinition Height="80" />
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="100" />
+            <ColumnDefinition />
+            <ColumnDefinition Width="100" />
+        </Grid.ColumnDefinitions>
+        <Label Grid.Row="0"
+               Grid.Column="1"
+               Height="40"
+               FontSize="20"
+               Content="Renoviranja"            
+               Margin="0,20,0,0" />
+        <DataGrid Grid.Row="1"
+                  Grid.Column="1"
+                  AutoGenerateColumns="False"
+                  x:Name="AccommodationReviewsDataGrid"
+                  IsReadOnly="True"
+                  SelectionMode="Single"
+                  ItemsSource="{Binding Path=AccommodationRenovations, UpdateSourceTrigger=PropertyChanged}"
+                  SelectedItem="{Binding Path=SelectedAccommodationRenovation}">
+            <DataGrid.Columns>
+                <DataGridTextColumn Header="Smeštaj"
+                                    Binding="{Binding Accommodation.Name}"
+                                    Width="80"></DataGridTextColumn>
+                <DataGridTextColumn Header="Država"
+                                    Binding="{Binding Accommodation.Location.Country}"
+                                    Width="80"></DataGridTextColumn>
+                <DataGridTextColumn Header="Grad"
+                                    Binding="{Binding Accommodation.Location.City}"
+                                    Width="80"></DataGridTextColumn>
+                <DataGridTextColumn Header="Od"
+                                    Binding="{Binding Start}"
+                                    Width="80"></DataGridTextColumn>
+                <DataGridTextColumn Header="Do"
+                                    Binding="{Binding End}"
+                                    Width="80"></DataGridTextColumn>
+            </DataGrid.Columns>
+        </DataGrid>
+        <StackPanel Grid.Row="2"
+                    Grid.Column="1"
+                    Orientation="Horizontal"
+                    HorizontalAlignment="Right">
+            <Button x:Name="CancelRenovationButton"
+                    Command="{Binding CancelRenovationCommand}"
+                    FontSize="15"
+                    Margin="10"
+                    Width="87">
+                <StackPanel>
+                    <TextBlock Text="Otkaži"
+                               HorizontalAlignment="Center" />
+                </StackPanel>
+            </Button>
+
+        </StackPanel>
+
+
+    </Grid>
+</Window>

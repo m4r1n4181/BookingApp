@@ -16,8 +16,9 @@ namespace BookingApp.WPF.View.OwnerPages
         {
             InitializeComponent();
             this.DataContext = new AccommodationRenovationsOverviewViewModelPage(); 
-        }       
+        }
 
+        
     }
 
 }

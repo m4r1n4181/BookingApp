@@ -1,5 +1,6 @@
 ﻿using BookingApp.Domain.Models;
 using BookingApp.Domain.RepositoryInterfaces;
+using BookingApp.Model;
 using BookingApp.Serializer;
 using System;
 using System.Collections.Generic;
@@ -28,11 +29,25 @@ namespace BookingApp.Repository
         }
 
         public List<RenovatingRequest> GetAll()
-        { 
+        {
 
-            return _serializer.FromCSV(FilePath);
+            return RenovatingRequests;
         }
-
+        public List<RenovatingRequest> GetAllWithAccommodationReservation()
+        {
+            RenovatingRequests = _serializer.FromCSV(FilePath);
+            BindAccommodationReservation();
+            return RenovatingRequests;
+        }
+  
+        public void BindAccommodationReservation() 
+        {
+            AccommodationReservationRepository accommodationReservationRepository = new AccommodationReservationRepository();
+            foreach (var renovatingRequest in RenovatingRequests)
+            {
+                renovatingRequest.AccommodationReservation = accommodationReservationRepository.GetById(renovatingRequest.AccommodationReservation.Id);
+            }
+        }
         public RenovatingRequest Save(RenovatingRequest renovatingRequest)
         {
             renovatingRequest.Id = NextId();

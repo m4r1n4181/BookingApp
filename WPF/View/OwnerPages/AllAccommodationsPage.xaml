@@ -14,8 +14,8 @@
             <ItemsControl ItemsSource="{Binding Accommodations}">
                 <ItemsControl.ItemTemplate>
                     <DataTemplate>
-                        <Border BorderBrush="#FBC0BF"
-                                Background="#FBC0BF"
+                        <Border BorderBrush="#C0D4D8"
+                                Background="#C0D4D8"
                                 Margin="0,10"
                                 CornerRadius="10"
                                 Padding="10">
@@ -71,7 +71,7 @@
                                             Margin="0,0,-20,0"
                                             FontWeight="Bold"
                                             BorderBrush="Transparent"
-                                            Background ="Transparent"                                           
+                                            Background="Transparent"
                                             Grid.Column="1" />
                                 </Grid>
 
@@ -82,9 +82,12 @@
                                     </Grid.ColumnDefinitions>
                                     <Button HorizontalAlignment="Left"
                                             Grid.Column="0"
-                                            BorderBrush="#FBC0BF"
-                                            Click="DeleteAccommdationButton_Click"
-                                            Background="#FBC0BF">
+                                            BorderBrush="#C0D4D8"
+                                            Command="{Binding DeleteAccommodationCommand}"
+                                            CommandParameter="{Binding}"
+                                            Background="#C0D4D8">
+                                        <!-- Click="DeleteAccommdationButton_Click" -->
+
                                         <TextBlock>
                                             <Run Text="&#x1F5D1;" />
                                             <Run Text=" delete" />
@@ -93,9 +96,12 @@
                                     <Button Content="View accommodation"
                                             HorizontalAlignment="Right"
                                             Grid.Column="1"
+                                            Command="{Binding ViewAccommodationCommand}"
+                                            CommandParameter="{Binding}"
+                                            BorderBrush="#C0D4D8"
                                             Click="ViewAccommodationButton_Click"
-                                            BorderBrush="#FBC0BF"
-                                            Background="#FBC0BF" />
+                                            Background="#C0D4D8" />
+                                           
 
                                 </Grid>
                             </StackPanel>

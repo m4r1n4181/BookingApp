@@ -423,7 +423,10 @@ namespace BookingApp.Service
 
             foreach (AccommodationReservation reservation in reservations)
             {
-                AddReservationMonthToStatistics(statisticsByMonth, reservation, year);
+                if (reservation.Arrival.Year == year)
+                {
+                    AddReservationMonthToStatistics(statisticsByMonth, reservation, year);
+                }
             }
 
             return statisticsByMonth;
@@ -504,7 +507,10 @@ namespace BookingApp.Service
 
             foreach (AccommodationReservation reservation in reservations)
             {
-                AddReservationMonthToBestStatistics(year, statistics, reservation);
+                if (reservation.Arrival.Year == year)
+                {
+                    AddReservationMonthToBestStatistics(year, statistics, reservation);
+                }
             }
 
             int max = statistics.Max(i => i.DaysReserved);

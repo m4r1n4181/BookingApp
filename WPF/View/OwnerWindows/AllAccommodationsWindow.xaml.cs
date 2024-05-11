@@ -33,13 +33,24 @@ namespace BookingApp.WPF.View.OwnerWindows
             _accommodationController = new AccommodationController();
             //LoggedInUser = user;
             Accommodations = new ObservableCollection<Accommodation>(_accommodationController.GetByOwner(SignInForm.LoggedUser.Id));
-
+            if (Accommodations.Count != 0)
+            {
+                SelectedAccommodation = Accommodations.ElementAt(0);
+            }
         }
 
         private void ViewStatisticsButton_Click(object sender, RoutedEventArgs e)
         {
             YearlyStatistics statistics = new YearlyStatistics(SelectedAccommodation);
             statistics.Show();
+        }
+        public void Refresh()
+        {
+            Accommodations.Clear();
+            foreach (Accommodation accommodation in _accommodationController.GetByOwner(SignInForm.LoggedUser.Id))
+            {
+                Accommodations.Add(accommodation);
+            }
         }
     }
 }

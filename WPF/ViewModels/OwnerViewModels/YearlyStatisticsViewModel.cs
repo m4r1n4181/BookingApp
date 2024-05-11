@@ -2,6 +2,7 @@
 using BookingApp.DTO;
 using BookingApp.Model;
 using BookingApp.ViewModels;
+using BookingApp.WPF.View.OwnerWindows;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -50,8 +51,8 @@ namespace BookingApp.WPF.ViewModels.OwnerViewModels
 
         public void Execute_StatisticsByMonthCommand(object param)
         {
-            //AccommodationStatisticsByMonth statisticsByMonth = new AccommodationStatisticsByMonth(SelectedStatistic, Accommodation);
-            //statisticsByMonth.Show();
+           MonthlyStatistics monthlyStatistics = new MonthlyStatistics(SelectedStatistic,Accommodation);
+            monthlyStatistics.Show();
         }
     }
 }

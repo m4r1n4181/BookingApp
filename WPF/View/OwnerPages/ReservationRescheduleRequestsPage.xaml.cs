@@ -39,11 +39,12 @@ namespace BookingApp.WPF.View.OwnerPages
         public ReservationRescheduleRequestsPage()
         {
             InitializeComponent();
+            
             this.DataContext = this;
             _reservationRescheduleRequestsController = new ReservationRescheduleRequestController();
 
             ReservationRescheduleRequests = new ObservableCollection<ReservationRescheduleRequest>(_reservationRescheduleRequestsController.GetAllForOwner(SignInForm.LoggedUser.Id));
-
+           
         }
 
         private void ViewRequestButton_Click(object sender, RoutedEventArgs e)
@@ -53,5 +54,6 @@ namespace BookingApp.WPF.View.OwnerPages
             this.NavigationService.Navigate(rescheduleRequestsHandlingPage);
             //pitati kako view model da Navigate drugi page 
         }
+       
     }
 }

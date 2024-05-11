@@ -4,23 +4,24 @@ using BookingApp.Model;
 using System.Collections.ObjectModel;
 using BookingApp.Controller;
 using BookingApp.View;
+using BookingApp.WPF.ViewModels.OwnerPageViewModels;
 
 namespace BookingApp.WPF.View.OwnerPages
 {
     public partial class AllAccommodationsPage : Page
     {
-        private AccommodationController _accommodationController;
+        // private AccommodationController _accommodationController;
 
-        public ObservableCollection<Accommodation> Accommodations { get; set; }
+        //public ObservableCollection<Accommodation> Accommodations { get; set; }
 
         public AllAccommodationsPage()
         {
             InitializeComponent();
-            _accommodationController = new AccommodationController();
-            Accommodations = new ObservableCollection<Accommodation>(_accommodationController.GetByOwner(SignInForm.LoggedUser.Id));
-            this.DataContext = this;
+            // _accommodationController = new AccommodationController();
+            //Accommodations = new ObservableCollection<Accommodation>(_accommodationController.GetByOwner(SignInForm.LoggedUser.Id));
+            DataContext = new AllAccommodationsViewModel();
         }
-
+        
         private void ViewAccommodationButton_Click(object sender, RoutedEventArgs e)
         {
             var button = sender as Button;
@@ -38,7 +39,7 @@ namespace BookingApp.WPF.View.OwnerPages
                 }
             }
         }
-
+        /*
         private void DeleteAccommdationButton_Click(object sender, RoutedEventArgs e)
         {
             var button = sender as Button;
@@ -56,6 +57,6 @@ namespace BookingApp.WPF.View.OwnerPages
                 }
             }
 
-        }
-    }
+    }*/
+}
 }

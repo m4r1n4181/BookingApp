@@ -9,7 +9,7 @@
       d:DesignWidth="430">
 
     <DataGrid AutoGenerateColumns="False"
-              Background="#FFDCDB"
+              Background="#AFD06E"
               x:Name="ReservationRescheduleRequestsDataGrid"
               VerticalScrollBarVisibility="Hidden"
               GridLinesVisibility="Horizontal"
@@ -21,13 +21,13 @@
         <DataGrid.RowStyle>
             <Style TargetType="DataGridRow">
                 <Setter Property="Background"
-                        Value="#FFDCDB" />
+                        Value="#AFD06E" />
             </Style>
         </DataGrid.RowStyle>
         <DataGrid.CellStyle>
             <Style TargetType="DataGridCell">
                 <Setter Property="Background"
-                        Value="#FFDCDB" />
+                        Value="#AFD06E" />
             </Style>
         </DataGrid.CellStyle>
         <DataGrid.Columns>
@@ -69,7 +69,7 @@
             <DataGridTemplateColumn Width="Auto">
                 <DataGridTemplateColumn.CellTemplate>
                     <DataTemplate>
-                        <Button Background="#FBC0BF"
+                        <Button Background="#87AECE"
                                 x:Name="ViewRequest"
                                 Content="View request"
                                 VerticalAlignment="Bottom"

@@ -1,5 +1,5 @@
 ﻿using BookingApp.Model;
-using BookingApp.WPF.ViewModels.OwnerViewModels;
+using BookingApp.WPF;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -23,7 +23,7 @@ namespace BookingApp.WPF.View.OwnerWindows
     {
         public YearlyStatistics(Accommodation accommodation)
         {
-            this.DataContext = new YearlyStatisticsViewModel(accommodation);
+            this.DataContext = new ViewModels.OwnerViewModels.YearlyStatisticsViewModel(accommodation);
             InitializeComponent();
         }
     }

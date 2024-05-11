@@ -11,7 +11,10 @@
     <None Remove="Resources\Images\add.png" />
     <None Remove="Resources\Images\delete.png" />
     <None Remove="Resources\Images\edit.png" />
+    <None Remove="Resources\Images\louvre.jpg" />
     <None Remove="Resources\Images\superGuest.png" />
+    <None Remove="Resources\Images\test.png" />
+    <None Remove="Resources\Images\testtest.jpg" />
     <None Remove="Resources\Images\view.png" />
   </ItemGroup>
 
@@ -36,7 +39,10 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Resource Include="Resources\Images\louvre.jpg" />
     <Resource Include="Resources\Images\superGuest.png" />
+    <Resource Include="Resources\Images\test.png" />
+    <Resource Include="Resources\Images\testtest.jpg" />
   </ItemGroup>
 
 

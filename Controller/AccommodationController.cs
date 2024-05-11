@@ -54,8 +54,10 @@ namespace BookingApp.Controller
             return _accommodationService.GetById(id);
         }
 
-
-
+        internal List<Accommodation> GetAllSorted()
+        {
+            return _accommodationService.GetAllSorted();
+        }
     }
 
 }

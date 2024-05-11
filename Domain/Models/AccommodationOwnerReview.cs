@@ -19,7 +19,7 @@ namespace BookingApp.Domain.Models
 
         public AccommodationOwnerReview()
         {
-            
+            RenovatingRequest = new List<RenovatingRequest>();
         }
 
         public AccommodationOwnerReview(int id, AccommodationReservation reservation, int cleanliness, int correctness, string comment)

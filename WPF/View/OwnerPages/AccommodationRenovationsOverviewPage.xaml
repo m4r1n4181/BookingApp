@@ -10,7 +10,7 @@
       Title="AccommodationRenovationsOverviewPage"
       DataContext="{Binding AccommodationRenovationsOverviewViewModelPage}">
 
-    <Grid Background="#FFDCDB">
+    <Grid Background="#AFD06E">
         <ComboBox HorizontalAlignment="Left"
                   VerticalAlignment="Top"
                   Width="162"
@@ -21,8 +21,8 @@
             <ComboBoxItem Content="Previous Renovations" />
         </ComboBox>
 
-        <DataGrid Background="#FFDCDB"
-                  BorderBrush="#FFDCDB"
+        <DataGrid Background="#AFD06E"
+                  BorderBrush="#AFD06E"
                   BorderThickness="1"
                   x:Name="AccommodationRenovationsDataGrid"
                   IsReadOnly="True"
@@ -34,7 +34,7 @@
             <DataGrid.RowStyle>
                 <Style TargetType="DataGridRow">
                     <Setter Property="Background"
-                            Value="#FFDCDB" />
+                            Value="#AFD06E" />
                 </Style>
             </DataGrid.RowStyle>
             <DataGrid.Columns>
@@ -90,5 +90,7 @@
                    VerticalAlignment="Bottom"
                    Text="You can cancel renovation at least 5 days before it starts."
                    FontSize="12" />
+        <!--Command="{Binding Path=DataContext.ScheduleCommand, RelativeSource={RelativeSource AncestorType={x:Type ItemsControl}}}" -->
+
     </Grid>
 </Page>

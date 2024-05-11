@@ -1,4 +1,5 @@
-﻿using BookingApp.Domain.Models;
+﻿using BookingApp.DependencyInjection;
+using BookingApp.Domain.Models;
 using BookingApp.Domain.RepositoryInterfaces;
 using BookingApp.Repository;
 using System;
@@ -11,11 +12,11 @@ namespace BookingApp.Service
 {
     public class RenovatingRequestService
     {
-        private readonly RenovatingRequestRepository _renovatingRequestRepository;
+        private readonly IRenovatingRequestRepository _renovatingRequestRepository;
 
         public RenovatingRequestService()
         {
-            _renovatingRequestRepository = new RenovatingRequestRepository();
+            _renovatingRequestRepository = Injector.CreateInstance<IRenovatingRequestRepository>();
         }
 
         public RenovatingRequest GetRenovatingRequestById(int id)

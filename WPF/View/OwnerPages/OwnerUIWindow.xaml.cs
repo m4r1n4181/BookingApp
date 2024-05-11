@@ -1,4 +1,5 @@
-﻿using BookingApp.WPF.ViewModels.OwnerPageViewModels;
+﻿using BookingApp.WPF.ViewModels;
+using BookingApp.WPF.ViewModels.OwnerPageViewModels;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -23,41 +24,40 @@ namespace BookingApp.WPF.View.OwnerPages
     public partial class OwnerUIWindow : Window, INotifyPropertyChanged
 
     {
-        List<Type> navigationStack = new List<Type>();
-        protected virtual void OnPropertyChanged(string name)
-        {
-            if (PropertyChanged != null)
-            {
-                PropertyChanged(this, new PropertyChangedEventArgs(name));
-            }
-        }
-        public event PropertyChangedEventHandler? PropertyChanged;
+        string questionMark = "\u003F";
+        string plusMark = "\uFF0B";
+        string allAccom = "\u22EE";
         private string _header;
         public string Header
         {
-            get => _header;
+            get { return _header; }
             set
             {
-                if (value != _header)
+                if (_header != value)
                 {
                     _header = value;
-                    OnPropertyChanged("Header");
+                    OnPropertyChanged(nameof(Header));
                 }
             }
         }
 
+        public event PropertyChangedEventHandler PropertyChanged;
+
+        protected virtual void OnPropertyChanged(string propertyName)
+        {
+            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
+        }
         public OwnerUIWindow()
         {
             InitializeComponent();
+            Header = questionMark + " Requests to move reservation";
             this.DataContext = this;
-          //  var scheduleVM = new ScheduleRenovationPageViewModel();
-            //scheduleVM.OnHeaderChanged += .HandleHeaderChange;
+        }
 
-        }
-        public void HandleHeaderChange(string header)
-        {
-            Header = header;
-        }
+
+    
+
+   
         private void BackButton_Click(object sender, RoutedEventArgs e)
         {
             if (this.frame.CanGoBack)
@@ -79,11 +79,15 @@ namespace BookingApp.WPF.View.OwnerPages
 
         private void RegisterAccommodationButton_Click(object sender, RoutedEventArgs e)
         {
-
+            RegisterAccommodationPage registerAccommodationPage = new RegisterAccommodationPage();
+            Header = plusMark + " Accommodation registration";
+            this.frame.Navigate(registerAccommodationPage);
         }
         private void AllAccommodationsButton_Click(object sender, RoutedEventArgs e)
         {
+            
             AllAccommodationsPage allAccommodationsPage = new AllAccommodationsPage();
+            Header = " " +allAccom+ " All accommodations";
             this.frame.Navigate(allAccommodationsPage);
         }
 

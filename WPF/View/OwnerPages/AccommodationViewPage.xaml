@@ -9,7 +9,7 @@
       d:DesignWidth="430"
       Title="AccommodationViewPage">
 
-    <Grid Background="#FFDCDB">
+    <Grid Background="#AFD06E">
         <Grid.RowDefinitions>
             <RowDefinition Height="60" />
             <RowDefinition Height="161" />
@@ -24,9 +24,9 @@
             <RowDefinition Height="Auto"
                            MinHeight="43.94" />
             <RowDefinition Height="Auto"
-                           MinHeight="69.94" />
+                           MinHeight="48" />
             <RowDefinition Height="Auto"
-                           MinHeight="64.96" />
+                           MinHeight="86.9" />
         </Grid.RowDefinitions>
 
 
@@ -40,34 +40,30 @@
             <Image Source="{Binding accommodation.Pictures[0]}"
                    Width="140"
                    Height="140"
-                   Margin="5" />
+                   Margin="38,60,37,11" />
             <Image Source="{Binding accommodation.Pictures[1]}"
                    Width="140"
                    Height="140"
-                   Margin="5"
+                   Margin="37,60,37,11"
                    Grid.Column="1" />
             <Button Content="&lt;"
                     Width="50"
                     Height="50"
-                    HorizontalAlignment="Left"
-                    VerticalAlignment="Center"
                     Background="Transparent"
                     BorderBrush="Transparent"
                     FontWeight="Bold"
                     FontSize="30"
                     Grid.Column="0"
-                    Margin="-15,0,0,0" />
+                    Margin="-10,102,175,59" />
             <Button Content="&gt;"
                     Width="50"
                     Height="50"
                     FontSize="30"
-                    HorizontalAlignment="Right"
-                    VerticalAlignment="Center"
                     Background="Transparent"
                     BorderBrush="Transparent"
                     FontWeight="Bold"
                     Grid.Column="1"
-                    Margin="0,0,-15,0" />
+                    Margin="174,102,-9,59" />
             <TextBlock HorizontalAlignment="Left"
                        Margin="10,10,0,0"
                        FontSize="28"
@@ -152,14 +148,14 @@
         <Button Content="edit"
                 Width="100"
                 Grid.Row="8"
-                Margin="34,5,0,33"
+                Margin="34,5,0,58"
                 HorizontalAlignment="Left"
-                Background="#FFECB4B4" />
+                Background="#DD9B64" />
         <Button Content="view statistics"
                 Width="150"
-                Background="#FF8989F3"
-                Margin="242,5,0,33"
-                Click="ViewStatisticsButton_Click"
+                Background="#87AECE"
+                Margin="242,5,0,58"
+                Command="{Binding ViewStatisticsCommand}"
                 Grid.Row="8"
                 HorizontalAlignment="Left" />
 

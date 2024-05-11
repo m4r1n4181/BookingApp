@@ -6,7 +6,7 @@
         xmlns:local="clr-namespace:BookingApp.WPF.View.OwnerWindows"
         mc:Ignorable="d"
         Title="YearlyStatistics" Height="450" Width="800">
-    <Grid Background="#5E4B64">
+    <Grid Background="Azure">
         <Grid.RowDefinitions>
             <RowDefinition Height="60" />
             <RowDefinition />
@@ -72,8 +72,7 @@
             <StackPanel>
                 <TextBlock Text="Statistika po mesecima"
                            HorizontalAlignment="Center" />
-                <TextBlock Text="CTRL + M"
-                           HorizontalAlignment="Center" />
+               
             </StackPanel>
         </Button>
     </Grid>

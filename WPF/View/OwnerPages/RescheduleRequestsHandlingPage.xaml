@@ -8,16 +8,16 @@
        d:DesignHeight="750"
        d:DesignWidth="430">
 
-    <Grid Background="#FFDCDB">
+    <Grid Background="#AFD06E">
         <Grid.RowDefinitions>
+            <RowDefinition Height="100" />
+            <RowDefinition Height="50" />
+            <RowDefinition Height="50" />
+            <RowDefinition Height="50" />
+            <RowDefinition Height="50" />
+            <RowDefinition Height="50" />
+            <RowDefinition Height="130" />
             <RowDefinition Height="Auto" />
-            <RowDefinition Height="Auto" />
-            <RowDefinition Height="Auto" />
-            <RowDefinition Height="Auto" />
-            <RowDefinition Height="Auto" />
-            <RowDefinition Height="Auto" />
-            <RowDefinition Height="184*" />
-            <RowDefinition Height="215*" />
         </Grid.RowDefinitions>
 
         <Grid Margin="10,10,10,10">
@@ -81,7 +81,7 @@
         </TextBlock>
 
         <Label Grid.Row="4"
-               Margin="10"
+               Margin="10,0,0,0"
                FontSize="25"
                FontWeight="Bold"
                VerticalAlignment="Center"
@@ -106,6 +106,7 @@
         </Label>
 
 
+
         <TextBlock Grid.Row="5"
                    Margin="10,10,10,10"
                    FontSize="20">
@@ -117,11 +118,10 @@
                  Text="{Binding Comment}"
                  Grid.RowSpan="2" />
 
-        <StackPanel Grid.Row="6"
+        <StackPanel Grid.Row="7"
                     Orientation="Horizontal"
                     HorizontalAlignment="Center"
-                    Margin="0,130,0,10"
-                    Grid.RowSpan="2"
+                    Margin="0,10,0,96"
                     Width="374">
             <Button x:Name="AcceptRequestButton"
                     Content="Accept request"
@@ -130,7 +130,7 @@
                     Width="170"
                     FontSize="17"
                     Margin="10"
-                    Background="#FF97D597" />
+                    Background="#87AECE" />
             <Button x:Name="DeclineRequestButton"
                     Content="Decline request"
                     Command="{Binding DeclineRequestCommand}"
