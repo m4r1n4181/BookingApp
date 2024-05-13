@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Xml.Linq;
+using BookingApp.Domain.RepositoryInterfaces;
 using BookingApp.DTO;
 using BookingApp.Model;
 using BookingApp.Model.Enums;
@@ -10,7 +11,7 @@ using BookingApp.Serializer;
 
 namespace BookingApp.Repository
 {
-    public class AccommodationRepository
+    public class AccommodationRepository : IAccommodationRepository
     {
         private const string FilePath = "../../../Resources/Data/accommodations.csv";
         private readonly Serializer<Accommodation> _serializer;
@@ -30,6 +31,8 @@ namespace BookingApp.Repository
         public Accommodation GetById(int id)
         {
             Accommodations = _serializer.FromCSV(FilePath);
+            BindLocations();
+            BindOwner();
             return Accommodations.FirstOrDefault(acc => acc.Id == id);
         }
 
@@ -39,7 +42,14 @@ namespace BookingApp.Repository
             Accommodations.ForEach(locR => { locR.Location = locationRepository.GetById(locR.Location.Id); });
         }
 
-
+        public void BindOwner()
+        {
+            UserRepository userRepository = new UserRepository();
+            /* foreach(var accommodationReservation in AccommodationReservations){
+                 accommodationReservation.Guest = userRepository.GetById(accommodationReservation.Guest.Id);
+             }*/
+            Accommodations.ForEach(accR => { accR.Owner = userRepository.Get(accR.Owner.Id); });
+        }
         public Accommodation Save(Accommodation accommodation)
         {
             accommodation.Id = NextId();

@@ -1,4 +1,6 @@
-﻿using BookingApp.Model;
+﻿using BookingApp.DependencyInjection;
+using BookingApp.Domain.RepositoryInterfaces;
+using BookingApp.Model;
 using BookingApp.Repository;
 using System;
 using System.Collections.Generic;
@@ -10,11 +12,11 @@ namespace BookingApp.Service
 {
     public class LocationService
     {
-        private LocationRepository _locationRepository;
+        private ILocationRepository _locationRepository;
 
         public LocationService()
         {
-            _locationRepository = new LocationRepository();
+            _locationRepository =Injector.CreateInstance<ILocationRepository>();
         }
 
         public List<Location> GetAll()

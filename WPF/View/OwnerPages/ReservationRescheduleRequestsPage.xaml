@@ -1,0 +1,84 @@
+﻿<Page x:Class="BookingApp.WPF.View.OwnerPages.ReservationRescheduleRequestsPage"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+      mc:Ignorable="d"
+      Background="#FFDCDB"
+      d:DesignHeight="750"
+      d:DesignWidth="430">
+
+    <DataGrid AutoGenerateColumns="False"
+              Background="#AFD06E"
+              x:Name="ReservationRescheduleRequestsDataGrid"
+              VerticalScrollBarVisibility="Hidden"
+              GridLinesVisibility="Horizontal"
+              HeadersVisibility="None"  
+        IsReadOnly="True"
+          SelectionMode="Single"
+          ItemsSource="{Binding Path=ReservationRescheduleRequests, UpdateSourceTrigger=PropertyChanged}"
+          SelectedItem="{Binding Path=SelectedReservationRescheduleRequest, UpdateSourceTrigger=PropertyChanged}">
+        <DataGrid.RowStyle>
+            <Style TargetType="DataGridRow">
+                <Setter Property="Background"
+                        Value="#AFD06E" />
+            </Style>
+        </DataGrid.RowStyle>
+        <DataGrid.CellStyle>
+            <Style TargetType="DataGridCell">
+                <Setter Property="Background"
+                        Value="#AFD06E" />
+            </Style>
+        </DataGrid.CellStyle>
+        <DataGrid.Columns>
+            <DataGridTemplateColumn Width="*">
+                <DataGridTemplateColumn.CellTemplate>
+                    <DataTemplate>
+                        <StackPanel Orientation="Horizontal">
+                            <Image Source="{Binding Reservation.Accommodation.Pictures[0]}"
+                                   Width="65"
+                                   Height="65" />
+                            <StackPanel Margin="5,0,0,0">
+                                <TextBlock   Margin="0,10,0,0">
+                                <Run Text="{Binding Reservation.Accommodation.Name}"
+                                     FontWeight="Bold"                             
+                                     FontSize="14" />
+                                <Run Text=", " />
+                                <Run Text="{Binding Reservation.Accommodation.Location.City}"
+                                     FontSize="14" />                                                                 
+                                <Run Text="{Binding Reservation.Accommodation.Location.Country}"
+                                     FontSize="14" />
+                                </TextBlock>
+                                <TextBlock HorizontalAlignment="Right"
+                                           VerticalAlignment="Center"
+                                           Margin="0,10,0,0">
+                                <Run Text="Duration: "
+                                     FontSize="14" />
+                                <Run Text="{Binding Reservation.Arrival,  StringFormat={}{0:d}}"
+                                     FontSize="14" />
+                                <Run Text=" - " />
+                                <Run Text="{Binding Reservation.Departure,  StringFormat={}{0:d}}"
+                                     FontSize="14" />
+                                </TextBlock>
+                            </StackPanel>
+                        </StackPanel>
+                    </DataTemplate>
+                </DataGridTemplateColumn.CellTemplate>
+            </DataGridTemplateColumn>
+
+            <DataGridTemplateColumn Width="Auto">
+                <DataGridTemplateColumn.CellTemplate>
+                    <DataTemplate>
+                        <Button Background="#87AECE"
+                                x:Name="ViewRequest"
+                                Content="View request"
+                                VerticalAlignment="Bottom"
+                                FontSize="14"
+                                Click="ViewRequestButton_Click"
+                                Margin="5" />
+                    </DataTemplate>
+                </DataGridTemplateColumn.CellTemplate>
+            </DataGridTemplateColumn>
+        </DataGrid.Columns>
+    </DataGrid>
+</Page>

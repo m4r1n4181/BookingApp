@@ -1,0 +1,35 @@
+﻿<Window x:Class="BookingApp.View.RegisterAccommodationForm"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:BookingApp.View"
+        mc:Ignorable="d"
+        Title="RegisterAccommodationForm" Height="450" Width="800">
+    <Grid>
+        <Label Content="Register accommodation" HorizontalAlignment="Left" Margin="110,10,0,0" VerticalAlignment="Top" FontSize="18"/>
+        <Label Content="name" HorizontalAlignment="Left" Margin="57,78,0,0" VerticalAlignment="Top" FontSize="16"/>
+        <TextBox Name="name" Text="{Binding Path=AccommodationName, UpdateSourceTrigger=PropertyChanged}" TextWrapping="Wrap" Width="120" Margin="154,83,526,325"/>
+        <Label x:Name="location" Content="Location" HorizontalAlignment="Left" Margin="57,136,0,0" VerticalAlignment="Top" FontSize="16"/>
+        <ComboBox x:Name="locationn" ItemsSource="{Binding Locations}" SelectedItem="{Binding SelectedLocation}" HorizontalAlignment="Left" Margin="154,141,0,0" VerticalAlignment="Top" Width="120"/>
+        <Label Content="Type (house, apartment or hut)" HorizontalAlignment="Left" Margin="57,186,0,0" VerticalAlignment="Top" FontSize="16"/>
+        <Label Content="max guests" HorizontalAlignment="Left" Margin="57,240,0,0" VerticalAlignment="Top" FontSize="16"/>
+        <TextBox x:Name="maxGuests" Text="{Binding Path=MaxGuests, UpdateSourceTrigger=PropertyChanged}" TextWrapping="Wrap" Width="120" Margin="154,245,526,163"/>
+        <Label Content="min reservation days" HorizontalAlignment="Left" Margin="57,290,0,0" VerticalAlignment="Top" FontSize="16"/>
+        <TextBox x:Name="minDays" Text="{Binding Path=MinReservationDays, UpdateSourceTrigger=PropertyChanged}" TextWrapping="Wrap" Width="120" Margin="256,295,424,113"/>
+        <Label Content="min cancellation days" HorizontalAlignment="Left" Margin="57,348,0,0" VerticalAlignment="Top" FontSize="16"/>
+        <TextBox x:Name="cancellationDays" 
+         Text="{Binding Path=CancellationDays, UpdateSourceTrigger=PropertyChanged}" 
+         TextWrapping="Wrap" 
+         Width="120" 
+         Margin="256,357,424,55"/>
+        <Label Content="pictures" HorizontalAlignment="Left" Margin="57,393,0,0" VerticalAlignment="Top" FontSize="16"/>
+        <Button x:Name="Cancel" Content="cancel" HorizontalAlignment="Left" Margin="494,381,0,0" VerticalAlignment="Top" FontSize="18" Click="Cancel_Click"/>
+        <Button x:Name="RegisterAccommodation" Content="save accommodation" HorizontalAlignment="Left" Margin="604,381,0,0" VerticalAlignment="Top" FontSize="18" Click="RegisterAccommodation_Click"/>
+        <Button Content="ADD" HorizontalAlignment="Left" Margin="176,396,0,0" VerticalAlignment="Top" FontSize="16" RenderTransformOrigin="-1.483,0.654" Click="AddImages_Click" />
+        <ComboBox HorizontalAlignment="Left" ItemsSource="{Binding Types}" SelectedItem="{Binding SelectedType}" Margin="307,195,0,0" VerticalAlignment="Top" Width="120" SelectionChanged="ComboBox_SelectionChanged"/>
+
+
+
+    </Grid>
+</Window>

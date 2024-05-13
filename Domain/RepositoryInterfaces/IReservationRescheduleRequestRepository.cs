@@ -1,4 +1,5 @@
 ﻿using BookingApp.Domain.Models;
+using BookingApp.Serializer;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,10 +10,17 @@ namespace BookingApp.Domain.RepositoryInterfaces
 {
     public interface IReservationRescheduleRequestRepository
     {
-        List<ReservationRescheduleRequest> GetAll();
-        ReservationRescheduleRequest Get(int id);
-        ReservationRescheduleRequest Save(ReservationRescheduleRequest reservationRescheduleRequest);
-        void Delete(ReservationRescheduleRequest reservationRescheduleRequest);
-        ReservationRescheduleRequest Update(ReservationRescheduleRequest reservationRescheduleRequest);
+        public ReservationRescheduleRequest Save(ReservationRescheduleRequest reservationRescheduleRequest);
+
+        public List<ReservationRescheduleRequest> GetAll();
+        public ReservationRescheduleRequest Get(int id);
+        public int NextId();
+        public void Delete(ReservationRescheduleRequest reservationRescheduleRequest);
+        public ReservationRescheduleRequest Update(ReservationRescheduleRequest reservationRescheduleRequest);
+        public List<ReservationRescheduleRequest> GetAllForGuest(int guestId);
+        public List<ReservationRescheduleRequest> GetAllWitReservation();
+        public List<ReservationRescheduleRequest> GetAllForOwner(int id);
+        public ReservationRescheduleRequest GetWithGuest(int id);
     }
 }
+

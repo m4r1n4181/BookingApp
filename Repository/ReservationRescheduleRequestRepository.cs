@@ -13,20 +13,11 @@ namespace BookingApp.Repository
     public class ReservationRescheduleRequestRepository : IReservationRescheduleRequestRepository
     {
         private const string FilePath = "../../../Resources/Data/reservationRescheduleRequests.csv";
-        private static ReservationRescheduleRequestRepository instance = null;
-
 
         private readonly Serializer<ReservationRescheduleRequest> _serializer;
 
         private List<ReservationRescheduleRequest> _reservationRescheduleRequests;
-        public static ReservationRescheduleRequestRepository GetInstance()
-        {
-            if (instance == null)
-            {
-                instance = new ReservationRescheduleRequestRepository();
-            }
-            return instance;
-        }
+        
         public ReservationRescheduleRequestRepository()
         {
             _serializer = new Serializer<ReservationRescheduleRequest>();
@@ -129,9 +120,10 @@ namespace BookingApp.Repository
             BindReservationRescheduleRequestWithAccommodationReservation();
             return _reservationRescheduleRequests;
         }
+  
         public List<ReservationRescheduleRequest> GetAllForOwner(int id)
         {
-            _reservationRescheduleRequests = _serializer.FromCSV(FilePath);
+            _reservationRescheduleRequests = GetAllWitReservation();
             BindReservationRescheduleRequestWithAccommodationReservation();
             return _reservationRescheduleRequests.FindAll(rr => rr.Reservation.Accommodation.Owner.Id == id);
         }

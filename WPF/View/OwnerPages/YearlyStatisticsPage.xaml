@@ -1,0 +1,85 @@
+﻿<Page x:Class="BookingApp.WPF.View.OwnerPages.YearlyStatisticsPage"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+      xmlns:local="clr-namespace:BookingApp.WPF.View.OwnerPages"
+      mc:Ignorable="d"
+      d:DesignHeight="700"
+      d:DesignWidth="430"
+      Title="YearlyStatisticsPage">
+
+    
+     <Grid Margin="10"
+          Background="#AFD06E">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="*" />
+                <RowDefinition Height="Auto" />
+            </Grid.RowDefinitions>
+
+            <!-- Accommodation Name and Picture -->
+            <StackPanel Grid.Row="0"
+                        Orientation="Horizontal"
+                        VerticalAlignment="Top">
+                <Image Source="{Binding accommodation.Pictures[0]}"
+                       Width="50"
+                       Height="50" />
+                <TextBlock Text="{Binding accommodation.Name}"
+                           FontSize="16"
+                           FontWeight="Bold"
+                           VerticalAlignment="Center"
+                           Margin="5,0,0,0"
+                       Width="194" />
+            </StackPanel>
+
+            <!-- Year Selection ComboBox -->
+            <ComboBox Grid.Row="1"
+                      SelectedItem="{Binding SelectedYear}"
+                      ItemsSource="{Binding Years}"
+                  Margin="247,5,5,5">
+                <ComboBox.ItemTemplate>
+                    <DataTemplate>
+                        <TextBlock Text="{Binding}" />
+                    </DataTemplate>
+                </ComboBox.ItemTemplate>
+            </ComboBox>
+
+            <!-- Statistics -->
+            <StackPanel Grid.Row="2"
+                        Margin="5">
+                <TextBlock Text="Number of reservations:"
+                           FontWeight="Bold"
+                           Margin="5,0" />
+                <TextBlock Text="{Binding AccommodationStatistic.ReservationsNum}"
+                           Margin="10,0" />
+                <TextBlock Text="Number of cancelled reservations:"
+                           FontWeight="Bold"
+                           Margin="5,0" />
+            <TextBlock Text="{Binding AccommodationStatistic.CancelledReservationsNum}"
+                           Margin="10,0" />
+                <TextBlock Text="Number of rescheduled reservations:"
+                           FontWeight="Bold"
+                           Margin="5,0" />
+            <TextBlock Text="{Binding AccommodationStatistic.RescheduledReservationsNum}"
+                           Margin="10,0" />
+                <TextBlock Text="Number of renovation recommendations:"
+                           FontWeight="Bold"
+                           Margin="5,0" />
+            <TextBlock Text="{Binding AccommodationStatistic.RecommendationForRenovationNum}"
+                           Margin="10,0" />
+            </StackPanel>
+
+            <!-- Graphs and PDF Export -->
+            <StackPanel Grid.Row="3"
+                        Orientation="Horizontal"
+                        HorizontalAlignment="Center"
+                        Margin="5">
+                <Button Content="View Monthly"
+                        Margin="5" />
+                <Button Content="PDF View Report"
+                        Margin="5" />
+            </StackPanel>
+        </Grid>
+</Page>

@@ -1,4 +1,5 @@
-﻿using BookingApp.Model;
+﻿using BookingApp.Domain.RepositoryInterfaces;
+using BookingApp.Model;
 using BookingApp.Serializer;
 using System;
 using System.Collections.Generic;
@@ -8,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace BookingApp.Repository
 {
-    public class OwnerReviewRepository
+    public class OwnerReviewRepository : IOwnerReviewRepository
     {
         private const string FilePath = "../../../Resources/Data/owner-review.csv";
         private readonly Serializer<OwnerReview> _serializer;
@@ -53,6 +54,11 @@ namespace BookingApp.Repository
         {
             OwnerReviews = _serializer.FromCSV(FilePath);
             return OwnerReviews.FirstOrDefault(or => or.Reservation.Id == reservationId);
+        }
+
+        public bool CheckOwnerReviewExistence(int accommodationReservationId)
+        {
+            return OwnerReviews.Any(or => or.Reservation.Id == accommodationReservationId);
         }
 
 

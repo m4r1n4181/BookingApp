@@ -4,6 +4,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using BookingApp.DependencyInjection;
+using BookingApp.Domain.RepositoryInterfaces;
 using BookingApp.Model;
 using BookingApp.Repository;
 
@@ -11,12 +13,12 @@ namespace BookingApp.Service
 {
     public class NotificationService
     {
-        private NotificationRepository _notificationRepository;
+        private INotificationRepository _notificationRepository;
 
         public NotificationService()
         {
             
-            _notificationRepository = new NotificationRepository();
+            _notificationRepository = Injector.CreateInstance<INotificationRepository>();
         }
 
         public Notification Create(Notification notification)
