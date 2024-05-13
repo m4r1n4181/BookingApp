@@ -80,10 +80,10 @@ namespace BookingApp.View
                         //ownerUIWindow.Show();
                      // AllAccommodationsWindow allAccommodationsWindow = new AllAccommodationsWindow();
                        // allAccommodationsWindow.Show(); 
-                       //OwnerMainWindow ownerMainWindow = new OwnerMainWindow();
-                        //ownerMainWindow.Show();
-                        SortedAccommodations sortedAccommodations = new SortedAccommodations();
-                        sortedAccommodations.Show();
+                       OwnerMainWindow ownerMainWindow = new OwnerMainWindow();
+                        ownerMainWindow.Show();
+                       // SortedAccommodations sortedAccommodations = new SortedAccommodations();
+                        //sortedAccommodations.Show();
 
                     }
 

@@ -122,7 +122,10 @@ namespace BookingApp.WPF.ViewModels.OwnerViewModels
         public void Execute_ScheduleRenovationCommand(object param)
         {
             AccommodationRenovation accommodationRenovation = new AccommodationRenovation() { Accommodation = SelectedAccommodation, Start = SelectedTerm.Start, End = SelectedTerm.End, Description = Description, IsCancelled = false };
-            _accommodationRenovationController.Save(accommodationRenovation);
+            if (_accommodationRenovationController.Save(accommodationRenovation) != null)
+            {
+                MessageBox.Show("uspesno zakazano renoviranje");
+            }
 
         }
         public bool Can_SearchCommand(object param)

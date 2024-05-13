@@ -18,12 +18,7 @@ namespace BookingApp.Model
         public Location Location { get; set; }
         public int MaxGuests { get; set; }
         public int MinReservationDays { get; set; }
-        private int _cancellationDays = 1; // Inicijalizujemo na 1
-        public int CancellationDays
-        {
-            get { return _cancellationDays; }
-            set { _cancellationDays = value; }
-        }
+        public int CancellationDays { get; set; }
         public List<string> Pictures { get; set; }
 
 
