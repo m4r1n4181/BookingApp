@@ -1,3 +1,4 @@
+using BookingApp.Domain.RepositoryInterfaces;
 using BookingApp.DTO;
 using BookingApp.Model;
 using BookingApp.Serializer;
@@ -10,7 +11,7 @@ using System.Xml.Linq;
 
 namespace BookingApp.Repository
 {
-    public class TourRepository
+    public class TourRepository : ITourRepository
     {
         private const string FilePath = "../../../Resources/Data/tours.csv";
 
@@ -150,7 +151,12 @@ namespace BookingApp.Repository
             return _tours.FindAll(tour => tour.TourGuide.Id == tourGuide.Id);
 
         }
+        public List<Tour> GetByTourGuideNotStarted(int tourGuideId)
+        {
+            _tours = _serializer.FromCSV(FilePath);
+            return _tours.FindAll(tour => tour.TourGuide.Id == tourGuideId && tour.TourStatus == Model.Enums.TourStatusType.not_started);
 
+        }
 
         public List<Tour> GetTodayTours()
         {
@@ -193,9 +199,39 @@ namespace BookingApp.Repository
             return _tourInFuture;
         }
 
+        public List<Tour> SearchTourForTourGuide(TourGuideSearch tourGuideSearch)
+        {
+            _tours = _serializer.FromCSV(FilePath);
+            BindLocations();
+
+            if (!string.IsNullOrWhiteSpace(tourGuideSearch.City))
+            {
+                _tours = _tours.FindAll(a => a.Location.City.Contains(tourGuideSearch.City, StringComparison.OrdinalIgnoreCase));
+            }
+
+            if (!string.IsNullOrWhiteSpace(tourGuideSearch.Country))
+            {
+                _tours = _tours.FindAll(a => a.Location.Country.Contains(tourGuideSearch.Country, StringComparison.OrdinalIgnoreCase));
+            }
+
+            if (tourGuideSearch.MaxTourists > 0)
+            {
+                _tours = _tours.FindAll(a => a.MaxTourists >= tourGuideSearch.MaxTourists);
+            }
+            if (tourGuideSearch.StartDate != null)
+            {
+                _tours = _tours.FindAll(a => a.StartDate >= tourGuideSearch.StartDate);
+            }
+
+            if (!string.IsNullOrWhiteSpace(tourGuideSearch.Language))
+            {
+                _tours = _tours.FindAll(tour => tour.Language.Equals(tourGuideSearch.Language, StringComparison.OrdinalIgnoreCase));
+            }
+
+            return _tours;
+        }
 
 
     }
-
 
 }

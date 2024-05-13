@@ -1,4 +1,6 @@
-﻿using BookingApp.Model;
+﻿using BookingApp.DependencyInjection;
+using BookingApp.Domain.RepositoryInterfaces;
+using BookingApp.Model;
 using BookingApp.Repository;
 using System;
 using System.Collections.Generic;
@@ -10,11 +12,11 @@ namespace BookingApp.Service
 {
     public class VoucherService
     {
-        private VoucherRepository _voucherRepository;
+        private IVoucherRepository _voucherRepository;
 
         public VoucherService()
         {
-            _voucherRepository = new VoucherRepository();
+            _voucherRepository = Injector.CreateInstance<IVoucherRepository>();
         }
         public Voucher Save(Voucher voucher)
         {

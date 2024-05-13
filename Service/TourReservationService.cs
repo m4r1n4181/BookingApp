@@ -1,4 +1,6 @@
-﻿using BookingApp.DTO;
+﻿using BookingApp.DependencyInjection;
+using BookingApp.Domain.RepositoryInterfaces;
+using BookingApp.DTO;
 using BookingApp.Model;
 using BookingApp.Model.Enums;
 using BookingApp.Repository;
@@ -12,15 +14,15 @@ namespace BookingApp.Service
 {
     public class TourReservationService
     {
-        private TourReservationRepository _tourReservationRepository;
-        private TourRepository _tourRepository;
-        private VoucherRepository _voucherRepository;
+        private ITourReservationRepository _tourReservationRepository;
+        private ITourRepository _tourRepository;
+        private IVoucherRepository _voucherRepository;
 
         public TourReservationService()
         {
-            _tourReservationRepository = new TourReservationRepository();
-            _tourRepository = new TourRepository();
-            _voucherRepository = new VoucherRepository();
+            _tourReservationRepository = Injector.CreateInstance<ITourReservationRepository>();
+            _tourRepository = Injector.CreateInstance<ITourRepository>();
+            _voucherRepository = Injector.CreateInstance<IVoucherRepository>();
 
         }
         public bool DatesIntertwine(DateTime start1, DateTime end1, DateTime start2, DateTime end2)

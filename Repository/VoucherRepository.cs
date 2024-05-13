@@ -1,4 +1,5 @@
-﻿using BookingApp.Model;
+﻿using BookingApp.Domain.RepositoryInterfaces;
+using BookingApp.Model;
 using BookingApp.Serializer;
 using System;
 using System.Collections.Generic;
@@ -9,7 +10,7 @@ using System.Xml.Linq;
 
 namespace BookingApp.Repository
 {
-    public class VoucherRepository
+    public class VoucherRepository : IVoucherRepository
     {
 
         private const string FilePath = "../../../Resources/Data/vouchers.csv";
