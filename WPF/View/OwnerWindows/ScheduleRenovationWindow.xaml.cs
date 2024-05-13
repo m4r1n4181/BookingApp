@@ -1,11 +1,5 @@
-<<<<<<< HEAD:WPF/View/OwnerWindows/ScheduleRenovationWindow.xaml.cs
 ﻿using BookingApp.WPF.ViewModels.OwnerPageViewModels;
 using BookingApp.WPF.ViewModels.OwnerViewModels;
-=======
-﻿using BookingApp.Controller;
-using BookingApp.Model;
-using BookingApp.WPF.ViewModels.TourGuideViewModels;
->>>>>>> feature/create-tour-from-request:WPF/View/TourGuide/ActiveTours.xaml.cs
 using System;
 using System.Collections.Generic;
 using System.Linq;
