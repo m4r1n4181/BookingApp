@@ -1,10 +1,16 @@
 ﻿using BookingApp.Controller;
 using BookingApp.Domain.Models;
+using BookingApp.DTO;
 using BookingApp.Model;
-using BookingApp.ViewModels.OwnerViewModels;
+using BookingApp.Model.Enums;
+using BookingApp.WPF.ViewModels.TourGuideViewModels;
 using System;
+using System.Collections;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
+using System.ComponentModel;
 using System.Linq;
+using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
@@ -16,19 +22,20 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 
-namespace BookingApp.View.OwnerWindows
+namespace BookingApp.WPF.View.TourGuide
 {
     /// <summary>
-    /// Interaction logic for DeclineReservationRescheduleRequestCommentWindow.xaml
+    /// Interaction logic for SearchTourRequests.xaml
     /// </summary>
-    public partial class DeclineReservationRescheduleRequestCommentWindow : Window
+    public partial class SearchTourRequests : Window
     {
-        public DeclineReservationRescheduleRequestCommentWindow(ReservationRescheduleRequest reservationRescheduleRequest)
+       
+        public SearchTourRequests()
         {
             InitializeComponent();
-            this.DataContext = new DeclineReservationRescheduleRequestCommentViewModel(reservationRescheduleRequest);
-
-        }
+            this.DataContext = new SearchTourRequestsViewModel();
+        
+        }    
 
     }
 }

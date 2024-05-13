@@ -1,4 +1,5 @@
-﻿using BookingApp.Model;
+﻿using BookingApp.Domain.RepositoryInterfaces;
+using BookingApp.Model;
 using BookingApp.Model.Enums;
 using BookingApp.Serializer;
 using System;
@@ -10,7 +11,7 @@ using System.Windows.Input;
 using System.Xml.Linq;
 namespace BookingApp.Repository
 {
-    public class TourReservationRepository
+    public class TourReservationRepository : ITourReservationRepository
     {
         private const string FilePath = "../../../Resources/Data/tour-reservation.csv";
         private readonly Serializer<TourReservation> _serializer;

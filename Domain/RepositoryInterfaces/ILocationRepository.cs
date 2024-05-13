@@ -22,5 +22,7 @@ namespace BookingApp.Domain.RepositoryInterfaces
 
         public Location Update(Location location);
         public Location Get(int id);
+
+        public int GetIdByCityAndCountry(string city, string country);
     }
 }

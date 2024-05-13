@@ -2,7 +2,6 @@
 using BookingApp.Model;
 using BookingApp.Model.Enums;
 using BookingApp.Repository;
-using BookingApp.View.OwnerWindows;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Runtime.CompilerServices;
@@ -66,12 +65,8 @@ namespace BookingApp.View
                     
                     if (user.Type == UserType.TourGuide)
                     {
-                        //TourGuideHomePage tourGuideHomePage= new TourGuideHomePage();
-                        //tourGuideHomePage.Show();
-                        /* CreateTourForm createTourForm = new CreateTourForm();
-                         createTourForm.Show();
-                         LiveTourView liveTourView = new LiveTourView();
-                         liveTourView.Show();*/
+                        TourGuideHomePage tourGuideHomePage= new TourGuideHomePage();
+                        tourGuideHomePage.Show();
 
                     }
                     else if (user.Type == UserType.Owner)

@@ -70,7 +70,8 @@ namespace BookingApp.Model
             AvailableSeats = availableSeats;
             StartDate = startDate;
             Duration = duration;
-            Pictures = pictures;
+            // Pictures = pictures;
+            Pictures = new List<string>();
             this.TourStatus = tourStatusType;
         }
 
@@ -78,9 +79,8 @@ namespace BookingApp.Model
         {
 
             string startDatesString = string.Join(";", StartDate);
-            // string? picturesString = Pictures != null ? string.Join(",", Pictures) : null;
-            //takodje nista se ne upisuje u tour.csv i proeriti saveAll keypoints
-            string picturesString = string.Join(",", Pictures);
+           // string picturesString = string.Join(",", Pictures);
+            string picturesString = Pictures != null ? string.Join(",", Pictures) : null;
             string[] csvValues = { Id.ToString(), TourGuide.Id.ToString(), Name, Description, Language, Location.Id.ToString(), MaxTourists.ToString(), AvailableSeats.ToString(), startDatesString, Duration.ToString(), picturesString, TourStatus.ToString() };
             return csvValues;
         }

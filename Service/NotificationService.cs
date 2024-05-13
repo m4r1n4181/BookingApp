@@ -7,6 +7,7 @@ using System.Threading.Tasks;
 using BookingApp.DependencyInjection;
 using BookingApp.Domain.RepositoryInterfaces;
 using BookingApp.Model;
+using BookingApp.Model.Enums;
 using BookingApp.Repository;
 
 namespace BookingApp.Service
@@ -51,6 +52,12 @@ namespace BookingApp.Service
                 _notificationRepository.Update(notification);
 
             }
+        }
+
+        public void SendNotification(int id, User user, string message, NotificationStatus notificationStatus)
+        {
+            Notification notification = new Notification(id, user, message, notificationStatus);
+            _notificationRepository.Save(notification);
         }
     }
 }
