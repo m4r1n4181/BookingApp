@@ -1,0 +1,77 @@
+@startuml
+actor User as "User"
+participant "ViewModel" as VM
+participant "AccommodationRenovationController" as RCtrl
+participant "AccommodationRenovationService" as RSvc
+participant "AccommodationReservationService" as RResSvc
+participant "AccommodationReservationRepository" as RResRepo
+participant "AccommodationRenovationRepository" as ARenoRepo
+participant "AccommodationRenovationService" as RSvc
+participant "AccommodationRenovationRepository" as RRepo
+
+User -> VM : Click(SearchCommand)
+activate VM
+VM -> RCtrl : FindAllAvailableTerms(SelectedAccommodation, SelectedStartDate, SelectedEndDate, Duration)
+activate RCtrl
+RCtrl -> RSvc : FindAllAvailableTerms(SelectedAccommodation, SelectedStartDate, SelectedEndDate, Duration)
+activate RSvc
+
+RSvc -> RResSvc : GetByAccommodationId(SelectedAccommodation.Id)
+activate RResSvc
+RResSvc -> RResRepo : GetAllWithAccommodations()
+activate RResRepo
+RResRepo -> RResRepo: GetAll()
+RResRepo --> RResSvc : reservations
+deactivate RResRepo
+RResSvc --> RSvc : reservations
+deactivate RResSvc
+
+RSvc -> RSvc : GetAvailableTerms(Start, End, Duration, reservations)
+activate RSvc
+
+loop for each reservation in reservations
+    loop while Start.AddDays(duration) <= End
+        RSvc -> RSvc : IsTermAvailableForRenovation(Start, End, Duration, reservation)
+        alt term is available
+            RSvc -> RSvc : Create DateRange(Start, Start.AddDays(Duration))
+            RSvc -> RSvc : Add DateRange to finalAvailableTerms
+        else
+            RSvc -> RSvc : [No action, term not available]
+        end
+        RSvc -> RSvc : Start = Start.AddDays(1)
+    end
+end
+
+RSvc --> RCtrl : finalAvailableTerms
+deactivate RSvc
+
+alt finalAvailableTerms is empty
+    RCtrl --> VM : MessageBox.Show("No available terms...", "", MessageBoxButton.OK, MessageBoxImage.Information)
+else
+    RCtrl --> VM : finalAvailableTerms
+end
+deactivate RCtrl
+
+VM --> User : displayResults()
+== Schedule Renovation ==
+User -> VM : Click(ScheduleCommand)
+activate VM
+VM -> RCtrl : scheduleRenovation(renovation)
+activate RCtrl
+
+    RCtrl -> RSvc : save(renovation)
+    activate RSvc
+    RSvc -> RRepo : sav(renovation)
+    activate RRepo
+    RRepo --> RSvc : savedRenovation
+    deactivate RRepo
+    RSvc --> RCtrl : savedRenovation
+    deactivate RSvc
+    RCtrl --> VM : return savedRenovation
+    
+
+
+deactivate RCtrl
+
+deactivate VM
+@enduml
