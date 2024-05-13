@@ -75,6 +75,7 @@ namespace BookingApp.WPF.ViewModels.OwnerViewModels
         public void Execute_CancelRenovationCommand(object param)
         {
             _accommodationRenovationController.CancelRenovation(SelectedAccommodationRenovation);
+           
             Refresh();
         }
     }

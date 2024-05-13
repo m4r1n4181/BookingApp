@@ -10,6 +10,7 @@ using BookingApp.DependencyInjection;
 using BookingApp.Domain.RepositoryInterfaces;
 using BookingApp.WPF.View.OwnerPages;
 using BookingApp.WPF.View.OwnerWindows;
+using BookingApp.View.OwnerWindows;
 
 namespace BookingApp.View
 {

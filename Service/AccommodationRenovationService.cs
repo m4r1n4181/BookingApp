@@ -146,6 +146,8 @@ namespace BookingApp.Service
             {
                 renovation.IsCancelled = true;
                 _accommodationRenovationRepository.Update(renovation);
+                MessageBox.Show("Uspesno otkazano renoviranje.", "", MessageBoxButton.OK, MessageBoxImage.Information);
+
             }
             else
             {
