@@ -29,6 +29,7 @@
             <Button x:Name="buttonReserve" Content="Rezerviši" Margin="5" Command="{Binding ReserveCommand}"/>
             <Button Content="My Tours" Command="{Binding MyToursCommand}" Margin="5"/>
             <Button Content="My Vouchers" Command="{Binding VouchersCommand}" Margin="5"/>
+            <Button Content="Create Request" Command="{Binding CreateRequestCommand}" Margin="5"/>
         </StackPanel>
 
         <!-- Prikaz tura -->

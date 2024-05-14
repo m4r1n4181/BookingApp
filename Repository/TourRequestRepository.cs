@@ -79,7 +79,15 @@ namespace BookingApp.Repository
         public void BindTourRequestUser() //za svaki tourrequest mi daj iz useraReposiotry turistu
         {
             UserRepository userRepository = new UserRepository();
-            _tourRequest.ForEach(tR => tR.Tourist = userRepository.GetById(tR.Tourist.Id));
+            foreach (var tourRequest in _tourRequest)
+            {
+                foreach (var tourParticipant in tourRequest.Tourists)
+                {
+                    int userId = tourParticipant.UserId;
+                    User user = userRepository.GetById(userId);
+                    tourParticipant.UserId = user.Id;
+                }
+            }
 
         }
         public List<TourRequest> GetAllWithUser()
@@ -105,7 +113,7 @@ namespace BookingApp.Repository
 
         public List<TourRequest> GetByTourist(int touristId) //bi trebalo da bude ovako
         {
-            return _tourRequest.FindAll(i => i.Tourist.Id == touristId);
+            return _tourRequest.FindAll(request => request.Tourists.Any(tourParticipant => tourParticipant.UserId == touristId));
         }
 
         public List<TourRequest> GetByTourGuide(int tourGuideId) //bi trebalo da bude ovako

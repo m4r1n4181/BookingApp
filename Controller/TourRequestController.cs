@@ -133,5 +133,10 @@ namespace BookingApp.Controller
             return _tourRequestService.DeclineRequest(tourRequestId);
 
         }
+
+        public void CreateTourRequest(Location location, string language, int maxTourists, string description,/* List<TourParticipants> participants,*/ DateTime startDate, DateTime endDate)
+        {
+            _tourRequestService.CreateTourRequest(location, language, maxTourists, description, startDate, endDate/*, participants*/);
+        }
     }
 }

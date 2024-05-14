@@ -36,7 +36,6 @@ namespace BookingApp.WPF.ViewModels.TouristViewModels
         private readonly TourReservationService _tourReservationService;
         private readonly TourReservationRepository _tourReservationRepository;
         private readonly NotificationController _notificationController;
-        public NavigationService navigationService { get; private set; }
         private User _user;
         private MyToursViewState _windowState;
         public NavigationService NavigationService { get; set; }

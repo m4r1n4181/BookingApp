@@ -12,6 +12,7 @@ namespace BookingApp.Domain.RepositoryInterfaces
     public interface IUserRepository
     {
         public User GetByUsername(string username);
+        public User GetById(int id);
 
     }
 }

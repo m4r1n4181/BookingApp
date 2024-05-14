@@ -11,6 +11,7 @@ using BookingApp.WPF.ViewModels;
 using BookingApp.WPF.View.Tourist;
 using System.Windows.Navigation;
 using BookingApp.View;
+using System;
 
 namespace BookingApp.WPF.ViewModels.Tourist
 {
@@ -97,6 +98,7 @@ namespace BookingApp.WPF.ViewModels.Tourist
         public RelayCommand ReserveCommand { get; private set; }
         public RelayCommand MyToursCommand { get; private set; }
         public RelayCommand VouchersCommand { get; private set; }
+        public RelayCommand CreateRequestCommand { get; private set; }
 
         // Constructor
         public TourOverviewFormViewModel(NavigationService navigation)
@@ -110,6 +112,13 @@ namespace BookingApp.WPF.ViewModels.Tourist
             ReserveCommand = new RelayCommand(Reserve);
             MyToursCommand = new RelayCommand(MyTours);
             VouchersCommand = new RelayCommand(Vouchers);
+            CreateRequestCommand = new RelayCommand(Request);
+        }
+
+        private void Request()
+        {
+            CreateRequestView createRequestView = new CreateRequestView(NavigationService);
+            NavigationService.Navigate(createRequestView);
         }
 
         // Method to handle searching for tours

@@ -128,7 +128,6 @@
             <TextBlock  Text="Date and time:" FontSize="15" Foreground="#0F3057" Height="25" Width="100" VerticalAlignment="Top" Margin="10,0,0,0"/>
             <StackPanel Orientation="Horizontal" Margin="-100 10 0 0" Height="60" VerticalAlignment="Top">
                 <DatePicker x:Name="dpStartDate" SelectedDate="{Binding TourDate}" Width="100" Height="25" VerticalAlignment="Center" HorizontalAlignment="Left"/>
-                <ComboBox x:Name="cbStartTime" ItemsSource="{Binding PossibleTimes}" SelectedItem="{Binding SelectedTime}" Width="85" Height="25" Margin="10,0,0,0"/>
             </StackPanel>
             <Button Width="39" Height="20" Margin="15 30 0 0" Command="{Binding AddDateTimeCommand}" FontSize="13" VerticalAlignment="Top">
                 <Button.Template>
