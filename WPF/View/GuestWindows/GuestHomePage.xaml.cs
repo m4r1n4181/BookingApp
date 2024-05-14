@@ -1,4 +1,6 @@
-﻿using BookingApp.Domain.Models;
+﻿using BookingApp.DependencyInjection;
+using BookingApp.Domain.Models;
+using BookingApp.Domain.RepositoryInterfaces;
 using BookingApp.Service;
 using BookingApp.View;
 using BookingApp.View.GuestWindows;
@@ -28,7 +30,12 @@ namespace BookingApp.WPF.Views.GuestWindows
         public GuestHomePage()
         {
             InitializeComponent();
-            _accommodationReservationService = new AccommodationReservationService();
+            _accommodationReservationService = new AccommodationReservationService(
+                Injector.CreateInstance<IAccommodationReservationRepository>(),
+                Injector.CreateInstance<IAccommodationRepository>(),
+                Injector.CreateInstance<INotificationRepository>(),
+                Injector.CreateInstance<IOwnerReviewRepository>(),
+                Injector.CreateInstance<ISuperGuestRepository>());
             this.DataContext = this;
         }
 

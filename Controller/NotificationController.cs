@@ -6,6 +6,8 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using BookingApp.Repository;
+using BookingApp.DependencyInjection;
+using BookingApp.Domain.RepositoryInterfaces;
 
 namespace BookingApp.Controller
 {
@@ -15,7 +17,7 @@ namespace BookingApp.Controller
 
         public NotificationController()
         {
-            _notificationService = new NotificationService();
+            _notificationService = new NotificationService(Injector.CreateInstance<INotificationRepository>());
         }
 
         public List<Notification> GetAll()

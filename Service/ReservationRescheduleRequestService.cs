@@ -16,9 +16,9 @@ namespace BookingApp.Service
    public class ReservationRescheduleRequestService
     {
         private IReservationRescheduleRequestRepository _reservationRescheduleRequestRepository;
-        public ReservationRescheduleRequestService()
+        public ReservationRescheduleRequestService(IReservationRescheduleRequestRepository reservationRescheduleRequestRepository)
         {
-            _reservationRescheduleRequestRepository = Injector.CreateInstance<IReservationRescheduleRequestRepository>();
+            _reservationRescheduleRequestRepository = reservationRescheduleRequestRepository;
         }
         public List<ReservationRescheduleRequest> GetAll()
         {

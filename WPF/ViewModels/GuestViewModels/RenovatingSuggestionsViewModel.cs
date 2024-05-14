@@ -1,6 +1,8 @@
 ﻿using BookingApp.Controller;
+using BookingApp.DependencyInjection;
 using BookingApp.Domain.Models;
 using BookingApp.Domain.Models.Enums;
+using BookingApp.Domain.RepositoryInterfaces;
 using BookingApp.Model;
 using BookingApp.ViewModel;
 using System;
@@ -26,7 +28,7 @@ namespace BookingApp.WPF.ViewModels.GuestViewModels
  
         public RenovatingSuggestionsViewModel(AccommodationReservation accommodationReservation) 
         {
-            _renovatingRequestController = new RenovatingRequestController(new Service.RenovatingRequestService());
+            _renovatingRequestController = new RenovatingRequestController(new Service.RenovatingRequestService(Injector.CreateInstance<IRenovatingRequestRepository>()));
             SelectedAccommodationReservation = accommodationReservation;
             RenovatingUrgencyLevels = new ObservableCollection<RenovatingUrgencyLevel>();
             RenovatingUrgencyLevels.Add(RenovatingUrgencyLevel.Level1);

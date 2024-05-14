@@ -11,11 +11,11 @@ namespace BookingApp.Service
 {
     public class RenovatingRequestService
     {
-        private readonly RenovatingRequestRepository _renovatingRequestRepository;
+        private readonly IRenovatingRequestRepository _renovatingRequestRepository;
 
-        public RenovatingRequestService()
+        public RenovatingRequestService(IRenovatingRequestRepository renovatingRequestRepository)
         {
-            _renovatingRequestRepository = new RenovatingRequestRepository();
+            _renovatingRequestRepository = renovatingRequestRepository;
         }
 
         public RenovatingRequest GetRenovatingRequestById(int id)

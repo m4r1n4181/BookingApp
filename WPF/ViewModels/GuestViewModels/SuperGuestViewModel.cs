@@ -1,5 +1,7 @@
 ﻿using BookingApp.Controller;
+using BookingApp.DependencyInjection;
 using BookingApp.Domain.Models;
+using BookingApp.Domain.RepositoryInterfaces;
 using BookingApp.Model;
 using BookingApp.Service;
 using BookingApp.View;
@@ -28,12 +30,18 @@ namespace BookingApp.WPF.ViewModels.GuestViewModels
             User = SignInForm.LoggedUser;
             _superGuestController = new SuperGuestController();
             _accommodationReservationController = new AccommodationReservationController();
-            _accommodationReservationService = new AccommodationReservationService();
+            _accommodationReservationService = new AccommodationReservationService(
+                Injector.CreateInstance<IAccommodationReservationRepository>(),
+                Injector.CreateInstance<IAccommodationRepository>(),
+                Injector.CreateInstance<INotificationRepository>(),
+                Injector.CreateInstance<IOwnerReviewRepository>(),
+                Injector.CreateInstance<ISuperGuestRepository>());
 
             SuperGuest  = _superGuestController.GetByUserId(User.Id);
             if(SuperGuest == null)
             {
                 SuperGuestVisibility = Visibility.Hidden;
+                SuperGuestReservations = _accommodationReservationService.CountReservationsLastYear(User);
             }
             else
             {

@@ -22,6 +22,7 @@ namespace BookingApp.DependencyInjection
             { typeof(INotificationRepository), new NotificationRepository() },
             { typeof(IRenovatingRequestRepository), new RenovatingRequestRepository() },
             { typeof(ISuperGuestRepository), new SuperGuestRepository() },
+            { typeof(IGuestReviewRepository), new GuestReviewRepository()},
 
             
             //{}

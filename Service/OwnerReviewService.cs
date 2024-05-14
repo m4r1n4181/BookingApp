@@ -15,11 +15,14 @@ namespace BookingApp.Service
         private IOwnerReviewRepository _ownerReviewRepository;
         public IAccommodationReservationRepository _accommodationReservationRepository;
 
-        public OwnerReviewService()
+        public OwnerReviewService(IOwnerReviewRepository ownerReviewRepository,IAccommodationReservationRepository accommodationReservationRepository)
         {
-            _ownerReviewRepository = Injector.CreateInstance<IOwnerReviewRepository>();
+            _ownerReviewRepository = ownerReviewRepository;
+            _accommodationReservationRepository = accommodationReservationRepository;
+
+            //_ownerReviewRepository = Injector.CreateInstance<IOwnerReviewRepository>();
             //treba li u konstruktor ovo?
-            _accommodationReservationRepository = Injector.CreateInstance<IAccommodationReservationRepository>();
+            // _accommodationReservationRepository = Injector.CreateInstance<IAccommodationReservationRepository>();
         }
 
         public OwnerReview RateOwner(OwnerReview ownerReview)

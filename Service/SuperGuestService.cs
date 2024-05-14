@@ -13,9 +13,9 @@ namespace BookingApp.Service
     {
         private readonly ISuperGuestRepository _superGuestRepository;
 
-        public SuperGuestService( )
+        public SuperGuestService(ISuperGuestRepository superGuestRepository)
         {
-            _superGuestRepository = Injector.CreateInstance<ISuperGuestRepository>();
+            _superGuestRepository =superGuestRepository;
         }
 
         public SuperGuest GetById(int id)

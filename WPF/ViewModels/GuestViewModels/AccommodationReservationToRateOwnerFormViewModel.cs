@@ -1,4 +1,6 @@
-﻿using BookingApp.Model;
+﻿using BookingApp.DependencyInjection;
+using BookingApp.Domain.RepositoryInterfaces;
+using BookingApp.Model;
 using BookingApp.Repository;
 using BookingApp.Service;
 using BookingApp.View;
@@ -29,7 +31,12 @@ namespace BookingApp.ViewModels.GuestViewModels
         { 
              LoggedInUser = SignInForm.LoggedUser;
             _accommodationReservationRepository = new AccommodationReservationRepository();
-            _accommodationReservationService = new AccommodationReservationService();
+            _accommodationReservationService = new AccommodationReservationService(
+                Injector.CreateInstance<IAccommodationReservationRepository>(),
+                Injector.CreateInstance<IAccommodationRepository>(),
+                Injector.CreateInstance<INotificationRepository>(),
+                Injector.CreateInstance<IOwnerReviewRepository>(),
+                Injector.CreateInstance<ISuperGuestRepository>());
             AccommodationReservations = new ObservableCollection<AccommodationReservation>(_accommodationReservationService.GetAllByGuestForRating(LoggedInUser.Id));
             RateCommand = new RelayCommand(Rate_Click);
         }

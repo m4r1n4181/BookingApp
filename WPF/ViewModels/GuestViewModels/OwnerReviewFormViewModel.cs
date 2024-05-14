@@ -1,5 +1,7 @@
 ﻿using BookingApp.Controller;
+using BookingApp.DependencyInjection;
 using BookingApp.Domain.Models.Enums;
+using BookingApp.Domain.RepositoryInterfaces;
 using BookingApp.Model;
 using BookingApp.Service;
 using BookingApp.WPF.View.GuestWindows;
@@ -28,21 +30,16 @@ namespace BookingApp.ViewModels.GuestViewModels
         public RelayCommand SaveCommand { get; set; }
 
         public RelayCommand RenovateCommand { get; set; }
-
-      
-
-        
+     
         public OwnerReviewFormViewModel(AccommodationReservation accommodationReservation) 
         {
-            _ownerReviewController = new OwnerReviewController(new OwnerReviewService());
+            _ownerReviewController = new OwnerReviewController(new OwnerReviewService(Injector.CreateInstance<IOwnerReviewRepository>(), Injector.CreateInstance<IAccommodationReservationRepository>()));
             SelectedAccommodationReservation = accommodationReservation;
             Pictures = new List<string>();
             AddCommand = new RelayCommand(Button_Click_2);
             SaveCommand = new RelayCommand(Button_Click);
             RenovateCommand = new RelayCommand(AddRenovatingSuggestions_Click);
-
-
-           
+ 
         }
 
         private int _cleanliness;

@@ -1,4 +1,6 @@
-﻿using BookingApp.Domain.Models;
+﻿using BookingApp.DependencyInjection;
+using BookingApp.Domain.Models;
+using BookingApp.Domain.RepositoryInterfaces;
 using BookingApp.Model;
 using BookingApp.Service;
 using BookingApp.View;
@@ -16,7 +18,12 @@ namespace BookingApp.Controller
        // private readonly AccommodationReservationService _accommodationReservationService;
         public AccommodationReservationController()
         {
-            _accommodationReservationService = new AccommodationReservationService();
+            _accommodationReservationService = new AccommodationReservationService(
+                Injector.CreateInstance<IAccommodationReservationRepository>(),
+                Injector.CreateInstance<IAccommodationRepository>(),
+                Injector.CreateInstance<INotificationRepository>(),
+                Injector.CreateInstance<IOwnerReviewRepository>(),
+                Injector.CreateInstance<ISuperGuestRepository>());
         }
 
         public AccommodationReservation Create(AccommodationReservation accommodationReservation,User user)

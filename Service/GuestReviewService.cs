@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using BookingApp.Domain.RepositoryInterfaces;
 using BookingApp.Model;
 using BookingApp.Repository;
 
@@ -7,14 +8,15 @@ namespace BookingApp.Service
 {
     public class GuestReviewService
     {
-        private GuestReviewRepository _guestReviewRepository;
-        private OwnerReviewRepository _ownerReviewRepository;
-        public AccommodationReservationRepository _accommodationReservationRepository;
+        private IGuestReviewRepository _guestReviewRepository;
+        private IOwnerReviewRepository _ownerReviewRepository;
+        public IAccommodationReservationRepository _accommodationReservationRepository;
 
-        public GuestReviewService()
+        public GuestReviewService(IGuestReviewRepository guestReviewRepository,IOwnerReviewRepository ownerReviewRepository,IAccommodationReservationRepository accommodationReservationRepository)
         {
-            _guestReviewRepository = new GuestReviewRepository();
-            _ownerReviewRepository = new OwnerReviewRepository();
+            _guestReviewRepository = guestReviewRepository;
+            _ownerReviewRepository = ownerReviewRepository;
+            _accommodationReservationRepository = accommodationReservationRepository;
         }
         public GuestReview RateGuest(GuestReview guestReview)
         {

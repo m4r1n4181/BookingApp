@@ -10,8 +10,10 @@ namespace BookingApp.Domain.RepositoryInterfaces
 {
     public interface IRenovatingRequestRepository
     {
+
         public RenovatingRequest GetById(int id);
 
         public List<RenovatingRequest> GetAll();
+        public RenovatingRequest Save(RenovatingRequest renovatingRequest);
     }
 }

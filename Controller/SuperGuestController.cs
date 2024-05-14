@@ -1,4 +1,5 @@
-﻿using BookingApp.Domain.Models;
+﻿using BookingApp.DependencyInjection;
+using BookingApp.Domain.Models;
 using BookingApp.Domain.RepositoryInterfaces;
 using BookingApp.Service;
 using System;
@@ -16,7 +17,7 @@ namespace BookingApp.Controller
 
         public SuperGuestController()
         {
-            _superGuestService = new SuperGuestService();
+            _superGuestService = new SuperGuestService(Injector.CreateInstance<ISuperGuestRepository>());
         }
 
         public SuperGuest GetById(int id)

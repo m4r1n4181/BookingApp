@@ -23,13 +23,14 @@ namespace BookingApp.Service
         private IOwnerReviewRepository _ownerReviewRepository;
         private ISuperGuestRepository _superGuestRepository;
 
-        public AccommodationReservationService()
+        public AccommodationReservationService(IAccommodationReservationRepository accommodationReservationRepository,IAccommodationRepository accommodationRepository,INotificationRepository notificationRepository,IOwnerReviewRepository ownerReviewRepository,ISuperGuestRepository superGuestRepository)//kontr prima interfejse, tamo gde se poziva konstr ide telo ovoga
         {
-            _accommodationReservationRepository = Injector.CreateInstance<IAccommodationReservationRepository>();
-            _accommodationRepository = Injector.CreateInstance<IAccommodationRepository>();
-            _notificationRepository = Injector.CreateInstance<INotificationRepository>();
-            _ownerReviewRepository = Injector.CreateInstance<IOwnerReviewRepository>();
-            _superGuestRepository = Injector.CreateInstance<ISuperGuestRepository>();
+
+            _accommodationReservationRepository = accommodationReservationRepository;
+            _accommodationRepository = accommodationRepository;
+            _notificationRepository = notificationRepository;
+            _ownerReviewRepository = ownerReviewRepository;
+            _superGuestRepository = superGuestRepository;
         }
 
         public List<AccommodationReservation> GetAllByOwnerForRating(int ownerId)
@@ -137,23 +138,24 @@ namespace BookingApp.Service
         }
         public AccommodationReservation Create(AccommodationReservation accommodationReservation,User user)
         {
-            //ukoliko je ovo gostova 10 rezervacija u prethodnih god dana onda mu dodeli superguest
-            ////za logovanog br rez u god dana onda novi obj sup g
-            //kreir sup g i sac u repo
+
+            // Kreiranje rezervacije
+            accommodationReservation = _accommodationReservationRepository.Save(accommodationReservation);
+
             int reservationsLastYear = CountReservationsLastYear(user);
-            if (reservationsLastYear >= 3)
+            if (reservationsLastYear >= 10)
             {
                 // Gost postaje super-gost
                 if (!IsSuperGuest(user))
                 {
                     // Dodeli mu status super-gosta i bonus poene
-                    SuperGuest superGuest = new SuperGuest(user, DateTime.Now, DateTime.Now.AddYears(1), 5);
+                    SuperGuest superGuest = new SuperGuest(user, DateTime.Now, DateTime.Now.AddYears(1), 6);
                     _superGuestRepository.Save(superGuest);
                 }
-            }
 
-            // Kreiranje rezervacije
-            accommodationReservation = _accommodationReservationRepository.Save(accommodationReservation);
+            }
+            
+
 
             // Ažuriranje statusa super-gosta i bonus poena
             UpdateSuperGuestStatus(user);
@@ -167,32 +169,35 @@ namespace BookingApp.Service
                 return _accommodationReservationRepository.GetAll().Count(r => r.Guest.Id == user.Id && r.CreatedAt > oneYearAgo);
             }
 
-            public void UpdateSuperGuestStatus(User user)
-            {
-                SuperGuest superGuest = _superGuestRepository.GetById(user.Id);
-                if (superGuest != null)
-            {
-                // Ažuriranje poena
-                superGuest.Points--;
-
-                // Provera isteka statusa super-gosta
-                CheckSuperGuestPeriod(superGuest.Id);
-            }
-        }
-
         public void CheckSuperGuestPeriod(int superGuestId)
         {
             SuperGuest superGuest = _superGuestRepository.GetById(superGuestId);
-            if (DateTime.Now >= superGuest.End)
+            if (superGuest != null)
             {
-                // Poništavanje statusa super-gosta
-                _superGuestRepository.Delete(superGuest);
-            }
-            else
-            {
+                if (DateTime.Now >= superGuest.End)
+                {
+                    // Poništavanje statusa super-gosta
+                    _superGuestRepository.Delete(superGuest);
+                }
                 _superGuestRepository.Update(superGuest);
+
             }
         }
+        public void UpdateSuperGuestStatus(User user)
+            {
+                SuperGuest superGuest = _superGuestRepository.GetById(user.Id);
+                if (superGuest != null)
+                {
+                // Ažuriranje poena
+                superGuest.Points--;
+                _superGuestRepository.Update(superGuest);
+
+                // Provera isteka statusa super-gosta
+                CheckSuperGuestPeriod(superGuest.Id);
+                }
+        }
+
+      
 
 
         public AccommodationReservation Update(AccommodationReservation accommodationReservation)
@@ -203,14 +208,7 @@ namespace BookingApp.Service
             public bool IsReschedulePossible(ReservationRescheduleRequest reservationRescheduleRequest)
             {
                 List<AccommodationReservation> reservations = _accommodationReservationRepository.GetByAccommodationId(reservationRescheduleRequest.Reservation.Accommodation.Id);
-                /*  foreach (AccommodationReservation reservation in reservations)
-                  {
-                      if (reservation.Id == reservationRescheduleRequest.Reservation.Id)
-                      {
-                          reservations.Remove(reservation);
-                          break;
-                      }
-                  }*/
+
                 foreach (AccommodationReservation reservation in reservations)
                 {
                     if (IsDatesIntertwine(reservation.Arrival, reservation.Departure, reservationRescheduleRequest.NewStart, reservationRescheduleRequest.NewEnd))
