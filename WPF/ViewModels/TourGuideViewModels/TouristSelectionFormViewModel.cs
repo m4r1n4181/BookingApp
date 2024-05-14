@@ -1,5 +1,6 @@
 ﻿using BookingApp.Controller;
 using BookingApp.Model;
+using BookingApp.View;
 using BookingApp.ViewModels;
 using System;
 using System.Collections.Generic;
@@ -10,7 +11,6 @@ using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
-using System.Windows.Input;
 
 namespace BookingApp.View.ViewModels.TourGuideViewModels
 {
