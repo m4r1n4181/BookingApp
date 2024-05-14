@@ -15,5 +15,6 @@ namespace BookingApp.Domain.RepositoryInterfaces
         void Delete(GuestReview guestReview);
         GuestReview Update(GuestReview guestReview);
         List<GuestReview> GetGuestReviews(int id);
+
     }
 }

@@ -1,4 +1,7 @@
 ﻿using BookingApp.Controller;
+using BookingApp.WPF.View.OwnerPages;
+using BookingApp.WPF.View.OwnerWindows;
+using BookingApp.WPF.ViewModels.OwnerViewModels;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -24,39 +27,9 @@ namespace BookingApp.View.OwnerWindows
         public OwnerMainWindow()
         {
             InitializeComponent();
-            this.DataContext = this;
-            _accommodationOwnerReviewController = new AccommodationOwnerReviewController();
-
-            if (!_accommodationOwnerReviewController.IsSuperOwner(SignInForm.LoggedUser.Id))
-            {
-                SuperOwnerLabel.Visibility = Visibility.Hidden;
-            }
-        }
-
-        private void MyAccommodationsButton_Click(object sender, RoutedEventArgs e)
-        {
-            AccommodationsOverviewWindow accommodations = new AccommodationsOverviewWindow();
-            accommodations.Show();
+            this.DataContext = new OwnerMainViewModel();
 
         }
 
-        private void GuestsReviewButton_Click(object sender, RoutedEventArgs e)
-        {
-
-        }
-
-        private void ReservationRescheduleRequestsButton_Click(object sender, RoutedEventArgs e)
-        {
-            ReservationRescheduleRequestsWindow reservationRescheduleRequestsWindow = new ReservationRescheduleRequestsWindow();
-            reservationRescheduleRequestsWindow.Show();
-
-        }
-
-        private void LogOutButton_Click(object sender, RoutedEventArgs e)
-        {
-            SignInForm signInForm = new SignInForm();
-            signInForm.Show();
-            this.Close();
-        }
     }
 }

@@ -1,0 +1,58 @@
+﻿<Window x:Class="BookingApp.WPF.View.OwnerWindows.AllAccommodationsWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:BookingApp.WPF.View.OwnerWindows"
+        mc:Ignorable="d"
+        Title="AllAccommodationsWindow"
+        Height="450"
+        Width="800">
+    <Grid>
+        <DataGrid ItemsSource="{Binding Path=Accommodations, UpdateSourceTrigger=PropertyChanged}"
+                  SelectedItem="{Binding Path=SelectedAccommodation, UpdateSourceTrigger=PropertyChanged}"
+                  Margin="0,0,0,86"
+                  AutoGenerateColumns="False"
+                  x:Name="AccommodationsDataGrid"
+                  IsReadOnly="True"
+                  SelectionMode="Single">
+            <DataGrid.Columns>
+                <DataGridTextColumn Header="Naziv"
+                                    Binding="{Binding Name}"
+                                    Width="*"
+                                    DataGridColumn.CanUserResize="False"></DataGridTextColumn>
+                <DataGridTextColumn Header="Država"
+                                    Binding="{Binding Location.Country}"
+                                    Width="*"
+                                    DataGridColumn.CanUserResize="False"></DataGridTextColumn>
+                <DataGridTextColumn Header="Grad"
+                                    Binding="{Binding Location.City}"
+                                    Width="*"
+                                    DataGridColumn.CanUserResize="False"></DataGridTextColumn>
+                <DataGridTextColumn Header="Tip"
+                                    Binding="{Binding Type}"
+                                    Width="*"
+                                    DataGridColumn.CanUserResize="False"></DataGridTextColumn>
+                <DataGridTextColumn Header="Max broj gostiju"
+                                    Binding="{Binding MaxGuests}"
+                                    Width="*"
+                                    DataGridColumn.CanUserResize="False"></DataGridTextColumn>
+                <DataGridTextColumn Header="Min dana za rezervaciju"
+                                    Binding="{Binding MinReservationDays}"
+                                    Width="135"
+                                    DataGridColumn.CanUserResize="False"></DataGridTextColumn>
+                <DataGridTextColumn Header="min dana pred otkazivanje"
+                                    Binding="{Binding CancellationDays}"
+                                    Width="*"
+                                    DataGridColumn.CanUserResize="False"></DataGridTextColumn>
+            </DataGrid.Columns>
+        </DataGrid>
+        <Button Content="View statistics"
+                HorizontalAlignment="Left"
+                Click="ViewStatisticsButton_Click"
+                Margin="674,373,0,0"
+                VerticalAlignment="Top"
+                Width="112" />
+
+    </Grid>
+</Window>

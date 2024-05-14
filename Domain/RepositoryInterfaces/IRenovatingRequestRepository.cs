@@ -14,6 +14,7 @@ namespace BookingApp.Domain.RepositoryInterfaces
         public RenovatingRequest GetById(int id);
 
         public List<RenovatingRequest> GetAll();
+        public List<RenovatingRequest> GetAllWithAccommodationReservation();
         public RenovatingRequest Save(RenovatingRequest renovatingRequest);
     }
 }

@@ -4,7 +4,7 @@ using BookingApp.Domain.Models;
 using BookingApp.Domain.Models.Enums;
 using BookingApp.Domain.RepositoryInterfaces;
 using BookingApp.Model;
-using BookingApp.ViewModel;
+using BookingApp.ViewModels;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;

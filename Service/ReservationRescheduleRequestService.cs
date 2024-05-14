@@ -9,6 +9,7 @@ using System.Text;
 using System.Threading.Tasks;
 using BookingApp.View;
 using BookingApp.DependencyInjection;
+using BookingApp.Model;
 
 
 namespace BookingApp.Service
@@ -151,6 +152,18 @@ namespace BookingApp.Service
         public ReservationRescheduleRequest GetWithGuest(int guestId)
         {
             return _reservationRescheduleRequestRepository.GetWithGuest(guestId);
+        }
+        public bool IsReservationRescheduled(AccommodationReservation reservation)
+        {
+            List<ReservationRescheduleRequest> reservationRescheduleRequests = _reservationRescheduleRequestRepository.GetAll();
+            foreach (ReservationRescheduleRequest ReservationRescheduleRequest in reservationRescheduleRequests)
+            {
+                if (ReservationRescheduleRequest.Reservation.Id == reservation.Id && ReservationRescheduleRequest.Status == RequestStatusType.Approved)
+                {
+                    return true;
+                }
+            }
+            return false;
         }
     }
 

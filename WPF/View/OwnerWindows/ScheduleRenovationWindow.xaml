@@ -1,0 +1,143 @@
+﻿<Window x:Class="BookingApp.WPF.View.OwnerWindows.ScheduleRenovationWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:BookingApp.WPF.View.OwnerWindows"
+        mc:Ignorable="d"
+        Title="ScheduleRenovationWindow"
+        Height="450"
+        Width="800">
+    <Grid HorizontalAlignment="Left"
+          Width="790"
+          Height="534"
+          Margin="10,0,0,0"
+          VerticalAlignment="Top">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="513*" />
+            <RowDefinition Height="25*" />
+        </Grid.RowDefinitions>
+        <Label Content="Select accommodation"
+               HorizontalAlignment="Left"
+               Margin="30,29,0,0"
+               VerticalAlignment="Top"
+               FontWeight="Bold"
+               Width="186"
+               FontSize="14" />
+        <ComboBox Name="Accommodations"
+                  HorizontalAlignment="Left"
+                  Margin="30,58,0,0"
+                  VerticalAlignment="Top"
+                  Width="164"
+                  ItemsSource="{Binding Accommodations}"
+                  SelectedItem="{Binding SelectedAccommodation}"
+                  BorderBrush="#FF7BD6EC">
+            <ComboBox.Background>
+                <LinearGradientBrush EndPoint="0,1">
+                    <GradientStop Color="#FFF0F0F0" />
+                    <GradientStop Color="#FF7BD6EC"
+                                  Offset="1" />
+                </LinearGradientBrush>
+            </ComboBox.Background>
+            <ComboBox.ItemTemplate>
+                <DataTemplate>
+                    <TextBlock>
+             <Run Text="{Binding Name}"
+                        FontWeight="Bold" />
+             <Run Text=", " />
+             <Run Text="{Binding Location.City}" />
+             <Run Text="{Binding Location.Country}" />
+                    </TextBlock>
+                </DataTemplate>
+            </ComboBox.ItemTemplate>
+        </ComboBox>
+        <DatePicker HorizontalAlignment="Left"
+                    Margin="33,120,0,0"
+                    SelectedDate="{Binding Path=SelectedStartDate}"
+                    Name="StartDatePicker"
+                    VerticalAlignment="Top" />
+        <DatePicker HorizontalAlignment="Left"
+                    Margin="190,120,0,0"
+                    SelectedDate="{Binding Path=SelectedEndDate}"
+                    Name="EndDatePicker"
+                    VerticalAlignment="Top" />
+        <Label Content="Start date&#xD;&#xA;"
+               HorizontalAlignment="Left"
+               Margin="33,94,0,0"
+               VerticalAlignment="Top"
+               Height="26"
+               FontWeight="Bold" />
+        <Label Content="End date&#xA;"
+               HorizontalAlignment="Left"
+               Margin="209,94,0,0"
+               VerticalAlignment="Top"
+               Height="26"
+               FontWeight="Bold" />
+        <Label Content="Expected duration (in days):"
+               HorizontalAlignment="Left"
+               Margin="26,156,0,0"
+               VerticalAlignment="Top"
+               Height="26"
+               FontWeight="Bold" />
+        <TextBox HorizontalAlignment="Left"
+                 Margin="30,187,0,0"
+                 TextWrapping="Wrap"
+                 VerticalAlignment="Top"
+                 Text="{Binding Duration}"
+                 Width="136" />
+        <Label Content="Renovation description:"
+               HorizontalAlignment="Left"
+               Margin="26,224,0,0"
+               VerticalAlignment="Top"
+               Height="26"
+               FontWeight="Bold" />
+        <TextBox HorizontalAlignment="Left"
+                 Margin="30,255,0,0"
+                 TextWrapping="Wrap"
+                 VerticalAlignment="Top"
+                 Width="146"
+                 Text="{Binding Description}"
+                 Height="64" />
+        <Button Content="search for available appointments"
+                HorizontalAlignment="Left"
+                Margin="109,342,0,0"
+                VerticalAlignment="Top"
+                BorderBrush="#FF6DECF5"
+                Background="#FFB2F4F9"
+                Command="{Binding SearchCommand}" />
+        <Label Content="Available appointments:"
+               HorizontalAlignment="Left"
+               Margin="363,38,0,0"
+               VerticalAlignment="Top"
+               Width="242"
+               FontWeight="Bold"
+               FontSize="14" />
+        <DataGrid x:Name="AvailableTermsDataGrid"
+                  Background="#FF87EEF4"
+                  ItemsSource="{Binding Path=AvailableTerms, UpdateSourceTrigger=PropertyChanged}"
+                  SelectedItem="{Binding Path=SelectedTerm, UpdateSourceTrigger=PropertyChanged}"
+                  Margin="350,77,91,291">
+            <DataGrid.Columns>
+                <DataGridTextColumn Header="From"
+                                    Width="*"
+                                    Binding="{Binding Start}"
+                                    CanUserResize="False" />
+                <DataGridTextColumn Header="To"
+                                    Width="*"
+                                    Binding="{Binding End}"
+                                    CanUserResize="False" />
+
+            </DataGrid.Columns>
+        </DataGrid>
+        <Button Content="schedule a renovation"
+                HorizontalAlignment="Left"
+                Margin="464,267,0,0"
+                VerticalAlignment="Top"
+                BorderBrush="#FF6DECF5"
+                Background="#FFB2F4F9"
+                Command="{Binding ScheduleRenovationCommand}" />
+
+
+
+    </Grid>
+</Window>

@@ -1,5 +1,6 @@
 ﻿using BookingApp.Domain.RepositoryInterfaces;
 using BookingApp.Model;
+using BookingApp.Model.Enums;
 using BookingApp.Serializer;
 using System.Collections.Generic;
 using System.Linq;
@@ -44,5 +45,6 @@ namespace BookingApp.Repository
             _users = _serializer.FromCSV(FilePath);
             return _users.FirstOrDefault(user => user.Id == id);
         }
+
     }
 }

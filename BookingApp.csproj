@@ -1,43 +1,79 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
-  <PropertyGroup>
-    <OutputType>WinExe</OutputType>
-    <TargetFramework>net6.0-windows</TargetFramework>
-    <Nullable>enable</Nullable>
-    <UseWPF>true</UseWPF>
-  </PropertyGroup>
+	<PropertyGroup>
+		<OutputType>WinExe</OutputType>
+		<TargetFramework>net6.0-windows</TargetFramework>
+		<Nullable>enable</Nullable>
+		<UseWPF>true</UseWPF>
+	</PropertyGroup>
 
-  <ItemGroup>
-    <None Remove="Resources\Images\add.png" />
-    <None Remove="Resources\Images\delete.png" />
-    <None Remove="Resources\Images\edit.png" />
-    <None Remove="Resources\Images\superGuest.png" />
-    <None Remove="Resources\Images\view.png" />
-  </ItemGroup>
+	<ItemGroup>
+		<None Remove="Resources\Images\add.png" />
+		<None Remove="Resources\Images\colloseum.jpg" />
+		<None Remove="Resources\Images\delete.png" />
+		<None Remove="Resources\Images\edit.png" />
+		<None Remove="Resources\Images\eiffel.jpg" />
+		<None Remove="Resources\Images\Finish.png" />
+		<None Remove="Resources\Images\louvre.jpg" />
+		<None Remove="Resources\Images\notre_dame.jpg" />
+		<None Remove="Resources\Images\palatine.jpg" />
+		<None Remove="Resources\Images\people.png" />
+		<None Remove="Resources\Images\personFigure.png" />
+		<None Remove="Resources\Images\personFigure2.png" />
+		<None Remove="Resources\Images\slika.jpg" />
+		<None Remove="Resources\Images\slika2.jpg" />
+		<None Remove="Resources\Images\superGuest.png" />
+		<None Remove="Resources\Images\tourKeyPoint0.png" />
+		<None Remove="Resources\Images\tourKeyPoint1.png" />
+		<None Remove="Resources\Images\tourKeyPoint2.png" />
+		<None Remove="Resources\Images\tourKeyPoint3.png" />
+		<None Remove="Resources\Images\tourKeyPoint4.png" />
+		<None Remove="Resources\Images\tourKeyPoint5.png" />
+		<None Remove="Resources\Images\tourKeyPoint6.png" />
+		<None Remove="Resources\Images\view.png" />
+	</ItemGroup>
 
-  <ItemGroup>
-    <Content Include="Resources\Images\add.png">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Resources\Images\delete.png">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Resources\Images\edit.png">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Resources\Images\view.png">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-  </ItemGroup>
+	<ItemGroup>
+		<Resource Include="Resources\Images\add.png">
+			<CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+		</Resource>
+		<Resource Include="Resources\Images\delete.png">
+			<CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+		</Resource>
+		<Resource Include="Resources\Images\edit.png">
+			<CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+		</Resource>
+		<Resource Include="Resources\Images\Finish.png" />
+		<Resource Include="Resources\Images\louvre.jpg" />
+		<Resource Include="Resources\Images\palatine.jpg" />
+		<Resource Include="Resources\Images\people.png" />
+		<Resource Include="Resources\Images\personFigure.png" />
+		<Resource Include="Resources\Images\personFigure2.png" />
+		<Resource Include="Resources\Images\superGuest.png" />
+		<Resource Include="Resources\Images\tourKeyPoint6.png" />
+		<Resource Include="Resources\Images\tourKeyPoint5.png" />
+		<Resource Include="Resources\Images\tourKeyPoint4.png" />
+		<Resource Include="Resources\Images\tourKeyPoint3.png" />
+		<Resource Include="Resources\Images\tourKeyPoint2.png" />
+		<Resource Include="Resources\Images\tourKeyPoint1.png" />
+		<Resource Include="Resources\Images\tourKeyPoint0.png" />
+		<Resource Include="Resources\Images\view.png">
+			<CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+		</Resource>
+	</ItemGroup>
 
-  <ItemGroup>
-    <PackageReference Include="MvvmLight" Version="5.4.1.1" />
-    <PackageReference Include="MvvmLightLibs" Version="5.4.1.1" />
-  </ItemGroup>
+	<ItemGroup>
+		<PackageReference Include="MvvmLight" Version="5.4.1.1" />
+		<PackageReference Include="MvvmLightLibs" Version="5.4.1.1" />
+	</ItemGroup>
 
-  <ItemGroup>
-    <Resource Include="Resources\Images\superGuest.png" />
-  </ItemGroup>
+	<ItemGroup>
+		<Resource Include="Resources\Images\colloseum.jpg" />
+		<Resource Include="Resources\Images\eiffel.jpg" />
+		<Resource Include="Resources\Images\notre_dame.jpg" />
+		<Resource Include="Resources\Images\slika.jpg" />
+		<Resource Include="Resources\Images\slika2.jpg" />
+	</ItemGroup>
 
 
 </Project>

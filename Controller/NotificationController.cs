@@ -8,6 +8,7 @@ using System.Threading.Tasks;
 using BookingApp.Repository;
 using BookingApp.DependencyInjection;
 using BookingApp.Domain.RepositoryInterfaces;
+using BookingApp.Model.Enums;
 
 namespace BookingApp.Controller
 {
@@ -40,6 +41,10 @@ namespace BookingApp.Controller
         public void ReadAllUserNotifications(int userId)
         {
             _notificationService.ReadAllUserNotifications(userId);
+        }
+        public void SendNotification(int id, User user, string message, NotificationStatus notificationStatus)
+        {
+            _notificationService.SendNotification(id, user, message, notificationStatus);
         }
     }
 }

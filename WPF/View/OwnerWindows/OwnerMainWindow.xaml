@@ -1,45 +1,23 @@
 ﻿<Window x:Class="BookingApp.View.OwnerWindows.OwnerMainWindow"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:local="clr-namespace:BookingApp.View.OwnerWindows"
-        mc:Ignorable="d"
-        Title="OwnerMainWindow" Height="450" Width="800">
-    <Grid>
-        <Grid.RowDefinitions>
-            <RowDefinition/>
-        </Grid.RowDefinitions>
-        <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="210"/>
-            <ColumnDefinition Width="*"/>
-        </Grid.ColumnDefinitions>
-        <Grid Grid.Column="0">
-            <Grid.RowDefinitions>
-                <RowDefinition Height="80" />
-                <RowDefinition Height="*" />
-            </Grid.RowDefinitions>
-            <Label x:Name="SuperOwnerLabel" Content="Super vlasnik" FontSize="30" FontWeight="Bold" VerticalContentAlignment="Center"/>
-            <Grid Grid.Row="1">
-                <Grid>
-                    <Grid.RowDefinitions>
-                        <RowDefinition Height="55"/>
-                        <RowDefinition Height="55"/>
-                        <RowDefinition Height="55"/>
-                        <RowDefinition Height="55"/>
-                        <RowDefinition Height="55"/>
-                        <RowDefinition Height="*"/>
-                    </Grid.RowDefinitions>
-                    <Button x:Name="MyAccommodationsButton" Content="svi smestaji" Click="MyAccommodationsButton_Click"
-                            Grid.Row="0" FontSize="20"  BorderBrush="White" />
-                    <Button x:Name="GuestWithoutReviewButton" Content="Neocenjeni gosti" Click="GuestsReviewButton_Click"
-                            Grid.Row="1" FontSize="20"  BorderBrush="White" />
-                    <Button x:Name="ReservationRescheduleRequestsButton" Content="Zahtevi" Click="ReservationRescheduleRequestsButton_Click"
-                            Grid.Row="2" FontSize="20"  BorderBrush="White" />
-                </Grid>
-            </Grid>
-        </Grid>
-        <Button Grid.Column="1" Name ="LogOutButton" Content="Odjavi se" HorizontalAlignment="Left" Margin="452,366,0,0" FontSize="20" VerticalAlignment="Top" Click="LogOutButton_Click"/>
-
-    </Grid>
+        Title="Owner Main Window"
+        Height="450"
+        Width="800">
+   
+    <StackPanel>
+        <Label Content="Super Owner"
+               Visibility="{Binding SuperOwnerVisibility}" />
+        <Button Content="My Accommodations"
+                Command="{Binding MyAccommodationsCommand}" />
+        <Button Content="Log Out"
+                Command="{Binding LogOutCommand}" />
+        <Button Content="Schedule Renovation"
+                Command="{Binding ScheduleRenovationCommand}" />
+        <Button Content="Scheduled Renovations"
+                Command="{Binding ScheduledRenovationsCommand}" />
+        <Label Content="DODALA SAM SORT ZA SMESTAJ AKO JE OD SUPER VLASNIKA PROVERITE TO"
+               FontSize="20"
+               FontWeight="Bold"/>
+    </StackPanel>
 </Window>

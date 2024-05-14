@@ -1,11 +1,12 @@
-﻿using BookingApp.Model;
+﻿using BookingApp.Domain.RepositoryInterfaces;
+using BookingApp.Model;
 using BookingApp.Serializer;
 using System.Collections.Generic;
 using System.Linq;
 
 namespace BookingApp.Repository
 {
-    public class TouristRepository
+    public class TouristRepository : ITouristRepository
     {
 
         private const string FilePath = "../../../Resources/Data/tourists.csv";

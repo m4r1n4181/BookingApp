@@ -20,9 +20,20 @@ namespace BookingApp.DependencyInjection
             { typeof(ILocationRepository), new LocationRepository() },
             { typeof(IAccommodationReservationRepository), new AccommodationReservationRepository() },
             { typeof(INotificationRepository), new NotificationRepository() },
+            { typeof(IKeyPointRepository), new KeyPointRepository() },
+            { typeof(ITourGuideRepository), new TourGuideRepository() },
+            { typeof(ITouristEntryRepository), new TouristEntryRepository() },
+            { typeof(ITouristRepository), new TouristRepository() },
+            { typeof(ITourParticipantRepository), new TourParticipantRepository() },
+            { typeof(ITourRepository), new TourRepository() },
+            { typeof(ITourRequestRepository), new TourRequestRepository() },
+            { typeof(ITourReservationRepository), new TourReservationRepository() },
+            { typeof(ITourReviewRepository), new TourReviewRepository() },
+            { typeof(IVoucherRepository), new VoucherRepository() },
             { typeof(IRenovatingRequestRepository), new RenovatingRequestRepository() },
             { typeof(ISuperGuestRepository), new SuperGuestRepository() },
-            { typeof(IGuestReviewRepository), new GuestReviewRepository()},
+            { typeof(IAccommodationRenovationRepository), new AccommodationRenovationRepository() },
+            { typeof(IGuestReviewRepository), new GuestReviewRepository() },
 
             
             //{}

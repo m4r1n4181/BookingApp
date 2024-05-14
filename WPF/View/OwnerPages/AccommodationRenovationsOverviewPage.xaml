@@ -1,0 +1,96 @@
+﻿<Page x:Class="BookingApp.WPF.View.OwnerPages.AccommodationRenovationsOverviewPage"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+      xmlns:local="clr-namespace:BookingApp.WPF.View.OwnerPages"
+      mc:Ignorable="d"
+      d:DesignHeight="700"
+      d:DesignWidth="430"
+      Title="AccommodationRenovationsOverviewPage"
+      DataContext="{Binding AccommodationRenovationsOverviewViewModelPage}">
+
+    <Grid Background="#AFD06E">
+        <ComboBox HorizontalAlignment="Left"
+                  VerticalAlignment="Top"
+                  Width="162"
+                  Margin="27,10,0,0"
+                  SelectedValue="{Binding SelectedType, UpdateSourceTrigger=PropertyChanged}"
+                  SelectedValuePath="Content">
+            <ComboBoxItem Content="Scheduled Renovations" />
+            <ComboBoxItem Content="Previous Renovations" />
+        </ComboBox>
+
+        <DataGrid Background="#AFD06E"
+                  BorderBrush="#AFD06E"
+                  BorderThickness="1"
+                  x:Name="AccommodationRenovationsDataGrid"
+                  IsReadOnly="True"
+                  SelectionMode="Single"
+                  ItemsSource="{Binding Path=AccommodationRenovations, UpdateSourceTrigger=PropertyChanged}"
+                  SelectedItem="{Binding Path=SelectedAccommodationRenovation}"
+                  Margin="10,50,10,10"
+                  AutoGenerateColumns="False">
+            <DataGrid.RowStyle>
+                <Style TargetType="DataGridRow">
+                    <Setter Property="Background"
+                            Value="#AFD06E" />
+                </Style>
+            </DataGrid.RowStyle>
+            <DataGrid.Columns>
+                <DataGridTemplateColumn Width="*">
+                    <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate>
+                            <Grid>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="100" />
+                                    <ColumnDefinition Width="*" />
+                                </Grid.ColumnDefinitions>
+                                <Image Source="{Binding Accommodation.Pictures[0]}"
+                                       Width="100"
+                                       Height="100" />
+                                <StackPanel Grid.Column="1"
+                                            Margin="7,3,7,3">
+                                    <TextBlock FontWeight="Bold"
+                                               FontSize="16"
+                                               Margin="0,20,0,0"> <!-- Added top margin to move text down -->
+                                        <Run Text="{Binding Accommodation.Name}" />
+                                        <Run Text=", " />
+                                        <Run Text="{Binding Accommodation.Location.City}" />
+                                        <Run Text="{Binding Accommodation.Location.Country}" />
+                                    </TextBlock>
+
+                                    <TextBlock FontSize="14"
+                                               TextWrapping="Wrap"
+                                               Margin="0,10,0,0"> <!-- Added top margin to move text down -->
+                                        <Run Text="Scheduled for: " />
+                                        <Run Text="{Binding Start, StringFormat={}{0:dd.MM.yyyy}}" />
+                                        <Run Text="-" />
+                                        <Run Text="{Binding End, StringFormat={}{0:dd.MM.yyyy}}" />
+                                    </TextBlock>
+                                    <Button Content="Cancel Renovation"
+                                            Command="{Binding CancelRenovationCommand}"
+                                            HorizontalAlignment="Right"
+                                            VerticalAlignment="Bottom"
+                                            Width="120"
+                                            Background="#FFEA5551"
+                                            Height="30"
+                                            Margin="7,20,7,7" />
+
+                                </StackPanel>
+                            </Grid>
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                </DataGridTemplateColumn>
+            </DataGrid.Columns>
+        </DataGrid>
+
+        <TextBlock HorizontalAlignment="Left"
+                   Margin="10,10,0,10"
+                   VerticalAlignment="Bottom"
+                   Text="You can cancel renovation at least 5 days before it starts."
+                   FontSize="12" />
+        <!--Command="{Binding Path=DataContext.ScheduleCommand, RelativeSource={RelativeSource AncestorType={x:Type ItemsControl}}}" -->
+
+    </Grid>
+</Page>

@@ -1,4 +1,6 @@
-﻿using BookingApp.Model;
+﻿using BookingApp.DependencyInjection;
+using BookingApp.Domain.RepositoryInterfaces;
+using BookingApp.Model;
 using BookingApp.Repository;
 using System;
 using System.Collections.Generic;
@@ -10,17 +12,17 @@ namespace BookingApp.Service
 {
     public class TouristService
     {
-        private TouristRepository _touristRepository;
-        private KeyPointRepository _keyPointRepository;
-        private TouristEntryRepository _touristEntryRepository;
-        private TourReservationRepository _tourReservationRepository;
+        private ITouristRepository _touristRepository;
+        private IKeyPointRepository _keyPointRepository;
+        private ITouristEntryRepository _touristEntryRepository;
+        private ITourReservationRepository _tourReservationRepository;
 
         public TouristService()
         {
-            _touristRepository = new TouristRepository();
-            _keyPointRepository = new KeyPointRepository();
-            _touristEntryRepository = new TouristEntryRepository();
-            _tourReservationRepository = new TourReservationRepository();
+            _touristRepository = Injector.CreateInstance<ITouristRepository>();
+            _keyPointRepository = Injector.CreateInstance<IKeyPointRepository>();
+            _touristEntryRepository = Injector.CreateInstance<ITouristEntryRepository>();
+            _tourReservationRepository = Injector.CreateInstance<ITourReservationRepository>();
         }
 
         public List<Tourist> GetAll()

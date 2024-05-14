@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using BookingApp.DependencyInjection;
 using BookingApp.Domain.RepositoryInterfaces;
 using BookingApp.Model;
 using BookingApp.Repository;

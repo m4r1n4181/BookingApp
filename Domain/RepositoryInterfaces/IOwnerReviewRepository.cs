@@ -14,7 +14,6 @@ namespace BookingApp.Domain.RepositoryInterfaces
         public OwnerReview Save(OwnerReview ownerReview);
 
         public OwnerReview GetOneByReservation(int reservationId);
-
         public bool CheckOwnerReviewExistence(int accommodationReservationId);
 
     }

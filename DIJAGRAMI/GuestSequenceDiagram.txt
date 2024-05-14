@@ -1,0 +1,47 @@
+@startuml
+actor User as "Korisnik"
+participant SuperGuestController as "SuperGuestController"
+participant SuperGuestService as "SuperGuestService"
+participant AccommodationReservationService as "AccommodationReservationService"
+participant SuperGuestRepository as "SuperGuestRepository"
+
+User -> SuperGuestController: GetByUserId(User.Id)
+activate SuperGuestController
+SuperGuestController -> SuperGuestService: GetByUserId(User.Id)
+activate SuperGuestService
+SuperGuestService -> SuperGuestRepository: GetById(User.Id)
+activate SuperGuestRepository
+SuperGuestRepository --> SuperGuestService: SuperGuest
+deactivate SuperGuestRepository
+SuperGuestService --> SuperGuestController: SuperGuest
+deactivate SuperGuestService
+SuperGuestController --> User: SuperGuest
+deactivate SuperGuestController
+
+User -> AccommodationReservationService: Create(AccommodationReservation)
+activate AccommodationReservationService
+AccommodationReservationService -> AccommodationReservationRepository: Save(AccommodationReservation)
+activate AccommodationReservationRepository
+AccommodationReservationRepository --> AccommodationReservationService: SavedReservation
+deactivate AccommodationReservationRepository
+AccommodationReservationService --> User: SavedReservation
+deactivate AccommodationReservationService
+User-> SuperGuestService: CountReservationsLastYear(User)
+activate SuperGuestService
+SuperGuestService -> AccommodationReservationRepository: GetAll()
+activate AccommodationReservationRepository
+AccommodationReservationRepository --> SuperGuestService: Reservations
+deactivate AccommodationReservationRepository
+SuperGuestService -> SuperGuestRepository: GetById(User.Id)
+activate SuperGuestRepository
+SuperGuestRepository --> SuperGuestService: SuperGuest
+deactivate SuperGuestRepository
+
+
+SuperGuestService--> SuperGuestService: UpdateSuperGuestStatus(User)
+deactivate SuperGuestService
+
+
+
+
+@enduml
