@@ -1,0 +1,21 @@
+@startuml
+actor "Program" as Program
+participant "matchingRequests" as matchingRequests
+participant "foreach loop" as Loop
+participant "request" as Request
+participant "tour" as Tour
+participant "Notification" as Notification
+participant "_notificationRepository" as NotificationRepository
+
+Program -> Loop: Iterate over matchingRequests
+Loop -> Loop: Next request
+Loop -> Request: Get request details
+Loop -> Tour: Get tour details
+Tour --> Loop: Return tour details
+Loop -> Notification: Create message string
+Notification --> Loop: Return message string
+Loop -> Notification: Create Notification object
+Notification --> Loop: Return Notification object
+Loop -> NotificationRepository: Save(notification)
+NotificationRepository --> Loop: Return save status
+@enduml
