@@ -2,8 +2,12 @@
 using BookingApp.Domain.Models;
 using BookingApp.Model;
 using BookingApp.Model.Enums;
+using BookingApp.Repository;
+using BookingApp.Service;
 using BookingApp.View;
 using BookingApp.ViewModels;
+using BookingApp.WPF.View.Tourist;
+using BookingApp.WPF.ViewModels;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -22,6 +26,10 @@ namespace BookingApp.WPF.ViewModels.TouristViewModels
 
         private LocationController _locationController;
         private TourRequestController _tourRequestController;
+        private TourParticipantService _tourParticipantService;
+        private TouristRepository _touristRepository;
+
+        public ObservableCollection<TourParticipants> Participants { get; private set; }
         public Location SelectedLocation { get; set; }
 
         private string _selectedCity;
@@ -155,6 +163,48 @@ namespace BookingApp.WPF.ViewModels.TouristViewModels
             }
         }
 
+        private string _firstName;
+        public string FirstName
+        {
+            get => _firstName;
+            set
+            {
+                if (value != _firstName)
+                {
+                    _firstName = value;
+                    OnPropertyChanged();
+                }
+            }
+        }
+
+        private string _lastName;
+        public string LastName
+        {
+            get => _lastName;
+            set
+            {
+                if (value != _lastName)
+                {
+                    _lastName = value;
+                    OnPropertyChanged();
+                }
+            }
+        }
+
+        private int _age;
+
+        public int Age
+        {
+            get => _age;
+            set
+            {
+                if (value != _age)
+                {
+                    _age = value;
+                    OnPropertyChanged();
+                }
+            }
+        }
         private void UpdateCitiesBasedOnCountry()
         {
             Cities = new ObservableCollection<string>(
@@ -168,37 +218,66 @@ namespace BookingApp.WPF.ViewModels.TouristViewModels
         }
         public NavigationService NavigationService { get; set; }
 
-        public RelayCommand CreateRequestCommand { get; private set; }
+        public RelayCommand AddParticipantsCommand { get; private set; }
+        public RelayCommand CreateRequestCommand {  get; private set; }
+        public RelayCommand UseMyInfoCommand {  get; private set; }
 
         public CreateRequestViewModel(NavigationService navigation) {
             _locationController = new LocationController();
             _tourRequestController = new TourRequestController();
+            _tourParticipantService = new TourParticipantService();
+            _touristRepository = new TouristRepository();
+            Participants = new ObservableCollection<TourParticipants>();
             NavigationService = navigation;
             Locations = new ObservableCollection<Location>(_locationController.GetAll());
             Cities = new ObservableCollection<string>(Locations.Select(loc => loc.City).Distinct());
             Countries = new ObservableCollection<string>(Locations.Select(loc => loc.Country).Distinct());
             DateTimes = new ObservableCollection<DateTime>();
+            StartDate = DateTime.Now;
+            EndDate = DateTime.Now;
+            AddParticipantsCommand = new RelayCommand(AddParticipants);
             CreateRequestCommand = new RelayCommand(CreateRequest);
+            UseMyInfoCommand = new RelayCommand(UseMyInfo);
 
+        }
+
+        public void AddParticipants(object param)
+        {
+
+            TourParticipants participant = new TourParticipants
+            {
+                FirstName = FirstName,
+                LastName = LastName,
+                Age = Convert.ToInt32(Age)
+            };
+
+            Participants.Add(participant);
+            _tourParticipantService.CreateParticipant(participant);
+
+        }
+
+        private void UseMyInfo(object sender)
+        {
+            Model.Tourist tourist1 = _touristRepository.GetByUserId(SignInForm.LoggedUser.Id);
+            TourParticipants tourist = new TourParticipants
+            {
+                FirstName = tourist1.FirstName,
+                LastName = tourist1.LastName,
+                Age = Convert.ToInt32(tourist1.Age),
+                UserId = SignInForm.LoggedUser.Id,
+            };
+
+            Participants.Add(tourist);
+            _tourParticipantService.CreateParticipant(tourist);
         }
 
         public void CreateRequest(object param)
         {
 
             Location selectedLocation = Locations.FirstOrDefault(loc => loc.City == SelectedCity && loc.Country == SelectedCountry);
-
-            TourRequest newTourRequest = new TourRequest
-            {
-                Location = selectedLocation,
-                Language = Language,
-                MaxTourists = MaxTourists,
-                Description = Description,
-                StartDate = StartDate,
-                EndDate = EndDate
-            };
-
-           // _tourRequestController.CreateTourRequest(newTourRequest);
-
+            _tourRequestController.CreateTourRequest(selectedLocation, Language, MaxTourists, Description, StartDate, EndDate, Participants.ToList(), SignInForm.LoggedUser);
+            MyRequestsView myRequests = new MyRequestsView(NavigationService);
+            NavigationService.Navigate(myRequests);
 
             //Close();
         }

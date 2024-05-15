@@ -63,6 +63,7 @@
   <ItemGroup>
     <PackageReference Include="MvvmLight" Version="5.4.1.1" />
     <PackageReference Include="MvvmLightLibs" Version="5.4.1.1" />
+    <PackageReference Include="Syncfusion.SfChart.WPF" Version="25.2.4" />
   </ItemGroup>
 
   <ItemGroup>

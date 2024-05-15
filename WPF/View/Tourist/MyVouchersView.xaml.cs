@@ -27,7 +27,6 @@ namespace BookingApp.WPF.View.Tourist
 {
     public partial class MyVouchersView : Page
     {
-        public static User User { get; set; }
         public MyVouchersView(NavigationService navigationService)
         {
             InitializeComponent();

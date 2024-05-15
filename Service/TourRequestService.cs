@@ -20,7 +20,7 @@ using System.Xml.Linq;
 
 namespace BookingApp.Service
 {
-    public class TourRequestService 
+    public class TourRequestService
     {
         private ITourRequestRepository _tourRequestRepository;
         private ITourRepository _tourRepository;
@@ -29,7 +29,6 @@ namespace BookingApp.Service
         private INotificationRepository _notificationRepository;
         private IUserRepository _userRepository;
 
-
         public TourRequestService()
         {
             _tourRequestRepository = Injector.CreateInstance<ITourRequestRepository>();
@@ -37,7 +36,6 @@ namespace BookingApp.Service
             _keyPointRepository = Injector.CreateInstance<IKeyPointRepository>();
             _locationRepository = Injector.CreateInstance<ILocationRepository>();
             _notificationRepository = Injector.CreateInstance<INotificationRepository>();
-            _userRepository = Injector.CreateInstance<IUserRepository>();
         }
 
         public TourRequest Save(TourRequest tourRequest)
@@ -84,12 +82,12 @@ namespace BookingApp.Service
             return true;
         }
 
-         public List<TourRequest> GetTourRequestsForTourGuide(int tourGuideId, DateTime start, DateTime end)
-          {
-              List<TourRequest> tourRequest = _tourRequestRepository.GetByTourGuide(tourGuideId);
+        public List<TourRequest> GetTourRequestsForTourGuide(int tourGuideId, DateTime start, DateTime end)
+        {
+            List<TourRequest> tourRequest = _tourRequestRepository.GetByTourGuide(tourGuideId);
 
-              return tourRequest.FindAll(tR => DatesIntertwine(tR.StartDate, tR.EndDate, start, end));
-          }
+            return tourRequest.FindAll(tR => DatesIntertwine(tR.StartDate, tR.EndDate, start, end));
+        }
 
         public void SaveTourFromRequest(TourRequest tourRequest, DateTime selectedDate)
         {
@@ -101,11 +99,11 @@ namespace BookingApp.Service
                 Description = tourRequest.Description,
                 StartDate = selectedDate,
                 TourGuide = tourRequest.TourGuide,
-                Name = tourRequest.Description, 
-                Duration = 2, 
-                AvailableSeats = tourRequest.MaxTourists, 
-                Pictures = null, 
-                TourStatus = TourStatusType.not_started 
+                Name = tourRequest.Description,
+                Duration = 2,
+                AvailableSeats = tourRequest.MaxTourists,
+                Pictures = null,
+                TourStatus = TourStatusType.not_started
             };
 
             _tourRepository.Save(tour);
@@ -163,13 +161,13 @@ namespace BookingApp.Service
 
             foreach (DateTime dateTime in dateTimes)
             {
-               
+
                 Tour tour = new Tour
                 {
                     Name = name,
                     TourGuide = SignInForm.LoggedUser,
                     Description = description,
-                    Location = location, 
+                    Location = location,
                     Language = language,
                     MaxTourists = maxTourists,
                     AvailableSeats = maxTourists,
@@ -183,15 +181,28 @@ namespace BookingApp.Service
                 keyPoints.ForEach(kp => kp.Tour = tour);
 
                 _keyPointRepository.SaveAll(keyPoints);
+                //notifikacije za turistu
+                List<TourRequest> matchingRequests = GetAll().Where(request =>
+                request.RequestStatus == RequestStatusType.Standby &&
+                (request.Location.Country == tour.Location.Country || request.Language == tour.Language)).ToList();
+
+                foreach (var request in matchingRequests)
+                {
+                    string message = $"Nova tura je kreirana na lokaciji {tour.Location.Country} i na jeziku {tour.Language}.";
+                    Notification notification = new Notification() { User = request.Tourist, Message = message, NotificationStatus = NotificationStatus.unread };
+                    _notificationRepository.Save(notification);
+                }
+
+
             }
         }
-        
+
         public bool IsTourGuideFreeOnDate(int tourGuideId, DateTime date)
         {
             List<Tour> guideTours = _tourRepository.GetByTourGuideNotStarted(tourGuideId);
-            foreach(Tour tour in guideTours)
+            foreach (Tour tour in guideTours)
             {
-                if(tour.StartDate.Date == date.Date)
+                if (tour.StartDate.Date == date.Date)
                 {
                     return false;
                 }
@@ -213,59 +224,34 @@ namespace BookingApp.Service
 
             tourRequest.RequestStatus = RequestStatusType.Approved;
             tourRequest.SelectedDate = selectedDate;
-            _tourRequestRepository.Update(tourRequest);
-            TourParticipants tourParticipant = tourRequest.Tourists.FirstOrDefault(tp => tp.UserId != -1);
-            if (tourParticipant != null)
-            {
-                int userId = tourParticipant.UserId;
-                User user = _userRepository.GetById(userId);
-                if (user != null)
-                {
-                    string message = "Vaš zahtev je odobren za datum " + selectedDate.ToShortDateString();
-                    Notification notification = new Notification()
-                    {
-                        Message = message,
-                        NotificationStatus = NotificationStatus.unread,
-                        User = user
-                    };
-                    _notificationRepository.Save(notification);
-                }
-            }
 
+            _tourRequestRepository.Update(tourRequest);
+            string message = "Vaš zahtev je odobren za datum " + selectedDate.ToShortDateString();
+            Notification notification = new Notification() { Message = message, NotificationStatus = NotificationStatus.unread, User = tourRequest.Tourist };
+            _notificationRepository.Save(notification);
 
             return tourRequest;
         }
+
         public TourRequest DeclineRequest(int tourRequestId)
         {
             TourRequest tourRequest = GetById(tourRequestId);
-            if (tourRequest == null)
+            if (tourRequestId == null)
             {
                 return null;
             }
             tourRequest.RequestStatus = RequestStatusType.Declined;
             _tourRequestRepository.Update(tourRequest);
-            TourParticipants tourParticipant = tourRequest.Tourists.FirstOrDefault(tp => tp.UserId != -1);
-            if (tourParticipant != null)
-            {
-                int userId = tourParticipant.UserId;
-                User user = _userRepository.GetById(userId);
-                if (user != null)
-                {
-                    string message = "Vaš zahtev je odbijen jer nema dostupnih termina";
-                    Notification notification = new Notification()
-                    {
-                        Message = message,
-                        NotificationStatus = NotificationStatus.unread,
-                        User = user
-                    };
-                    _notificationRepository.Save(notification);
-                }
-            }
+
+
+            string message = "Vaš zahtev je odbijen jer nema dostupnih termina";
+            Notification notification = new Notification() { Message = message, NotificationStatus = NotificationStatus.unread, User = tourRequest.Tourist };
+            _notificationRepository.Save(notification);
 
             return tourRequest;
         }
 
-        public void CreateTourRequest(Location location, string language, int maxTourists, string description, DateTime startDate, DateTime endDate)
+        public TourRequest CreateTourRequest(Location location, string language, int maxTourists, string description, DateTime startDate, DateTime endDate, List<TourParticipants> tourParticipants, User user)
         {
             TourRequest tourRequest = new TourRequest
             {
@@ -276,15 +262,53 @@ namespace BookingApp.Service
                 Description = description,
                 StartDate = startDate,
                 EndDate = endDate,
-                Tourists = new List<TourParticipants>(),
-                TourGuide = null,
-                RequestStatus = RequestStatusType.Standby
+                Tourists = tourParticipants,
+                RequestStatus = RequestStatusType.Standby,
+                Tourist = user,
             };
 
-            tourRequest = _tourRequestRepository.Save(tourRequest);
+            return _tourRequestRepository.Save(tourRequest);
+        }
+
+        public List<TourRequest> GetByTourist(int touristId)
+        {
+            return _tourRequestRepository.GetByTourist(touristId); 
+        }
+        public List<TourRequest> GetAllTourRequestsForUser(int userId)
+        {
+            return _tourRequestRepository.GetAllTourRequestsForUser(userId);
         }
 
 
+        public List<int> YearsOfTourRequests(int guestId)
+        {
+            return _tourRequestRepository.YearsOfTourRequests(guestId);
+        }
+
+        public TourRequestPercentageDto GetPercentageOfTourRequest(int userId)
+        {
+            return _tourRequestRepository.GetPercentageOfTourRequest(userId);
+        }
+
+        public TourRequestPercentageDto GetPercentageOfTourRequestForYear(int userId, int year)
+        {
+            return _tourRequestRepository.GetPercentageOfTourRequestForYear(userId, year);
+        }
+
+        public int CountRequestsByLocationForTourist(Location location, int id)
+        {
+            return _tourRequestRepository.CountRequestsByLocationForTourist(location, id);
+        }
+
+        public int CountRequestsByLanguageForTourist(string language, int id)
+        {
+            return _tourRequestRepository.CountRequestsByLanguageForTourist(language, id);
+        }
+
+        public int CountRequestForTourist(int id)
+        {
+            return _tourRequestRepository.CountRequestForTourist(id);
+        }
 
     }
 }
