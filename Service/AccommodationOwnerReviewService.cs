@@ -1,4 +1,5 @@
-﻿using BookingApp.Domain.Models;
+﻿using BookingApp.DependencyInjection;
+using BookingApp.Domain.Models;
 using BookingApp.Domain.RepositoryInterfaces;
 using BookingApp.Model;
 using BookingApp.Repository;
@@ -13,14 +14,16 @@ namespace BookingApp.Service
 {
     public class AccommodationOwnerReviewService
     {
-        public AccommodationOwnerReviewRepository _accommodationOwnerReviewRepository;
+        public IAccommodationOwnerReviewRepository _accommodationOwnerReviewRepository;
 
-        public AccommodationReservationRepository _accommodationReservationRepository;
+        public IAccommodationReservationRepository _accommodationReservationRepository;
+        public IRenovatingRequestRepository _renovationRequestRepository;
 
         public AccommodationOwnerReviewService()
         {
-            _accommodationOwnerReviewRepository = new AccommodationOwnerReviewRepository();
-            _accommodationReservationRepository = new AccommodationReservationRepository();
+            _accommodationOwnerReviewRepository = Injector.CreateInstance<IAccommodationOwnerReviewRepository>();
+            _accommodationReservationRepository = Injector.CreateInstance<IAccommodationReservationRepository>();
+            _renovationRequestRepository = Injector.CreateInstance<IRenovatingRequestRepository>();
         }
         public List<AccommodationOwnerReview> GetAll()
         {
@@ -90,7 +93,30 @@ namespace BookingApp.Service
         {
             int count = GetReviewsCountForOwner(ownerId);
             double average = GetReviewsAverageForOwner(ownerId);
-            return count >= 50 && average >= 4.5; 
+            return count >= 1 && average >= 3.5; 
+        }
+        public bool IsReservationWithRenovationRecommendations(AccommodationReservation reservation)
+        {
+            List<AccommodationOwnerReview> reviews = _accommodationOwnerReviewRepository.GetAll();
+            foreach (AccommodationOwnerReview review in reviews)
+            {
+                foreach (RenovatingRequest renovationRequest in _renovationRequestRepository.GetAllWithAccommodationReservation())
+                {
+                    if (renovationRequest.AccommodationReservation.AccommodationReview.Id == review.Id)
+                    {
+                        review.RenovatingRequest.Add(renovationRequest);
+                    }
+                }
+
+            }
+            foreach (AccommodationOwnerReview review in reviews)
+            {
+                if (review.Reservation.Id == reservation.Id && review.RenovatingRequest.Any())
+                {
+                    return true;
+                }
+            }
+            return false;
         }
 
 

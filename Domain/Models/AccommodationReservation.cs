@@ -19,10 +19,21 @@ namespace BookingApp.Model
         public DateTime Departure { get; set; }
         public AccommodationOwnerReview AccommodationReview { get; set; }
         public GuestReview GuestReview { get; set; }
-
         public AccommodationReservationStatus Status { get; set; }
+        public DateTime CreatedAt { get; set; }
 
         public AccommodationReservation() { }
+
+        public AccommodationReservation(Accommodation accommodation, User guest, DateTime arrival, DateTime departure)
+        {
+            Accommodation = accommodation;
+            Guest = guest;
+            Arrival = arrival;
+            Departure = departure;
+            Status = AccommodationReservationStatus.Active;
+            CreatedAt = DateTime.Now;
+            
+        }
         public AccommodationReservation(Accommodation accommodation, User guest, DateTime arrival, DateTime departure, AccommodationOwnerReview accommodationOwnerReview, GuestReview guestReview, AccommodationReservationStatus status)
         {
             Accommodation = accommodation;
@@ -32,13 +43,14 @@ namespace BookingApp.Model
             AccommodationReview = accommodationOwnerReview;
             GuestReview = guestReview;
             Status = status;
+            CreatedAt = DateTime.Now;
         }
         public string[] ToCSV()
         {
             string accommodationReviewId = AccommodationReview != null ? AccommodationReview.Id.ToString() : "-1";
             string guestReviewId = GuestReview != null ? GuestReview.Id.ToString() : "-1";
 
-            string[] csvValues = { Id.ToString(), Accommodation.Id.ToString(), Guest.Id.ToString(), Arrival.ToString(), Departure.ToString(), accommodationReviewId, guestReviewId, Status.ToString()};
+            string[] csvValues = { Id.ToString(), Accommodation.Id.ToString(), Guest.Id.ToString(), Arrival.ToString(), Departure.ToString(), accommodationReviewId, guestReviewId, Status.ToString(), CreatedAt.ToString()};
             return csvValues;
         }
         public void FromCSV(string[] values)
@@ -54,6 +66,7 @@ namespace BookingApp.Model
              GuestReview = new GuestReview() {  Id = Convert.ToInt32(values[6]) };
              Enum.TryParse(values[7], out Enums.AccommodationReservationStatus status);
              Status = status;
+             CreatedAt = Convert.ToDateTime(values[8]);
          
         }
     }

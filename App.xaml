@@ -4,6 +4,7 @@
              xmlns:local="clr-namespace:BookingApp"
              StartupUri="WPF/View/SignInForm.xaml">
     <Application.Resources>
-         
+       
     </Application.Resources>
+
 </Application>

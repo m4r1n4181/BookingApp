@@ -16,10 +16,11 @@ namespace BookingApp.Service
     {
         private INotificationRepository _notificationRepository;
 
-        public NotificationService()
+        public NotificationService(INotificationRepository notificationRepository)
         {
-            
-            _notificationRepository = Injector.CreateInstance<INotificationRepository>();
+            _notificationRepository = notificationRepository;
+
+           // _notificationRepository = Injector.CreateInstance<INotificationRepository>();
         }
 
         public Notification Create(Notification notification)

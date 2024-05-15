@@ -56,6 +56,11 @@ namespace BookingApp.Repository
             return OwnerReviews.FirstOrDefault(or => or.Reservation.Id == reservationId);
         }
 
+        public bool CheckOwnerReviewExistence(int accommodationReservationId)
+        {
+            return OwnerReviews.Any(or => or.Reservation.Id == accommodationReservationId);
+        }
+
 
     }
 }

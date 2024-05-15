@@ -31,6 +31,8 @@ namespace BookingApp.Repository
         public Accommodation GetById(int id)
         {
             Accommodations = _serializer.FromCSV(FilePath);
+            BindLocations();
+            BindOwner();
             return Accommodations.FirstOrDefault(acc => acc.Id == id);
         }
 
@@ -40,7 +42,14 @@ namespace BookingApp.Repository
             Accommodations.ForEach(locR => { locR.Location = locationRepository.GetById(locR.Location.Id); });
         }
 
-
+        public void BindOwner()
+        {
+            UserRepository userRepository = new UserRepository();
+            /* foreach(var accommodationReservation in AccommodationReservations){
+                 accommodationReservation.Guest = userRepository.GetById(accommodationReservation.Guest.Id);
+             }*/
+            Accommodations.ForEach(accR => { accR.Owner = userRepository.Get(accR.Owner.Id); });
+        }
         public Accommodation Save(Accommodation accommodation)
         {
             accommodation.Id = NextId();

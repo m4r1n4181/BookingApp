@@ -10,7 +10,7 @@ using System.Threading.Tasks;
 
 namespace BookingApp.Repository
 {
-    public class GuestReviewRepository
+    public class GuestReviewRepository : IGuestReviewRepository
     {
         private const string FilePath = "../../../Resources/Data/guest-review.csv";
         private readonly Serializer<GuestReview> _serializer;
@@ -77,7 +77,7 @@ namespace BookingApp.Repository
         {
             GuestReviews = _serializer.FromCSV(FilePath);
             BindReservations();
-            return GuestReviews.FindAll(gr => gr.AccommodationReservation.Guest.Id == id);
+            return GuestReviews.FindAll(gr => gr.AccommodationReservation.Guest.Id == id);//ovde vrati null
         }
      
 

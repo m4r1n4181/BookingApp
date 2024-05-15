@@ -15,11 +15,11 @@ namespace BookingApp.Domain.Models
         public int Cleanliness { get; set; }
         public int Correctness { get; set; }
         public string Comment { get; set; }
-      
+        public List<RenovatingRequest> RenovatingRequest { get; set; }
 
         public AccommodationOwnerReview()
         {
-            
+            RenovatingRequest = new List<RenovatingRequest>();
         }
 
         public AccommodationOwnerReview(int id, AccommodationReservation reservation, int cleanliness, int correctness, string comment)
@@ -29,6 +29,8 @@ namespace BookingApp.Domain.Models
             Cleanliness = cleanliness;
             Correctness = correctness;
             Comment = comment;
+            RenovatingRequest = new List<RenovatingRequest>();  
+
             
         }
 

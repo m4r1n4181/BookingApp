@@ -1,4 +1,6 @@
-﻿using BookingApp.Domain.Models;
+﻿using BookingApp.DependencyInjection;
+using BookingApp.Domain.Models;
+using BookingApp.Domain.RepositoryInterfaces;
 using BookingApp.Service;
 using System;
 using System.Collections.Generic;
@@ -14,7 +16,7 @@ namespace BookingApp.Controller
 
         public ReservationRescheduleRequestController()
         {
-            _reservationRescheduleRequestService = new ReservationRescheduleRequestService();
+            _reservationRescheduleRequestService = new ReservationRescheduleRequestService(Injector.CreateInstance<IReservationRescheduleRequestRepository>());
         }
         public List<ReservationRescheduleRequest> GetAll()
         {

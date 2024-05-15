@@ -25,7 +25,10 @@ namespace BookingApp.Controller
         {
             return _accommodationService.RegisterAccommondation(accommodation);
         }
-
+        public void Delete(Accommodation accommodation)
+        {
+            _accommodationService.Delete(accommodation);
+        }
         public List<Accommodation> GetAllWithLocations()
         {
             return _accommodationService.GetAllWithLocations();
@@ -46,9 +49,15 @@ namespace BookingApp.Controller
 
             return _accommodationService.GetByOwner(id);
         }
+        public Accommodation GetById(int id)
+        {
+            return _accommodationService.GetById(id);
+        }
 
-
-
+        internal List<Accommodation> GetAllSorted()
+        {
+            return _accommodationService.GetAllSorted();
+        }
     }
 
 }
