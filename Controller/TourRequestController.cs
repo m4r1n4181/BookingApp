@@ -133,5 +133,48 @@ namespace BookingApp.Controller
             return _tourRequestService.DeclineRequest(tourRequestId);
 
         }
+
+        public TourRequest CreateTourRequest(Location location, string language, int maxTourists, string description,/* List<TourParticipants> participants,*/ DateTime startDate, DateTime endDate, List<TourParticipants> participants, User user)
+        {
+            return _tourRequestService.CreateTourRequest(location, language, maxTourists, description, startDate, endDate, participants, user);
+        }
+
+        public List<TourRequest> GetByTourist(int touristId)
+        {
+            return _tourRequestService.GetByTourist(touristId);
+        }
+        public List<TourRequest> GetAllTourRequestsForUser(int userId)
+        {
+            return _tourRequestService.GetAllTourRequestsForUser(userId);
+        }
+
+        public List<int> YearsOfTourRequests(int guestId)
+        {
+            return _tourRequestService.YearsOfTourRequests(guestId);
+        }
+
+        public TourRequestPercentageDto GetPercentageOfTourRequest(int userId)
+        {
+            return _tourRequestService.GetPercentageOfTourRequest(userId);
+        }
+
+        public TourRequestPercentageDto GetPercentageOfTourRequestForYear(int userId, int year)
+        {
+            return _tourRequestService.GetPercentageOfTourRequestForYear(userId, year);
+        }
+
+        public int CountRequestsByLocationForTourist(Location location, int id)
+        {
+            return _tourRequestService.CountRequestsByLocationForTourist(location, id);
+        }
+
+        public int CountRequestsByLanguageForTourist(string language, int id)
+        {
+            return _tourRequestService.CountRequestsByLanguageForTourist(language, id);
+        }
+        public int CountRequestForTourist(int id)
+        {
+            return _tourRequestService.CountRequestForTourist(id);
+        }
     }
 }

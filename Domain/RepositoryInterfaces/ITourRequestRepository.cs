@@ -1,6 +1,8 @@
 ﻿using BookingApp.Domain.Models;
 using BookingApp.DTO;
 using BookingApp.Model;
+using BookingApp.Model.Enums;
+using BookingApp.Repository;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -33,5 +35,19 @@ namespace BookingApp.Domain.RepositoryInterfaces
         Dictionary<string, int> CountRequestsByYearAndMonth(int year);
         Location GetMostRequestedLocationLastYear();
         string GetMostRequestedLanguageLastYear();
+         List<TourRequest> GetAllTourRequestsForUser(int userId);
+
+
+         List<int> YearsOfTourRequests(int guestId);
+
+        TourRequestPercentageDto GetPercentageOfTourRequest(int userId);
+
+        TourRequestPercentageDto GetPercentageOfTourRequestForYear(int userId, int year);
+
+
+        int CountRequestsByLocationForTourist(Location location, int id);
+
+        int CountRequestsByLanguageForTourist(string language, int id);
+        int CountRequestForTourist(int id);
     }
 }

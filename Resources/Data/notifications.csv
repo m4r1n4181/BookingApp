@@ -20,7 +20,7 @@
 20|5|You have been added to tour zakintos with participants:gile zikic, Uros Zivkovic, |read
 21|4|Your reservation for accommodation Cozy Cabin has been Approved|read
 22|11|Your reservation for accommodation Lake View Lodge has been Approved|unread
-23|5|Your reservation for accommodation Oceanfront Retreat has been Declined|unread
+23|5|Your reservation for accommodation Oceanfront Retreat has been Declined|read
 24|4|Your reservation for accommodation Cozy Cabin has been Declined|read
 25|2|Guest: Mia has cancelled reservation for accommodation Countryside Farmhouse for date 5/16/2024 12:00:00 AM|unread
 26|2|Guest: Mia has cancelled reservation for accommodation Desert Oasis for date 5/28/2024 12:00:00 AM|unread
@@ -39,3 +39,4 @@
 39|8|Vaš zahtev je odobren za datum 6/24/2024|unread
 40|8|Vaš zahtev je odbijen jer nema dostupnih termina|unread
 41|8|Vaš zahtev je odobren za datum 6/24/2024|unread
+42|5|Nova tura je kreirana na lokaciji Srbija i na jeziku nemacki.|read

@@ -152,17 +152,17 @@ namespace BookingApp.Service
              }
              return tourAgeGroupStatistic;
          }*/
-       /* public List<TourReservation> GetReservationsByUserId(int userId)
+        public List<TourReservation> GetByUserId(int userId)
         {
             var reservations = _tourReservationRepository.GetAll().Where(r => r.UserId == userId).ToList();
             return reservations;
-        }*/
+        }
 
-        /*public TourStatusType GetTourStatus(TourReservation reservation)
+        public TourStatusType GetTourStatus(TourReservation reservation)
         {
             Tour tour = _tourRepository.GetById(reservation.Tour.Id);
             return tour.TourStatus;
-        }*/
+        }
         /* public List<TourReservation> GetPreviousReservationsByUserId(int userId)
          {
              return _tourReservationRepository.GetAllWithTours().Where(r => r.Tour.IsCompleted && r.UserId == userId).ToList();

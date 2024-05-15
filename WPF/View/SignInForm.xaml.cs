@@ -2,6 +2,7 @@
 using BookingApp.Model;
 using BookingApp.Model.Enums;
 using BookingApp.Repository;
+using BookingApp.WPF.View.Tourist;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Runtime.CompilerServices;
@@ -86,6 +87,16 @@ namespace BookingApp.View
 
                     else if (user.Type == UserType.Tourist)
                     {
+                        TouristMainWindow touristMainWindow = new TouristMainWindow(LoggedUser);
+                        touristMainWindow.Show();
+
+                        List<Notification> notifications = _notificationController.GetByUserId(LoggedUser.Id);
+                        foreach(Notification notification in notifications)
+                        {
+                            MessageBox.Show(notification.Message, "Notifications", MessageBoxButton.OK, MessageBoxImage.Information);
+                        }
+                        _notificationController.ReadAllUserNotifications(LoggedUser.Id);
+
                       
                     }
                     else if(user.Type == UserType.Guest)
