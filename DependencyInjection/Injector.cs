@@ -34,6 +34,8 @@ namespace BookingApp.DependencyInjection
             { typeof(ISuperGuestRepository), new SuperGuestRepository() },
             { typeof(IAccommodationRenovationRepository), new AccommodationRenovationRepository() },
             { typeof(IGuestReviewRepository), new GuestReviewRepository() },
+            { typeof(IForumRepository), new ForumRepository() },
+            { typeof(INewForumNotificationRepository), new NewForumNotificationRepository() },
 
             
             //{}
