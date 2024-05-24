@@ -1,5 +1,5 @@
 @startuml
-actor User as "User"
+actor User as "Owner"
 participant "ViewModel" as VM
 participant "AccommodationRenovationController" as RCtrl
 participant "AccommodationRenovationService" as RSvc
