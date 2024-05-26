@@ -3,6 +3,7 @@ using BookingApp.DependencyInjection;
 using BookingApp.Domain.RepositoryInterfaces;
 using BookingApp.DTO;
 using BookingApp.Model;
+using BookingApp.Model.Enums;
 using BookingApp.Repository;
 using BookingApp.Serializer;
 using System;
@@ -328,6 +329,22 @@ namespace BookingApp.Service
             return _tourRepository.SearchTourForTourGuide(tourGuideSearch);
 
         }
+        public List<Tour> GetFutureToursByGuideId(int guideId)
+        {
+            List<Tour> futureTours = new List<Tour>();
+            List<Tour> allTours = _tourRepository.GetAllWithLocations();
+
+            foreach (Tour tour in allTours)
+            {
+                if (tour.TourGuide.Id == guideId && tour.StartDate > DateTime.Now && tour.TourStatus == TourStatusType.not_started)
+                {
+                    futureTours.Add(tour);
+                }
+            }
+
+            return futureTours;
+        }
+
 
     }
 }

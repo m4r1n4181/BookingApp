@@ -70,10 +70,8 @@ namespace BookingApp.Repository
             _tourGuide = _serializer.FromCSV(FilePath);
             return _tourGuide.FirstOrDefault(tG => tG.Id == id);
         }
-
-
-
     }
+
 
 
 }

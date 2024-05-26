@@ -26,5 +26,9 @@ namespace BookingApp.Controller
         {
             return _tourGuideService.GetById(id);
         }
+        public void Resignation(int guideId)
+        {
+            _tourGuideService.Resignation(guideId);
+        }
     }
 }

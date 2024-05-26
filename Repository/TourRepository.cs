@@ -231,6 +231,11 @@ namespace BookingApp.Repository
             return _tours;
         }
 
+        public List<Tour> GetCancelledToursByGuideId(int guideId)
+        {
+            return _tours.Where(t => t.TourGuide.Id == guideId && t.TourStatus == Model.Enums.TourStatusType.cancelled).ToList();
+        }
+
 
     }
 

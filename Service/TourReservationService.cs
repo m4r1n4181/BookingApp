@@ -83,7 +83,6 @@ namespace BookingApp.Service
             Voucher voucher = new Voucher(-1,tourist, StatusType.active, expires, false, 1, VoucherType.cancellation);
             _voucherRepository.Save(voucher);
 
-            //_tourReservationRepository.Delete(tourReservation);
         }
 
         public void CancelAllTourReservationsForTour(int tourId)

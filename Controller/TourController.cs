@@ -8,6 +8,7 @@ using BookingApp.Repository;
 using BookingApp.DTO;
 using System;
 using BookingApp.Domain.RepositoryInterfaces;
+using BookingApp.Model.Enums;
 namespace BookingApp.Controller
 {
     public class TourController
@@ -116,6 +117,12 @@ namespace BookingApp.Controller
         public List<Tour> SearchTourForTourGuide(TourGuideSearch tourGuideSearch)
         {
             return _tourService.SearchTourForTourGuide(tourGuideSearch);
+
+        }
+
+        public List<Tour> GetFutureToursByGuideId(int guideId)
+        {
+            return _tourService.GetFutureToursByGuideId(guideId);
 
         }
 
