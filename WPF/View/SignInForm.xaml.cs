@@ -13,6 +13,7 @@ using BookingApp.WPF.View.OwnerPages;
 using BookingApp.WPF.View.OwnerWindows;
 using BookingApp.View.OwnerWindows;
 using BookingApp.WPF.Views.GuestWindows;
+using BookingApp.WPF.View.TourGuideWindows;
 
 namespace BookingApp.View
 {
@@ -24,6 +25,7 @@ namespace BookingApp.View
 
         private readonly IUserRepository _repository;
         private NotificationController _notificationController;
+        private TourGuideController _tourGuideController;
 
         public static User LoggedUser { get; set; }
 
@@ -54,6 +56,8 @@ namespace BookingApp.View
             DataContext = this;
             _repository = Injector.CreateInstance<IUserRepository>();
             _notificationController = new NotificationController();
+            _tourGuideController = new TourGuideController();
+
         }
 
         private void SignIn(object sender, RoutedEventArgs e)
@@ -67,10 +71,10 @@ namespace BookingApp.View
                     LoggedUser = user;
 
                     if (user.Type == UserType.TourGuide)
-                    {
-                        TourGuideHomePage tourGuideHomePage = new TourGuideHomePage();
-                        tourGuideHomePage.Show();
-
+                    { 
+                            TourGuideHomePage tourGuideHomePage = new TourGuideHomePage();
+                            tourGuideHomePage.Show();
+            
                     }
                     else if (user.Type == UserType.Owner)
                     {
@@ -87,7 +91,7 @@ namespace BookingApp.View
 
                     else if (user.Type == UserType.Tourist)
                     {
-                       // TouristMainWindow touristMainWindow = new TouristMainWindow(LoggedUser);
+                       //TouristMainWindow touristMainWindow = new TouristMainWindow(LoggedUser);
                        // touristMainWindow.Show();
 
                         List<Notification> notifications = _notificationController.GetByUserId(LoggedUser.Id);

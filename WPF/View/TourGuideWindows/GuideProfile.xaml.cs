@@ -1,8 +1,8 @@
 ﻿using BookingApp.Controller;
 using BookingApp.Model;
-using BookingApp.WPF.View.TourGuide;
+using BookingApp.Service;
+using BookingApp.View;
 using System;
-using System.Collections;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Linq;
@@ -18,13 +18,27 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 
-namespace BookingApp.View
+namespace BookingApp.WPF.View.TourGuideWindows
 {
     /// <summary>
-    /// Interaction logic for TourGuideHomePage.xaml
+    /// Interaction logic for GuideProfile.xaml
     /// </summary>
-    public partial class TourGuideHomePage : Window, INotifyPropertyChanged
+    public partial class GuideProfile : Window
     {
+        private TourGuideController _tourGuideController;
+
+        private Visibility _superGuideVisibility;
+
+        public Visibility SuperGuideVisibility
+        {
+            get => _superGuideVisibility;
+            set
+            {
+                _superGuideVisibility = value;
+                OnPropertyChanged(nameof(SuperGuideVisibility));
+            }
+        }
+
         public string _firstName;
         public string FirstName
         {
@@ -60,18 +74,41 @@ namespace BookingApp.View
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
         }
 
-        public TourGuide SelectedTourGuide { get; set; }
-        private TourGuideController _tourGuideController;
 
-
-        public TourGuideHomePage()
+        public GuideProfile()
         {
             InitializeComponent();
-            FirstName = FirstName;
-            LastName = LastName;
+            DataContext = this;
 
             _tourGuideController = new TourGuideController();
+            _superGuideVisibility = Visibility.Visible;
+            bool isSuperGuide = _tourGuideController.IsSuperGuide(SignInForm.LoggedUser.Id);
 
+            if (isSuperGuide)
+            {
+                _superGuideVisibility = Visibility.Visible;
+            }
+            else
+            {
+                _superGuideVisibility = Visibility.Hidden;
+            }
+
+            TourGuideService tourGuideService = new TourGuideService();
+            BookingApp.Model.TourGuide currentGuide = tourGuideService.GetById(SignInForm.LoggedUser.Id); 
+            if (currentGuide != null)
+            {
+                FirstName = currentGuide.FirstName;
+                LastName = currentGuide.LastName;
+                SuperGuideVisibility = currentGuide.IsSuperGuide ? Visibility.Visible : Visibility.Collapsed;
+            }
+
+        }
+
+       
+        private void Quit_Job_Click(object sender, RoutedEventArgs e)
+        {
+            int guideId = SignInForm.LoggedUser.Id;
+            _tourGuideController.Resignation(guideId);
         }
 
         private void CreateNewTour_Click(object sender, RoutedEventArgs e)
@@ -135,16 +172,13 @@ namespace BookingApp.View
 
         private void Profile_Click(object sender, RoutedEventArgs e)
         {
-            TourGuideProfile tourGuideProfile = new TourGuideProfile();
-            tourGuideProfile.Show();
+            GuideProfile guideProfile = new GuideProfile();
+            guideProfile.Show();
         }
 
         private void Tutorial_Click(object sender, RoutedEventArgs e)
         {
             //otvara prozor za tutorial 
         }
-
-
-
     }
 }

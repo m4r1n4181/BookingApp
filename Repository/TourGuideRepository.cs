@@ -6,6 +6,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows;
 
 namespace BookingApp.Repository
 {
@@ -65,13 +66,14 @@ namespace BookingApp.Repository
             _serializer.ToCSV(FilePath, _tourGuide);
             return tourGuide;
         }
+
         public TourGuide GetById(int id)
         {
             _tourGuide = _serializer.FromCSV(FilePath);
             return _tourGuide.FirstOrDefault(tG => tG.Id == id);
         }
+
+
     }
-
-
 
 }

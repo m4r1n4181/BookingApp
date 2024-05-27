@@ -1,36 +1,24 @@
-﻿using BookingApp.Controller;
-using BookingApp.Model;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Shapes;
+﻿using System;
 using System.Collections.ObjectModel;
+using System.Windows;
+using BookingApp.Controller;
+using BookingApp.Model;
+using BookingApp.Repository;
+using BookingApp.Service;
 using BookingApp.View.ViewModels.TourGuideViewModels;
 using BookingApp.WPF.View.TourGuide;
+using BookingApp.WPF.View.TourGuideWindows;
 
 
 namespace BookingApp.View
 {
-    /// <summary>
-    /// Interaction logic for AllTours.xaml
-    /// </summary>
-    public partial class AllTours : Window
-    {
-       
-        public AllTours()
+    public partial class LiveTourView : Window
+    { 
+        public LiveTourView()
         {
             InitializeComponent();
-            this.DataContext = new AllToursViewModel();
-
+            this.DataContext = new LiveTourViewModel();
+            
         }
 
         private void LiveTour_Click(object sender, RoutedEventArgs e)
@@ -88,6 +76,7 @@ namespace BookingApp.View
         {
             //otvara prozor za tutorial 
         }
+
 
     }
 }

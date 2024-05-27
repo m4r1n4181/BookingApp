@@ -22,7 +22,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 
-namespace BookingApp.WPF.View.TourGuide
+namespace BookingApp.WPF.View.TourGuideWindows
 {
     /// <summary>
     /// Interaction logic for SearchTourRequests.xaml

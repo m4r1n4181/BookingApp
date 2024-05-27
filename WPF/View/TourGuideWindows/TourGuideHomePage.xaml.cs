@@ -1,7 +1,6 @@
 ﻿using BookingApp.Controller;
-using BookingApp.Model; 
+using BookingApp.Model;
 using BookingApp.View;
-using BookingApp.WPF.View.TourGuide;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -18,35 +17,30 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
-namespace BookingApp.View
+
+namespace BookingApp.WPF.View.TourGuideWindows
 {
     /// <summary>
-    /// Interaction logic for TourGuideProfile.xaml
+    /// Interaction logic for TourGuideHomePage.xaml
     /// </summary>
-    public partial class TourGuideProfile : Window, INotifyPropertyChanged
+    public partial class TourGuideHomePage : Window, INotifyPropertyChanged
     {
-        private TourGuideController _tourGuideController;
-        private TourController _tourController;
-        private TourReservationController _tourReservationController;
 
-        public User User { get; set; }
-        
-        public ObservableCollection<Tour> Tours { get; set; }
 
-        private Tour _selectedTour;
-        public Tour SelectedTour
+
+        private Visibility _superGuideVisibility;
+
+        public Visibility SuperGuideVisibility
         {
-            get { return _selectedTour; }
+            get => _superGuideVisibility;
             set
             {
-                if (_selectedTour != value)
-                {
-                    _selectedTour = value;
-                    OnPropertyChanged();
-                }
+                _superGuideVisibility = value;
+                OnPropertyChanged(nameof(SuperGuideVisibility));
             }
         }
-        private string _firstName;
+
+        public string _firstName;
         public string FirstName
         {
             get => _firstName;
@@ -60,7 +54,7 @@ namespace BookingApp.View
             }
         }
 
-        private string _lastName;
+        public string _lastName;
         public string LastName
         {
             get => _lastName;
@@ -74,7 +68,6 @@ namespace BookingApp.View
             }
         }
 
-
         public event PropertyChangedEventHandler PropertyChanged;
 
         protected virtual void OnPropertyChanged([CallerMemberName] string propertyName = null)
@@ -82,17 +75,12 @@ namespace BookingApp.View
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
         }
 
+       
 
-        public TourGuideProfile()
+        public TourGuideHomePage()
         {
             InitializeComponent();
 
-            _tourGuideController = new TourGuideController();
-            _tourController = new TourController();
-            _tourReservationController = new TourReservationController();
-           
-
-          
         }
 
         private void CreateNewTour_Click(object sender, RoutedEventArgs e)
@@ -156,7 +144,8 @@ namespace BookingApp.View
 
         private void Profile_Click(object sender, RoutedEventArgs e)
         {
-           //dodati 
+           GuideProfile guideProfile = new GuideProfile();
+           guideProfile.Show();
         }
 
         private void Tutorial_Click(object sender, RoutedEventArgs e)
@@ -164,22 +153,6 @@ namespace BookingApp.View
             //otvara prozor za tutorial 
         }
 
-        public void Quit_Job_Click(object sender, RoutedEventArgs e)
-        {
-            if (SelectedTour == null)
-            {
-                MessageBox.Show("Please select a tour.", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
-                return;
-            }
-
-            _tourGuideController.Resignation(User.Id);
-            Refresh();
-        }
-        private void Refresh()
-        {
-            Tours.Clear();
-            _tourController.GetTourInFuture().ForEach(t => Tours.Add(t));
-        }
 
     }
 }

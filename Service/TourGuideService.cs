@@ -70,10 +70,18 @@ namespace BookingApp.Service
             _voucherRepository.Save(voucher);
         }
 
+        public bool IsSuperGuide(int id)
+        {
+            TourGuide guide = _tourGuideRepository.GetById(id);
 
-
-
-
-
+            if (guide != null)
+            {
+                return guide.IsSuperGuide;
+            }
+            else
+            {
+                return false; 
+            }
+        }
     }
 }
