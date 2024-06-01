@@ -117,7 +117,7 @@ namespace BookingApp.Controller
             return _tourRequestService.GetMostRequestedLanguageLastYear();
         }
 
-        public void CreateTourFromRequest(List<DateTime> dateTimes, List<KeyPoint> keyPoints, string name, Location location, string description, int maxTourists, int duration, List<string> pictures)
+        public void CreateTourFromRequest(List<DateTime> dateTimes, List<KeyPoint> keyPoints, string name, int location, string description, int maxTourists, int duration, List<string> pictures)
         {
              _tourRequestService.CreateTourFromRequest( dateTimes, keyPoints, name, location, description, maxTourists, duration, pictures);
         }

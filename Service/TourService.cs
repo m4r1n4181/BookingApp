@@ -345,6 +345,34 @@ namespace BookingApp.Service
             return futureTours;
         }
 
+        public List<string> GetUniqueLanguagesFromFinishedToursInLastYear(TourGuide guide)
+        {
+            DateTime oneYearAgo = DateTime.Now.AddYears(-1);
+
+            // Dobijanje završenih tura u proteklih godinu dana
+            List<Tour> finishedToursInLastYear = _tourRepository
+                .GetByTourGuide(guide)
+                .Where(tour => tour.StartDate >= oneYearAgo
+                               && tour.TourStatus == TourStatusType.finished)
+                .Distinct()
+                .ToList();
+
+            // Dobijanje jedinstvenih jezika
+            List<string> uniqueLanguages = finishedToursInLastYear
+                .Select(tour => tour.Language)
+                .Distinct()
+                .ToList();
+
+            return uniqueLanguages;
+        }
+
+
+        public List<Tour> GetAllByTourGuideId(int tourGuideId)
+        {
+            return _tourRepository.GetAllByTourGuideId(tourGuideId);
+        }
+
+
 
     }
 }

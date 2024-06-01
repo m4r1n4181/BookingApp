@@ -167,7 +167,38 @@
             </Button.Template>
         </Button>
 
-       
+        <ScrollViewer Grid.Row="0" VerticalScrollBarVisibility="Auto" Margin="10" >
+            <ItemsControl ItemsSource="{Binding Comments}" >
+                <ItemsControl.ItemTemplate>
+                    <DataTemplate>
+                        <Border Margin="0,0,0,10" BorderBrush="#E0E0E0" BorderThickness="1" CornerRadius="12" Background="White">
+                            <StackPanel HorizontalAlignment="Stretch" VerticalAlignment="Center">
+                                <TextBlock FontSize="18" Foreground="#505050" TextWrapping="Wrap">
+                                    <Run Text="{Binding User.Username}"/>
+                                    <TextBlock Text=" *" FontSize="16" Foreground="#505050">
+                                        <TextBlock.Style>
+                                            <Style TargetType="TextBlock">
+                                                <Setter Property="Visibility" Value="Collapsed"/>
+                                                <Style.Triggers>
+                                                    <DataTrigger Binding="{Binding IsFromOwner}" Value="True">
+                                                        <Setter Property="Visibility" Value="Visible"/>
+                                                    </DataTrigger>
+                                                </Style.Triggers>
+                                            </Style>
+                                        </TextBlock.Style>
+                                    </TextBlock>
+                                </TextBlock>
+                                <TextBlock Text="{Binding ReporetedNum}" FontSize="18" Foreground="#707070" TextWrapping="Wrap" Margin="0,5,0,0"/>
+                                <TextBlock Text="{Binding Text}" FontSize="18" Foreground="#707070" TextWrapping="Wrap" Margin="0,5,0,0"/>
+                                
+                            </StackPanel>
+                        </Border>
+                    </DataTemplate>
+                </ItemsControl.ItemTemplate>
+            </ItemsControl>
+        </ScrollViewer>
+
+
 
     </Grid>
 </Window>

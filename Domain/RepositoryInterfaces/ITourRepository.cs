@@ -1,5 +1,6 @@
 ﻿using BookingApp.DTO;
 using BookingApp.Model;
+using BookingApp.Serializer;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -31,7 +32,8 @@ namespace BookingApp.Domain.RepositoryInterfaces
         List<Tour> GetFutureTours();
         List<Tour> SearchTourForTourGuide(TourGuideSearch tourGuideSearch);
         List<Tour> GetCancelledToursByGuideId(int guideId);
-       
+        List<Tour> GetAllByTourGuideId(int tourGuideId);
+        
 
     }
 }

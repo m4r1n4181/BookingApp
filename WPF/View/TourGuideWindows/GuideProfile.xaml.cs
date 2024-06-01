@@ -111,6 +111,13 @@ namespace BookingApp.WPF.View.TourGuideWindows
             _tourGuideController.Resignation(guideId);
         }
 
+        private void Status_Click(object sender, RoutedEventArgs e)
+        {
+            GuideStatus guideStatus = new GuideStatus();
+            guideStatus.Show();
+        }
+
+
         private void CreateNewTour_Click(object sender, RoutedEventArgs e)
         {
             CreateTourForm createTourForm = new CreateTourForm();

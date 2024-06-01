@@ -126,6 +126,11 @@ namespace BookingApp.Controller
 
         }
 
+        public List<string> GetUniqueLanguagesFromFinishedToursInLastYear(TourGuide guide)
+        {
+            return _tourService.GetUniqueLanguagesFromFinishedToursInLastYear(guide);
+        }
+
 
     }
 

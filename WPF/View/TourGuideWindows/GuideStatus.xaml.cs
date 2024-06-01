@@ -1,5 +1,7 @@
 ﻿using BookingApp.Controller;
+using BookingApp.DTO;
 using BookingApp.Model;
+using BookingApp.Service;
 using BookingApp.View;
 using System;
 using System.Collections.Generic;
@@ -21,15 +23,27 @@ using System.Windows.Shapes;
 namespace BookingApp.WPF.View.TourGuideWindows
 {
     /// <summary>
-    /// Interaction logic for TourGuideHomePage.xaml
+    /// Interaction logic for GuideStatus.xaml
     /// </summary>
-    public partial class TourGuideHomePage : Window, INotifyPropertyChanged
+    public partial class GuideStatus : Window, INotifyPropertyChanged
     {
+        private TourGuideController _tourGuideController;
+        private TourController _tourController;
+        private TourReviewController _tourReviewController;
 
 
+        private ObservableCollection<string> _uniqueLanguages;
+        public ObservableCollection<string> UniqueLanguages
+        {
+            get { return _uniqueLanguages; }
+            set
+            {
+                _uniqueLanguages = value;
+                OnPropertyChanged(nameof(UniqueLanguages));
+            }
+        }
 
         private Visibility _superGuideVisibility;
-
         public Visibility SuperGuideVisibility
         {
             get => _superGuideVisibility;
@@ -68,6 +82,17 @@ namespace BookingApp.WPF.View.TourGuideWindows
             }
         }
 
+        private ObservableCollection<LanguageStatisticsDto> _languageStatistics;
+        public ObservableCollection<LanguageStatisticsDto> LanguageStatistics
+        {
+            get { return _languageStatistics; }
+            set
+            {
+                _languageStatistics = value;
+                OnPropertyChanged(nameof(LanguageStatistics));
+            }
+        }
+
         public event PropertyChangedEventHandler PropertyChanged;
 
         protected virtual void OnPropertyChanged([CallerMemberName] string propertyName = null)
@@ -75,18 +100,75 @@ namespace BookingApp.WPF.View.TourGuideWindows
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
         }
 
-        public TourController _tourController;
-        public ObservableCollection<Tour> TodayTours { get; set; }
-        public TourGuideHomePage()
+        public GuideStatus()
         {
             InitializeComponent();
-            this.DataContext = this;
+            DataContext = this;
 
             _tourController = new TourController();
+            _tourGuideController = new TourGuideController();
+            _tourReviewController = new TourReviewController();
 
-            TodayTours = new ObservableCollection<Tour>(_tourController.GetTodayTours());
+            _superGuideVisibility = Visibility.Visible;
+            bool isSuperGuide = _tourGuideController.IsSuperGuide(SignInForm.LoggedUser.Id);
 
+            if (isSuperGuide)
+            {
+                _superGuideVisibility = Visibility.Visible;
+            }
+            else
+            {
+                _superGuideVisibility = Visibility.Hidden;
+            }
+
+            TourGuideService tourGuideService = new TourGuideService();
+            BookingApp.Model.TourGuide currentGuide = tourGuideService.GetById(SignInForm.LoggedUser.Id);
+            if (currentGuide != null)
+            {
+                FirstName = currentGuide.FirstName;
+                LastName = currentGuide.LastName;
+                SuperGuideVisibility = currentGuide.IsSuperGuide ? Visibility.Visible : Visibility.Collapsed;
+
+                LoadUniqueLanguages(currentGuide);
+                LoadLanguageStatistics(currentGuide);
+
+            }
         }
+
+        public void LoadUniqueLanguages(BookingApp.Model.TourGuide guide)
+        {
+            UniqueLanguages = new ObservableCollection<string>(_tourController.GetUniqueLanguagesFromFinishedToursInLastYear(guide));
+        }
+
+        public void LoadLanguageStatistics(BookingApp.Model.TourGuide guide)
+        {
+            LanguageStatistics = new ObservableCollection<LanguageStatisticsDto>();
+
+            foreach (var language in UniqueLanguages)
+            {
+                var finishedTours = _tourController.GetUniqueLanguagesFromFinishedToursInLastYear(guide); 
+                var statistics = new LanguageStatisticsDto(language)
+                {
+                    Language = language,
+                    FinishedTourCount = finishedTours.Count,
+                   // AverageRating = _tourReviewController.UpdateSuperGuideStatus(guide, language)
+                };
+                LanguageStatistics.Add(statistics);
+            }
+        }
+
+        private void Quit_Job_Click(object sender, RoutedEventArgs e)
+        {
+            int guideId = SignInForm.LoggedUser.Id;
+            _tourGuideController.Resignation(guideId);
+        }
+
+        private void Status_Click(object sender, RoutedEventArgs e)
+        {
+            GuideStatus guideStatus = new GuideStatus();
+            guideStatus.Show();
+        }
+
 
         private void CreateNewTour_Click(object sender, RoutedEventArgs e)
         {
@@ -149,15 +231,13 @@ namespace BookingApp.WPF.View.TourGuideWindows
 
         private void Profile_Click(object sender, RoutedEventArgs e)
         {
-           GuideProfile guideProfile = new GuideProfile();
-           guideProfile.Show();
+            GuideProfile guideProfile = new GuideProfile();
+            guideProfile.Show();
         }
 
         private void Tutorial_Click(object sender, RoutedEventArgs e)
         {
             //otvara prozor za tutorial 
         }
-
-
     }
 }

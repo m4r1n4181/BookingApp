@@ -1,6 +1,7 @@
 using BookingApp.Domain.RepositoryInterfaces;
 using BookingApp.DTO;
 using BookingApp.Model;
+using BookingApp.Model.Enums;
 using BookingApp.Serializer;
 using System;
 using System.Collections.Generic;
@@ -236,6 +237,11 @@ namespace BookingApp.Repository
             return _tours.Where(t => t.TourGuide.Id == guideId && t.TourStatus == Model.Enums.TourStatusType.cancelled).ToList();
         }
 
+        public List<Tour> GetAllByTourGuideId(int tourGuideId)
+        {
+            _tours = _serializer.FromCSV(FilePath);
+            return _tours.FindAll(tour => tour.TourGuide.Id == tourGuideId);
+        }
 
 
     }

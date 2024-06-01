@@ -225,7 +225,7 @@ namespace BookingApp.WPF.View.TourGuide
             List<DateTime> dateTimes = new List<DateTime> { TourDate };
             List<KeyPoint> keyPoints = KeyPoints.Select(kp => new KeyPoint { Name = kp.Name, IsActive = kp.IsActive, Tour = newTour }).ToList();
 
-            _tourRequestController.CreateTourFromRequest(dateTimes, keyPoints, newTour.Name, newTour.Location, newTour.Description, newTour.MaxTourists, newTour.Duration, newTour.Pictures);
+            _tourRequestController.CreateTourFromRequest(dateTimes, keyPoints, newTour.Name, locationId, newTour.Description, newTour.MaxTourists, newTour.Duration, newTour.Pictures);
         }
 
         private void AddImages_Click(object sender, RoutedEventArgs e)

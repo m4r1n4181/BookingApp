@@ -35,7 +35,7 @@ namespace BookingApp.WPF.View.TourGuideWindows
             InitializeComponent();
             this.DataContext = new SearchTourRequestsViewModel();
         
-        }    
+        }
 
     }
 }

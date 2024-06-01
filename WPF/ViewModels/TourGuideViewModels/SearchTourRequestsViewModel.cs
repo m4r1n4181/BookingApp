@@ -4,6 +4,7 @@ using BookingApp.DTO;
 using BookingApp.Model.Enums;
 using BookingApp.ViewModels;
 using BookingApp.WPF.View.TourGuide;
+using BookingApp.WPF.View.TourGuideWindows;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -29,6 +30,7 @@ namespace BookingApp.WPF.ViewModels.TourGuideViewModels
         public RelayCommand SearchCommand { get; set; }
         public RelayCommand ViewCommand { get; set; }
         public RelayCommand StatisticsCommand { get; set; }
+        public RelayCommand ComplexRequestsCommand { get; set; }
 
 
         private string _city;
@@ -140,9 +142,11 @@ namespace BookingApp.WPF.ViewModels.TourGuideViewModels
             StartDate = null;
             EndDate = null;
 
+
             SearchCommand = new RelayCommand(Search_Click, CanExecuteSearchClick);
             ViewCommand = new RelayCommand(View_Click, CanExecuteViewClick);
             StatisticsCommand = new RelayCommand(Statistics_Click, CanExecuteStatisticsClick);
+            ComplexRequestsCommand = new RelayCommand(ComplexRequests_Click, CanExecuteComplexRequestsClick);
 
 
         }
@@ -200,6 +204,19 @@ namespace BookingApp.WPF.ViewModels.TourGuideViewModels
         }
 
         public bool CanExecuteStatisticsClick(object param)
+        {
+            return true;
+        }
+
+        public void ComplexRequests_Click(object param)
+        {
+
+            ComplexRequestsOverview complexRequestsOverview = new ComplexRequestsOverview();
+            complexRequestsOverview.Show();
+
+        }
+
+        public bool CanExecuteComplexRequestsClick(object param)
         {
             return true;
         }

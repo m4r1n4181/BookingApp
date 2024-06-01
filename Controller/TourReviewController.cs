@@ -9,6 +9,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Controls;
 
 namespace BookingApp.Controller
 {
@@ -41,9 +42,6 @@ namespace BookingApp.Controller
             _tourReviewService = tourReviewService;
         }
 
-        public void UpdateSuperGuideStatus(TourGuide guide, string language)
-        {
-            _tourReviewService.UpdateSuperGuideStatus(guide, language);
-        }
+       
     }
 }

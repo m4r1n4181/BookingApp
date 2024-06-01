@@ -30,6 +30,7 @@
 
                 <TextBlock Width="100" Text="Name:" VerticalAlignment="Bottom" Margin="15,0,0,13"  FontSize="15" Foreground="#0F3057" />
                 <TextBox x:Name="txtTourName" Text="{Binding Path=TourName, UpdateSourceTrigger=PropertyChanged}" Width="150" Height="25" Margin="0,0,0,10"  VerticalAlignment="Bottom" FontSize="15"/>
+                <TextBlock Text="{Binding ValidationErrors[TourName]}" Foreground="Red"/>
             </StackPanel>
 
         </Grid>
@@ -62,6 +63,8 @@
             <StackPanel  Grid.Row="0" Grid.Column="0"  Orientation="Horizontal" Margin="0 0 0 0" >
                 <TextBlock Width="100" Text="Languages:" VerticalAlignment="Center" Margin="15,0,0,0" FontSize="15" Foreground="#0F3057"/>
                 <TextBox x:Name="txtLanguages" Text="{Binding Path=TourLanguage, UpdateSourceTrigger=PropertyChanged}" Width="150" Height="25" FontSize="15" />
+                <TextBlock Text="{Binding ValidationErrors[TourLanguage]}" Foreground="Red"/>
+
             </StackPanel>
 
 

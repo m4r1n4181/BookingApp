@@ -154,8 +154,9 @@ namespace BookingApp.Service
             return _tourRequestRepository.GetMostRequestedLanguageLastYear();
         }
 
-        public void CreateTourFromRequest(List<DateTime> dateTimes, List<KeyPoint> keyPoints, string name, Location location, string description, int maxTourists, int duration, List<string> pictures)
+        public void CreateTourFromRequest(List<DateTime> dateTimes, List<KeyPoint> keyPoints, string name, int locationId, string description, int maxTourists, int duration, List<string> pictures)
         {
+            Location location = _locationRepository.Get(locationId);
             //Location location = GetMostRequestedLocationLastYear();
             string language = GetMostRequestedLanguageLastYear();
 
