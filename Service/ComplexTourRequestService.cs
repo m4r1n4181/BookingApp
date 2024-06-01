@@ -1,6 +1,7 @@
 ﻿using BookingApp.DependencyInjection;
 using BookingApp.Domain.Models;
 using BookingApp.Domain.RepositoryInterfaces;
+using BookingApp.Model;
 using BookingApp.Model.Enums;
 using BookingApp.Repository;
 using System;
@@ -17,6 +18,7 @@ namespace BookingApp.Service
         private ITourRequestRepository _simpleTourRequestRepository;
         private ITourGuideRepository _tourGuideRepository;
         private ITourRepository _tourRepository;
+        private INotificationRepository _notificationRepository;
 
         public ComplexTourRequestService()
         {
@@ -24,6 +26,7 @@ namespace BookingApp.Service
             _simpleTourRequestRepository = Injector.CreateInstance<ITourRequestRepository>();
             _tourGuideRepository = Injector.CreateInstance<ITourGuideRepository>();
             _tourRepository = Injector.CreateInstance<ITourRepository>();
+            _notificationRepository = Injector.CreateInstance<INotificationRepository>();
 
         }
 
@@ -156,6 +159,45 @@ namespace BookingApp.Service
                 .ToList();
 
             return acceptedTourParts.Any();
+        }
+
+        public ComplexTourRequest AcceptRequest(int requestId, DateTime selectedDate)
+        {
+            var complexRequest = _complexTourRequestRepository.Get(requestId);
+            if (complexRequest == null)
+            {
+                return null;
+            }
+
+            if (complexRequest.TourGuide == null || !IsGuideAvailable(complexRequest.TourGuide.Id, selectedDate))
+            {
+                return null;
+            }
+
+            complexRequest.Status = RequestStatusType.Approved;
+            complexRequest.SelectedDate = selectedDate;
+            _complexTourRequestRepository.Update(complexRequest);
+
+            string message = "Vaš zahtev je odobren za datum " + selectedDate.ToShortDateString();
+            var notification = new Notification
+            {
+                Message = message,
+                NotificationStatus = NotificationStatus.unread,
+                User = complexRequest.Tourist
+            };
+            _notificationRepository.Save(notification);
+
+            return complexRequest;
+        }
+
+        public void DeclineRequest(int requestId)
+        {
+            var complexRequest = _complexTourRequestRepository.Get(requestId);
+            if (complexRequest != null)
+            {
+                complexRequest.Status = RequestStatusType.Approved;
+                _complexTourRequestRepository.Update(complexRequest);
+            }
         }
     }
 }

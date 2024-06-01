@@ -32,7 +32,7 @@
             </DataGrid.Columns>
         </DataGrid>
 
-        <Button Content="Approve" Click="Approve_Click" HorizontalAlignment="Left" VerticalAlignment="Top" Width="100" Height="30" Margin="304,506,0,0"/>
+        <Button Content="Approve" Click="Approve_Click" HorizontalAlignment="Left" VerticalAlignment="Top" Width="100" Height="30" Margin="302,511,0,0"/>
         <Button Content="Decline" Click="Decline_Click" HorizontalAlignment="Left" VerticalAlignment="Top" Width="100" Height="30" Margin="442,511,0,0"/>
 
     </Grid>

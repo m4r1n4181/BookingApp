@@ -112,8 +112,8 @@ namespace BookingApp.WPF.View.TourGuideWindows
         {
             if (SelectedComplexRequest != null && SelectedDate != null)
             {
-               // _complexTourRequestController.AcceptRequest(SelectedComplexRequest.Id, SelectedDate);
-               // ComplexRequests.Remove(SelectedComplexRequest);
+                _complexTourRequestController.AcceptRequest(SelectedComplexRequest.Id, SelectedDate);
+                ComplexRequests.Remove(SelectedComplexRequest);
             }
         }
 
@@ -121,8 +121,8 @@ namespace BookingApp.WPF.View.TourGuideWindows
         {
             if (SelectedComplexRequest != null)
             {
-               // _complexTourRequestController.DeclineRequest(SelectedComplexRequest.Id);
-                //ComplexRequests.Remove(SelectedComplexRequest);
+                _complexTourRequestController.DeclineRequest(SelectedComplexRequest.Id);
+                ComplexRequests.Remove(SelectedComplexRequest);
             }
         }
 

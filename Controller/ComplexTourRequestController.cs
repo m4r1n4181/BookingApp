@@ -73,5 +73,15 @@ namespace BookingApp.Controller
         {
             return _tourRequestService.IsTourPartAlreadyAccepted(guideId, complexRequest);
         }
+
+        public ComplexTourRequest AcceptRequest(int requestId, DateTime selectedDate)
+        {
+            return _tourRequestService.AcceptRequest(requestId, selectedDate);
+        }
+
+        public void DeclineRequest(int requestId)
+        {
+             _tourRequestService.DeclineRequest(requestId);
+        }
     }
 }
