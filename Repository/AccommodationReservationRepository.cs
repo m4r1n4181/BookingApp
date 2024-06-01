@@ -14,6 +14,7 @@ namespace BookingApp.Repository
         private const string FilePath = "../../../Resources/Data/accommodation-reservation.csv";
         private readonly Serializer<AccommodationReservation> _serializer;
         public List<AccommodationReservation> AccommodationReservations;
+        public AccommodationRepository _accommodationRepository { get; set; }
         public List<User> _guests;
         private static AccommodationReservationRepository instance = null;
 
@@ -21,6 +22,7 @@ namespace BookingApp.Repository
         {
             _serializer = new Serializer<AccommodationReservation>();
             AccommodationReservations = _serializer.FromCSV(FilePath);
+            _accommodationRepository = new AccommodationRepository();
         }
      
         public List<AccommodationReservation> GetAll()
@@ -144,7 +146,50 @@ namespace BookingApp.Repository
             return reservations.Where(reservation => reservation.Accommodation.Owner.Id == id).ToList();
         }
 
+        public List<Location> GetTopThreePopularLocations()
+        {
+            List<Accommodation> accommodations = _accommodationRepository.GetAllWithLocations();
+            List<AccommodationReservation> reservations = GetAllWithGuestsAndAccommodations();
 
+            
+            var locationStats = accommodations.GroupBy(a => a.Location)
+                .Select(g => new
+                {
+                    Location = g.Key,
+                    TotalBookings = g.Sum(a => reservations.Where(r => r.Accommodation.Id == a.Id).Count()),
+                    OccupancyRate = g.Sum(a => reservations.Where(r => r.Accommodation.Id == a.Id).Sum(r => (r.Departure - r.Arrival).Days)) / (DateTime.Now - DateTime.Now.AddYears(-1)).Days
+                })
+                .OrderByDescending(ls => ls.TotalBookings)  
+                .ThenByDescending(ls => ls.OccupancyRate)  
+                .Take(3)  
+                .Select(ls => ls.Location)
+                .ToList();
+
+            return locationStats;
+        }
+        public List<Location> GetWorstTreePopularLocations()
+        {
+            List<Accommodation> accommodations = _accommodationRepository.GetAllWithLocations();
+            List<AccommodationReservation> reservations = GetAllWithGuestsAndAccommodations();
+
+           
+            var locationStats = accommodations.GroupBy(a => a.Location)
+                .Select(g => new
+                {
+                    Location = g.Key,
+                    TotalBookings = g.Sum(a => reservations.Where(r => r.Accommodation.Id == a.Id).Count()),
+                    OccupancyRate = g.Sum(a => reservations.Where(r => r.Accommodation.Id == a.Id).Sum(r => (r.Departure - r.Arrival).Days)) / (DateTime.Now - DateTime.Now.AddYears(-1)).Days
+                })
+                .OrderBy(ls => ls.TotalBookings)  
+                .ThenBy(ls => ls.OccupancyRate)  
+                .Take(3) 
+                .Select(ls => ls.Location)
+                .ToList();
+
+            return locationStats;
+
+
+        }
 
 
     }

@@ -3,6 +3,7 @@ using BookingApp.Model;
 using BookingApp.Model.Enums;
 using BookingApp.Serializer;
 using System;
+using System.Collections.Generic;
 using System.ComponentModel;
 using System.Globalization;
 using System.Linq;
@@ -69,5 +70,6 @@ namespace BookingApp.Model
              CreatedAt = Convert.ToDateTime(values[8]);
          
         }
+        
     }
 }

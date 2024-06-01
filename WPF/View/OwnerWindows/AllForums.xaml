@@ -1,0 +1,41 @@
+﻿<Window x:Class="BookingApp.WPF.View.OwnerWindows.AllForums"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:BookingApp.WPF.View.OwnerWindows"
+        mc:Ignorable="d"
+        Title="AllForums"
+        Height="450"
+        Width="800">
+    <Grid>
+        <DataGrid ItemsSource="{Binding Forums, UpdateSourceTrigger=PropertyChanged}"
+                  SelectedItem="{Binding SelectedForum, UpdateSourceTrigger=PropertyChanged}"
+                  Margin="10,42,10,158"
+                  AutoGenerateColumns="False"
+                  IsReadOnly="True"
+                  SelectionMode="Single"
+                  RowHeight="50"
+                  Background="white">
+            <DataGrid.Columns>
+                <DataGridTextColumn Header="Država"
+                                    Binding="{Binding Location.Country}"
+                                    Width="*"></DataGridTextColumn>
+                <DataGridTextColumn Header="Grad"
+                                    Binding="{Binding Location.City}"
+                                    Width="*"></DataGridTextColumn>
+                <DataGridTextColumn Header="Autor"
+                                    Binding="{Binding Author.Username}"
+                                    Width="*"></DataGridTextColumn>
+            </DataGrid.Columns>
+        </DataGrid>
+        <Button Content="Pogledaj forum"
+                HorizontalAlignment="Left"
+                Margin="477,331,0,0"
+                VerticalAlignment="Top"
+                Command="{Binding ForumCommand}"
+                Height="37"
+                Width="141" />
+
+    </Grid>
+</Window>

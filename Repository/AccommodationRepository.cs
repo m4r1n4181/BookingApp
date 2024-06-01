@@ -101,7 +101,7 @@ namespace BookingApp.Repository
 
         public List<Accommodation> GetAllWithLocations()
         {
-            Accommodations = _serializer.FromCSV(FilePath);
+            Accommodations = GetAll();
             BindLocations();
             return Accommodations;
         }

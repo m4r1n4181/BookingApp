@@ -68,7 +68,13 @@ namespace BookingApp.Repository
             _serializer.ToCSV(FilePath, _notifications);
             return notification;
         }
+        public void BindNotificationForum()
+        {
+           
+            ForumRepository forumRepository = new ForumRepository();
+            _notifications.ForEach(n=>n.Forum = forumRepository.Get(n.Id));
+        }
+        
 
-      
     }
 }
