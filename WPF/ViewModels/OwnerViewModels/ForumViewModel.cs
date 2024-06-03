@@ -23,6 +23,7 @@ namespace BookingApp.WPF.ViewModels.OwnerViewModels
 
        
         ICommand CommentCommand { get; set; }
+        ICommand ReportCommand { get; set; }
         public Forum forum { get; set; }
 
         private string _comment;
@@ -38,6 +39,7 @@ namespace BookingApp.WPF.ViewModels.OwnerViewModels
                 }
             }
         }
+        public Comment SelectedComment { get; set; }
         public event PropertyChangedEventHandler? PropertyChanged;
 
         protected virtual void OnPropertyChanged(string name)
@@ -52,6 +54,7 @@ namespace BookingApp.WPF.ViewModels.OwnerViewModels
            
             forum = selectedForum;
 
+
             _commentController = new CommentController();
 
 
@@ -59,6 +62,18 @@ namespace BookingApp.WPF.ViewModels.OwnerViewModels
             Comments.Clear();
             Comments = new ObservableCollection<Comment>(_commentController.GetByForumId(forum.Id));
             CommentCommand = new RelayCommand(Execute_Comment, CanExecute);
+           ReportCommand = new RelayCommand(Execute_Report, CanExecuteReport);
+        }
+        
+        private void Execute_Report()
+        {
+            SelectedComment.ReportsNumber++;
+            _commentController.Update(SelectedComment);
+        }
+
+        private bool CanExecuteReport()
+        {
+            return true;
         }
 
         private bool CanExecute()

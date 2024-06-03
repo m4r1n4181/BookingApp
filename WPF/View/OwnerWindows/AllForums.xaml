@@ -9,8 +9,8 @@
         Height="450"
         Width="800">
     <Grid>
-        <DataGrid ItemsSource="{Binding Forums, UpdateSourceTrigger=PropertyChanged}"
-                  SelectedItem="{Binding SelectedForum, UpdateSourceTrigger=PropertyChanged}"
+        <DataGrid ItemsSource="{Binding Path=Forums, UpdateSourceTrigger=PropertyChanged}"
+                  SelectedItem="{Binding Path =SelectedForum}"
                   Margin="10,42,10,158"
                   AutoGenerateColumns="False"
                   IsReadOnly="True"

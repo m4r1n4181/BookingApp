@@ -55,24 +55,41 @@
                Margin="10,221,0,0"
                VerticalAlignment="Top"
                FontSize="20" />
-        <DataGrid ItemsSource="{Binding Comments, UpdateSourceTrigger=PropertyChanged}"
-                  Margin="10,254,10,106"
+        <DataGrid x:Name="commentsDataGrid"
                   AutoGenerateColumns="False"
-                  IsReadOnly="True"
-                  RowHeight="50"
-                  Background="white">
+                  ItemsSource="{Binding Comments}"
+                  SelectedItem="{Binding SelectedComment, Mode=TwoWay}"
+                  CanUserAddRows="False"
+                  CanUserDeleteRows="False"
+                  HorizontalAlignment="Left"
+                  Height="47"
+                  Margin="10,263,0,0"
+                  VerticalAlignment="Top"
+                  Width="775">
             <DataGrid.Columns>
-                <DataGridTextColumn Header="Komentar"
+                <DataGridTextColumn Header="Comment"
                                     Binding="{Binding Text}"
-                                    Width="3*"></DataGridTextColumn>
-                <DataGridTextColumn Header="Autor"
+                                    Width="*" />
+                <DataGridTextColumn Header="Author"
                                     Binding="{Binding Author.Username}"
-                                    Width="*"></DataGridTextColumn>
+                                    Width="200" />
+                <DataGridTextColumn Header="Reports number "
+                                    Binding="{Binding ReportsNumber}"
+                                    Width="200" />
             </DataGrid.Columns>
         </DataGrid>
 
+        <Button Content="Report Comment"
+                Command="{Binding ReportCommand}"
+                HorizontalAlignment="Left"
+                VerticalAlignment="Bottom"
+                Margin="10"
+                Width="120"
+                Height="30" />
 
 
-        
+
+
+
     </Grid>
 </Window>

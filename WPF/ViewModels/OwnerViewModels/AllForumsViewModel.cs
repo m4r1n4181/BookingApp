@@ -20,8 +20,20 @@ namespace BookingApp.WPF.ViewModels.OwnerViewModels
         private readonly ForumController _forumController;
         private readonly LocationController _locationController;
 
+        
         public ObservableCollection<Forum> Forums { get; set; }
-        public Forum SelectedForum { get; set; }
+        private Forum _forum;
+        public Forum SelectedForum
+        {
+            get { return _forum; }
+
+            set
+            {
+                _forum = value;
+                //OnPropertyChanged();
+            }
+        }
+       // public Forum SelectedForum { get; set; }
         public ICommand ForumCommand { get; set; }
         public AllForumsViewModel()
         {
@@ -40,7 +52,8 @@ namespace BookingApp.WPF.ViewModels.OwnerViewModels
 
         private bool CanExecute()
         {
-            return SelectedForum != null;
+            //  return SelectedForum != null;
+            return true;
         }
 
         private void Execute_ViewForumCommand()
@@ -48,5 +61,6 @@ namespace BookingApp.WPF.ViewModels.OwnerViewModels
             ForumWindow forumWindow = new ForumWindow(SelectedForum);
             forumWindow.Show();
         }
+
     }
 }
