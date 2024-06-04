@@ -23,7 +23,7 @@
                VerticalAlignment="Top" />
 
         <TextBox x:Name="CommentTextBox"
-                 Text="{Binding Path=Comment, Mode=OneWayToSource,UpdateSourceTrigger=LostFocus}"
+                 Text="{Binding Path=Comment,UpdateSourceTrigger=PropertyChanged}"
                  HorizontalAlignment="Left"
                  Margin="10,72,0,0"
                  TextWrapping="Wrap"
@@ -58,11 +58,11 @@
         <DataGrid x:Name="commentsDataGrid"
                   AutoGenerateColumns="False"
                   ItemsSource="{Binding Comments}"
-                  SelectedItem="{Binding SelectedComment, Mode=TwoWay}"
+                  SelectedItem="{Binding SelectedComment}"
                   CanUserAddRows="False"
                   CanUserDeleteRows="False"
                   HorizontalAlignment="Left"
-                  Height="47"
+                  Height="107"
                   Margin="10,263,0,0"
                   VerticalAlignment="Top"
                   Width="775">

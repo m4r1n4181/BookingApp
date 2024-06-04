@@ -86,6 +86,8 @@ namespace BookingApp.View
                         //locationRecommendation.Show();
                         AllForums allForums= new AllForums();
                         allForums.Show();
+                        LocationRecommendation locationRecommendation = new LocationRecommendation();
+                        locationRecommendation.Show();
 
                     }
 

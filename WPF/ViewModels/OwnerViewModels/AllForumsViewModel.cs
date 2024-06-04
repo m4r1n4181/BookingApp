@@ -8,6 +8,7 @@ using GalaSoft.MvvmLight.Command;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -15,7 +16,7 @@ using System.Windows.Input;
 
 namespace BookingApp.WPF.ViewModels.OwnerViewModels
 {
-    public class AllForumsViewModel : ViewModelBase
+    public class AllForumsViewModel : ViewModelBase, INotifyPropertyChanged
     {
         private readonly ForumController _forumController;
         private readonly LocationController _locationController;
@@ -30,10 +31,19 @@ namespace BookingApp.WPF.ViewModels.OwnerViewModels
             set
             {
                 _forum = value;
-                //OnPropertyChanged();
+                OnPropertyChanged("SelectedForum");
             }
         }
-       // public Forum SelectedForum { get; set; }
+        public event PropertyChangedEventHandler? PropertyChanged;
+
+        protected virtual void OnPropertyChanged(string name)
+        {
+            if (PropertyChanged != null)
+            {
+                PropertyChanged(this, new PropertyChangedEventArgs(name));
+            }
+        }
+        // public Forum SelectedForum { get; set; }
         public ICommand ForumCommand { get; set; }
         public AllForumsViewModel()
         {

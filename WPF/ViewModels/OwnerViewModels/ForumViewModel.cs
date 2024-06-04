@@ -2,6 +2,7 @@
 using BookingApp.Domain.Models;
 using BookingApp.Model;
 using BookingApp.View;
+using BookingApp.ViewModels;
 using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.Command;
 using System;
@@ -16,14 +17,14 @@ using System.Windows.Input;
 
 namespace BookingApp.WPF.ViewModels.OwnerViewModels
 {
-    public class ForumViewModel: ViewModelBase
+    public class ForumViewModel:  INotifyPropertyChanged
     {
         private readonly CommentController _commentController;
         public ObservableCollection<Comment> Comments { get; set; }
 
        
-        ICommand CommentCommand { get; set; }
-        ICommand ReportCommand { get; set; }
+      public ICommand CommentCommand { get; set; }
+       public ICommand ReportCommand { get; set; }
         public Forum forum { get; set; }
 
         private string _comment;
@@ -61,45 +62,52 @@ namespace BookingApp.WPF.ViewModels.OwnerViewModels
             Comments = new ObservableCollection<Comment>(_commentController.GetByForumId(forum.Id));
             Comments.Clear();
             Comments = new ObservableCollection<Comment>(_commentController.GetByForumId(forum.Id));
-            CommentCommand = new RelayCommand(Execute_Comment, CanExecute);
-            ReportCommand = new RelayCommand(Execute_Report, CanExecuteReport);
+            CommentCommand = new BookingApp.ViewModels.RelayCommand(Execute_Comment, CanExecute);
+            ReportCommand = new BookingApp.ViewModels.RelayCommand(Execute_Report, CanExecuteReport);
         }
-        
-        private void Execute_Report()
+
+
+        private void Execute_Report(object param)
         {
             SelectedComment.ReportsNumber++;
             _commentController.Update(SelectedComment);
+            MessageBox.Show("uspesno prijavljen komentar");
+            // Comments.Clear();
+            //Comments = new ObservableCollection<Comment>(_commentController.GetByForumId(forum.Id));
+            //OnPropertyChanged();
+            OnPropertyChanged("Comments");
         }
 
-        private bool CanExecuteReport()
+        private bool CanExecuteReport(object param)
         {
             return true;
         }
 
-        private bool CanExecute()
+        private bool CanExecute(object param)
         {
-            if (string.IsNullOrEmpty(Comment))
-            {
-                MessageBox.Show("Niste uneli komentar!", "Greska!", MessageBoxButton.OK, MessageBoxImage.Error);
-                return false;
-            }
-            else if (forum.IsOpen == false)
-            {
-                MessageBox.Show("Ne mozete dodati komentar na zatvorene forume!", "Greska!", MessageBoxButton.OK, MessageBoxImage.Error);
-                return false;
-            }
             return true;
            
             }
 
-        private void Execute_Comment()
+        private void Execute_Comment(object param)
         {
-          
-                Comment comment = new Comment() { Text = Comment, Author = SignInForm.LoggedUser, Role = SignInForm.LoggedUser.Type, ForumId = forum.Id, ReportsNumber = 0 };
+            if (string.IsNullOrEmpty(Comment))
+            {
+                MessageBox.Show("Niste uneli komentar!", "Greska!", MessageBoxButton.OK, MessageBoxImage.Error);
+                return ;
+            }
+            else if (forum.IsOpen == false)
+            {
+                MessageBox.Show("Ne mozete dodati komentar na zatvorene forume!", "Greska!", MessageBoxButton.OK, MessageBoxImage.Error);
+                return ;
+            }
+
+            Comment comment = new Comment() { Text = Comment, Author = SignInForm.LoggedUser, Role = SignInForm.LoggedUser.Type, ForumId = forum.Id, ReportsNumber = 0 };
                 _commentController.Save(comment);
                 forum.Comments.Add(comment);
                 MessageBox.Show("Uspešno ste ostavili komentar na forumu!", "Komentar ostavljen!", MessageBoxButton.OK);
-            
+            OnPropertyChanged("Comments") ;
+
         }
 
     }
