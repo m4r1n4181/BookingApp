@@ -17,7 +17,7 @@ namespace BookingApp.Domain.RepositoryInterfaces
         public AccommodationReservation Get(int id);
 
 
-
+        public List<Location> GetWorstTreePopularLocations();
         public List<AccommodationReservation> GetAllWithGuests();
 
         public List<AccommodationReservation> GetAllWithGuestsAndAccommodations();
@@ -33,6 +33,7 @@ namespace BookingApp.Domain.RepositoryInterfaces
         public List<AccommodationReservation> GetByAccommodationId(int id);
 
         public List<AccommodationReservation> GetByOwnerId(int id);
+        public List<Location> GetTopThreePopularLocations();
 
     }
 }

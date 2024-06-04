@@ -15,6 +15,10 @@ namespace BookingApp.Repository
         private const string FilePath = "../../../Resources/Data/locations.csv";
 
         private readonly Serializer<Location> _serializer;
+        public AccommodationReservationRepository AccommodationReservationsRepository;
+        public AccommodationRepository AccommodationsRepository;
+        private static LocationRepository instance = null;
+
 
         private List<Location> _location;
 
@@ -87,6 +91,16 @@ namespace BookingApp.Repository
             Location location = locations.FirstOrDefault(loc => loc.City.Equals(city, StringComparison.OrdinalIgnoreCase) && loc.Country.Equals(country, StringComparison.OrdinalIgnoreCase));
             return location.Id;
         }
+        /*
+        public List<Location> GetByReservationSorted(int id)
+        {
+            List<Accommodation> OwnersAccommodations = AccommodationsRepository.GetByOwner(id);
+            List<AccommodationReservation> OwnersReservations = AccommodationReservationsRepository.GetByOwnerId(id);
+
+
+            return null;
+
+        }*/
 
 
     }

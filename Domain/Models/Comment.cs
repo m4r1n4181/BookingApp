@@ -1,4 +1,5 @@
-﻿using BookingApp.Serializer;
+﻿using BookingApp.Model.Enums;
+using BookingApp.Serializer;
 using System;
 
 namespace BookingApp.Model
@@ -6,31 +7,45 @@ namespace BookingApp.Model
     public class Comment : ISerializable
     {
         public int Id { get; set; }
-        public DateTime CreationTime { get; set; }
         public string Text { get; set; }
-        public User User { get; set; }
+        public User Author { get; set; }
+        public UserType Role { get; set; }
+        public int ForumId { get; set; }
+        public int ReportsNumber { get; set; }
 
         public Comment() { }
 
-        public Comment(DateTime creationTime, string text, User user)
+        public Comment(int id, string text, User author, UserType role, int forumId, int reportsNumber)
         {
-            CreationTime = creationTime;
+            Id = id;
             Text = text;
-            User = user;
+            Author = author;
+            Role = role;
+            ForumId = forumId;
+            ReportsNumber = reportsNumber;
         }
 
         public string[] ToCSV()
         {
-            string[] csvValues = { Id.ToString(), CreationTime.ToString(), Text, User.Id.ToString() };
+            string[] csvValues =
+            {   Id.ToString(),
+                Text,
+                Author.Username.ToString(),
+                Role.ToString(),
+                ForumId.ToString(),
+                ReportsNumber.ToString()
+            };
             return csvValues;
         }
 
         public void FromCSV(string[] values)
         {
             Id = Convert.ToInt32(values[0]);
-            CreationTime = Convert.ToDateTime(values[1]);
-            Text = values[2];
-            User = new User() { Id = Convert.ToInt32(values[3]) };
+            Text = values[1];
+            Author = new User() { Username = Convert.ToString(values[2]) };
+            Role = (UserType)Enum.Parse(typeof(UserType), values[3]);
+            ForumId = Convert.ToInt32(values[4]);
+            ReportsNumber = Convert.ToInt32(values[5]);
         }
     }
 }

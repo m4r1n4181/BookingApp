@@ -14,7 +14,9 @@ namespace BookingApp.Domain.RepositoryInterfaces
         public Forum Save(Forum forum);
         public void Delete(Forum forum);
         public Forum Update(Forum forum);
-        public int NextId();         
+        public int NextId();
+        public Forum SaveForumComment(Forum forum);
         public List<Forum> GetByAuthorId(int id);
+        public List<Forum> GetForumsForOwner(int id);
     }
 }

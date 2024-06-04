@@ -77,7 +77,14 @@ namespace BookingApp.Controller
         {
             return _accommodationReservationService.GetBestMonthForAccommodation(year, accommodationId);
         }
-
+       public List<Location> GetTopThreePopularLocations()
+        {
+            return _accommodationReservationService.GetTopThreePopularLocations();
+        }
+        public List<Location> GetWorstTreePopularLocations()
+        {
+            return _accommodationReservationService.GetWorstTreePopularLocations();
+        }
 
     }
 }

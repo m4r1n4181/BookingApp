@@ -16,6 +16,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Navigation;
+using NavigationService = System.Windows.Navigation.NavigationService;
 
 namespace BookingApp.WPF.ViewModels.TouristViewModels
 {
@@ -221,7 +222,7 @@ namespace BookingApp.WPF.ViewModels.TouristViewModels
         public RelayCommand AddParticipantsCommand { get; private set; }
         public RelayCommand CreateRequestCommand {  get; private set; }
         public RelayCommand UseMyInfoCommand {  get; private set; }
-
+        
         public CreateRequestViewModel(NavigationService navigation) {
             _locationController = new LocationController();
             _tourRequestController = new TourRequestController();
@@ -277,7 +278,7 @@ namespace BookingApp.WPF.ViewModels.TouristViewModels
             Location selectedLocation = Locations.FirstOrDefault(loc => loc.City == SelectedCity && loc.Country == SelectedCountry);
             _tourRequestController.CreateTourRequest(selectedLocation, Language, MaxTourists, Description, StartDate, EndDate, Participants.ToList(), SignInForm.LoggedUser);
             MyRequestsView myRequests = new MyRequestsView(NavigationService);
-            NavigationService.Navigate(myRequests);
+            //NavigationService.Navigate(myRequests);
 
             //Close();
         }

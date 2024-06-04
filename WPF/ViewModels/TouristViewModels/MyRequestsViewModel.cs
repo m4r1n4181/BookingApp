@@ -13,6 +13,7 @@ using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Navigation;
+using NavigationService = System.Windows.Navigation.NavigationService;
 
 namespace BookingApp.WPF.ViewModels.TouristViewModels
 {
@@ -21,7 +22,7 @@ namespace BookingApp.WPF.ViewModels.TouristViewModels
         public ObservableCollection<TourRequest> TourRequests { get; set; }
         public TourRequestController _tourRequestController;
         public TourRequest _tourRequest;
-        public NavigationService Navigation { get; set; }
+        public System.Windows.Navigation.NavigationService Navigation { get; set; }
         // public User User { get; set; }
         private static string _description;
         public string Description

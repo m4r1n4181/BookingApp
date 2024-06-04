@@ -21,6 +21,7 @@ using BookingApp.WPF.ViewModels;
 using BookingApp.WPF.View;
 using BookingApp.ViewModels;
 using BookingApp.View;
+using NavigationService = System.Windows.Navigation.NavigationService;
 
 namespace BookingApp.WPF.ViewModels.TouristViewModels
 {
@@ -38,7 +39,7 @@ namespace BookingApp.WPF.ViewModels.TouristViewModels
         private readonly NotificationController _notificationController;
         private User _user;
         private MyToursViewState _windowState;
-        public NavigationService NavigationService { get; set; }
+        public System.Windows.Navigation.NavigationService NavigationService { get; set; }
         public ObservableCollection<Notification> Notifications { get; set; }
         public TourStatusType Status { get; set; }
         public User User

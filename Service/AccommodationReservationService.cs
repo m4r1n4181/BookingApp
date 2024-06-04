@@ -53,7 +53,10 @@ namespace BookingApp.Service
             return ownersReservations;
         }
 
-
+        public List<Location> GetWorstTreePopularLocations()
+        {
+            return _accommodationReservationRepository.GetWorstTreePopularLocations();
+        }
 
         public List<AccommodationReservation> GetAllByGuest(int guestId)
         {
@@ -513,6 +516,12 @@ namespace BookingApp.Service
             BestStatisticMonthDto bestStatistic = statistics.First(x => x.DaysReserved == max);
 
             return bestStatistic.Month;
+        }
+        public List<Location> GetTopThreePopularLocations()
+        {
+            return _accommodationReservationRepository.GetTopThreePopularLocations();
+            
+        
         }
 
     }
