@@ -27,6 +27,7 @@ namespace BookingApp.Domain.RepositoryInterfaces
         List<Tour> GetByTourGuideNotStarted(int tourGuideId);
 
         List<Tour> GetTodayTours();
+        List<Tour> GetThisWeeksMondayTours();
         List<Tour> GetAllActiveTours();
         List<Tour> GetAlternativeTours(int locationId);
         List<Tour> GetFutureTours();

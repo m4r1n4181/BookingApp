@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:BookingApp.WPF.View.TourGuide"
         mc:Ignorable="d"
-        Title="TourGuideHomePage" Height="600" Width="850" Background="#F0F0F0">
+        Title="TourGuideHomePage" Height="700" Width="930" Background="#F0F0F0">
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="1*"/>
@@ -167,38 +167,57 @@
             </Button.Template>
         </Button>
 
-        <ScrollViewer Grid.Row="0" VerticalScrollBarVisibility="Auto" Margin="10" >
-            <ItemsControl ItemsSource="{Binding Comments}" >
+        <ItemsControl Margin="10,0,10,0" Grid.Row="1" Grid.Column="1" Grid.ColumnSpan="6" Grid.RowSpan="3" ItemsSource="{Binding TodayToursThreeByThree}">
+            <ItemsControl.ItemsPanel>
+                <ItemsPanelTemplate>
+                    <StackPanel Orientation="Horizontal"/>
+                </ItemsPanelTemplate>
+            </ItemsControl.ItemsPanel>
+            <ItemsControl.ItemTemplate>
+                <DataTemplate>
+                    <Border Height="240" Margin="0,0,10,0" BorderBrush="#E0E0E0" BorderThickness="1" CornerRadius="12" Background="White">
+                        <StackPanel HorizontalAlignment="Stretch" VerticalAlignment="Center">
+                            <TextBlock Text="{Binding Name}" FontSize="18" Foreground="#0F3057" TextWrapping="Wrap" Margin="19,5,0,0"/>
+                            <Image x:Name="cikaImage" Source="{Binding FirstImage}" Width="200" Height="150" HorizontalAlignment="Left"  Margin="20,0,20,0">
+                            </Image>
+                            <TextBlock Text="{Binding Location}" HorizontalAlignment="Right" FontSize="14" Foreground="#0F3057" TextWrapping="Wrap" Margin="0,5,22,0" />
+
+                        </StackPanel>
+
+
+                    </Border>
+                </DataTemplate>
+            </ItemsControl.ItemTemplate>
+        </ItemsControl>
+        <StackPanel Orientation="Horizontal" Grid.Row="4" Grid.Column="1" Grid.ColumnSpan="6">
+            <Button x:Name="leftButton" Margin="30,0,0,0" Height="50" Width="30" Click="leftButton_Click" Background="Transparent" BorderBrush="Transparent">
+                <TextBlock FontWeight="Bold" FontSize="40" Text="◀️" Foreground="#0F3057" VerticalAlignment="Center" HorizontalAlignment="Center"/>
+            </Button>
+            <TextBlock Margin="60,0,0,0" FontSize="40" FontWeight="Bold" Foreground="#0F3057" VerticalAlignment="Center"> Tours scheduled for today</TextBlock>
+            <Button x:Name="rigthButton" Click="rigthButton_Click" Height="50" Width="30" Margin="100,0,0,0"  Background="Transparent" BorderBrush="Transparent">
+                <TextBlock Text="▶️" Foreground="#0F3057" FontSize="40" VerticalAlignment="Center" HorizontalAlignment="Center"/>
+            </Button>
+        </StackPanel>
+
+        <StackPanel Orientation="Vertical" Grid.Row="5" Grid.Column="1" Grid.RowSpan="2" >
+            <TextBlock HorizontalAlignment="Center" FontSize="30" FontWeight="Bold">Monday</TextBlock>
+            <ItemsControl Margin="10,0,10,0"  ItemsSource="{Binding ThisWeeksMonday}" Height="150">
+                <ItemsControl.ItemsPanel>
+                    <ItemsPanelTemplate>
+                        <StackPanel Orientation="Vertical"/>
+                    </ItemsPanelTemplate>
+                </ItemsControl.ItemsPanel>
                 <ItemsControl.ItemTemplate>
                     <DataTemplate>
-                        <Border Margin="0,0,0,10" BorderBrush="#E0E0E0" BorderThickness="1" CornerRadius="12" Background="White">
-                            <StackPanel HorizontalAlignment="Stretch" VerticalAlignment="Center">
-                                <TextBlock FontSize="18" Foreground="#505050" TextWrapping="Wrap">
-                                    <Run Text="{Binding User.Username}"/>
-                                    <TextBlock Text=" *" FontSize="16" Foreground="#505050">
-                                        <TextBlock.Style>
-                                            <Style TargetType="TextBlock">
-                                                <Setter Property="Visibility" Value="Collapsed"/>
-                                                <Style.Triggers>
-                                                    <DataTrigger Binding="{Binding IsFromOwner}" Value="True">
-                                                        <Setter Property="Visibility" Value="Visible"/>
-                                                    </DataTrigger>
-                                                </Style.Triggers>
-                                            </Style>
-                                        </TextBlock.Style>
-                                    </TextBlock>
-                                </TextBlock>
-                                <TextBlock Text="{Binding ReporetedNum}" FontSize="18" Foreground="#707070" TextWrapping="Wrap" Margin="0,5,0,0"/>
-                                <TextBlock Text="{Binding Text}" FontSize="18" Foreground="#707070" TextWrapping="Wrap" Margin="0,5,0,0"/>
-                                
+                        <Border Height="30" Margin="0,0,10,0" BorderBrush="#E0E0E0" BorderThickness="1" CornerRadius="12" Background="White">
+                            <StackPanel  VerticalAlignment="Center">
+                                <TextBlock Text="{Binding Name}" FontSize="18" Foreground="#0F3057" TextWrapping="Wrap" Margin="19,5,0,0"/>
                             </StackPanel>
                         </Border>
                     </DataTemplate>
                 </ItemsControl.ItemTemplate>
             </ItemsControl>
-        </ScrollViewer>
-
-
+        </StackPanel>
 
     </Grid>
 </Window>

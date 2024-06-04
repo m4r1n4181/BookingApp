@@ -77,15 +77,24 @@ namespace BookingApp.WPF.View.TourGuideWindows
 
         public TourController _tourController;
         public ObservableCollection<Tour> TodayTours { get; set; }
+        public ObservableCollection<Tour> TodayToursThreeByThree { get; set; }
+        public ObservableCollection<Tour> ThisWeeksMonday { get; set; }
+        private int atIndex;
         public TourGuideHomePage()
         {
             InitializeComponent();
             this.DataContext = this;
 
+            atIndex = 0;
             _tourController = new TourController();
 
             TodayTours = new ObservableCollection<Tour>(_tourController.GetTodayTours());
 
+            List<Tour> first3 = TodayTours.Skip(atIndex).Take(3).ToList();
+
+            TodayToursThreeByThree = new ObservableCollection<Tour>(first3);
+
+            ThisWeeksMonday = new ObservableCollection<Tour>(_tourController.GetThisWeeksMondayTours());
         }
 
         private void CreateNewTour_Click(object sender, RoutedEventArgs e)
@@ -158,6 +167,37 @@ namespace BookingApp.WPF.View.TourGuideWindows
             //otvara prozor za tutorial 
         }
 
+        private void leftButton_Click(object sender, RoutedEventArgs e)
+        {
+            if (atIndex - 3 >= TodayTours.Count)
+            {
+                return;
+            }
+            atIndex -= 3;
 
+            List<Tour> other3 = TodayTours.Skip(atIndex).Take(3).ToList();
+
+            RefreshTours(other3);
+
+        }
+
+        private void rigthButton_Click(object sender, RoutedEventArgs e)
+        {
+            if(atIndex + 3 >= TodayTours.Count)
+            {
+                return;
+            }
+            atIndex += 3;
+
+            List<Tour> other3 = TodayTours.Skip(atIndex).Take(3).ToList();
+
+            RefreshTours(other3);
+        }
+
+        private void RefreshTours(List<Tour> tours)
+        {
+            TodayToursThreeByThree.Clear();
+            tours.ForEach(t => TodayToursThreeByThree.Add(t));
+        }
     }
 }

@@ -111,12 +111,18 @@ namespace BookingApp.Service
                 .ToList();
         }
 
-        public bool IsGuideAvailable(int guideId, DateTime date)
+        public bool IsTourGuideFreeOnDate(int tourGuideId, DateTime date)
         {
-            var tours = _tourRepository.GetAllByTourGuideId(guideId);
-            return !tours.Any(t => t.StartDate.Date == date.Date && t.TourStatus == TourStatusType.not_started);
+            List<Tour> guideTours = _tourRepository.GetByTourGuideNotStarted(tourGuideId);
+            foreach (Tour tour in guideTours)
+            {
+                if (tour.StartDate.Date == date.Date)
+                {
+                    return false;
+                }
+            }
+            return true;
         }
-
         public List<DateTime> GetAvailableDatesForTourPart(int guideId, int tourRequestId)
         {
             var tourRequest = _simpleTourRequestRepository.GetById(tourRequestId);
@@ -131,7 +137,7 @@ namespace BookingApp.Service
 
             for (var date = startDate; date <= endDate; date = date.AddDays(1))
             {
-                if (IsGuideAvailable(guideId, date))
+                if (IsTourGuideFreeOnDate(guideId, date))
                 {
                     availableDates.Add(date);
                 }
@@ -161,43 +167,46 @@ namespace BookingApp.Service
             return acceptedTourParts.Any();
         }
 
-        public ComplexTourRequest AcceptRequest(int requestId, DateTime selectedDate)
+
+        public ComplexTourRequest AcceptRequest(int complexRequestId, DateTime selectedDate)
         {
-            var complexRequest = _complexTourRequestRepository.Get(requestId);
-            if (complexRequest == null)
+            ComplexTourRequest complexRequest = Get(complexRequestId);
+            if (complexRequestId == null)
             {
                 return null;
             }
-
-            if (complexRequest.TourGuide == null || !IsGuideAvailable(complexRequest.TourGuide.Id, selectedDate))
+            if (!IsTourGuideFreeOnDate(complexRequest.TourGuide.Id, selectedDate))
             {
                 return null;
             }
-
+            
             complexRequest.Status = RequestStatusType.Approved;
             complexRequest.SelectedDate = selectedDate;
-            _complexTourRequestRepository.Update(complexRequest);
 
+            _complexTourRequestRepository.Update(complexRequest);
             string message = "Vaš zahtev je odobren za datum " + selectedDate.ToShortDateString();
-            var notification = new Notification
-            {
-                Message = message,
-                NotificationStatus = NotificationStatus.unread,
-                User = complexRequest.Tourist
-            };
+            Notification notification = new Notification() { Message = message, NotificationStatus = NotificationStatus.unread, User = complexRequest.Tourist };
             _notificationRepository.Save(notification);
 
             return complexRequest;
         }
 
-        public void DeclineRequest(int requestId)
+        public ComplexTourRequest DeclineRequest(int complexRequestId)
         {
-            var complexRequest = _complexTourRequestRepository.Get(requestId);
-            if (complexRequest != null)
+            ComplexTourRequest complexRequest = Get(complexRequestId);
+            if (complexRequestId == null)
             {
-                complexRequest.Status = RequestStatusType.Approved;
-                _complexTourRequestRepository.Update(complexRequest);
+                return null;
             }
+            complexRequest.Status = RequestStatusType.Declined;
+            _complexTourRequestRepository.Update(complexRequest);
+
+
+            string message = "Vaš zahtev je odbijen jer nema dostupnih termina";
+            Notification notification = new Notification() { Message = message, NotificationStatus = NotificationStatus.unread, User = complexRequest.Tourist };
+            _notificationRepository.Save(notification);
+
+            return complexRequest;
         }
     }
 }

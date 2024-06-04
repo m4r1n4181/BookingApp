@@ -22,30 +22,30 @@
 22|1|Nova tura  Na petrovaradin|nova tura|Srpski|2|5|0|4/26/2024 12:00:00 PM|2|../../Resources/Images/add.png,../../Resources/Images/delete.png|cancelled
 23|1|ponovo1|ponovo|Engleski|4|4|0|6/1/2024 12:00:00 PM|2|../../Resources/Images/colloseum.jpg|finished
 24|1|ponovo1|ponovo|Engleski|4|4|0|4/13/2024 3:00:00 PM|2|../../Resources/Images/colloseum.jpg|started
-25|1|aj ponovo|aj pliz|Nemacki|6|4|0|4/13/2024 12:00:00 PM|3|../../Resources/Images/palatine.jpg|not_started
+25|1|Savremenost|savremenost|Nemacki|6|4|0|6/4/2024 12:00:00 PM|3|../../../Resources/Images/palatine.jpg|not_started
 26|1|aj ponovo|aj pliz|Nemacki|6|4|0|4/13/2024 6:00:00 PM|3|../../Resources/Images/palatine.jpg|started
 27|1|zabg|za beograd|Srpski|2|3|0|4/13/2024 12:00:00 PM|3||started
 28|1|zdravo1|hej|3|5|4|0|4/15/2024 12:00:00 PM|3|../../Resources/Images/colloseum.jpg|finished
 29|1|zdravo1|hej|3|5|4|0|4/15/2024 9:00:00 AM|3|../../Resources/Images/colloseum.jpg|finished
 30|1|lepota|jnsjs|Engleski|4|4|0|4/15/2024 12:00:00 PM|2||not_started
-31|1|TURA|TURA|Engleski|1|5|0|6/1/2024 18:00:00|7|../../../Resources/Images/notre_dame.jpg,../../../Resources/Images/slika.jpg|finished
+31|1|TURA|TURA|Engleski|1|5|0|6/4/2024 6:00:00 PM|7|../../../Resources/Images/notre_dame.jpg,../../../Resources/Images/slika.jpg|not_started
 32|1|Petrovaradin|Predivan pejzaz i bogata istorija|Engleski|1|4|5|7/19/2024 12:00:00 PM|2|../../Resources/Images/delete.png|not_started
-33|1|Venecija|Bogata istorija i jedinstveni kanali|Engleski|2|3|3|6/18/2024 12:00:00 PM|2|../../Resources/Images/delete.png|not_started
+33|1|Venecija|Bogata istorija i jedinstveni kanali|Engleski|2|3|3|6/4/2024 12:00:00 PM|2|../../../Resources/Images/venice.jpg|not_started
 34|1|ItalijaTour|Pogledi i hrana fantasticni|Engleski|3|5|10|4/18/2024 12:00:00 PM|2|../Resources/Images/edit.png|not_started
 35|1|Split|Sunce, more i zabava|Engleski|4|6|0|5/19/2024 12:00:00 PM|3|../Resources/Images/view.png|not_started
-36|1|Bec|Bogata istorija i fascinantna arhitektura|Nemacki|1|20|2|6/24/2024 12:00:00 PM|6|../Resources/Images/delete.png|not_started
+36|1|Bec|Bogata istorija i fascinantna arhitektura|Nemacki|1|20|6|6/4/2024 12:00:00 PM|6|../../../Resources/Images/italia_landscape.jpeg|not_started
 37|1|Bec|Bogata istorija i fascinantna arhitektura|Nemacki|2|20|20|7/19/2024 12:00:00 PM|6|../Resources/Images/delete.png|not_started
 38|1|Bec|Bogata istorija i fascinantna arhitektura|Nemacki|1|20|20|8/19/2024 12:00:00 PM|6|../Resources/Images/delete.png|not_started
 39|1|Bec|Bogata istorija i fascinantna arhitektura|Nemacki|2|20|0|9/19/2024 12:00:00 PM|6|../Resources/Images/delete.png|not_started
 40|1|senegal|luda tura|Kineski|10|20|0|4/17/2024 12:00:00 PM|16|../Resources/Images/edit.png|not_started
 41|1|senegal|luda tura|Kineski|10|20|0|4/17/2024 3:00:00 PM|16|../Resources/Images/edit.png|not_started
-42|1|rr|trstina|Srpski|4|20|0|4/17/2024 9:00:00 AM|2|../Resources/Images/delete.png|not_started
-43|1|rr|trstina|Srpski|4|20|0|4/17/2024 12:00:00 PM|2|../Resources/Images/delete.png|not_started
-44|1|torino|lepo|Srpski|2|50|0|4/30/2024 12:00:00 PM|73|../Resources/Images/delete.png|not_started
-45|1|zakintos|leto|Srpski|1|10|8|5/5/2024 12:00:00 PM|12|../Resources/Images/notre_dame.jpg|not_started
-46|1|Venera|Its a beautiful city, with lots of historical landmarks.|Italian|4|11|0|6/1/2024 9:00:00|2|../../../Resources/Images/colloseum.jpg,../../../Resources/Images/notre_dame.jpg|finished
-47|1|TTTT|opis ture111|Srpski|6|4|0|5/10/2024 9:00:00 AM|20|../../../Resources/Images/slika.jpg,../../../Resources/Images/slika2.jpg,../../../Resources/Images/slika.jpg|started
+42|1|rr|trstina|Srpski|4|20|0|6/3/2024 9:00:00 AM|2|../Resources/Images/delete.png|not_started
+43|1|ime neko u ponedeljak ima|trstina|Srpski|4|20|0|6/3/2024 12:00:00 PM|2|../Resources/Images/delete.png|not_started
+44|1|torino|lepo|Srpski|2|50|0|6/3/2024 12:00:00 PM|73|../Resources/Images/delete.png|not_started
+45|1|zakintos|leto|Srpski|1|10|8|6/4/2024 12:00:00 PM|12|../../../Resources/Images/colloseum.jpg|not_started
+46|1|Venera|Its a beautiful city, with lots of historical landmarks.|Italian|4|11|0|6/4/2024 9:00:00 AM|2|../../../Resources/Images/colloseum.jpg,../../../Resources/Images/notre_dame.jpg|not_started
+47|1|Letovanje|opis ture111|Srpski|6|4|0|6/4/2024 9:00:00 AM|20|../../../Resources/Images/slika.jpg,../../../Resources/Images/slika2.jpg,../../../Resources/Images/slika.jpg|not_started
 48|1|TTTT|opis ture111|Srpski|6|4|0|5/10/2024 12:00:00 PM|20|../../../Resources/Images/slika.jpg,../../../Resources/Images/slika2.jpg,../../../Resources/Images/slika.jpg|finished
 49|1|jjj|jhgf|Nemacki|2|20|20|5/14/2024 12:00:00 PM|4|../Resources/Images/colloseum.jpg|not_started
-50|1|hjk|hghjkl|Nemacki|2|70|70|5/15/2024 12:00:00 PM|6|../Resources/Images/Finish.png|not_started
-51|1|pliz|deac|Nemacki|2|3|3|6/1/2024 12:00:00 PM|3|../Resources/Images/colloseum.jpg|not_started
+50|1|hjk|hghjkl|Nemacki|2|70|70|5/13/2024 12:00:00 PM|6|../Resources/Images/Finish.png|not_started
+51|1|pliz|deac|Nemacki|2|3|3|5/25/2024 12:00:00 PM|3|../Resources/Images/colloseum.jpg|not_started

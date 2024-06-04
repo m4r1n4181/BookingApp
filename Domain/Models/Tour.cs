@@ -106,6 +106,17 @@ namespace BookingApp.Model
 
         }
 
+        public string FirstImage
+        {
+            get
+            {
+                if (Pictures == null || Pictures.Count == 0 )
+                {
+                    return null;
+                }
+                return Pictures[0];
+            }
+        }
 
     }
 

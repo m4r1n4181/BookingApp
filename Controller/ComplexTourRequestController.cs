@@ -1,4 +1,5 @@
 ﻿using BookingApp.Domain.Models;
+using BookingApp.Model;
 using BookingApp.Model.Enums;
 using BookingApp.Service;
 using System;
@@ -58,9 +59,9 @@ namespace BookingApp.Controller
         {
             return _tourRequestService.GetSimpleTourRequestsForComplexRequest(complexRequestId);
         }
-        public bool IsGuideAvailable(int guideId, DateTime date)
+        public bool IsTourGuideFreeOnDate(int tourGuideId, DateTime date)
         {
-            return _tourRequestService.IsGuideAvailable(guideId, date);
+            return _tourRequestService.IsTourGuideFreeOnDate(tourGuideId, date);
         }
 
         public List<DateTime> GetAvailableDatesForTourPart(int guideId, int tourRequestId)

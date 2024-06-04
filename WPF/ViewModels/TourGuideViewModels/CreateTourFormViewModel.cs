@@ -251,18 +251,26 @@ namespace BookingApp.View.ViewModels.TourGuideViewModels
             {
                 this.ValidationErrors["TourName"] = "TourName is required.";
             }
-            if (MaxTourists < 0)
-            {
-                this.ValidationErrors["TourName"] = "TourName is required.";
-            }
             if (string.IsNullOrWhiteSpace(this.TourLanguage))
             {
-                this.ValidationErrors["TourLanguage"] = "TourLanguage is required.";
+                this.ValidationErrors["TourLanguage"] = "Tour Language is required.";
             }
-            if (!string.IsNullOrWhiteSpace(this.TourLanguage) && !Char.IsLetter(TourLanguage[0]))
+
+            if (string.IsNullOrWhiteSpace(this.TourName))
             {
-                this.ValidationErrors["TourLanguage"] = "TourLanguage must start with letter.";
+                this.ValidationErrors["TourDate"] = "TourDate is required.";
             }
+
+            if (this.KeyPoints == null || this.KeyPoints.Count < 2)
+            {
+                this.ValidationErrors["KeyPoints"] = "At least two key points are required.";
+            }
+
+            if (string.IsNullOrWhiteSpace(this.TourName))
+            {
+                this.ValidationErrors["TourDate"] = "TourDate is required.";
+            }
+
         }
 
         public void CreateTourForm(object param)

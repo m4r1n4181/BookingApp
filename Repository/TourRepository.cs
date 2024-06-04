@@ -169,6 +169,21 @@ namespace BookingApp.Repository
             return _tours.FindAll(tour => tour.StartDate.Date == today && tour.TourStatus == Model.Enums.TourStatusType.not_started);
         }
 
+        public List<Tour> GetThisWeeksMondayTours()
+        {
+            _tours = _serializer.FromCSV(FilePath);
+            BindLocations();
+
+            // Get today's date
+            DateTime today = DateTime.Now.Date;
+
+            // Calculate the date for the current week's Monday
+            DateTime thisWeeksMonday = today.AddDays(-(int)today.DayOfWeek + (int)DayOfWeek.Monday);
+
+            // Find all tours that start on this week's Monday and have not started
+            return _tours.FindAll(tour => tour.StartDate.Date == thisWeeksMonday && tour.TourStatus == Model.Enums.TourStatusType.not_started);
+        }
+
         public List<Tour> GetAllActiveTours()
         {
             _tours = _serializer.FromCSV(FilePath);

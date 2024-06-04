@@ -27,12 +27,10 @@
         <Grid Grid.Row="0" Grid.Column="0">
             <TextBlock Text="Create tour:" FontWeight="Bold" FontSize="30" VerticalAlignment="Top" Margin="80,21,144,0" Foreground="#0F3057"/>
             <StackPanel Grid.Row="0" Grid.Column="0" Margin="0,0,120,0" Orientation="Horizontal">
-
-                <TextBlock Width="100" Text="Name:" VerticalAlignment="Bottom" Margin="15,0,0,13"  FontSize="15" Foreground="#0F3057" />
-                <TextBox x:Name="txtTourName" Text="{Binding Path=TourName, UpdateSourceTrigger=PropertyChanged}" Width="150" Height="25" Margin="0,0,0,10"  VerticalAlignment="Bottom" FontSize="15"/>
-                <TextBlock Text="{Binding ValidationErrors[TourName]}" Foreground="Red"/>
+                <TextBlock Width="100" Text="Name:" VerticalAlignment="Bottom" Margin="15,0,0,18"  FontSize="15" Foreground="#0F3057" />
+                <TextBox x:Name="txtTourName" Text="{Binding Path=TourName, UpdateSourceTrigger=PropertyChanged}" Width="150" Height="25" Margin="0,0,0,15"  VerticalAlignment="Bottom" FontSize="15"/>
             </StackPanel>
-
+            <TextBlock Text="{Binding ValidationErrors[TourName]}" Foreground="DarkRed" Margin="118,108,10,-13"/>
         </Grid>
 
         <Grid Grid.Row="1" Grid.Column="0" Margin="0,0,0,0">
@@ -53,7 +51,7 @@
 
         </Grid>
 
-        <Grid Grid.Row="2" Grid.Column="0" Margin="0,0,0,0">
+        <Grid Grid.Row="1" Grid.Column="0" Margin="1,121,399,0" Grid.ColumnSpan="2" Grid.RowSpan="2">
             <Grid.RowDefinitions>
                 <RowDefinition Height="1*"/>
                 <RowDefinition Height="1*"/>
@@ -63,9 +61,9 @@
             <StackPanel  Grid.Row="0" Grid.Column="0"  Orientation="Horizontal" Margin="0 0 0 0" >
                 <TextBlock Width="100" Text="Languages:" VerticalAlignment="Center" Margin="15,0,0,0" FontSize="15" Foreground="#0F3057"/>
                 <TextBox x:Name="txtLanguages" Text="{Binding Path=TourLanguage, UpdateSourceTrigger=PropertyChanged}" Width="150" Height="25" FontSize="15" />
-                <TextBlock Text="{Binding ValidationErrors[TourLanguage]}" Foreground="Red"/>
-
             </StackPanel>
+            <TextBlock Text="{Binding ValidationErrors[TourLanguage]}" Foreground="DarkRed" Margin="117,46,10,46" Grid.RowSpan="2"/>
+
 
 
             <StackPanel Grid.Column="0"  Orientation="Horizontal" Margin="0,73,218,-82" Grid.RowSpan="2" >
@@ -119,6 +117,8 @@
                     </Button.Template>
                 </Button>
             </StackPanel>
+            <TextBlock Text="{Binding ValidationErrors[KeyPoints]}" Foreground="DarkRed" Margin="0,31,10,60" Grid.Column="1"/>
+
 
             <StackPanel Grid.Row="0" Grid.Column="0"  Orientation="Horizontal" Margin="10 0 0 10">
                 <ListBox Width="155" Height="41" ItemsSource="{Binding KeyPoints, UpdateSourceTrigger=PropertyChanged}" VerticalAlignment="Bottom" Margin="0 2 0 0" FontSize="12" DisplayMemberPath="Name"/>
@@ -131,6 +131,7 @@
             <TextBlock  Text="Date and time:" FontSize="15" Foreground="#0F3057" Height="25" Width="100" VerticalAlignment="Top" Margin="10,0,0,0"/>
             <StackPanel Orientation="Horizontal" Margin="-100 10 0 0" Height="60" VerticalAlignment="Top">
                 <DatePicker x:Name="dpStartDate" SelectedDate="{Binding TourDate}" Width="100" Height="25" VerticalAlignment="Center" HorizontalAlignment="Left"/>
+                <ComboBox x:Name="cbStartTime" ItemsSource="{Binding PossibleTimes}" SelectedItem="{Binding SelectedTime}" Width="60" Height="25"/>
             </StackPanel>
             <Button Width="39" Height="20" Margin="15 30 0 0" Command="{Binding AddDateTimeCommand}" FontSize="13" VerticalAlignment="Top">
                 <Button.Template>
@@ -143,9 +144,11 @@
             </Button>
 
             <StackPanel Grid.Row="1" Grid.Column="0"  Orientation="Horizontal" Margin="0 0 0 0">
-                <ListBox Width="195"  Height="61" ItemsSource="{Binding DateTimes, UpdateSourceTrigger=PropertyChanged}"  VerticalAlignment="Bottom" Margin="-303 10 0 0" FontSize="12" />
+                <ListBox Width="172"  Height="61" ItemsSource="{Binding DateTimes, UpdateSourceTrigger=PropertyChanged}" FontSize="12" Margin="5 0 0 0" />
             </StackPanel>
         </StackPanel>
+        <TextBlock Text="{Binding ValidationErrors[TourDate]}" Foreground="DarkRed" Margin="10,61,200,29" Grid.Column="1" Grid.Row="1"/>
+
 
         <Grid Grid.Row="2" Grid.Column="1" Margin="0,0,0,0">
             <Grid.ColumnDefinitions>

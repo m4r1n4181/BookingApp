@@ -56,6 +56,17 @@ namespace BookingApp.Service
             return _tourRepository.GetTodayTours();
         }
 
+        public List<Tour> GetThisWeeksMonday()
+        {
+
+            return _tourRepository.GetTodayTours();
+        }
+
+        public List<Tour> GetThisWeeksMondayTours()
+        {
+           return _tourRepository.GetThisWeeksMondayTours();
+        }
+
         public void StartTour(int id)
         {
             Tour tour = _tourRepository.GetById(id);
