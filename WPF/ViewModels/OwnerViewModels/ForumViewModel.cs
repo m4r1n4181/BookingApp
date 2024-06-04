@@ -62,7 +62,7 @@ namespace BookingApp.WPF.ViewModels.OwnerViewModels
             Comments.Clear();
             Comments = new ObservableCollection<Comment>(_commentController.GetByForumId(forum.Id));
             CommentCommand = new RelayCommand(Execute_Comment, CanExecute);
-           ReportCommand = new RelayCommand(Execute_Report, CanExecuteReport);
+            ReportCommand = new RelayCommand(Execute_Report, CanExecuteReport);
         }
         
         private void Execute_Report()
