@@ -47,6 +47,22 @@ namespace BookingApp.Controller
         {
             return _tourService.GetThisWeeksMondayTours();
         }
+        public List<Tour> GetThisWeeksTuesdayTours()
+        {
+            return _tourService.GetThisWeeksTuesdayTours();
+        }
+        public List<Tour> GetThisWeeksWednesdayTours()
+        {
+            return _tourService.GetThisWeeksWednesdayTours();
+        }
+        public List<Tour> GetThisWeeksThursdayTours()
+        {
+            return _tourService.GetThisWeeksThursdayTours();
+        }
+        public List<Tour> GetThisWeeksFridayTours()
+        {
+            return _tourService.GetThisWeeksFridayTours();
+        }
 
         public void StartTour(int id)
         {

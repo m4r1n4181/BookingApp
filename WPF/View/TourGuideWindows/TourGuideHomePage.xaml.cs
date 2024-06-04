@@ -79,6 +79,11 @@ namespace BookingApp.WPF.View.TourGuideWindows
         public ObservableCollection<Tour> TodayTours { get; set; }
         public ObservableCollection<Tour> TodayToursThreeByThree { get; set; }
         public ObservableCollection<Tour> ThisWeeksMonday { get; set; }
+        public ObservableCollection<Tour> ThisWeeksTuesday { get; set; }
+        public ObservableCollection<Tour> ThisWeeksWednesday { get; set; }
+        public ObservableCollection<Tour> ThisWeeksThursday { get; set; }
+        public ObservableCollection<Tour> ThisWeeksFriday { get; set; }
+
         private int atIndex;
         public TourGuideHomePage()
         {
@@ -95,6 +100,11 @@ namespace BookingApp.WPF.View.TourGuideWindows
             TodayToursThreeByThree = new ObservableCollection<Tour>(first3);
 
             ThisWeeksMonday = new ObservableCollection<Tour>(_tourController.GetThisWeeksMondayTours());
+            ThisWeeksTuesday = new ObservableCollection<Tour>(_tourController.GetThisWeeksTuesdayTours());
+            ThisWeeksWednesday = new ObservableCollection<Tour>(_tourController.GetThisWeeksWednesdayTours());
+            ThisWeeksThursday = new ObservableCollection<Tour>(_tourController.GetThisWeeksThursdayTours());
+            ThisWeeksFriday = new ObservableCollection<Tour>(_tourController.GetThisWeeksFridayTours());
+
         }
 
         private void CreateNewTour_Click(object sender, RoutedEventArgs e)

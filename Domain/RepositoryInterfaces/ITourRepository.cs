@@ -25,9 +25,12 @@ namespace BookingApp.Domain.RepositoryInterfaces
         Tour Update(Tour tour);
         List<Tour> GetByTourGuide(TourGuide tourGuide);
         List<Tour> GetByTourGuideNotStarted(int tourGuideId);
-
         List<Tour> GetTodayTours();
         List<Tour> GetThisWeeksMondayTours();
+        List<Tour> GetThisWeeksTuesdayTours();
+        List<Tour> GetThisWeeksWednesdayTours();
+        List<Tour> GetThisWeeksThursdayTours();
+        List<Tour> GetThisWeeksFridayTours();
         List<Tour> GetAllActiveTours();
         List<Tour> GetAlternativeTours(int locationId);
         List<Tour> GetFutureTours();

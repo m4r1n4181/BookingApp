@@ -183,6 +183,50 @@ namespace BookingApp.Repository
             // Find all tours that start on this week's Monday and have not started
             return _tours.FindAll(tour => tour.StartDate.Date == thisWeeksMonday && tour.TourStatus == Model.Enums.TourStatusType.not_started);
         }
+        public List<Tour> GetThisWeeksTuesdayTours()
+        {
+            _tours = _serializer.FromCSV(FilePath);
+            BindLocations();
+
+            DateTime today = DateTime.Now.Date;
+
+            DateTime thisWeeksMonday = today.AddDays(-(int)today.DayOfWeek + (int)DayOfWeek.Tuesday);
+
+            return _tours.FindAll(tour => tour.StartDate.Date == thisWeeksMonday && tour.TourStatus == Model.Enums.TourStatusType.not_started);
+        }
+        public List<Tour> GetThisWeeksWednesdayTours()
+        {
+            _tours = _serializer.FromCSV(FilePath);
+            BindLocations();
+
+            DateTime today = DateTime.Now.Date;
+
+            DateTime thisWeeksMonday = today.AddDays(-(int)today.DayOfWeek + (int)DayOfWeek.Wednesday);
+
+            return _tours.FindAll(tour => tour.StartDate.Date == thisWeeksMonday && tour.TourStatus == Model.Enums.TourStatusType.not_started);
+        }
+        public List<Tour> GetThisWeeksThursdayTours()
+        {
+            _tours = _serializer.FromCSV(FilePath);
+            BindLocations();
+
+            DateTime today = DateTime.Now.Date;
+
+            DateTime thisWeeksMonday = today.AddDays(-(int)today.DayOfWeek + (int)DayOfWeek.Thursday);
+
+            return _tours.FindAll(tour => tour.StartDate.Date == thisWeeksMonday && tour.TourStatus == Model.Enums.TourStatusType.not_started);
+        }
+        public List<Tour> GetThisWeeksFridayTours()
+        {
+            _tours = _serializer.FromCSV(FilePath);
+            BindLocations();
+
+            DateTime today = DateTime.Now.Date;
+
+            DateTime thisWeeksMonday = today.AddDays(-(int)today.DayOfWeek + (int)DayOfWeek.Friday);
+
+            return _tours.FindAll(tour => tour.StartDate.Date == thisWeeksMonday && tour.TourStatus == Model.Enums.TourStatusType.not_started);
+        }
 
         public List<Tour> GetAllActiveTours()
         {

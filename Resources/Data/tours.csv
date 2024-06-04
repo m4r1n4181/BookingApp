@@ -1,51 +1,20 @@
-1|1|nova|as|Srpski|2|2|0|4/15/2024 12:00:00 PM|2|../../Resources/Images/add.png|finished
-2|1|Name22|sasas|Srpski|2|2|2|3/19/2024 3:00:00 PM|2|../../Resources/Images/add.png|finished
-3|1|nnn|as|Engleski|2|2|0|3/19/2024 6:00:00 PM|3|../../Resources/Images/add.png|started
-4|1|Nazif|asd|Engleski|1|2|0|3/19/2024 9:00:00 AM|2|../../Resources/Images/add.png|started
-5|1|ime1|opi|Nemacki|3|2|0|3/19/2024 6:00:00 PM|2|../../Resources/Images/add.png|not_started
-6|1|lklk|nmnmn|Nemacki|2|20|0|3/19/2024 12:00:00 PM|2|../../Resources/Images/add.png|not_started
-7|1|mn|mnmn|Korejski|3|70|0|3/19/2024 9:00:00 AM|2|../../Resources/Images/add.png|not_started
-8|1|hi|bjbejhd|Japanski|3|10|0|3/19/2024 12:00:00 PM|2|../../Resources/Images/add.png|not_started
-9|1|Boze pomozi|molim te|Engleski|4|4|0|3/19/2024 12:00:00 PM|3|../../Resources/Images/add.png|not_started
-10|1|m|s|Engleski|2|3|0|3/19/2024 3:00:00 PM|4|../../Resources/Images/add.png|not_started
-11|1|zzz|djbjs|Nemacki|6|4|0|3/19/2024 3:00:00 PM|5|../../Resources/Images/add.png|not_started
-12|1|kt1|srecno|Engleski|8|5|0|3/20/2024 3:00:00 PM|2|../../Resources/Images/add.png|not_started
-13|1|Rabata|turnir u vaterpolu |Srpski|1|13|0|3/20/2024 9:00:00 AM|10|../../Resources/Images/add.png,../../Resources/Images/colloseum.jpg|not_started
-14|1|Babina greda|opis|Engleski|2|2|0|3/23/2024 3:00:00 PM|4|../../Resources/Images/palatine.jpg|not_started
-15|1|hej|hej|Engleski|3|6|0|3/31/2024 12:00:00 PM|5||not_started
-16|1|Savremenost|izlozba|Engleski|2|10|0|4/17/2024 12:00:00 PM|3||started
-17|1|Umetnost|izlet|Engleski|5|8|0|4/20/2024 6:00:00 PM|3||cancelled
-18|1|Muzej|lepota|Engleski|3|20|0|4/4/2024 12:00:00 PM|2||not_started
-19|1|trying|hwhebdhbc|Engleski|3|4|0|4/3/2024 12:00:00 PM|3|../../Resources/Images/edit.png|not_started
-20|1|test|test|Engleski|5|4|0|4/4/2024 12:00:00 PM|3||not_started
-21|1|Nova tura  Na petrovaradin|nova tura|Srpski|2|5|0|4/20/2024 12:00:00 PM|2|../../Resources/Images/add.png,../../Resources/Images/delete.png|cancelled
-22|1|Nova tura  Na petrovaradin|nova tura|Srpski|2|5|0|4/26/2024 12:00:00 PM|2|../../Resources/Images/add.png,../../Resources/Images/delete.png|cancelled
-23|1|ponovo1|ponovo|Engleski|4|4|0|6/1/2024 12:00:00 PM|2|../../Resources/Images/colloseum.jpg|finished
-24|1|ponovo1|ponovo|Engleski|4|4|0|4/13/2024 3:00:00 PM|2|../../Resources/Images/colloseum.jpg|started
-25|1|Savremenost|savremenost|Nemacki|6|4|0|6/4/2024 12:00:00 PM|3|../../../Resources/Images/palatine.jpg|not_started
-26|1|aj ponovo|aj pliz|Nemacki|6|4|0|4/13/2024 6:00:00 PM|3|../../Resources/Images/palatine.jpg|started
-27|1|zabg|za beograd|Srpski|2|3|0|4/13/2024 12:00:00 PM|3||started
-28|1|zdravo1|hej|3|5|4|0|4/15/2024 12:00:00 PM|3|../../Resources/Images/colloseum.jpg|finished
-29|1|zdravo1|hej|3|5|4|0|4/15/2024 9:00:00 AM|3|../../Resources/Images/colloseum.jpg|finished
-30|1|lepota|jnsjs|Engleski|4|4|0|4/15/2024 12:00:00 PM|2||not_started
-31|1|TURA|TURA|Engleski|1|5|0|6/4/2024 6:00:00 PM|7|../../../Resources/Images/notre_dame.jpg,../../../Resources/Images/slika.jpg|not_started
-32|1|Petrovaradin|Predivan pejzaz i bogata istorija|Engleski|1|4|5|7/19/2024 12:00:00 PM|2|../../Resources/Images/delete.png|not_started
-33|1|Venecija|Bogata istorija i jedinstveni kanali|Engleski|2|3|3|6/4/2024 12:00:00 PM|2|../../../Resources/Images/venice.jpg|not_started
-34|1|ItalijaTour|Pogledi i hrana fantasticni|Engleski|3|5|10|4/18/2024 12:00:00 PM|2|../Resources/Images/edit.png|not_started
-35|1|Split|Sunce, more i zabava|Engleski|4|6|0|5/19/2024 12:00:00 PM|3|../Resources/Images/view.png|not_started
-36|1|Bec|Bogata istorija i fascinantna arhitektura|Nemacki|1|20|6|6/4/2024 12:00:00 PM|6|../../../Resources/Images/italia_landscape.jpeg|not_started
-37|1|Bec|Bogata istorija i fascinantna arhitektura|Nemacki|2|20|20|7/19/2024 12:00:00 PM|6|../Resources/Images/delete.png|not_started
-38|1|Bec|Bogata istorija i fascinantna arhitektura|Nemacki|1|20|20|8/19/2024 12:00:00 PM|6|../Resources/Images/delete.png|not_started
-39|1|Bec|Bogata istorija i fascinantna arhitektura|Nemacki|2|20|0|9/19/2024 12:00:00 PM|6|../Resources/Images/delete.png|not_started
-40|1|senegal|luda tura|Kineski|10|20|0|4/17/2024 12:00:00 PM|16|../Resources/Images/edit.png|not_started
-41|1|senegal|luda tura|Kineski|10|20|0|4/17/2024 3:00:00 PM|16|../Resources/Images/edit.png|not_started
-42|1|rr|trstina|Srpski|4|20|0|6/3/2024 9:00:00 AM|2|../Resources/Images/delete.png|not_started
-43|1|ime neko u ponedeljak ima|trstina|Srpski|4|20|0|6/3/2024 12:00:00 PM|2|../Resources/Images/delete.png|not_started
-44|1|torino|lepo|Srpski|2|50|0|6/3/2024 12:00:00 PM|73|../Resources/Images/delete.png|not_started
-45|1|zakintos|leto|Srpski|1|10|8|6/4/2024 12:00:00 PM|12|../../../Resources/Images/colloseum.jpg|not_started
-46|1|Venera|Its a beautiful city, with lots of historical landmarks.|Italian|4|11|0|6/4/2024 9:00:00 AM|2|../../../Resources/Images/colloseum.jpg,../../../Resources/Images/notre_dame.jpg|not_started
-47|1|Letovanje|opis ture111|Srpski|6|4|0|6/4/2024 9:00:00 AM|20|../../../Resources/Images/slika.jpg,../../../Resources/Images/slika2.jpg,../../../Resources/Images/slika.jpg|not_started
-48|1|TTTT|opis ture111|Srpski|6|4|0|5/10/2024 12:00:00 PM|20|../../../Resources/Images/slika.jpg,../../../Resources/Images/slika2.jpg,../../../Resources/Images/slika.jpg|finished
-49|1|jjj|jhgf|Nemacki|2|20|20|5/14/2024 12:00:00 PM|4|../Resources/Images/colloseum.jpg|not_started
-50|1|hjk|hghjkl|Nemacki|2|70|70|5/13/2024 12:00:00 PM|6|../Resources/Images/Finish.png|not_started
-51|1|pliz|deac|Nemacki|2|3|3|5/25/2024 12:00:00 PM|3|../Resources/Images/colloseum.jpg|not_started
+1|1|Rabata|turnir u vaterpolu |Srpski|1|13|0|3/20/2024 9:00:00 AM|10|../../../Resources/Images/add.png,../../../Resources/Images/colloseum.jpg|not_started
+2|1|Babina greda|opis|Engleski|2|2|0|3/23/2024 3:00:00 PM|4|../../../Resources/Images/palatine.jpg|not_started
+3|1|Kalemegdan|nova tura|Srpski|2|5|0|4/26/2024 12:00:00 PM|2|../../../Resources/Images/add.png,../../../Resources/Images/delete.png|cancelled
+4|1|Savremenost|savremenost|Nemacki|6|4|0|6/4/2024 12:00:00 PM|3|../../../Resources/Images/palatine.jpg|not_started
+5|1|TURA|TURA|Engleski|1|5|0|6/4/2024 6:00:00 PM|7|../../../Resources/Images/notre_dame.jpg,../../../Resources/Images/slika.jpg|not_started
+6|1|Petrovaradin|Predivan pejzaz i bogata istorija|Engleski|1|4|5|7/19/2024 12:00:00 PM|2|../../../Resources/Images/delete.png|not_started
+7|1|Venecija|Bogata istorija i jedinstveni kanali|Engleski|2|3|3|6/4/2024 12:00:00 PM|2|../../../Resources/Images/venice.jpg|not_started
+8|1|ItalijaTour|Pogledi i hrana fantasticni|Engleski|3|5|10|4/18/2024 12:00:00 PM|2|../../../Resources/Images/edit.png|not_started
+9|1|Split|Sunce, more i zabava|Engleski|4|6|0|5/19/2024 12:00:00 PM|3|../../../Resources/Images/view.png|not_started
+10|1|Bec|Bogata istorija i fascinantna arhitektura|Nemacki|1|20|6|6/4/2024 12:00:00 PM|6|../../../Resources/Images/italia_landscape.jpeg|not_started
+11|1|Bec|Bogata istorija i fascinantna arhitektura|Nemacki|2|20|20|7/19/2024 12:00:00 PM|6|../../../Resources/Images/delete.png|not_started
+12|1|Bec|Bogata istorija i fascinantna arhitektura|Nemacki|1|20|20|8/19/2024 12:00:00 PM|6|../../../Resources/Images/delete.png|not_started
+13|1|Bec|Bogata istorija i fascinantna arhitektura|Nemacki|2|20|0|9/19/2024 12:00:00 PM|6|../../../Resources/Images/delete.png|not_started
+14|1|Spanija|pejzaz|Kineski|10|20|0|4/17/2024 12:00:00 PM|16|../../../Resources/Images/edit.png|not_started
+15|1|Senegal|luda tura|Kineski|10|20|0|6/7/2024 3:00:00 PM|16|../../../Resources/Images/senegal.jpeg|not_started
+16|1|Trstina|trstina|Srpski|4|20|0|6/3/2024 9:00:00 AM|2|../../../Resources/Images/delete.png|not_started
+17|1|Torino|lepo|Srpski|2|50|0|6/3/2024 12:00:00 PM|73|../../../Resources/Images/delete.png|not_started
+18|1|Zakintos|leto|Srpski|1|10|8|6/6/2024 12:00:00 PM|12|../../../Resources/Images/colloseum.jpg|not_started
+19|1|Venera|Its a beautiful city, with lots of historical landmarks.|Italian|4|11|0|6/4/2024 9:00:00 AM|2|../../../Resources/Images/colloseum.jpg,../../../Resources/Images/notre_dame.jpg|not_started
+20|1|Letovanje|opis ture111|Srpski|6|4|0|6/7/2024 9:00:00 AM|20|../../../Resources/Images/slika.jpg,../../../Resources/Images/slika2.jpg,../../../Resources/Images/slika.jpg|not_started
