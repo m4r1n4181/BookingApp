@@ -22,5 +22,7 @@ namespace BookingApp.Domain.RepositoryInterfaces
         TourReservation GetByTourAndTourist(int tourId, int touristId);
         List<TourReservation> GetByUser(int id);
         TourStatusType GetTourStatus(TourReservation reservation);
+
+        public List<TourReservation> GetByGuideAndLanguage(int guideId, string language, DateTime lastYear);
     }
 }

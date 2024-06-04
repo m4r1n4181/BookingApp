@@ -3,6 +3,7 @@ using BookingApp.DependencyInjection;
 using BookingApp.Domain.RepositoryInterfaces;
 using BookingApp.DTO;
 using BookingApp.Model;
+using BookingApp.Model.Enums;
 using BookingApp.Repository;
 using BookingApp.Serializer;
 using System;
@@ -53,6 +54,27 @@ namespace BookingApp.Service
         public List<Tour> GetTodayTours()
         {
             return _tourRepository.GetTodayTours();
+        }
+
+        public List<Tour> GetThisWeeksMondayTours()
+        {
+           return _tourRepository.GetThisWeeksMondayTours();
+        }
+        public List<Tour> GetThisWeeksTuesdayTours()
+        {
+            return _tourRepository.GetThisWeeksTuesdayTours();
+        }
+        public List<Tour> GetThisWeeksWednesdayTours()
+        {
+            return _tourRepository.GetThisWeeksWednesdayTours();
+        }
+        public List<Tour> GetThisWeeksThursdayTours()
+        {
+            return _tourRepository.GetThisWeeksThursdayTours();
+        }
+        public List<Tour> GetThisWeeksFridayTours()
+        {
+            return _tourRepository.GetThisWeeksFridayTours();
         }
 
         public void StartTour(int id)
@@ -328,6 +350,50 @@ namespace BookingApp.Service
             return _tourRepository.SearchTourForTourGuide(tourGuideSearch);
 
         }
+        public List<Tour> GetFutureToursByGuideId(int guideId)
+        {
+            List<Tour> futureTours = new List<Tour>();
+            List<Tour> allTours = _tourRepository.GetAllWithLocations();
+
+            foreach (Tour tour in allTours)
+            {
+                if (tour.TourGuide.Id == guideId && tour.StartDate > DateTime.Now && tour.TourStatus == TourStatusType.not_started)
+                {
+                    futureTours.Add(tour);
+                }
+            }
+
+            return futureTours;
+        }
+
+        public List<string> GetUniqueLanguagesFromFinishedToursInLastYear(TourGuide guide)
+        {
+            DateTime oneYearAgo = DateTime.Now.AddYears(-1);
+
+            // Dobijanje završenih tura u proteklih godinu dana
+            List<Tour> finishedToursInLastYear = _tourRepository
+                .GetByTourGuide(guide)
+                .Where(tour => tour.StartDate >= oneYearAgo
+                               && tour.TourStatus == TourStatusType.finished)
+                .Distinct()
+                .ToList();
+
+            // Dobijanje jedinstvenih jezika
+            List<string> uniqueLanguages = finishedToursInLastYear
+                .Select(tour => tour.Language)
+                .Distinct()
+                .ToList();
+
+            return uniqueLanguages;
+        }
+
+
+        public List<Tour> GetAllByTourGuideId(int tourGuideId)
+        {
+            return _tourRepository.GetAllByTourGuideId(tourGuideId);
+        }
+
+
 
     }
 }

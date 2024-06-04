@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows;
 
 namespace BookingApp.Controller
 {
@@ -22,9 +23,19 @@ namespace BookingApp.Controller
             return _tourGuideService.GetAll();
         }
 
-        public TourGuide GetById(int id)
+         public TourGuide GetById(int id)
+         {
+             return _tourGuideService.GetById(id);
+         }
+      
+        public void Resignation(int guideId)
         {
-            return _tourGuideService.GetById(id);
+            _tourGuideService.Resignation(guideId);
+        }
+
+        public bool IsSuperGuide(int guideId)
+        {
+            return _tourGuideService.IsSuperGuide(guideId);
         }
     }
 }

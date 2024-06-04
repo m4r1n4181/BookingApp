@@ -1,6 +1,7 @@
 using BookingApp.Domain.RepositoryInterfaces;
 using BookingApp.DTO;
 using BookingApp.Model;
+using BookingApp.Model.Enums;
 using BookingApp.Serializer;
 using System;
 using System.Collections.Generic;
@@ -168,6 +169,65 @@ namespace BookingApp.Repository
             return _tours.FindAll(tour => tour.StartDate.Date == today && tour.TourStatus == Model.Enums.TourStatusType.not_started);
         }
 
+        public List<Tour> GetThisWeeksMondayTours()
+        {
+            _tours = _serializer.FromCSV(FilePath);
+            BindLocations();
+
+            // Get today's date
+            DateTime today = DateTime.Now.Date;
+
+            // Calculate the date for the current week's Monday
+            DateTime thisWeeksMonday = today.AddDays(-(int)today.DayOfWeek + (int)DayOfWeek.Monday);
+
+            // Find all tours that start on this week's Monday and have not started
+            return _tours.FindAll(tour => tour.StartDate.Date == thisWeeksMonday && tour.TourStatus == Model.Enums.TourStatusType.not_started);
+        }
+        public List<Tour> GetThisWeeksTuesdayTours()
+        {
+            _tours = _serializer.FromCSV(FilePath);
+            BindLocations();
+
+            DateTime today = DateTime.Now.Date;
+
+            DateTime thisWeeksMonday = today.AddDays(-(int)today.DayOfWeek + (int)DayOfWeek.Tuesday);
+
+            return _tours.FindAll(tour => tour.StartDate.Date == thisWeeksMonday && tour.TourStatus == Model.Enums.TourStatusType.not_started);
+        }
+        public List<Tour> GetThisWeeksWednesdayTours()
+        {
+            _tours = _serializer.FromCSV(FilePath);
+            BindLocations();
+
+            DateTime today = DateTime.Now.Date;
+
+            DateTime thisWeeksMonday = today.AddDays(-(int)today.DayOfWeek + (int)DayOfWeek.Wednesday);
+
+            return _tours.FindAll(tour => tour.StartDate.Date == thisWeeksMonday && tour.TourStatus == Model.Enums.TourStatusType.not_started);
+        }
+        public List<Tour> GetThisWeeksThursdayTours()
+        {
+            _tours = _serializer.FromCSV(FilePath);
+            BindLocations();
+
+            DateTime today = DateTime.Now.Date;
+
+            DateTime thisWeeksMonday = today.AddDays(-(int)today.DayOfWeek + (int)DayOfWeek.Thursday);
+
+            return _tours.FindAll(tour => tour.StartDate.Date == thisWeeksMonday && tour.TourStatus == Model.Enums.TourStatusType.not_started);
+        }
+        public List<Tour> GetThisWeeksFridayTours()
+        {
+            _tours = _serializer.FromCSV(FilePath);
+            BindLocations();
+
+            DateTime today = DateTime.Now.Date;
+
+            DateTime thisWeeksMonday = today.AddDays(-(int)today.DayOfWeek + (int)DayOfWeek.Friday);
+
+            return _tours.FindAll(tour => tour.StartDate.Date == thisWeeksMonday && tour.TourStatus == Model.Enums.TourStatusType.not_started);
+        }
+
         public List<Tour> GetAllActiveTours()
         {
             _tours = _serializer.FromCSV(FilePath);
@@ -229,6 +289,17 @@ namespace BookingApp.Repository
             }
 
             return _tours;
+        }
+
+        public List<Tour> GetCancelledToursByGuideId(int guideId)
+        {
+            return _tours.Where(t => t.TourGuide.Id == guideId && t.TourStatus == Model.Enums.TourStatusType.cancelled).ToList();
+        }
+
+        public List<Tour> GetAllByTourGuideId(int tourGuideId)
+        {
+            _tours = _serializer.FromCSV(FilePath);
+            return _tours.FindAll(tour => tour.TourGuide.Id == tourGuideId);
         }
 
 

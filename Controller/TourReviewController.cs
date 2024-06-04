@@ -1,11 +1,15 @@
-﻿using BookingApp.Model;
+﻿using BookingApp.Domain.RepositoryInterfaces;
+using BookingApp.Model;
+using BookingApp.Model.Enums;
 using BookingApp.Repository;
 using BookingApp.Service;
+using BookingApp.View;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Controls;
 
 namespace BookingApp.Controller
 {
@@ -38,5 +42,6 @@ namespace BookingApp.Controller
             _tourReviewService = tourReviewService;
         }
 
+       
     }
 }

@@ -15,7 +15,7 @@ using System.Windows;
 
 namespace BookingApp.View.ViewModels.TourGuideViewModels
 {
-    public class CreateTourFormViewModel : INotifyPropertyChanged
+    public class CreateTourFormViewModel : ValidationBase
     {
         private readonly TourController _tourController;
 
@@ -219,12 +219,6 @@ namespace BookingApp.View.ViewModels.TourGuideViewModels
 
 
 
-        public event PropertyChangedEventHandler PropertyChanged;
-
-        protected virtual void OnPropertyChanged([CallerMemberName] string propertyName = null)
-        {
-            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
-        }
         public CreateTourFormViewModel()
         {
             _tourController = new TourController();
@@ -251,9 +245,41 @@ namespace BookingApp.View.ViewModels.TourGuideViewModels
 
         }
 
+        protected override void ValidateSelf()
+        {
+            if (string.IsNullOrWhiteSpace(this.TourName))
+            {
+                this.ValidationErrors["TourName"] = "TourName is required.";
+            }
+            if (string.IsNullOrWhiteSpace(this.TourLanguage))
+            {
+                this.ValidationErrors["TourLanguage"] = "Tour Language is required.";
+            }
+
+            if (string.IsNullOrWhiteSpace(this.TourName))
+            {
+                this.ValidationErrors["TourDate"] = "TourDate is required.";
+            }
+
+            if (this.KeyPoints == null || this.KeyPoints.Count < 2)
+            {
+                this.ValidationErrors["KeyPoints"] = "At least two key points are required.";
+            }
+
+            if (string.IsNullOrWhiteSpace(this.TourName))
+            {
+                this.ValidationErrors["TourDate"] = "TourDate is required.";
+            }
+
+        }
+
         public void CreateTourForm(object param)
         {
-
+            Validate();
+            if(IsValid == false)
+            {
+                return;
+            }
             Location selectedLocation = Locations.FirstOrDefault(loc => loc.City == SelectedCity && loc.Country == SelectedCountry);
 
             Tour newTour = new Tour

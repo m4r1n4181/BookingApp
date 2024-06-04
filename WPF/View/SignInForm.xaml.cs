@@ -2,7 +2,7 @@
 using BookingApp.Model;
 using BookingApp.Model.Enums;
 using BookingApp.Repository;
-using BookingApp.WPF.View.Tourist;
+//using BookingApp.WPF.View.Tourist;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Runtime.CompilerServices;
@@ -13,6 +13,7 @@ using BookingApp.WPF.View.OwnerPages;
 using BookingApp.WPF.View.OwnerWindows;
 using BookingApp.View.OwnerWindows;
 using BookingApp.WPF.Views.GuestWindows;
+using BookingApp.WPF.View.TourGuideWindows;
 
 namespace BookingApp.View
 {
@@ -24,6 +25,7 @@ namespace BookingApp.View
 
         private readonly IUserRepository _repository;
         private NotificationController _notificationController;
+        private TourGuideController _tourGuideController;
 
         public static User LoggedUser { get; set; }
 
@@ -54,6 +56,8 @@ namespace BookingApp.View
             DataContext = this;
             _repository = Injector.CreateInstance<IUserRepository>();
             _notificationController = new NotificationController();
+            _tourGuideController = new TourGuideController();
+
         }
 
         private void SignIn(object sender, RoutedEventArgs e)
@@ -65,12 +69,12 @@ namespace BookingApp.View
                 if (user.Password == txtPassword.Password)
                 {
                     LoggedUser = user;
-                    
-                    if (user.Type == UserType.TourGuide)
-                    {
-                        TourGuideHomePage tourGuideHomePage= new TourGuideHomePage();
-                        tourGuideHomePage.Show();
 
+                    if (user.Type == UserType.TourGuide)
+                    { 
+                            TourGuideHomePage tourGuideHomePage = new TourGuideHomePage();
+                            tourGuideHomePage.Show();
+            
                     }
                     else if (user.Type == UserType.Owner)
                     {
@@ -93,8 +97,8 @@ namespace BookingApp.View
 
                     else if (user.Type == UserType.Tourist)
                     {
-                        TouristMainWindow touristMainWindow = new TouristMainWindow(LoggedUser);
-                        touristMainWindow.Show();
+                       //TouristMainWindow touristMainWindow = new TouristMainWindow(LoggedUser);
+                       // touristMainWindow.Show();
 
                         List<Notification> notifications = _notificationController.GetByUserId(LoggedUser.Id);
                         foreach(Notification notification in notifications)

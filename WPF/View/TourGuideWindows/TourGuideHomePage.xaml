@@ -1,0 +1,313 @@
+﻿<Window x:Class="BookingApp.WPF.View.TourGuideWindows.TourGuideHomePage"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:BookingApp.WPF.View.TourGuide"
+        mc:Ignorable="d"
+        Title="TourGuideHomePage" Height="700" Width="930" Background="#F0F0F0">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="1*"/>
+            <RowDefinition Height="1*"/>
+            <RowDefinition Height="1*"/>
+            <RowDefinition Height="1*"/>
+            <RowDefinition Height="1*"/>
+            <RowDefinition Height="1*"/>
+            <RowDefinition Height="1*"/>
+        </Grid.RowDefinitions>
+
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="1*"/>
+            <ColumnDefinition Width="1*"/>
+            <ColumnDefinition Width="1*"/>
+            <ColumnDefinition Width="1*"/>
+            <ColumnDefinition Width="1*"/>
+            <ColumnDefinition Width="1*"/>
+        </Grid.ColumnDefinitions>
+
+        <Grid Grid.Row="0" Grid.Column="1" Grid.ColumnSpan="6" Background="White" Margin="0"/>
+
+
+        <Grid Grid.Row="0" Grid.Column="0" Grid.RowSpan="7" Background="#0F3057" Margin="0"/>
+
+        <Border Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="1" BorderBrush="Gray" BorderThickness="0,0,0,0.5" Margin="0,0,0,0"/>
+        <Border Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="1" BorderBrush="Gray" BorderThickness="0,0,0,0.5" Margin="0,0,0,0"/>
+        <Border Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="1" BorderBrush="Gray" BorderThickness="0,0,0,0.5" Margin="0,0,0,0"/>
+        <Border Grid.Row="3" Grid.Column="0" Grid.ColumnSpan="1" BorderBrush="Gray" BorderThickness="0,0,0,0.5" Margin="0,0,0,0"/>
+        <Border Grid.Row="4" Grid.Column="0" Grid.ColumnSpan="1" BorderBrush="Gray" BorderThickness="0,0,0,0.5" Margin="0,0,0,0"/>
+        <Border Grid.Row="5" Grid.Column="0" Grid.ColumnSpan="1" BorderBrush="Gray" BorderThickness="0,0,0,0.5" Margin="0,0,0,0"/>
+
+        <!-- Home -->
+        <Button  Grid.Column="0" Margin="10,10,10,10" Click="Home_Click" Grid.Row="0">
+            <Button.Template>
+                <ControlTemplate TargetType="Button">
+                    <Grid>
+                        <StackPanel Orientation="Horizontal" VerticalAlignment="Center" HorizontalAlignment="Center">
+                            <TextBlock FontSize="30" TextAlignment="Center" Foreground="White">&#x1F3E0;</TextBlock>
+                        </StackPanel>
+                    </Grid>
+                </ControlTemplate>
+            </Button.Template>
+        </Button>
+        <!-- All Tours Button -->
+        <Button Grid.Column="0" Margin="0,10,38,10" Click="AllTours_Click" Grid.Row="1" >
+            <Button.Template>
+                <ControlTemplate TargetType="Button">
+                    <Grid>
+                        <StackPanel Orientation="Horizontal" VerticalAlignment="Center" HorizontalAlignment="Center">
+                            <TextBlock FontSize="18" TextAlignment="Center" Foreground="White">&#x1F30D;</TextBlock>
+                            <TextBlock Text="Tour" FontSize="15" TextAlignment="Center" Foreground="White" VerticalAlignment="Center" Margin="5,0,0,0"/>
+                        </StackPanel>
+                    </Grid>
+                </ControlTemplate>
+            </Button.Template>
+        </Button>
+        <!-- Live Tour Button -->
+        <Button Grid.Row="2" Grid.Column="0" Margin="0,10,26,10" Click="LiveTour_Click">
+            <Button.Template>
+                <ControlTemplate TargetType="Button">
+                    <Grid>
+                        <StackPanel Orientation="Horizontal" VerticalAlignment="Center" HorizontalAlignment="Center">
+                            <TextBlock FontSize="18" TextAlignment="Center" Foreground="White">&#x1F3A7;</TextBlock>
+                            <TextBlock Text="Today" FontSize="15" TextAlignment="Center" Foreground="White" VerticalAlignment="Center" Margin="5,0,0,0"/>
+                        </StackPanel>
+                    </Grid>
+                </ControlTemplate>
+            </Button.Template>
+        </Button>
+        <!-- Tour Statistics Button -->
+        <Button Grid.Row="3" Grid.Column="0" Margin="10,10,10,10" Click="TourStatistics_Click">
+            <Button.Template>
+                <ControlTemplate TargetType="Button">
+                    <Grid>
+                        <StackPanel Orientation="Horizontal" VerticalAlignment="Center" HorizontalAlignment="Center">
+                            <TextBlock FontSize="18" TextAlignment="Center" Foreground="White">&#x1F4CA;</TextBlock>
+                            <TextBlock Text="Statistics" FontSize="15" TextAlignment="Center" Foreground="White" VerticalAlignment="Center" Margin="5,0,0,0" Width="65"/>
+                        </StackPanel>
+                    </Grid>
+                </ControlTemplate>
+            </Button.Template>
+        </Button>
+
+        <!-- Tour Guide Reviews Button -->
+        <Button Grid.Row="4" Grid.Column="0" Margin="15,10,10,10" Click="TourGuideReviews_Click">
+            <Button.Template>
+                <ControlTemplate TargetType="Button">
+                    <Grid Margin="-14,0,0,0">
+                        <StackPanel Orientation="Horizontal" VerticalAlignment="Center" HorizontalAlignment="Center">
+                            <TextBlock FontSize="18" TextAlignment="Center" Foreground="White">&#x1F441;&#xFE0F;</TextBlock>
+                            <TextBlock Text="Reviews" FontSize="15" TextAlignment="Center" Foreground="White" VerticalAlignment="Center" Margin="5,0,0,0"/>
+                        </StackPanel>
+                    </Grid>
+                </ControlTemplate>
+            </Button.Template>
+        </Button>
+
+        <!-- Requests Button -->
+        <Button Grid.Row="5" Grid.Column="0" Margin="10,10,10,10" Click="Requests_Click">
+            <Button.Template>
+                <ControlTemplate TargetType="Button">
+                    <Grid>
+                        <StackPanel Orientation="Horizontal" VerticalAlignment="Center" HorizontalAlignment="Center">
+                            <TextBlock FontSize="18" TextAlignment="Center" Foreground="White">&#x1F4AC;</TextBlock>
+                            <TextBlock Text="Requests" FontSize="15" TextAlignment="Center" Foreground="White" VerticalAlignment="Center" Margin="5,0,0,0"/>
+                        </StackPanel>
+                    </Grid>
+                </ControlTemplate>
+            </Button.Template>
+        </Button>
+
+
+        <!-- Logout Button -->
+        <Button Click="Logout_Click" Grid.Row="6" Grid.Column="0" Margin="10,29,10,10">
+            <Button.Template>
+                <ControlTemplate TargetType="Button">
+                    <Grid>
+                        <TextBlock FontSize="30" TextAlignment="Center" VerticalAlignment="Top"  Foreground="White" >&#x1F6AA;</TextBlock>
+                    </Grid>
+                </ControlTemplate>
+            </Button.Template>
+        </Button>
+
+        <!-- Profile Button -->
+        <Button Grid.Row="0" Grid.Column="1" Margin="10,0,44,0" Click="Profile_Click">
+            <Button.Template>
+                <ControlTemplate TargetType="Button">
+                    <Grid>
+                        <!-- Circular background -->
+                        <Ellipse Fill="White" Stroke="#0F3057" StrokeThickness="3"  Width="40" Height="40" VerticalAlignment="Center" HorizontalAlignment="Center"/>
+                        <!-- Person icon -->
+                        <TextBlock FontFamily="Segoe MDL2 Assets" Foreground="#0F3057" FontSize="30" TextAlignment="Center" VerticalAlignment="Center"  >&#xE77B;</TextBlock>
+                        <!-- Text -->
+                        <TextBlock Text="" FontSize="10" TextAlignment="Left" VerticalAlignment="Bottom" Margin="67,0,-126,21" Height="28"/>
+                    </Grid>
+                </ControlTemplate>
+            </Button.Template>
+        </Button>
+
+        <!-- First Name -->
+        <TextBlock Text="{Binding FirstName}" FontSize="12" Foreground="#0F3057" VerticalAlignment="Center" Margin="-50,0,0,0" Grid.Row="0" Grid.Column="1" Grid.ColumnSpan="2" Width="50"  Height="15"/>
+        <!-- Last Name -->
+        <TextBlock Text="{Binding LastName}" FontSize="12" Foreground="#0F3057" VerticalAlignment="Center" Margin="-70,0,0,0" Grid.Row="0" Grid.Column="2"  Width="50"  Height="15"/>
+
+
+        <Border Grid.Row="0" Grid.Column="1" Grid.ColumnSpan="6" BorderBrush="Black" BorderThickness="0,0.5,0,0.5" Margin="0,0,0,0"/>
+        <Border Grid.Row="0" Grid.Column="0" Grid.RowSpan="7" BorderBrush="Black" BorderThickness="0,0.5,0.5,0.5" Margin="0,0,0,0"/>
+
+        <!-- Tutorial Button -->
+        <Button Grid.Row="0" Grid.Column="6" Margin="60,0,7,40" Click="Tutorial_Click">
+            <Button.Template>
+                <ControlTemplate TargetType="Button">
+                    <Grid>
+                        <TextBlock FontSize="26" TextAlignment="Center" VerticalAlignment="Center">&#x24D8;</TextBlock>
+                    </Grid>
+                </ControlTemplate>
+            </Button.Template>
+        </Button>
+
+        <ItemsControl Margin="10,0,10,0" Grid.Row="1" Grid.Column="1" Grid.ColumnSpan="6" Grid.RowSpan="3" ItemsSource="{Binding TodayToursThreeByThree}">
+            <ItemsControl.ItemsPanel>
+                <ItemsPanelTemplate>
+                    <StackPanel Orientation="Horizontal"/>
+                </ItemsPanelTemplate>
+            </ItemsControl.ItemsPanel>
+            <ItemsControl.ItemTemplate>
+                <DataTemplate>
+                    <Border Height="240" Margin="0,0,10,0" BorderBrush="#E0E0E0" BorderThickness="1" CornerRadius="12" Background="White">
+                        <StackPanel HorizontalAlignment="Stretch" VerticalAlignment="Center">
+                            <TextBlock Text="{Binding Name}" FontSize="18" Foreground="#0F3057" TextWrapping="Wrap" Margin="19,5,0,0"/>
+                            <Image x:Name="cikaImage" Source="{Binding FirstImage}" Width="200" Height="150" HorizontalAlignment="Left"  Margin="20,0,20,0">
+                            </Image>
+                            <TextBlock Text="{Binding Location}" HorizontalAlignment="Right" FontSize="14" Foreground="#0F3057" TextWrapping="Wrap" Margin="0,5,22,0" />
+                        </StackPanel>
+                    </Border>
+                </DataTemplate>
+            </ItemsControl.ItemTemplate>
+        </ItemsControl>
+        
+        <StackPanel Orientation="Horizontal" Grid.Row="4" Grid.Column="1"
+                    Grid.ColumnSpan="6">
+            <Button x:Name="leftButton" Margin="30,0,0,0" Height="50" Width="30" Click="leftButton_Click" Background="Transparent" BorderBrush="Transparent">
+                <TextBlock FontWeight="Bold" FontSize="40" Text="◀️" Foreground="#0F3057" VerticalAlignment="Center" HorizontalAlignment="Center"/>
+            </Button>
+            <TextBlock Margin="100,0,0,0" FontSize="40" FontWeight="Bold" FontStyle="Italic" Foreground="#0F3057" VerticalAlignment="Center">Tours scheduled for today</TextBlock>
+            <Button x:Name="rigthButton" Click="rigthButton_Click" Height="50" Width="30" Margin="65,0,0,0"  Background="Transparent" BorderBrush="Transparent">
+                <TextBlock Text="▶️" Foreground="#0F3057" FontSize="40" VerticalAlignment="Center" HorizontalAlignment="Center"/>
+            </Button>
+        </StackPanel>
+
+        <!-- Monday -->
+        <StackPanel Orientation="Vertical" Grid.Row="5" Grid.Column="1" Grid.RowSpan="2" >
+            <TextBlock HorizontalAlignment="Center" Foreground="#0F3057" Margin="10,5,10,0" FontSize="20" FontWeight="Bold">Monday</TextBlock>
+            <ItemsControl Margin="10,10,10,0"  ItemsSource="{Binding ThisWeeksMonday}" Height="150">
+                <ItemsControl.ItemsPanel>
+                    <ItemsPanelTemplate>
+                        <StackPanel Orientation="Vertical"/>
+                    </ItemsPanelTemplate>
+                </ItemsControl.ItemsPanel>
+                <ItemsControl.ItemTemplate>
+                    <DataTemplate>
+                        <Border Height="30" Margin="0,0,10,0" BorderBrush="#E0E0E0" BorderThickness="1" CornerRadius="12" Background="White">
+                            <StackPanel  VerticalAlignment="Center">
+                                <TextBlock Text="{Binding Name}" FontSize="12" Foreground="#0F3057" TextWrapping="Wrap" Margin="19,5,0,0"/>
+                            </StackPanel>
+                        </Border>
+                    </DataTemplate>
+                </ItemsControl.ItemTemplate>
+            </ItemsControl>
+        </StackPanel>
+
+        <!-- Tuesday -->
+        <StackPanel Orientation="Vertical" Grid.Row="5" Grid.Column="2" Grid.RowSpan="2" >
+            <TextBlock HorizontalAlignment="Center" Foreground="#0F3057" Margin="10,5,10,0" FontSize="20" FontWeight="Bold">Tuesday</TextBlock>
+            <ItemsControl Margin="10,10,10,0"  ItemsSource="{Binding ThisWeeksTuesday}" Height="150">
+                <ItemsControl.ItemsPanel>
+                    <ItemsPanelTemplate>
+                        <StackPanel Orientation="Vertical"/>
+                    </ItemsPanelTemplate>
+                </ItemsControl.ItemsPanel>
+                <ItemsControl.ItemTemplate>
+                    <DataTemplate>
+                        <Border Height="30" Margin="0,0,10,0" BorderBrush="#E0E0E0" BorderThickness="1" CornerRadius="12" Background="White">
+                            <StackPanel  VerticalAlignment="Center">
+                                <TextBlock Text="{Binding Name}" FontSize="13" Foreground="#0F3057" TextWrapping="Wrap" Margin="19,5,0,0"/>
+                            </StackPanel>
+                        </Border>
+                    </DataTemplate>
+                </ItemsControl.ItemTemplate>
+            </ItemsControl>
+        </StackPanel>
+
+        <!-- Wednesday -->
+        <StackPanel Orientation="Vertical" Grid.Row="5" Grid.Column="3" Grid.RowSpan="2" >
+            <TextBlock HorizontalAlignment="Center" Foreground="#0F3057" Margin="10,5,10,0" FontSize="20" FontWeight="Bold">Wednesday</TextBlock>
+            <ItemsControl Margin="10,10,10,0"  ItemsSource="{Binding ThisWeeksWednesday}" Height="150">
+                <ItemsControl.ItemsPanel>
+                    <ItemsPanelTemplate>
+                        <StackPanel Orientation="Vertical"/>
+                    </ItemsPanelTemplate>
+                </ItemsControl.ItemsPanel>
+                <ItemsControl.ItemTemplate>
+                    <DataTemplate>
+                        <Border Height="30" Margin="0,0,10,0" BorderBrush="#E0E0E0" BorderThickness="1" CornerRadius="12" Background="White">
+                            <StackPanel  VerticalAlignment="Center">
+                                <TextBlock Text="{Binding Name}" FontSize="13" Foreground="#0F3057" TextWrapping="Wrap" Margin="19,5,0,0"/>
+                            </StackPanel>
+                        </Border>
+                    </DataTemplate>
+                </ItemsControl.ItemTemplate>
+            </ItemsControl>
+        </StackPanel>
+
+        <!-- Thursday -->
+        <StackPanel Orientation="Vertical" Grid.Row="5" Grid.Column="4" Grid.RowSpan="2" >
+            <TextBlock HorizontalAlignment="Center" Foreground="#0F3057" Margin="10,5,10,0" FontSize="20" FontWeight="Bold">Thursday</TextBlock>
+            <ItemsControl Margin="10,10,10,0"  ItemsSource="{Binding ThisWeeksThursday}" Height="150">
+                <ItemsControl.ItemsPanel>
+                    <ItemsPanelTemplate>
+                        <StackPanel Orientation="Vertical"/>
+                    </ItemsPanelTemplate>
+                </ItemsControl.ItemsPanel>
+                <ItemsControl.ItemTemplate>
+                    <DataTemplate>
+                        <Border Height="30" Margin="0,0,10,0" BorderBrush="#E0E0E0" BorderThickness="1" CornerRadius="12" Background="White">
+                            <StackPanel  VerticalAlignment="Center">
+                                <TextBlock Text="{Binding Name}" FontSize="13" Foreground="#0F3057" TextWrapping="Wrap" Margin="19,5,0,0"/>
+                            </StackPanel>
+                        </Border>
+                    </DataTemplate>
+                </ItemsControl.ItemTemplate>
+            </ItemsControl>
+        </StackPanel>
+
+        <!-- Friday -->
+        <StackPanel Orientation="Vertical" Grid.Row="5" Grid.Column="5" Grid.RowSpan="2" >
+            <TextBlock HorizontalAlignment="Center" Foreground="#0F3057" Margin="10,5,10,0" FontSize="20" FontWeight="Bold">Friday</TextBlock>
+            <ItemsControl Margin="10,10,10,0"  ItemsSource="{Binding ThisWeeksFriday}" Height="150">
+                <ItemsControl.ItemsPanel>
+                    <ItemsPanelTemplate>
+                        <StackPanel Orientation="Vertical"/>
+                    </ItemsPanelTemplate>
+                </ItemsControl.ItemsPanel>
+                <ItemsControl.ItemTemplate>
+                    <DataTemplate>
+                        <Border Height="30" Margin="0,0,10,0" BorderBrush="#E0E0E0" BorderThickness="1" CornerRadius="12" Background="White">
+                            <StackPanel  VerticalAlignment="Center">
+                                <TextBlock Text="{Binding Name}" FontSize="13" Foreground="#0F3057" TextWrapping="Wrap" Margin="19,5,0,0"/>
+                            </StackPanel>
+                        </Border>
+                    </DataTemplate>
+                </ItemsControl.ItemTemplate>
+            </ItemsControl>
+        </StackPanel>
+
+        <Border Grid.Row="5"  Grid.RowSpan="2" Grid.Column="1" BorderBrush="#0F3057" BorderThickness="0,1,1,1" Margin="0,0,0,0"/>
+        <Border Grid.Row="5"  Grid.RowSpan="2" Grid.Column="2" BorderBrush="#0F3057" BorderThickness="0,1,1,1" Margin="0,0,0,0"/>
+        <Border Grid.Row="5"  Grid.RowSpan="2" Grid.Column="3" BorderBrush="#0F3057" BorderThickness="0,1,1,1" Margin="0,0,0,0"/>
+        <Border Grid.Row="5"  Grid.RowSpan="2" Grid.Column="4" BorderBrush="#0F3057" BorderThickness="0,1,1,1" Margin="0,0,0,0"/>
+        <Border Grid.Row="5"  Grid.RowSpan="2" Grid.Column="5" BorderBrush="#0F3057" BorderThickness="0,1,0,1" Margin="0,0,0,0"/>
+
+
+    </Grid>
+</Window>

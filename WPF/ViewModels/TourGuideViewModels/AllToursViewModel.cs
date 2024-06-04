@@ -265,9 +265,21 @@ namespace BookingApp.View.ViewModels.TourGuideViewModels
                     Tours.Add(tour);
                 }
             }
+            if (IsFutureToursSelected)
+            {
+                foreach (Tour tour in _tourController.SearchTourForTourGuide(searchParams))
+                {
+                    Tours.Add(tour);
+                }
+            }
+            if (IsActiveToursSelected)
+            {
+                foreach (Tour tour in _tourController.SearchTourForTourGuide(searchParams))
+                {
+                    Tours.Add(tour);
+                }
+            }
         }
-
-
             public bool CanExecuteSearchClick(object param)
             {
             return true;

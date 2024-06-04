@@ -151,6 +151,14 @@ namespace BookingApp.Repository
             return tour.TourStatus;
         }
 
+        //daj mi sve rezervacije gde je taj tourguide gde je taj jezik i da su se desile -1 godina 
+        public List<TourReservation> GetByGuideAndLanguage(int guideId, string language, DateTime lastYear)
+        {
+            return _tourReservations
+                .Where(tr => tr.Tour != null && tr.Tour.TourGuide.Id == guideId && tr.Tour.Language == language && tr.Tour.StartDate >= lastYear)
+                .ToList();
+        }
+
 
     }
 }

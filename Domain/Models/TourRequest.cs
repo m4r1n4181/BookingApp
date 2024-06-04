@@ -24,9 +24,11 @@ namespace BookingApp.Domain.Models
         public RequestStatusType RequestStatus { get; set; }
         public DateTime? SelectedDate { get; set; }
         public User Tourist {  get; set; }
+        public int ComplexTourRequestId { get; set; }
+
 
         public TourRequest() { }
-        public TourRequest(int id, Location location, string language, int maxTourists, string description, DateTime startDate, DateTime endDate, List<TourParticipants> tourists, User tourGuide, RequestStatusType requestStatus, User user)
+        public TourRequest(int id, Location location, string language, int maxTourists, string description, DateTime startDate, DateTime endDate, List<TourParticipants> tourists, User tourGuide, RequestStatusType requestStatus, User user, int complexTourRequestId)
         {
             Id = id;
             Location = location;
@@ -38,7 +40,8 @@ namespace BookingApp.Domain.Models
             Tourists = tourists;
             TourGuide = tourGuide;
             RequestStatus = requestStatus;
-            Tourist = user;    
+            Tourist = user;
+            ComplexTourRequestId = complexTourRequestId;
         }
 
         public string[] ToCSV()
@@ -46,7 +49,7 @@ namespace BookingApp.Domain.Models
             string selectedDateStr = (SelectedDate == null) ? "null" : SelectedDate.ToString();
             string touristIds = string.Join(";", Tourists.Select(t => t.Id.ToString()));
             string tourGuideId = (TourGuide == null) ? "null" : TourGuide.Id.ToString();
-            string[] csvValues = { Id.ToString(), Location.Id.ToString(), Language.ToString(), MaxTourists.ToString(), Description, StartDate.ToString(), EndDate.ToString(), touristIds, tourGuideId, RequestStatus.ToString(), selectedDateStr, Tourist.Id.ToString() };
+            string[] csvValues = { Id.ToString(), Location.Id.ToString(), Language.ToString(), MaxTourists.ToString(), Description, StartDate.ToString(), EndDate.ToString(), touristIds, tourGuideId, RequestStatus.ToString(), selectedDateStr, Tourist.Id.ToString(), ComplexTourRequestId.ToString() };
             return csvValues;
         }
 
@@ -85,8 +88,10 @@ namespace BookingApp.Domain.Models
 
             }
             Tourist = new User() { Id = Convert.ToInt32(values[11]) };
+            ComplexTourRequestId = Convert.ToInt32(values[12]);
+
 
         }
-      
+
     }
 }

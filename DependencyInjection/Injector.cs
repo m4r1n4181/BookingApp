@@ -41,6 +41,10 @@ namespace BookingApp.DependencyInjection
 
             
            
+            { typeof(IComplexTourRequestRepository), new ComplexTourRequestRepository() },
+
+            
+            //{}
         
         };
 

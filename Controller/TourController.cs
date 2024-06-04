@@ -8,6 +8,7 @@ using BookingApp.Repository;
 using BookingApp.DTO;
 using System;
 using BookingApp.Domain.RepositoryInterfaces;
+using BookingApp.Model.Enums;
 namespace BookingApp.Controller
 {
     public class TourController
@@ -41,6 +42,26 @@ namespace BookingApp.Controller
         public List<Tour> GetTodayTours()
         {
             return _tourService.GetTodayTours();
+        }
+        public List<Tour> GetThisWeeksMondayTours()
+        {
+            return _tourService.GetThisWeeksMondayTours();
+        }
+        public List<Tour> GetThisWeeksTuesdayTours()
+        {
+            return _tourService.GetThisWeeksTuesdayTours();
+        }
+        public List<Tour> GetThisWeeksWednesdayTours()
+        {
+            return _tourService.GetThisWeeksWednesdayTours();
+        }
+        public List<Tour> GetThisWeeksThursdayTours()
+        {
+            return _tourService.GetThisWeeksThursdayTours();
+        }
+        public List<Tour> GetThisWeeksFridayTours()
+        {
+            return _tourService.GetThisWeeksFridayTours();
         }
 
         public void StartTour(int id)
@@ -117,6 +138,17 @@ namespace BookingApp.Controller
         {
             return _tourService.SearchTourForTourGuide(tourGuideSearch);
 
+        }
+
+        public List<Tour> GetFutureToursByGuideId(int guideId)
+        {
+            return _tourService.GetFutureToursByGuideId(guideId);
+
+        }
+
+        public List<string> GetUniqueLanguagesFromFinishedToursInLastYear(TourGuide guide)
+        {
+            return _tourService.GetUniqueLanguagesFromFinishedToursInLastYear(guide);
         }
 
 
