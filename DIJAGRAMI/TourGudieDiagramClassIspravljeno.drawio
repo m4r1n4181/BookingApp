@@ -1,11 +1,11 @@
-<mxfile host="app.diagrams.net" modified="2024-05-13T09:23:40.375Z" agent="Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/124.0.0.0 Safari/537.36" etag="rSAYB_3BmwBfZCXGd8ab" version="24.4.0" type="device">
+<mxfile host="app.diagrams.net" modified="2024-06-05T00:34:50.544Z" agent="Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/125.0.0.0 Safari/537.36" etag="bO6gzSzZcLEnlX_603NB" version="24.4.13" type="device">
   <diagram id="C5RBs43oDa-KdzZeNtuy" name="Page-1">
-    <mxGraphModel dx="926" dy="457" grid="1" gridSize="9" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
+    <mxGraphModel dx="880" dy="434" grid="1" gridSize="9" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
       <root>
         <mxCell id="WIyWlLk6GJQsqaUBKTNV-0" />
         <mxCell id="WIyWlLk6GJQsqaUBKTNV-1" parent="WIyWlLk6GJQsqaUBKTNV-0" />
         <mxCell id="zkfFHV4jXpPFQw0GAbJ--0" value="Tour Request" style="swimlane;fontStyle=2;align=center;verticalAlign=top;childLayout=stackLayout;horizontal=1;startSize=26;horizontalStack=0;resizeParent=1;resizeLast=0;collapsible=1;marginBottom=0;rounded=0;shadow=0;strokeWidth=1;" parent="WIyWlLk6GJQsqaUBKTNV-1" vertex="1">
-          <mxGeometry x="220" y="120" width="450" height="375" as="geometry">
+          <mxGeometry x="220" y="120" width="450" height="289" as="geometry">
             <mxRectangle x="220" y="120" width="160" height="26" as="alternateBounds" />
           </mxGeometry>
         </mxCell>
@@ -33,23 +33,14 @@
         <mxCell id="wFmKNOvRVq7fivsYvquY-1" value="+ SelectedDate: DateTime" style="text;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;rounded=0;shadow=0;html=0;" parent="zkfFHV4jXpPFQw0GAbJ--0" vertex="1">
           <mxGeometry y="208" width="450" height="26" as="geometry" />
         </mxCell>
-        <mxCell id="iYTX1hzSNdXGsrL3NJAf-0" value="" style="endArrow=none;html=1;rounded=0;entryX=1.001;entryY=0.87;entryDx=0;entryDy=0;entryPerimeter=0;" edge="1" parent="zkfFHV4jXpPFQw0GAbJ--0" target="wFmKNOvRVq7fivsYvquY-1">
+        <mxCell id="iYTX1hzSNdXGsrL3NJAf-0" value="" style="endArrow=none;html=1;rounded=0;entryX=1.001;entryY=0.87;entryDx=0;entryDy=0;entryPerimeter=0;" parent="zkfFHV4jXpPFQw0GAbJ--0" target="wFmKNOvRVq7fivsYvquY-1" edge="1">
           <mxGeometry width="50" height="50" relative="1" as="geometry">
             <mxPoint y="231" as="sourcePoint" />
             <mxPoint x="410" y="231" as="targetPoint" />
           </mxGeometry>
         </mxCell>
-        <mxCell id="iYTX1hzSNdXGsrL3NJAf-5" value=" + ApproveRequest(tourRequestId: int, selectedDate: DateTime): TourRequest" style="text;whiteSpace=wrap;" vertex="1" parent="zkfFHV4jXpPFQw0GAbJ--0">
-          <mxGeometry y="234" width="450" height="27" as="geometry" />
-        </mxCell>
-        <mxCell id="iYTX1hzSNdXGsrL3NJAf-3" value="+ DeclineRequest(tourRequestId: int): TourRequest" style="text;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;rounded=0;shadow=0;html=0;" vertex="1" parent="zkfFHV4jXpPFQw0GAbJ--0">
-          <mxGeometry y="261" width="450" height="27" as="geometry" />
-        </mxCell>
-        <mxCell id="iYTX1hzSNdXGsrL3NJAf-2" value="+ IsTourGuideFreeOnDate(tourGuideId: int, date: DateTime): bool&#xa;" style="text;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;rounded=0;shadow=0;html=0;" vertex="1" parent="zkfFHV4jXpPFQw0GAbJ--0">
-          <mxGeometry y="288" width="450" height="26" as="geometry" />
-        </mxCell>
-        <mxCell id="iYTX1hzSNdXGsrL3NJAf-1" value="+ CreateTourFromRequest(dateTimes: List&lt;DateTime&gt;, keyPoints: List&lt;KeyPoint&gt;, &#xa;name: string, location: Location, description: string, maxTourists: int,&#xa;duration: int, pictures: List&lt;string&gt;): void" style="text;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;rounded=0;shadow=0;html=0;" vertex="1" parent="zkfFHV4jXpPFQw0GAbJ--0">
-          <mxGeometry y="314" width="450" height="55" as="geometry" />
+        <mxCell id="iYTX1hzSNdXGsrL3NJAf-1" value="+ CreateTourFromRequest(dateTimes: List&lt;DateTime&gt;, keyPoints: List&lt;KeyPoint&gt;, &#xa;name: string, location: Location, description: string, maxTourists: int,&#xa;duration: int, pictures: List&lt;string&gt;): void" style="text;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;rounded=0;shadow=0;html=0;fontSize=9;" parent="zkfFHV4jXpPFQw0GAbJ--0" vertex="1">
+          <mxGeometry y="234" width="450" height="55" as="geometry" />
         </mxCell>
         <mxCell id="zkfFHV4jXpPFQw0GAbJ--17" value="User" style="swimlane;fontStyle=2;align=center;verticalAlign=top;childLayout=stackLayout;horizontal=1;startSize=26;horizontalStack=0;resizeParent=1;resizeLast=0;collapsible=1;marginBottom=0;rounded=0;shadow=0;strokeWidth=1;" parent="WIyWlLk6GJQsqaUBKTNV-1" vertex="1">
           <mxGeometry x="351" y="657" width="160" height="132" as="geometry">
@@ -133,16 +124,16 @@
         <mxCell id="wFmKNOvRVq7fivsYvquY-37" value="+ Country: string" style="text;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;rounded=0;shadow=0;html=0;" parent="wFmKNOvRVq7fivsYvquY-34" vertex="1">
           <mxGeometry y="78" width="160" height="26" as="geometry" />
         </mxCell>
-        <mxCell id="wFmKNOvRVq7fivsYvquY-45" value="" style="endArrow=diamondThin;endFill=0;endSize=24;html=1;rounded=0;exitX=0;exitY=0.981;exitDx=0;exitDy=0;exitPerimeter=0;" parent="WIyWlLk6GJQsqaUBKTNV-1" source="wFmKNOvRVq7fivsYvquY-35" edge="1">
+        <mxCell id="wFmKNOvRVq7fivsYvquY-45" value="" style="endArrow=diamondThin;endFill=0;endSize=24;html=1;rounded=0;exitX=1.002;exitY=-0.154;exitDx=0;exitDy=0;exitPerimeter=0;entryX=0;entryY=0.26;entryDx=0;entryDy=0;entryPerimeter=0;" parent="WIyWlLk6GJQsqaUBKTNV-1" source="wFmKNOvRVq7fivsYvquY-6" target="wFmKNOvRVq7fivsYvquY-36" edge="1">
           <mxGeometry width="160" relative="1" as="geometry">
             <mxPoint x="788" y="200.75" as="sourcePoint" />
-            <mxPoint x="670" y="200.75" as="targetPoint" />
+            <mxPoint x="747" y="99" as="targetPoint" />
           </mxGeometry>
         </mxCell>
-        <mxCell id="wFmKNOvRVq7fivsYvquY-48" value="" style="endArrow=diamondThin;endFill=0;endSize=24;html=1;rounded=0;" parent="WIyWlLk6GJQsqaUBKTNV-1" edge="1">
+        <mxCell id="wFmKNOvRVq7fivsYvquY-48" value="" style="endArrow=diamondThin;endFill=0;endSize=24;html=1;rounded=0;entryX=0.213;entryY=-0.008;entryDx=0;entryDy=0;entryPerimeter=0;exitX=0.369;exitY=0.964;exitDx=0;exitDy=0;exitPerimeter=0;" parent="WIyWlLk6GJQsqaUBKTNV-1" source="iYTX1hzSNdXGsrL3NJAf-1" target="zkfFHV4jXpPFQw0GAbJ--17" edge="1">
           <mxGeometry width="160" relative="1" as="geometry">
-            <mxPoint x="387" y="657" as="sourcePoint" />
-            <mxPoint x="387.2" y="513" as="targetPoint" />
+            <mxPoint x="385" y="432" as="sourcePoint" />
+            <mxPoint x="486" y="549" as="targetPoint" />
           </mxGeometry>
         </mxCell>
         <mxCell id="wFmKNOvRVq7fivsYvquY-51" value="0...*" style="text;html=1;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;" parent="WIyWlLk6GJQsqaUBKTNV-1" vertex="1">

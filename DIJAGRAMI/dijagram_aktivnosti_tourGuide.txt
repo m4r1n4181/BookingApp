@@ -1,0 +1,22 @@
+@startuml
+start
+:Prijava vodiča na sistem;
+
+:Prikaži zahteve za složene ture;
+:Vodič bira zahtev za složenu turu;
+
+if (Da li vodič ima slobodne termine?) then (Da)
+    :Prikaz mogućih termina;
+    if (Postoje slobodni termini bez preklapanja?) then (Da)
+        :Vodič bira termin;
+        :Termin je prihvaćen;
+    else (Ne)
+        :Nema slobodnih termina;
+    endif
+else (Ne)
+    :Nema slobodnih termina;
+endif
+
+:Kraj;
+stop
+@enduml

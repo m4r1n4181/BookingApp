@@ -86,9 +86,7 @@ namespace BookingApp.WPF.View.TourGuideWindows
         private void Logout_Click(object sender, RoutedEventArgs e)
         {
 
-            SignInForm signInForm = new SignInForm();
-            signInForm.Show();
-            //za sad me samo baca na signin, posle neka logika 
+            Close();
         }
 
         private void Profile_Click(object sender, RoutedEventArgs e)

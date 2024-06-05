@@ -16,8 +16,6 @@
                             <DataGrid ItemsSource="{Binding SimpleTourRequests}" AutoGenerateColumns="False" IsReadOnly="True">
                                 <DataGrid.Columns>
                                     <DataGridTextColumn Header="Tour Request" Binding="{Binding Id}" Width="1*"/>
-                                    <DataGridTextColumn Header="Start Date" Binding="{Binding StartDate, StringFormat='dd.MM.yyyy'}" Width="1*"/>
-                                    <DataGridTextColumn Header="End Date" Binding="{Binding EndDate, StringFormat='dd.MM.yyyy'}" Width="1*"/>
                                 </DataGrid.Columns>
                             </DataGrid>
                         </DataTemplate>

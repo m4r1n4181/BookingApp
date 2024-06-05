@@ -1,5 +1,6 @@
 ﻿using BookingApp.Controller;
 using BookingApp.Model;
+using BookingApp.Service;
 using BookingApp.View;
 using System;
 using System.Collections.Generic;
@@ -26,8 +27,6 @@ namespace BookingApp.WPF.View.TourGuideWindows
     public partial class TourGuideHomePage : Window, INotifyPropertyChanged
     {
 
-
-
         private Visibility _superGuideVisibility;
 
         public Visibility SuperGuideVisibility
@@ -39,6 +38,18 @@ namespace BookingApp.WPF.View.TourGuideWindows
                 OnPropertyChanged(nameof(SuperGuideVisibility));
             }
         }
+
+        public bool IsSuperGuide
+        {
+            get => _isSuperGuide;
+            set
+            {
+                _isSuperGuide = value;
+                OnPropertyChanged(nameof(IsSuperGuide));
+                SuperGuideVisibility = value ? Visibility.Visible : Visibility.Collapsed;
+            }
+        }
+        private bool _isSuperGuide;
 
         public string _firstName;
         public string FirstName
@@ -74,6 +85,7 @@ namespace BookingApp.WPF.View.TourGuideWindows
         {
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
         }
+        public Dictionary<string, bool> SuperGuideStatusPerLanguage { get; private set; }
 
         public TourController _tourController;
         public ObservableCollection<Tour> TodayTours { get; set; }
@@ -105,6 +117,24 @@ namespace BookingApp.WPF.View.TourGuideWindows
             ThisWeeksThursday = new ObservableCollection<Tour>(_tourController.GetThisWeeksThursdayTours());
             ThisWeeksFriday = new ObservableCollection<Tour>(_tourController.GetThisWeeksFridayTours());
 
+            TourGuideService tourGuideService = new TourGuideService();
+            BookingApp.Model.TourGuide currentGuide = tourGuideService.GetById(SignInForm.LoggedUser.Id);
+            if (currentGuide != null)
+            {
+                FirstName = currentGuide.FirstName;
+                LastName = currentGuide.LastName;
+            }
+
+            SuperGuideStatusPerLanguage = new Dictionary<string, bool>();
+
+
+            var languageToCheck = "Engleski";
+            int guideId = SignInForm.LoggedUser.Id;
+
+            bool isSuperGuide = _tourController.CheckAndAssignSuperGuide(guideId, languageToCheck);
+            SuperGuideStatusPerLanguage[languageToCheck] = isSuperGuide;
+
+            IsSuperGuide = isSuperGuide;
         }
 
         private void CreateNewTour_Click(object sender, RoutedEventArgs e)
@@ -149,7 +179,8 @@ namespace BookingApp.WPF.View.TourGuideWindows
 
         private void Home_Click(object sender, RoutedEventArgs e)
         {
-
+            TourGuideHomePage tourGuideHomePage = new TourGuideHomePage();
+            tourGuideHomePage.Show();
         }
 
         private void Requests_Click(object sender, RoutedEventArgs e)
@@ -161,9 +192,7 @@ namespace BookingApp.WPF.View.TourGuideWindows
         private void Logout_Click(object sender, RoutedEventArgs e)
         {
 
-            SignInForm signInForm = new SignInForm();
-            signInForm.Show();
-            //za sad me samo baca na signin, posle neka logika 
+            Close();
         }
 
         private void Profile_Click(object sender, RoutedEventArgs e)

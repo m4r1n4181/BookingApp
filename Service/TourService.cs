@@ -25,6 +25,9 @@ namespace BookingApp.Service
         private ITouristEntryRepository _entryRepository;
         private ITourReservationRepository _tourReservationRepository;
         private TourReservationService _tourReservationService;
+        private ITourReviewRepository _tourReviewRepository;
+        private ITourGuideRepository _tourGuideRepository;
+
 
         public TourService()
         {
@@ -34,6 +37,9 @@ namespace BookingApp.Service
             _entryRepository = Injector.CreateInstance<ITouristEntryRepository>();
             _tourReservationRepository = Injector.CreateInstance<ITourReservationRepository>();
             _tourReservationService = new TourReservationService();
+            _tourReviewRepository = Injector.CreateInstance<ITourReviewRepository>();
+            _tourGuideRepository = Injector.CreateInstance<ITourGuideRepository>();
+
         }
 
 
@@ -387,12 +393,41 @@ namespace BookingApp.Service
             return uniqueLanguages;
         }
 
-
-        public List<Tour> GetAllByTourGuideId(int tourGuideId)
+        public bool CheckAndAssignSuperGuide(int guideId, string language)
         {
-            return _tourRepository.GetAllByTourGuideId(tourGuideId);
-        }
+            DateTime oneYear = DateTime.Now.AddYears(-1);
+            var tours = _tourRepository.GetAll()
+                            .Where(t => t.Language == language && t.StartDate >= oneYear && t.TourStatus == TourStatusType.finished)
+                            .ToList();
 
+            if (tours.Count < 2)
+            {
+                return false;
+            }
+
+            var totalReviews = new List<TourReview>();
+            foreach (var tour in tours)
+            {
+                var reviews = _tourReviewRepository.GetByTour(tour.Id);
+                totalReviews.AddRange(reviews);
+            }
+
+            double averageRating = totalReviews.Average(r => (r.Knowledge + r.Fluency + r.TourAppeal) / 3.0);
+            if (averageRating < 2.0)
+            {
+                return false;
+            }
+
+            var guide = _tourGuideRepository.GetById(guideId);
+            if (guide != null)
+            {
+                guide.IsSuperGuide = true;
+                _tourGuideRepository.Update(guide);
+                return true;
+            }
+
+            return false;
+        }
 
 
     }

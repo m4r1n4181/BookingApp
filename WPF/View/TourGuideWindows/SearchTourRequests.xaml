@@ -147,11 +147,6 @@
             </Button.Template>
         </Button>
 
-        <!-- First Name -->
-        <TextBlock Text="{Binding FirstName}" FontSize="12" Foreground="#0F3057" VerticalAlignment="Center" Margin="-50,0,0,0" Grid.Row="0" Grid.Column="1" Grid.ColumnSpan="2" Width="50"  Height="15"/>
-        <!-- Last Name -->
-        <TextBlock Text="{Binding LastName}" FontSize="12" Foreground="#0F3057" VerticalAlignment="Center" Margin="-70,0,0,0" Grid.Row="0" Grid.Column="2"  Width="50"  Height="15"/>
-
 
         <Border Grid.Row="0" Grid.Column="1" Grid.ColumnSpan="6" BorderBrush="Black" BorderThickness="0,0.5,0,0.5" Margin="0,0,0,0"/>
         <Border Grid.Row="0" Grid.Column="0" Grid.RowSpan="7" BorderBrush="Black" BorderThickness="0,0.5,0.5,0.5" Margin="0,0,0,0"/>
@@ -241,29 +236,27 @@
             <Label Content="Country:" Margin="15,10,0,0" VerticalAlignment="Top" FontSize="18" Foreground="#0F3057" />
             <TextBox HorizontalAlignment="Left" Text="{Binding Path=Country, UpdateSourceTrigger=PropertyChanged}" Margin="15,15,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="100" Height="30"/>
 
-            <Label Content="Number of tourists: " HorizontalAlignment="Left" Margin="9,168,0,0" VerticalAlignment="Top"  />
-            <TextBox HorizontalAlignment="Left" Text="{Binding Path=MaxTourists, UpdateSourceTrigger=PropertyChanged}" Margin="128,176,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="100"/>
-
-            <Label Content="Status:" HorizontalAlignment="Left" Margin="8,221,0,0" VerticalAlignment="Top"  Width="78" Height="35"/>
-            <ComboBox HorizontalAlignment="Left" ItemsSource="{Binding Types}" SelectedItem="{Binding SelectedStatus}" Margin="128,228,0,0" VerticalAlignment="Top" Width="100"/>
-
-            <Label Content="Start Date:" HorizontalAlignment="Left" Margin="13,321,0,0" VerticalAlignment="Top" Width="109"/>
-            <DatePicker HorizontalAlignment="Left" SelectedDate="{Binding StartDate}" Margin="10,360,0,0" VerticalAlignment="Top"/>
-
-            <Label Content="End Date:" HorizontalAlignment="Left" Margin="136,321,0,0" VerticalAlignment="Top" Width="109"/>
-            <DatePicker HorizontalAlignment="Left" SelectedDate="{Binding EndDate}" Margin="136,360,0,0" VerticalAlignment="Top"/>
+            <Label Content="👥" Margin="50,10,0,0" VerticalAlignment="Top" FontSize="18" Foreground="#0F3057" ToolTip="Number of tourists: X"/>
+            <TextBox Text="{Binding Path=MaxTourists, UpdateSourceTrigger=PropertyChanged}" Margin="15,15,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="60" Height="30"/>
         </StackPanel>
 
-        <Button Content="Search" HorizontalAlignment="Left" Margin="39,499,0,0" VerticalAlignment="Top" Width="119" Height="37" Command="{Binding SearchCommand}"/>
-        <Button Content="Complex Requests" HorizontalAlignment="Left" Margin="250,501,0,0" VerticalAlignment="Top" Width="119" Height="37" Command="{Binding ComplexRequestsCommand}"/>
+        <StackPanel Orientation="Horizontal" Grid.Row="2" Grid.Column="3" Grid.ColumnSpan="3" Margin="15,10,130,0">
+            <StackPanel Orientation="Vertical" Margin="20,0,10,0">
+                <Label Content="Start Date:" Margin="0,0,0,0" VerticalAlignment="Top" FontSize="18" Foreground="#0F3057"/>
+                <DatePicker HorizontalAlignment="Left" SelectedDate="{Binding StartDate}" Margin="0,5,0,0" VerticalAlignment="Top"/>
+            </StackPanel>
 
+            <StackPanel Orientation="Vertical" Margin="80,0,0,0">
+                <Label Content="End Date:" Margin="0,0,0,0" VerticalAlignment="Top" FontSize="18" Foreground="#0F3057"/>
+                <DatePicker HorizontalAlignment="Left" SelectedDate="{Binding EndDate}" Margin="0,5,0,0" VerticalAlignment="Top"/>
+            </StackPanel>
+        </StackPanel>
 
-
-        <StackPanel Margin="250,70,50,0">
+        <StackPanel Margin="15,5,15,5" Grid.Row="3" Grid.RowSpan="3" Grid.Column="2" Grid.ColumnSpan="4">
             <DataGrid ItemsSource="{Binding TourRequests}"
     SelectedItem="{Binding SelectedTourRequest}"
     IsReadOnly="True" SelectionMode="Single" 
-AutoGenerateColumns="False" Height="402" HeadersVisibility="Column" FontSize="13">
+AutoGenerateColumns="False" Height="280" HeadersVisibility="Column" FontSize="13">
                 <DataGrid.Columns>
                     <DataGridTextColumn Header="City" Binding="{Binding Location.City}" Width="*"/>
                     <DataGridTextColumn Header="Country" Binding="{Binding Location.Country}" Width="*"/>
@@ -274,11 +267,50 @@ AutoGenerateColumns="False" Height="402" HeadersVisibility="Column" FontSize="13
                 </DataGrid.Columns>
             </DataGrid>
         </StackPanel>
-        <Button Content=" View" HorizontalAlignment="Left" Margin="680,496,0,0" VerticalAlignment="Top" Width="120" Height="42" Command="{Binding ViewCommand}"/>
-        <Button Content=" Statistics" HorizontalAlignment="Left" Margin="680,10,0,0" VerticalAlignment="Top" Width="120" Height="42" Command="{Binding StatisticsCommand}"/>
+
+
+        <StackPanel Grid.Row="2" Grid.Column="5" Orientation="Horizontal" Margin="80,10,0,0" HorizontalAlignment="Left">
+            <Button Width="40" Padding="5" Background="#0F3057" Foreground="White" FontSize="18" VerticalAlignment="Center" 
+    Command="{Binding SearchCommand}" Height="40" >
+                <TextBlock FontFamily="Segoe MDL2 Assets" FontSize="20" Text="&#xE721;" />
+            </Button>
+        </StackPanel>
+
+        <Button Content="View" Grid.Row="6" Grid.Column="5" HorizontalAlignment="Center" Margin="0,20,0,0" VerticalAlignment="Top" Width="120" Height="30" Command="{Binding ViewCommand}">
+            <Button.Template>
+                <ControlTemplate TargetType="Button">
+                    <Border Background="#0F3057" BorderBrush="#0F3057" BorderThickness="2" CornerRadius="5">
+                        <TextBlock Text="{TemplateBinding Content}" Foreground="White" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                    </Border>
+                </ControlTemplate>
+            </Button.Template>
+        </Button>
+
+        <Button Content="Statistics" Grid.Row="6" Grid.Column="3" HorizontalAlignment="Center" Margin="0,20,0,0" VerticalAlignment="Top" Width="120" Height="30" Command="{Binding StatisticsCommand}">
+            <Button.Template>
+                <ControlTemplate TargetType="Button">
+                    <Border Background="#0F3057" BorderBrush="#0F3057" BorderThickness="2" CornerRadius="5">
+                        <TextBlock Text="{TemplateBinding Content}" Foreground="White" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                    </Border>
+                </ControlTemplate>
+            </Button.Template>
+        </Button>
+
+        <Button Content="Complex Requests" Grid.Row="6" Grid.Column="2" HorizontalAlignment="Center" Margin="0,20,0,0" VerticalAlignment="Top" Width="120" Height="30" Command="{Binding ComplexRequestsCommand}">
+            <Button.Template>
+                <ControlTemplate TargetType="Button">
+                    <Border Background="#0F3057" BorderBrush="#0F3057" BorderThickness="2" CornerRadius="5">
+                        <TextBlock Text="{TemplateBinding Content}" Foreground="White" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                    </Border>
+                </ControlTemplate>
+            </Button.Template>
+        </Button>
+
+
+
 
 
 
     </Grid>
-    
+
 </Window>

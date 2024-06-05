@@ -152,6 +152,12 @@ namespace BookingApp.Controller
         }
 
 
+        public bool CheckAndAssignSuperGuide(int guideId, string language)
+        {
+            return _tourService.CheckAndAssignSuperGuide(guideId, language);
+        }
+
+
     }
 
 

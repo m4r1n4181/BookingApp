@@ -1,13 +1,13 @@
-1|1|Rabata|turnir u vaterpolu |Srpski|1|13|0|3/20/2024 9:00:00 AM|10|../../../Resources/Images/add.png,../../../Resources/Images/colloseum.jpg|not_started
-2|1|Babina greda|opis|Engleski|2|2|0|3/23/2024 3:00:00 PM|4|../../../Resources/Images/palatine.jpg|not_started
-3|1|Kalemegdan|nova tura|Srpski|2|5|0|4/26/2024 12:00:00 PM|2|../../../Resources/Images/add.png,../../../Resources/Images/delete.png|cancelled
-4|1|Savremenost|savremenost|Nemacki|6|4|0|6/4/2024 12:00:00 PM|3|../../../Resources/Images/palatine.jpg|not_started
-5|1|TURA|TURA|Engleski|1|5|0|6/4/2024 6:00:00 PM|7|../../../Resources/Images/notre_dame.jpg,../../../Resources/Images/slika.jpg|not_started
+1|1|Rabata|turnir u vaterpolu |Engleski|1|13|0|3/20/2024 9:00:00 AM|10|../../../Resources/Images/add.png,../../../Resources/Images/colloseum.jpg|finished
+2|1|Babina greda|opis|Engleski|2|2|0|3/23/2024 3:00:00 PM|4|../../../Resources/Images/palatine.jpg|finished
+3|1|Kalemegdan|nova tura|Engleski|2|5|0|4/26/2024 12:00:00 PM|2|../../../Resources/Images/add.png,../../../Resources/Images/delete.png|finished
+4|1|Savremenost|savremenost|Nemacki|6|4|0|6/5/2024 12:00:00 PM|3|../../../Resources/Images/palatine.jpg|not_started
+5|1|TURA|TURA|Engleski|1|5|0|6/5/2024 6:00:00 PM|7|../../../Resources/Images/notre_dame.jpg,../../../Resources/Images/slika.jpg|not_started
 6|1|Petrovaradin|Predivan pejzaz i bogata istorija|Engleski|1|4|5|7/19/2024 12:00:00 PM|2|../../../Resources/Images/delete.png|not_started
-7|1|Venecija|Bogata istorija i jedinstveni kanali|Engleski|2|3|3|6/4/2024 12:00:00 PM|2|../../../Resources/Images/venice.jpg|not_started
+7|1|Venecija|Bogata istorija i jedinstveni kanali|Engleski|2|3|3|6/5/2024 12:00:00 PM|2|../../../Resources/Images/venice.jpg|not_started
 8|1|ItalijaTour|Pogledi i hrana fantasticni|Engleski|3|5|10|4/18/2024 12:00:00 PM|2|../../../Resources/Images/edit.png|not_started
 9|1|Split|Sunce, more i zabava|Engleski|4|6|0|5/19/2024 12:00:00 PM|3|../../../Resources/Images/view.png|not_started
-10|1|Bec|Bogata istorija i fascinantna arhitektura|Nemacki|1|20|6|6/4/2024 12:00:00 PM|6|../../../Resources/Images/italia_landscape.jpeg|not_started
+10|1|Bec|Bogata istorija i fascinantna arhitektura|Nemacki|1|20|6|6/5/2024 12:00:00 PM|6|../../../Resources/Images/italia_landscape.jpeg|not_started
 11|1|Bec|Bogata istorija i fascinantna arhitektura|Nemacki|2|20|20|7/19/2024 12:00:00 PM|6|../../../Resources/Images/delete.png|not_started
 12|1|Bec|Bogata istorija i fascinantna arhitektura|Nemacki|1|20|20|8/19/2024 12:00:00 PM|6|../../../Resources/Images/delete.png|not_started
 13|1|Bec|Bogata istorija i fascinantna arhitektura|Nemacki|2|20|0|9/19/2024 12:00:00 PM|6|../../../Resources/Images/delete.png|not_started

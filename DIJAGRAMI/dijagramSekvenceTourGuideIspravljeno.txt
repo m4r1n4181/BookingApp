@@ -1,5 +1,5 @@
 @startuml
-actor User
+actor TourGuide
 participant "UI Element" as UI
 participant "TourRequestController" as Controller
 participant "TourRequestService" as Service
@@ -13,88 +13,78 @@ participant "LocationController" as LocationController
 participant "LocationService" as LocationService
 participant "LocationRepository" as LocationRepository
 
-User -> UI: Click CreateFromRequestStats
+TourGuide -> UI: Click CreateFromRequestStats()
 activate UI
 
-UI -> Controller: Call CreateFromRequestStats_Click()
+UI -> Controller: Call CreateFromRequestStats_Click(List<DateTime> dateTimes, List<KeyPoint> keyPoints, string name, int locationId, string description, int maxTourists, int duration, List<string> pictures)
 activate Controller
 
 Controller -> Service: Call GetMostRequestedLocationLastYear()
 activate Service
 
 Service -> RequestRepository: GetMostRequestedLocation()
-activate RequestRepository
-
 alt Location found
+    activate RequestRepository
     RequestRepository --> Service: Return mostRequestedLocation
     deactivate RequestRepository
-
-    Service --> Controller: Return mostRequestedLocation
     deactivate Service
 
-    Controller -> Controller: Create new Tour object
-    Controller -> Controller: Set properties of Tour object
-    Controller -> Controller: Create list of dateTimes
-    Controller -> Controller: Create list of keyPoints
+    Service -> Controller: Return mostRequestedLocation
+    activate Controller
+    Controller -> Controller: Create new Tour object()
+    Controller -> Controller: Set properties of Tour object()
+    Controller -> Controller: Create list of dateTimes()
+    loop Create KeyPoints
+        Controller -> Controller: Create KeyPoint()
+    end
 
     Controller -> LocationController: Call GetIdByCityAndCountry(mostRequestedLocation.City, mostRequestedLocation.Country)
     activate LocationController
-
     LocationController -> LocationService: Call GetIdByCityAndCountry(mostRequestedLocation.City, mostRequestedLocation.Country)
     activate LocationService
-
     LocationService -> LocationRepository: GetIdByCityAndCountry(mostRequestedLocation.City, mostRequestedLocation.Country)
     activate LocationRepository
-
     LocationRepository --> LocationService: Return locationId
     deactivate LocationRepository
-
     LocationService --> LocationController: Return locationId
     deactivate LocationService
-
     LocationController --> Controller: Return locationId
     deactivate LocationController
 
     Controller -> Service: Call CreateTourFromRequest()
     activate Service
-
-    Service -> RequestRepository: Save new TourRequest
+    Service -> RequestRepository: Save new TourRequest()
     activate RequestRepository
-
     RequestRepository --> Service: Return saved TourRequest
     deactivate RequestRepository
 
-    Service -> Repository: Save new Tour
+    Service -> Repository: Save new Tour()
     activate Repository
-
     Repository --> Service: Return saved Tour
     deactivate Repository
 
-    Service -> Repository: Save list of KeyPoints
+    Service -> Repository: Save list of KeyPoints()
     activate Repository
-
     Repository --> Service: Return saved KeyPoints
     deactivate Repository
 
     Service --> Controller: Return result of creation
     deactivate Service
-
     Controller -> UI: Return result to UI
     deactivate Controller
-
-    UI --> User: Show result
+    UI --> TourGuide: Show result
     deactivate UI
 else Location not found
+    activate RequestRepository
     RequestRepository --> Service: No location found
     deactivate RequestRepository
-
-    Service --> Controller: No location found
     deactivate Service
 
+    activate Controller
     Controller -> UI: No location found
     deactivate Controller
 
-    UI --> User: Show no location found message
+    UI --> TourGuide: Show no location found message
     deactivate UI
 end
 @enduml
